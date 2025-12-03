@@ -31,7 +31,7 @@ jobs:
       - name: Publish to npm
         run: |
             cd dist/ngx-opalbytes-directives
-            npm publish --provenance --access public
+            npm audit signatures
       
       - name: Release
         env:
