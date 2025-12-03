@@ -1,59 +1,104 @@
-# OpalbytesDirectiveComponents
+# 📦 Opalbytes Directive Components
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.1.
+Este repositório contém uma biblioteca Angular (`ngx-opalbytes-directives`) com um conjunto de diretivas reutilizáveis. O projeto está configurado com um fluxo de trabalho moderno para garantir a qualidade e a consistência do código.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Começo Rápido
 
-```bash
-ng serve
+1.  **Instalar Dependências**
+    ```bash
+    npm install
+    ```
+
+2.  **Desenvolver a Biblioteca**
+    Para compilar a biblioteca e re-compilar a cada alteração, use o modo "watch":
+    ```bash
+    ng build ngx-opalbytes-directives --watch
+    ```
+    Para usar esta biblioteca em um projeto local durante o desenvolvimento, você pode usar o `npm link`.
+
+---
+
+## 📂 Estrutura do Projeto
+
+A estrutura do projeto é organizada para o desenvolvimento de bibliotecas Angular.
+
+```
+opalbytes-directive-components/
+├── projects/
+│   └── ngx-opalbytes-directives/    ✅ A nossa biblioteca de diretivas
+│       ├── src/
+│       │   ├── lib/
+│       │   │   └── directives/      📚 Onde as diretivas são criadas
+│       │   └── public-api.ts        📦 Arquivo que expõe as diretivas para o público
+│       └── ng-package.json          ⚙️ Configuração de empacotamento da biblioteca
+│
+├── .github/                         ⚙️ Workflows de CI/CD (ex: Release com semantic-release)
+├── .husky/                          훅 Git para validação de commits
+├── commitlint.config.js             룰 Regras para o formato das mensagens de commit
+└── .releaserc.js                    🚀 Configuração do semantic-release
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 룰 Regras de Commit
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Este projeto utiliza o padrão **Conventional Commits** para as mensagens de commit. Esse padrão é obrigatório e validado automaticamente antes de cada commit usando `commitlint` e `husky`.
 
-```bash
-ng generate component component-name
+O formato geral é:
+
+```
+<tipo>(<escopo>): <descrição>
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**Principais `tipos` permitidos:**
+
+*   **feat**: Para novas funcionalidades.
+*   **fix**: Para correções de bugs.
+*   **docs**: Para alterações na documentação.
+*   **style**: Para formatação de código (espaços, ponto e vírgula, etc.).
+*   **refactor**: Para refatorações que não alteram a funcionalidade.
+*   **test**: Para adição ou modificação de testes.
+*   **chore**: Para tarefas de build, configuração, etc.
+
+**Exemplo de mensagem de commit válida:**
 
 ```bash
-ng generate --help
+feat(input): adicionar diretiva para formatar moeda em tempo real
 ```
 
-## Building
+---
 
-To build the project run:
+## 🚀 Releases e Versionamento
 
-```bash
-ng build
-```
+O versionamento e a publicação de novas versões são totalmente automatizados com o **semantic-release**.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+**Como funciona:**
 
-## Running unit tests
+1.  Quando um commit é enviado para a branch `main`.
+2.  O `semantic-release` analisa as mensagens de commit desde o último release.
+3.  Ele determina automaticamente a próxima versão (major, minor ou patch) com base nos tipos de commit (`feat` gera uma `minor`, `fix` gera uma `patch`, etc.).
+4.  Ele atualiza a versão nos arquivos `package.json` (tanto na raiz quanto na biblioteca).
+5.  Cria um `CHANGELOG.md` com as alterações.
+6.  Cria um novo commit e uma tag de release no GitHub.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+## 🛠️ Scripts Disponíveis
 
-## Running end-to-end tests
+*   `npm run build`: Compila a biblioteca para produção.
+*   `npm run watch`: Compila a biblioteca em modo de desenvolvimento e observa as alterações.
+*   `npm run test`: Executa os testes unitários com Vitest.
+*   `npm run lint`: Analisa o código em busca de erros de estilo e padrões.
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## 🔗 Tecnologias
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+*   **Angular**: Framework principal para a criação da biblioteca.
+*   **TypeScript**: Linguagem base do projeto.
+*   **Conventional Commits**: Padrão para mensagens de commit.
+*   **Husky**: Ferramenta para executar scripts em hooks do Git.
+*   **Commitlint**: Validador de mensagens de commit.
+*   **Semantic Release**: Ferramenta para automação de versionamento e releases.
