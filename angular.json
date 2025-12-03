@@ -2,9 +2,48 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   },
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-opalbytes-directives": {
+      "projectType": "library",
+      "root": "projects/ngx-opalbytes-directives",
+      "sourceRoot": "projects/ngx-opalbytes-directives/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-opalbytes-directives/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-opalbytes-directives/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-opalbytes-directives/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-opalbytes-directives/**/*.ts",
+              "projects/ngx-opalbytes-directives/**/*.html"
+            ],
+            "eslintConfig": "projects/ngx-opalbytes-directives/eslint.config.js"
+          }
+        }
+      }
+    }
   }
 }
