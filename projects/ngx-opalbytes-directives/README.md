@@ -1,63 +1,66 @@
-# NgxOpalbytesDirectives
+# ngx-opalbytes-directives
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+Uma biblioteca de diretivas reutilizáveis para aplicações Angular.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Instalação
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Para instalar a biblioteca, execute o seguinte comando:
 
 ```bash
-ng generate --help
+npm install ngx-opalbytes-directives
 ```
 
-## Building
+## Como Usar
 
-To build the library, run:
+As diretivas nesta biblioteca são `standalone`, o que significa que você pode importá-las diretamente nos seus componentes ou módulos sem a necessidade de um `NgModule` intermediário.
 
-```bash
-ng build ngx-opalbytes-directives
+**Exemplo de importação em um componente:**
+
+```typescript
+import { Component } from '@angular/core';
+// Importe a diretiva desejada
+import { HighlightDirective } from 'ngx-opalbytes-directives';
+
+@Component({
+  selector: 'app-exemplo',
+  standalone: true,
+  imports: [
+    HighlightDirective // Adicione a diretiva aos imports do componente
+  ],
+  template: `
+    <h1 [libHighlight]="'#e6e6e6'">Passe o mouse aqui</h1>
+  `
+})
+export class ExemploComponent { }
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+---
 
-### Publishing the Library
+## Diretivas Disponíveis
 
-Once the project is built, you can publish your library by following these steps:
+| Diretiva / Seletor | Descrição | Inputs |
+| :--- | :--- | :--- |
+| **[libHighlight]** | Realça a cor de fundo de um elemento quando o usuário passa o mouse sobre ele. | `libHighlight: string`<br>A cor a ser usada no realce. Valor padrão: `'yellow'`. |
 
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/ngx-opalbytes-directives
-   ```
+### Exemplo de Uso - `[libHighlight]`
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+Você pode usar a diretiva com a cor padrão ou fornecer uma cor customizada.
 
-## Running unit tests
+```html
+<!-- 1. Usando a cor padrão (amarelo) -->
+<p [libHighlight]>
+  Passe o mouse sobre mim para ver o realce padrão.
+</p>
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+<!-- 2. Fornecendo uma cor customizada -->
+<div [libHighlight]="'lightblue'">
+  Passe o mouse aqui para um realce azul claro.
+</div>
 
-```bash
-ng test
+<!-- 3. Usando cores hexadecimais -->
+<span [libHighlight]="'#f0f0f0'">
+  E aqui para um realce cinza claro.
+</span>
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
