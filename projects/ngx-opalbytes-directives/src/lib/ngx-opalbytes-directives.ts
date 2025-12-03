@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'lib-ngx-opalbytes-directives',
+  selector: 'ngx-opalbytes-directives',
   imports: [],
   template: `
     <p>
@@ -10,6 +10,4 @@ import { Component } from '@angular/core';
   `,
   styles: ``,
 })
-export class NgxOpalbytesDirectives {
-
-}
+export class NgxOpalbytesDirectives {}

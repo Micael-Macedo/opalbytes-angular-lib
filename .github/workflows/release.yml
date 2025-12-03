@@ -24,6 +24,14 @@ jobs:
 
       - name: Run Unit Test
         run: npm run test
+
+      - name: Build library
+        run: npm run build
+
+      - name: Publish to npm
+        run: 
+            cd dist/opalbytes-directive-components
+            npm publish --provenance --access public
       
       - name: Release
         env:

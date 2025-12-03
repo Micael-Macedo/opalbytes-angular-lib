@@ -19,3 +19,5 @@
  * export * from './lib/directives.module';
  *
  */
+
+export * from './lib/ngx-opalbytes-directives'
