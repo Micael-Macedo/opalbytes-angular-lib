@@ -1,3 +1,21 @@
+# [1.2.0](https://github.com/Micael-Macedo/opalbytes-directive-components/compare/v1.1.0...v1.2.0) (2025-12-03)
+
+
+### Bug Fixes
+
+* add assinatura npm em release ([5260fc5](https://github.com/Micael-Macedo/opalbytes-directive-components/commit/5260fc5d9a49d71a3b81980b70af721249b57e7f))
+* correcao nome pasta biblioteca ([91f45cd](https://github.com/Micael-Macedo/opalbytes-directive-components/commit/91f45cd5196041988549d8bcbefd12db76b43e96))
+* correcao publicacao npm ([b1c52d5](https://github.com/Micael-Macedo/opalbytes-directive-components/commit/b1c52d54a2e232016ac7003e9fcb833894021d8a))
+* remocao assinatura npm ([9528a52](https://github.com/Micael-Macedo/opalbytes-directive-components/commit/9528a52bed8491094782ccc4d63c66d77dcf3ffc))
+* separador caminho workflow ([f04a68d](https://github.com/Micael-Macedo/opalbytes-directive-components/commit/f04a68d0fac2ec88c7fc76d2b112551ea40b2cd3))
+
+
+### Features
+
+* add diretiva exemplo ([ed9d8af](https://github.com/Micael-Macedo/opalbytes-directive-components/commit/ed9d8afcb40ecd69db99d0d4fcce4648f08fddf7))
+* add diretiva highlight de exemplo ([9c44fba](https://github.com/Micael-Macedo/opalbytes-directive-components/commit/9c44fba4ffc719ce5817b1be4372527eb1bbcf5f))
+* add teste com watch ([2bdf4ee](https://github.com/Micael-Macedo/opalbytes-directive-components/commit/2bdf4ee6b84df09028660297343312ed24262a70))
+
 # [1.1.0](https://github.com/Micael-Macedo/opalbytes-directive-components/compare/v1.0.0...v1.1.0) (2025-12-03)
 
 
