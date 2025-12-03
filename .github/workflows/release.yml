@@ -30,7 +30,7 @@ jobs:
 
       - name: Publish to npm
         run: |
-            cd dist/opalbytes-directive-components
+            cd dist\ngx-opalbytes-directives
             npm publish --provenance --access public
       
       - name: Release
