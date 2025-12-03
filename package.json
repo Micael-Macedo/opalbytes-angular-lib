@@ -41,6 +41,8 @@
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/js": "^9.39.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "angular-eslint": "21.0.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
@@ -50,6 +52,7 @@
     "husky": "^9.1.7",
     "jsdom": "^27.1.0",
     "ng-packagr": "^21.0.0",
+    "semantic-release": "^25.0.2",
     "typescript": "~5.9.2",
     "typescript-eslint": "8.46.4",
     "vitest": "^4.0.8"
