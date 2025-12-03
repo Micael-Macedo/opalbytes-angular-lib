@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Micael-Macedo/opalbytes-directive-components/compare/v1.2.0...v1.3.0) (2025-12-03)
+
+
+### Features
+
+* atulizacao readme da biblioteca para npm ([52a28a3](https://github.com/Micael-Macedo/opalbytes-directive-components/commit/52a28a30f5a869281bd85e4bd665d8dd44d44da8))
+
 # [1.2.0](https://github.com/Micael-Macedo/opalbytes-directive-components/compare/v1.1.0...v1.2.0) (2025-12-03)
 
 
