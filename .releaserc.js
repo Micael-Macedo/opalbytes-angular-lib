@@ -1,7 +1,24 @@
 module.exports = {
     branches: ["main"],
     plugins: [
-        "@semantic-release/commit-analyzer",
+        ["@semantic-release/commit-analyzer", {
+            preset: "conventionalcommits",
+            releaseRules: [
+                { type: "docs", release: "minor" },      
+                { type: "feat", release: "minor" },     
+                { type: "fix", release: "patch" },      
+                { type: "chore", release: null },       
+                { type: "refactor", release: "patch" }, 
+                { type: "style", release: null },       
+                { type: "test", release: null },        
+                { scope: "release", release: "patch" }, 
+                { breaking: true, release: "major" }    
+            ],
+            parserOpts: {
+                noteKeywords: ["BREAKING CHANGE", "BREAKING CHANGES"]
+            }
+        }],
+        
         "@semantic-release/release-notes-generator",
         "@semantic-release/changelog",
         [
@@ -21,7 +38,6 @@ module.exports = {
             "@semantic-release/git",
             {
                 assets: ["CHANGELOG.md", "package.json", "package-lock.json", "projects/ngx-opalbytes-directives/package.json"],
-                message: "docs: ${nextRelease.version}",
             },
         ],
         "@semantic-release/github",
