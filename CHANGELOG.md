@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Micael-Macedo/opalbytes-directive-components/compare/v1.4.0...v1.5.0) (2025-12-10)
+
+
+### Features
+
+* add importacao de elementos em projetos ([5be05cd](https://github.com/Micael-Macedo/opalbytes-directive-components/commit/5be05cd3ce57fc5d331ddab8af7159271867b1e2))
+
 # [1.4.0](https://github.com/Micael-Macedo/opalbytes-directive-components/compare/v1.3.0...v1.4.0) (2025-12-04)
 
 
