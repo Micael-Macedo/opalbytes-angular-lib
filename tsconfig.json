@@ -7,6 +7,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
+    "preserveSymlinks": true,
     "paths": {
       "ngx-opalbytes-directives": [
         "./dist/ngx-opalbytes-directives"

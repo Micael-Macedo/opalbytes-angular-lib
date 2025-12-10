@@ -1,3 +1,21 @@
+# 🔗 Tecnologias
+
+*   **Angular**: Framework principal para a criação da biblioteca.
+*   **TypeScript**: Linguagem base do projeto.
+*   **Conventional Commits**: Padrão para mensagens de commit.
+*   **Husky**: Ferramenta para executar scripts em hooks do Git.
+*   **Commitlint**: Validador de mensagens de commit.
+*   **Semantic Release**: Ferramenta para automação de versionamento e releases.
+
+## Framework e Linguagens
+|Tecnologia  |	Versão  |   Descrição  |
+|------------|----------|-------------------------------------|
+|   Angular	 |  ^21.0.0	|  Framework principal para desenvolvimento da biblioteca |
+| TypeScript |	~5.9.2	| Linguagem base com tipagem estática |
+|    RxJS	 |  ~7.8.0  | Biblioteca para programação reativa |
+
+---
+
 # 📦 Opalbytes Directive Components
 
 Este repositório contém uma biblioteca Angular (`ngx-opalbytes-directives`) com um conjunto de diretivas reutilizáveis. O projeto está configurado com um fluxo de trabalho moderno para garantir a qualidade e a consistência do código.
@@ -11,12 +29,37 @@ Este repositório contém uma biblioteca Angular (`ngx-opalbytes-directives`) co
     npm install
     ```
 
-2.  **Desenvolver a Biblioteca**
-    Para compilar a biblioteca e re-compilar a cada alteração, use o modo "watch":
-    ```bash
-    ng build ngx-opalbytes-directives --watch
-    ```
-    Para usar esta biblioteca em um projeto local durante o desenvolvimento, você pode usar o `npm link`.
+2. Desenvolver a Biblioteca
+
+### Compilação com Observação de Alterações
+Para compilar a biblioteca e recompilá-la automaticamente a cada modificação, utilize o modo **watch**:
+
+```bash
+ng build ngx-opalbytes-directives --watch
+```
+ou
+```bash
+npm run watch
+```
+
+### Uso em Projeto Local (Desenvolvimento)
+Para testar a biblioteca em um projeto local durante o desenvolvimento, siga estas opções:
+
+#### **Opção 1: Usando `npm link` (Recomendado)**
+1. No diretório da biblioteca:
+   ```bash
+   npm link
+   ```
+2. No diretório do projeto de destino:
+   ```bash
+   npm link ngx-opalbytes-directives
+   ```
+
+#### **Opção 2: Instalação Direta via Caminho Local**
+Caso encontre problemas com `npm link`, instale diretamente pelo caminho da biblioteca compilada:
+```bash
+npm i "caminho-da-biblioteca/opalbytes-directive-components/dist/ngx-opalbytes-directives"
+```
 
 ---
 
@@ -39,6 +82,51 @@ opalbytes-directive-components/
 ├── commitlint.config.js             룰 Regras para o formato das mensagens de commit
 └── .releaserc.js                    🚀 Configuração do semantic-release
 ```
+
+--- 
+## 🌿 Estratégia de Branches
+
+### Convenção de Nomenclatura
+Usamos uma convenção simples e eficiente para nomear branches:
+
+```
+<tipo>/descricao-breve
+```
+
+**Tipos recomendados:**
+- `feat/` - Nova funcionalidade
+- `fix/` - Correção de bug
+- `docs/` - Documentação
+- `refactor/` - Refatoração de código
+- `test/` - Testes
+- `chore/` - Tarefas de manutenção
+
+**Exemplos corretos:**
+```bash
+# ✅ Branches válidas
+git checkout -b feat/add-input-mask-directive
+git checkout -b fix/correcao-validacao-formato
+git checkout -b docs/atualizacao-guia-instalacao
+git checkout -b test/add-testes-unitarios-diretivas
+```
+
+**Regras importantes:**
+- Use apenas letras minúsculas
+- Separe palavras com hífen (`-`)
+- Evite caracteres especiais
+- Seja descritivo mas conciso
+
+### Fluxo de Trabalho
+1. Crie uma branch a partir da `main`:
+   ```bash
+   git checkout main
+   git pull origin main
+   git checkout -b tipo/nome-da-feature
+   ```
+
+2. Desenvolva e faça commits seguindo as regras de Conventional Commits
+
+3. Abra um Pull Request para revisão
 
 ---
 
@@ -92,13 +180,3 @@ O versionamento e a publicação de novas versões são totalmente automatizados
 *   `npm run test`: Executa os testes unitários com Vitest.
 *   `npm run lint`: Analisa o código em busca de erros de estilo e padrões.
 
----
-
-## 🔗 Tecnologias
-
-*   **Angular**: Framework principal para a criação da biblioteca.
-*   **TypeScript**: Linguagem base do projeto.
-*   **Conventional Commits**: Padrão para mensagens de commit.
-*   **Husky**: Ferramenta para executar scripts em hooks do Git.
-*   **Commitlint**: Validador de mensagens de commit.
-*   **Semantic Release**: Ferramenta para automação de versionamento e releases.
