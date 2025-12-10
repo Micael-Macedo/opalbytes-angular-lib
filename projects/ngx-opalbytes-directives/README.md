@@ -3,6 +3,10 @@
 Uma biblioteca de diretivas reutilizáveis para aplicações Angular.
 
 ---
+## Compatibilidade
+|Tecnologia  |	Versão  |   Descrição  |
+|------------|----------|-------------------------------------|
+|   Angular	 |  ^21.0.0	|  Framework principal da biblioteca |
 
 ## Instalação
 

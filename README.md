@@ -10,7 +10,7 @@
 ## Framework e Linguagens
 |Tecnologia  |	Versão  |   Descrição  |
 |------------|----------|-------------------------------------|
-|   Angular	 |  21.0.0	|  Framework principal para desenvolvimento da biblioteca |
+|   Angular	 |  ^21.0.0	|  Framework principal para desenvolvimento da biblioteca |
 | TypeScript |	~5.9.2	| Linguagem base com tipagem estática |
 |    RxJS	 |  ~7.8.0  | Biblioteca para programação reativa |
 
