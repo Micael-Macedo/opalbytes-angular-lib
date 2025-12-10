@@ -158,6 +158,34 @@ feat(input): adicionar diretiva para formatar moeda em tempo real
 
 ---
 
+## 📜 Regras de Desenvolvimento
+
+Para garantir a qualidade e a estabilidade do código, seguimos um conjunto de regras estritas. A colaboração deve seguir o fluxo de Pull Request, e a automação com Husky garante que essas regras sejam cumpridas.
+
+### 1. Commits Diretos na `main` São Proibidos
+
+- **Fluxo de Pull Request (PR)**: Toda e qualquer alteração destinada à branch `main` **deve** ser feita através de um Pull Request. Commits diretos na `main` são bloqueados por regras de proteção da branch.
+- **Revisão de Código**: Antes de ser mesclado, um PR deve ser revisado por pelo menos um outro membro da equipe.
+
+### 2. Testes São Obrigatórios
+
+- **Cobertura de Testes**: Novas funcionalidades (`feat`) e correções de bugs (`fix`) devem, obrigatoriamente, vir acompanhadas de testes unitários que validem o comportamento esperado.
+- **Qualidade Assegurada**: O objetivo é manter uma alta cobertura de testes para garantir que futuras alterações não quebrem o que já existe.
+
+### 3. Verificação Automática com Husky
+
+Antes de cada commit, o Husky executa automaticamente os seguintes scripts:
+- verificação de commit direto na main
+- `npm run lint`: Para garantir que o código segue os padrões de estilo definidos.
+
+Antes de cada push, o Husky executa automaticamente os seguintes scripts:
+- verificação de push direto na main
+- `npm run test`: Para rodar todos os testes unitários e garantir que nada foi quebrado.
+
+**Um commit só será criado se os testes e o lint passarem.** Isso impede que código com problemas seja adicionado ao repositório.
+
+---
+
 ## 🚀 Releases e Versionamento
 
 O versionamento e a publicação de novas versões são totalmente automatizados com o **semantic-release**.
@@ -177,6 +205,7 @@ O versionamento e a publicação de novas versões são totalmente automatizados
 
 *   `npm run build`: Compila a biblioteca para produção.
 *   `npm run watch`: Compila a biblioteca em modo de desenvolvimento e observa as alterações.
-*   `npm run test`: Executa os testes unitários com Vitest.
+*   `npm run test`: Executa os testes unitários com Vitest fechando o terminal ao finalizar.
+*   `npm run test_watch`: Executa os testes unitários com Vitest.
 *   `npm run lint`: Analisa o código em busca de erros de estilo e padrões.
 
