@@ -44,6 +44,114 @@
           }
         }
       }
+    },
+    "ngx-opalbytes-components": {
+      "projectType": "library",
+      "root": "projects/ngx-opalbytes-components",
+      "sourceRoot": "projects/ngx-opalbytes-components/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-opalbytes-components/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-opalbytes-components/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-opalbytes-components/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-opalbytes-components/**/*.ts",
+              "projects/ngx-opalbytes-components/**/*.html"
+            ],
+            "eslintConfig": "projects/ngx-opalbytes-components/eslint.config.js"
+          }
+        }
+      }
+    },
+    "ngx-opalbytes-services": {
+      "projectType": "library",
+      "root": "projects/ngx-opalbytes-services",
+      "sourceRoot": "projects/ngx-opalbytes-services/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-opalbytes-services/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-opalbytes-services/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-opalbytes-services/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-opalbytes-services/**/*.ts",
+              "projects/ngx-opalbytes-services/**/*.html"
+            ],
+            "eslintConfig": "projects/ngx-opalbytes-services/eslint.config.js"
+          }
+        }
+      }
+    },
+    "ngx-opalbytes-utils": {
+      "projectType": "library",
+      "root": "projects/ngx-opalbytes-utils",
+      "sourceRoot": "projects/ngx-opalbytes-utils/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-opalbytes-utils/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-opalbytes-utils/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-opalbytes-utils/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-opalbytes-utils/**/*.ts",
+              "projects/ngx-opalbytes-utils/**/*.html"
+            ],
+            "eslintConfig": "projects/ngx-opalbytes-utils/eslint.config.js"
+          }
+        }
+      }
     }
   }
 }

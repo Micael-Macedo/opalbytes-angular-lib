@@ -4,7 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build:all": "ng build ngx-opalbytes &&",
+    "build_directives": "ng build ngx-opalbytes-directives",
+    "build_components": "ng build ngx-opalbytes-components",
+    "build_services": "ng build ngx-opalbytes-services",
+    "build_utils": "ng build ngx-opalbytes-utils",
     "watch": "ng build --watch --configuration development",
     "test_watch": "ng test",
     "test": "ng test --watch=false",

@@ -9,8 +9,17 @@
     "noImplicitReturns": true,
     "preserveSymlinks": true,
     "paths": {
+      "ngx-opalbytes-components": [
+        "./dist/ngx-opalbytes-components"
+      ],
       "ngx-opalbytes-directives": [
         "./dist/ngx-opalbytes-directives"
+      ],
+      "ngx-opalbytes-services": [
+        "./dist/ngx-opalbytes-services"
+      ],
+      "ngx-opalbytes-utils": [
+        "./dist/ngx-opalbytes-utils"
       ]
     },
     "noFallthroughCasesInSwitch": true,
@@ -34,6 +43,24 @@
     },
     {
       "path": "./projects/ngx-opalbytes-directives/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-components/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-components/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-services/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-services/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-utils/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-utils/tsconfig.spec.json"
     }
   ]
 }
