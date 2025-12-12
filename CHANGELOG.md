@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.5.0...v1.5.1) (2025-12-12)
+
+
+### Bug Fixes
+
+* **libs:** correcao instalacao dependencias em release ([b456580](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/b4565805363c3e97d3c35b5408e88131f203b030))
+
 # [1.5.0](https://github.com/Micael-Macedo/opalbytes-directive-components/compare/v1.4.0...v1.5.0) (2025-12-10)
 
 
