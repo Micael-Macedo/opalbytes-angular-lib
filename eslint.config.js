@@ -7,7 +7,7 @@ const angular = require("angular-eslint");
 module.exports = defineConfig([
   {
     ignores: [
-      "**/dist/**", 
+      "**/dist/**",
     ],
     files: ["**/*.ts"],
     extends: [
@@ -34,7 +34,9 @@ module.exports = defineConfig([
           style: "kebab-case",
         },
       ],
-      "no-console": "error"
+      "no-console": "error",
+      "no-unused-vars": "error",
+      "@typescript-eslint/no-explicit-any": "warn"
     },
   },
   {
