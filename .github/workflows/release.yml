@@ -17,7 +17,7 @@ jobs:
           node-version: 'lts/*'
           
       - name: Lint lib
-        run: npm lint
+        run: npm run lint
 
       - name: Install dependencies
         run: npm ci
@@ -40,10 +40,10 @@ jobs:
           node-version: 'lts/*'
           
       - name: Lint lib
-        run: npm lint
+        run: npm run lint
 
       - name: Test lib
-        run: npm test:components
+        run: npm run test:components
 
       - name: Install dependencies
         run: npm ci
@@ -71,10 +71,10 @@ jobs:
           node-version: 'lts/*'
 
       - name: Lint lib
-        run: npm lint
+        run: npm run lint
 
       - name: Test lib
-        run: npm test:directives
+        run: npm run test:directives
 
       - name: Install dependencies
         run: npm ci
@@ -101,10 +101,10 @@ jobs:
           node-version: 'lts/*'
 
       - name: Lint lib
-        run: npm lint
+        run: npm run lint
 
       - name: Test lib
-        run: npm test:services
+        run: npm run test:services
 
       - name: Install dependencies
         run: npm ci
@@ -131,10 +131,10 @@ jobs:
           node-version: 'lts/*'
 
       - name: Lint lib
-        run: npm lint
+        run: npm run lint
         
       - name: Test lib
-        run: npm test:utils
+        run: npm run test:utils
 
       - name: Install dependencies
         run: npm ci
