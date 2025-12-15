@@ -8,7 +8,8 @@
   [class.disabled]="isDisabled"
   [class.loading]="isLoading"
   [ngClass]="btnClass"
-  [attr.data-cy]="dataCy">
+  [attr.data-cy]="dataCy"
+  (click)="onClick()">
   @if (leadingIcon) {
   <span [class]="useMaterialIcons ? 'material-icons leading-icon' : 'leading-icon'">
     @if(useMaterialIcons) { {{ leadingIcon }} } @else {

@@ -4,7 +4,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'lib-base-button',
-  imports: [MatTooltipModule, CommonModule],
+  imports: [CommonModule, MatTooltipModule],
   templateUrl: './base-button.html',
   styleUrl: './base-button.css',
 })
@@ -16,7 +16,7 @@ export class BaseButton implements OnInit {
   @Input() isLoading = false;
   @Input() useMaterialIcons = false;
   @Input() btnClass = "";
-  @Input() tooltip = "";
+  @Input() tooltip?:string;
 
   @Input() trailingIcon?: string;
   @Input() leadingIcon?: string;
@@ -26,8 +26,6 @@ export class BaseButton implements OnInit {
     if (!this.dataCy) {
       this.dataCy = `btn-${this.buttonText.replace(/\s+/g, '-').toLowerCase()}`;
     }
-
-    this.tooltip = this.buttonText
   }
 
   onClick(): void {
