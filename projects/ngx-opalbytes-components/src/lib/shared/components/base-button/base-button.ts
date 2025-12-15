@@ -10,13 +10,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class BaseButton implements OnInit {
   @Output() readonly buttonClick = new EventEmitter<void>();
-  @Input() buttonText: string = "Clique!";
-  @Input() isDarkMode: boolean = false;
-  @Input() isDisabled: boolean = false;
-  @Input() isLoading: boolean = false;
-  @Input() useMaterialIcons: boolean = false;
-  @Input() btnClass: string = "";
-  @Input() tooltip: string = "";
+  @Input() buttonText = "Clique!";
+  @Input() isDarkMode = false;
+  @Input() isDisabled = false;
+  @Input() isLoading = false;
+  @Input() useMaterialIcons = false;
+  @Input() btnClass = "";
+  @Input() tooltip = "";
 
   @Input() trailingIcon?: string;
   @Input() leadingIcon?: string;
