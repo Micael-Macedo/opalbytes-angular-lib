@@ -1,0 +1,28 @@
+<button
+  [matTooltip]="tooltip"
+  matTooltipPosition="below"
+  matTooltipClass="custom-arrow-tooltip"
+  [matTooltipDisabled]="!tooltip"
+  [disabled]="isDisabled || isLoading"
+  [class.darkMode]="isDarkMode"
+  [class.disabled]="isDisabled"
+  [class.loading]="isLoading"
+  [ngClass]="btnClass"
+  [attr.data-cy]="dataCy"
+  (click)="onClick()">
+  @if (leadingIcon) {
+  <span [class]="useMaterialIcons ? 'material-icons leading-icon' : 'leading-icon'">
+    @if(useMaterialIcons) { {{ leadingIcon }} } @else {
+    <img [src]="leadingIcon" alt="icon" />
+    }
+  </span>
+  } {{ buttonText }} @if (trailingIcon) {
+  <span [class]="useMaterialIcons ? 'material-icons trailing-icon' : 'trailing-icon'">
+    @if(useMaterialIcons){ {{ trailingIcon }} } @else {
+    <img [src]="trailingIcon" alt="icon" />
+    }
+  </span>
+  } @if (isLoading) {
+  <span class="loader"></span>
+  }
+</button>
