@@ -1,5 +1,5 @@
 const path = require('path');
-const libraryName = path.basename(__dirname); // e.g., 'ngx-opalbytes-directives'
+const libraryName = path.basename(__dirname); 
 const projectRoot = path.resolve(__dirname, '../..');
 
 module.exports = {
@@ -37,19 +37,17 @@ module.exports = {
         [
             "@semantic-release/exec",
             {
-                // Updates the version in the source package.json
-                prepareCmd: `npm version ${nextRelease.version} --no-git-tag-version`,
+                prepareCmd: "npm version ${nextRelease.version} --no-git-tag-version",
             },
         ],
         [
             "@semantic-release/git",
             {
-                // Commits the version bump and changelog
                 assets: ["CHANGELOG.md", "package.json"],
                 message: `chore(release): ${libraryName} ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}`
             },
         ],
         "@semantic-release/github",
     ],
-    repositoryUrl: "https://github.com/Micael-Macedo/opalbytes-directive-components",
+    repositoryUrl: "https://github.com/Micael-Macedo/opalbytes-angular-lib.git",
 };
