@@ -1,0 +1,32 @@
+<div class="dialog-container">
+  <div class="dialog-content">
+    <img [src]="config.logoIcon" alt="Logo" class="logo" />
+    <div class="alert-wrapper">
+      <div class="text-content" [ngClass]="config.type">
+        <div class="title">{{ config.title }}</div>
+        <div class="message">{{ config.message }}</div>
+        <div class="button-container">
+          @if (config.cancelButtonText) {
+          <button
+            class="cancel-button"
+            (click)="handleCancel()"
+            [attr.data-cy]="config.cancelButtonText">
+            {{ config.cancelButtonText }}
+          </button>
+          } @if (config.confirmButtonText) {
+          <button
+            class="confirm-button"
+            [ngClass]="config.type"
+            (click)="handleConfirm()"
+            [attr.data-cy]="config.confirmButtonText">
+            {{ config.confirmButtonText }}
+          </button>
+          }
+        </div>
+      </div>
+      <div class="icon-container">
+        <img [src]="getIconPath()" alt="Dialog Icon" class="alert-icon" />
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+@switch (baseCardData.typeCard) { @case('IMAGE') {
+<a
+  [href]="baseCardData.sourceData"
+  class="flex card col"
+  [target]="baseCardData.isTargetBlank ? '_blank': ''">
+  <div class="midia">
+    <img [src]="baseCardData.imgThumbnail" alt="" />
+  </div>
+  <div class="card-text-data d-flex w100 col">
+    <h3 class="card-title">{{ baseCardData.title }}</h3>
+    <p class="card-description">{{ baseCardData.description }}</p>
+  </div>
+</a>
+} @case('VIDEO') {
+<div class="flex card col">
+  <div class="midia video">
+    <video [poster]="baseCardData.imgThumbnail" [controls]="baseCardData.isControlsEnabled">
+      <source [src]="baseCardData.sourceData" />
+    </video>
+  </div>
+  <div class="card-text-data d-flex w100 col">
+    <h3 class="card-title">{{ baseCardData.title }}</h3>
+    <p class="card-description">{{ baseCardData.description }}</p>
+  </div>
+</div>
+} }

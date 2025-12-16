@@ -1,0 +1,44 @@
+.card {
+  width: 100%;
+  min-width: 410px;
+  max-width: 410px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+}
+  
+.card-text-data {
+    padding: 20px 18px;
+    background-color: var(--table-body-color);
+    border-radius: 0 0 18px 18px;
+}
+
+.card-title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.card-description {
+    font-size: 16px;
+    font-weight: 400;
+}
+.midia {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: var(--black);
+}
+
+img,
+video {
+    width: 100%;
+    border-radius: 18px 18px 0 0;
+}
+
+.midia.video {
+    aspect-ratio: 16 / 9;
+}
+.midia.video video {
+    aspect-ratio: 16 / 9;
+}
