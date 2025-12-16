@@ -9,6 +9,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class BaseButton implements OnInit {
   @Output() readonly buttonClick = new EventEmitter<void>();
+  
   @Input() buttonText = "Clique!";
   @Input() isDarkMode = false;
   @Input() isDisabled = false;
