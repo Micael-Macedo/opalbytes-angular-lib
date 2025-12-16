@@ -7,7 +7,7 @@ export interface IAlertConfig {
   type: AlertType;
   title: string;
   message: string;
-  alertIcon: string; 
+  alertIcon?: string; 
 }
 
 
@@ -22,7 +22,7 @@ export class BaseAlert {
     type: AlertType;
     title: string;
     message: string;
-    alertIcon: string
+    alertIcon?: string
   };
 
   private iconPaths: Record<AlertType, string> = {

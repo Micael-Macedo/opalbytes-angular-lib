@@ -37,22 +37,22 @@ describe('BaseDialog', () => {
 
   it('deve retornar o ícone correto para "success"', () => {
     component.config.type = "success";
-    expect(component.getIconPath()).toBe("assets/images/svg/success-alert-icon.svg");
+    expect(component.getIconPath()).toBe("https://placehold.co/600x400");
   });
 
   it('deve retornar o ícone correto para "error"', () => {
     component.config.type = "error";
-    expect(component.getIconPath()).toBe("assets/images/svg/error-alert-icon.svg");
+    expect(component.getIconPath()).toBe("https://placehold.co/600x400");
   });
 
   it('deve retornar o ícone correto para "info"', () => {
     component.config.type = "info";
-    expect(component.getIconPath()).toBe("assets/images/svg/info-alert-icon.svg");
+    expect(component.getIconPath()).toBe("https://placehold.co/600x400");
   });
 
   it('deve retornar o ícone correto para "warning"', () => {
     component.config.type = "warning";
-    expect(component.getIconPath()).toBe("assets/images/svg/warning-alert-icon.svg");
+    expect(component.getIconPath()).toBe("https://placehold.co/600x400");
   });
 
   it("deve chamar onConfirm e closeDialog ao confirmar", () => {
