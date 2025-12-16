@@ -49,5 +49,5 @@ module.exports = {
         ],
         "@semantic-release/github",
     ],
-    repositoryUrl: "https://github.com/Micael-Macedo/opalbytes-directive-components",
+    repositoryUrl: "https://github.com/Micael-Macedo/opalbytes-angular-lib.git",
 };
