@@ -1,0 +1,19 @@
+<div class="dialog-container">
+  <div class="dialog-content">
+    <img [src]="data.alertIcon" alt="R-Clinicas Logo" class="logo" />
+    <div class="alert-wrapper">
+      <div class="text-content">
+        @if (data.title) {
+        <div class="title" [ngClass]="getTitleClass(data.type)">{{ data.title }}</div>
+        } @if (data.title && data.message) {
+        <div class="message-spacer"></div>
+        } @if (data.message) {
+        <div class="message">{{ data.message }}</div>
+        }
+      </div>
+      <div class="icon-container">
+        <img [src]="getIconPath(data.type)" alt="Alert Icon" class="alert-icon" />
+      </div>
+    </div>
+  </div>
+</div>
