@@ -1,3 +1,23 @@
+# [1.6.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.5.1...v1.6.0) (2025-12-16)
+
+
+### Bug Fixes
+
+* **components:** ajuste-grupamento-opcionais ([e188e2f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e188e2f501f543af0c82b17357079dd577a40521))
+* **components:** correcao-espacamento-atributos ([08bdee6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/08bdee6f1117aa47ead7b25ac635d690d0f0c075))
+* **components:** correcao-lib-name-release ([627934f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/627934f5b9da26b13b0526a584d9209bba1cac16))
+* **components:** correcao-publicacao-release ([05ebc42](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/05ebc42dfd446eedd542d17b147c55804c99f126))
+* **components:** correcao-repositorio-url-release ([6f8384d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/6f8384dbc2f6ebbde377f96c0c1ca6cfbbaf17b2))
+* **components:** remocao-tooltip-botao ([3f51861](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3f518610403a50cee0b975ecc1a4ca4b42171d7c))
+* **libs:** correcao-link-repositorio-para-releases ([35513ef](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/35513eff77e4cdb43450601d51c9180e2f95a647))
+
+
+### Features
+
+* **components:** add componente base botao ([6e8e978](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/6e8e97855d139fb0afc1f3cfbeb2618c3e373184))
+* **components:** add-base-button-public ([3c33650](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3c3365024dab8503ce155ce469ff4cb156815523))
+* **components:** correcao-inferencia-atributos ([b2e99d4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/b2e99d4b7d8e7d5ea96d11e622837945cdbdb6a3))
+
 ## [1.5.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.5.0...v1.5.1) (2025-12-12)
 
 
