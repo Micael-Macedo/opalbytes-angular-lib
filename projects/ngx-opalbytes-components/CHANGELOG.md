@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.2.0...ngx-opalbytes-components@1.3.0) (2025-12-16)
+
+
+### Features
+
+* liberacao-componentes-base ([ebae02d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ebae02d4903d332a13acad3ba37e58f5322cb26f))
+
 # [1.2.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.1.0...ngx-opalbytes-components@1.2.0) (2025-12-16)
 
 
