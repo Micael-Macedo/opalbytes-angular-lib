@@ -6,7 +6,7 @@ on:
 jobs:
   release-libs:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'feat(libs)') || contains(github.event.head_commit.message, 'fix(libs)') || contains(github.event.head_commit.message, 'refactor(libs)') || contains(github.event.head_commit.message, 'docs(libs)') || contains(github.event.head_commit.message, 'chore(libs)')  || contains(github.event.head_commit.message, 'release(libs)') || contains(github.event.head_commit.message, 'test(libs)') || contains(github.event.head_commit.message, 'style(libs)')"
+    if: "contains(github.event.head_commit.message, 'feat(libs)') || contains(github.event.head_commit.message, 'fix(libs)') || contains(github.event.head_commit.message, 'refactor(libs)') || contains(github.event.head_commit.message, 'docs(libs)') || contains(github.event.head_commit.message, 'chore(libs)')  || contains(github.event.head_commit.message, 'release(libs)') || contains(github.event.head_commit.message, 'test(libs)') || contains(github.event.head_commit.message, 'style(libs)') || contains(github.event.head_commit.message, 'feature(libs)')"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -29,7 +29,7 @@ jobs:
 
   release-components:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'feat(components)') || contains(github.event.head_commit.message, 'fix(components)') || contains(github.event.head_commit.message, 'refactor(components)') || contains(github.event.head_commit.message, 'docs(components)') || contains(github.event.head_commit.message, 'chore(components)')  || contains(github.event.head_commit.message, 'release(components)') || contains(github.event.head_commit.message, 'test(components)') || contains(github.event.head_commit.message, 'style(components)')"
+    if: "contains(github.event.head_commit.message, 'feat(components)') || contains(github.event.head_commit.message, 'fix(components)') || contains(github.event.head_commit.message, 'refactor(components)') || contains(github.event.head_commit.message, 'docs(components)') || contains(github.event.head_commit.message, 'chore(components)')  || contains(github.event.head_commit.message, 'release(components)') || contains(github.event.head_commit.message, 'test(components)') || contains(github.event.head_commit.message, 'style(components)') || contains(github.event.head_commit.message, 'feature(components)')"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -59,7 +59,7 @@ jobs:
 
   release-directives:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'feat(directives)') || contains(github.event.head_commit.message, 'fix(directives)') || contains(github.event.head_commit.message, 'refactor(directives)') || contains(github.event.head_commit.message, 'docs(directives)') || contains(github.event.head_commit.message, 'chore(directives)')  || contains(github.event.head_commit.message, 'release(directives)') || contains(github.event.head_commit.message, 'test(directives)') || contains(github.event.head_commit.message, 'style(directives)')"
+    if: "contains(github.event.head_commit.message, 'feat(directives)') || contains(github.event.head_commit.message, 'fix(directives)') || contains(github.event.head_commit.message, 'refactor(directives)') || contains(github.event.head_commit.message, 'docs(directives)') || contains(github.event.head_commit.message, 'chore(directives)')  || contains(github.event.head_commit.message, 'release(directives)') || contains(github.event.head_commit.message, 'test(directives)') || contains(github.event.head_commit.message, 'style(directives)') || contains(github.event.head_commit.message, 'feature(directives)')"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -90,7 +90,7 @@ jobs:
 
   release-services:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'feat(services)') || contains(github.event.head_commit.message, 'fix(services)') || contains(github.event.head_commit.message, 'refactor(services)') || contains(github.event.head_commit.message, 'docsor(services)') || contains(github.event.head_commit.message, 'chore(services)')  || contains(github.event.head_commit.message, 'release(services)') || contains(github.event.head_commit.message, 'test(services)') || contains(github.event.head_commit.message, 'style(services)')"
+    if: "contains(github.event.head_commit.message, 'feat(services)') || contains(github.event.head_commit.message, 'fix(services)') || contains(github.event.head_commit.message, 'refactor(services)') || contains(github.event.head_commit.message, 'docsor(services)') || contains(github.event.head_commit.message, 'chore(services)')  || contains(github.event.head_commit.message, 'release(services)') || contains(github.event.head_commit.message, 'test(services)') || contains(github.event.head_commit.message, 'style(services)') || contains(github.event.head_commit.message, 'feature(services)')"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -120,7 +120,7 @@ jobs:
 
   release-utils:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'feat(utils)') || contains(github.event.head_commit.message, 'fix(utils)') || contains(github.event.head_commit.message, 'refactor(utils)') || contains(github.event.head_commit.message, 'docsactor(utils)') || contains(github.event.head_commit.message, 'chore(utils)')  || contains(github.event.head_commit.message, 'release(utils)') || contains(github.event.head_commit.message, 'test(utils)') || contains(github.event.head_commit.message, 'style(utils)')"
+    if: "contains(github.event.head_commit.message, 'feat(utils)') || contains(github.event.head_commit.message, 'fix(utils)') || contains(github.event.head_commit.message, 'refactor(utils)') || contains(github.event.head_commit.message, 'docsactor(utils)') || contains(github.event.head_commit.message, 'chore(utils)')  || contains(github.event.head_commit.message, 'release(utils)') || contains(github.event.head_commit.message, 'test(utils)') || contains(github.event.head_commit.message, 'style(utils)') || contains(github.event.head_commit.message, 'feature(utils)')"
     steps:
       - uses: actions/checkout@v3
         with:
