@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.1.0...ngx-opalbytes-components@1.2.0) (2025-12-16)
+
+
+### Features
+
+* **components:** add-componentes-basico ([c2eb7b7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c2eb7b70a0eeaf640c48334326e04d7f71a53bbd))
+* **components:** remocao-base-card ([4f9923e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4f9923e2a0d801dcb167be6ebd9f34105251b5d1))
+
 # [1.1.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.0.2...ngx-opalbytes-components@1.1.0) (2025-12-16)
 
 
