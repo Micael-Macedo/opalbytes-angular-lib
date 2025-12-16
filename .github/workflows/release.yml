@@ -147,3 +147,33 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: cd projects/ngx-opalbytes-utils && npx semantic-release
+
+  release-core:
+    runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, 'feat(core)') || contains(github.event.head_commit.message, 'fix(core)') || contains(github.event.head_commit.message, 'refactor(core)') || contains(github.event.head_commit.message, 'docsactor(core)') || contains(github.event.head_commit.message, 'chore(core)')  || contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'test(core)') || contains(github.event.head_commit.message, 'style(core)') || contains(github.event.head_commit.message, 'feature(core)')"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint lib
+        run: npm run lint
+        
+      - name: Test lib
+        run: npm run test:core
+
+      - name: Build library
+        run: npm run build:core
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: cd projects/ngx-opalbytes-core-shared && npx semantic-release

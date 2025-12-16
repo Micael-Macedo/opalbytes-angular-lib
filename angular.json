@@ -152,6 +152,42 @@
           }
         }
       }
+    },
+    "ngx-opalbytes-core-shared": {
+      "projectType": "library",
+      "root": "projects/ngx-opalbytes-core-shared",
+      "sourceRoot": "projects/ngx-opalbytes-core-shared/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-opalbytes-core-shared/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-opalbytes-core-shared/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-opalbytes-core-shared/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-opalbytes-core-shared/**/*.ts",
+              "projects/ngx-opalbytes-core-shared/**/*.html"
+            ],
+            "eslintConfig": "projects/ngx-opalbytes-core-shared/eslint.config.js"
+          }
+        }
+      }
     }
   }
 }

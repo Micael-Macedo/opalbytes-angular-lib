@@ -12,6 +12,9 @@
       "ngx-opalbytes-components": [
         "./dist/ngx-opalbytes-components"
       ],
+      "ngx-opalbytes-core-shared": [
+        "./dist/ngx-opalbytes-core-shared"
+      ],
       "ngx-opalbytes-directives": [
         "./dist/ngx-opalbytes-directives"
       ],
@@ -61,6 +64,18 @@
     },
     {
       "path": "./projects/ngx-opalbytes-utils/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-core-shared/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-core-shared/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-core-shared/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-core-shared/tsconfig.spec.json"
     }
   ]
 }
