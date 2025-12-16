@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'lib-base-button',
-  imports: [CommonModule],
+  imports: [CommonModule, MatTooltipModule],
   templateUrl: './base-button.html',
   styleUrl: './base-button.css',
 })
@@ -25,6 +26,10 @@ export class BaseButton implements OnInit {
   ngOnInit(): void {
     if (!this.dataCy) {
       this.dataCy = `btn-${this.buttonText.replace(/\s+/g, '-').toLowerCase()}`;
+    }
+
+    if(!this.tooltip && this.buttonText.length >= 20){
+      this.tooltip = this.buttonText
     }
   }
 

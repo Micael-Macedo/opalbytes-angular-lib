@@ -112,4 +112,23 @@ describe('BaseButton', () => {
       expect(component.dataCy).toBe(expectedDataCy)
     })
   })
+  describe("tooltip", () => {
+    it("não deve exibir tooltip", () =>{
+      component.tooltip = undefined
+      component.buttonText = "Clique"
+
+      component.ngOnInit()
+
+      expect(component.tooltip).toBeUndefined()
+    })
+
+    it("exibir tooltip em caso de pelo menos 20 ", () =>{
+      const expectedTooltip = "qqwertyuiopasdfghjklçzxcvb" 
+      component.buttonText = expectedTooltip
+
+      component.ngOnInit()
+
+      expect(component.tooltip).toBe(expectedTooltip)
+    })
+  })
 })

@@ -1,4 +1,8 @@
 <button
+  [matTooltip]="tooltip"
+  matTooltipPosition="below"
+  matTooltipClass="custom-arrow-tooltip"
+  [matTooltipDisabled]="!tooltip"
   [disabled]="isDisabled || isLoading"
   [class.darkMode]="isDarkMode"
   [class.disabled]="isDisabled"
