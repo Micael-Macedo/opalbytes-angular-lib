@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.0.1...ngx-opalbytes-components@1.0.2) (2025-12-16)
+
+
+### Bug Fixes
+
+* **components:** ajuste-grupamento-opcionais ([e188e2f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e188e2f501f543af0c82b17357079dd577a40521))
+
 ## [1.0.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.0.0...ngx-opalbytes-components@1.0.1) (2025-12-16)
 
 
