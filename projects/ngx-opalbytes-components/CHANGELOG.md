@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.0.2...ngx-opalbytes-components@1.1.0) (2025-12-16)
+
+
+### Bug Fixes
+
+* **libs:** correcao-link-repositorio-para-releases ([35513ef](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/35513eff77e4cdb43450601d51c9180e2f95a647))
+
+
+### Features
+
+* **components:** add-tooltip-base-button ([7cc144e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/7cc144ebe1b9266228541736ed9fb700c1d6815d))
+
 ## [1.0.2](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.0.1...ngx-opalbytes-components@1.0.2) (2025-12-16)
 
 
