@@ -37,16 +37,14 @@ module.exports = {
         [
             "@semantic-release/exec",
             {
-                // Updates the version in the source package.json
-                prepareCmd: `npm version ${nextRelease.version} --no-git-tag-version`,
+                prepareCmd: "npm version ${nextRelease.version} --no-git-tag-version",
             },
         ],
         [
             "@semantic-release/git",
             {
-                // Commits the version bump and changelog
                 assets: ["CHANGELOG.md", "package.json"],
-                message: `chore(release): ${libraryName} ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}`
+                message: "chore(release): ${libraryName} ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
             },
         ],
         "@semantic-release/github",
