@@ -44,7 +44,8 @@ module.exports = {
             "@semantic-release/git",
             {
                 assets: ["CHANGELOG.md", "package.json"],
-                message: "chore(release): ${libraryName} ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+                // Fixed: Use hardcoded library name or remove it
+                message: `chore(release): ${libraryName} \${nextRelease.version} [skip ci]\n\n\${nextRelease.notes}`
             },
         ],
         "@semantic-release/github",
