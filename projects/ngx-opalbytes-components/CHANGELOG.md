@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.0.0...ngx-opalbytes-components@1.0.1) (2025-12-16)
+
+
+### Bug Fixes
+
+* **components:** correcao-espacamento-atributos ([08bdee6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/08bdee6f1117aa47ead7b25ac635d690d0f0c075))
+
 # 1.0.0 (2025-12-16)
 
 
