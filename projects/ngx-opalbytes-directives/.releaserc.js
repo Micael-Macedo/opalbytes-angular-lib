@@ -1,5 +1,5 @@
 const path = require('path');
-const libraryName = path.basename(__dirname); // e.g., 'ngx-opalbytes-directives'
+const libraryName = path.basename(__dirname);
 const projectRoot = path.resolve(__dirname, '../..');
 
 module.exports = {
@@ -44,7 +44,7 @@ module.exports = {
             "@semantic-release/git",
             {
                 assets: ["CHANGELOG.md", "package.json"],
-                message: `chore(release): ${libraryName} ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}`
+                message: `chore(release): ${libraryName} \${nextRelease.version} [skip ci]\n\n\${nextRelease.notes}`
             },
         ],
         "@semantic-release/github",

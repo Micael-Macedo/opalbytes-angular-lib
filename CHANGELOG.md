@@ -1,3 +1,13 @@
+## [1.7.2](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.7.1...v1.7.2) (2025-12-17)
+
+
+### Bug Fixes
+
+* **core:** correcao-nextRelease ([3a4942a](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3a4942a1cfd8f9161282253b74ee820d7de3bd68))
+* **directives:** correcao-nextRelease ([0b6af78](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0b6af7841fdb1cacd4dc3cfde37fe58540055b74))
+* **services:** correcao-nextRelease ([ddaa6c4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ddaa6c4c1d21e33ee6022db8d4c28ff22c0bc412))
+* **utils:** correcao-nextRelease ([67d94fc](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/67d94fc646433e7c32b1cb5b7858f43a2a735efd))
+
 ## [1.7.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.7.0...v1.7.1) (2025-12-17)
 
 
