@@ -1,6 +1,6 @@
 <div class="dialog-container">
   <div class="dialog-content">
-    <img [src]="data.alertIcon" alt="R-Clinicas Logo" class="logo" />
+    <img alt="R-Clinicas Logo" class="logo" [ngSrc]="data.alertIcon ?? ''" />
     <div class="alert-wrapper">
       <div class="text-content">
         @if (data.title) {
@@ -12,7 +12,7 @@
         }
       </div>
       <div class="icon-container">
-        <img [src]="getIconPath(data.type)" alt="Alert Icon" class="alert-icon" />
+        <img alt="Alert Icon" class="alert-icon" [ngSrc]="getIconPath(data.type)" />
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 export type DialogType = "success" | "error" | "info" | "warning";
@@ -16,7 +16,7 @@ export interface IDialogConfig {
 
 @Component({
   selector: 'lib-base-dialog',
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './base-dialog.html',
   styleUrl: './base-dialog.css',
 })

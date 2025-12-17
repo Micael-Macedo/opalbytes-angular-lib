@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'lib-base-button',
-  imports: [CommonModule, MatTooltipModule],
+  imports: [CommonModule, MatTooltipModule, NgOptimizedImage],
   templateUrl: './base-button.html',
   styleUrl: './base-button.css',
 })
