@@ -1,4 +1,4 @@
-name: Publish Libs
+name: Publish Libs Sequentially
 on:
   push:
     branches: [ main ]
@@ -89,7 +89,7 @@ jobs:
           echo "should-release-utils=$should_release_utils" >> $GITHUB_OUTPUT
           echo "should-release-core=$should_release_core" >> $GITHUB_OUTPUT
 
-  publish-libs-sequentially:
+  publish-sequentially:
     runs-on: ubuntu-latest
     needs: check-commits
     if: |
@@ -101,104 +101,148 @@ jobs:
       needs.check-commits.outputs.should-release-libs == 'true'
     
     strategy:
-      fail-fast: false
+      max-parallel: 1  # ⬅️ GARANTE EXECUÇÃO SEQUENCIAL - UMA POR VEZ!
+      fail-fast: false  # Se uma falhar, continua com as outras
       matrix:
+        # ORDEM DE EXECUÇÃO - IMPORTANTE: coloque na ordem das dependências
+        # Primeiro as bibliotecas base, depois as que dependem delas
         library: ['core', 'utils', 'services', 'directives', 'components', 'libs']
         include:
+          # CORE - biblioteca base
           - library: 'core'
-            should-release: ${{ needs.check-commits.outputs.should-release-core }}
+            condition: ${{ needs.check-commits.outputs.should-release-core }}
             project-path: 'projects/ngx-opalbytes-core-shared'
             build-command: 'npm run build:core'
             test-command: 'echo "No tests for core"'
+            release-command: 'cd projects/ngx-opalbytes-core-shared && npx semantic-release'
+          
+          # UTILS
           - library: 'utils'
-            should-release: ${{ needs.check-commits.outputs.should-release-utils }}
+            condition: ${{ needs.check-commits.outputs.should-release-utils }}
             project-path: 'projects/ngx-opalbytes-utils'
             build-command: 'npm run build:utils'
             test-command: 'npm run test:utils'
+            release-command: 'cd projects/ngx-opalbytes-utils && npx semantic-release'
+          
+          # SERVICES
           - library: 'services'
-            should-release: ${{ needs.check-commits.outputs.should-release-services }}
+            condition: ${{ needs.check-commits.outputs.should-release-services }}
             project-path: 'projects/ngx-opalbytes-services'
             build-command: 'npm run build:services'
             test-command: 'npm run test:services'
+            release-command: 'cd projects/ngx-opalbytes-services && npx semantic-release'
+          
+          # DIRECTIVES
           - library: 'directives'
-            should-release: ${{ needs.check-commits.outputs.should-release-directives }}
+            condition: ${{ needs.check-commits.outputs.should-release-directives }}
             project-path: 'projects/ngx-opalbytes-directives'
             build-command: 'npm run build:directives'
             test-command: 'npm run test:directives'
+            release-command: 'cd projects/ngx-opalbytes-directives && npx semantic-release'
+          
+          # COMPONENTS
           - library: 'components'
-            should-release: ${{ needs.check-commits.outputs.should-release-components }}
+            condition: ${{ needs.check-commits.outputs.should-release-components }}
             project-path: 'projects/ngx-opalbytes-components'
             build-command: 'npm run build:components'
             test-command: 'npm run test:components'
+            release-command: 'cd projects/ngx-opalbytes-components && npx semantic-release'
+          
+          # LIBS (raiz)
           - library: 'libs'
-            should-release: ${{ needs.check-commits.outputs.should-release-libs }}
+            condition: ${{ needs.check-commits.outputs.should-release-libs }}
             project-path: '.'
-            build-command: 'echo "No build for root"'
+            build-command: 'echo "No build needed for root"'
             test-command: 'echo "No tests for root"'
+            release-command: 'npx semantic-release'
     
     steps:
-      - name: Check if should release ${{ matrix.library }}
-        id: check-release
+      - name: Iniciar processo para ${{ matrix.library }}
         run: |
-          echo "Library: ${{ matrix.library }}"
-          echo "Should release: ${{ matrix.should-release }}"
-          if [ "${{ matrix.should-release }}" = "true" ]; then
-            echo "Releasing ${{ matrix.library }}"
-            echo "should-release=true" >> $GITHUB_OUTPUT
-          else
-            echo "Skipping ${{ matrix.library }} - no changes detected"
-            echo "should-release=false" >> $GITHUB_OUTPUT
-          fi
+          echo "========================================"
+          echo "📦 PROCESSANDO: ${{ matrix.library }}"
+          echo "📊 Condição para release: ${{ matrix.condition }}"
+          echo "📁 Caminho do projeto: ${{ matrix.project-path }}"
+          echo "========================================"
       
-      - name: Skip if no changes
-        if: steps.check-release.outputs.should-release != 'true'
-        run: echo "Skipping ${{ matrix.library }} library"
-        continue-on-error: true
+      - name: Pular biblioteca se não houver mudanças
+        if: matrix.condition != 'true'
+        run: |
+          echo "⏭️  PULANDO ${{ matrix.library }} - nenhuma mudança detectada nos commits"
+          echo "✅ Próxima biblioteca na sequência..."
+          exit 0
       
       - uses: actions/checkout@v3
-        if: steps.check-release.outputs.should-release == 'true'
+        if: matrix.condition == 'true'
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Setup Node.js
-        if: steps.check-release.outputs.should-release == 'true'
+        if: matrix.condition == 'true'
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
 
       - name: Configure npm authentication
-        if: steps.check-release.outputs.should-release == 'true'
+        if: matrix.condition == 'true'
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
 
       - name: Install dependencies
-        if: steps.check-release.outputs.should-release == 'true'
-        run: npm ci
-
+        if: matrix.condition == 'true'
+        run: |
+          echo "📥 Instalando dependências..."
+          npm ci --no-audit --prefer-offline
+          echo "✅ Dependências instaladas"
+          
+      - name: Verify Git configuration
+        if: matrix.condition == 'true'
+        run: |
+          echo "🔍 Verificando configuração do Git..."
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git remote -v
+          
       - name: Lint ${{ matrix.library }}
-        if: steps.check-release.outputs.should-release == 'true'
-        run: npm run lint
+        if: matrix.condition == 'true'
+        run: |
+          echo "🔍 Executando lint..."
+          npm run lint
+          echo "✅ Lint concluído"
 
       - name: Test ${{ matrix.library }}
-        if: steps.check-release.outputs.should-release == 'true' && matrix.test-command != 'echo "No tests for root"'
-        run: ${{ matrix.test-command }}
+        if: matrix.condition == 'true' && matrix.test-command != 'echo "No tests for root"'
+        run: |
+          echo "🧪 Executando testes..."
+          ${{ matrix.test-command }}
+          echo "✅ Testes concluídos"
 
       - name: Build ${{ matrix.library }}
-        if: steps.check-release.outputs.should-release == 'true' && matrix.build-command != 'echo "No build for root"'
-        run: ${{ matrix.build-command }}
+        if: matrix.condition == 'true' && matrix.build-command != 'echo "No build needed for root"'
+        run: |
+          echo "🏗️  Construindo biblioteca..."
+          ${{ matrix.build-command }}
+          echo "✅ Build concluído"
 
       - name: Release ${{ matrix.library }}
-        if: steps.check-release.outputs.should-release == 'true'
+        if: matrix.condition == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Releasing ${{ matrix.library }}..."
-          if [ "${{ matrix.library }}" = "libs" ]; then
-            npx semantic-release
-          else
-            cd ${{ matrix.project-path }} && npx semantic-release
-          fi
+          echo "🚀 INICIANDO RELEASE: ${{ matrix.library }}"
+          echo "📁 Diretório: $(pwd)"
+          echo "📦 Comando: ${{ matrix.release-command }}"
+          
+          # Executar semantic-release
+          ${{ matrix.release-command }}
+          
+          echo "✅ RELEASE CONCLUÍDO: ${{ matrix.library }}"
+          echo "========================================"
