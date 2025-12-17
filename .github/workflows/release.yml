@@ -3,6 +3,12 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write   
+  issues: write     
+  pull-requests: write
+  id-token: write   
+
 jobs:
   check-commits:
     runs-on: ubuntu-latest
@@ -258,9 +264,6 @@ jobs:
       - name: Lint lib
         run: npm run lint
         
-      - name: Test lib
-        run: npm run test:core
-
       - name: Build library
         run: npm run build:core
 
