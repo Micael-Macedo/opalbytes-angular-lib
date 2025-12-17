@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.8.0...v1.9.0) (2025-12-17)
+
+
+### Features
+
+* **libs:** add paralelismo durante release ([db3919a](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/db3919a3f84a9057f96a84219ab21e18277abb91))
+
 # [1.8.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.7.3...v1.8.0) (2025-12-17)
 
 
