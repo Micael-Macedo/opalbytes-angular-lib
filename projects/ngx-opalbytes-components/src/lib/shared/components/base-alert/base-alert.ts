@@ -12,7 +12,7 @@ export interface IAlertConfig {
 
 
 @Component({
-  selector: 'lib-base-alert',
+  selector: 'cao-base-alert',
   imports: [CommonModule, NgOptimizedImage],
   templateUrl: './base-alert.html',
   styleUrl: './base-alert.css',

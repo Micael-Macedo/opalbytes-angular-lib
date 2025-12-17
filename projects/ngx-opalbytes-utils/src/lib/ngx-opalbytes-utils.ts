@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'lib-ngx-opalbytes-utils',
+  selector: 'cao-ngx-opalbytes-utils',
   imports: [],
   template: `
     <p>

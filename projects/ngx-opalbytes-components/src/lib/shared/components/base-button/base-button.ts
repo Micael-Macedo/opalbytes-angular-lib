@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'lib-base-button',
+  selector: 'cao-base-button',
   imports: [CommonModule, MatTooltipModule, NgOptimizedImage],
   templateUrl: './base-button.html',
   styleUrl: './base-button.css',

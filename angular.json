@@ -13,7 +13,7 @@
       "projectType": "library",
       "root": "projects/ngx-opalbytes-directives",
       "sourceRoot": "projects/ngx-opalbytes-directives/src",
-      "prefix": "lib",
+      "prefix": "cao",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
@@ -49,7 +49,7 @@
       "projectType": "library",
       "root": "projects/ngx-opalbytes-components",
       "sourceRoot": "projects/ngx-opalbytes-components/src",
-      "prefix": "lib",
+      "prefix": "cao",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
@@ -85,7 +85,7 @@
       "projectType": "library",
       "root": "projects/ngx-opalbytes-services",
       "sourceRoot": "projects/ngx-opalbytes-services/src",
-      "prefix": "lib",
+      "prefix": "cao",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
@@ -121,7 +121,7 @@
       "projectType": "library",
       "root": "projects/ngx-opalbytes-utils",
       "sourceRoot": "projects/ngx-opalbytes-utils/src",
-      "prefix": "lib",
+      "prefix": "cao",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
@@ -157,7 +157,7 @@
       "projectType": "library",
       "root": "projects/ngx-opalbytes-core-shared",
       "sourceRoot": "projects/ngx-opalbytes-core-shared/src",
-      "prefix": "lib",
+      "prefix": "cao",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",

@@ -10,7 +10,7 @@ module.exports = [
         "error",
         {
           type: "attribute",
-          prefix: "lib",
+          prefix: "cao",
           style: "camelCase",
         },
       ],
@@ -18,7 +18,7 @@ module.exports = [
         "error",
         {
           type: "element",
-          prefix: "lib",
+          prefix: "cao",
           style: "kebab-case",
         },
       ],

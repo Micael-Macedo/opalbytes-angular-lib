@@ -1,17 +1,17 @@
 import { Directive, ElementRef, HostListener, inject, input } from '@angular/core';
 
 @Directive({
-  selector: '[libHighlight]',
+  selector: '[caoHighlight]',
   standalone: true
 })
 export class HighlightDirective {
 
-  libHighlight = input('yellow');
+  caoHighlight = input('yellow');
 
   private el = inject(ElementRef)
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.highlight(this.libHighlight());
+    this.highlight(this.caoHighlight());
   }
 
   @HostListener('mouseleave') onMouseLeave() {
