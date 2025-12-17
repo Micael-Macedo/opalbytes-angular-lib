@@ -1,7 +1,8 @@
 <button
-  [matTooltip]="tooltip"
+  type="button"
   matTooltipPosition="below"
   matTooltipClass="custom-arrow-tooltip"
+  [matTooltip]="tooltip"
   [matTooltipDisabled]="!tooltip"
   [disabled]="isDisabled || isLoading"
   [class.darkMode]="isDarkMode"
@@ -13,13 +14,13 @@
   @if (leadingIcon) {
   <span [class]="useMaterialIcons ? 'material-icons leading-icon' : 'leading-icon'">
     @if(useMaterialIcons) { {{ leadingIcon }} } @else {
-    <img [src]="leadingIcon" alt="icon" />
+    <img alt="icon" [ngSrc]="leadingIcon" />
     }
   </span>
   } {{ buttonText }} @if (trailingIcon) {
   <span [class]="useMaterialIcons ? 'material-icons trailing-icon' : 'trailing-icon'">
     @if(useMaterialIcons){ {{ trailingIcon }} } @else {
-    <img [src]="trailingIcon" alt="icon" />
+    <img alt="icon" [ngSrc]="trailingIcon" />
     }
   </span>
   } @if (isLoading) {

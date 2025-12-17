@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 
 export type AlertType = "success" | "error" | "info" | "warning";
@@ -13,7 +13,7 @@ export interface IAlertConfig {
 
 @Component({
   selector: 'lib-base-alert',
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './base-alert.html',
   styleUrl: './base-alert.css',
 })

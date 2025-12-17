@@ -21,6 +21,7 @@ describe('BaseDialog', () => {
       message: "Test Message",
       confirmButtonText: "Confirm",
       cancelButtonText: "Cancel",
+      logoIcon: "img",
       type: "success",
       onConfirm: vi.fn(),
       onCancel: vi.fn(),

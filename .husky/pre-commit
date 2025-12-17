@@ -26,4 +26,4 @@ if [ "$current_branch" = "main" ] && [ "$is_semantic_release" = "false" ]; then
     echo "🔗 Documentação: https://github.com/Micael-Macedo/opalbytes-directive-components/blob/main/README.md#-estratégia-de-branches"
     exit 1
 fi
-npx eslint
+npm run lint

@@ -1,6 +1,7 @@
+
 <div class="dialog-container">
   <div class="dialog-content">
-    <img [src]="config.logoIcon" alt="Logo" class="logo" />
+    <img alt="Logo" class="logo" [fill]="true" [ngSrc]="config.logoIcon ?? ''" />
     <div class="alert-wrapper">
       <div class="text-content" [ngClass]="config.type">
         <div class="title">{{ config.title }}</div>
@@ -8,24 +9,26 @@
         <div class="button-container">
           @if (config.cancelButtonText) {
           <button
+            type="button"
             class="cancel-button"
-            (click)="handleCancel()"
-            [attr.data-cy]="config.cancelButtonText">
+            [attr.data-cy]="config.cancelButtonText"
+            (click)="handleCancel()">
             {{ config.cancelButtonText }}
           </button>
           } @if (config.confirmButtonText) {
           <button
+            type="button"
             class="confirm-button"
             [ngClass]="config.type"
-            (click)="handleConfirm()"
-            [attr.data-cy]="config.confirmButtonText">
+            [attr.data-cy]="config.confirmButtonText"
+            (click)="handleConfirm()">
             {{ config.confirmButtonText }}
           </button>
           }
         </div>
       </div>
       <div class="icon-container">
-        <img [src]="getIconPath()" alt="Dialog Icon" class="alert-icon" />
+        <img alt="Dialog Icon" [fill]="true" class="alert-icon" [ngSrc]="getIconPath()" />
       </div>
     </div>
   </div>
