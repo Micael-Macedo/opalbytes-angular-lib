@@ -89,228 +89,116 @@ jobs:
           echo "should-release-utils=$should_release_utils" >> $GITHUB_OUTPUT
           echo "should-release-core=$should_release_core" >> $GITHUB_OUTPUT
 
-  # Primeira biblioteca - ordem pode ser ajustada conforme suas dependências
-  release-core:
+  publish-libs-sequentially:
     runs-on: ubuntu-latest
     needs: check-commits
-    if: needs.check-commits.outputs.should-release-core == 'true'
+    if: |
+      needs.check-commits.outputs.should-release-core == 'true' ||
+      needs.check-commits.outputs.should-release-utils == 'true' ||
+      needs.check-commits.outputs.should-release-services == 'true' ||
+      needs.check-commits.outputs.should-release-directives == 'true' ||
+      needs.check-commits.outputs.should-release-components == 'true' ||
+      needs.check-commits.outputs.should-release-libs == 'true'
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        library: ['core', 'utils', 'services', 'directives', 'components', 'libs']
+        include:
+          - library: 'core'
+            should-release: ${{ needs.check-commits.outputs.should-release-core }}
+            project-path: 'projects/ngx-opalbytes-core-shared'
+            build-command: 'npm run build:core'
+            test-command: 'echo "No tests for core"'
+          - library: 'utils'
+            should-release: ${{ needs.check-commits.outputs.should-release-utils }}
+            project-path: 'projects/ngx-opalbytes-utils'
+            build-command: 'npm run build:utils'
+            test-command: 'npm run test:utils'
+          - library: 'services'
+            should-release: ${{ needs.check-commits.outputs.should-release-services }}
+            project-path: 'projects/ngx-opalbytes-services'
+            build-command: 'npm run build:services'
+            test-command: 'npm run test:services'
+          - library: 'directives'
+            should-release: ${{ needs.check-commits.outputs.should-release-directives }}
+            project-path: 'projects/ngx-opalbytes-directives'
+            build-command: 'npm run build:directives'
+            test-command: 'npm run test:directives'
+          - library: 'components'
+            should-release: ${{ needs.check-commits.outputs.should-release-components }}
+            project-path: 'projects/ngx-opalbytes-components'
+            build-command: 'npm run build:components'
+            test-command: 'npm run test:components'
+          - library: 'libs'
+            should-release: ${{ needs.check-commits.outputs.should-release-libs }}
+            project-path: '.'
+            build-command: 'echo "No build for root"'
+            test-command: 'echo "No tests for root"'
+    
     steps:
+      - name: Check if should release ${{ matrix.library }}
+        id: check-release
+        run: |
+          echo "Library: ${{ matrix.library }}"
+          echo "Should release: ${{ matrix.should-release }}"
+          if [ "${{ matrix.should-release }}" = "true" ]; then
+            echo "Releasing ${{ matrix.library }}"
+            echo "should-release=true" >> $GITHUB_OUTPUT
+          else
+            echo "Skipping ${{ matrix.library }} - no changes detected"
+            echo "should-release=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Skip if no changes
+        if: steps.check-release.outputs.should-release != 'true'
+        run: echo "Skipping ${{ matrix.library }} library"
+        continue-on-error: true
+      
       - uses: actions/checkout@v3
+        if: steps.check-release.outputs.should-release == 'true'
         with:
           fetch-depth: 0
           
       - name: Setup Node.js
+        if: steps.check-release.outputs.should-release == 'true'
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Configure npm authentication
+        if: steps.check-release.outputs.should-release == 'true'
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
 
       - name: Install dependencies
+        if: steps.check-release.outputs.should-release == 'true'
         run: npm ci
 
-      - name: Lint lib
+      - name: Lint ${{ matrix.library }}
+        if: steps.check-release.outputs.should-release == 'true'
         run: npm run lint
-        
-      - name: Build library
-        run: npm run build:core
 
-      - name: Release Core
+      - name: Test ${{ matrix.library }}
+        if: steps.check-release.outputs.should-release == 'true' && matrix.test-command != 'echo "No tests for root"'
+        run: ${{ matrix.test-command }}
+
+      - name: Build ${{ matrix.library }}
+        if: steps.check-release.outputs.should-release == 'true' && matrix.build-command != 'echo "No build for root"'
+        run: ${{ matrix.build-command }}
+
+      - name: Release ${{ matrix.library }}
+        if: steps.check-release.outputs.should-release == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: cd projects/ngx-opalbytes-core-shared && npx semantic-release
-
-  release-utils:
-    runs-on: ubuntu-latest
-    needs: [check-commits, release-core]
-    if: needs.check-commits.outputs.should-release-utils == 'true'
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Configure npm authentication
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint lib
-        run: npm run lint
-        
-      - name: Test lib
-        run: npm run test:utils
-
-      - name: Build library
-        run: npm run build:utils
-
-      - name: Release Utils
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: cd projects/ngx-opalbytes-utils && npx semantic-release
-
-  release-services:
-    runs-on: ubuntu-latest
-    needs: [check-commits, release-utils]
-    if: needs.check-commits.outputs.should-release-services == 'true'
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Configure npm authentication
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint lib
-        run: npm run lint
-
-      - name: Test lib
-        run: npm run test:services
-
-      - name: Build library
-        run: npm run build:services
-
-      - name: Release Services
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: cd projects/ngx-opalbytes-services && npx semantic-release
-
-  release-directives:
-    runs-on: ubuntu-latest
-    needs: [check-commits, release-services]
-    if: needs.check-commits.outputs.should-release-directives == 'true'
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Configure npm authentication
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint lib
-        run: npm run lint
-
-      - name: Test lib
-        run: npm run test:directives
-
-      - name: Build library
-        run: npm run build:directives
-
-      - name: Release Directives
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: cd projects/ngx-opalbytes-directives && npx semantic-release
-
-  release-components:
-    runs-on: ubuntu-latest
-    needs: [check-commits, release-directives]
-    if: needs.check-commits.outputs.should-release-components == 'true'
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Configure npm authentication
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint lib
-        run: npm run lint
-
-      - name: Test lib
-        run: npm run test:components
-
-      - name: Build library
-        run: npm run build:components
-
-      - name: Release Components
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: cd projects/ngx-opalbytes-components && npx semantic-release
-
-  release-libs:
-    runs-on: ubuntu-latest
-    needs: [check-commits, release-components]
-    if: needs.check-commits.outputs.should-release-libs == 'true'
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Configure npm authentication
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
-
-      - name: Install dependencies
-        run: npm ci
-          
-      - name: Lint lib
-        run: npm run lint
-
-      - name: Release Libs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+          echo "Releasing ${{ matrix.library }}..."
+          if [ "${{ matrix.library }}" = "libs" ]; then
+            npx semantic-release
+          else
+            cd ${{ matrix.project-path }} && npx semantic-release
+          fi
