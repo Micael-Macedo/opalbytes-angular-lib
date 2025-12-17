@@ -1,3 +1,14 @@
+## [1.7.3](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.7.2...v1.7.3) (2025-12-17)
+
+
+### Bug Fixes
+
+* **components:** remocao espacamento public-api ([85a551c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/85a551cc15213c22052852af7bb754b96cd1dc6b))
+* **core:** remocao espacamento public-api ([63cad65](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/63cad6535bfaf3c37d421bb2bc513aac7c3493c2))
+* **libs:** correcao permissoes de publicacao ([7f3d195](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/7f3d19523da853f8bbb410bbd68d6d99f7071206))
+* **services:** remocao espacamento public-api ([7e0d1a2](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/7e0d1a29847340f6594449aafa11462b70a60998))
+* **utils:** remocao espacamento public-api ([0351e4b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0351e4b5959722f43bc8e55e11e17dbbcb69253c))
+
 ## [1.7.2](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.7.1...v1.7.2) (2025-12-17)
 
 
