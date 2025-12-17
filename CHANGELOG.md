@@ -1,3 +1,26 @@
+# [1.8.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.7.3...v1.8.0) (2025-12-17)
+
+
+### Bug Fixes
+
+* **components:** correcao exportacao componente inexistente ([02ae9ad](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/02ae9ad3b5094623968200639c30e1cb3fbd92f0))
+* **core:** adicao arquivo npmrc ([acf4304](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/acf43048e1c05a9407cc41e3eceefddc592ae2fb))
+* **core:** correcao-release ([4a81140](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4a81140e2cca7272d5fbc2acf577f69c73bf7700))
+* **core:** remocao espacamento ([0aa99f0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0aa99f0e96ac31ef79940cebe534eca2a58c3ef3))
+* **libs:** correcao publicacao por etapa ([12be8cb](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/12be8cb6afb5f0383c6cdcdfc8ef9807158e291d))
+* **libs:** publicacao de forma sequencial ([d458482](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d458482e45ceee04a7f3f60292d9e8651f909e73))
+
+
+### Features
+
+* **components:** adicao regra prefixo cao ([ff8cea4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ff8cea460af1768e48649b45d7e551186b39dcb1))
+* **core:** adicao regra prefixo cao ([67a5b2d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/67a5b2d9cdb5705419fefbd9e61b25bb3a0fa150))
+* **core:** liberacao-publicacao-navegation-utils ([48882a7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/48882a7b8ef069e581c91965b0461c1f9759c834))
+* **directives:** adicao regra prefixo cao ([02f52e7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/02f52e7e48e9d9231bcb022dc61cc7f20d36cc94))
+* **libs:** adicao-regra-prefixo-cao ([dd3c5cd](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/dd3c5cddf382f3c5bc1777c177e5f5911ce5468a))
+* **services:** adicao regra prefixo cao ([8fd8703](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8fd8703ef845f6af126e66335a195b7462d72eab))
+* **utils:** adicao regra prefixo cao ([d303f10](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d303f108521e034a8be60d8d87fc40715a27b730))
+
 ## [1.7.3](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.7.2...v1.7.3) (2025-12-17)
 
 
