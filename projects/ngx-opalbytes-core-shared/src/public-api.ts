@@ -83,4 +83,3 @@ export * from "./lib/shared/pipes/format-data-nascimento.pipe";
 export * from "./lib/shared/pipes/format-date.pipe";
 export * from "./lib/shared/pipes/format-rg.pipe";
 export * from "./lib/shared/pipes/format-telefone.pipe";
-
