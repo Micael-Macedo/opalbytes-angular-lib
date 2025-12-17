@@ -1,63 +1,103 @@
-# NgxOpalbytesServices
+# 📦 ngx-opalbytes-services
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+Esta biblioteca destina-se a abrigar serviços (`services`) Angular reutilizáveis que encapsulam lógica de negócios, chamadas de API e outras funcionalidades compartilhadas.
 
-## Code scaffolding
+**Nota:** Atualmente, esta biblioteca contém apenas um componente de placeholder e ainda não possui serviços implementados.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
+## Compatibilidade
+|Tecnologia  |	Versão  |   Descrição  |
+|------------|----------|-------------------------------------|
+|   Angular	 |  ^21.0.0	|  Framework principal da biblioteca |
 
-```bash
-ng generate component component-name
-```
+## Instalação
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the library, run:
+Para instalar a biblioteca, execute o seguinte comando:
 
 ```bash
-ng build ngx-opalbytes-services
+npm install ngx-opalbytes-services
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+---
+## Dependências
 
-### Publishing the Library
+Esta biblioteca possui as seguintes dependências:
 
-Once the project is built, you can publish your library by following these steps:
+### `peerDependencies`
 
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/ngx-opalbytes-services
-   ```
+| Pacote | Versão |
+| :----- | :----- |
+| `@angular/common` | `^21.0.0` |
+| `@angular/core` | `^21.0.0` |
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+### `dependencies`
 
-## Running unit tests
+| Pacote | Versão |
+| :----- | :----- |
+| `tslib` | `^2.3.0` |
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
+## Como Usar
 
-```bash
-ng test
+Quando serviços forem adicionados, eles poderão ser injetados nos seus componentes ou outros serviços via injeção de dependência do Angular.
+
+**Exemplo de como um serviço seria utilizado:**
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+// Supondo a existência de um 'UserService'
+import { UserService } from 'ngx-opalbytes-services';
+
+@Component({
+  selector: 'app-user-profile',
+})
+export class UserProfileComponent implements OnInit {
+  
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    // this.userService.getUsers().subscribe(...);
+  }
+}
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Organização de Pastas
 
-```bash
-ng e2e
+Dentro da pasta `src/lib/`, os serviços devem ser organizados em subpastas, se necessário, ou diretamente sob `lib/`. Por exemplo:
+
+```
+src/
+└── lib/
+    ├── services/
+    │   └── user.service.ts
+    └── auth.service.ts
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Serviços Disponíveis
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Atualmente, não há serviços disponíveis nesta biblioteca.
+
+---
+
+## 📜 Como Contribuir
+
+Para adicionar um novo serviço a esta biblioteca, siga os passos abaixo:
+
+1.  **Crie o arquivo** do seu serviço dentro da pasta `src/lib/`. Por exemplo: `src/lib/user.service.ts`.
+2.  **Implemente seu serviço**, lembrando de marcá-lo com `@Injectable({ providedIn: 'root' })` para que ele seja "tree-shakable".
+3.  **Exponha o serviço** na API pública da biblioteca, adicionando uma linha de exportação no arquivo `src/public-api.ts`.
+
+    ```typescript
+    // projects/ngx-opalbytes-services/src/public-api.ts
+    export * from './lib/user.service'; 
+    ```
+4.  **Adicione testes unitários** para garantir a qualidade e o funcionamento esperado do seu serviço.
+5.  **Faça o commit** seguindo as [regras de commit do projeto](/README.md#룰-regras-de-commit-com-escopo-obrigatório), usando o escopo `services`.
+
+    ```bash
+    git commit -m "feat(services): add user service para validacao"
+    ```

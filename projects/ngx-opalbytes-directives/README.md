@@ -1,6 +1,6 @@
-# ngx-opalbytes-directives
+# 📦 ngx-opalbytes-directives
 
-Uma biblioteca de diretivas reutilizáveis para aplicações Angular.
+Uma biblioteca de diretivas reutilizáveis para aplicações Angular, focada em adicionar comportamentos e estilos dinâmicos aos elementos do DOM.
 
 ---
 ## Compatibilidade
@@ -16,9 +16,28 @@ Para instalar a biblioteca, execute o seguinte comando:
 npm install ngx-opalbytes-directives
 ```
 
+---
+## Dependências
+
+Esta biblioteca possui as seguintes dependências:
+
+### `peerDependencies`
+
+| Pacote | Versão |
+| :----- | :----- |
+| `@angular/common` | `^21.0.0` |
+| `@angular/core` | `^21.0.0` |
+
+### `dependencies`
+
+| Pacote | Versão |
+| :----- | :----- |
+| `tslib` | `^2.3.0` |
+
+---
 ## Como Usar
 
-As diretivas nesta biblioteca são `standalone`, o que significa que você pode importá-las diretamente nos seus componentes ou módulos sem a necessidade de um `NgModule` intermediário.
+As diretivas nesta biblioteca são `standalone`, o que significa que você pode importá-las diretamente nos seus componentes ou módulos.
 
 **Exemplo de importação em um componente:**
 
@@ -34,7 +53,7 @@ import { HighlightDirective } from 'ngx-opalbytes-directives';
     HighlightDirective // Adicione a diretiva aos imports do componente
   ],
   template: `
-    <h1 [libHighlight]="'#e6e6e6'">Passe o mouse aqui</h1>
+    <h1 [caoHighlight]="'#e6e6e6'">Passe o mouse aqui</h1>
   `
 })
 export class ExemploComponent { }
@@ -42,29 +61,61 @@ export class ExemploComponent { }
 
 ---
 
+## Organização de Pastas
+
+Dentro da pasta `src/lib/`, as diretivas são organizadas em `directives/` e cada diretiva reside em sua própria pasta, contendo seus arquivos (`.ts`, `.spec.ts`).
+
+```
+src/
+└── lib/
+    └── directives/
+        └── highlight/
+```
+
+---
+
 ## Diretivas Disponíveis
 
-| Diretiva / Seletor | Descrição | Inputs |
+| Diretiva | Seletor | Descrição |
 | :--- | :--- | :--- |
-| **[libHighlight]** | Realça a cor de fundo de um elemento quando o usuário passa o mouse sobre ele. | `libHighlight: string`<br>A cor a ser usada no realce. Valor padrão: `'yellow'`. |
+| `HighlightDirective` | `[caoHighlight]` | Realça a cor de fundo de um elemento quando o usuário passa o mouse sobre ele. Aceita uma string com a cor como input (padrão: `'yellow'`). |
 
-### Exemplo de Uso - `[libHighlight]`
-
-Você pode usar a diretiva com a cor padrão ou fornecer uma cor customizada.
+### Exemplo de Uso - `[caoHighlight]`
 
 ```html
 <!-- 1. Usando a cor padrão (amarelo) -->
-<p [libHighlight]>
+<p [caoHighlight]>
   Passe o mouse sobre mim para ver o realce padrão.
 </p>
 
 <!-- 2. Fornecendo uma cor customizada -->
-<div [libHighlight]="'lightblue'">
+<div [caoHighlight]="'lightblue'">
   Passe o mouse aqui para um realce azul claro.
 </div>
-
-<!-- 3. Usando cores hexadecimais -->
-<span [libHighlight]="'#f0f0f0'">
-  E aqui para um realce cinza claro.
-</span>
 ```
+
+---
+
+## 📜 Como Contribuir
+
+Para adicionar uma nova diretiva a esta biblioteca, siga os passos abaixo:
+
+1.  **Crie os arquivos** da sua diretiva dentro da pasta `src/lib/directives/`, seguindo a estrutura de pastas existente.
+2.  **Exponha a diretiva** na API pública da biblioteca, adicionando uma linha de exportação no arquivo `src/public-api.ts`.
+3.  **Adicione ou atualize os testes unitários** para garantir a cobertura e o funcionamento esperado.
+4.  **Faça o commit** seguindo as [regras de commit do projeto](/README.md#룰-regras-de-commit-com-escopo-obrigatório), usando o escopo `directives`.
+
+    ```bash
+    git commit -m "feat(directives): add diretiva email"
+    ```
+
+---
+
+## 📜 Regras e Convenções
+
+### Prefixo
+
+O prefixo para diretivas nesta biblioteca é `cao`.
+
+- **Diretivas**: Utilize o prefixo `cao...` em camelCase para os seletores de atributo.
+

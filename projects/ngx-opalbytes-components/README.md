@@ -1,63 +1,111 @@
-# NgxOpalbytesComponents
+# 📦 ngx-opalbytes-components
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+Uma biblioteca de componentes de UI reutilizáveis para aplicações Angular, projetada para acelerar o desenvolvimento e manter a consistência visual.
 
-## Code scaffolding
+---
+## Compatibilidade
+|Tecnologia  |	Versão  |   Descrição  |
+|------------|----------|-------------------------------------|
+|   Angular	 |  ^21.0.0	|  Framework principal da biblioteca |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Instalação
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the library, run:
+Para instalar a biblioteca, execute o seguinte comando:
 
 ```bash
-ng build ngx-opalbytes-components
+npm install ngx-opalbytes-components
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
 
-### Publishing the Library
+## Dependências
 
-Once the project is built, you can publish your library by following these steps:
+Esta biblioteca possui as seguintes dependências:
 
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/ngx-opalbytes-components
-   ```
+### `peerDependencies`
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+| Pacote | Versão |
+| :----- | :----- |
+| `@angular/common` | `^21.0.0` |
+| `@angular/core` | `^21.0.0` |
+| `@angular/material` | `^21.0.3` |
 
-## Running unit tests
+### `dependencies`
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+| Pacote | Versão |
+| :----- | :----- |
+| `tslib` | `^2.3.0` |
 
-```bash
-ng test
+---
+## Como Usar
+
+Os componentes nesta biblioteca são `standalone`, o que significa que você pode importá-los diretamente nos seus componentes ou módulos.
+
+**Exemplo de importação em um componente:**
+
+```typescript
+import { Component } from '@angular/core';
+// Importe o componente desejado
+import { BaseButton } from 'ngx-opalbytes-components';
+
+@Component({
+  selector: 'app-exemplo',
+  standalone: true,
+  imports: [
+    BaseButton // Adicione o componente aos imports
+  ],
+  template: `
+    <cao-base-button buttonText="Clique Aqui"></cao-base-button>
+  `
+})
+export class ExemploComponent { }
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Organização de Pastas
 
-```bash
-ng e2e
+Dentro da pasta `src/lib/`, os componentes são organizados em `shared/components/` e cada componente reside em sua própria pasta, contendo seus arquivos (`.ts`, `.html`, `.css`, `.spec.ts`).
+
+```
+src/
+└── lib/
+    └── shared/
+        └── components/
+            ├── base-alert/
+            └── base-button/
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Componentes Disponíveis
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Componente | Seletor | Descrição |
+| :--- | :--- | :--- |
+| `BaseButton` | `<cao-base-button>` | Um botão customizável com suporte a ícones, estado de loading e tooltip. |
+| `BaseAlert` | `<cao-base-alert>` | Um componente para exibir alertas de sucesso, erro, informação ou aviso. |
+| `BaseDialog` | `<cao-base-dialog>` | Exibe uma caixa de diálogo modal para interações que exigem confirmação do usuário. |
+
+---
+
+## 📜 Como Contribuir
+
+Para adicionar um novo componente a esta biblioteca, siga os passos abaixo:
+
+1.  **Crie os arquivos** do seu componente dentro da pasta `src/lib/shared/components/`, seguindo a estrutura de pastas existente.
+2.  **Exponha o componente** na API pública da biblioteca, adicionando uma linha de exportação no arquivo `src/public-api.ts`.
+3.  **Adicione ou atualize os testes unitários** para garantir a cobertura e o funcionamento esperado.
+4.  **Faça o commit** seguindo as [regras de commit do projeto](/README.md#룰-regras-de-commit-com-escopo-obrigatório), usando o escopo `components`.
+
+    ```bash
+    git commit -m "feat(components): add new component"
+    ```
+
+---
+
+## 📜 Regras e Convenções
+
+### Prefixo
+
+O prefixo para componentes nesta biblioteca é `cao`.
+
+- **Componentes**: Utilize o prefixo `<cao-...>` nos seletores dos elementos.
