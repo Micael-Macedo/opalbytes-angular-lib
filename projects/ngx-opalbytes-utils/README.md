@@ -1,63 +1,100 @@
-# NgxOpalbytesUtils
+# 📦 ngx-opalbytes-utils
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+Esta biblioteca é designada para funções utilitárias puras, pipes e outras lógicas que podem ser compartilhadas entre diferentes projetos Angular.
 
-## Code scaffolding
+**Nota:** Atualmente, esta biblioteca contém apenas um componente de placeholder e ainda não possui utilitários ou pipes implementados.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
+## Compatibilidade
+|Tecnologia  |	Versão  |   Descrição  |
+|------------|----------|-------------------------------------|
+|   Angular	 |  ^21.0.0	|  Framework principal da biblioteca |
 
-```bash
-ng generate component component-name
-```
+## Instalação
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the library, run:
+Para instalar a biblioteca, execute o seguinte comando:
 
 ```bash
-ng build ngx-opalbytes-utils
+npm install ngx-opalbytes-utils
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+---
+## Dependências
 
-### Publishing the Library
+Esta biblioteca possui as seguintes dependências:
 
-Once the project is built, you can publish your library by following these steps:
+### `peerDependencies`
 
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/ngx-opalbytes-utils
-   ```
+| Pacote | Versão |
+| :----- | :----- |
+| `@angular/common` | `^21.0.0` |
+| `@angular/core` | `^21.0.0` |
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+### `dependencies`
 
-## Running unit tests
+| Pacote | Versão |
+| :----- | :----- |
+| `tslib` | `^2.3.0` |
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
+## Como Usar
 
-```bash
-ng test
+Quando utilitários ou pipes forem adicionados, eles poderão ser importados diretamente.
+
+**Exemplo de como um pipe seria utilizado:**
+
+```typescript
+import { Component } from '@angular/core';
+// Supondo a existência de um 'FormatCpfPipe'
+import { caoFormatCpfPipe } from 'ngx-opalbytes-utils';
+
+@Component({
+  selector: 'app-user-details',
+  standalone: true,
+  imports: [FormatCpfPipe],
+  template: `
+    <p>CPF: {{ user.cpf | formatCpf }}</p>
+  `
+})
+export class UserDetailsComponent {
+  user = { cpf: '12345678900' };
+}
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Organização de Pastas
 
-```bash
-ng e2e
+Dentro da pasta `src/lib/`, utilitários e pipes devem ser organizados em subpastas apropriadas, como `utils/` para funções e `pipes/` para pipes.
+
+```
+src/
+└── lib/
+    └── pipes/
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Itens Disponíveis
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Atualmente, não há utilitários ou pipes disponíveis nesta biblioteca.
+
+---
+
+## 📜 Como Contribuir
+
+Para adicionar um novo utilitario a esta biblioteca, siga os passos abaixo:
+
+1.  **Crie o arquivo** do seu utilitario dentro da pasta `src/lib/`. Por exemplo: `src/lib/user.utils.ts`.
+2.  **Implemente seu utilitario**, lembrando de marcá-lo com `@Injectable({ providedIn: 'root' })` para que ele seja "tree-shakable".
+3.  **Exponha o utilitario** na API pública da biblioteca, adicionando uma linha de exportação no arquivo `src/public-api.ts`.
+
+    ```typescript
+    // projects/ngx-opalbytes-utils/src/public-api.ts
+    export * from './lib/user.utils'; 
+    ```
+5.  **Faça o commit** seguindo as [regras de commit do projeto](/README.md#룰-regras-de-commit-com-escopo-obrigatório), usando o escopo `utils`.
+
+    ```bash
+    git commit -m "feat(utils): add conversao date em string"
+    ```
