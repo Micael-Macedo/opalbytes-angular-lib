@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-core-shared@1.0.0...ngx-opalbytes-core-shared@1.1.0) (2025-12-17)
+
+
+### Features
+
+* **core:** liberacao-publicacao-navegation-utils ([48882a7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/48882a7b8ef069e581c91965b0461c1f9759c834))
+
 # 1.0.0 (2025-12-17)
 
 
