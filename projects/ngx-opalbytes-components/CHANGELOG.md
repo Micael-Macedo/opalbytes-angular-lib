@@ -1,3 +1,45 @@
+# [1.4.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.3.0...ngx-opalbytes-components@1.4.0) (2025-12-17)
+
+
+### Bug Fixes
+
+* **components:** correcao exportacao componente inexistente ([02ae9ad](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/02ae9ad3b5094623968200639c30e1cb3fbd92f0))
+* **components:** correcao-eslint ([510145e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/510145e591d242583f36d44fe96ba140f05d6673))
+* **components:** correcao-lint-imagens-e-tipagens ([8b1b525](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8b1b5253f76d73e0911a6b6ae1f33d4fd864429c))
+* **components:** remocao espacamento public-api ([85a551c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/85a551cc15213c22052852af7bb754b96cd1dc6b))
+* **core:** adicao arquivo npmrc ([acf4304](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/acf43048e1c05a9407cc41e3eceefddc592ae2fb))
+* **core:** correcao-eslint ([9c881f5](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9c881f5ef00c5dbdac431442a23c0faef986d444))
+* **core:** correcao-lint-padronizacao-importacao ([381f5ca](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/381f5ca8003fe82211e9d67fb6edd5a9e917d79a))
+* **core:** correcao-nextRelease ([3a4942a](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3a4942a1cfd8f9161282253b74ee820d7de3bd68))
+* **core:** correcao-release ([4a81140](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4a81140e2cca7272d5fbc2acf577f69c73bf7700))
+* **core:** remocao espacamento ([0aa99f0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0aa99f0e96ac31ef79940cebe534eca2a58c3ef3))
+* **core:** remocao espacamento public-api ([63cad65](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/63cad6535bfaf3c37d421bb2bc513aac7c3493c2))
+* **directives:** correcao-eslint ([d03478d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d03478d94ae4eb1c06a27393ee5033ae5e412c4b))
+* **directives:** correcao-nextRelease ([0b6af78](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0b6af7841fdb1cacd4dc3cfde37fe58540055b74))
+* **libs:** correcao permissoes de publicacao ([7f3d195](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/7f3d19523da853f8bbb410bbd68d6d99f7071206))
+* **libs:** correcao-verificao-commits-release ([e4990a6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e4990a6c8a49f2b1256cd7d913a82d6ade5b9d1e))
+* **services:** correcao-eslint ([ffd0e9c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ffd0e9c4a6b97d1bb036e1bb265394a5144c01fe))
+* **services:** correcao-nextRelease ([ddaa6c4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ddaa6c4c1d21e33ee6022db8d4c28ff22c0bc412))
+* **services:** remocao espacamento public-api ([7e0d1a2](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/7e0d1a29847340f6594449aafa11462b70a60998))
+* **utils:** correcao-eslint ([35c508b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/35c508b521ff409ba69f12ebc1b58249fd4e5e31))
+* **utils:** correcao-inline-source ([571979f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/571979f2864e218f3c5626dcd54e8603155e2436))
+* **utils:** correcao-nextRelease ([67d94fc](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/67d94fc646433e7c32b1cb5b7858f43a2a735efd))
+* **utils:** remocao espacamento public-api ([0351e4b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0351e4b5959722f43bc8e55e11e17dbbcb69253c))
+
+
+### Features
+
+* **components:** add atributo fill em imagens ([26e412f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/26e412f6d1d229b284dd7f2681d6d4ead732704f))
+* **components:** adicao regra prefixo cao ([ff8cea4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ff8cea460af1768e48649b45d7e551186b39dcb1))
+* **core:** add biblioteca core ([cdad6c1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/cdad6c16f50c40459fa780c2c8c829b5b577c32d))
+* **core:** adicao regra prefixo cao ([67a5b2d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/67a5b2d9cdb5705419fefbd9e61b25bb3a0fa150))
+* **core:** liberacao-publicacao-navegation-utils ([48882a7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/48882a7b8ef069e581c91965b0461c1f9759c834))
+* **directives:** adicao regra prefixo cao ([02f52e7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/02f52e7e48e9d9231bcb022dc61cc7f20d36cc94))
+* integracao biblioteca core shared ([5651b05](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/5651b05c1bce292fb8f6a9674e64b3265420b056))
+* **libs:** adicao-regra-prefixo-cao ([dd3c5cd](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/dd3c5cddf382f3c5bc1777c177e5f5911ce5468a))
+* **services:** adicao regra prefixo cao ([8fd8703](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8fd8703ef845f6af126e66335a195b7462d72eab))
+* **utils:** adicao regra prefixo cao ([d303f10](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d303f108521e034a8be60d8d87fc40715a27b730))
+
 # [1.3.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.2.0...ngx-opalbytes-components@1.3.0) (2025-12-16)
 
 
