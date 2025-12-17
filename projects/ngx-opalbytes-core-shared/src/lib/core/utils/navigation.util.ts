@@ -1,7 +1,7 @@
-import { ROUTES } from './../../shared/constants/routes.constants';
 import { Injectable } from "@angular/core";
 import { NavigationExtras, Router, UrlTree } from "@angular/router";
 
+import { ROUTES } from './../../shared/constants/routes.constants';
 
 /**
  * Tipo para as rotas configuradas

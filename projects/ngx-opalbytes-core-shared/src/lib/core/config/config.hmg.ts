@@ -1,5 +1,4 @@
 import { IAppConfig } from './../../shared/interfaces/app-config.interface';
-
 import { ApiUrl } from "./app-endpoints";
 import { BASE_PATHS, BASE_HTTP_METHODS } from "../utils/app-config.base";
 

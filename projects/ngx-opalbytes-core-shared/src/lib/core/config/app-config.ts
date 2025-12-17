@@ -1,8 +1,8 @@
 import { InjectionToken } from "@angular/core";
 
+import { IAppConfig } from './../../shared/interfaces/app-config.interface';
 
 import { productionConfig, homologationConfig, localConfig, developmentConfig } from "./index";
-import { IAppConfig } from './../../shared/interfaces/app-config.interface';
 
 // Token de injeção para o environment
 export const ENVIRONMENT = new InjectionToken<{ name: string }>("ENVIRONMENT");

@@ -1,18 +1,18 @@
-import { NavigationUtil } from './../../core/utils/navigation.util';
 /* eslint-disable no-console */
 /**
  * EXEMPLOS DE USO - NavigationUtil
  * Este arquivo contém exemplos práticos de como usar o NavigationUtil
  * Pode ser removido em produção - serve apenas como documentação
- */
+*/
 
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 
 import { ROUTES } from "../constants/routes.constants";
+import { NavigationUtil } from './../../core/utils/navigation.util';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: "app-example",
+  selector: "lib-example",
   template: "",
 })
 export class ExampleComponent {

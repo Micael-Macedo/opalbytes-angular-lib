@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 
-import { APP_CONFIG, ApiUrl, ApiPath, HttpMethod } from "../config";
 import { IAppConfig } from "../../shared/interfaces/app-config.interface";
+import { APP_CONFIG, ApiUrl, ApiPath, HttpMethod } from "../config";
 
 @Injectable({
   providedIn: "root",
