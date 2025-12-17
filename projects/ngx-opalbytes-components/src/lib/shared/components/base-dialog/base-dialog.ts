@@ -15,7 +15,7 @@ export interface IDialogConfig {
 }
 
 @Component({
-  selector: 'lib-base-dialog',
+  selector: 'cao-base-dialog',
   imports: [CommonModule, NgOptimizedImage],
   templateUrl: './base-dialog.html',
   styleUrl: './base-dialog.css',
