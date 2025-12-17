@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-core-shared@1.1.0...ngx-opalbytes-core-shared@1.2.0) (2025-12-17)
+
+
+### Features
+
+* **components:** adicao regra prefixo cao ([ff8cea4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ff8cea460af1768e48649b45d7e551186b39dcb1))
+* **core:** adicao regra prefixo cao ([67a5b2d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/67a5b2d9cdb5705419fefbd9e61b25bb3a0fa150))
+* **directives:** adicao regra prefixo cao ([02f52e7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/02f52e7e48e9d9231bcb022dc61cc7f20d36cc94))
+* **libs:** adicao-regra-prefixo-cao ([dd3c5cd](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/dd3c5cddf382f3c5bc1777c177e5f5911ce5468a))
+* **services:** adicao regra prefixo cao ([8fd8703](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8fd8703ef845f6af126e66335a195b7462d72eab))
+* **utils:** adicao regra prefixo cao ([d303f10](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d303f108521e034a8be60d8d87fc40715a27b730))
+
 # [1.1.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-core-shared@1.0.0...ngx-opalbytes-core-shared@1.1.0) (2025-12-17)
 
 
