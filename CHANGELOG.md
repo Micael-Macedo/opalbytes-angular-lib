@@ -1,3 +1,23 @@
+# [1.7.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.6.0...v1.7.0) (2025-12-17)
+
+
+### Bug Fixes
+
+* **components:** correcao-lint-imagens-e-tipagens ([8b1b525](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8b1b5253f76d73e0911a6b6ae1f33d4fd864429c))
+* **core:** correcao-lint-padronizacao-importacao ([381f5ca](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/381f5ca8003fe82211e9d67fb6edd5a9e917d79a))
+* **utils:** correcao-inline-source ([571979f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/571979f2864e218f3c5626dcd54e8603155e2436))
+
+
+### Features
+
+* **components:** add atributo fill em imagens ([26e412f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/26e412f6d1d229b284dd7f2681d6d4ead732704f))
+* **components:** add-componentes-basico ([c2eb7b7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c2eb7b70a0eeaf640c48334326e04d7f71a53bbd))
+* **components:** add-tooltip-base-button ([7cc144e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/7cc144ebe1b9266228541736ed9fb700c1d6815d))
+* **components:** remocao-base-card ([4f9923e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4f9923e2a0d801dcb167be6ebd9f34105251b5d1))
+* **core:** add biblioteca core ([cdad6c1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/cdad6c16f50c40459fa780c2c8c829b5b577c32d))
+* integracao biblioteca core shared ([5651b05](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/5651b05c1bce292fb8f6a9674e64b3265420b056))
+* liberacao-componentes-base ([ebae02d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ebae02d4903d332a13acad3ba37e58f5322cb26f))
+
 # [1.6.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.5.1...v1.6.0) (2025-12-16)
 
 
