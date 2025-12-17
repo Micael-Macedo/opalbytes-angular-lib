@@ -1,3 +1,21 @@
+# [1.5.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.4.0...ngx-opalbytes-components@1.5.0) (2025-12-17)
+
+
+### Bug Fixes
+
+* **libs:** correcao publicacao por etapa ([12be8cb](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/12be8cb6afb5f0383c6cdcdfc8ef9807158e291d))
+* **libs:** publicacao de forma sequencial ([d458482](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d458482e45ceee04a7f3f60292d9e8651f909e73))
+
+
+### Features
+
+* **components:** add documentacao da biblioteca ([4aed27c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4aed27c57516365374dee13695ee526c7877102d))
+* **core:** add documentacao da biblioteca ([bc4a6f7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/bc4a6f76986a804e4afbcee1b5a83c03fcbae098))
+* **directives:** add documentacao da biblioteca ([a0c2510](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a0c2510c94c6656a37fc86d769e33fcc54d72287))
+* **libs:** add paralelismo durante release ([db3919a](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/db3919a3f84a9057f96a84219ab21e18277abb91))
+* **services:** add documentacao da biblioteca ([224dbe8](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/224dbe853e2b1577208b3397ef716e23f0fb2860))
+* **utils:** add documentacao da biblioteca ([059f9ab](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/059f9abb0a6bf1d4ed972b2f85de2bd7721d5616))
+
 # [1.4.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.3.0...ngx-opalbytes-components@1.4.0) (2025-12-17)
 
 
