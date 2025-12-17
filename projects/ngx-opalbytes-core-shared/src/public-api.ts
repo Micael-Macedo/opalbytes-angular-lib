@@ -32,6 +32,7 @@ export * from "./lib/core/utils/global-error.handler";
 // Utils
 export * from "./lib/core/utils/app-config.base";
 export * from "./lib/core/utils/loading-type";
+export * from "./lib/core/utils/navigation.util";
 
 // Interfaces
 export * from "./lib/core/interfaces/api.interface";
