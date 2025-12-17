@@ -1,8 +1,7 @@
 // @ts-check
-const { defineConfig } = require("eslint/config");
 const rootConfig = require("../../eslint.config.js");
 
-module.exports = defineConfig([
+module.exports = [
   ...rootConfig,
   {
     files: ["**/*.ts"],
@@ -29,4 +28,4 @@ module.exports = defineConfig([
     files: ["**/*.html"],
     rules: {},
   }
-]);
+];
