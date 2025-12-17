@@ -1,19 +1,10 @@
 // @ts-check
-const eslint = require("@eslint/js");
-const { defineConfig } = require("eslint/config");
-const tseslint = require("typescript-eslint");
-const angular = require("angular-eslint");
+const rootConfig = require("../../eslint.config.js");
 
-module.exports = defineConfig([
+module.exports = [
+  ...rootConfig,
   {
     files: ["**/*.ts"],
-    extends: [
-      eslint.configs.recommended,
-      tseslint.configs.recommended,
-      tseslint.configs.stylistic,
-      angular.configs.tsRecommended,
-    ],
-    processor: angular.processInlineTemplates,
     rules: {
       "@angular-eslint/directive-selector": [
         "error",
@@ -31,17 +22,10 @@ module.exports = defineConfig([
           style: "kebab-case",
         },
       ],
-      "no-console": "error",
-      "no-unused-vars": "error",
-      "@typescript-eslint/no-explicit-any": "warn"
     },
   },
   {
     files: ["**/*.html"],
-    extends: [
-      angular.configs.templateRecommended,
-      angular.configs.templateAccessibility,
-    ],
     rules: {},
   }
-]);
+];
