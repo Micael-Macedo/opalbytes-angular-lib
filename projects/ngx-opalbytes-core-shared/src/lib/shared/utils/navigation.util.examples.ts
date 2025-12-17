@@ -12,7 +12,7 @@ import { NavigationUtil } from './../../core/utils/navigation.util';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: "lib-example",
+  selector: "cao-example",
   template: "",
 })
 export class ExampleComponent {
