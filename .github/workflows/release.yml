@@ -4,9 +4,89 @@ on:
     branches: [ main ]
 
 jobs:
+  check-commits:
+    runs-on: ubuntu-latest
+    outputs:
+      should-release-libs: ${{ steps.check.outputs.should-release-libs }}
+      should-release-components: ${{ steps.check.outputs.should-release-components }}
+      should-release-directives: ${{ steps.check.outputs.should-release-directives }}
+      should-release-services: ${{ steps.check.outputs.should-release-services }}
+      should-release-utils: ${{ steps.check.outputs.should-release-utils }}
+      should-release-core: ${{ steps.check.outputs.should-release-core }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Check commits for library changes
+        id: check
+        run: |
+          # Obter todos os commits deste push
+          if [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            COMMITS=$(git log --pretty=format:"%s" ${{ github.event.before }}..${{ github.event.after }})
+          else
+            # Primeiro push para o branch
+            COMMITS=$(git log --pretty=format:"%s" ${{ github.event.after }})
+          fi
+          
+          echo "Commits encontrados:"
+          echo "$COMMITS"
+          
+          # Verificar cada commit para cada biblioteca
+          should_release_libs="false"
+          should_release_components="false"
+          should_release_directives="false"
+          should_release_services="false"
+          should_release_utils="false"
+          should_release_core="false"
+          
+          while IFS= read -r commit_message; do
+            echo "Analisando commit: $commit_message"
+            
+            # Verificar padrões para cada biblioteca
+            if [[ "$commit_message" =~ (feat\(libs\)|fix\(libs\)|refactor\(libs\)|docs\(libs\)|chore\(libs\)|release\(libs\)|test\(libs\)|style\(libs\)|feature\(libs\)) ]]; then
+              should_release_libs="true"
+              echo "Commit relacionado a libs encontrado"
+            fi
+            
+            if [[ "$commit_message" =~ (feat\(components\)|fix\(components\)|refactor\(components\)|docs\(components\)|chore\(components\)|release\(components\)|test\(components\)|style\(components\)|feature\(components\)) ]]; then
+              should_release_components="true"
+              echo "Commit relacionado a components encontrado"
+            fi
+            
+            if [[ "$commit_message" =~ (feat\(directives\)|fix\(directives\)|refactor\(directives\)|docs\(directives\)|chore\(directives\)|release\(directives\)|test\(directives\)|style\(directives\)|feature\(directives\)) ]]; then
+              should_release_directives="true"
+              echo "Commit relacionado a directives encontrado"
+            fi
+            
+            if [[ "$commit_message" =~ (feat\(services\)|fix\(services\)|refactor\(services\)|docs\(services\)|chore\(services\)|release\(services\)|test\(services\)|style\(services\)|feature\(services\)) ]]; then
+              should_release_services="true"
+              echo "Commit relacionado a services encontrado"
+            fi
+            
+            if [[ "$commit_message" =~ (feat\(utils\)|fix\(utils\)|refactor\(utils\)|docs\(utils\)|chore\(utils\)|release\(utils\)|test\(utils\)|style\(utils\)|feature\(utils\)) ]]; then
+              should_release_utils="true"
+              echo "Commit relacionado a utils encontrado"
+            fi
+            
+            if [[ "$commit_message" =~ (feat\(core\)|fix\(core\)|refactor\(core\)|docs\(core\)|chore\(core\)|release\(core\)|test\(core\)|style\(core\)|feature\(core\)) ]]; then
+              should_release_core="true"
+              echo "Commit relacionado a core encontrado"
+            fi
+          done <<< "$COMMITS"
+          
+          # Exportar resultados
+          echo "::set-output name=should-release-libs::$should_release_libs"
+          echo "::set-output name=should-release-components::$should_release_components"
+          echo "::set-output name=should-release-directives::$should_release_directives"
+          echo "::set-output name=should-release-services::$should_release_services"
+          echo "::set-output name=should-release-utils::$should_release_utils"
+          echo "::set-output name=should-release-core::$should_release_core"
+
   release-libs:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'feat(libs)') || contains(github.event.head_commit.message, 'fix(libs)') || contains(github.event.head_commit.message, 'refactor(libs)') || contains(github.event.head_commit.message, 'docs(libs)') || contains(github.event.head_commit.message, 'chore(libs)')  || contains(github.event.head_commit.message, 'release(libs)') || contains(github.event.head_commit.message, 'test(libs)') || contains(github.event.head_commit.message, 'style(libs)') || contains(github.event.head_commit.message, 'feature(libs)')"
+    needs: check-commits
+    if: needs.check-commits.outputs.should-release-libs == 'true'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -15,6 +95,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
@@ -25,11 +106,13 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
   release-components:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'feat(components)') || contains(github.event.head_commit.message, 'fix(components)') || contains(github.event.head_commit.message, 'refactor(components)') || contains(github.event.head_commit.message, 'docs(components)') || contains(github.event.head_commit.message, 'chore(components)')  || contains(github.event.head_commit.message, 'release(components)') || contains(github.event.head_commit.message, 'test(components)') || contains(github.event.head_commit.message, 'style(components)') || contains(github.event.head_commit.message, 'feature(components)')"
+    needs: check-commits
+    if: needs.check-commits.outputs.should-release-components == 'true'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -38,6 +121,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
@@ -59,7 +143,8 @@ jobs:
 
   release-directives:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'feat(directives)') || contains(github.event.head_commit.message, 'fix(directives)') || contains(github.event.head_commit.message, 'refactor(directives)') || contains(github.event.head_commit.message, 'docs(directives)') || contains(github.event.head_commit.message, 'chore(directives)')  || contains(github.event.head_commit.message, 'release(directives)') || contains(github.event.head_commit.message, 'test(directives)') || contains(github.event.head_commit.message, 'style(directives)') || contains(github.event.head_commit.message, 'feature(directives)')"
+    needs: check-commits
+    if: needs.check-commits.outputs.should-release-directives == 'true'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -69,6 +154,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
@@ -90,7 +176,8 @@ jobs:
 
   release-services:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'feat(services)') || contains(github.event.head_commit.message, 'fix(services)') || contains(github.event.head_commit.message, 'refactor(services)') || contains(github.event.head_commit.message, 'docsor(services)') || contains(github.event.head_commit.message, 'chore(services)')  || contains(github.event.head_commit.message, 'release(services)') || contains(github.event.head_commit.message, 'test(services)') || contains(github.event.head_commit.message, 'style(services)') || contains(github.event.head_commit.message, 'feature(services)')"
+    needs: check-commits
+    if: needs.check-commits.outputs.should-release-services == 'true'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -99,6 +186,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
@@ -120,7 +208,8 @@ jobs:
 
   release-utils:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'feat(utils)') || contains(github.event.head_commit.message, 'fix(utils)') || contains(github.event.head_commit.message, 'refactor(utils)') || contains(github.event.head_commit.message, 'docsactor(utils)') || contains(github.event.head_commit.message, 'chore(utils)')  || contains(github.event.head_commit.message, 'release(utils)') || contains(github.event.head_commit.message, 'test(utils)') || contains(github.event.head_commit.message, 'style(utils)') || contains(github.event.head_commit.message, 'feature(utils)')"
+    needs: check-commits
+    if: needs.check-commits.outputs.should-release-utils == 'true'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -129,6 +218,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
@@ -150,7 +240,8 @@ jobs:
 
   release-core:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'feat(core)') || contains(github.event.head_commit.message, 'fix(core)') || contains(github.event.head_commit.message, 'refactor(core)') || contains(github.event.head_commit.message, 'docsactor(core)') || contains(github.event.head_commit.message, 'chore(core)')  || contains(github.event.head_commit.message, 'release(core)') || contains(github.event.head_commit.message, 'test(core)') || contains(github.event.head_commit.message, 'style(core)') || contains(github.event.head_commit.message, 'feature(core)')"
+    needs: check-commits
+    if: needs.check-commits.outputs.should-release-core == 'true'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -159,6 +250,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
