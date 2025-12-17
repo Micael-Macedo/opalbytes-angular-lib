@@ -1,3 +1,14 @@
+# [1.10.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.9.0...v1.10.0) (2025-12-17)
+
+
+### Features
+
+* **components:** add documentacao da biblioteca ([4aed27c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4aed27c57516365374dee13695ee526c7877102d))
+* **core:** add documentacao da biblioteca ([bc4a6f7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/bc4a6f76986a804e4afbcee1b5a83c03fcbae098))
+* **directives:** add documentacao da biblioteca ([a0c2510](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a0c2510c94c6656a37fc86d769e33fcc54d72287))
+* **services:** add documentacao da biblioteca ([224dbe8](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/224dbe853e2b1577208b3397ef716e23f0fb2860))
+* **utils:** add documentacao da biblioteca ([059f9ab](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/059f9abb0a6bf1d4ed972b2f85de2bd7721d5616))
+
 # [1.9.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.8.0...v1.9.0) (2025-12-17)
 
 
