@@ -1,13 +1,13 @@
+import { HighlightDirective } from './highlight.directive';
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { HighlightDirective } from './highlight.directive';
 
 // Componente de teste
 @Component({
   template: `
-    <div [libHighlight]="color">
+    <div [caoHighlight]="color">
       Test Element
     </div>
   `,
@@ -44,7 +44,7 @@ describe('HighlightDirective com inject()', () => {
 
   it('deve criar uma instância usando inject()', () => {
     expect(directiveInstance).toBeTruthy();
-    expect(directiveInstance.libHighlight()).toBe('yellow');
+    expect(directiveInstance.caoHighlight()).toBe('yellow');
   });
 
   it('deve ter ElementRef injetado corretamente', () => {
