@@ -1,7 +1,7 @@
 
 <div class="dialog-container">
   <div class="dialog-content">
-    <img alt="Logo" class="logo" [ngSrc]="config.logoIcon ?? ''" />
+    <img alt="Logo" class="logo" [fill]="true" [ngSrc]="config.logoIcon ?? ''" />
     <div class="alert-wrapper">
       <div class="text-content" [ngClass]="config.type">
         <div class="title">{{ config.title }}</div>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="icon-container">
-        <img alt="Dialog Icon" class="alert-icon" [ngSrc]="getIconPath()" />
+        <img alt="Dialog Icon" [fill]="true" class="alert-icon" [ngSrc]="getIconPath()" />
       </div>
     </div>
   </div>
