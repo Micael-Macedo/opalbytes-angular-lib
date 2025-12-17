@@ -1,3 +1,15 @@
+## [1.7.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.7.0...v1.7.1) (2025-12-17)
+
+
+### Bug Fixes
+
+* **components:** correcao-eslint ([510145e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/510145e591d242583f36d44fe96ba140f05d6673))
+* **core:** correcao-eslint ([9c881f5](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9c881f5ef00c5dbdac431442a23c0faef986d444))
+* **directives:** correcao-eslint ([d03478d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d03478d94ae4eb1c06a27393ee5033ae5e412c4b))
+* **libs:** correcao-verificao-commits-release ([e4990a6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e4990a6c8a49f2b1256cd7d913a82d6ade5b9d1e))
+* **services:** correcao-eslint ([ffd0e9c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ffd0e9c4a6b97d1bb036e1bb265394a5144c01fe))
+* **utils:** correcao-eslint ([35c508b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/35c508b521ff409ba69f12ebc1b58249fd4e5e31))
+
 # [1.7.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.6.0...v1.7.0) (2025-12-17)
 
 
