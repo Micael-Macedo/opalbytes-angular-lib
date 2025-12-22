@@ -1,5 +1,10 @@
-<footer>
-  <ul>
-    <li>{{ footerText }} © {{ currentYear }}</li>
-  </ul>
+<footer class="footer-element" [class.fixed]="isFixed">
+  <div class="flex col">
+    <ng-content />
+    @if(footerText){
+      <ul class="footer-end">
+        <li>{{ footerText }} © {{ currentYear }}</li>
+      </ul>
+    }
+  </div>
 </footer>
