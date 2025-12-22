@@ -71,8 +71,15 @@ src/
 └── lib/
     └── shared/
         └── components/
+            ├── autocomplete/
             ├── base-alert/
-            └── base-button/
+            ├── base-button/
+            ├── base-dialog/
+            ├── base-table/
+            ├── base-time-range/
+            ├── drop-down/
+            ├── footer/
+            └── links-button/
 ```
 
 ---
@@ -84,6 +91,12 @@ src/
 | `BaseButton` | `<cao-base-button>` | Um botão customizável com suporte a ícones, estado de loading e tooltip. |
 | `BaseAlert` | `<cao-base-alert>` | Um componente para exibir alertas de sucesso, erro, informação ou aviso. |
 | `BaseDialog` | `<cao-base-dialog>` | Exibe uma caixa de diálogo modal para interações que exigem confirmação do usuário. |
+| `Autocomplete` | `<cao-autocomplete>` | Um campo de preenchimento automático com suporte a filtragem de opções. |
+| `BaseTable` | `<cao-base-table>` | Uma tabela de dados com ordenação, paginação e seleção de linhas. |
+| `BaseTimeRange` | `<cao-base-time-range>` | Um seletor de intervalo de datas. |
+| `DropDown` | `<cao-drop-down>` | Um menu suspenso com busca e suporte a ícones. |
+| `Footer` | `<cao-footer>` | Um rodapé simples para a aplicação. |
+| `LinksButton` | `<cao-links-button>` | Exibe uma lista de links de navegação como botões. |
 
 ---
 
