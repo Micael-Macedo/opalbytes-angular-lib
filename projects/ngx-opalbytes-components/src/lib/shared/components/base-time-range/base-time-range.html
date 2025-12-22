@@ -1,0 +1,23 @@
+<label class="label-dropw-down" [for]="controlName">{{ label }}</label>
+<mat-form-field class="input-data-field" subscriptSizing="dynamic" appearance="outline">
+  <mat-date-range-input [rangePicker]="picker" [max]="maxDate"
+    [attr.dataCy]="this.dataCy"
+  >
+    <input
+      #startDateInput
+      matStartDate
+      placeholder="DATA INÍCIO"
+      [tabIndex]="1"
+      [value]="startDate"
+      (dateInput)="onSelectStartDate($event)" />
+    <input
+      #endDateInput
+      matEndDate
+      placeholder="DATA FIM"
+      [tabIndex]="2"
+      [value]="finalDate"
+      (dateInput)="onInputMaxDate($event)" />
+  </mat-date-range-input>
+  <mat-datepicker-toggle matIconSuffix [for]="picker" />
+  <mat-date-range-picker #picker />
+</mat-form-field>

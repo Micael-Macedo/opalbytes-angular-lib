@@ -1,0 +1,23 @@
+<div class="links-info">
+  @if (navContent()) {
+  <h2>{{ navContent().title }}</h2>
+  <div class="links">
+    @for (link of navContent().links; track $index) {
+    <div
+      class="link"
+      role="button"
+      tabindex="0"
+      [tabIndex]="link.disabled ? -1 : 0"
+      [class.disabled]="link.disabled"
+      [attr.data-cy]="link.dataCy"
+      [attr.aria-disabled]="link.disabled"
+      (click)="isValidationRequired(link)"
+      (keydown.enter)="isValidationRequired(link)"
+      (keydown.space)="isValidationRequired(link); $event.preventDefault()"
+      >
+      {{ link.text }}
+    </div>
+    }
+  </div>
+  }
+</div>

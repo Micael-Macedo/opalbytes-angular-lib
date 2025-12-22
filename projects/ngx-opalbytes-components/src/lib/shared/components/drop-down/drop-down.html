@@ -1,0 +1,96 @@
+<div
+  class="dropdown-container"
+  role="combobox"
+  [ngClass]="[
+    dropDownClass,
+    isDisabled ? 'disabled' : '',
+    control?.touched && control?.invalid ? 'invalid' : '',
+    (control?.touched && control?.valid && selectedItem && isFocused && !removeValidBorder) ? 'valid' : ''
+  ]"
+  [ngStyle]="styleDropDown"
+  [attr.aria-expanded]="isOpen"
+  [attr.aria-haspopup]="'listbox'"
+  [attr.aria-controls]="isOpen ? ('dropdown-list-' + dataCy) : null"
+  [attr.aria-labelledby]="ariaLabelledBy || null"
+  [attr.aria-label]="ariaLabel || null"
+  [attr.aria-disabled]="isDisabled"
+  [attr.aria-activedescendant]="activeDescendant"
+  [attr.data-cy]="dataCy">
+  
+  <div
+    class="dropdown-header"
+    matTooltipPosition="below"
+    matTooltipClass="custom-arrow-tooltip"
+    tabindex="0"
+    role="button"
+    [matTooltip]="tooltip"
+    [attr.aria-disabled]="isDisabled"
+    (click)="!isDisabled && toggleDropdown()"
+    (keydown.enter)="!isDisabled && toggleDropdown()"
+    (keydown.space)="!isDisabled && toggleDropdown(); $event.preventDefault()"
+    (keydown.arrowdown)="!isDisabled && onArrowDown($event)"
+    (keydown.arrowup)="!isDisabled && onArrowUp($event)"
+    (keydown.escape)="!isDisabled && closeDropdown()">
+    <span id="dropdown-label-{{dataCy}}">{{ selectedItem?.nome ?? textHeader }}</span>
+    <mat-icon aria-hidden="true">{{ isOpen ? 'expand_less' : 'expand_more' }}</mat-icon>
+  </div>
+
+  @if (isOpen) {
+  <ul 
+    class="dropdown-list" 
+    role="listbox"
+    [id]="'dropdown-list-' + dataCy"
+    [ngClass]="{ 'drop-up': dropDirection === 'up', 'dropdown-secundary': dropDownClass === 'dropdown-secundary' }"
+    [attr.aria-label]="listAriaLabel || 'Opções'"
+    [attr.aria-labelledby]="'dropdown-label-' + dataCy">
+    
+
+    <li class="dropdown-search" role="none">
+      <input 
+        type="text" 
+        placeholder="Buscar por código ou nome..." 
+        role="searchbox"
+        aria-label="Buscar opções"
+        [formControl]="searchControl"
+        (keydown.arrowdown)="onArrowDown($event)"
+        (keydown.arrowup)="onArrowUp($event)"
+        (keydown.enter)="onSearchEnter($event)"
+        (keydown.escape)="closeDropdown()" />
+    </li>
+    
+
+    @for (item of filteredOptions; track $index) { 
+      @if(item && item.nome) {
+      <li
+        class="dropdown-item"
+        role="option"
+        [ngClass]="{
+          'icon-right': item.iconPosition === 'right',
+          'selected': item === selectedItem,
+          'focused': $index === focusedIndex
+        }"
+        [attr.id]="'option-' + dataCy + '-' + $index"
+        [attr.aria-selected]="item === selectedItem"
+        [attr.tabindex]="$index === focusedIndex ? 0 : -1"
+        [attr.data-cy]="item.dataCy"
+        (click)="selectItem(item)"
+        (keydown.enter)="selectItem(item)"
+        (keydown.space)="selectItem(item); $event.preventDefault()"
+        (mouseenter)="focusedIndex = $index">
+        @if (item.icon && item.iconPosition !== 'right') {
+        <mat-icon class="dropdown-icon" aria-hidden="true">{{ item.icon }}</mat-icon>
+        } 
+        <span>{{ item.nome }}</span>
+        @if (item.icon && item.iconPosition === 'right') {
+        <mat-icon class="dropdown-icon" aria-hidden="true">{{ item.icon }}</mat-icon>
+        }
+      </li>
+      } 
+    }
+  </ul>
+  }
+  
+  @if (control?.touched && control?.invalid && errorText) {
+    <div class="message-error">{{ errorText }}</div>
+  }
+</div>

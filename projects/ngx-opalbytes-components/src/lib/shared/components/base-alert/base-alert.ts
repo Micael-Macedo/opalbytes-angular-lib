@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 export type AlertType = "success" | "error" | "info" | "warning";
 
@@ -16,14 +16,18 @@ export interface IAlertConfig {
   imports: [CommonModule, NgOptimizedImage],
   templateUrl: './base-alert.html',
   styleUrl: './base-alert.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BaseAlert {
+export class BaseAlert implements OnInit {
   data!: {
     type: AlertType;
     title: string;
     message: string;
     alertIcon?: string
   };
+  
+  iconPath!: string;
+  titleClass!: string;
 
   private iconPaths: Record<AlertType, string> = {
     success: "https://placehold.co/600x400",
@@ -32,11 +36,8 @@ export class BaseAlert {
     warning: "https://placehold.co/600x400",
   };
 
-  getIconPath(type: AlertType): string {
-    return this.iconPaths[type];
-  }
-
-  getTitleClass(type: AlertType): string {
-    return `title-${type}`;
+  ngOnInit(): void {
+    this.iconPath = this.iconPaths[this.data.type];
+    this.titleClass = `title-${this.data.type}`;
   }
 }
