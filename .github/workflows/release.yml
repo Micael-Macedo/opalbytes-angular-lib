@@ -18,7 +18,7 @@ jobs:
       should-release-directives: ${{ steps.check.outputs.should-release-directives }}
       should-release-services: ${{ steps.check.outputs.should-release-services }}
       should-release-utils: ${{ steps.check.outputs.should-release-utils }}
-      should-release-core: ${{ steps.check-commits.outputs.should-release-core }}
+      should-release-core: ${{ steps.check.outputs.should-release-core }}  # ⬅️ CORRIGIDO: steps.check
     steps:
       - uses: actions/checkout@v3
         with:
@@ -156,39 +156,51 @@ jobs:
           echo "📊 Condição para release: ${{ matrix.condition }}"
           echo "========================================"
       
-      - name: Pular biblioteca se não houver mudanças
-        if: matrix.condition != 'true'
+      - name: Verificar se deve publicar
+        id: check-release
         run: |
-          echo "⏭️  PULANDO ${{ matrix.library }} - nenhuma mudança detectada"
-          exit 0
+          if [ "${{ matrix.condition }}" = "true" ]; then
+            echo "✅ Biblioteca ${{ matrix.library }} será publicada"
+            echo "should-release=true" >> $GITHUB_OUTPUT
+          else
+            echo "⏭️  Pulando ${{ matrix.library }} - nenhuma mudança detectada"
+            echo "should-release=false" >> $GITHUB_OUTPUT
+          fi
       
+      # ⚠️ ADICIONAR if: steps.check-release.outputs.should-release == 'true' EM TODOS OS STEPS
       - name: Checkout repository
+        if: steps.check-release.outputs.should-release == 'true'
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Setup Node.js
+        if: steps.check-release.outputs.should-release == 'true'
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Configure npm authentication
+        if: steps.check-release.outputs.should-release == 'true'
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
 
       - name: Configure Git
+        if: steps.check-release.outputs.should-release == 'true'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Install dependencies
+        if: steps.check-release.outputs.should-release == 'true'
         run: npm ci
 
       # 🔄 ATUALIZAR REPOSITÓRIO ANTES DE CADA BIBLIOTECA
       - name: Update repository
+        if: steps.check-release.outputs.should-release == 'true'
         run: |
           echo "🔄 Atualizando repositório..."
           git fetch origin main
@@ -197,17 +209,19 @@ jobs:
           echo "✅ Repositório atualizado"
           
       - name: Lint ${{ matrix.library }}
+        if: steps.check-release.outputs.should-release == 'true'
         run: npm run lint
 
       - name: Test ${{ matrix.library }}
-        if: matrix.test-command != 'echo "No tests for root"'
+        if: steps.check-release.outputs.should-release == 'true' && matrix.test-command != 'echo "No tests for root"'
         run: ${{ matrix.test-command }}
 
       - name: Build ${{ matrix.library }}
-        if: matrix.build-command != 'echo "No build needed for root"'
+        if: steps.check-release.outputs.should-release == 'true' && matrix.build-command != 'echo "No build needed for root"'
         run: ${{ matrix.build-command }}
 
       - name: Release ${{ matrix.library }}
+        if: steps.check-release.outputs.should-release == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

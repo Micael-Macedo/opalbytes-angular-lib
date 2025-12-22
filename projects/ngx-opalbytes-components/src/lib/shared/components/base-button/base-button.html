@@ -14,14 +14,18 @@
   (keydown)="onClick()"
   >
   @if (leadingIcon) {
-  <span [class]="useMaterialIcons ? 'material-icons leading-icon' : 'leading-icon'">
-    @if(useMaterialIcons) { {{ leadingIcon }} } @else {
+  <span [class]="isLucideIcon ? 'lucide-icons leading-icon' : 'leading-icon'">
+    @if(isLucideIcon) { 
+      <lucide-angular class="my-icon" [name]="leadingIcon" />
+     } @else {
     <img alt="icon" [ngSrc]="leadingIcon" />
     }
   </span>
   } {{ buttonText }} @if (trailingIcon) {
-  <span [class]="useMaterialIcons ? 'material-icons trailing-icon' : 'trailing-icon'">
-    @if(useMaterialIcons){ {{ trailingIcon }} } @else {
+  <span [class]="isLucideIcon ? 'lucide-icons trailing-icon' : 'trailing-icon'">
+    @if(isLucideIcon){ 
+      <lucide-angular class="my-icon" [name]="trailingIcon" />
+     } @else {
     <img alt="icon" [ngSrc]="trailingIcon" />
     }
   </span>
