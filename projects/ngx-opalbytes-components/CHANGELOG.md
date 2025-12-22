@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.6.0...ngx-opalbytes-components@1.6.1) (2025-12-22)
+
+
+### Bug Fixes
+
+* **components:** atualizacao componentes em documentacao ([81edc71](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/81edc710a63ea7dbe115fcea3176c1f9ef1df9bf))
+
 # [1.6.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.5.0...ngx-opalbytes-components@1.6.0) (2025-12-22)
 
 
