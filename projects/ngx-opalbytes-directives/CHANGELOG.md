@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.0.0...ngx-opalbytes-directives@1.1.0) (2025-12-22)
+
+
+### Features
+
+* **components:** add componentes basicos interativos ([071b18b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/071b18b16b5de5026672f9cc0eb069f31a8552de))
+
 # 1.0.0 (2025-12-17)
 
 
