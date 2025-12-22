@@ -21,3 +21,4 @@
  */
 
 export * from './lib/directives/highlight/highlight.directive'
+export * from './lib/directives/skeleton/skeleton.directive'
