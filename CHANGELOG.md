@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.10.0...v1.11.0) (2025-12-22)
+
+
+### Features
+
+* **components:** add componentes basicos interativos ([071b18b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/071b18b16b5de5026672f9cc0eb069f31a8552de))
+
 # [1.10.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.9.0...v1.10.0) (2025-12-17)
 
 
