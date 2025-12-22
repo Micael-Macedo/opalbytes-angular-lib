@@ -12,6 +12,7 @@
             type="button"
             class="cancel-button"
             [attr.data-cy]="config.cancelButtonText"
+            (keydown)="handleCancel()"
             (click)="handleCancel()">
             {{ config.cancelButtonText }}
           </button>
@@ -21,7 +22,9 @@
             class="confirm-button"
             [ngClass]="config.type"
             [attr.data-cy]="config.confirmButtonText"
-            (click)="handleConfirm()">
+            (click)="handleConfirm()"
+            (keydown)="handleConfirm()"
+            >
             {{ config.confirmButtonText }}
           </button>
           }

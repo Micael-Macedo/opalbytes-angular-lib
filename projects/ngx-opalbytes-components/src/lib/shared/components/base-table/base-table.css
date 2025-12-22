@@ -1,0 +1,173 @@
+.table-container {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  overflow: auto hidden;
+}
+
+.table-container .table-controls {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.table-container .table-controls .filter-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  flex-direction: row;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--input-disabled-bg);
+  width: 50%;
+  height: 55px;
+}
+
+.table-container .table-controls .filter-field input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.table-container .table-controls .filter-field .input-filter {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: none;
+  transition: none;
+}
+
+.table-container .table-controls .filter-field i {
+  color: var(--icon-collor);
+  margin-left: 8px;
+}
+
+.table-container .mat-mdc-table {
+  width: max-content;
+  min-width: 100%;
+  background-color: var(--table-body-color);
+}
+
+.table-container .mat-mdc-table .mat-mdc-header-cell:first-child,
+.table-container .mat-mdc-table .mat-mdc-cell:first-child {
+  border-right: none !important;
+}
+
+.table-container .mat-mdc-table .mat-mdc-header-cell:not(:first-child),
+.table-container .mat-mdc-table .mat-mdc-cell:not(:first-child) {
+  border-right: 1px solid var(--primary);
+}
+
+.table-container .mat-mdc-table .mat-mdc-header-cell:first-child {
+  width: 60px;
+  max-width: 60px;
+  min-width: 60px;
+  border-right: none;
+}
+
+.table-container .mat-mdc-table .mat-mdc-cell:first-child {
+  width: 60px;
+  max-width: 60px;
+  min-width: 60px;
+  border-right: none;
+}
+
+.table-container .mat-mdc-table .mat-mdc-header-row {
+  background-color: var(--table-header);
+}
+
+.table-container .mat-mdc-table .mat-mdc-header-row .mat-mdc-header-cell {
+  border-right: 1px solid var(--white);
+  font-weight: 600;
+  color: var(--white);
+  border-bottom: 1px solid var(--input-background);
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
+.table-container .mat-mdc-table .mat-mdc-header-row .mat-mdc-header-cell:last-child {
+  border-right: none;
+}
+
+.table-container .mat-mdc-table .mat-mdc-row {
+  transition: background-color 0.2s ease;
+}
+
+.table-container .mat-mdc-table .mat-mdc-row .mat-mdc-cell {
+  border-right: 1px solid var(--primary);
+  color: var(--gray-dark);
+  border-bottom: 1px solid var(--input-background);
+}
+
+.table-container .mat-mdc-table .mat-mdc-row .mat-mdc-cell:last-child {
+  border-right: none;
+}
+
+.table-container .mat-mdc-table .mat-mdc-row:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.table-container .mat-mdc-table .mat-mdc-row.selected {
+  background-color: rgba(63, 81, 181, 0.1);
+}
+
+.table-container .mat-mdc-table .mat-mdc-checkbox {
+  margin-right: 12px;
+}
+
+.table-container .mat-mdc-table .mat-mdc-checkbox .mdc-checkbox {
+  --mdc-checkbox-unselected-icon-color: var(--gray-dark);
+  --mdc-checkbox-selected-icon-color: var(--info);
+}
+
+.table-container .mat-mdc-table .mat-mdc-footer-row {
+  background-color: var(--table-background);
+  font-weight: 600;
+  color: var(--input-disabled-bg);
+}
+
+.table-container .mat-mdc-table .mat-mdc-footer-row .mat-mdc-footer-cell {
+  padding: 12px;
+  text-align: left;
+  color: var(--gray-dark);
+}
+
+.table-container span,
+.table-container img {
+  margin-right: 10px;
+}
+
+.table-container[_ngcontent-ng-c1530403114] .mat-mdc-table[_ngcontent-ng-c1530403114] .mat-mdc-footer-row[_ngcontent-ng-c1530403114] {
+  display: none;
+}
+
+.no-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  font-size: 1.1rem;
+}
+
+.no-data-container .no-data-title {
+  color: var(--table-header);
+  margin-bottom: 12px;
+}
+
+.no-data-container .no-data-message {
+  color: var(--table-header);
+}
+
+@media (max-width: 768px) {
+  .table-container .table-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .table-container .table-controls .filter-field {
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+}

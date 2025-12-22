@@ -1,0 +1,32 @@
+<div class="form-field">
+  @if (label) {
+  <label [for]="internalControl">{{ label }}</label>
+  }
+
+  <mat-form-field appearance="outline" class="rnv-autocomplete-mat-form-field">
+    <div class="input-wrapper" [class.focused]="isFocused">
+      <input
+        type="text"
+        matInput
+        [placeholder]="placeholder"
+        [formControl]="internalControl"
+        [matAutocomplete]="auto"
+        [attr.data-cy]="dataCy"
+        [ngClass]="[
+          control?.touched && control?.invalid ? 'invalid' : '',
+          control?.touched && control?.valid && control?.value ? 'valid' : ''
+        ]"
+        (focus)="onFocus()"
+        (blur)="onBlur()" />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        autoActiveFirstOption
+        [displayWith]="displayFn"
+        (optionSelected)="onOptionSelected($event)">
+        @for (option of filteredOptions$ | async; track option.id) {
+        <mat-option [value]="option">{{ option.nome }}</mat-option>
+        }
+      </mat-autocomplete>
+    </div>
+  </mat-form-field>
+</div>

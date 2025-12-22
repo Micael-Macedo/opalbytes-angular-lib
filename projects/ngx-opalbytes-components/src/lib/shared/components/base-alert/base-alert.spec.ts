@@ -40,7 +40,9 @@ describe('BaseAlert', () => {
     };
 
     types.forEach((type) => {
-      expect(component.getIconPath(type)).toBe(expectedPaths[type]);
+      component.data.type = type
+      component.ngOnInit()
+      expect(component.iconPath).toBe(expectedPaths[type]);
     });
   });
 
@@ -48,7 +50,9 @@ describe('BaseAlert', () => {
     const types: AlertType[] = ["success", "error", "info", "warning"];
 
     types.forEach((type) => {
-      expect(component.getTitleClass(type)).toBe(`title-${type}`);
+      component.data.type = type
+      component.ngOnInit()
+      expect(component.titleClass).toBe(`title-${type}`);
     });
   });
 });

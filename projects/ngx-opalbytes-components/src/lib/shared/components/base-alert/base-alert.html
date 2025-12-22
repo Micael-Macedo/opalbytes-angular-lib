@@ -4,7 +4,7 @@
     <div class="alert-wrapper">
       <div class="text-content">
         @if (data.title) {
-        <div class="title" [ngClass]="getTitleClass(data.type)">{{ data.title }}</div>
+        <div class="title" [ngClass]="titleClass">{{ data.title }}</div>
         } @if (data.title && data.message) {
         <div class="message-spacer"></div>
         } @if (data.message) {
@@ -12,7 +12,7 @@
         }
       </div>
       <div class="icon-container">
-        <img alt="Alert Icon" class="alert-icon" [ngSrc]="getIconPath(data.type)" [fill]="true" />
+        <img alt="Alert Icon" class="alert-icon" [ngSrc]="iconPath" [fill]="true" />
       </div>
     </div>
   </div>

@@ -1,0 +1,128 @@
+<div class="table-container" [ngClass]="customClass">
+  @if (tableConfig) {
+  <div class="table-controls">
+    <mat-menu #menuColunas="matMenu">
+      @for (column of allColumns; track column) {
+      <button
+      mat-menu-item
+      [type]="'button'" (click)="toggleColumnVisibility(column)">
+        <mat-checkbox
+          [attr.data-cy]="'checkbox-toggle-column-' + column"
+          [checked]="isColumnVisible(column)">
+          {{ getColumnHeader(column) }}
+        </mat-checkbox>
+      </button>
+      }
+    </mat-menu>
+  </div>
+
+  <table
+    mat-table
+    matSort
+    class="mat-elevation-z8"
+    [dataSource]="dataSource"
+    (matSortChange)="announceSortChange($event)">
+    <ng-container matColumnDef="select">
+      <th *matHeaderCellDef mat-header-cell>
+        <mat-checkbox
+          data-cy="checkbox-select-all"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          (change)="$event ? toggleAllRows() : null" />
+      </th>
+      <td *matCellDef="let row" mat-cell>
+        <mat-checkbox
+          [attr.data-cy]="'checkbox-select-row-' + row.id"
+          [checked]="selection.isSelected(row)"
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null" />
+      </td>
+    </ng-container>
+
+    @for (column of displayedColumns; track column) {
+    <ng-container [matColumnDef]="column">
+      <th *matHeaderCellDef mat-header-cell [mat-sort-header]="column">
+        <span>{{ getColumnHeader(column) }}</span>
+        <img
+          alt="icone"
+          [ngSrc]="'.src/assets/svg/arrow-left-double.svg'"
+          [fill]="true"
+          [matMenuTriggerFor]="menuColunas" />
+        <mat-menu #menuColunas="matMenu">
+          @for (column of allColumns; track column) {
+          <button
+          mat-menu-item
+          [type]="'button'" (click)="toggleColumnVisibility(column)">
+            <mat-checkbox
+              [attr.data-cy]="'checkbox-toggle-column-' + column"
+              [checked]="isColumnVisible(column)">
+              {{ getColumnHeader(column) }}
+            </mat-checkbox>
+          </button>
+          }
+        </mat-menu>
+      </th>
+      <td *matCellDef="let element" mat-cell>
+        @switch (getColumnType(column)) { @case ('STRING') {
+        <span>{{ element[getColumnElement(column)] }}</span>
+        } @case ('BOOLEAN') {
+        <mat-checkbox
+          disabled
+          [attr.data-cy]="'checkbox-value-' + column + '-' + element.id"
+          [checked]="element[getColumnElement(column)]" />
+        } @case ('DATE') {
+        <span>{{ element[getColumnElement(column)] | date:'mediumDate' }}</span>
+        } @case ('NUMBER') {
+        <span>{{ element[getColumnElement(column)] | number:'1.2-2' }}</span>
+        } @case ('SINGLE_BUTTON') {
+        <div>
+          @for (btn of getColumnButtons(column); track btn) {
+          <button
+          mat-icon-button
+          [type]="'button'" [matTooltip]="btn.tooltip" (click)="btn.onClick(element)">
+            <mat-icon>{{ btn.icon }}</mat-icon>
+          </button>
+          }
+        </div>
+        } @default {
+        <span>{{ element[getColumnElement(column)] }}</span>
+        } }
+      </td>
+    </ng-container>
+    }
+
+    <ng-container matColumnDef="footer">
+      <td *matFooterCellDef mat-footer-cell [attr.colspan]="displayedColumns.length + 1">
+        Total de Registros: {{ dataSource.data.length }}
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="getAllColumns()" mat-header-row></tr>
+    <tr
+      *matRowDef="let row; columns: getAllColumns();"
+      mat-row
+      (click)="selection.toggle(row)"></tr>
+    <tr *matFooterRowDef="['footer']" mat-footer-row></tr>
+  </table>
+  }
+</div>
+
+<mat-paginator
+  #paginator
+  aria-label="Select page"
+  [length]="totalItems"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageIndex]="currentPage - 1"
+  [hidePageSize]="false"
+  [showFirstLastButtons]="showFirstLastButtons"
+  (page)="onPageEvent($event)" />
+
+@if (!tableConfig || tableConfig.data.length === 0) {
+<div class="no-data-container">
+  <h2 class="no-data-title">{{ tableConfig?.result?.noData || 'Não há dados disponíveis' }}</h2>
+  <p class="no-data-message"
+    >{{ tableConfig?.result?.defaultMessage || 'Adicione alguns dados' }}</p
+  >
+</div>
+}

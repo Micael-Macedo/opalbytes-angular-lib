@@ -1,0 +1,79 @@
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rnv-autocomplete-mat-form-field {
+  width: 100%;
+}
+
+.rnv-autocomplete-mat-form-field .mat-mdc-text-field-wrapper {
+  border-radius: 8px;
+  padding: 0;
+  height: 48px; /* Adjust height to match base-input */
+}
+
+.rnv-autocomplete-mat-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
+  padding: 0 10px; /* Match base-input padding */
+  align-items: center;
+}
+
+.rnv-autocomplete-mat-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-infix {
+  padding: 0;
+  min-height: 0;
+}
+
+.rnv-autocomplete-mat-form-field .mat-mdc-form-field-subscript-wrapper {
+  display: none; /* Hide default error message space */
+}
+
+.rnv-autocomplete-mat-form-field .mat-mdc-form-field-outline {
+  display: none; /* Hide default outline */
+}
+
+/* input.mat-mdc-input {
+  color: var(--text-color-input);
+  font-size: 14px;
+  padding: 0;
+  height: 20px;
+}
+
+input.mat-mdc-input::placeholder {
+  color: var(--input-text);
+} */
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-wrapper.focused input {
+  /* Add focus styles if needed, similar to base-input */
+}
+
+.input-wrapper .invalid {
+}
+
+.input-wrapper .valid {
+}
+
+.mat-mdc-option {
+  font-size: 1rem;
+  padding: 6px 16px;
+  text-transform: uppercase;
+}
+
+/* Styles for the autocomplete panel */
+.mat-mdc-autocomplete-panel {
+  border-radius: 8px;
+  padding: 12px 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}

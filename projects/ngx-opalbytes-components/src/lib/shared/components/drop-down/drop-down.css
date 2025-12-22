@@ -1,0 +1,61 @@
+/* Add these focus states to your existing CSS */
+
+.dropdown-header:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.dropdown-header:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.dropdown-search input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.dropdown-item:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+/* Enhanced focused state */
+.dropdown-item.focused {
+  background-color: var(--hover-drop-down);
+  font-weight: bold;
+}
+
+/* Ensure proper contrast for disabled state */
+.dropdown-container.disabled {
+  opacity: 0.6;
+}
+
+/* Scrollbar improvements for better UX */
+.dropdown-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure dropdown doesn't go off-screen on mobile */
+@media screen and (max-width: 768px) {
+  .dropdown-list {
+    max-height: 180px;
+  }
+  
+  .dropdown-list.drop-up {
+    bottom: 45px;
+  }
+}
