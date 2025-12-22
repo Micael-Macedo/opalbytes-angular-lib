@@ -1,0 +1,21 @@
+<div class="time-picker-wrapper">
+  <mat-form-field
+    class="custom-timepicker"
+    [ngClass]="{
+      'invalid': control?.touched && control?.invalid,
+      'valid': control?.touched && control?.valid
+    }">
+    <input
+      matInput
+      placeholder="00:00"
+      [formControl]="control"
+      [matTimepicker]="picker"
+      [min]="min"
+      [max]="max"
+      [disabled]="isDisabled"
+      [attr.data-cy]="dataCy"
+      (blur)="control?.markAsTouched()" />
+    <mat-timepicker-toggle matSuffix [for]="picker" />
+    <mat-timepicker #picker [options]="customOptions" (selected)="timeChange.emit($event.value)" />
+  </mat-form-field>
+</div>
