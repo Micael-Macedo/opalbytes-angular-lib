@@ -1,3 +1,18 @@
+# [1.6.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.5.0...ngx-opalbytes-components@1.6.0) (2025-12-22)
+
+
+### Bug Fixes
+
+* **components:** correcao estilizacao autcomplete ([e87a4fe](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e87a4fe8516101b8b0793c240392f402b86075b5))
+* **libs:** correcao publicacao libs em caso alteracoes ([7f2a5dc](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/7f2a5dc0b1a3f0edb5c72dfee4d71e8909f33882))
+
+
+### Features
+
+* **components:** add componentes basicos interativos ([071b18b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/071b18b16b5de5026672f9cc0eb069f31a8552de))
+* **components:** add package lucide angular ([2a26284](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2a26284eaea195f5c127199ec9ae34b8ff581caf))
+* **libs:** add package lucide angular ([6ac8eca](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/6ac8ecaaa9c13b1e294c4cb8ab320a5e726f8daf))
+
 # [1.5.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.4.0...ngx-opalbytes-components@1.5.0) (2025-12-17)
 
 
