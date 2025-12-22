@@ -26,7 +26,7 @@ interface IAutoCompleteOption {
 @Component({
   selector: "cao-autocomplete",
   templateUrl: "./autocomplete.html",
-  styleUrls: ["./autocomplete.scss"],
+  styleUrls: ["./autocomplete.css"],
   standalone: true,
   imports: [
     CommonModule,
