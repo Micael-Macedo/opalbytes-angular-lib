@@ -83,6 +83,59 @@ opalbytes-directive-components/
 └── .releaserc.js                    # Configuração do semantic-release
 ```
 
+---
+
+## 📚 Bibliotecas Disponíveis
+
+### `ngx-opalbytes-components`
+Biblioteca de componentes de UI reutilizáveis.
+
+| Componente          | Descrição                                             |
+| ------------------- | ----------------------------------------------------- |
+| `autocomplete`      | Um campo de formulário com sugestões de preenchimento.  |
+| `base-alert`        | Componente para exibir mensagens de alerta.           |
+| `base-button`       | Botão padrão com estilos customizáveis.               |
+| `base-dialog`       | Janela de diálogo modal.                              |
+| `base-table`        | Tabela de dados com ordenação e paginação.            |
+| `base-time-range`   | Seletor de intervalo de tempo.                        |
+| `drop-down`         | Menu suspenso (dropdown).                             |
+| `footer`            | Rodapé padrão para páginas.                           |
+| `links-button`      | Botão que renderiza múltiplos links.                  |
+| `paginator`         | Controle de paginação para tabelas ou listas.         |
+| `time-picker`       | Seletor de horário.                                   |
+
+### `ngx-opalbytes-directives`
+Diretivas para adicionar comportamentos a elementos do DOM.
+
+| Diretiva      | Descrição                                                   |
+| ------------- | ----------------------------------------------------------- |
+| `cpf-mask`    | Aplica uma máscara de CPF a um campo de input.              |
+| `highlight`   | Realça o texto de um elemento.                              |
+| `skeleton`    | Exibe um placeholder de carregamento (esqueleto).           |
+
+### `ngx-opalbytes-services`
+Serviços injetáveis com lógica de negócio ou comunicação com APIs.
+
+| Serviço             | Descrição                                                   |
+| ------------------- | ----------------------------------------------------------- |
+| `date-pipe.service` | Formata datas de acordo com a localidade.                   |
+| `installer.service` | Gerencia a instalação de PWAs.                              |
+| `websocket.service` | Lida com a comunicação em tempo real via WebSockets.        |
+
+### `ngx-opalbytes-utils`
+Funções utilitárias e helpers.
+
+| Utilitário | Descrição |
+| --- | --- |
+| `NgxOpalbytesUtils` | Componente placeholder (sem funções utilitárias no momento). |
+
+### `ngx-opalbytes-core-shared`
+Biblioteca central com a base para as demais, incluindo serviços, interceptors, guards e modelos essenciais.
+
+**Nota:** Esta biblioteca é mais complexa e dividida em `core` e `shared`.
+- **Core:** Contém a lógica central da aplicação (serviços, interceptors, guards).
+- **Shared:** Contém elementos compartilhados entre diferentes partes da aplicação (componentes de UI, diretivas, pipes).
+
 --- 
 
 ## 🌿 Estratégia de Branches
