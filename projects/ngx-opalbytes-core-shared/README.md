@@ -25,6 +25,7 @@ src/
     │   ├── interceptors/      # Interceptors HTTP
     │   ├── interfaces/        # Interfaces de dados do core
     │   ├── models/            # Modelos de dados do core
+    │   ├── providers/         # Modelos de Providers padrão do core
     │   ├── services/          # Serviços do core (API, cache, autenticação)
     │   └── utils/             # Funções utilitárias e handlers de erro
     └── shared/                # Módulo com elementos reutilizáveis de UI e dados
@@ -84,6 +85,7 @@ O `core` oferece as peças fundamentais para a arquitetura de uma aplicação.
 -   **Guards**: Para proteger rotas (ex: `AuthGuard`).
 -   **Config**: Gerenciamento de configurações de ambiente (`development`, `production`).
 -   **Utils**: Utilitários globais, como `GlobalErrorHandler`.
+-   **Providers**: Provider padrão para aplicações
 
 #### Principais Serviços
 
