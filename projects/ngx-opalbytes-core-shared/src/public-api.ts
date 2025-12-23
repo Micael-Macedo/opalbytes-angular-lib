@@ -55,6 +55,9 @@ export * from "./lib/core/models/http-error.model";
 // Utils
 export * from "./lib/core/utils/alert-message.builder";
 
+// Providers
+export * from "./lib/core/providers/core.providers"
+
 /*
  * Public API Surface of shared
  */
