@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.13.0...v1.14.0) (2025-12-23)
+
+
+### Features
+
+* **core:** add provide padrao ([539f871](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/539f8712bd43ebe0e5930a7c172991096d0535b9))
+
 # [1.13.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.12.0...v1.13.0) (2025-12-23)
 
 
