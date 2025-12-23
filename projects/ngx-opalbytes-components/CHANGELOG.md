@@ -1,3 +1,19 @@
+# [1.7.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.6.1...ngx-opalbytes-components@1.7.0) (2025-12-23)
+
+
+### Features
+
+* **components:** add adicao elementos em rodape ([7947486](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/7947486d2e33d3a1c0f8b87992312ce5be74f439))
+* **components:** add documento detalhamento  componentes ([3505eb9](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3505eb99cf1088e69fac7ae8222faafca75f386c))
+* **components:** add elementos paginacao ([fdab041](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fdab041e21038e1805445f4842e2822747cb0746))
+* **components:** add elementos time-picker ([09fa0f6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/09fa0f63f998c96f9697900ef1ff22ec8cc0c247))
+* **components:** add modulo angular material ([d1b2c4e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d1b2c4ec5e7b73dc1e7206160d676bd7da3b5a8d))
+* **directives:** add diretiva skeleton ([91c16ef](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/91c16ef6bb9b5641d719f706ddc2e9433e23617a))
+* **directives:** add documento detalhamento  diretivas ([3c7fed1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3c7fed16d8333d2fd0a5a0279b04797d8d0f14c1))
+* **libs:** add documento detalhamento  services ([2654d82](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2654d82057928fdaac67fde42c695097d3c4436e))
+* **services:** add documento detalhamento  services ([020d3d0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/020d3d0362d35abe7e2a3289f0a65614cdbf3657))
+* **services:** add servicos basicos ([86f6f49](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/86f6f4941c58a38af72ba07746ba6b9bdde8dc23))
+
 ## [1.6.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.6.0...ngx-opalbytes-components@1.6.1) (2025-12-22)
 
 
