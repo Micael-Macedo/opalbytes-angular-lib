@@ -1,3 +1,5 @@
+## [1.2.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.2.0...ngx-opalbytes-directives@1.2.1) (2025-12-23)
+
 # [1.2.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.1.0...ngx-opalbytes-directives@1.2.0) (2025-12-23)
 
 
