@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-core-shared@1.5.0...ngx-opalbytes-core-shared@1.5.1) (2025-12-23)
+
+
+### Bug Fixes
+
+* **core:** liberacao funcao publica providers ([3a9217e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3a9217e10e8d7478fd286d581f81f4fefc3ea85b))
+
 # [1.5.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-core-shared@1.4.0...ngx-opalbytes-core-shared@1.5.0) (2025-12-23)
 
 
