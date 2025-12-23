@@ -1,0 +1,84 @@
+.time-picker-wrapper {
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.custom-timepicker {
+  width: 100%;
+}
+
+.custom-timepicker .mat-mdc-text-field-wrapper {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 0;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  background-color: var(--input-background);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s ease-in-out;
+}
+
+.custom-timepicker.invalid .mat-mdc-text-field-wrapper {
+  border-color: var(--error);
+}
+
+/* só aplica o verde de success enquanto estiver focado */
+.custom-timepicker.valid.mat-focused .mat-mdc-text-field-wrapper {
+  border-color: var(--success);
+}
+
+/* após perder o foco, "neutraliza" o success para transparente */
+.custom-timepicker.valid:not(.mat-focused) .mat-mdc-text-field-wrapper {
+  border-color: transparent;
+}
+
+.custom-timepicker .mdc-line-ripple {
+  display: none;
+}
+
+.custom-timepicker .mat-mdc-input-element {
+  font-size: 16px;
+  padding-left: 16px;
+  caret-color: transparent;
+  background: transparent;
+}
+
+.custom-timepicker .mat-mdc-icon-button.mat-mdc-button-base {
+  padding: 0;
+  border-left: 1px solid var(--line-color);
+  border-radius: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-timepicker .mat-timepicker-toggle-default-icon {
+  color: var(--primary);
+}
+
+.custom-timepicker .mat-mdc-form-field-flex {
+  background-color: var(--input-background);
+}
+
+/* oculta label flutuante e subscript conforme seu estilo */
+.mat-mdc-form-field:not(.mat-form-field-disabled) .mat-mdc-floating-label.mdc-floating-label {
+  display: none;
+}
+
+.mat-mdc-form-field-subscript-wrapper,
+.mat-mdc-form-field-bottom-align::before {
+  display: none;
+}
+
+.custom-timepicker .mat-mdc-form-field-infix {
+  padding: 18px 0 !important;
+}
+
+/* remove qualquer box-shadow remanescente no outline quando focado */
+.custom-timepicker.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  box-shadow: none !important;
+}

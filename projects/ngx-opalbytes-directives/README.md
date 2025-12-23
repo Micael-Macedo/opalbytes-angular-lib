@@ -69,19 +69,29 @@ Dentro da pasta `src/lib/`, as diretivas são organizadas em `directives/` e cad
 src/
 └── lib/
     └── directives/
-        └── highlight/
+        ├── cpf-mask/
+        ├── highlight/
+        └── skeleton/
 ```
 
 ---
 
-## Diretivas Disponíveis
+---
 
-| Diretiva | Seletor | Descrição |
-| :--- | :--- | :--- |
-| `HighlightDirective` | `[caoHighlight]` | Realça a cor de fundo de um elemento quando o usuário passa o mouse sobre ele. Aceita uma string com a cor como input (padrão: `'yellow'`). |
+## Detalhes das Diretivas
 
-### Exemplo de Uso - `[caoHighlight]`
+### `HighlightDirective`
+Realça a cor de fundo de um elemento quando o usuário passa o mouse sobre ele.
 
+**Seletor:** `[caoHighlight]`
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `caoHighlight` | `string` | `'yellow'` | A cor a ser usada para o realce. |
+
+**Exemplo de Uso**
 ```html
 <!-- 1. Usando a cor padrão (amarelo) -->
 <p [caoHighlight]>
@@ -91,6 +101,39 @@ src/
 <!-- 2. Fornecendo uma cor customizada -->
 <div [caoHighlight]="'lightblue'">
   Passe o mouse aqui para um realce azul claro.
+</div>
+```
+
+---
+
+### `CpfMaskDirective`
+Aplica uma máscara de CPF (`000.000.000-00`) a um campo de input.
+
+**Seletor:** `[caoCpfMask]`
+
+**Nota:** Esta diretiva está presente na estrutura de pastas, mas sua implementação ainda não foi concluída.
+
+**Exemplo de Uso**
+```html
+<input type="text" caoCpfMask>
+```
+
+---
+
+### `SkeletonDirective`
+Exibe um efeito de "esqueleto" de carregamento nos elementos filhos do container onde a diretiva é aplicada.
+
+**Seletor:** `[caoSkeleton]`
+
+Esta diretiva não possui inputs ou outputs. Ela aplica o efeito automaticamente por uma duração de 2 segundos.
+
+**Exemplo de Uso**
+```html
+<!-- Aplica o efeito de esqueleto a todos os elementos internos -->
+<div caoSkeleton>
+  <h2>Título</h2>
+  <p>Este é um parágrafo de exemplo.</p>
+  <button>Botão</button>
 </div>
 ```
 
