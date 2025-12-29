@@ -1,3 +1,24 @@
+# [1.6.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-core-shared@1.5.1...ngx-opalbytes-core-shared@1.6.0) (2025-12-29)
+
+
+### Bug Fixes
+
+* **components:**  correcao organizacao documentacao ([bd4c484](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/bd4c4845d0ba91217adcafd2163717007bd91aef))
+* **core:**  correcao organizacao documentacao ([566954b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/566954bc952fb41b1a24116bc81b1d25017f76bb))
+
+
+### Features
+
+* **components:** add componente input ([e50bd45](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e50bd4562bfa618ae0339911bd604a52d4937789))
+* **components:** add feature base alert ([cd90ff2](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/cd90ff2e479b52c0e12bf1dd17a70f6e8d4eb0fd))
+* **components:** add feature base dialog ([2e06c87](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2e06c87a273ad09ca20834940db285fcc0bf8719))
+* **components:** add feature base modal ([2a62884](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2a6288476034a85bde2f6f27bbc2bd7c748db97a))
+* **components:** add feature base table ([dcdd095](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/dcdd0959bcf5c2223ff77f653d7a574883336400))
+* **components:** add feature base table paginated ([eea57e4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/eea57e4f41d6a081de7d601161384b0b02d82f87))
+* **core:** add installer service ([9cd34e1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9cd34e17c8f2ae506f2cd6e1a53a1206646c0b0c))
+* **libs:** atualizacao pacotes angular material ([b43bdf3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/b43bdf36cb5b88c02ed3f20669863f22f54d7ef9))
+* **libs:** atualizacao pacotes externos ([3e000db](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3e000db1dfdfc0508ec29fc753ce2da816e4ea79))
+
 ## [1.5.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-core-shared@1.5.0...ngx-opalbytes-core-shared@1.5.1) (2025-12-23)
 
 
