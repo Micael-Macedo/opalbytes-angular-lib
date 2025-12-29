@@ -70,12 +70,13 @@ npm i "caminho-da-biblioteca/opalbytes-directive-components/dist/ngx-opalbytes-d
 Este é um monorepo Angular que gerencia múltiplas bibliotecas. Todas as bibliotecas residem no diretório `projects/`.
 
 ```
-opalbytes-directive-components/
+opalbytes-angular-lib/
 ├── projects/
-│   ├── ngx-opalbytes-components/    # Biblioteca de componentes
-│   ├── ngx-opalbytes-directives/    # Biblioteca de diretivas
-│   ├── ngx-opalbytes-services/      # Biblioteca de serviços
-│   └── ngx-opalbytes-utils/         # Funções utilitárias
+│   ├── ngx-opalbytes-components/    # Biblioteca de componentes de UI
+│   ├── ngx-opalbytes-core-shared/   # Biblioteca central com serviços, guards e modelos
+│   ├── ngx-opalbytes-directives/    # Biblioteca de diretivas de atributo e estruturais
+│   └── ngx-opalbytes-services/      # Biblioteca de serviços reutilizáveis
+│   └── ngx-opalbytes-utils/         # Funções e utilitários
 │
 ├── .github/                         # Workflows de CI/CD (Release)
 ├── .husky/                          # Hooks do Git para validações
@@ -87,54 +88,64 @@ opalbytes-directive-components/
 
 ## 📚 Bibliotecas Disponíveis
 
+### `ngx-opalbytes-core-shared`
+
+Biblioteca central que serve como base para as demais. Contém a lógica de negócio principal, serviços essenciais, interceptors, guards e modelos de dados.
+
+- **`core`**: Módulo com a lógica central da aplicação.
+  - **`services`**: Serviços essenciais como `AuthService`, `StorageService` e `HttpErrorHandlerService`.
+  - **`interceptors`**: Interceptors para adicionar headers, tratar erros HTTP e gerenciar o cache.
+  - **`guards`**: Guards de rota para proteger o acesso a determinadas áreas da aplicação.
+  - **`models`**: Modelos de dados globais, como `User` e `HttpError`.
+- **`shared`**: Módulo com componentes, diretivas e pipes compartilhados.
+  - **`components`**: Componentes reutilizáveis, como `LoadingSpinner` e `ConfirmationDialog`.
+  - **`pipes`**: Pipes para formatação de dados, como `CPF` e `Date`.
+
 ### `ngx-opalbytes-components`
-Biblioteca de componentes de UI reutilizáveis.
+
+Biblioteca de componentes de UI reutilizáveis e desacoplados, prontos para serem usados em qualquer projeto Angular.
 
 | Componente          | Descrição                                             |
 | ------------------- | ----------------------------------------------------- |
-| `autocomplete`      | Um campo de formulário com sugestões de preenchimento.  |
-| `base-alert`        | Componente para exibir mensagens de alerta.           |
-| `base-button`       | Botão padrão com estilos customizáveis.               |
+| `autocomplete`      | Campo de formulário com preenchimento automático.     |
+| `base-alert`        | Alerta para exibir mensagens de sucesso, erro, etc.   |
+| `base-button`       | Botão padrão com diferentes estilos.                  |
 | `base-dialog`       | Janela de diálogo modal.                              |
-| `base-table`        | Tabela de dados com ordenação e paginação.            |
+| `base-table`        | Tabela de dados com ordenação, paginação e filtros.   |
 | `base-time-range`   | Seletor de intervalo de tempo.                        |
 | `drop-down`         | Menu suspenso (dropdown).                             |
-| `footer`            | Rodapé padrão para páginas.                           |
-| `links-button`      | Botão que renderiza múltiplos links.                  |
-| `paginator`         | Controle de paginação para tabelas ou listas.         |
+| `footer`            | Rodapé padrão.                                        |
+| `links-button`      | Botão que renderiza uma lista de links.               |
+| `paginator`         | Controle de paginação para tabelas.                   |
 | `time-picker`       | Seletor de horário.                                   |
 
 ### `ngx-opalbytes-directives`
-Diretivas para adicionar comportamentos a elementos do DOM.
+
+Diretivas para adicionar comportamentos dinâmicos a elementos do DOM.
 
 | Diretiva      | Descrição                                                   |
 | ------------- | ----------------------------------------------------------- |
 | `cpf-mask`    | Aplica uma máscara de CPF a um campo de input.              |
-| `highlight`   | Realça o texto de um elemento.                              |
+| `highlight`   | Realça o texto de um elemento com base em uma busca.        |
 | `skeleton`    | Exibe um placeholder de carregamento (esqueleto).           |
 
 ### `ngx-opalbytes-services`
-Serviços injetáveis com lógica de negócio ou comunicação com APIs.
+
+Serviços reutilizáveis com lógica de negócio específica e isolada.
 
 | Serviço             | Descrição                                                   |
 | ------------------- | ----------------------------------------------------------- |
 | `date-pipe.service` | Formata datas de acordo com a localidade.                   |
-| `installer.service` | Gerencia a instalação de PWAs.                              |
-| `websocket.service` | Lida com a comunicação em tempo real via WebSockets.        |
+| `installer.service` | Gerencia a instalação de um PWA.                            |
+| `websocket.service` | Facilita a comunicação em tempo real via WebSockets.        |
 
 ### `ngx-opalbytes-utils`
-Funções utilitárias e helpers.
+
+Funções utilitárias e helpers para tarefas comuns.
 
 | Utilitário | Descrição |
 | --- | --- |
-| `NgxOpalbytesUtils` | Componente placeholder (sem funções utilitárias no momento). |
-
-### `ngx-opalbytes-core-shared`
-Biblioteca central com a base para as demais, incluindo serviços, interceptors, guards e modelos essenciais.
-
-**Nota:** Esta biblioteca é mais complexa e dividida em `core` e `shared`.
-- **Core:** Contém a lógica central da aplicação (serviços, interceptors, guards).
-- **Shared:** Contém elementos compartilhados entre diferentes partes da aplicação (componentes de UI, diretivas, pipes).
+| `NgxOpalbytesUtils` | Coleção de funções utilitárias (sem implementação no momento). |
 
 --- 
 
@@ -232,6 +243,8 @@ O **escopo é obrigatório** e indica qual biblioteca do monorepo está sendo mo
 *   `directives`
 *   `services`
 *   `utils`
+*   `core`
+*   `shared`
 *   `libs`
 
 **Exemplos de mensagens de commit VÁLIDAS:**
