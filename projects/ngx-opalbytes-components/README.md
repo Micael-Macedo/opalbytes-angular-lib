@@ -71,20 +71,22 @@ src/
 └── lib/
     └── shared/
         └── components/
-            ├── autocomplete/
-            ├── base-alert/
-            ├── base-button/
-            ├── base-dialog/
-            ├── base-input/
+        |   ├── autocomplete/
+        |   ├── base-button/
+        |   ├── base-input/
+        |   ├── base-time-range/
+        |   ├── drop-down/
+        |   ├── footer/
+        |   ├── links-button/
+        |   ├── paginator/
+        |   └── time-picker/
+        └── features/
             ├── base-modal/
             ├── base-table/
-            ├── base-time-range/
-            ├── drop-down/
-            ├── footer/
-            ├── links-button/
-            ├── paginator/
-            ├── table-light-paginated/
-            └── time-picker/
+            ├── base-table-paginated/
+            ├── base-dialog/
+            └── base-alert/
+            
 ```
 
 ---
