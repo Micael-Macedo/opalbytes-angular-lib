@@ -1,0 +1,213 @@
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+label {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-wrapper input,
+.input-wrapper textarea {
+  width: 100%;
+  border: none;
+  background-color: var(--input-background);
+  border-radius: 8px;
+  padding: 14px 10px;
+  color: var(--text-color-input);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.input-wrapper input::placeholder,
+.input-wrapper textarea::placeholder {
+  color: var(--input-text);
+}
+
+.input-wrapper input:focus,
+.input-wrapper textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.input-wrapper.has-leading-icon input {
+  padding-left: 33px;
+}
+
+.input-wrapper.has-trailing-icon input {
+  padding-right: 30px;
+}
+
+.input-wrapper img {
+  width: 100%;
+  height: auto;
+}
+
+.input-wrapper .leading-icon,
+.input-wrapper .icon:first-child {
+  position: absolute;
+  top: 53%;
+  left: 8px;
+  transform: translateY(-50%);
+  width: 15px;
+  pointer-events: none;
+}
+
+.input-wrapper .leading-icon::placeholder,
+.input-wrapper .icon:first-child::placeholder {
+  margin-left: 20px;
+}
+
+.input-wrapper .trailing-icon,
+.input-wrapper .icon:last-child {
+  position: absolute;
+  top: 53%;
+  right: 14px;
+  transform: translateY(-50%);
+  width: 15px;
+}
+
+.input-wrapper .trailing-icon img,
+.input-wrapper .icon:last-child img {
+  width: 100%;
+  height: auto;
+}
+
+.input-wrapper .material-icons {
+  font-size: 20px;
+  color: var(--input-text);
+}
+
+.input-wrapper .search-icon-border {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  border-left: 1px solid var(--line-color);
+  padding-left: 8px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper .search-icon {
+  width: 16px;
+  height: 24px;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+.input-wrapper .search-icon:hover {
+  filter: invert(62%) sepia(92%) saturate(747%) hue-rotate(142deg) brightness(97%) contrast(101%);
+}
+
+[type="date"] {
+  height: 43px;
+  padding: 14px 0 14px 12px !important;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+  background: url("/assets/images/svg/input-date-icon.svg") no-repeat center;
+  cursor: pointer;
+  border-left: 1px solid var(--line-color);
+  padding-left: 12px;
+  width: 30px;
+  height: 35px;
+}
+
+[type="date"].invalid::-webkit-calendar-picker-indicator {
+  border-left: 1px solid var(--error);
+}
+
+[type="date"].valid::-webkit-calendar-picker-indicator {
+  border-left: 1px solid var(--success);
+}
+
+.input-date-disabled {
+  background: url("/assets/images/svg/icon-date-border.svg") no-repeat right 12px center;
+  background-size: 30px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--input-background);
+  padding: 12px 40px 12px 16px;
+  width: 100%;
+  color: var(--input-text);
+}
+
+.input-date-disabled::placeholder {
+  color: var(--input-text);
+}
+
+.input-secondary {
+  width: 100%;
+  border: 1px solid var(--data-bg) !important;
+  background-color: var(--white) !important;
+}
+
+.input-secondary.invalid {
+  border: 1px solid var(--error) !important;
+}
+
+.input-secondary.valid {
+  border: 1px solid var(--success) !important;
+}
+
+.input-wrapper .invalid {
+  border: 1px solid var(--error);
+}
+
+.input-wrapper .valid {
+  border: 1px solid var(--success);
+}
+
+.input-border-primary {
+  border: 1px solid var(--primary) !important;
+  background-color: var(--white) !important;
+}
+
+.input-border-primary.invalid {
+  border: 1px solid var(--error) !important;
+}
+
+.input-border-primary.valid {
+  border: 1px solid var(--success) !important;
+}
+
+/* stylelint-disable selector-pseudo-element-no-unknown */
+::ng-deep .custom-arrow-tooltip {
+  background-color: var(--color-tooltip);
+  color: var(--white);
+  padding: 0 4px;
+  border-radius: 6px;
+  font-size: 12px;
+  position: relative;
+  text-align: center;
+  max-width: 260px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 30%);
+}
+
+::ng-deep .input-component .cdk-overlay-pane .custom-arrow-tooltip::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  rotate: 180deg;
+  right: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--color-tooltip);
+}
+/* stylelint-enable selector-pseudo-element-no-unknown */
