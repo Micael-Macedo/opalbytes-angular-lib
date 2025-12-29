@@ -1,3 +1,11 @@
+## [1.15.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.15.0...v1.15.1) (2025-12-29)
+
+
+### Bug Fixes
+
+* **components:**  correcao organizacao documentacao ([bd4c484](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/bd4c4845d0ba91217adcafd2163717007bd91aef))
+* **core:**  correcao organizacao documentacao ([566954b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/566954bc952fb41b1a24116bc81b1d25017f76bb))
+
 # [1.15.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.14.0...v1.15.0) (2025-12-29)
 
 
