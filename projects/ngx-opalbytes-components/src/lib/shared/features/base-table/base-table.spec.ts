@@ -1,4 +1,4 @@
-import { FilterTableService, TableComponent, TableService } from './base-table';
+import { BaseTable } from './base-table';
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
@@ -9,6 +9,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { BehaviorSubject } from "rxjs";
 import { describe, it, expect, beforeEach, vi } from "vitest";
+import { TableService } from './base-table.service';
+import { BaseFilterTableService } from './base-filter-table.service';
 
 const configMock = {
   columns: ["name", "age"],
@@ -31,9 +33,9 @@ const configMock = {
   data: [],
 };
 
-describe("TableComponent", () => {
-  let component: TableComponent;
-  let fixture: ComponentFixture<TableComponent>;
+describe("BaseTable", () => {
+  let component: BaseTable;
+  let fixture: ComponentFixture<BaseTable>;
   let tableService: TableService;
 
 
@@ -55,7 +57,7 @@ describe("TableComponent", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        TableComponent,
+        BaseTable,
         MatTableModule,
         MatSortModule,
         MatCheckboxModule,
@@ -65,12 +67,12 @@ describe("TableComponent", () => {
       ],
       providers: [
         { provide: TableService, useValue: tableServiceStub },
-        { provide: FilterTableService, useValue: filterTableServiceStub },
+        { provide: BaseFilterTableService, useValue: filterTableServiceStub },
         { provide: LiveAnnouncer, useValue: liveAnnouncerStub },
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TableComponent);
+    fixture = TestBed.createComponent(BaseTable);
     component = fixture.componentInstance;
     tableService = TestBed.inject(TableService);
     fixture.detectChanges();

@@ -10,213 +10,22 @@ import {
   ViewChild,
   Output,
   EventEmitter,
- Injectable } from "@angular/core";
+  inject
+} from "@angular/core";
 import { MatPaginator, MatPaginatorIntl, PageEvent } from "@angular/material/paginator";
 import { MatSort, Sort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 
-import { Subscription , BehaviorSubject, Observable , Subject } from "rxjs";
-import { map } from "rxjs/operators";
+import { Subscription } from "rxjs";
 
+
+import { BaseFilterTableService } from "./base-filter-table.service";
+import { IColumnConfig, ITableConfig } from "./base-table.interface";
+import { TableService } from "./base-table.service";
 import { MaterialModule } from "../../../material.module";
 
 
-
-export interface IColumnButton {
-  icon: string;
-  label: string;
-  onClick: (data: any) => void;
-  tooltip?: string;
-}
-
-export interface IColumnConfig {
-  type:
-    | "STRING"
-    | "BOOLEAN"
-    | "SINGLE_BUTTON"
-    | "DATE"
-    | "NUMBER"
-    | "text"
-    | "number"
-    | "boolean"
-    | "date"
-    | "actions";
-  element?: string;
-  key?: string;
-  header: string;
-  visible: boolean;
-  sortable?: boolean;
-  isDefaultSort?: boolean;
-  defaultSortDirection?: "asc" | "desc";
-  pipe?: any;
-  buttons?: IColumnButton[];
-}
-
-export interface ITableConfig {
-  columns: string[];
-  subTitle?: string | null;
-  result?: {
-    noData: string;
-    defaultMessage: string;
-  };
-  data: any[];
-  columnData: Record<string, IColumnConfig>;
-  paginated?: boolean;
-}
-
-
-@Injectable({
-  providedIn: "root",
-})
-export class FilterTableService {
-  private filterSubject = new Subject<string>();
-
-  filter$ = this.filterSubject.asObservable();
-
-  updateFilter(filterValue: string) {
-    this.filterSubject.next(filterValue);
-  }
-}
-
-
-@Injectable({
-  providedIn: "root",
-})
-export class TableService {
-  private tableConfigSubject = new BehaviorSubject<ITableConfig | null>(null);
-  private dataSubject = new BehaviorSubject<any[]>([]);
-  private columnsSubject = new BehaviorSubject<IColumnConfig[]>([]);
-
-  tableConfig$: Observable<ITableConfig | null> = this.tableConfigSubject.asObservable();
-  columns$: Observable<IColumnConfig[]> = this.columnsSubject.asObservable();
-  data$: Observable<any[]> = this.dataSubject.asObservable();
-
-  visibleColumns$: Observable<string[]> = this.columns$.pipe(
-    map((columns) =>
-      columns.filter((col) => col.visible).map((col) => col.key || col.element || "")
-    )
-  );
-
-  createTable(data: any[], columns?: IColumnConfig[], customConfig?: Partial<ITableConfig>): void {
-    const tableConfig: ITableConfig = {
-      columns: columns ? columns.map((col) => col.key || col.element || "") : [],
-      data,
-      columnData: {},
-      result: {
-        noData: "Não há dados para o filtro selecionado.",
-        defaultMessage: "Nenhum resultado encontrado.",
-      },
-      ...customConfig,
-    };
-
-    if (data.length > 0 && columns) {
-      const columnData: Record<string, IColumnConfig> = {};
-      columns.forEach((col) => {
-        columnData[col.key || col.element || ""] = {
-          ...col,
-          type: col.type || this.inferColumnType(data[0][col.key || col.element || ""]),
-          visible: col.visible !== undefined ? col.visible : true,
-        };
-      });
-      tableConfig.columnData = columnData;
-    } else if (data.length === 0 && columns) {
-      const columnData: Record<string, IColumnConfig> = {};
-      columns.forEach((col) => {
-        columnData[col.key || col.element || ""] = {
-          ...col,
-          type: col.type || "STRING",
-          visible: col.visible !== undefined ? col.visible : true,
-        };
-      });
-      tableConfig.columnData = columnData;
-    }
-
-    this.tableConfigSubject.next(tableConfig);
-    this.columnsSubject.next(columns || []);
-    this.dataSubject.next(data);
-  }
-
-  private inferColumnType(value: any): IColumnConfig["type"] {
-    if (value === null || value === undefined) {return "STRING";}
-    switch (typeof value) {
-      case "boolean":
-        return "BOOLEAN";
-      case "number":
-        return "NUMBER";
-      case "string":
-        return this.isValidDate(value) ? "DATE" : "STRING";
-      default:
-        return "STRING";
-    }
-  }
-
-  private isValidDate(value: string): boolean {
-    return !isNaN(Date.parse(value));
-  }
-
-  toggleColumnVisibility(columnKey: string): void {
-    const currentColumns = this.columnsSubject.value;
-    const updatedColumns = currentColumns.map((col) =>
-      col.key === columnKey || col.element === columnKey ? { ...col, visible: !col.visible } : col
-    );
-
-    const currentConfig = this.tableConfigSubject.value;
-    if (currentConfig) {
-      const updatedColumnData = { ...currentConfig.columnData };
-      const columnToUpdate = Object.keys(updatedColumnData).find((key) => key === columnKey);
-
-      if (columnToUpdate) {
-        updatedColumnData[columnToUpdate].visible = !updatedColumnData[columnToUpdate].visible;
-
-        this.tableConfigSubject.next({
-          ...currentConfig,
-          columnData: updatedColumnData,
-        });
-      }
-    }
-
-    this.columnsSubject.next(updatedColumns);
-  }
-
-  getVisibleColumns(): IColumnConfig[] {
-    return this.columnsSubject.value.filter((col) => col.visible);
-  }
-
-  setColumns(columns: IColumnConfig[]): void {
-    const currentConfig = this.tableConfigSubject.value;
-    if (currentConfig) {
-      const columnData: Record<string, IColumnConfig> = {};
-      columns.forEach((col) => {
-        columnData[col.key || col.element || ""] = col;
-      });
-
-      this.tableConfigSubject.next({
-        ...currentConfig,
-        columns: columns.map((col) => col.key || col.element || ""),
-        columnData,
-      });
-    }
-    this.columnsSubject.next(columns);
-  }
-
-  setData(data: any[]): void {
-    this.dataSubject.next(data);
-
-    const currentConfig = this.tableConfigSubject.value;
-    if (currentConfig) {
-      this.tableConfigSubject.next({
-        ...currentConfig,
-        data,
-      });
-    }
-  }
-
-  updateTableData(data: any[]): void {
-    this.setData(data);
-  }
-}
-
-export function getPtBrPaginatorIntl(): MatPaginatorIntl {
+export function getPtBrPaginatorIntlBaseTable(): MatPaginatorIntl {
   const paginatorIntl = new MatPaginatorIntl();
   paginatorIntl.itemsPerPageLabel = "Itens por página:";
   paginatorIntl.nextPageLabel = "Próxima página";
@@ -240,9 +49,9 @@ export function getPtBrPaginatorIntl(): MatPaginatorIntl {
   templateUrl: "./base-table.html",
   styleUrls: ["./base-table.css"],
   imports: [CommonModule, MaterialModule, NgOptimizedImage],
-  providers: [{ provide: MatPaginatorIntl, useValue: getPtBrPaginatorIntl() }],
+  providers: [{ provide: MatPaginatorIntl, useValue: getPtBrPaginatorIntlBaseTable() }],
 })
-export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BaseTable implements OnInit, AfterViewInit, OnDestroy {
   @Input() customClass = "";
   @Input() pageSizeOptions: number[] = [5, 10, 20, 50];
   @Input() showFirstLastButtons = true;
@@ -278,10 +87,11 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     return ["select", ...this.displayedColumns];
   }
 
+  protected tableService = inject(TableService)
+  protected liveAnnouncer = inject(LiveAnnouncer)
+  protected filterTableService = inject(BaseFilterTableService)
+
   constructor(
-    protected tableService: TableService,
-    protected liveAnnouncer: LiveAnnouncer,
-    protected filterTableService: FilterTableService
   ) {
     this.initializeSortingAccessor();
     this.initializeFilterPredicate();
