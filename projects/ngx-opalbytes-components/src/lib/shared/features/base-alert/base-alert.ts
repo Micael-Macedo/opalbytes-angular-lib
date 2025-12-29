@@ -1,15 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-export type AlertType = "success" | "error" | "info" | "warning";
-
-export interface IAlertConfig {
-  type: AlertType;
-  title: string;
-  message: string;
-  alertIcon?: string; 
-}
-
+import { AlertType } from './base-alert.interface';
 
 @Component({
   selector: 'cao-base-alert',
@@ -25,7 +17,7 @@ export class BaseAlert implements OnInit {
     message: string;
     alertIcon?: string
   };
-  
+
   iconPath!: string;
   titleClass!: string;
 

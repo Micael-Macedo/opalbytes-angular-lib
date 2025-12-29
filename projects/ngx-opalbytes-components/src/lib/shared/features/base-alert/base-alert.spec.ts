@@ -1,7 +1,8 @@
+import { BaseAlert } from './base-alert';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { describe, it, expect, beforeEach } from 'vitest';
+import { AlertType } from './base-alert.interface';
 
-import { AlertType, BaseAlert } from './base-alert';
 
 describe('BaseAlert', () => {
   let component: BaseAlert;
@@ -14,14 +15,14 @@ describe('BaseAlert', () => {
 
     fixture = TestBed.createComponent(BaseAlert);
     component = fixture.componentInstance;
-    
+
     component.data = {
       type: 'info',
       title: 'Test Title',
       message: 'Test Message',
       alertIcon: 'test-icon.svg'
     };
-    
+
     fixture.detectChanges();
     await fixture.whenStable();
   });

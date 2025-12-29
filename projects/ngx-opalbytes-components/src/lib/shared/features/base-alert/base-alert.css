@@ -1,0 +1,142 @@
+:host {
+  position: fixed;
+  top: 10%;
+  left: 55%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: block;
+  animation: slide-in 0.3s ease-out;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.dialog-container {
+  width: 600px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--white);
+}
+
+.dialog-content {
+  padding: 20px 30px;
+  box-sizing: border-box;
+}
+
+.logo {
+  width: 150px;
+  height: 24px;
+  margin-bottom: 15px;
+}
+
+.alert-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-content {
+  flex-grow: 1;
+  margin: 20px;
+  padding-right: 20px;
+}
+
+.title {
+  font-family: Lato, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.title.success {
+  color: var(--primary);
+}
+
+.title.error {
+  color: var(--error-color);
+}
+
+.title.warning {
+  color: var(--support-orange);
+}
+
+.title.info {
+  color: var(--primary);
+}
+
+.title.title-success {
+  color: var(--primary);
+}
+
+.title.title-error {
+  color: var(--error);
+}
+
+.title.title-warning {
+  color: var(--support-orange);
+}
+
+.title.title-info {
+  color: var(--primary);
+}
+
+.message-spacer {
+  height: 16px;
+}
+
+.message {
+  font-family: Lato, sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 100%;
+  color: var(--message-color);
+}
+
+.icon-container {
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+}
+
+.alert-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  :host {
+    left: 55%;
+    max-width: 95%;
+  }
+
+  .dialog-container {
+    max-width: 90%;
+    width: 400px;
+  }
+
+  .alert-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .text-content {
+    padding-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .icon-container {
+    width: 100px;
+    height: 100px;
+  }
+}
