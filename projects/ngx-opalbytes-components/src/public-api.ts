@@ -31,3 +31,7 @@ export * from './lib/shared/features/base-table-paginated/base-table-paginated.s
 export * from './lib/shared/features/base-table-paginated/base-table-paginated.interface'
 export * from './lib/shared/features/base-table-paginated/base-filter-table-paginated.service'
 export * from './lib/shared/features/base-table-paginated/base-pagination.service'
+
+export * from './lib/shared/features/base-alert/base-alert'
+export * from './lib/shared/features/base-alert/base-alert.service'
+export * from './lib/shared/features/base-alert/base-alert.interface'
