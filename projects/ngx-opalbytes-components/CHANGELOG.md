@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.8.0...ngx-opalbytes-components@1.8.1) (2025-12-29)
+
+
+### Bug Fixes
+
+* **components:** add ngx-mask dependencia ([6640811](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/664081124138a4a4da98f9263ce421ede486129f))
+
 # [1.8.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.7.0...ngx-opalbytes-components@1.8.0) (2025-12-29)
 
 
