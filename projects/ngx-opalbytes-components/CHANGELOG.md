@@ -1,3 +1,12 @@
+# [1.9.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.8.1...ngx-opalbytes-components@1.9.0) (2025-12-29)
+
+
+### Features
+
+* add base alert ([22e4caa](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/22e4caad1609e1e5a904c3c81efa4f7b6c0114cc))
+* add customizacao alerta ([cade2c5](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/cade2c509c728a887a6b2bfe34c5fabe10240187))
+* **components:** explicacao-usabilidade-feature-base-alert ([8030418](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8030418f8ec6e8ff49bbf73a2064d1078c35c928))
+
 ## [1.8.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.8.0...ngx-opalbytes-components@1.8.1) (2025-12-29)
 
 
