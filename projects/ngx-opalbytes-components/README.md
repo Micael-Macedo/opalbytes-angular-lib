@@ -179,6 +179,81 @@ Um componente para exibir alertas de sucesso, erro, informação ou aviso. Geral
 
 ---
 
+### `AlertService`
+O `AlertService` é responsável por exibir os alertas na tela. Por padrão, ele utiliza o componente `BaseAlert`.
+
+**Como estender o `AlertService` para usar um componente de alerta customizado:**
+
+Para personalizar a aparência ou o comportamento dos alertas, você pode estender o `AlertService` e sobrescrever o método `generateComponentPortal()`. Este método deve retornar o seu componente customizado, que **DEVE** estender o `BaseAlert`.
+
+**Exemplo:**
+
+1.  **Crie seu componente de alerta customizado** (ex: `CustomAlertComponent`):
+
+    ```typescript
+    // custom-alert.component.ts
+    import { Component } from '@angular/core';
+    import { BaseAlert } from 'ngx-opalbytes-components';
+
+    @Component({
+      selector: 'app-custom-alert',
+      template: `
+        <div class="custom-alert-container" [ngClass]="data.type">
+          <img *ngIf="data.alertIcon" [src]="data.alertIcon" alt="Alert Icon" class="alert-icon">
+          <div class="content">
+            <h3 class="title">{{ data.title }}</h3>
+            <p class="message">{{ data.message }}</p>
+          </div>
+        </div>
+      `,
+      styles: [`
+        .custom-alert-container {
+          /* seus estilos personalizados */
+        }
+      `]
+    })
+    export class CustomAlertComponent extends BaseAlert {
+      // Você pode adicionar lógica específica aqui se precisar
+    }
+    ```
+
+2.  **Crie um serviço que estende o `AlertService`**:
+
+    ```typescript
+    // custom-alert.service.ts
+    import { Injectable } from '@angular/core';
+    import { AlertService } from 'ngx-opalbytes-components';
+    import { CustomAlertComponent } from './custom-alert.component'; // Importe seu componente customizado
+
+    @Injectable({
+      providedIn: 'root'
+    })
+    export class CustomAlertService extends AlertService {
+      override generateComponentPortal(): typeof CustomAlertComponent {
+        return CustomAlertComponent;
+      }
+    }
+    ```
+
+3.  **No seu `app.module.ts` ou onde seu serviço é provido, use o `CustomAlertService`**:
+
+    ```typescript
+    // app.module.ts ou o módulo onde você quer usar o serviço customizado
+    import { NgModule } from '@angular/core';
+    import { AlertService } from 'ngx-opalbytes-components'; // Importe o serviço original
+    import { CustomAlertService } from './custom-alert.service'; // Importe seu serviço customizado
+
+    @NgModule({
+      providers: [
+        { provide: AlertService, useClass: CustomAlertService } // Prover seu serviço customizado no lugar do original
+      ]
+    })
+    export class AppModule { }
+    ```
+    Dessa forma, toda vez que você injetar e usar o `AlertService` em sua aplicação, na verdade estará utilizando o `CustomAlertService` que exibirá seu `CustomAlertComponent` personalizado.
+
+---
+
 ### `BaseDialog`
 Exibe uma caixa de diálogo modal para interações que exigem confirmação do usuário.
 
