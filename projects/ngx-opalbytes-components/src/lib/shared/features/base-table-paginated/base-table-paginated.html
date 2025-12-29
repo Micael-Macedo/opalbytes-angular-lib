@@ -1,0 +1,68 @@
+<div class="table-container" [ngClass]="customClass">
+  @if (tableConfig) {
+  <table mat-table matSort [dataSource]="dataSource" (matSortChange)="announceSortChange($event)">
+    @for (column of displayedColumns; track column) {
+    <ng-container [matColumnDef]="column">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header class="table-header">
+        {{ getColumnHeader(column) }}
+      </th>
+      <td *matCellDef="let element" mat-cell class="table-cell">
+        @switch (getColumnType(column)) { @case ('STRING') { @if (getColumnCssClass &&
+        getColumnCssClass(column, element[getColumnElement(column)])) {
+        <span [class]="getColumnCssClass(column, element[getColumnElement(column)])">
+          {{ element[getColumnElement(column)] }}
+        </span>
+        } @else {
+        <span>{{ element[getColumnElement(column)] }}</span>
+        } } @case ('BOOLEAN') {
+        <mat-checkbox disabled [checked]="element[getColumnElement(column)]" />
+        } @case ('DATE') {
+        <span>{{ element[getColumnElement(column)] | date:'mediumDate' }}</span>
+        } @case ('NUMBER') {
+        <span>{{ element[getColumnElement(column)] | number:'1.2-2' }}</span>
+        } @case ('SINGLE_BUTTON') {
+        <div>
+          @for (btn of getColumnButtons(column); track btn) {
+          <button type="button" mat-icon-button [matTooltip]="btn.tooltip" (click)="btn.onClick(element)">
+            <mat-icon>{{ btn.icon }}</mat-icon>
+          </button>
+          }
+        </div>
+        } }
+      </td>
+    </ng-container>
+    }
+
+    <ng-container matColumnDef="footer">
+      <td
+        *matFooterCellDef
+        mat-footer-cell
+        class="table-cell"
+        [attr.colspan]="displayedColumns.length">
+        Total de Registros: {{ totalItems }}
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row (click)="onRowClick(row)"></tr>
+    <tr *matFooterRowDef="['footer']" mat-footer-row class="mat-row-footer"></tr>
+  </table>
+  @if(totalItems > 0){
+
+  <mat-paginator
+    #paginator
+    aria-label="Select page"
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="currentPage - 1"
+    [hidePageSize]="false"
+    [showFirstLastButtons]="showFirstLastButtons"
+    (page)="onPageEvent($event)" />
+  } @else {
+  <div class="no-data-container">
+    <h2>{{ tableConfig?.result?.noData ?? 'Não há dados disponíveis' }}</h2>
+    <p>{{ tableConfig?.result?.defaultMessage ?? 'Adicione alguns dados' }}</p>
+  </div>
+  } }
+</div>
