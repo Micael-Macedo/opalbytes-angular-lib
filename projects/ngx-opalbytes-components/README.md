@@ -75,11 +75,16 @@ src/
             ├── base-alert/
             ├── base-button/
             ├── base-dialog/
+            ├── base-input/
+            ├── base-modal/
             ├── base-table/
             ├── base-time-range/
             ├── drop-down/
             ├── footer/
-            └── links-button/
+            ├── links-button/
+            ├── paginator/
+            ├── table-light-paginated/
+            └── time-picker/
 ```
 
 ---
@@ -111,6 +116,48 @@ Um botão customizável com suporte a ícones, estado de loading e tooltip.
 | Evento | Tipo | Descrição |
 | --- | --- | --- |
 | `buttonClick` | `EventEmitter<void>` | Emitido quando o botão é clicado. |
+
+---
+
+### `BaseInput`
+Um campo de entrada de texto customizável com suporte a ícones, máscaras e validação.
+
+**Seletor:** `<cao-input>`
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `type` | `string` | `'text'` | O tipo de input (text, password, email, etc). |
+| `placeholder` | `string` | `''` | O texto de placeholder. |
+| `label` | `string` | `''` | O rótulo do campo. |
+| `inputClass` | `string` | `''` | Classes CSS customizadas para o input. |
+| `value` | `string` \| `number` \| `boolean` \| `Date` | `''` | O valor do input. |
+| `errorMessage` | `string` | `''` | Mensagem de erro a ser exibida. |
+| `isDisabled` | `boolean` | `false` | Desabilita o input. |
+| `maxLength` | `number` | `undefined` | Número máximo de caracteres. |
+| `searchMode` | `boolean` | `false` | Ativa o modo de busca, exibindo um ícone de busca. |
+| `showBorder` | `boolean` | `false` | Exibe uma borda no input. |
+| `isLucideIcon` | `boolean` | `false` | Define se o ícone é do pacote Lucide. |
+| `mask` | `string` | `undefined` | Máscara a ser aplicada ao input (usando `ngx-mask`). |
+| `control` | `AbstractControl` \| `null` | `null` | O `FormControl` associado. |
+| `tooltip` | `string` | `''` | Texto a ser exibido em uma tooltip. |
+| `dataCy` | `string` | `undefined` | Atributo para testes E2E com Cypress. |
+| `textareaRows` | `string` | `undefined` | Número de linhas para um textarea. |
+| `decimalMarker` | `'.' \| ',' \| ['.', ',']` | `','` | Marcador decimal para números. |
+| `thousandSeparator` | `string` | `'.'` | Separador de milhares para números. |
+| `allowNegativeNumbers`| `boolean`| `false`| Permite números negativos. |
+| `separatorLimit` | `string` | `''` | Limite do separador. |
+| `leadingIcon` | `string` | `undefined` | Ícone a ser exibido antes do texto. |
+| `trailingIcon` | `string` | `undefined` | Ícone a ser exibido após o texto. |
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `valueChange` | `EventEmitter<string>` | Emitido quando o valor do input muda. |
+| `searchClick` | `EventEmitter<void>` | Emitido quando o ícone de busca é clicado. |
+| `inputChange` | `EventEmitter<string>` | Emitido a cada mudança no input. |
 
 ---
 
@@ -150,6 +197,25 @@ Exibe uma caixa de diálogo modal para interações que exigem confirmação do 
 
 ---
 
+### `FeatureBaseModal`
+Um componente de modal genérico que pode ser customizado.
+
+**Seletor:** `<cao-feature-base-modal>`
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `showModal` | `boolean` | `false` | Controla a visibilidade do modal. |
+| `title` | `string` | `''` | O título do modal. |
+| `data` | `T` | `undefined` | Dados a serem passados para o conteúdo do modal. |
+| `modalTypeClass` | `'default' \| 'custom'` | `'default'` | Classe de tipo de modal. |
+| `modalClass` | `string` | `'modal-default'` | Classe CSS customizada para o modal. |
+| `modalSize` | `'w-100' \| 'w-90' \| ...` | `'w-70'` | Largura do modal. |
+| `closeOnOverlayClick`| `boolean`| `false`| Fecha o modal ao clicar no overlay. |
+
+---
+
 ### `Autocomplete`
 Um campo de preenchimento automático que funciona com `ngModel` ou `formControlName`.
 
@@ -186,6 +252,36 @@ Uma tabela de dados com ordenação, paginação e seleção de linhas. A config
 
 | Evento | Tipo | Descrição |
 | --- | --- | --- |
+| `pageChanged` | `EventEmitter<number>` | Emitido quando a página muda. |
+| `pageSizeChanged` | `EventEmitter<number>` | Emitido quando o tamanho da página muda. |
+| `firstPageClicked` | `EventEmitter<void>` | Emitido ao clicar no botão de primeira página. |
+| `lastPageClicked` | `EventEmitter<void>` | Emitido ao clicar no botão de última página. |
+| `selectionChanged` | `EventEmitter<any[]>` | Emitido quando a seleção de linhas muda. |
+| `pageEvent` | `EventEmitter<PageEvent>`| Emitido em qualquer evento de paginação. |
+
+---
+
+### `TableLightPaginated`
+Uma tabela de dados leve com paginação no lado do cliente. Herda a maioria de suas funcionalidades do `BaseTable`.
+
+**Seletor:** `<cao-table-light-paginated>`
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `getColumnCssClass`| `(columnKey: string, value: any) => string` | `null` | Função para obter classes CSS customizadas para células. |
+| `customClass` | `string` | `''` | Classe CSS customizada para a tabela. |
+| `pageSizeOptions` | `number[]` | `[5, 10, 20, 50]` | Opções para o número de itens por página. |
+| `showFirstLastButtons`| `boolean`| `true` | Exibe os botões de primeira/última página. |
+| `isPaginatedByServer`| `boolean`| `true` | Define se a paginação é controlada pelo servidor (sempre `true` neste componente). |
+
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `rowClicked` | `EventEmitter<any>` | Emitido quando uma linha da tabela é clicada. |
 | `pageChanged` | `EventEmitter<number>` | Emitido quando a página muda. |
 | `pageSizeChanged` | `EventEmitter<number>` | Emitido quando o tamanho da página muda. |
 | `firstPageClicked` | `EventEmitter<void>` | Emitido ao clicar no botão de primeira página. |

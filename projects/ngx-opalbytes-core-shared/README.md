@@ -97,6 +97,49 @@ O `core` oferece as peças fundamentais para a arquitetura de uma aplicação.
 | `LoadingService` | Para controlar o estado de "carregando" em toda a aplicação. |
 | `HttpCacheService`| Para armazenar em cache respostas de requisições HTTP GET. |
 | `ConfigService` | Para carregar e fornecer configurações de ambiente. |
+| `CaoInstallationService` | Serviço para verificar a instalação e realizar o download de executáveis. |
+
+#### `CaoInstallationService`
+
+Este serviço é projetado para interagir com o sistema do usuário para verificar se um determinado software está instalado e para facilitar o download e a instalação de executáveis.
+
+**Métodos Principais**
+
+| Método | Descrição |
+| :--- | :--- |
+| `checkInstallation(config: IConfigInstallation)` | Verifica se um software está instalado, com base na configuração fornecida. Retorna um `Observable<IStatusInstallation>`. |
+| `downloadAndInstall(config: IConfigInstallation)` | Inicia o download de um executável a partir do caminho do asset fornecido. |
+| `downloadAndOpenFile(config: IConfigInstallation, isTargetBlank = true)` | Inicia o download de um arquivo e o abre em uma nova aba. |
+| `downloadBlobFile(configBlob: IBlobConfigInstallation)` | Realiza o download de um arquivo a partir de um `Blob`. |
+| `reinstall(config: IConfigInstallation)` | Reinstala o software, que é um alias para `downloadAndInstall`. |
+
+**Interfaces**
+
+`IConfigInstallation`
+
+| Propriedade | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `executableName` | `string` | O nome do arquivo executável. |
+| `assetPath` | `string` | O caminho para o asset (URL de download). |
+| `registryPath` | `string` (opcional) | O caminho no registro do Windows para verificar a instalação. |
+| `expectedVersion`| `string` (opcional) | A versão esperada do software. |
+
+`IStatusInstallation`
+
+| Propriedade | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `isInstalled` | `boolean` | `true` se o software estiver instalado. |
+| `version` | `string` (opcional) | A versão do software instalado. |
+| `lastChecked` | `Date` | A data da última verificação. |
+| `installationPath`| `string` (opcional) | O caminho da instalação. |
+
+`IBlobConfigInstallation`
+
+| Propriedade | Tipo | Descrição |
+| :--- | :--- | :--- |
+| `executableName` | `string` | O nome do arquivo executável. |
+| `assetPath` | `Blob` | O `Blob` do arquivo a ser baixado. |
+
 
 ---
 

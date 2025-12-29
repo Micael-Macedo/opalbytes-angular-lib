@@ -1,7 +1,8 @@
+import { BaseDialog } from './base-dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { IDialogConfig } from './base-dialog.interface';
 
-import { BaseDialog, IDialogConfig } from './base-dialog';
 
 describe('BaseDialog', () => {
   let component: BaseDialog;

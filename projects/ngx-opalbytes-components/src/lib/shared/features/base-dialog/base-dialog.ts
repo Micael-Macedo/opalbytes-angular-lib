@@ -1,18 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
-export type DialogType = "success" | "error" | "info" | "warning";
-
-export interface IDialogConfig {
-  type: DialogType;
-  title: string;
-  logoIcon?: string;
-  message: string;
-  confirmButtonText: string;
-  cancelButtonText: string;
-  onConfirm: () => void;
-  onCancel: () => void;
-}
+import { DialogType, IDialogConfig } from './base-dialog.interface';
 
 @Component({
   selector: 'cao-base-dialog',
