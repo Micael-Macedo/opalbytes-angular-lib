@@ -1,0 +1,158 @@
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.dialog-container {
+  width: 600px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--white);
+  max-width: 90%;
+  margin-left: 250px;
+}
+
+.dialog-content {
+  padding: 20px 30px;
+  box-sizing: border-box;
+}
+
+.logo {
+  width: 150px;
+  height: 24px;
+  margin-bottom: 15px;
+}
+
+.alert-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.confirm-button,
+.cancel-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.confirm-button {
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+.cancel-button {
+  background-color: var(--disabled-button);
+  color: var(--white);
+}
+
+.confirm-button:hover,
+.cancel-button:hover {
+  opacity: 0.9;
+}
+
+.text-content {
+  flex-grow: 1;
+  padding-right: 20px;
+}
+
+.text-content .title {
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.text-content.success .title {
+  color: var(--primary);
+}
+
+.text-content.error .title {
+  color: var(--error-color);
+}
+
+.text-content.error .confirm-button {
+  background-color: var(--error-color);
+}
+
+.text-content.warning .title {
+  color: var(--support-orange);
+}
+
+.text-content.info .title {
+  color: var(--primary);
+}
+
+.text-content.info .confirm-button {
+  background-color: var(--primary);
+}
+
+.message {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--message-color);
+  margin-bottom: 15px;
+}
+
+.icon-container {
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+}
+
+.alert-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .dialog-container {
+    width: 400px;
+    max-width: 90%;
+    margin-left: 0;
+  }
+
+  .alert-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .text-content {
+    padding-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .icon-container {
+    width: 100px;
+    height: 100px;
+  }
+
+  .button-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .confirm-button,
+  .cancel-button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
