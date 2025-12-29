@@ -26,7 +26,7 @@ src/
     │   ├── interfaces/        # Interfaces de dados do core
     │   ├── models/            # Modelos de dados do core
     │   ├── providers/         # Modelos de Providers padrão do core
-    │   ├── services/          # Serviços do core (API, cache, autenticação)
+    │   ├── services/          # Serviços do core (API, cache, autenticação, instalacao)
     │   └── utils/             # Funções utilitárias e handlers de erro
     └── shared/                # Módulo com elementos reutilizáveis de UI e dados
         ├── components/        # Componentes compartilhados
