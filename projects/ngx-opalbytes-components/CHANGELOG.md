@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.9.1...ngx-opalbytes-components@1.9.2) (2025-12-30)
+
+
+### Bug Fixes
+
+* **components:** atualizacao customizacao dialog ([281bf31](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/281bf31c91f4d62a33b789ffd85c84c30b000dee))
+
 ## [1.9.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.9.0...ngx-opalbytes-components@1.9.1) (2025-12-30)
 
 
