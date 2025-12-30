@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
 import { DialogType, IDialogConfig } from './base-dialog.interface';
 
 @Component({
-  selector: 'cao-base-dialog',
+  selector: 'cao-dialog',
   imports: [CommonModule, NgOptimizedImage],
   templateUrl: './base-dialog.html',
   styleUrl: './base-dialog.css',

@@ -54,7 +54,7 @@ import { BaseButton } from 'ngx-opalbytes-components';
     BaseButton // Adicione o componente aos imports
   ],
   template: `
-    <cao-base-button buttonText="Clique Aqui"></cao-base-button>
+    <cao-button buttonText="Clique Aqui"></cao-button>
   `
 })
 export class ExemploComponent { }
@@ -96,7 +96,7 @@ src/
 ### `BaseButton`
 Um botão customizável com suporte a ícones, estado de loading e tooltip.
 
-**Seletor:** `<cao-base-button>`
+**Seletor:** `<cao-button>`
 
 **Atributos (Inputs)**
 
@@ -166,7 +166,7 @@ Um campo de entrada de texto customizável com suporte a ícones, máscaras e va
 ### `BaseAlert`
 Um componente para exibir alertas de sucesso, erro, informação ou aviso. Geralmente utilizado com um serviço de diálogo.
 
-**Seletor:** `<cao-base-alert>`
+**Seletor:** `<cao-alert>`
 
 **Atributos (Inputs via `data`)**
 
@@ -235,29 +235,12 @@ Para personalizar a aparência ou o comportamento dos alertas, você pode estend
     }
     ```
 
-3.  **No seu `app.module.ts` ou onde seu serviço é provido, use o `CustomAlertService`**:
-
-    ```typescript
-    // app.module.ts ou o módulo onde você quer usar o serviço customizado
-    import { NgModule } from '@angular/core';
-    import { AlertService } from 'ngx-opalbytes-components'; // Importe o serviço original
-    import { CustomAlertService } from './custom-alert.service'; // Importe seu serviço customizado
-
-    @NgModule({
-      providers: [
-        { provide: AlertService, useClass: CustomAlertService } // Prover seu serviço customizado no lugar do original
-      ]
-    })
-    export class AppModule { }
-    ```
-    Dessa forma, toda vez que você injetar e usar o `AlertService` em sua aplicação, na verdade estará utilizando o `CustomAlertService` que exibirá seu `CustomAlertComponent` personalizado.
-
 ---
 
 ### `BaseDialog`
 Exibe uma caixa de diálogo modal para interações que exigem confirmação do usuário.
 
-**Seletor:** `<cao-base-dialog>`
+**Seletor:** `<cao-dialog>`
 
 **Atributos (Inputs via `config`)**
 
@@ -272,6 +255,80 @@ Exibe uma caixa de diálogo modal para interações que exigem confirmação do 
 | `onConfirm` | `() => void` | Função a ser executada na confirmação. |
 | `onCancel` | `() => void` | Função a ser executada no cancelamento. |
 
+
+**Como estender o `DialogService` para usar um componente de dialoga customizado:**
+
+Para personalizar a aparência ou o comportamento dos dialogos, você pode estender o `DialogService` e sobrescrever o método `generateComponentPortal()`. Este método deve retornar o seu componente customizado, que **DEVE** estender o `BaseDialog`.
+
+**Exemplo:**
+
+1.  **Crie seu componente de dialoga customizado** (ex: `CustomDialogComponent`):
+
+    ```typescript
+    // custom-dialog.component.ts
+    import { Component } from '@angular/core';
+    import { BaseDialog } from 'ngx-opalbytes-components';
+
+    @Component({
+      selector: 'app-custom-dialog',
+      template: `
+        <div class="custom-dialog-container" [ngClass]="data.type">
+          <img *ngIf="data.dialogIcon" [src]="data.dialogIcon" alt="Dialog Icon" class="dialog-icon">
+          <div class="content">
+            <h3 class="title">{{ data.title }}</h3>
+            <p class="message">{{ data.message }}</p>
+             @if (config.cancelButtonText) {
+              <button
+                type="button"
+                class="cancel-button"
+                [attr.data-cy]="config.cancelButtonText"
+                (keydown)="handleCancel()"
+                (click)="handleCancel()">
+                {{ config.cancelButtonText }}
+              </button>
+              } @if (config.confirmButtonText) {
+              <button
+                type="button"
+                class="confirm-button"
+                [ngClass]="config.type"
+                [attr.data-cy]="config.confirmButtonText"
+                (click)="handleConfirm()"
+                (keydown)="handleConfirm()"
+                >
+                {{ config.confirmButtonText }}
+              </button>
+              }
+          </div>
+        </div>
+      `,
+      styles: [`
+        .custom-dialog-container {
+          /* seus estilos personalizados */
+        }
+      `]
+    })
+    export class CustomDialogComponent extends BaseDialog {
+      // Você pode adicionar lógica específica aqui se precisar
+    }
+    ```
+
+2.  **Crie um serviço que estende o `DialogService`**:
+
+    ```typescript
+    // custom-dialog.service.ts
+    import { Injectable } from '@angular/core';
+    import { DialogService } from 'ngx-opalbytes-components';
+    import { CustomDialogComponent } from './custom-dialog.component'; // Importe seu componente customizado
+
+    @Injectable({
+      providedIn: 'root'
+    })
+    export class CustomDialogService extends DialogService {
+      override generateComponentPortal(): typeof CustomDialogComponent {
+        return CustomDialogComponent;
+      }
+    }
+    ```
 ---
 
 ### `FeatureBaseModal`
@@ -314,7 +371,7 @@ Um campo de preenchimento automático que funciona com `ngModel` ou `formControl
 ### `BaseTable`
 Uma tabela de dados com ordenação, paginação e seleção de linhas. A configuração é feita através do `TableService`.
 
-**Seletor:** `<cao-base-table>`
+**Seletor:** `<cao-table>`
 
 **Atributos (Inputs)**
 
@@ -371,7 +428,7 @@ Uma tabela de dados leve com paginação no lado do cliente. Herda a maioria de 
 ### `BaseTimeRange`
 Um seletor de intervalo de datas.
 
-**Seletor:** `<cao-base-time-range>`
+**Seletor:** `<cao-time-range>`
 
 **Atributos (Inputs)**
 
