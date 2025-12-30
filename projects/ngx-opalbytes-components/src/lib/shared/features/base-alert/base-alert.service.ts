@@ -8,7 +8,7 @@ import { IAlertConfig } from "./base-alert.interface";
 @Injectable({
   providedIn: "root",
 })
-export class AlertService {
+export class BaseAlertService {
   constructor(private overlay: Overlay) { }
   protected defaultTime = 3000
 
