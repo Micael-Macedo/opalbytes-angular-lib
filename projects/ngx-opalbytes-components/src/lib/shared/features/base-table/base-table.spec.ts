@@ -9,7 +9,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { BehaviorSubject } from "rxjs";
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { TableService } from './base-table.service';
+import { BaseTableService } from './base-table.service';
 import { BaseFilterTableService } from './base-filter-table.service';
 
 const configMock = {
@@ -36,7 +36,7 @@ const configMock = {
 describe("BaseTable", () => {
   let component: BaseTable;
   let fixture: ComponentFixture<BaseTable>;
-  let tableService: TableService;
+  let tableService: BaseTableService;
 
 
   const tableServiceStub = {
@@ -66,7 +66,7 @@ describe("BaseTable", () => {
         MatTooltipModule,
       ],
       providers: [
-        { provide: TableService, useValue: tableServiceStub },
+        { provide: BaseTableService, useValue: tableServiceStub },
         { provide: BaseFilterTableService, useValue: filterTableServiceStub },
         { provide: LiveAnnouncer, useValue: liveAnnouncerStub },
       ],
@@ -74,7 +74,7 @@ describe("BaseTable", () => {
 
     fixture = TestBed.createComponent(BaseTable);
     component = fixture.componentInstance;
-    tableService = TestBed.inject(TableService);
+    tableService = TestBed.inject(BaseTableService);
     fixture.detectChanges();
   });
 

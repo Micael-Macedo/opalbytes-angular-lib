@@ -7,7 +7,7 @@ import { ITableConfig, IColumnConfig } from "./base-table.interface";
 @Injectable({
   providedIn: "root",
 })
-export class TableService {
+export class BaseTableService {
   private tableConfigSubject = new BehaviorSubject<ITableConfig | null>(null);
   private dataSubject = new BehaviorSubject<any[]>([]);
   private columnsSubject = new BehaviorSubject<IColumnConfig[]>([]);

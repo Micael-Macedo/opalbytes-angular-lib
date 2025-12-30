@@ -18,8 +18,8 @@ import { MatTableDataSource } from "@angular/material/table";
 
 import { Subscription } from "rxjs";
 
-import { FilterTablePaginatedService } from "./base-filter-table-paginated.service";
-import { PaginationService } from "./base-pagination.service";
+import { BaseFilterTablePaginatedService } from "./base-filter-table-paginated.service";
+import { BasePaginationService } from "./base-pagination.service";
 import { IColumnPaginatedConfig, ITablePaginatedConfig } from "./base-table-paginated.interface";
 import { TablePaginatedService } from "./base-table-paginated.service";
 import { MaterialModule } from "../../../material.module";
@@ -86,10 +86,10 @@ export class BaseTablePaginated implements OnInit, OnDestroy {
   private previousPage = 1;
 
 
-  protected paginationService = inject(PaginationService);
+  protected paginationService = inject(BasePaginationService);
   protected tableService = inject(TablePaginatedService);
   protected liveAnnouncer = inject(LiveAnnouncer);
-  protected filterTableService = inject(FilterTablePaginatedService);
+  protected filterTableService = inject(BaseFilterTablePaginatedService);
 
 
   constructor(

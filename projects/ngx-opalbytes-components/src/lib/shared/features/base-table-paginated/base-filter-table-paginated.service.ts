@@ -5,7 +5,7 @@ import { Subject } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
-export class FilterTablePaginatedService {
+export class BaseFilterTablePaginatedService {
   private filterSubject = new Subject<string>();
 
   filter$ = this.filterSubject.asObservable();

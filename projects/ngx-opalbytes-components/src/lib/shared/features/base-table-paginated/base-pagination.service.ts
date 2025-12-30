@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
-export class PaginationService {
+export class BasePaginationService {
   private pageSubject = new BehaviorSubject<number>(1);
   private pageSizeSubject = new BehaviorSubject<number>(10);
   private totalItemsSubject = new BehaviorSubject<number>(0);

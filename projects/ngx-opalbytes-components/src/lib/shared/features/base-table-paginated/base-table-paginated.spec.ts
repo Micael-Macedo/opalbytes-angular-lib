@@ -2,10 +2,10 @@ import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BehaviorSubject, Subscription } from "rxjs";
-import { TableService } from '../base-table/base-table.service';
+import { BaseTableService } from '../base-table/base-table.service';
 import { BaseTablePaginated } from './base-table-paginated';
-import { PaginationService } from './base-pagination.service';
-import { FilterTablePaginatedService } from './base-filter-table-paginated.service';
+import { BasePaginationService } from './base-pagination.service';
+import { BaseFilterTablePaginatedService } from './base-filter-table-paginated.service';
 
 describe("BaseTablePaginated", () => {
   let component: BaseTablePaginated;
@@ -42,9 +42,9 @@ describe("BaseTablePaginated", () => {
     await TestBed.configureTestingModule({
       imports: [BaseTablePaginated],
       providers: [
-        { provide: TableService, useValue: tableServiceStub },
-        { provide: FilterTablePaginatedService, useValue: filterTableServiceStub },
-        { provide: PaginationService, useValue: paginationServiceStub },
+        { provide: BaseTableService, useValue: tableServiceStub },
+        { provide: BaseFilterTablePaginatedService, useValue: filterTableServiceStub },
+        { provide: BasePaginationService, useValue: paginationServiceStub },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
