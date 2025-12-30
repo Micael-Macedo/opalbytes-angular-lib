@@ -1,3 +1,12 @@
+## [1.9.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.9.0...ngx-opalbytes-components@1.9.1) (2025-12-30)
+
+
+### Bug Fixes
+
+* **components:** correcao importacao de servicos para testes ([846bf51](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/846bf513b42ae39b9c0e43b7b4885a860a806b4f))
+* **components:** correcao injecao de base services ([79d0d61](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/79d0d618c00e20deb01ebe675d6c21e72eb48348))
+* **components:** correcao nomenclatura base services ([d298a08](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d298a086a9e03e15ae42578f72a2caf8da8b35a9))
+
 # [1.9.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.8.1...ngx-opalbytes-components@1.9.0) (2025-12-29)
 
 
