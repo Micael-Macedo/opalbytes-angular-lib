@@ -21,7 +21,7 @@ import { Subscription } from "rxjs";
 
 import { BaseFilterTableService } from "./base-filter-table.service";
 import { IColumnConfig, ITableConfig } from "./base-table.interface";
-import { TableService } from "./base-table.service";
+import { BaseTableService } from "./base-table.service";
 import { MaterialModule } from "../../../material.module";
 
 
@@ -87,7 +87,7 @@ export class BaseTable implements OnInit, AfterViewInit, OnDestroy {
     return ["select", ...this.displayedColumns];
   }
 
-  protected tableService = inject(TableService)
+  protected tableService = inject(BaseTableService)
   protected liveAnnouncer = inject(LiveAnnouncer)
   protected filterTableService = inject(BaseFilterTableService)
 
