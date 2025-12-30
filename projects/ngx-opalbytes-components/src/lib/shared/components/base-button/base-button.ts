@@ -5,7 +5,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
-  selector: 'cao-base-button',
+  selector: 'cao-button',
   imports: [CommonModule, MatTooltipModule, NgOptimizedImage, LucideAngularModule],
   templateUrl: './base-button.html',
   styleUrl: './base-button.css',

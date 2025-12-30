@@ -5,7 +5,7 @@ import { ModalTypeClass, ModalTypeSize } from './base-modal.interface';
 import { BaseModalService } from './base-modal.service';
 
 @Component({
-  selector: 'cao-base-modal',
+  selector: 'cao-modal',
   imports: [CommonModule],
   templateUrl: './base-modal.html',
   styleUrl: './base-modal.css',

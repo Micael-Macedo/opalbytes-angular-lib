@@ -19,7 +19,7 @@ export class BaseDialogService {
       backdropClass: "dialog-backdrop",
     });
 
-    const dialogPortal = new ComponentPortal(BaseDialog);
+    const dialogPortal = new ComponentPortal(this.generateComponentPortal());
     const componentRef = overlayRef.attach(dialogPortal);
 
     componentRef.instance.config = config;
@@ -29,5 +29,9 @@ export class BaseDialogService {
     };
 
     return overlayRef;
+  }
+
+  generateComponentPortal(): typeof BaseDialog{
+    return BaseDialog;
   }
 }
