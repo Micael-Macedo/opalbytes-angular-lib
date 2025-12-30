@@ -45,7 +45,7 @@ export function getPtBrPaginatorIntlBaseTable(): MatPaginatorIntl {
 
 
 @Component({
-  selector: "cao-base-table",
+  selector: "cao-table",
   templateUrl: "./base-table.html",
   styleUrls: ["./base-table.css"],
   imports: [CommonModule, MaterialModule, NgOptimizedImage],

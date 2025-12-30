@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AlertType } from './base-alert.interface';
 
 @Component({
-  selector: 'cao-base-alert',
+  selector: 'cao-alert',
   imports: [CommonModule, NgOptimizedImage],
   templateUrl: './base-alert.html',
   styleUrl: './base-alert.css',
