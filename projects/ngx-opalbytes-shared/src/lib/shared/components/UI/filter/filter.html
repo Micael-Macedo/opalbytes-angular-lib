@@ -1,0 +1,243 @@
+<!-- Chips dos Filtros Aplicados -->
+@if (filtrosAplicados.length > 0) {
+  <div class="mb-4 flex flex-wrap gap-2 items-center">
+    <svg
+      class="h-4 w-4 text-muted-foreground"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+      ></path>
+    </svg>
+    <span class="text-sm text-muted-foreground">Filtros aplicados:</span>
+    @for (filtro of filtrosAplicados; track $index) {
+      <span
+        class="inline-flex items-center gap-1 px-2 py-1 bg-secondary text-secondary-foreground rounded-full text-xs"
+      >
+        {{ filtro }}
+        <button
+          (click)="handleRemoveFiltro($index)"
+          (keydown.enter)="handleRemoveFiltro($index)"
+          tabindex="0"
+          role="button"
+          class="h-3 w-3 cursor-pointer hover:text-destructive"
+          aria-label="Remover filtro"
+        >
+          ×
+        </button>
+      </span>
+    }
+    <button
+      (click)="handleLimparFiltros()"
+      (keydown.enter)="handleLimparFiltros()"
+      tabindex="0"
+      role="button"
+      class="h-6 px-2 text-xs text-muted-foreground hover:text-foreground"
+    >
+      Limpar tudo
+    </button>
+  </div>
+}
+
+<!-- Filtros -->
+<div class="bg-card border border-border rounded-lg mb-4">
+  <div class="p-4 border-b border-border">
+    <div class="flex items-center justify-between">
+      <h3 class="text-base font-semibold">Filtros de Pesquisa</h3>
+
+      @if (showAddFiltersButton) {
+        <!-- Dropdown Multi-seleção para filtros dinâmicos -->
+        <div class="relative">
+          <button
+            (click)="toggleSeletorFiltros(); $event.stopPropagation()"
+            (keydown.enter)="toggleSeletorFiltros(); $event.stopPropagation()"
+            tabindex="0"
+            role="button"
+            class="flex items-center gap-2 px-4 py-2 border border-border rounded-md hover:bg-muted text-sm"
+          >
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+              ></path>
+            </svg>
+            Adicionar Filtros
+          </button>
+
+          <!-- Dropdown de Seleção de Filtros -->
+          @if (mostrarSeletorFiltros()) {
+            <div
+              class="absolute right-0 mt-2 w-64 bg-card border border-border rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto"
+              (click)="$event.stopPropagation()"
+              (keydown.enter)="$event.stopPropagation()"
+              (keydown.space)="$event.stopPropagation()"
+              tabindex="0"
+            >
+              <div class="p-4">
+                <h4 class="text-sm font-semibold mb-3">Adicionar Filtros</h4>
+                <div class="space-y-2">
+                  @if (filtrosDisponiveis().length === 0) {
+                    <p class="text-sm text-muted-foreground text-center py-4">
+                      Todos os filtros já estão adicionados
+                    </p>
+                  } @else {
+                    @for (filterId of filtrosDisponiveis(); track filterId) {
+                      <button
+                        (click)="handleAdicionarFiltro(filterId)"
+                        (keydown.enter)="handleAdicionarFiltro(filterId)"
+                        tabindex="0"
+                        role="button"
+                        class="w-full flex items-center gap-2 cursor-pointer hover:bg-muted/50 p-2 rounded text-left"
+                      >
+                        <svg
+                          class="h-4 w-4 text-muted-foreground"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 4v16m8-8H4"
+                          ></path>
+                        </svg>
+                        <span class="text-sm">{{ getFilterConfig(filterId).label }}</span>
+                      </button>
+                    }
+                  }
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+  <div class="p-4 space-y-4">
+    <!-- Grid responsivo para filtros -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      @for (filterId of activeFiltersArray(); track filterId) {
+        <div class="space-y-1">
+          <label class="text-xs font-medium" [for]="'filter-' + filterId">
+            {{ getFilterConfig(filterId).label }}
+          </label>
+
+          @switch (getFilterConfig(filterId).component) {
+            @case ('text') {
+              @if (filterId === 'cpf') {
+                <input
+                  id="filter-{{ filterId }}"
+                  type="text"
+                  [placeholder]="'Digite ' + getFilterConfig(filterId).label.toLowerCase() + '...'"
+                  [(ngModel)]="filterValues[filterId]"
+                  (ngModelChange)="updateFilterValue(filterId, $event)"
+                  appCpfMask
+                  class="h-8 text-xs w-full px-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              } @else if (filterId === 'documento') {
+                <input
+                  id="filter-{{ filterId }}"
+                  type="text"
+                  [placeholder]="'Digite ' + getFilterConfig(filterId).label.toLowerCase() + '...'"
+                  [(ngModel)]="filterValues[filterId]"
+                  (ngModelChange)="updateFilterValue(filterId, $event)"
+                  appCpfCnpjMask
+                  class="h-8 text-xs w-full px-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              } @else if (filterId === 'rg') {
+                <input
+                  id="filter-{{ filterId }}"
+                  type="text"
+                  [placeholder]="'Digite ' + getFilterConfig(filterId).label.toLowerCase() + '...'"
+                  [(ngModel)]="filterValues[filterId]"
+                  (ngModelChange)="updateFilterValue(filterId, $event)"
+                  appRgMask
+                  class="h-8 text-xs w-full px-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              } @else {
+                <input
+                  id="filter-{{ filterId }}"
+                  type="text"
+                  [placeholder]="'Digite ' + getFilterConfig(filterId).label.toLowerCase() + '...'"
+                  [(ngModel)]="filterValues[filterId]"
+                  (ngModelChange)="updateFilterValue(filterId, $event)"
+                  [maxlength]="getFilterConfig(filterId).maxLength || null"
+                  [minlength]="getFilterConfig(filterId).minLength || null"
+                  class="h-8 text-xs w-full px-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              }
+            }
+            @case ('select') {
+              <select
+                id="filter-{{ filterId }}"
+                [(ngModel)]="filterValues[filterId]"
+                (ngModelChange)="updateFilterValue(filterId, $event)"
+                class="h-8 text-xs w-full px-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <option value="">Selecionar...</option>
+                @for (option of getFilterConfig(filterId).options; track option.value) {
+                  <option [value]="option.value">{{ option.label }}</option>
+                }
+              </select>
+            }
+            @case ('date') {
+              <input
+                id="filter-{{ filterId }}"
+                type="date"
+                [(ngModel)]="filterValues[filterId]"
+                (ngModelChange)="updateFilterValue(filterId, $event)"
+                class="h-8 text-xs w-full px-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            }
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Botões de Ação -->
+    <div class="flex flex-wrap gap-2 pt-2">
+      <button
+        (click)="handlePesquisar()"
+        (keydown.enter)="handlePesquisar()"
+        tabindex="0"
+        role="button"
+        class="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+      >
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          ></path>
+        </svg>
+        Pesquisar
+      </button>
+      <button
+        (click)="handleLimpar()"
+        (keydown.enter)="handleLimpar()"
+        tabindex="0"
+        role="button"
+        class="flex items-center gap-2 px-4 py-2 border border-border rounded-md hover:bg-muted"
+      >
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+          ></path>
+        </svg>
+        Limpar
+      </button>
+    </div>
+  </div>
+</div>

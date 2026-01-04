@@ -1,0 +1,20 @@
+<div [ngClass]="cn('rounded-lg border bg-card text-card-foreground shadow-sm', className)">
+  <!-- Header -->
+  @if (header) {
+    <div [ngClass]="cn('flex flex-col space-y-1.5 p-6', headerClass)">
+      <ng-container *ngTemplateOutlet="header"></ng-container>
+    </div>
+  }
+
+  <!-- Content -->
+  <div [ngClass]="cn('p-6 pt-0', contentClass)">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </div>
+
+  <!-- Footer -->
+  @if (footer) {
+    <div [ngClass]="cn('flex items-center p-6 pt-0', footerClass)">
+      <ng-container *ngTemplateOutlet="footer"></ng-container>
+    </div>
+  }
+</div>

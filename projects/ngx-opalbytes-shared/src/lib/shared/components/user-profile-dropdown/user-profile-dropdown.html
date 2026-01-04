@@ -1,0 +1,89 @@
+<div #profileContainer class="relative w-full flex items-center gap-3 px-2 py-2.5">
+  <!-- Hidden trigger button for menu -->
+  <button
+    mat-button
+    [matMenuTriggerFor]="menu"
+    #menuTrigger="matMenuTrigger"
+    class="hidden"
+    style="display: none"
+  ></button>
+
+  <!-- Avatar -->
+  <div
+    class="flex items-center justify-center w-12 h-12 rounded-full bg-sidebar-accent text-sidebar-foreground font-bold text-sm flex-shrink-0"
+  >
+    {{ currentUser().initials }}
+  </div>
+
+  <!-- User Info -->
+  <div class="flex-1 flex flex-col items-start text-left min-w-0">
+    <span
+      class="text-sm font-bold text-sidebar-foreground uppercase leading-tight block"
+      [title]="currentUser().name"
+    >
+      {{ currentUser().name }}
+    </span>
+    <button
+      type="button"
+      class="text-xs text-sidebar-foreground/70 uppercase mt-0.5 leading-tight hover:underline p-0 h-auto min-w-0 text-left !mx-0 !ml-0 cursor-pointer bg-transparent border-0"
+      (click)="openProfileMenu()"
+      (keydown.enter)="openProfileMenu()"
+      (keydown.space)="openProfileMenu()"
+    >
+      Editar perfil
+    </button>
+  </div>
+
+  <!-- Dropdown Menu -->
+  <mat-menu
+    #menu="matMenu"
+    class="!bg-popover !text-popover-foreground !rounded-lg !shadow-xl !border !border-border w-64 p-0 overflow-hidden ml-64"
+    xPosition="after"
+  >
+    <!-- Header Section -->
+    <div class="relative p-5 bg-card border-b border-border">
+      <div class="flex items-center gap-4">
+        <!-- Avatar Large -->
+        <div
+          class="flex items-center justify-center w-16 h-16 rounded-full bg-primary text-primary-foreground font-bold text-xl shadow-lg ring-2 ring-primary/20 flex-shrink-0"
+        >
+          {{ currentUser().initials }}
+        </div>
+
+        <!-- User Details -->
+        <div class="flex-1 min-w-0">
+          <h3
+            class="font-bold text-foreground text-lg truncate mb-1.5"
+            [title]="currentUser().name"
+          >
+            {{ currentUser().name }}
+          </h3>
+          <div
+            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-primary/10 text-primary text-xs font-medium mb-2"
+          >
+            <mat-icon class="text-xs !w-3.5 !h-3.5">verified</mat-icon>
+            <span class="truncate max-w-[100px]" [title]="currentUser().role">{{
+              currentUser().role
+            }}</span>
+          </div>
+          <p class="text-xs text-muted-foreground truncate" [title]="currentUser().email">
+            {{ currentUser().email }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu Items Section -->
+    <div class="p-2">
+      <!-- Configurações -->
+      <button
+        mat-menu-item
+        class="menu-item-animate flex items-center px-3 py-2.5 rounded-lg hover:bg-accent hover:text-accent-foreground active:bg-accent/80 transition-all duration-150 w-full text-left group"
+        (click)="openSettings()"
+      >
+        <mat-icon class="text-primary text-lg">settings</mat-icon>
+        <span class="font-medium text-foreground">Configurações</span>
+      </button>
+    </div>
+  </mat-menu>
+</div>
