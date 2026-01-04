@@ -1,0 +1,14 @@
+[
+  {
+    "name": "ngx-opalbytes-utils",
+    "path": "dist/ngx-opalbytes-utils/fesm2022/*.mjs",
+    "limit": "150 KB",
+    "gzip": true
+  },
+  {
+    "name": "ngx-opalbytes-performance",
+    "path": "dist/ngx-opalbytes-performance/fesm2022/*.mjs",
+    "limit": "150 KB",
+    "gzip": true
+  }
+]

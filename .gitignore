@@ -38,6 +38,13 @@ testem.log
 /typings
 __screenshots__/
 
+# Performance and Coverage
+*.coverage.json
+test-performance.json
+.nyc_output
+.size-limit-cache
+bundlesize-cache.json
+
 # System files
 .DS_Store
 Thumbs.db

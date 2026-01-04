@@ -23,6 +23,9 @@
       ],
       "ngx-opalbytes-utils": [
         "./dist/ngx-opalbytes-utils"
+      ],
+      "ngx-opalbytes-performance": [
+        "./dist/ngx-opalbytes-performance"
       ]
     },
     "noFallthroughCasesInSwitch": true,
@@ -72,10 +75,10 @@
       "path": "./projects/ngx-opalbytes-core-shared/tsconfig.spec.json"
     },
     {
-      "path": "./projects/ngx-opalbytes-core-shared/tsconfig.lib.json"
+      "path": "./projects/ngx-opalbytes-performance/tsconfig.lib.json"
     },
     {
-      "path": "./projects/ngx-opalbytes-core-shared/tsconfig.spec.json"
+      "path": "./projects/ngx-opalbytes-performance/tsconfig.spec.json"
     }
   ]
 }

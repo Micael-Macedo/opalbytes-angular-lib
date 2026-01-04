@@ -18,7 +18,8 @@ jobs:
       should-release-directives: ${{ steps.check.outputs.should-release-directives }}
       should-release-services: ${{ steps.check.outputs.should-release-services }}
       should-release-utils: ${{ steps.check.outputs.should-release-utils }}
-      should-release-core: ${{ steps.check.outputs.should-release-core }}  # ⬅️ CORRIGIDO: steps.check
+      should-release-core: ${{ steps.check.outputs.should-release-core }}
+      should-release-performance: ${{ steps.check.outputs.should-release-performance }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -45,6 +46,7 @@ jobs:
           should_release_services="false"
           should_release_utils="false"
           should_release_core="false"
+          should_release_performance="false"
           
           while IFS= read -r commit_message; do
             echo "Analisando commit: $commit_message"
@@ -79,6 +81,11 @@ jobs:
               should_release_core="true"
               echo "Commit relacionado a core encontrado"
             fi
+
+            if [[ "$commit_message" =~ (feat\(performance\)|fix\(performance\)|refactor\(performance\)|docs\(performance\)|chore\(performance\)|release\(performance\)|test\(performance\)|style\(performance\)|feature\(performance\)) ]]; then
+              should_release_performance="true"
+              echo "Commit relacionado a performance encontrado"
+            fi
           done <<< "$COMMITS"
           
           # Export results
@@ -88,6 +95,7 @@ jobs:
           echo "should-release-services=$should_release_services" >> $GITHUB_OUTPUT
           echo "should-release-utils=$should_release_utils" >> $GITHUB_OUTPUT
           echo "should-release-core=$should_release_core" >> $GITHUB_OUTPUT
+          echo "should-release-performance=$should_release_performance" >> $GITHUB_OUTPUT
 
   publish-sequentially:
     runs-on: ubuntu-latest
@@ -98,13 +106,14 @@ jobs:
       needs.check-commits.outputs.should-release-services == 'true' ||
       needs.check-commits.outputs.should-release-directives == 'true' ||
       needs.check-commits.outputs.should-release-components == 'true' ||
+      needs.check-commits.outputs.should-release-performance == 'true' ||
       needs.check-commits.outputs.should-release-libs == 'true'
     
     strategy:
-      max-parallel: 1 
+      max-parallel: 1
       fail-fast: false
       matrix:
-        library: ['core', 'utils', 'services', 'directives', 'components', 'libs']
+        library: ['core', 'utils', 'services', 'directives', 'components', 'performance', 'libs']
         include:
           - library: 'core'
             condition: ${{ needs.check-commits.outputs.should-release-core }}
@@ -140,7 +149,14 @@ jobs:
             build-command: 'npm run build:components'
             test-command: 'npm run test:components'
             release-command: 'cd projects/ngx-opalbytes-components && npx semantic-release'
-          
+
+          - library: 'performance'
+            condition: ${{ needs.check-commits.outputs.should-release-performance }}
+            project-path: 'projects/ngx-opalbytes-performance'
+            build-command: 'npm run build:performance'
+            test-command: 'npm run test:performance'
+            release-command: 'cd projects/ngx-opalbytes-performance && npx semantic-release'
+
           - library: 'libs'
             condition: ${{ needs.check-commits.outputs.should-release-libs }}
             project-path: '.'
