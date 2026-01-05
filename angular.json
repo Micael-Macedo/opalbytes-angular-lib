@@ -200,6 +200,12 @@
             }
           },
           "defaultConfiguration": "production"
+        },        
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-opalbytes-shared/tsconfig.spec.json"
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
