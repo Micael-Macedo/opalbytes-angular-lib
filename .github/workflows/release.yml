@@ -223,6 +223,24 @@ jobs:
           git checkout main
           git pull origin main
           echo "✅ Repositório atualizado"
+
+      # 📊 GERAR RELATÓRIO DE MÉTRICAS
+      - name: Generate Metrics Report
+        if: steps.check-release.outputs.should-release == 'true'
+        run: |
+          echo "📊 Gerando relatório de métricas..."
+          npm run metrics:report || echo "Aviso: Algumas métricas falharam, mas continuando..."
+          echo "✅ Relatório de métricas gerado"
+        continue-on-error: true
+
+      # 📝 ADICIONAR MÉTRICAS AO CHANGELOG
+      - name: Add Metrics to Changelog
+        if: steps.check-release.outputs.should-release == 'true'
+        run: |
+          echo "📝 Adicionando métricas ao changelog..."
+          npm run metrics:changelog
+          echo "✅ Métricas adicionadas ao changelog"
+        continue-on-error: true
           
       - name: Lint ${{ matrix.library }}
         if: steps.check-release.outputs.should-release == 'true'
@@ -246,3 +264,12 @@ jobs:
           echo "🚀 INICIANDO RELEASE: ${{ matrix.library }}"
           ${{ matrix.release-command }}
           echo "✅ RELEASE CONCLUÍDO: ${{ matrix.library }}"
+
+      # 📤 PUBLICAR RELATÓRIO COMO ARTIFACT
+      - name: Upload Metrics Report
+        if: steps.check-release.outputs.should-release == 'true' && hashFiles('metrics-reports/latest.html') != ''
+        uses: actions/upload-artifact@v3
+        with:
+          name: metrics-report-${{ matrix.library }}
+          path: metrics-reports/latest.html
+          retention-days: 90

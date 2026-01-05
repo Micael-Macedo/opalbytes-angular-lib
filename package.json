@@ -34,6 +34,7 @@
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "metrics:report": "node scripts/run-metrics.js",
+    "metrics:changelog": "node scripts/add-metrics-to-changelog.js",
     "prepare": "husky"
   },
   "prettier": {

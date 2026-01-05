@@ -32,34 +32,34 @@ class MetricsRunner {
   }
 
   log(message) {
-    console.log(`[Metrics] ${message}`);
+    console.log(`[Metricas] ${message}`);
   }
 
   logError(message, error) {
-    console.error(`[Metrics Error] ${message}`);
+    console.error(`[Erro de Metricas] ${message}`);
     if (error) {
       console.error(error);
     }
   }
 
   executeCommand(command, description) {
-    this.log(`Running: ${description}...`);
+    this.log(`Executando: ${description}...`);
     try {
       const output = execSync(command, {
         encoding: 'utf-8',
         stdio: ['pipe', 'pipe', 'pipe']
       });
-      this.log(`Completed: ${description}`);
+      this.log(`Concluido: ${description}`);
       return { success: true, output };
     } catch (error) {
-      this.logError(`Failed: ${description}`, error.message);
+      this.logError(`Falhou: ${description}`, error.message);
       return { success: false, output: error.stdout || '', error: error.message };
     }
   }
 
   async runBuild() {
-    this.log('Building all packages...');
-    const result = this.executeCommand('npm run build:all', 'Build all packages');
+    this.log('Construindo todos os pacotes...');
+    const result = this.executeCommand('npm run build:all', 'Construcao de todos os pacotes');
     this.results.metrics.build = {
       success: result.success,
       output: result.output
@@ -68,8 +68,8 @@ class MetricsRunner {
   }
 
   async runSizeLimit() {
-    this.log('Running size-limit...');
-    const result = this.executeCommand('npm run size', 'Size limit check');
+    this.log('Executando verificacao de tamanho...');
+    const result = this.executeCommand('npm run size', 'Verificacao de limite de tamanho');
 
     const sizeData = [];
     try {
@@ -90,7 +90,7 @@ class MetricsRunner {
         }
       });
     } catch (error) {
-      this.logError('Error parsing size-limit output', error.message);
+      this.logError('Erro ao processar saida do size-limit', error.message);
     }
 
     this.results.metrics.sizeLimit = {
@@ -101,8 +101,8 @@ class MetricsRunner {
   }
 
   async runBundlesize() {
-    this.log('Running bundlesize...');
-    const result = this.executeCommand('npm run bundlesize', 'Bundlesize check');
+    this.log('Executando verificacao de bundle...');
+    const result = this.executeCommand('npm run bundlesize', 'Verificacao de tamanho do bundle');
 
     const bundlesizeData = [];
     try {
@@ -119,7 +119,7 @@ class MetricsRunner {
         });
       });
     } catch (error) {
-      this.logError('Error parsing bundlesize output', error.message);
+      this.logError('Erro ao processar saida do bundlesize', error.message);
     }
 
     this.results.metrics.bundlesize = {
@@ -130,8 +130,8 @@ class MetricsRunner {
   }
 
   async runDepcheck() {
-    this.log('Running depcheck...');
-    const result = this.executeCommand('npm run deps:check', 'Dependency check');
+    this.log('Executando verificacao de dependencias...');
+    const result = this.executeCommand('npm run deps:check', 'Verificacao de dependencias');
 
     let depcheckData = {
       hasIssues: false,
@@ -162,7 +162,7 @@ class MetricsRunner {
         }
       }
     } catch (error) {
-      this.logError('Error parsing depcheck output', error.message);
+      this.logError('Erro ao processar saida do depcheck', error.message);
     }
 
     this.results.metrics.depcheck = {
@@ -173,8 +173,8 @@ class MetricsRunner {
   }
 
   async runTests() {
-    this.log('Running tests...');
-    const result = this.executeCommand('npm test', 'Unit tests');
+    this.log('Executando testes...');
+    const result = this.executeCommand('npm test', 'Testes unitarios');
 
     const testData = {
       total: 0,
@@ -194,7 +194,7 @@ class MetricsRunner {
       if (skippedMatch) testData.skipped = parseInt(skippedMatch[1]);
       testData.total = testData.passed + testData.failed + testData.skipped;
     } catch (error) {
-      this.logError('Error parsing test output', error.message);
+      this.logError('Erro ao processar saida dos testes', error.message);
     }
 
     this.results.metrics.tests = {
@@ -205,8 +205,8 @@ class MetricsRunner {
   }
 
   async runLint() {
-    this.log('Running lint...');
-    const result = this.executeCommand('npm run lint', 'Lint check');
+    this.log('Executando lint...');
+    const result = this.executeCommand('npm run lint', 'Verificacao de lint');
 
     const lintData = {
       errors: 0,
@@ -224,7 +224,7 @@ class MetricsRunner {
       if (warningsMatch) lintData.warnings = parseInt(warningsMatch[1]);
       if (filesMatch) lintData.files = parseInt(filesMatch[1]);
     } catch (error) {
-      this.logError('Error parsing lint output', error.message);
+      this.logError('Erro ao processar saida do lint', error.message);
     }
 
     this.results.metrics.lint = {
@@ -240,7 +240,7 @@ class MetricsRunner {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metrics Report - ${this.results.branch}</title>
+    <title>Relatorio de Metricas - ${this.results.branch}</title>
     <style>
         * {
             margin: 0;
@@ -473,7 +473,7 @@ class MetricsRunner {
 <body>
     <div class="container">
         <div class="header">
-            <h1>Metrics Report</h1>
+            <h1>Relatorio de Metricas</h1>
             <div class="meta">
                 <div class="meta-item">
                     <strong>Branch:</strong> <span>${this.results.branch}</span>
@@ -482,7 +482,7 @@ class MetricsRunner {
                     <strong>Commit:</strong> <span>${this.results.commit}</span>
                 </div>
                 <div class="meta-item">
-                    <strong>Date:</strong> <span>${new Date(this.results.timestamp).toLocaleString()}</span>
+                    <strong>Data:</strong> <span>${new Date(this.results.timestamp).toLocaleString('pt-BR')}</span>
                 </div>
             </div>
         </div>
@@ -501,7 +501,7 @@ class MetricsRunner {
         </div>
 
         <div class="footer">
-            <p>Generated at ${new Date(this.results.timestamp).toLocaleString()}</p>
+            <p>Gerado em ${new Date(this.results.timestamp).toLocaleString('pt-BR')}</p>
         </div>
     </div>
 </body>
@@ -517,15 +517,15 @@ class MetricsRunner {
 
     return `
       <div class="summary-card">
-        <h3>Total Metrics</h3>
+        <h3>Total de Metricas</h3>
         <div class="value">${totalMetrics}</div>
       </div>
       <div class="summary-card">
-        <h3>Successful</h3>
+        <h3>Sucesso</h3>
         <div class="value">${successfulMetrics}</div>
       </div>
       <div class="summary-card">
-        <h3>Failed</h3>
+        <h3>Falhas</h3>
         <div class="value">${failedMetrics}</div>
       </div>
     `;
@@ -540,14 +540,14 @@ class MetricsRunner {
         <div class="metric-header">
           <h2>Build</h2>
           <span class="status-badge ${build.success ? 'status-success' : 'status-error'}">
-            ${build.success ? 'Success' : 'Failed'}
+            ${build.success ? 'Sucesso' : 'Falhou'}
           </span>
         </div>
         <div class="metric-body">
-          <p>${build.success ? 'All packages built successfully.' : 'Build failed. See output below.'}</p>
+          <p>${build.success ? 'Todos os pacotes foram construidos com sucesso.' : 'Build falhou. Veja a saida abaixo.'}</p>
           ${build.output ? `
             <div class="output-section">
-              <h3>Build Output</h3>
+              <h3>Saida do Build</h3>
               <pre>${this.escapeHtml(build.output.substring(0, 2000))}${build.output.length > 2000 ? '...' : ''}</pre>
             </div>
           ` : ''}
@@ -563,9 +563,9 @@ class MetricsRunner {
     return `
       <div class="metric-section">
         <div class="metric-header">
-          <h2>Size Limit</h2>
+          <h2>Limite de Tamanho</h2>
           <span class="status-badge ${sizeLimit.success ? 'status-success' : 'status-error'}">
-            ${sizeLimit.success ? 'Passed' : 'Failed'}
+            ${sizeLimit.success ? 'Passou' : 'Falhou'}
           </span>
         </div>
         <div class="metric-body">
@@ -573,9 +573,9 @@ class MetricsRunner {
             <table>
               <thead>
                 <tr>
-                  <th>Package</th>
-                  <th>Limit</th>
-                  <th>Actual Size</th>
+                  <th>Pacote</th>
+                  <th>Limite</th>
+                  <th>Tamanho Atual</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -585,15 +585,15 @@ class MetricsRunner {
                     <td>${item.name}</td>
                     <td>${item.limit}</td>
                     <td>${item.actual}</td>
-                    <td><span class="status-badge ${item.passed ? 'status-success' : 'status-error'}">${item.passed ? 'OK' : 'Exceeded'}</span></td>
+                    <td><span class="status-badge ${item.passed ? 'status-success' : 'status-error'}">${item.passed ? 'OK' : 'Excedeu'}</span></td>
                   </tr>
                 `).join('')}
               </tbody>
             </table>
-          ` : '<p>No size limit data available.</p>'}
+          ` : '<p>Nenhum dado de limite de tamanho disponivel.</p>'}
           ${sizeLimit.output ? `
             <div class="output-section">
-              <h3>Output</h3>
+              <h3>Saida</h3>
               <pre>${this.escapeHtml(sizeLimit.output.substring(0, 1500))}${sizeLimit.output.length > 1500 ? '...' : ''}</pre>
             </div>
           ` : ''}
@@ -609,9 +609,9 @@ class MetricsRunner {
     return `
       <div class="metric-section">
         <div class="metric-header">
-          <h2>Bundle Size</h2>
+          <h2>Tamanho do Bundle</h2>
           <span class="status-badge ${bundlesize.success ? 'status-success' : 'status-error'}">
-            ${bundlesize.success ? 'Passed' : 'Failed'}
+            ${bundlesize.success ? 'Passou' : 'Falhou'}
           </span>
         </div>
         <div class="metric-body">
@@ -619,8 +619,8 @@ class MetricsRunner {
             <table>
               <thead>
                 <tr>
-                  <th>Path</th>
-                  <th>Max Size</th>
+                  <th>Caminho</th>
+                  <th>Tamanho Maximo</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -629,15 +629,15 @@ class MetricsRunner {
                   <tr>
                     <td>${item.path}</td>
                     <td>${item.maxSize}</td>
-                    <td><span class="status-badge ${item.passed ? 'status-success' : 'status-error'}">${item.passed ? 'OK' : 'Exceeded'}</span></td>
+                    <td><span class="status-badge ${item.passed ? 'status-success' : 'status-error'}">${item.passed ? 'OK' : 'Excedeu'}</span></td>
                   </tr>
                 `).join('')}
               </tbody>
             </table>
-          ` : '<p>No bundle size data available.</p>'}
+          ` : '<p>Nenhum dado de tamanho de bundle disponivel.</p>'}
           ${bundlesize.output ? `
             <div class="output-section">
-              <h3>Output</h3>
+              <h3>Saida</h3>
               <pre>${this.escapeHtml(bundlesize.output.substring(0, 1500))}${bundlesize.output.length > 1500 ? '...' : ''}</pre>
             </div>
           ` : ''}
@@ -653,35 +653,35 @@ class MetricsRunner {
     return `
       <div class="metric-section">
         <div class="metric-header">
-          <h2>Dependency Check</h2>
+          <h2>Verificacao de Dependencias</h2>
           <span class="status-badge ${!depcheck.data.hasIssues ? 'status-success' : 'status-error'}">
-            ${!depcheck.data.hasIssues ? 'Clean' : 'Issues Found'}
+            ${!depcheck.data.hasIssues ? 'Limpo' : 'Problemas Encontrados'}
           </span>
         </div>
         <div class="metric-body">
           <div class="stats-grid">
             <div class="stat-card">
               <div class="value">${depcheck.data.unusedDependencies.length}</div>
-              <div class="label">Unused Dependencies</div>
+              <div class="label">Dependencias Nao Utilizadas</div>
             </div>
             <div class="stat-card">
               <div class="value">${depcheck.data.missingDependencies.length}</div>
-              <div class="label">Missing Dependencies</div>
+              <div class="label">Dependencias Ausentes</div>
             </div>
           </div>
 
           ${depcheck.data.unusedDependencies.length > 0 ? `
             <div class="output-section">
-              <h3>Unused Dependencies</h3>
+              <h3>Dependencias Nao Utilizadas</h3>
               <ul class="list-items">
                 ${depcheck.data.unusedDependencies.map(dep => `<li>${dep}</li>`).join('')}
               </ul>
             </div>
-          ` : '<p class="no-items">No unused dependencies found.</p>'}
+          ` : '<p class="no-items">Nenhuma dependencia nao utilizada encontrada.</p>'}
 
           ${depcheck.data.missingDependencies.length > 0 ? `
             <div class="output-section">
-              <h3>Missing Dependencies</h3>
+              <h3>Dependencias Ausentes</h3>
               <ul class="list-items">
                 ${depcheck.data.missingDependencies.map(dep => `<li>${dep}</li>`).join('')}
               </ul>
@@ -699,33 +699,33 @@ class MetricsRunner {
     return `
       <div class="metric-section">
         <div class="metric-header">
-          <h2>Unit Tests</h2>
+          <h2>Testes Unitarios</h2>
           <span class="status-badge ${tests.success ? 'status-success' : 'status-error'}">
-            ${tests.success ? 'Passed' : 'Failed'}
+            ${tests.success ? 'Passou' : 'Falhou'}
           </span>
         </div>
         <div class="metric-body">
           <div class="stats-grid">
             <div class="stat-card">
               <div class="value">${tests.data.total}</div>
-              <div class="label">Total Tests</div>
+              <div class="label">Total de Testes</div>
             </div>
             <div class="stat-card">
               <div class="value">${tests.data.passed}</div>
-              <div class="label">Passed</div>
+              <div class="label">Passaram</div>
             </div>
             <div class="stat-card">
               <div class="value">${tests.data.failed}</div>
-              <div class="label">Failed</div>
+              <div class="label">Falharam</div>
             </div>
             <div class="stat-card">
               <div class="value">${tests.data.skipped}</div>
-              <div class="label">Skipped</div>
+              <div class="label">Pulados</div>
             </div>
           </div>
           ${tests.output ? `
             <div class="output-section">
-              <h3>Test Output</h3>
+              <h3>Saida dos Testes</h3>
               <pre>${this.escapeHtml(tests.output.substring(0, 2000))}${tests.output.length > 2000 ? '...' : ''}</pre>
             </div>
           ` : ''}
@@ -743,27 +743,27 @@ class MetricsRunner {
         <div class="metric-header">
           <h2>Lint</h2>
           <span class="status-badge ${lint.success ? 'status-success' : 'status-error'}">
-            ${lint.success ? 'Passed' : 'Issues Found'}
+            ${lint.success ? 'Passou' : 'Problemas Encontrados'}
           </span>
         </div>
         <div class="metric-body">
           <div class="stats-grid">
             <div class="stat-card">
               <div class="value">${lint.data.files}</div>
-              <div class="label">Files Checked</div>
+              <div class="label">Arquivos Verificados</div>
             </div>
             <div class="stat-card">
               <div class="value">${lint.data.errors}</div>
-              <div class="label">Errors</div>
+              <div class="label">Erros</div>
             </div>
             <div class="stat-card">
               <div class="value">${lint.data.warnings}</div>
-              <div class="label">Warnings</div>
+              <div class="label">Avisos</div>
             </div>
           </div>
           ${lint.output ? `
             <div class="output-section">
-              <h3>Lint Output</h3>
+              <h3>Saida do Lint</h3>
               <pre>${this.escapeHtml(lint.output.substring(0, 2000))}${lint.output.length > 2000 ? '...' : ''}</pre>
             </div>
           ` : ''}
@@ -798,18 +798,18 @@ class MetricsRunner {
     const filepath = path.join(this.outputDir, filename);
 
     fs.writeFileSync(filepath, html, 'utf-8');
-    this.log(`Report saved to: ${filepath}`);
+    this.log(`Relatorio salvo em: ${filepath}`);
 
     const latestPath = path.join(this.outputDir, 'latest.html');
     fs.writeFileSync(latestPath, html, 'utf-8');
-    this.log(`Latest report saved to: ${latestPath}`);
+    this.log(`Ultimo relatorio salvo em: ${latestPath}`);
 
     return filepath;
   }
 
   async run() {
     console.log('\n===========================================');
-    console.log('     METRICS COLLECTION STARTED');
+    console.log('     COLETA DE METRICAS INICIADA');
     console.log('===========================================\n');
 
     const buildSuccess = await this.runBuild();
@@ -818,7 +818,7 @@ class MetricsRunner {
       await this.runSizeLimit();
       await this.runBundlesize();
     } else {
-      this.log('Build failed. Skipping size and bundle checks.');
+      this.log('Build falhou. Pulando verificacoes de tamanho e bundle.');
     }
 
     await this.runDepcheck();
@@ -826,23 +826,23 @@ class MetricsRunner {
     await this.runLint();
 
     console.log('\n===========================================');
-    console.log('     GENERATING HTML REPORT');
+    console.log('     GERANDO RELATORIO HTML');
     console.log('===========================================\n');
 
     const html = this.generateHTML();
     const filepath = this.saveHTML(html);
 
     console.log('\n===========================================');
-    console.log('     METRICS COLLECTION COMPLETED');
+    console.log('     COLETA DE METRICAS CONCLUIDA');
     console.log('===========================================\n');
 
     const totalMetrics = Object.keys(this.results.metrics).length;
     const successfulMetrics = Object.values(this.results.metrics).filter(m => m.success).length;
 
-    console.log(`Total metrics run: ${totalMetrics}`);
-    console.log(`Successful: ${successfulMetrics}`);
-    console.log(`Failed: ${totalMetrics - successfulMetrics}`);
-    console.log(`\nReport available at: ${filepath}\n`);
+    console.log(`Total de metricas executadas: ${totalMetrics}`);
+    console.log(`Sucesso: ${successfulMetrics}`);
+    console.log(`Falhas: ${totalMetrics - successfulMetrics}`);
+    console.log(`\nRelatorio disponivel em: ${filepath}\n`);
 
     return true;
   }
@@ -853,7 +853,7 @@ if (require.main === module) {
   runner.run().then(success => {
     process.exit(success ? 0 : 1);
   }).catch(error => {
-    console.error('Fatal error:', error);
+    console.error('Erro fatal:', error);
     process.exit(1);
   });
 }
