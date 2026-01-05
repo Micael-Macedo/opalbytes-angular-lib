@@ -122,7 +122,7 @@ jobs:
       max-parallel: 1 
       fail-fast: false
       matrix:
-        library: ['core', 'utils', 'services', 'directives', 'components', 'libs', 'shared']
+        library: ['core', 'utils', 'services', 'directives', 'components', 'libs', 'shared', 'pdf-export']
         include:
           - library: 'core'
             condition: ${{ needs.check-commits.outputs.should-release-core }}
@@ -176,8 +176,8 @@ jobs:
           - library: 'pdf-export'
             condition: ${{ needs.check-commits.outputs.should-release-pdf-export }}
             project-path: 'projects/ngx-opalbytes-feature-pdf'
-            build-command: 'npm run build:pdf-export'
-            test-command: 'npm run test:pdf-export'
+            build-command: 'npm run build:pdf'
+            test-command: 'npm run test:pdf'
             release-command: 'cd projects/ngx-opalbytes-feature-pdf && npx semantic-release'
 
     steps:
