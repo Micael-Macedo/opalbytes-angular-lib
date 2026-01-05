@@ -1,3 +1,19 @@
+# [1.18.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.17.0...v1.18.0) (2026-01-05)
+
+
+### Bug Fixes
+
+* **shared:** correcao comparacao commit package ([981f783](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/981f783081e476fe1adf2054ea096ba42e23cbe6))
+* **shared:** correcao publicacao lib shared ([20b0fb1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/20b0fb107c1e15f97b64fa4745a7710e0d141aaa))
+
+
+### Features
+
+* **libs:** inclusao matriz publicacao pdf em release ([c48d9e3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c48d9e3dbaffb4cf37f48e9bfa191d132eb3e371))
+* **pdf:** add estrategias de exportacao de pag ([86fb462](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/86fb46244873798ae6b542399ed12647e1092bcf))
+* **pdf:** add-lib-pdf-convertor ([9bedfc0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9bedfc02026538c48e47c0fe3b829d1dcd585704))
+* **pdf:** atualizacao documentacao sobre lib pdf ([22a63be](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/22a63be2375e83be862c24bff91e5e0196d8adee))
+
 # [1.17.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.16.0...v1.17.0) (2026-01-05)
 
 
