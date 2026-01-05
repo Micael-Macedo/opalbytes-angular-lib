@@ -33,6 +33,7 @@
     "deps:update:interactive": "ncu -i",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
+    "metrics:report": "node scripts/run-metrics.js",
     "prepare": "husky"
   },
   "prettier": {

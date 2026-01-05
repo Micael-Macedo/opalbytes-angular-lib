@@ -44,6 +44,7 @@ test-performance.json
 .nyc_output
 .size-limit-cache
 bundlesize-cache.json
+metrics-reports/
 
 # System files
 .DS_Store
