@@ -18,6 +18,8 @@
     "test:directives": "ng test ngx-opalbytes-directives --watch=false",
     "test:utils": "ng test ngx-opalbytes-utils --watch=false",
     "test:services": "ng test ngx-opalbytes-services --watch=false",
+    "test:core": "ng test ngx-opalbytes-core --watch=false",
+    "test:shared": "ng test ngx-opalbytes-shared --watch=false",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "prepare": "husky"

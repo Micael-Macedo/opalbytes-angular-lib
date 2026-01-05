@@ -98,9 +98,6 @@ Biblioteca central que serve como base para as demais. Contém a lógica de neg�
   - **`interceptors`**: Interceptors para adicionar headers, tratar erros HTTP e gerenciar o cache.
   - **`guards`**: Guards de rota para proteger o acesso a determinadas áreas da aplicação.
   - **`models`**: Modelos de dados globais, como `User` e `HttpError`.
-- **`shared`**: Módulo com componentes, diretivas e pipes compartilhados.
-  - **`components`**: Componentes reutilizáveis, como `LoadingSpinner` e `ConfirmationDialog`.
-  - **`pipes`**: Pipes para formatação de dados, como `CPF` e `Date`.
 
 ### `ngx-opalbytes-components`
 
@@ -142,17 +139,17 @@ Serviços reutilizáveis com lógica de negócio específica e isolada.
 
 ### `ngx-opalbytes-shared`
 
-Módulos compartilhados que contêm componentes, constantes, diretivas, enums, interfaces, layouts, pipes, resolvers e validadores para serem usados em várias partes de uma aplicação.
+Biblioteca que agrupa módulos compartilhados, incluindo componentes de UI genéricos, diretivas, enums, interfaces, pipes, resolvers e validadores, para promover a reutilização e padronização em projetos Angular.
 
 | Módulo | Descrição |
 | --- | --- |
 | `components` | Componentes de UI genéricos e reutilizáveis. |
 | `constants` | Constantes globais da aplicação. |
-| `directives` | Diretivas de atributo e estruturais. |
-| `enums` | Enumerações para tipos e status. |
-| `interfaces` | Interfaces de modelos de dados. |
+| `directives` | Diretivas de atributo e estruturais (ex: máscaras, validações). |
+| `enums` | Enumerações para tipos e status comuns. |
+| `interfaces` | Interfaces de modelos de dados e configurações compartilhadas. |
 | `layouts` | Estruturas de layout reutilizáveis. |
-| `pipes` | Pipes para formatação de dados. |
+| `pipes` | Pipes para formatação de dados (ex: CEP, CPF/CNPJ, datas). |
 | `resolvers` | Resolvers para pré-carregamento de dados de rotas. |
 | `validators` | Funções de validação para formulários reativos. |
 
@@ -257,12 +254,12 @@ O **escopo é obrigatório** e indica qual biblioteca do monorepo está sendo mo
 **O escopo DEVE ser um dos seguintes:**
 
 *   `components`
+*   `core`
 *   `directives`
 *   `services`
-*   `utils`
-*   `core`
 *   `shared`
-*   `libs`
+*   `utils`
+*   `root`
 
 **Exemplos de mensagens de commit VÁLIDAS:**
 

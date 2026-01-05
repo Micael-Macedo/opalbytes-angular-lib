@@ -1,14 +1,8 @@
 # 📦 ngx-opalbytes-core
 
-A biblioteca `ngx-opalbytes-core` é o coração das aplicações Angular da Opalbytes. Ela fornece um conjunto robusto de serviços, interceptors, pipes e interfaces essenciais que formam a base para o desenvolvimento de projetos, garantindo padronização e reutilização de código.
+A biblioteca `ngx-opalbytes-core` é o coração das aplicações Angular da Opalbytes. Ela fornece um conjunto robusto de serviços, interceptors e interfaces essenciais que formam a base para o desenvolvimento de projetos, garantindo padronização e reutilização de código.
 
 ---
-## Estrutura da Biblioteca
-
-A biblioteca é dividida em duas áreas principais:
-
--   `core`: Contém a lógica de negócio fundamental, serviços de infraestrutura e gerenciamento de estado.
--   `shared`: Inclui elementos reutilizáveis focados em UI, como pipes para formatação de dados e interfaces comuns.
 
 ### Organização de Pastas Detalhada
 
@@ -17,27 +11,17 @@ A organização interna da biblioteca segue uma estrutura modular clara para fac
 ```
 src/
 └── lib/
-    ├── core/                  # Módulo principal com lógica de negócio e infraestrutura
-    │   ├── config/            # Configurações da aplicação (endpoints, ambiente)
-    │   ├── constants/         # Constantes globais
-    │   ├── enums/             # Enumerações comuns
-    │   ├── guards/            # Guards de rota (ex: autenticação)
-    │   ├── interceptors/      # Interceptors HTTP
-    │   ├── interfaces/        # Interfaces de dados do core
-    │   ├── models/            # Modelos de dados do core
-    │   ├── providers/         # Modelos de Providers padrão do core
-    │   ├── services/          # Serviços do core (API, cache, autenticação, instalacao)
-    │   └── utils/             # Funções utilitárias e handlers de erro
-    └── shared/                # Módulo com elementos reutilizáveis de UI e dados
-        ├── components/        # Componentes compartilhados
-        ├── constants/         # Constantes compartilhadas (permissões, rotas)
-        ├── directives/        # Diretivas compartilhadas
-        ├── enums/             # Enumerações compartilhadas
-        ├── interfaces/        # Interfaces de dados compartilhadas
-        ├── layouts/           # Layouts comuns
-        ├── pipes/             # Pipes para formatação de dados
-        ├── resolvers/         # Resolvers de rota
-        └── validators/        # Validadores de formulário
+    ├── config/            # Configurações da aplicação (endpoints, ambiente)
+    ├── constants/         # Constantes globais
+    ├── enums/             # Enumerações comuns
+    ├── guards/            # Guards de rota (ex: autenticação)
+    ├── interceptors/      # Interceptors HTTP
+    ├── interfaces/        # Interfaces de dados do core
+    ├── models/            # Modelos de dados do core
+    ├── providers/         # Modelos de Providers padrão do core
+    ├── services/          # Serviços do core (API, cache, autenticação, instalacao)
+    └── utils/             # Funções utilitárias e handlers de erro
+ 
 ```
 
 ---
@@ -65,6 +49,9 @@ Esta biblioteca possui as seguintes dependências:
 | :----- | :----- |
 | `@angular/common` | `^21.0.0` |
 | `@angular/core` | `^21.0.0` |
+|    `"ngx-webstorage"`| `"^21.0.1"` |
+|    `"ngx-mask"`| `"^20.0.3"` |
+|    `"jwt-decode"`| `"^4.0.0"` |
 
 ### `dependencies`
 
@@ -143,29 +130,7 @@ Este serviço é projetado para interagir com o sistema do usuário para verific
 
 ---
 
-## Módulo `shared`
 
-O `shared` contém utilitários e definições que são amplamente utilizados nos templates e componentes da aplicação.
-
-### Itens Disponíveis no `shared`
-
--   **Pipes**: Para formatar dados diretamente no HTML (ex: moedas, datas, CPF/CNPJ).
--   **Interfaces**: Definições de tipos para objetos comuns, como `SidebarItem`, `TableColumn`, etc.
--   **Constants**: Constantes globais, como definições de rotas e permissões.
-
-#### Pipes Disponíveis
-
-| Pipe | Descrição |
-| :--- | :--- |
-| `formatCep` | Formata um valor como um CEP (ex: `12345-678`). |
-| `formatCpfCnpj` | Formata um valor como CPF ou CNPJ, dependendo do tamanho. |
-| `formatCpf` | Formata um valor como um CPF (ex: `123.456.789-00`). |
-| `formatDataNascimento` | Formata uma data de nascimento. |
-| `formatDate` | Formata uma data (ex: `dd/MM/yyyy`). |
-| `formatRg` | Formata um valor como um RG. |
-| `formatTelefone` | Formata um número de telefone (ex: `(11) 99999-9999`). |
-
----
 
 ## Como Usar
 
@@ -187,22 +152,7 @@ export class MeuComponente {
 }
 ```
 
-### Usando um Pipe
 
-```typescript
-import { Component } from '@angular/core';
-import { FormatCpfPipe } from 'ngx-opalbytes-core';
-
-@Component({
-  selector: 'app-user-info',
-  standalone: true,
-  imports: [FormatCpfPipe],
-  template: `<p>CPF: {{ user.cpf | formatCpf }}</p>`
-})
-export class UserInfoComponent {
-  user = { cpf: '12345678900' };
-}
-```
 
 ---
 
@@ -210,10 +160,10 @@ export class UserInfoComponent {
 
 Para adicionar uma nova funcionalidade a esta biblioteca, siga os passos abaixo:
 
-1.  **Crie os arquivos** da sua funcionalidade (serviço, pipe, etc.) dentro da pasta `src/lib/core` ou `src/lib/shared`, seguindo a estrutura de pastas existente.
+1.  **Crie os arquivos** da sua funcionalidade (serviço, pipe, etc.) dentro da pasta `src/lib/`, seguindo a estrutura de pastas existente.
 2.  **Exponha sua funcionalidade** na API pública da biblioteca, adicionando uma linha de exportação no arquivo `src/public-api.ts`.
 3.  **Adicione ou atualize os testes unitários** para garantir a cobertura e o funcionamento esperado.
-4.  **Faça o commit** seguindo as [regras de commit do projeto](/README.md#룰-regras-de-commit-com-escopo-obrigatório), usando o escopo `core` (que abrange tanto `core` quanto `shared`).
+4.  **Faça o commit** seguindo as [regras de commit do projeto](/README.md#%F0%9F%93%B2-regras-de-commit-com-escopo-obrigatório), usando o escopo `core`.
 
     ```bash
     git commit -m "feat(core): add novas rotas padrão"
