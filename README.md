@@ -73,9 +73,10 @@ Este é um monorepo Angular que gerencia múltiplas bibliotecas. Todas as biblio
 opalbytes-angular-lib/
 ├── projects/
 │   ├── ngx-opalbytes-components/    # Biblioteca de componentes de UI
-│   ├── ngx-opalbytes-core-shared/   # Biblioteca central com serviços, guards e modelos
+│   ├── ngx-opalbytes-core/   # Biblioteca central com serviços, guards e modelos
 │   ├── ngx-opalbytes-directives/    # Biblioteca de diretivas de atributo e estruturais
-│   └── ngx-opalbytes-services/      # Biblioteca de serviços reutilizáveis
+│   ├── ngx-opalbytes-services/      # Biblioteca de serviços reutilizáveis
+│   ├── ngx-opalbytes-shared/        # Módulos, pipes e componentes compartilhados
 │   └── ngx-opalbytes-utils/         # Funções e utilitários
 │
 ├── .github/                         # Workflows de CI/CD (Release)
@@ -88,7 +89,7 @@ opalbytes-angular-lib/
 
 ## 📚 Bibliotecas Disponíveis
 
-### `ngx-opalbytes-core-shared`
+### `ngx-opalbytes-core`
 
 Biblioteca central que serve como base para as demais. Contém a lógica de negócio principal, serviços essenciais, interceptors, guards e modelos de dados.
 
@@ -138,6 +139,22 @@ Serviços reutilizáveis com lógica de negócio específica e isolada.
 | `date-pipe.service` | Formata datas de acordo com a localidade.                   |
 | `installer.service` | Gerencia a instalação de um PWA.                            |
 | `websocket.service` | Facilita a comunicação em tempo real via WebSockets.        |
+
+### `ngx-opalbytes-shared`
+
+Módulos compartilhados que contêm componentes, constantes, diretivas, enums, interfaces, layouts, pipes, resolvers e validadores para serem usados em várias partes de uma aplicação.
+
+| Módulo | Descrição |
+| --- | --- |
+| `components` | Componentes de UI genéricos e reutilizáveis. |
+| `constants` | Constantes globais da aplicação. |
+| `directives` | Diretivas de atributo e estruturais. |
+| `enums` | Enumerações para tipos e status. |
+| `interfaces` | Interfaces de modelos de dados. |
+| `layouts` | Estruturas de layout reutilizáveis. |
+| `pipes` | Pipes para formatação de dados. |
+| `resolvers` | Resolvers para pré-carregamento de dados de rotas. |
+| `validators` | Funções de validação para formulários reativos. |
 
 ### `ngx-opalbytes-utils`
 

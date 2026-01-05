@@ -18,7 +18,8 @@ jobs:
       should-release-directives: ${{ steps.check.outputs.should-release-directives }}
       should-release-services: ${{ steps.check.outputs.should-release-services }}
       should-release-utils: ${{ steps.check.outputs.should-release-utils }}
-      should-release-core: ${{ steps.check.outputs.should-release-core }}  # ⬅️ CORRIGIDO: steps.check
+      should-release-core: ${{ steps.check.outputs.should-release-core }}  
+      should-release-shared: ${{ steps.check.outputs.should-release-shared }}  
     steps:
       - uses: actions/checkout@v3
         with:
@@ -45,6 +46,7 @@ jobs:
           should_release_services="false"
           should_release_utils="false"
           should_release_core="false"
+          should_release_shared="false"
           
           while IFS= read -r commit_message; do
             echo "Analisando commit: $commit_message"
@@ -79,6 +81,11 @@ jobs:
               should_release_core="true"
               echo "Commit relacionado a core encontrado"
             fi
+
+            if [[ "$commit_message" =~ (feat\(shared\)|fix\(shared\)|refactor\(shared\)|docs\(shared\)|chore\(shared\)|release\(shared\)|test\(shared\)|style\(shared\)|feature\(shared\)) ]]; then
+              should_release_shared="true"
+              echo "Commit relacionado a shared encontrado"
+            fi
           done <<< "$COMMITS"
           
           # Export results
@@ -88,6 +95,7 @@ jobs:
           echo "should-release-services=$should_release_services" >> $GITHUB_OUTPUT
           echo "should-release-utils=$should_release_utils" >> $GITHUB_OUTPUT
           echo "should-release-core=$should_release_core" >> $GITHUB_OUTPUT
+          echo "should-release-core=$shared" >> $GITHUB_OUTPUT
 
   publish-sequentially:
     runs-on: ubuntu-latest
@@ -98,20 +106,21 @@ jobs:
       needs.check-commits.outputs.should-release-services == 'true' ||
       needs.check-commits.outputs.should-release-directives == 'true' ||
       needs.check-commits.outputs.should-release-components == 'true' ||
-      needs.check-commits.outputs.should-release-libs == 'true'
+      needs.check-commits.outputs.should-release-libs == 'true' ||
+      needs.check-commits.outputs.should-release-shared == 'true'
     
     strategy:
       max-parallel: 1 
       fail-fast: false
       matrix:
-        library: ['core', 'utils', 'services', 'directives', 'components', 'libs']
+        library: ['core', 'utils', 'services', 'directives', 'components', 'libs', 'shared']
         include:
           - library: 'core'
             condition: ${{ needs.check-commits.outputs.should-release-core }}
-            project-path: 'projects/ngx-opalbytes-core-shared'
+            project-path: 'projects/ngx-opalbytes-core'
             build-command: 'npm run build:core'
             test-command: 'echo "No tests for core"'
-            release-command: 'cd projects/ngx-opalbytes-core-shared && npx semantic-release'
+            release-command: 'cd projects/ngx-opalbytes-core && npx semantic-release'
           
           - library: 'utils'
             condition: ${{ needs.check-commits.outputs.should-release-utils }}
@@ -143,6 +152,13 @@ jobs:
           
           - library: 'libs'
             condition: ${{ needs.check-commits.outputs.should-release-libs }}
+            project-path: '.'
+            build-command: 'echo "No build needed for root"'
+            test-command: 'echo "No tests for root"'
+            release-command: 'npx semantic-release'
+
+          - library: 'shared'
+            condition: ${{ needs.check-commits.outputs.should-release-shared }}
             project-path: '.'
             build-command: 'echo "No build needed for root"'
             test-command: 'echo "No tests for root"'

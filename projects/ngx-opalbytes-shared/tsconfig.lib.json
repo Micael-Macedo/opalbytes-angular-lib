@@ -1,0 +1,56 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/lib",
+    "declaration": true,
+    "declarationMap": true,
+    "types": [],
+    "baseUrl": "./",
+    "paths": {
+      "@shared/*": [
+        "src/lib/shared/*"
+      ],
+      "@shared.components/*": [
+        "src/lib/shared/components/*"
+      ],
+      "@shared.constants/*": [
+        "src/lib/shared/constants/*"
+      ],
+      "@shared.directives/*": [
+        "src/lib/shared/directives/*"
+      ],
+      "@shared.enums/*": [
+        "src/lib/shared/enums/*"
+      ],
+      "@shared.interfaces/*": [
+        "src/lib/shared/interfaces/*"
+      ],
+      "@shared.layouts/*": [
+        "src/lib/shared/layouts/*"
+      ],
+      "@shared.models/*": [
+        "src/lib/shared/models/*"
+      ],
+      "@shared.pipes/*": [
+        "src/lib/shared/pipes/*"
+      ],
+      "@shared.resolvers/*": [
+        "src/lib/shared/resolvers/*"
+      ],
+      "@shared.services/*": [
+        "src/lib/shared/services/*"
+      ],
+      "@shared.validators/*": [
+        "src/lib/shared/validators/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
+  ]
+}
