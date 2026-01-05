@@ -1,3 +1,26 @@
+# [1.16.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.15.1...v1.16.0) (2026-01-05)
+
+
+### Bug Fixes
+
+* **components:** add ngx-mask dependencia ([6640811](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/664081124138a4a4da98f9263ce421ede486129f))
+* **components:** atualizacao customizacao dialog ([281bf31](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/281bf31c91f4d62a33b789ffd85c84c30b000dee))
+* **components:** correcao importacao de servicos para testes ([846bf51](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/846bf513b42ae39b9c0e43b7b4885a860a806b4f))
+* **components:** correcao injecao de base services ([79d0d61](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/79d0d618c00e20deb01ebe675d6c21e72eb48348))
+* **components:** correcao nomenclatura base services ([d298a08](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d298a086a9e03e15ae42578f72a2caf8da8b35a9))
+* **core:** correcao importacao elementos shared ([9305681](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/930568142bbff68d6263f90d21383ea82abc9dad))
+
+
+### Features
+
+* add base alert ([22e4caa](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/22e4caad1609e1e5a904c3c81efa4f7b6c0114cc))
+* add customizacao alerta ([cade2c5](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/cade2c509c728a887a6b2bfe34c5fabe10240187))
+* **components:** explicacao-usabilidade-feature-base-alert ([8030418](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8030418f8ec6e8ff49bbf73a2064d1078c35c928))
+* **core:** criacao lib core ([9d18448](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9d184484889df2242ce009147f4db19e03325731))
+* **libs:** criacao actions para lib core e shared ([d0390d1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d0390d1d96d3bd621ad41cd3a737c65d002330b1))
+* **shared:** atualizacao elementos shared ([d55807c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d55807cff21025e6440b1f964bb67888d2404571))
+* **shared:** criacao lib shared ([e3b9f37](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e3b9f37da18f7c684bd63cd688f9c0e1a6567d03))
+
 ## [1.15.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.15.0...v1.15.1) (2025-12-29)
 
 
