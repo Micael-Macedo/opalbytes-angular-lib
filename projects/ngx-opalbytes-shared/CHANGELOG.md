@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-shared@1.0.0...ngx-opalbytes-shared@1.0.1) (2026-01-05)
+
+
+### Bug Fixes
+
+* **shared:** correcao comparacao commit package ([981f783](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/981f783081e476fe1adf2054ea096ba42e23cbe6))
+* **shared:** correcao publicacao lib shared ([20b0fb1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/20b0fb107c1e15f97b64fa4745a7710e0d141aaa))
+
 # 1.0.0 (2026-01-05)
 
 
