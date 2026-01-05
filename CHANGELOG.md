@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.18.0...v1.19.0) (2026-01-05)
+
+
+### Features
+
+* **core:** add elemento websocket ([e60d1bf](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e60d1bfb4bf055b7ff396c97d47406a97f576582))
+
 # [1.18.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.17.0...v1.18.0) (2026-01-05)
 
 
