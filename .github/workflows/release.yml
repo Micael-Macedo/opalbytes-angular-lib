@@ -95,7 +95,7 @@ jobs:
           echo "should-release-services=$should_release_services" >> $GITHUB_OUTPUT
           echo "should-release-utils=$should_release_utils" >> $GITHUB_OUTPUT
           echo "should-release-core=$should_release_core" >> $GITHUB_OUTPUT
-          echo "should-release-core=$shared" >> $GITHUB_OUTPUT
+          echo "should-release-shared=$should_release_shared" >> $GITHUB_OUTPUT
 
   publish-sequentially:
     runs-on: ubuntu-latest
@@ -159,10 +159,10 @@ jobs:
 
           - library: 'shared'
             condition: ${{ needs.check-commits.outputs.should-release-shared }}
-            project-path: '.'
-            build-command: 'echo "No build needed for root"'
-            test-command: 'echo "No tests for root"'
-            release-command: 'npx semantic-release'
+            project-path: 'projects/ngx-opalbytes-shared'
+            build-command: 'npm run build:shared'
+            test-command: 'npm run test:shared'
+            release-command: 'cd projects/ngx-opalbytes-shared && npx semantic-release'
     
     steps:
       - name: Iniciar processo para ${{ matrix.library }}
