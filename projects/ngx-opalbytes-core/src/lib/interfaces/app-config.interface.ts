@@ -6,9 +6,16 @@ export type AppPaths = Record<string, string>;
 export type HttpMethods = Record<string, string>;
 export type AppAuth = Record<string, string>;
 
+export enum EnvironmentEnum {
+    production = "production",
+    homologation = "homologation",
+    development = "development",
+    local = "local"
+}
+
 export interface IAppConfig {
     production: boolean;
-    environment: "production" | "homologation" | "development" | "local";
+    environment: EnvironmentEnum;
     urls: IAppUrls;
     paths: AppPaths;
     httpMethods?: HttpMethods;

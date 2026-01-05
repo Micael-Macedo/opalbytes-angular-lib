@@ -1,11 +1,12 @@
-import { IAppConfig } from "@opalbytes/shared";
+
+import { EnvironmentEnum, IAppConfig } from "@core.interfaces/app-config.interface";
 
 import { ApiUrl } from "./app-endpoints";
 import { BASE_PATHS, BASE_HTTP_METHODS } from "../utils/app-config.base";
 
 export const localConfig: IAppConfig = {
   production: false,
-  environment: "local",
+  environment: EnvironmentEnum.local,
   urls: {
     [ApiUrl.API]: "http://localhost:3000",
     [ApiUrl.CROPPING]: "http://localhost:3001",

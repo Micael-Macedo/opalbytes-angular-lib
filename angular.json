@@ -182,6 +182,36 @@
           }
         }
       }
+    },
+    "ngx-opalbytes-shared": {
+      "projectType": "library",
+      "root": "projects/ngx-opalbytes-shared",
+      "sourceRoot": "projects/ngx-opalbytes-shared/src",
+      "prefix": "cao",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-opalbytes-shared/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-opalbytes-shared/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-opalbytes-shared/**/*.ts",
+              "projects/ngx-opalbytes-shared/**/*.html"
+            ],
+            "eslintConfig": "projects/ngx-opalbytes-shared/eslint.config.js"
+          }
+        }
+      }
     }
   }
 }

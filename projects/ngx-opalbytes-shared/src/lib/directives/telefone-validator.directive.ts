@@ -18,10 +18,10 @@ function isValidTelefone(telefone: string): boolean {
   const cleanTelefone = telefone.replace(/\D/g, '');
 
   // Verifica se tem 10 ou 11 dígitos (com DDD)
-  if (cleanTelefone.length < 10 || cleanTelefone.length > 11) return false;
+  if (cleanTelefone.length < 10 || cleanTelefone.length > 11) {return false;}
 
   // Verifica se não são todos os dígitos iguais
-  if (/^(\d)\1+$/.test(cleanTelefone)) return false;
+  if (/^(\d)\1+$/.test(cleanTelefone)) {return false;}
 
   // Validação de formato (aceita vários formatos)
   // Formato: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX ou XX XXXXX-XXXX ou XX XXXX-XXXX

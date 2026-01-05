@@ -3,8 +3,6 @@
  */
 
 // Directives
-export * from './lib/directives/breadcrumbLink.directive';
-export * from './lib/directives/button.directive';
 export * from './lib/directives/cep-mask.directive';
 export * from './lib/directives/cep-validator.directive';
 export * from './lib/directives/cnpj-mask.directive';
@@ -21,8 +19,6 @@ export * from './lib/directives/email-or-username-validator.directive';
 export * from './lib/directives/email-validator.directive';
 export * from './lib/directives/has-errors.directive';
 export * from './lib/directives/password-validator.directive';
-export * from './lib/directives/permission.directive';
-export * from './lib/directives/rg-mask.directive';
 export * from './lib/directives/rg-validator.directive';
 export * from './lib/directives/telefone-validator.directive';
 

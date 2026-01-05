@@ -3,7 +3,9 @@ import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
 
 import { BehaviorSubject, Observable, map } from "rxjs";
 
-import { CookieService } from "./cookie.service";
+import { EnvironmentEnum } from "@core.interfaces/app-config.interface";
+
+import { CookieService, ICookieOptions } from "./cookie.service";
 import { IStorageOptions, IStorageItem } from "../interfaces/storage.interface";
 
 /**
@@ -22,15 +24,15 @@ export class StorageService {
   private readonly COOKIE_PREFIX = "app_";
   private readonly DEFAULT_COOKIE_OPTIONS = {
     path: "/",
-    secure: environment.production, // HTTPS apenas em produção
-    sameSite: (environment.production ? "Strict" : "Lax") as "Strict" | "Lax", // Lax em dev para compatibilidade
+    secure: EnvironmentEnum.production ? true : false, // HTTPS apenas em produção
+    sameSite: (EnvironmentEnum.production ? "Strict" : "Lax") as "Strict" | "Lax", // Lax em dev para compatibilidade
     expires: 7, // 7 dias padrão
   };
 
   constructor(
     private cookieService: CookieService,
     @Inject(PLATFORM_ID) private platformId: object
-  ) {}
+  ) { }
 
   /**
    * Normaliza a chave para maiúsculas
@@ -198,8 +200,7 @@ export class StorageService {
         this.removeItem(normalizedKey);
         return null;
       }
-
-      return options.encrypt ? this.decrypt(item.value) : item.value;
+      return options.encrypt ? this.decrypt(item.value as string) : item.value;
     } catch (error) {
       console.error(`Erro ao parsear cookie ${cookieName}:`, error);
       return null;
@@ -383,14 +384,14 @@ export class StorageService {
   /**
    * Retorna opções de cookie específicas baseadas na chave
    */
-  private getCookieOptionsForKey(key: string, expiresInDays: number) {
+  private getCookieOptionsForKey(key: string, expiresInDays: number): ICookieOptions {
     // Tokens de autenticação requerem configurações mais restritivas
     if (key === "TOKEN" || key === "REFRESH_TOKEN") {
       return {
         ...this.DEFAULT_COOKIE_OPTIONS,
         expires: expiresInDays,
-        sameSite: (environment.production ? "Strict" : "Lax") as "Strict" | "Lax", // Lax em dev
-        secure: environment.production, // HTTPS apenas em produção
+        sameSite: (EnvironmentEnum.production ? "Strict" : "Lax") as "Strict" | "Lax", // Lax em dev
+        secure: EnvironmentEnum.production ? true : false, // HTTPS apenas em produção
       };
     }
 
@@ -400,7 +401,7 @@ export class StorageService {
         ...this.DEFAULT_COOKIE_OPTIONS,
         expires: 30, // 30 dias
         sameSite: "Lax" as const,
-        secure: environment.production, // HTTPS apenas em produção
+        secure: EnvironmentEnum.production ? true : false, // HTTPS apenas em produção
       };
     }
 
@@ -423,12 +424,12 @@ export class StorageService {
    * @param value Valor a ser criptografado
    * @returns Valor criptografado
    */
-  private encrypt<T>(value: T): string {
+  private encrypt<T>(value: T): any {
     try {
       const stringValue = JSON.stringify(value);
       return btoa(stringValue);
     } catch (_error) {
-      return (value + String(_error)) as unknown as string;
+      return (value + String(_error)) as unknown as T;
     }
   }
 

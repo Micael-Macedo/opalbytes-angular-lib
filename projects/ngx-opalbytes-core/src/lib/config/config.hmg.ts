@@ -1,11 +1,12 @@
-import { IAppConfig } from "@opalbytes/shared";
+
+import { EnvironmentEnum, IAppConfig } from "@core.interfaces/app-config.interface";
 
 import { ApiUrl } from "./app-endpoints";
 import { BASE_PATHS, BASE_HTTP_METHODS } from "../utils/app-config.base";
 
 export const homologationConfig: IAppConfig = {
   production: false,
-  environment: "homologation",
+  environment: EnvironmentEnum.homologation,
   urls: {
     [ApiUrl.API]: "https://api-hmg.renova.app.br",
     [ApiUrl.CROPPING]: "https://rcropping-api-hmg.renova.app.br",

@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostListener, Optional, Self } from '@angular/co
 import { NgControl } from '@angular/forms';
 
 @Directive({
-  selector: '[appCpfMask]',
+  selector: '[caoCpfMask]',
   standalone: true,
 })
 export class CpfMaskDirective {

@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostListener, Input, OnInit, Optional, Self } fr
 import { NgControl } from '@angular/forms';
 
 @Directive({
-  selector: '[appCpfEmailMask]',
+  selector: '[caoCpfEmailMask]',
   standalone: true,
 })
 export class CpfEmailMaskDirective implements OnInit {

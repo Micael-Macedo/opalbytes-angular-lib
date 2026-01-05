@@ -39,15 +39,15 @@ function isValidDataNascimento(data: string): boolean {
     }
   }
 
-  if (!match) return false;
+  if (!match) {return false;}
 
   // Validação básica de data
-  if (month < 1 || month > 12) return false;
-  if (day < 1 || day > 31) return false;
+  if (month < 1 || month > 12) {return false;}
+  if (day < 1 || day > 31) {return false;}
 
   // Validação de ano (não pode ser futuro e deve ser razoável)
   const currentYear = new Date().getFullYear();
-  if (year > currentYear || year < 1900) return false;
+  if (year > currentYear || year < 1900) {return false;}
 
   // Validação de dias por mês
   const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];

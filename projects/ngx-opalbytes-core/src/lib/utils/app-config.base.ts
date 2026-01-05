@@ -1,4 +1,4 @@
-import { AppPaths, HttpMethods } from "@opalbytes/shared";
+import { AppPaths, HttpMethods } from "@core.interfaces/app-config.interface";
 
 import { ApiPath, HttpMethod } from "../config/app-endpoints";
 

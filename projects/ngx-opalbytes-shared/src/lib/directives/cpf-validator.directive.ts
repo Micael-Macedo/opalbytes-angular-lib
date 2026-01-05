@@ -15,6 +15,6 @@ export function cpfValidator(): ValidatorFn {
 
 function isValidCPF(raw: string): boolean {
   const cpf = raw.replace(/\D/g, '');
-  if (cpf.length !== 11) return false;
+  if (cpf.length !== 11) {return false;}
   return !/^(\d)\1{10}$/.test(cpf);
 }

@@ -1,11 +1,11 @@
-import { IAppConfig } from "@opalbytes/shared";
+import { EnvironmentEnum, IAppConfig } from "@core.interfaces/app-config.interface";
 
 import { ApiUrl } from "./app-endpoints";
 import { BASE_PATHS, BASE_HTTP_METHODS } from "../utils/app-config.base";
 
 export const developmentConfig: IAppConfig = {
   production: false,
-  environment: "development",
+  environment: EnvironmentEnum.development,
   urls: {
     [ApiUrl.API]: "https://api-dev.renova.app.br",
     [ApiUrl.CROPPING]: "https://rcropping-api-prd.renova.app.br",

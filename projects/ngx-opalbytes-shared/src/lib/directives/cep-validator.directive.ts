@@ -18,10 +18,10 @@ function isValidCEP(cep: string): boolean {
   const cleanCep = cep.replace(/\D/g, '');
 
   // Verifica se tem 8 dígitos
-  if (cleanCep.length !== 8) return false;
+  if (cleanCep.length !== 8) {return false;}
 
   // Verifica se não são todos os dígitos iguais
-  if (/^(\d)\1{7}$/.test(cleanCep)) return false;
+  if (/^(\d)\1{7}$/.test(cleanCep)) {return false;}
 
   // Validação básica de formato (aceita com ou sem máscara)
   // Formato: XXXXX-XXX ou XXXXXXXX

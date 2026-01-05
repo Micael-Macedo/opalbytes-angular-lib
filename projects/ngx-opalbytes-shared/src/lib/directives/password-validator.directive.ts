@@ -1,12 +1,12 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export interface PasswordValidatorOptions {
+export interface IPasswordValidatorOptions {
   nomeField?: string;
   sobrenomeField?: string;
   emailField?: string;
 }
 
-export function passwordValidator(options?: PasswordValidatorOptions): ValidatorFn {
+export function passwordValidator(options?: IPasswordValidatorOptions): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (!control.value) {
       return null;

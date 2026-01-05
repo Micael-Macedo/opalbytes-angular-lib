@@ -2,7 +2,7 @@ import { Directive, ElementRef, HostListener, Optional, Self } from '@angular/co
 import { NgControl } from '@angular/forms';
 
 @Directive({
-  selector: '[appCnpjMask]',
+  selector: '[caoCnpjMask]',
   standalone: true,
 })
 export class CnpjMaskDirective {

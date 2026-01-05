@@ -18,10 +18,10 @@ function isValidCNPJ(cnpj: string): boolean {
   cnpj = cnpj.replace(/[^\d]/g, '');
 
   // Verifica se tem 14 dígitos
-  if (cnpj.length !== 14) return false;
+  if (cnpj.length !== 14) {return false;}
 
   // Verifica se todos os dígitos são iguais
-  if (/^(\d)\1{13}$/.test(cnpj)) return false;
+  if (/^(\d)\1{13}$/.test(cnpj)) {return false;}
 
   // Validação do primeiro dígito verificador
   let soma = 0;
@@ -33,7 +33,7 @@ function isValidCNPJ(cnpj: string): boolean {
   let resto = soma % 11;
   const digito1 = resto < 2 ? 0 : 11 - resto;
 
-  if (parseInt(cnpj.charAt(12)) !== digito1) return false;
+  if (parseInt(cnpj.charAt(12)) !== digito1) {return false;}
 
   // Validação do segundo dígito verificador
   soma = 0;

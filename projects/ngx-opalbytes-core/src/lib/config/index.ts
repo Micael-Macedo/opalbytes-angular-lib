@@ -1,4 +1,3 @@
-export * from "@opalbytes/shared";
 export * from "../utils/app-config.base";
 export * from "./app-config";
 export * from "./app-endpoints";
