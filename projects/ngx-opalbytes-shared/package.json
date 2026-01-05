@@ -1,9 +1,5 @@
 {
-<<<<<<< Updated upstream
-  "name": "ngx-opalbytes-core",
-=======
   "name": "ngx-opalbytes-shared",
->>>>>>> Stashed changes
   "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^21.0.0",
