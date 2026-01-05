@@ -1,3 +1,16 @@
+# [1.17.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.16.0...v1.17.0) (2026-01-05)
+
+
+### Bug Fixes
+
+* **shared:** correcao pacote de destino no build ([a49c917](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a49c91754e276ce0313e3c2fd9996cc1b977bb50))
+
+
+### Features
+
+* **core:** atualizacao peerDependencies ([9951a5b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9951a5ba7db5ac01179d10485a9e0657aa633d70))
+* **shared:** correcao release shared ([42cab12](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/42cab126eda44cf9bafbaa342078ff1221329f49))
+
 # [1.16.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.15.1...v1.16.0) (2026-01-05)
 
 
