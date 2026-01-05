@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build:all": "ng build ngx-opalbytes-directives && ng build ngx-opalbytes-components && ng build ngx-opalbytes-services && ng build ngx-opalbytes-utils && ng build ngx-opalbytes-core-shared",
+    "build:all": "ng build ngx-opalbytes-directives && ng build ngx-opalbytes-components && ng build ngx-opalbytes-services && ng build ngx-opalbytes-utils && ng build ngx-opalbytes-core-shared && ng build ngx-opalbytes-performance",
     "build:directives": "ng build ngx-opalbytes-directives",
     "build:components": "ng build ngx-opalbytes-components",
     "build:services": "ng build ngx-opalbytes-services",
@@ -19,6 +19,8 @@
     "test:utils": "ng test ngx-opalbytes-utils --watch=false",
     "test:services": "ng test ngx-opalbytes-services --watch=false",
     "test:performance": "ng test ngx-opalbytes-performance --watch=false",
+    "test:core": "ng test ngx-opalbytes-core-shared --watch=false",
+    "test:shared": "ng test ngx-opalbytes-core-shared --watch=false",
     "test:coverage": "vitest run --coverage",
     "test:coverage:utils": "vitest run --coverage --project ngx-opalbytes-utils",
     "test:coverage:components": "vitest run --coverage --project ngx-opalbytes-components",

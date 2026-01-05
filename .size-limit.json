@@ -1,8 +1,32 @@
 [
   {
+    "name": "ngx-opalbytes-directives",
+    "path": "dist/ngx-opalbytes-directives/fesm2022/*.mjs",
+    "limit": "100 KB",
+    "gzip": true
+  },
+  {
+    "name": "ngx-opalbytes-components",
+    "path": "dist/ngx-opalbytes-components/fesm2022/*.mjs",
+    "limit": "200 KB",
+    "gzip": true
+  },
+  {
+    "name": "ngx-opalbytes-services",
+    "path": "dist/ngx-opalbytes-services/fesm2022/*.mjs",
+    "limit": "100 KB",
+    "gzip": true
+  },
+  {
     "name": "ngx-opalbytes-utils",
     "path": "dist/ngx-opalbytes-utils/fesm2022/*.mjs",
     "limit": "150 KB",
+    "gzip": true
+  },
+  {
+    "name": "ngx-opalbytes-core-shared",
+    "path": "dist/ngx-opalbytes-core-shared/fesm2022/*.mjs",
+    "limit": "50 KB",
     "gzip": true
   },
   {

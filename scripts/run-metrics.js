@@ -76,18 +76,55 @@ class MetricsRunner {
       const configPath = path.join(process.cwd(), '.size-limit.json');
       const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 
-      const lines = result.output.split('\n');
-      config.forEach((item, index) => {
-        const matchingLine = lines.find(line => line.includes(item.name));
-        if (matchingLine) {
-          const sizeMatch = matchingLine.match(/(\d+\.?\d*\s*[KMG]?B)/);
-          sizeData.push({
-            name: item.name,
-            limit: item.limit,
-            actual: sizeMatch ? sizeMatch[1] : 'N/A',
-            passed: result.success
-          });
+      const output = result.output || '';
+
+      // Divide a saída em seções, uma para cada pacote
+      config.forEach((item) => {
+        let actualSize = 'N/A';
+        let passed = true;
+        let exceeded = null;
+
+        // Procura pela seção do pacote na saída
+        // Formato esperado:
+        // ngx-opalbytes-directives
+        // Package size limit has exceeded by 36.94 kB
+        // Size limit: 100 kB
+        // Size:       136.94 kB with all dependencies, minified and gzipped
+
+        // Cria um regex para encontrar a seção do pacote
+        // Captura desde o nome até encontrar dupla quebra de linha (com possíveis espaços) ou fim do texto
+        const packageRegex = new RegExp(`${this.escapeRegex(item.name)}[\\s\\S]*?(?=\\n\\s*\\n|$)`, 'i');
+        const packageMatch = output.match(packageRegex);
+
+        if (packageMatch) {
+          const sectionText = packageMatch[0];
+
+          // Captura o tamanho real: "Size:       136.94 kB with all dependencies..."
+          const sizeMatch = sectionText.match(/Size:\s+(\d+(?:\.\d+)?)\s*([KMG]?B)/i);
+          if (sizeMatch) {
+            actualSize = `${sizeMatch[1]} ${sizeMatch[2]}`;
+          }
+
+          // Verifica se excedeu o limite: "Package size limit has exceeded by 36.94 kB"
+          const exceedMatch = sectionText.match(/has exceeded by\s+(\d+(?:\.\d+)?)\s*([KMG]?B)/i);
+          if (exceedMatch) {
+            exceeded = `${exceedMatch[1]} ${exceedMatch[2]}`;
+            passed = false;
+          }
         }
+
+        // Se o comando falhou e não encontramos informação específica, marca como failed
+        if (!result.success && actualSize === 'N/A') {
+          passed = false;
+        }
+
+        sizeData.push({
+          name: item.name,
+          limit: item.limit,
+          actual: actualSize,
+          exceeded: exceeded,
+          passed: passed
+        });
       });
     } catch (error) {
       this.logError('Erro ao processar saida do size-limit', error.message);
@@ -98,6 +135,10 @@ class MetricsRunner {
       data: sizeData,
       output: result.output
     };
+  }
+
+  escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
   async runBundlesize() {
@@ -131,44 +172,79 @@ class MetricsRunner {
 
   async runDepcheck() {
     this.log('Executando verificacao de dependencias...');
-    const result = this.executeCommand('npm run deps:check', 'Verificacao de dependencias');
 
-    let depcheckData = {
-      hasIssues: false,
-      unusedDependencies: [],
-      missingDependencies: []
-    };
+    const libraries = [
+      'ngx-opalbytes-directives',
+      'ngx-opalbytes-components',
+      'ngx-opalbytes-services',
+      'ngx-opalbytes-utils',
+      'ngx-opalbytes-core-shared',
+      'ngx-opalbytes-performance'
+    ];
 
-    try {
-      const output = result.output || '';
-      if (output.includes('Unused dependencies')) {
-        depcheckData.hasIssues = true;
-        const unusedMatch = output.match(/Unused dependencies[:\s]+([\s\S]*?)(?=\n\n|Missing|$)/);
-        if (unusedMatch) {
-          depcheckData.unusedDependencies = unusedMatch[1]
-            .split('\n')
-            .filter(line => line.trim().startsWith('*'))
-            .map(line => line.trim().substring(1).trim());
-        }
+    const depcheckByLib = [];
+    let globalOutput = '';
+    let hasAnyIssues = false;
+
+    for (const lib of libraries) {
+      const libPath = path.join(process.cwd(), 'projects', lib);
+
+      if (!fs.existsSync(libPath)) {
+        continue;
       }
-      if (output.includes('Missing dependencies')) {
-        depcheckData.hasIssues = true;
-        const missingMatch = output.match(/Missing dependencies[:\s]+([\s\S]*?)(?=\n\n|Unused|$)/);
-        if (missingMatch) {
-          depcheckData.missingDependencies = missingMatch[1]
-            .split('\n')
-            .filter(line => line.trim().startsWith('*'))
-            .map(line => line.trim().substring(1).trim());
+
+      this.log(`  Verificando dependencias de ${lib}...`);
+
+      const result = this.executeCommand(
+        `cd "${libPath}" && depcheck || true`,
+        `Depcheck em ${lib}`
+      );
+
+      globalOutput += `\n\n=== ${lib} ===\n${result.output}`;
+
+      let libData = {
+        library: lib,
+        hasIssues: false,
+        unusedDependencies: [],
+        missingDependencies: []
+      };
+
+      try {
+        const output = result.output || '';
+        if (output.includes('Unused dependencies')) {
+          libData.hasIssues = true;
+          hasAnyIssues = true;
+          const unusedMatch = output.match(/Unused dependencies[:\s]+([\s\S]*?)(?=\n\n|Missing|$)/);
+          if (unusedMatch) {
+            libData.unusedDependencies = unusedMatch[1]
+              .split('\n')
+              .filter(line => line.trim().startsWith('*'))
+              .map(line => line.trim().substring(1).trim());
+          }
         }
+        if (output.includes('Missing dependencies')) {
+          libData.hasIssues = true;
+          hasAnyIssues = true;
+          const missingMatch = output.match(/Missing dependencies[:\s]+([\s\S]*?)(?=\n\n|Unused|$)/);
+          if (missingMatch) {
+            libData.missingDependencies = missingMatch[1]
+              .split('\n')
+              .filter(line => line.trim().startsWith('*'))
+              .map(line => line.trim().substring(1).trim());
+          }
+        }
+      } catch (error) {
+        this.logError(`Erro ao processar saida do depcheck para ${lib}`, error.message);
       }
-    } catch (error) {
-      this.logError('Erro ao processar saida do depcheck', error.message);
+
+      depcheckByLib.push(libData);
     }
 
     this.results.metrics.depcheck = {
-      success: result.success,
-      data: depcheckData,
-      output: result.output
+      success: true,
+      hasAnyIssues: hasAnyIssues,
+      libraries: depcheckByLib,
+      output: globalOutput
     };
   }
 
@@ -395,22 +471,49 @@ class MetricsRunner {
         .output-section {
             margin-top: 15px;
             background: #f5f5f5;
-            padding: 15px;
+            padding: 0;
             border-radius: 6px;
             border: 1px solid #e0e0e0;
         }
 
-        .output-section h3 {
-            font-size: 1em;
-            margin-bottom: 10px;
-            color: #555;
+        .output-section summary {
+            padding: 12px 15px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #667eea;
+            user-select: none;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .output-section summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .output-section summary::before {
+            content: '▶';
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 0.8em;
+        }
+
+        .output-section[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .output-section summary:hover {
+            background: #ebebeb;
         }
 
         .output-section pre {
             background: #2d2d2d;
             color: #f8f8f2;
             padding: 15px;
-            border-radius: 6px;
+            margin: 0;
+            border-radius: 0 0 6px 6px;
             overflow-x: auto;
             font-size: 0.85em;
             line-height: 1.5;
@@ -546,10 +649,10 @@ class MetricsRunner {
         <div class="metric-body">
           <p>${build.success ? 'Todos os pacotes foram construidos com sucesso.' : 'Build falhou. Veja a saida abaixo.'}</p>
           ${build.output ? `
-            <div class="output-section">
-              <h3>Saida do Build</h3>
+            <details class="output-section">
+              <summary>Ver Saida do Build</summary>
               <pre>${this.escapeHtml(build.output.substring(0, 2000))}${build.output.length > 2000 ? '...' : ''}</pre>
-            </div>
+            </details>
           ` : ''}
         </div>
       </div>
@@ -576,6 +679,7 @@ class MetricsRunner {
                   <th>Pacote</th>
                   <th>Limite</th>
                   <th>Tamanho Atual</th>
+                  <th>Excedeu</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -585,6 +689,7 @@ class MetricsRunner {
                     <td>${item.name}</td>
                     <td>${item.limit}</td>
                     <td>${item.actual}</td>
+                    <td>${item.exceeded || '-'}</td>
                     <td><span class="status-badge ${item.passed ? 'status-success' : 'status-error'}">${item.passed ? 'OK' : 'Excedeu'}</span></td>
                   </tr>
                 `).join('')}
@@ -592,10 +697,10 @@ class MetricsRunner {
             </table>
           ` : '<p>Nenhum dado de limite de tamanho disponivel.</p>'}
           ${sizeLimit.output ? `
-            <div class="output-section">
-              <h3>Saida</h3>
+            <details class="output-section">
+              <summary>Ver Saida Completa</summary>
               <pre>${this.escapeHtml(sizeLimit.output.substring(0, 1500))}${sizeLimit.output.length > 1500 ? '...' : ''}</pre>
-            </div>
+            </details>
           ` : ''}
         </div>
       </div>
@@ -636,10 +741,10 @@ class MetricsRunner {
             </table>
           ` : '<p>Nenhum dado de tamanho de bundle disponivel.</p>'}
           ${bundlesize.output ? `
-            <div class="output-section">
-              <h3>Saida</h3>
+            <details class="output-section">
+              <summary>Ver Saida Completa</summary>
               <pre>${this.escapeHtml(bundlesize.output.substring(0, 1500))}${bundlesize.output.length > 1500 ? '...' : ''}</pre>
-            </div>
+            </details>
           ` : ''}
         </div>
       </div>
@@ -650,42 +755,69 @@ class MetricsRunner {
     const depcheck = this.results.metrics.depcheck;
     if (!depcheck) return '';
 
+    const totalUnused = depcheck.libraries.reduce((sum, lib) => sum + lib.unusedDependencies.length, 0);
+    const totalMissing = depcheck.libraries.reduce((sum, lib) => sum + lib.missingDependencies.length, 0);
+
     return `
       <div class="metric-section">
         <div class="metric-header">
           <h2>Verificacao de Dependencias</h2>
-          <span class="status-badge ${!depcheck.data.hasIssues ? 'status-success' : 'status-error'}">
-            ${!depcheck.data.hasIssues ? 'Limpo' : 'Problemas Encontrados'}
+          <span class="status-badge ${!depcheck.hasAnyIssues ? 'status-success' : 'status-error'}">
+            ${!depcheck.hasAnyIssues ? 'Limpo' : 'Problemas Encontrados'}
           </span>
         </div>
         <div class="metric-body">
           <div class="stats-grid">
             <div class="stat-card">
-              <div class="value">${depcheck.data.unusedDependencies.length}</div>
+              <div class="value">${totalUnused}</div>
               <div class="label">Dependencias Nao Utilizadas</div>
             </div>
             <div class="stat-card">
-              <div class="value">${depcheck.data.missingDependencies.length}</div>
+              <div class="value">${totalMissing}</div>
               <div class="label">Dependencias Ausentes</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">${depcheck.libraries.filter(lib => lib.hasIssues).length}</div>
+              <div class="label">Bibliotecas com Problemas</div>
             </div>
           </div>
 
-          ${depcheck.data.unusedDependencies.length > 0 ? `
-            <div class="output-section">
-              <h3>Dependencias Nao Utilizadas</h3>
-              <ul class="list-items">
-                ${depcheck.data.unusedDependencies.map(dep => `<li>${dep}</li>`).join('')}
-              </ul>
-            </div>
-          ` : '<p class="no-items">Nenhuma dependencia nao utilizada encontrada.</p>'}
+          ${depcheck.libraries.map(lib => `
+            <div style="margin-top: 20px; padding: 15px; background: ${lib.hasIssues ? '#fff3e0' : '#e8f5e9'}; border-radius: 8px; border-left: 4px solid ${lib.hasIssues ? '#ff9800' : '#4caf50'};">
+              <h3 style="margin: 0 0 10px 0; color: #333; font-size: 1.1em;">
+                ${lib.library}
+                <span class="status-badge ${lib.hasIssues ? 'status-error' : 'status-success'}" style="margin-left: 10px; font-size: 0.75em;">
+                  ${lib.hasIssues ? 'Com Problemas' : 'Limpo'}
+                </span>
+              </h3>
 
-          ${depcheck.data.missingDependencies.length > 0 ? `
-            <div class="output-section">
-              <h3>Dependencias Ausentes</h3>
-              <ul class="list-items">
-                ${depcheck.data.missingDependencies.map(dep => `<li>${dep}</li>`).join('')}
-              </ul>
+              ${lib.unusedDependencies.length > 0 ? `
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Nao Utilizadas (${lib.unusedDependencies.length}):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    ${lib.unusedDependencies.map(dep => `<li>${dep}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+
+              ${lib.missingDependencies.length > 0 ? `
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Ausentes (${lib.missingDependencies.length}):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    ${lib.missingDependencies.map(dep => `<li>${dep}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+
+              ${!lib.hasIssues ? '<p style="margin: 10px 0 0 0; color: #4caf50; font-style: italic;">Nenhum problema encontrado nesta biblioteca.</p>' : ''}
             </div>
+          `).join('')}
+
+          ${depcheck.output ? `
+            <details class="output-section" style="margin-top: 20px;">
+              <summary>Ver Saida Completa de Todas as Bibliotecas</summary>
+              <pre>${this.escapeHtml(depcheck.output.substring(0, 3000))}${depcheck.output.length > 3000 ? '...' : ''}</pre>
+            </details>
           ` : ''}
         </div>
       </div>
@@ -724,10 +856,10 @@ class MetricsRunner {
             </div>
           </div>
           ${tests.output ? `
-            <div class="output-section">
-              <h3>Saida dos Testes</h3>
+            <details class="output-section">
+              <summary>Ver Saida dos Testes</summary>
               <pre>${this.escapeHtml(tests.output.substring(0, 2000))}${tests.output.length > 2000 ? '...' : ''}</pre>
-            </div>
+            </details>
           ` : ''}
         </div>
       </div>
@@ -762,10 +894,10 @@ class MetricsRunner {
             </div>
           </div>
           ${lint.output ? `
-            <div class="output-section">
-              <h3>Saida do Lint</h3>
+            <details class="output-section">
+              <summary>Ver Saida do Lint</summary>
               <pre>${this.escapeHtml(lint.output.substring(0, 2000))}${lint.output.length > 2000 ? '...' : ''}</pre>
-            </div>
+            </details>
           ` : ''}
         </div>
       </div>
