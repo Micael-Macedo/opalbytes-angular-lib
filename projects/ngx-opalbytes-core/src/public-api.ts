@@ -48,3 +48,5 @@ export * from "./lib/utils/global-error.handler";
 export * from "./lib/utils/loading-type"; 
 export * from "./lib/utils/navigation.util"; 
 
+export * from "./lib/models/websocket/index"
+export * from "./lib/services/websocket/index"
