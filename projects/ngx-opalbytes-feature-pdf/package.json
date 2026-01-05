@@ -1,0 +1,14 @@
+{
+  "name": "ngx-opalbytes-feature-pdf",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

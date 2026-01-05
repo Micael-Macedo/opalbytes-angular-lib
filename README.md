@@ -75,6 +75,7 @@ opalbytes-angular-lib/
 │   ├── ngx-opalbytes-components/    # Biblioteca de componentes de UI
 │   ├── ngx-opalbytes-core/   # Biblioteca central com serviços, guards e modelos
 │   ├── ngx-opalbytes-directives/    # Biblioteca de diretivas de atributo e estruturais
+│   ├── ngx-opalbytes-feature-pdf/   # Biblioteca para geração de PDF
 │   ├── ngx-opalbytes-services/      # Biblioteca de serviços reutilizáveis
 │   ├── ngx-opalbytes-shared/        # Módulos, pipes e componentes compartilhados
 │   └── ngx-opalbytes-utils/         # Funções e utilitários
@@ -126,6 +127,17 @@ Diretivas para adicionar comportamentos dinâmicos a elementos do DOM.
 | `cpf-mask`    | Aplica uma máscara de CPF a um campo de input.              |
 | `highlight`   | Realça o texto de um elemento com base em uma busca.        |
 | `skeleton`    | Exibe um placeholder de carregamento (esqueleto).           |
+
+### `ngx-opalbytes-feature-pdf`
+
+Biblioteca para conversão de conteúdo HTML para documentos PDF. Utiliza `jspdf` e `html2canvas` para capturar elementos do DOM e gerar arquivos PDF, com suporte para múltiplas páginas, marcas d'água e customização de saída.
+
+| Serviço/Utilitário | Descrição |
+| --- | --- |
+| `PdfExportService` | Orquestra o processo de exportação com estado reativo. |
+| `HtmlToPdfConverter` | Utilitário de baixo nível para a conversão de HTML para PDF. |
+| `SinglePageExportStrategy` | Estratégia de exportação para conteúdo de página única. |
+| `MultiPageExportStrategy` | Estratégia de exportação para conteúdo de múltiplas páginas. |
 
 ### `ngx-opalbytes-services`
 
@@ -256,6 +268,7 @@ O **escopo é obrigatório** e indica qual biblioteca do monorepo está sendo mo
 *   `components`
 *   `core`
 *   `directives`
+*   `pdf`
 *   `services`
 *   `shared`
 *   `utils`

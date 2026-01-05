@@ -18,6 +18,9 @@
       "ngx-opalbytes-directives": [
         "./dist/ngx-opalbytes-directives"
       ],
+      "ngx-opalbytes-feature-pdf": [
+        "./dist/ngx-opalbytes-feature-pdf"
+      ],
       "ngx-opalbytes-services": [
         "./dist/ngx-opalbytes-services"
       ],
@@ -76,6 +79,12 @@
     },
     {
       "path": "./projects/ngx-opalbytes-core/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-feature-pdf/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-feature-pdf/tsconfig.spec.json"
     }
   ]
 }
