@@ -1,3 +1,30 @@
+# [1.10.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.9.2...ngx-opalbytes-components@1.10.0) (2026-01-06)
+
+
+### Bug Fixes
+
+* **components:** correcao step para lint ([c91c85d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c91c85d69256dba2b883b50c246d72b7cc4646ff))
+* **core:** correcao importacao elementos shared ([9305681](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/930568142bbff68d6263f90d21383ea82abc9dad))
+* **shared:** correcao comparacao commit package ([981f783](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/981f783081e476fe1adf2054ea096ba42e23cbe6))
+* **shared:** correcao pacote de destino no build ([a49c917](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a49c91754e276ce0313e3c2fd9996cc1b977bb50))
+* **shared:** correcao publicacao lib shared ([20b0fb1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/20b0fb107c1e15f97b64fa4745a7710e0d141aaa))
+
+
+### Features
+
+* **components:** add componente stepper e step ([9d26896](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9d2689624473a5f62f077517efa75f1151379190))
+* **core:** add elemento websocket ([e60d1bf](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e60d1bfb4bf055b7ff396c97d47406a97f576582))
+* **core:** atualizacao peerDependencies ([9951a5b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9951a5ba7db5ac01179d10485a9e0657aa633d70))
+* **core:** criacao lib core ([9d18448](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9d184484889df2242ce009147f4db19e03325731))
+* **libs:** criacao actions para lib core e shared ([d0390d1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d0390d1d96d3bd621ad41cd3a737c65d002330b1))
+* **libs:** inclusao matriz publicacao pdf em release ([c48d9e3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c48d9e3dbaffb4cf37f48e9bfa191d132eb3e371))
+* **pdf:** add estrategias de exportacao de pag ([86fb462](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/86fb46244873798ae6b542399ed12647e1092bcf))
+* **pdf:** add-lib-pdf-convertor ([9bedfc0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9bedfc02026538c48e47c0fe3b829d1dcd585704))
+* **pdf:** atualizacao documentacao sobre lib pdf ([22a63be](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/22a63be2375e83be862c24bff91e5e0196d8adee))
+* **shared:** atualizacao elementos shared ([d55807c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d55807cff21025e6440b1f964bb67888d2404571))
+* **shared:** correcao release shared ([42cab12](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/42cab126eda44cf9bafbaa342078ff1221329f49))
+* **shared:** criacao lib shared ([e3b9f37](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e3b9f37da18f7c684bd63cd688f9c0e1a6567d03))
+
 ## [1.9.2](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.9.1...ngx-opalbytes-components@1.9.2) (2025-12-30)
 
 

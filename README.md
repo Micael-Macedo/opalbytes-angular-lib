@@ -73,10 +73,12 @@ Este é um monorepo Angular que gerencia múltiplas bibliotecas. Todas as biblio
 opalbytes-angular-lib/
 ├── projects/
 │   ├── ngx-opalbytes-components/    # Biblioteca de componentes de UI
-│   ├── ngx-opalbytes-core-shared/   # Biblioteca central com serviços, guards e modelos
+│   ├── ngx-opalbytes-core/   # Biblioteca central com serviços, guards e modelos
 │   ├── ngx-opalbytes-directives/    # Biblioteca de diretivas de atributo e estruturais
 │   ├── ngx-opalbytes-services/      # Biblioteca de serviços reutilizáveis
-│   ├── ngx-opalbytes-utils/         # Funções e utilitários
+│   ├── ngx-opalbytes-feature-pdf/   # Biblioteca para geração de PDF
+│   ├── ngx-opalbytes-shared/        # Módulos, pipes e componentes compartilhados
+│   ├─── ngx-opalbytes-utils/         # Funções e utilitários
 │   └── ngx-opalbytes-performance/   # Monitoramento de performance em runtime
 │
 ├── .github/                         # Workflows de CI/CD (Release)
@@ -89,7 +91,7 @@ opalbytes-angular-lib/
 
 ## 📚 Bibliotecas Disponíveis
 
-### `ngx-opalbytes-core-shared`
+### `ngx-opalbytes-core`
 
 Biblioteca central que serve como base para as demais. Contém a lógica de negócio principal, serviços essenciais, interceptors, guards e modelos de dados.
 
@@ -98,9 +100,6 @@ Biblioteca central que serve como base para as demais. Contém a lógica de neg�
   - **`interceptors`**: Interceptors para adicionar headers, tratar erros HTTP e gerenciar o cache.
   - **`guards`**: Guards de rota para proteger o acesso a determinadas áreas da aplicação.
   - **`models`**: Modelos de dados globais, como `User` e `HttpError`.
-- **`shared`**: Módulo com componentes, diretivas e pipes compartilhados.
-  - **`components`**: Componentes reutilizáveis, como `LoadingSpinner` e `ConfirmationDialog`.
-  - **`pipes`**: Pipes para formatação de dados, como `CPF` e `Date`.
 
 ### `ngx-opalbytes-components`
 
@@ -130,6 +129,17 @@ Diretivas para adicionar comportamentos dinâmicos a elementos do DOM.
 | `highlight`   | Realça o texto de um elemento com base em uma busca.        |
 | `skeleton`    | Exibe um placeholder de carregamento (esqueleto).           |
 
+### `ngx-opalbytes-feature-pdf`
+
+Biblioteca para conversão de conteúdo HTML para documentos PDF. Utiliza `jspdf` e `html2canvas` para capturar elementos do DOM e gerar arquivos PDF, com suporte para múltiplas páginas, marcas d'água e customização de saída.
+
+| Serviço/Utilitário | Descrição |
+| --- | --- |
+| `PdfExportService` | Orquestra o processo de exportação com estado reativo. |
+| `HtmlToPdfConverter` | Utilitário de baixo nível para a conversão de HTML para PDF. |
+| `SinglePageExportStrategy` | Estratégia de exportação para conteúdo de página única. |
+| `MultiPageExportStrategy` | Estratégia de exportação para conteúdo de múltiplas páginas. |
+
 ### `ngx-opalbytes-services`
 
 Serviços reutilizáveis com lógica de negócio específica e isolada.
@@ -139,6 +149,22 @@ Serviços reutilizáveis com lógica de negócio específica e isolada.
 | `date-pipe.service` | Formata datas de acordo com a localidade.                   |
 | `installer.service` | Gerencia a instalação de um PWA.                            |
 | `websocket.service` | Facilita a comunicação em tempo real via WebSockets.        |
+
+### `ngx-opalbytes-shared`
+
+Biblioteca que agrupa módulos compartilhados, incluindo componentes de UI genéricos, diretivas, enums, interfaces, pipes, resolvers e validadores, para promover a reutilização e padronização em projetos Angular.
+
+| Módulo | Descrição |
+| --- | --- |
+| `components` | Componentes de UI genéricos e reutilizáveis. |
+| `constants` | Constantes globais da aplicação. |
+| `directives` | Diretivas de atributo e estruturais (ex: máscaras, validações). |
+| `enums` | Enumerações para tipos e status comuns. |
+| `interfaces` | Interfaces de modelos de dados e configurações compartilhadas. |
+| `layouts` | Estruturas de layout reutilizáveis. |
+| `pipes` | Pipes para formatação de dados (ex: CEP, CPF/CNPJ, datas). |
+| `resolvers` | Resolvers para pré-carregamento de dados de rotas. |
+| `validators` | Funções de validação para formulários reativos. |
 
 ### `ngx-opalbytes-utils`
 
@@ -302,13 +328,15 @@ O **escopo é obrigatório** e indica qual biblioteca do monorepo está sendo mo
 **O escopo DEVE ser um dos seguintes:**
 
 *   `components`
-*   `directives`
-*   `services`
-*   `utils`
 *   `core`
+*   `directives`
+*   `pdf`
+*   `services`
 *   `shared`
 *   `performance`
 *   `libs`
+*   `utils`
+*   `root`
 
 **Exemplos de mensagens de commit VÁLIDAS:**
 

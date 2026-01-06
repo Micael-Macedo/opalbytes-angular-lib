@@ -79,6 +79,7 @@ src/
         |   ├── footer/
         |   ├── links-button/
         |   ├── paginator/
+        |   ├── stepper/
         |   └── time-picker/
         └── features/
             ├── base-modal/
@@ -118,6 +119,61 @@ Um botão customizável com suporte a ícones, estado de loading e tooltip.
 | Evento | Tipo | Descrição |
 | --- | --- | --- |
 | `buttonClick` | `EventEmitter<void>` | Emitido quando o botão é clicado. |
+
+---
+
+### `Stepper`
+
+Um componente de passo a passo que guia o usuário através de um processo.
+
+**Seletor:** `<cao-stepper>`
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo     | Padrão | Descrição                             |
+| -------- | -------- | ------ | ------------------------------------- |
+| `title`  | `string` | `''`   | O título exibido acima do stepper.    |
+
+**Eventos (Outputs)**
+
+| Evento            | Tipo                | Descrição                                         |
+| ----------------- | ------------------- | ------------------------------------------------- |
+| `maxReachedEvent` | `EventEmitter<null>` | Emitido quando o último passo do stepper é alcançado. |
+
+**Métodos**
+
+| Método         | Descrição                                                                              |
+| -------------- | -------------------------------------------------------------------------------------- |
+| `nextStep()`   | Avança para o próximo passo. Se estiver no último passo, emite o evento `maxReachedEvent`. |
+| `prevStep()`   | Retorna ao passo anterior. Não faz nada se estiver no primeiro passo.                  |
+| `resetStepper()`| Reinicia o stepper, voltando ao primeiro passo e desativando todos os outros.          |
+
+**Uso com `Step`**
+
+O `Stepper` deve ser usado em conjunto com o componente `Step`.
+
+```html
+<cao-stepper title="Meu Stepper">
+  <cao-step title="1"></cao-step>
+  <cao-step title="2"></cao-step>
+  <cao-step title="3"></cao-step>
+</cao-stepper>
+```
+
+---
+
+### `Step`
+
+Representa um único passo dentro do componente `Stepper`.
+
+**Seletor:** `<cao-step>`
+
+**Atributos (Inputs)**
+
+| Atributo   | Tipo      | Padrão  | Descrição                                 |
+| ---------- | --------- | ------- | ----------------------------------------- |
+| `title`    | `string`  | `''`    | O texto exibido dentro do passo (ex: "1"). |
+| `isActive` | `boolean` | `false` | Define se o passo está ativo.             |
 
 ---
 

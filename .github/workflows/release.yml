@@ -18,8 +18,9 @@ jobs:
       should-release-directives: ${{ steps.check.outputs.should-release-directives }}
       should-release-services: ${{ steps.check.outputs.should-release-services }}
       should-release-utils: ${{ steps.check.outputs.should-release-utils }}
-      should-release-core: ${{ steps.check.outputs.should-release-core }}
       should-release-performance: ${{ steps.check.outputs.should-release-performance }}
+      should-release-shared: ${{ steps.check.outputs.should-release-shared }}  
+      should-release-pdf-export: ${{ steps.check.outputs.should-release-pdf-export }}  
     steps:
       - uses: actions/checkout@v3
         with:
@@ -47,6 +48,8 @@ jobs:
           should_release_utils="false"
           should_release_core="false"
           should_release_performance="false"
+          should_release_shared="false"
+          should_release_pdf_export="false"
           
           while IFS= read -r commit_message; do
             echo "Analisando commit: $commit_message"
@@ -86,6 +89,16 @@ jobs:
               should_release_performance="true"
               echo "Commit relacionado a performance encontrado"
             fi
+            
+            if [[ "$commit_message" =~ (feat\(shared\)|fix\(shared\)|refactor\(shared\)|docs\(shared\)|chore\(shared\)|release\(shared\)|test\(shared\)|style\(shared\)|feature\(shared\)) ]]; then
+              should_release_shared="true"
+              echo "Commit relacionado a shared encontrado"
+            fi
+
+            if [[ "$commit_message" =~ (feat\(pdf\)|fix\(pdf\)|refactor\(pdf\)|docs\(pdf\)|chore\(pdf\)|release\(pdf\)|test\(pdf\)|style\(pdf\)|feature\(pdf\)) ]]; then
+              should_release_pdf_export="true"
+              echo "Commit relacionado a pdf-export encontrado"
+            fi
           done <<< "$COMMITS"
           
           # Export results
@@ -96,6 +109,8 @@ jobs:
           echo "should-release-utils=$should_release_utils" >> $GITHUB_OUTPUT
           echo "should-release-core=$should_release_core" >> $GITHUB_OUTPUT
           echo "should-release-performance=$should_release_performance" >> $GITHUB_OUTPUT
+          echo "should-release-shared=$should_release_shared" >> $GITHUB_OUTPUT
+          echo "should-release-pdf-export=$should_release_pdf_export" >> $GITHUB_OUTPUT
 
   publish-sequentially:
     runs-on: ubuntu-latest
@@ -107,20 +122,22 @@ jobs:
       needs.check-commits.outputs.should-release-directives == 'true' ||
       needs.check-commits.outputs.should-release-components == 'true' ||
       needs.check-commits.outputs.should-release-performance == 'true' ||
-      needs.check-commits.outputs.should-release-libs == 'true'
+      needs.check-commits.outputs.should-release-libs == 'true' ||
+      needs.check-commits.outputs.should-release-shared == 'true' ||
+      needs.check-commits.outputs.should-release-pdf-export == 'true' 
     
     strategy:
       max-parallel: 1
       fail-fast: false
       matrix:
-        library: ['core', 'utils', 'services', 'directives', 'components', 'performance', 'libs']
+        library: ['core', 'utils', 'services', 'directives', 'components', 'libs','performance', 'shared', 'pdf-export']
         include:
           - library: 'core'
             condition: ${{ needs.check-commits.outputs.should-release-core }}
-            project-path: 'projects/ngx-opalbytes-core-shared'
+            project-path: 'projects/ngx-opalbytes-core'
             build-command: 'npm run build:core'
             test-command: 'echo "No tests for core"'
-            release-command: 'cd projects/ngx-opalbytes-core-shared && npx semantic-release'
+            release-command: 'cd projects/ngx-opalbytes-core && npx semantic-release'
           
           - library: 'utils'
             condition: ${{ needs.check-commits.outputs.should-release-utils }}
@@ -163,7 +180,21 @@ jobs:
             build-command: 'echo "No build needed for root"'
             test-command: 'echo "No tests for root"'
             release-command: 'npx semantic-release'
-    
+
+          - library: 'shared'
+            condition: ${{ needs.check-commits.outputs.should-release-shared }}
+            project-path: 'projects/ngx-opalbytes-shared'
+            build-command: 'npm run build:shared'
+            test-command: 'npm run test:shared'
+            release-command: 'cd projects/ngx-opalbytes-shared && npx semantic-release'
+          
+          - library: 'pdf-export'
+            condition: ${{ needs.check-commits.outputs.should-release-pdf-export }}
+            project-path: 'projects/ngx-opalbytes-feature-pdf'
+            build-command: 'npm run build:pdf'
+            test-command: 'npm run test:pdf'
+            release-command: 'cd projects/ngx-opalbytes-feature-pdf && npx semantic-release'
+
     steps:
       - name: Iniciar processo para ${{ matrix.library }}
         run: |
