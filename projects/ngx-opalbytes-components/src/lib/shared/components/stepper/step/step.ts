@@ -9,6 +9,6 @@ import { Component, Input } from "@angular/core";
   imports: [CommonModule],
 })
 export class StepComponent {
-  @Input() title: string = "";
-  @Input() isActive: boolean = false;
+  @Input() title = "";
+  @Input() isActive = false;
 }

@@ -1,6 +1,6 @@
-import { AfterContentInit, EventEmitter, Output } from "@angular/core";
-import { ContentChildren, Input, QueryList } from "@angular/core";
-import { Component } from "@angular/core";
+import { AfterContentInit, EventEmitter, Output , ContentChildren, Input, QueryList , Component } from "@angular/core";
+
+
 import { StepComponent } from "./step/step";
 
 @Component({
@@ -13,9 +13,9 @@ export class StepperComponent implements AfterContentInit {
   constructor() {}
   @ContentChildren(StepComponent) steps!: QueryList<StepComponent>;
   @Input() title!: string;
-  activeStepIndex: number = 0;
-  lengthStep: number = 0;
-  showLine: boolean = true;
+  activeStepIndex = 0;
+  lengthStep = 0;
+  showLine = true;
 
   @Output() readonly maxReachedEvent: EventEmitter<null> = new EventEmitter<null>();
 
