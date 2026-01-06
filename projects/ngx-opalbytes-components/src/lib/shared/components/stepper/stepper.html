@@ -1,0 +1,11 @@
+@if(title){
+<h3 class="stepper-title">{{ title }}</h3>
+}
+<div class="d-flex step-container aic jcsb">
+  @if (showLine) {
+  <div class="line"></div>
+  }
+  <div class="steps d-flex aic jcsb">
+    <ng-content />
+  </div>
+</div>
