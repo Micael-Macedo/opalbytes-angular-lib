@@ -1,0 +1,17 @@
+.step-container {
+  position: relative;
+}
+
+.steps {
+  z-index: 2;
+  gap: 24px;
+}
+
+.line {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  height: 1.5px;
+  background-color: var(--return-color);
+  z-index: 1;
+}
