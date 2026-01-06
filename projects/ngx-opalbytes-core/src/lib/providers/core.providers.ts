@@ -12,17 +12,13 @@ import {
 import { APP_CONFIG, ENVIRONMENT, getConfigByEnvironment } from '@core.config/index';
 import { ApiInterceptor } from '@core.interceptors/api.interceptor';
 import { LoadingInterceptor } from '@core.interceptors/loading.interceptor';
-
-
-export interface IEnvironment {
-  production: boolean;
-  name: "production" | "homologation" | "development" | "local";
-}
+import { IApiConfig } from '@core.interfaces/apiUrl-config.interface';
+import { IEnvironmentConfig } from '@core.interfaces/environment-config.interface';
 
 export interface IProvideConfig {
   routes: Routes,
-  enviroment: IEnvironment
-  apiConfig: any;
+  enviroment: IEnvironmentConfig,
+  apiConfig: IApiConfig;
 }
 
 export function caoProvideCore(provideConfig: IProvideConfig): EnvironmentProviders {
