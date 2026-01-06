@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 
-import { IWebSocketConfig } from '@core.models/websocket';
+import { IWebSocketConfig } from '@core.services/models/websocket-config.model';
 
 /**
  * Wrapper para WebSocket nativo do browser
@@ -18,7 +18,7 @@ export class WebSocketConnection {
   private closeSubject = new Subject<CloseEvent>();
   private errorSubject = new Subject<Event>();
 
-  constructor(private config: IWebSocketConfig) {}
+  constructor(private config: IWebSocketConfig) { }
 
   /**
    * Abre a conexão WebSocket

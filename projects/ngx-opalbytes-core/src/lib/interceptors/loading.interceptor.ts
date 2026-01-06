@@ -13,7 +13,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { tap, catchError, debounceTime } from "rxjs/operators";
 
-import { LoadingService } from "../services/loading.service";
+import { LoadingService } from "./services/loading.service";
+
 
 @Injectable({ providedIn: "root" })
 export class LoadingInterceptor implements HttpInterceptor {

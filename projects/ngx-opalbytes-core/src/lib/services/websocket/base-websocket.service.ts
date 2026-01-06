@@ -2,11 +2,11 @@
 import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
 import { map, take, takeUntil } from 'rxjs/operators';
 
+import { IWebSocketResponse, WebSocketState, IWebSocketConfig } from '@core.services/models';
 
-import { IWebSocketResponse, WebSocketState, IWebSocketConfig } from '@core.models/websocket';
-import { ConfigService } from '@core.services/config.service';
-
+import { WebsocketConfigService } from './websocket-config.service';
 import { WebSocketConnection } from './websocket-connection';
+
 
 /**
  * Classe base abstrata para serviços WebSocket
@@ -36,7 +36,7 @@ export abstract class BaseWebSocketService<TRequest, TResponse> {
   protected reconnectTimer?: ReturnType<typeof setTimeout>;
   protected destroy$ = new Subject<void>();
 
-  constructor(protected configService: ConfigService) {
+  constructor(protected configService: WebsocketConfigService) {
     this.connection$ = new BehaviorSubject<WebSocketConnection | null>(null);
     this.messages$ = new Subject<IWebSocketResponse<TResponse>>();
     this.state$ = new BehaviorSubject<WebSocketState>(WebSocketState.Disconnected);

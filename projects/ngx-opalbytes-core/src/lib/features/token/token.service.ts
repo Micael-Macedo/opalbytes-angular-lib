@@ -1,17 +1,16 @@
 import { Injectable } from "@angular/core";
 
+
 import { jwtDecode } from "jwt-decode";
 import { Observable } from "rxjs";
 
-import { StorageService } from "./storage.service";
-import { Variables } from "../constants/variaveis.enum";
-import { IJwtPayload } from "../interfaces/jwt-interface";
+import { StorageService } from "@core.services/storage.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class TokenService {
-  constructor(private storageService: StorageService) {}
+  constructor(private storageService: StorageService) { }
 
   hasToken(): boolean {
     return !!this.getToken();

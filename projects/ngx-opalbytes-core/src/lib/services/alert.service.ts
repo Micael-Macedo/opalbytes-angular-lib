@@ -1,9 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 
-import { IAlertConfig } from "@core.interfaces/alert-config.interface";
-
+import { IAlertConfig } from "./interfaces/alert-config.interface";
 import { ToastService } from "./toast.service";
-
 
 @Injectable({
   providedIn: "root",

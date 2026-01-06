@@ -22,6 +22,7 @@ export interface IEnvironment {
 export interface IProvideConfig {
   routes: Routes,
   enviroment: IEnvironment
+  apiConfig: any;
 }
 
 export function caoProvideCore(provideConfig: IProvideConfig): EnvironmentProviders {

@@ -10,9 +10,10 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map, catchError, finalize } from "rxjs/operators";
 
-import { HttpErrorHandlerService } from "../services/http-error-handler.service";
-import { LoadingService } from "../services/loading.service";
-import { ResponseTransformerService } from "../services/response-transformer.service";
+import { HttpErrorHandlerService } from "./services/http-error-handler.service";
+import { LoadingService } from "./services/loading.service";
+import { ResponseTransformerService } from "./services/response-transformer.service";
+
 
 /**
  * Interceptor HTTP refatorado seguindo princípios SOLID

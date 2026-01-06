@@ -39,14 +39,14 @@ export * from "./lib/services/http-error-handler.service";
 export * from "./lib/services/storage.service";
 export * from "./lib/services/table.service";
 export * from "./lib/services/toast.service";
-export * from "./lib/services/token.service";
+export * from "./lib/features/token/token.service";
 
 // Utils
 export * from "./lib/utils/alert-message.builder";
 export * from "./lib/utils/app-config.base";
 export * from "./lib/utils/global-error.handler";
-export * from "./lib/utils/loading-type"; 
-export * from "./lib/utils/navigation.util"; 
+export * from "./lib/utils/loading-type";
+export * from "./lib/utils/navigation.util";
 
-export * from "./lib/models/websocket/index"
+export * from "./lib/services/websocket/models/index"
 export * from "./lib/services/websocket/index"

@@ -2,9 +2,9 @@ import { Inject, Injectable, Injector } from "@angular/core";
 
 import { Observable } from "rxjs";
 
-import { HelpConfig } from "../config/help-config";
-import { IApiResponse } from "../interfaces/api.interface";
-import { BaseResourceModel } from "../models/base-resource.model";
+import { HelpConfig } from "./config/help-config";
+import { IApiResponse } from "./interfaces/api.interface";
+import { BaseResourceModel } from "./models/base-resource.model";
 
 @Injectable({
   providedIn: "root",
