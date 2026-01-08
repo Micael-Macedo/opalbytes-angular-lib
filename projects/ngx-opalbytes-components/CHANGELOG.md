@@ -1,3 +1,19 @@
+# [1.12.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.11.0...ngx-opalbytes-components@1.12.0) (2026-01-08)
+
+
+### Bug Fixes
+
+* **core:** ajusta porvider e StorageService ([fc2137f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fc2137f3a553c13a0da65436cb13d8e5a6213c79))
+* **pdf:** correcao importacao elementos internos ([e3ef756](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e3ef7561b902205316e86a1aeda76daf2a7af4c4))
+
+
+### Features
+
+* **components:** add stepper e nomenclatura autocomplete ([474bfcd](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/474bfcdd763fa6ae392fc005ca96c3602fcf4412))
+* **core:** add independencia de pacotes ([2b05ea4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2b05ea4f9d2d1a530f850f2f0f09618b9a2c8615))
+* **core:** arquivos separados para dependecia de projetos ([e8b759b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e8b759b621ebdeb255eb6cdce2e9ccc8ad6b2a1f))
+* **shared:** add diretiva skeleton ([4edd388](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4edd388f7f0fa899f512711872b590191f03b1f6))
+
 # [1.11.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.10.0...ngx-opalbytes-components@1.11.0) (2026-01-08)
 
 
