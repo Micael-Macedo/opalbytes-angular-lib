@@ -9,11 +9,11 @@ import {
   withSessionStorage,
 } from "ngx-webstorage";
 
-import { APP_CONFIG, ENVIRONMENT, getConfigByEnvironment } from '@core.config/index';
-import { ApiInterceptor } from '@core.interceptors/api.interceptor';
-import { LoadingInterceptor } from '@core.interceptors/loading.interceptor';
-import { IApiConfig } from '@core.interfaces/apiUrl-config.interface';
-import { IEnvironmentConfig } from '@core.interfaces/environment-config.interface';
+import { APP_CONFIG, ENVIRONMENT, getConfigByEnvironment } from '../config/index';
+import { CaoApiInterceptor } from '../interceptors/api.interceptor';
+import { CaoLoadingInterceptor } from '../interceptors/loading.interceptor';
+import { IApiConfig } from '../interfaces/apiUrl-config.interface';
+import { IEnvironmentConfig } from '../interfaces/environment-config.interface';
 
 export interface IProvideConfig {
   routes: Routes,
@@ -43,12 +43,12 @@ export function caoProvideCore(provideConfig: IProvideConfig): EnvironmentProvid
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ApiInterceptor,
+      useClass: CaoApiInterceptor,
       multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: LoadingInterceptor,
+      useClass: CaoLoadingInterceptor,
       multi: true,
     },
     DatePipe

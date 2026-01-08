@@ -4,10 +4,7 @@ import { Router } from "@angular/router";
 
 import { Observable, from, throwError } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
-
-import { AlertService } from "./alert.service";
-import { HttpErrorModel } from "../models/http-error.model";
-import { AlertMessageBuilder } from "../utils/alert-message.builder";
+import { AlertMessageBuilder, AlertService, HttpErrorModel } from "src/public-api";
 
 /**
  * Serviço responsável por processar erros HTTP

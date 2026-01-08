@@ -36,7 +36,7 @@ import { ResponseTransformerService } from "./services/response-transformer.serv
  * - X-Transform-Response / transform: Força transformação de resposta
  */
 @Injectable({ providedIn: "root" })
-export class ApiInterceptor implements HttpInterceptor {
+export class CaoApiInterceptor implements HttpInterceptor {
   constructor(
     private loadingService: LoadingService,
     private httpErrorHandler: HttpErrorHandlerService,

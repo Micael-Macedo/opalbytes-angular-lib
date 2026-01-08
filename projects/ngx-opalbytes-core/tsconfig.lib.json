@@ -7,36 +7,7 @@
     "outDir": "../../out-tsc/lib",
     "declaration": true,
     "declarationMap": true,
-    "types": [],
-    "paths": {
-      "@core.config/*": [
-        "src/lib/config/*"
-      ],
-      "@core.constants/*": [
-        "src/lib/constants/*"
-      ],
-      "@core.enums/*": [
-        "src/lib/enums/*"
-      ],
-      "@core.guards/*": [
-        "src/lib/guards/*"
-      ],
-      "@core.interceptors/*": [
-        "src/lib/interceptors/*"
-      ],
-      "@core.interfaces/*": [
-        "src/lib/interfaces/*"
-      ],
-      "@core.models/*": [
-        "src/lib/models/*"
-      ],
-      "@core.services/*": [
-        "src/lib/services/*"
-      ],
-      "@core.utils/*": [
-        "src/lib/utils/*"
-      ],
-    }
+    "types": []
   },
   "include": [
     "src/**/*.ts"

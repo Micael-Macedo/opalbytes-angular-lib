@@ -1,9 +1,10 @@
 import { HttpEvent, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
+import { IApiResponse } from "src/lib/services/interfaces/api.interface";
+import { AlertMessageBuilder } from "src/public-api";
+
 import { HttpErrorHandlerService } from "./http-error-handler.service";
-import { IApiResponse } from "../interfaces/api.interface";
-import { AlertMessageBuilder } from "../utils/alert-message.builder";
 
 /**
  * Tipo de severidade de alerta

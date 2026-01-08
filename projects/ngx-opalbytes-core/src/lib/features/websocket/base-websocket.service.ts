@@ -2,10 +2,10 @@
 import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
 import { map, take, takeUntil } from 'rxjs/operators';
 
-import { IWebSocketResponse, WebSocketState, IWebSocketConfig } from '@core.services/models';
 
 import { WebsocketConfigService } from './websocket-config.service';
 import { WebSocketConnection } from './websocket-connection';
+import { IWebSocketResponse, WebSocketState, IWebSocketConfig } from '../../services/models';
 
 
 /**
@@ -27,7 +27,7 @@ import { WebSocketConnection } from './websocket-connection';
  * @template TRequest Tipo da requisição enviada
  * @template TResponse Tipo da resposta recebida
  */
-export abstract class BaseWebSocketService<TRequest, TResponse> {
+export abstract class CaoWebSocketService<TRequest, TResponse> {
   protected connection$: BehaviorSubject<WebSocketConnection | null>;
   protected messages$: Subject<IWebSocketResponse<TResponse>>;
   protected state$: BehaviorSubject<WebSocketState>;

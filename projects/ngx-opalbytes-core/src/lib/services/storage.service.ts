@@ -3,9 +3,8 @@ import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
 
 import { BehaviorSubject, Observable, map } from "rxjs";
 
-import { EnvironmentEnum } from "@core.config/app-config";
-
 import { CookieService, ICookieOptions } from "./cookie.service";
+import { EnvironmentEnum } from "../config/app-config";
 import { IStorageOptions, IStorageItem } from "../interfaces/storage.interface";
 
 /**

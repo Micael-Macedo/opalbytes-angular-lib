@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Injectable } from '@angular/core';
 
-import { BaseWebSocketService } from './base-websocket.service';
+import { CaoWebSocketService } from './base-websocket.service';
 
 /**
  * Singleton para gerenciar múltiplas conexões WebSocket
@@ -31,9 +31,9 @@ import { BaseWebSocketService } from './base-websocket.service';
 @Injectable({
   providedIn: 'root',
 })
-export class WebSocketManagerService {
+export class CaoWebSocketManagerService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private connections = new Map<string, BaseWebSocketService<any, any>>();
+  private connections = new Map<string, CaoWebSocketService<any, any>>();
 
   /**
    * Registra um serviço WebSocket
@@ -41,7 +41,7 @@ export class WebSocketManagerService {
    * @param service Instância do serviço
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register<T extends BaseWebSocketService<any, any>>(key: string, service: T): void {
+  register<T extends CaoWebSocketService<any, any>>(key: string, service: T): void {
     if (this.connections.has(key)) {
       console.warn(`[WebSocketManager] Service '${key}' already registered, replacing...`);
       const existingService = this.connections.get(key);
@@ -75,7 +75,7 @@ export class WebSocketManagerService {
    * @returns Serviço ou undefined se não encontrado
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  get<T extends BaseWebSocketService<any, any>>(key: string): T | undefined {
+  get<T extends CaoWebSocketService<any, any>>(key: string): T | undefined {
     return this.connections.get(key) as T | undefined;
   }
 

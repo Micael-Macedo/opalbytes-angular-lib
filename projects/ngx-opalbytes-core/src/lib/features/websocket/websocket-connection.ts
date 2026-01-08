@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 
-import { IWebSocketConfig } from '@core.services/models/websocket-config.model';
+import { IWebSocketConfig } from '../../services/models/websocket-config.model';
 
 /**
  * Wrapper para WebSocket nativo do browser
