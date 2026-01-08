@@ -1,11 +1,11 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 
 
-import { IPdfExportOptions } from '@pdf.interfaces/export-options.interface';
-import { ExportStatus, IExportResult } from '@pdf.interfaces/export-result.interface';
-import { IExportStrategy } from '@pdf.interfaces/export-strategy.interface';
 import { catchError, finalize, Observable, of, tap } from 'rxjs';
 
+import { IPdfExportOptions } from '../interfaces/export-options.interface';
+import { ExportStatus, IExportResult } from '../interfaces/export-result.interface';
+import { IExportStrategy } from '../interfaces/export-strategy.interface';
 import { MultiPageExportStrategy } from './export/strategies/multi-page-export.strategy';
 import { SinglePageExportStrategy } from './export/strategies/single-page-export.strategy';
 
@@ -14,7 +14,7 @@ type ExportType = 'single-page' | 'multi-page';
 @Injectable({
   providedIn: 'root',
 })
-export class PdfExportService {
+export class CaoPdfExportService {
   private singlePageStrategy = inject(SinglePageExportStrategy);
   private multiPageStrategy = inject(MultiPageExportStrategy);
 

@@ -1,12 +1,13 @@
 import { inject } from '@angular/core';
 
 
-import { IPdfExportOptions } from '@pdf.interfaces/export-options.interface';
-import { ExportStatus, IExportResult } from '@pdf.interfaces/export-result.interface';
-import { IExportStrategy } from '@pdf.interfaces/export-strategy.interface';
-import { HtmlToPdfConverter } from '@pdf.utils/html-to-pdf.converter';
 import jsPDF from 'jspdf';
 import { map, Observable, switchMap } from 'rxjs';
+
+import { IPdfExportOptions } from '../../../interfaces/export-options.interface';
+import { ExportStatus, IExportResult } from '../../../interfaces/export-result.interface';
+import { IExportStrategy } from '../../../interfaces/export-strategy.interface';
+import { HtmlToPdfConverter } from '../../../utils/html-to-pdf.converter';
 
 export abstract class BaseExportStrategy implements IExportStrategy {
   protected converter = inject(HtmlToPdfConverter);

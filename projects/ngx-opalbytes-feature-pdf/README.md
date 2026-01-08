@@ -42,9 +42,7 @@ import (
 
 import { Observable } from 'rxjs';
 
-import { IPdfExportOptions } from '@core.interfaces/export-options.interface';
-import { IExportResult } from '@core.interfaces/export-result.interface';
-import { PdfExportService } from '@core.services/pdf-export.service';
+import { CaoPdfExportService, IPdfExportOptions, IExportResult } from 'ngx-opalbytes-feature-pdf';
 
 import { IProtocoloData } from '@domain.models/processo/protocolo-data.interface';
 
@@ -54,7 +52,7 @@ import { ProtocoloPdfTemplateComponent } from '@shared.components/protocolo-pdf-
   providedIn: 'root',
 })
 export class ProcessoDetalhesExportService {
-  private pdfExportService = inject(PdfExportService);
+  private pdfExportService = inject(CaoPdfExportService);
   private appRef = inject(ApplicationRef);
   private injector = inject(EnvironmentInjector);
 
