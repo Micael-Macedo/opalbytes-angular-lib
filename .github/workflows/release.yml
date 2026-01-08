@@ -18,7 +18,7 @@ jobs:
       should-release-directives: ${{ steps.check.outputs.should-release-directives }}
       should-release-services: ${{ steps.check.outputs.should-release-services }}
       should-release-utils: ${{ steps.check.outputs.should-release-utils }}
-      should-release-core: ${{ steps.check.outputs.should-release-core }}  
+      should-release-performance: ${{ steps.check.outputs.should-release-performance }}
       should-release-shared: ${{ steps.check.outputs.should-release-shared }}  
       should-release-pdf-export: ${{ steps.check.outputs.should-release-pdf-export }}  
     steps:
@@ -47,6 +47,7 @@ jobs:
           should_release_services="false"
           should_release_utils="false"
           should_release_core="false"
+          should_release_performance="false"
           should_release_shared="false"
           should_release_pdf_export="false"
           
@@ -84,6 +85,11 @@ jobs:
               echo "Commit relacionado a core encontrado"
             fi
 
+            if [[ "$commit_message" =~ (feat\(performance\)|fix\(performance\)|refactor\(performance\)|docs\(performance\)|chore\(performance\)|release\(performance\)|test\(performance\)|style\(performance\)|feature\(performance\)) ]]; then
+              should_release_performance="true"
+              echo "Commit relacionado a performance encontrado"
+            fi
+            
             if [[ "$commit_message" =~ (feat\(shared\)|fix\(shared\)|refactor\(shared\)|docs\(shared\)|chore\(shared\)|release\(shared\)|test\(shared\)|style\(shared\)|feature\(shared\)) ]]; then
               should_release_shared="true"
               echo "Commit relacionado a shared encontrado"
@@ -102,6 +108,7 @@ jobs:
           echo "should-release-services=$should_release_services" >> $GITHUB_OUTPUT
           echo "should-release-utils=$should_release_utils" >> $GITHUB_OUTPUT
           echo "should-release-core=$should_release_core" >> $GITHUB_OUTPUT
+          echo "should-release-performance=$should_release_performance" >> $GITHUB_OUTPUT
           echo "should-release-shared=$should_release_shared" >> $GITHUB_OUTPUT
           echo "should-release-pdf-export=$should_release_pdf_export" >> $GITHUB_OUTPUT
 
@@ -114,15 +121,16 @@ jobs:
       needs.check-commits.outputs.should-release-services == 'true' ||
       needs.check-commits.outputs.should-release-directives == 'true' ||
       needs.check-commits.outputs.should-release-components == 'true' ||
+      needs.check-commits.outputs.should-release-performance == 'true' ||
       needs.check-commits.outputs.should-release-libs == 'true' ||
       needs.check-commits.outputs.should-release-shared == 'true' ||
       needs.check-commits.outputs.should-release-pdf-export == 'true' 
     
     strategy:
-      max-parallel: 1 
+      max-parallel: 1
       fail-fast: false
       matrix:
-        library: ['core', 'utils', 'services', 'directives', 'components', 'libs', 'shared', 'pdf-export']
+        library: ['core', 'utils', 'services', 'directives', 'components', 'libs','performance', 'shared', 'pdf-export']
         include:
           - library: 'core'
             condition: ${{ needs.check-commits.outputs.should-release-core }}
@@ -158,7 +166,14 @@ jobs:
             build-command: 'npm run build:components'
             test-command: 'npm run test:components'
             release-command: 'cd projects/ngx-opalbytes-components && npx semantic-release'
-          
+
+          - library: 'performance'
+            condition: ${{ needs.check-commits.outputs.should-release-performance }}
+            project-path: 'projects/ngx-opalbytes-performance'
+            build-command: 'npm run build:performance'
+            test-command: 'npm run test:performance'
+            release-command: 'cd projects/ngx-opalbytes-performance && npx semantic-release'
+
           - library: 'libs'
             condition: ${{ needs.check-commits.outputs.should-release-libs }}
             project-path: '.'
@@ -239,6 +254,24 @@ jobs:
           git checkout main
           git pull origin main
           echo "✅ Repositório atualizado"
+
+      # 📊 GERAR RELATÓRIO DE MÉTRICAS
+      - name: Generate Metrics Report
+        if: steps.check-release.outputs.should-release == 'true'
+        run: |
+          echo "📊 Gerando relatório de métricas..."
+          npm run metrics:report || echo "Aviso: Algumas métricas falharam, mas continuando..."
+          echo "✅ Relatório de métricas gerado"
+        continue-on-error: true
+
+      # 📝 ADICIONAR MÉTRICAS AO CHANGELOG
+      - name: Add Metrics to Changelog
+        if: steps.check-release.outputs.should-release == 'true'
+        run: |
+          echo "📝 Adicionando métricas ao changelog..."
+          npm run metrics:changelog
+          echo "✅ Métricas adicionadas ao changelog"
+        continue-on-error: true
           
       - name: Lint ${{ matrix.library }}
         if: steps.check-release.outputs.should-release == 'true'
@@ -262,3 +295,12 @@ jobs:
           echo "🚀 INICIANDO RELEASE: ${{ matrix.library }}"
           ${{ matrix.release-command }}
           echo "✅ RELEASE CONCLUÍDO: ${{ matrix.library }}"
+
+      # 📤 PUBLICAR RELATÓRIO COMO ARTIFACT
+      - name: Upload Metrics Report
+        if: steps.check-release.outputs.should-release == 'true' && hashFiles('metrics-reports/latest.html') != ''
+        uses: actions/upload-artifact@v3
+        with:
+          name: metrics-report-${{ matrix.library }}
+          path: metrics-reports/latest.html
+          retention-days: 90

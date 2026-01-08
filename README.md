@@ -75,10 +75,11 @@ opalbytes-angular-lib/
 │   ├── ngx-opalbytes-components/    # Biblioteca de componentes de UI
 │   ├── ngx-opalbytes-core/   # Biblioteca central com serviços, guards e modelos
 │   ├── ngx-opalbytes-directives/    # Biblioteca de diretivas de atributo e estruturais
-│   ├── ngx-opalbytes-feature-pdf/   # Biblioteca para geração de PDF
 │   ├── ngx-opalbytes-services/      # Biblioteca de serviços reutilizáveis
+│   ├── ngx-opalbytes-feature-pdf/   # Biblioteca para geração de PDF
 │   ├── ngx-opalbytes-shared/        # Módulos, pipes e componentes compartilhados
-│   └── ngx-opalbytes-utils/         # Funções e utilitários
+│   ├─── ngx-opalbytes-utils/         # Funções e utilitários
+│   └── ngx-opalbytes-performance/   # Monitoramento de performance em runtime
 │
 ├── .github/                         # Workflows de CI/CD (Release)
 ├── .husky/                          # Hooks do Git para validações
@@ -173,7 +174,68 @@ Funções utilitárias e helpers para tarefas comuns.
 | --- | --- |
 | `NgxOpalbytesUtils` | Coleção de funções utilitárias (sem implementação no momento). |
 
---- 
+### `ngx-opalbytes-performance`
+
+Biblioteca para monitoramento de performance em runtime.
+
+| Serviço/Recurso                | Descrição                                                   |
+| ------------------------------ | ----------------------------------------------------------- |
+| `PerformanceMetricsService`    | Serviço central para métricas de performance               |
+| `WebVitalsService`             | Monitoramento de Web Vitals (LCP, FID, CLS, etc.)          |
+| `PerformanceObserverService`   | Detecção de long tasks e eventos de performance            |
+| `MemoryMetricsService`         | Monitoramento de uso de memória                            |
+
+Veja a [documentação completa](./projects/ngx-opalbytes-performance/README.md).
+
+---
+
+## 📊 Performance Monitoring
+
+Este monorepo inclui ferramentas integradas de monitoramento de performance:
+
+### Bundle Size Monitoring
+- **size-limit**: Monitora o tamanho dos bundles de cada biblioteca
+- **bundlesize**: Garante que os bundles não excedam limites definidos
+
+```bash
+# Verificar tamanho de todas as bibliotecas
+npm run size
+
+# Verificar com bundlesize
+npm run bundlesize
+```
+
+### Test Coverage
+- Configurado com Vitest e @vitest/coverage-v8
+- Thresholds: 80% para statements, branches, functions e lines
+- Modo: reportar (não bloqueia builds)
+
+```bash
+# Gerar relatório de coverage para todas as libs
+npm run test:coverage
+
+# Coverage de uma lib específica
+npm run test:coverage:utils
+npm run test:coverage:components
+npm run test:coverage:performance
+```
+
+### Dependency Analysis
+- **depcheck**: Identifica dependências não utilizadas
+- **npm-check-updates**: Verifica atualizações disponíveis
+
+```bash
+# Verificar dependências não usadas
+npm run deps:check
+
+# Verificar atualizações disponíveis
+npm run deps:update
+
+# Atualizar interativamente
+npm run deps:update:interactive
+```
+
+---
 
 ## 🌿 Estratégia de Branches
 
@@ -271,6 +333,8 @@ O **escopo é obrigatório** e indica qual biblioteca do monorepo está sendo mo
 *   `pdf`
 *   `services`
 *   `shared`
+*   `performance`
+*   `libs`
 *   `utils`
 *   `root`
 

@@ -8,5 +8,12 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "bundlesize": [
+    {
+      "path": "../../dist/ngx-opalbytes-utils/fesm2022/*.mjs",
+      "maxSize": "60 KB",
+      "compression": "gzip"
+    }
+  ]
 }

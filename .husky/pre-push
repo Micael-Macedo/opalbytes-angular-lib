@@ -17,16 +17,34 @@ fi
 
 # Se tentando push para origin/main
 if [ "$remote" = "origin" ] && [ "$is_semantic_release" = "false" ] && [ "$current_branch" = "main" ]; then
-  echo "❌ ERRO: Push direto para 'main' não é permitido!"
+  echo "ERRO: Push direto para 'main' nao e permitido!"
   echo ""
-  echo "📋 Fluxo correto:"
+  echo "Fluxo correto:"
   echo "   1. Crie uma branch: git checkout -b feat/nova-funcionalidade"
-  echo "   2. Faça commits nela"
-  echo "   3. Envie para o repositório: git push origin feat/nova-funcionalidade"
+  echo "   2. Faca commits nela"
+  echo "   3. Envie para o repositorio: git push origin feat/nova-funcionalidade"
   echo "   4. Abra um Pull Request no GitHub"
   echo ""
-  echo "🔗 Documentação: https://github.com/Micael-Macedo/opalbytes-directive-components/blob/main/README.md#-estratégia-de-branches"
+  echo "Documentacao: https://github.com/Micael-Macedo/opalbytes-directive-components/blob/main/README.md#-estrategia-de-branches"
   exit 1
 fi
 
+echo ""
+echo "==========================================="
+echo "  Executando testes..."
+echo "==========================================="
+echo ""
 npm test
+
+if [ $? -eq 0 ]; then
+  echo ""
+  echo "==========================================="
+  echo "  Coletando metricas..."
+  echo "==========================================="
+  echo ""
+  npm run metrics:report
+else
+  echo ""
+  echo "ERRO: Testes falharam. Push cancelado."
+  exit 1
+fi

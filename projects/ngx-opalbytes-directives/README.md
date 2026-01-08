@@ -154,6 +154,19 @@ Para adicionar uma nova diretiva a esta biblioteca, siga os passos abaixo:
 
 ---
 
+## 📊 Métricas de Qualidade
+
+Esta biblioteca passa por verificações automáticas de qualidade a cada release:
+
+- **Bundle Size**: Verificado para garantir otimização
+- **Testes Unitários**: Cobertura e execução automática
+- **Lint**: Verificação de qualidade de código
+- **Size Limit**: Controle de tamanho do pacote
+
+Os relatórios completos de métricas estão disponíveis no repositório.
+
+---
+
 ## 📜 Regras e Convenções
 
 ### Prefixo

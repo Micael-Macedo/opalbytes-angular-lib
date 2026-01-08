@@ -175,6 +175,22 @@
 * **services:** adicao regra prefixo cao ([8fd8703](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8fd8703ef845f6af126e66335a195b7462d72eab))
 * **utils:** adicao regra prefixo cao ([d303f10](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d303f108521e034a8be60d8d87fc40715a27b730))
 
+
+## 📊 Relatório de Métricas
+
+**Data**: 05/01/2026, 10:54:34
+**Branch**: feature(perfomance)/perfomance
+**Commit**: 6258ba3
+
+### Resumo
+- Total de métricas: 6
+- Sucessos: 3
+- Falhas: 3
+
+[📈 Ver Relatório Completo (HTML)](./metrics-reports/latest.html)
+
+---
+
 ## [1.7.3](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.7.2...v1.7.3) (2025-12-17)
 
 

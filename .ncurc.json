@@ -1,0 +1,8 @@
+{
+  "upgrade": false,
+  "reject": [
+    "npm"
+  ],
+  "target": "latest",
+  "interactive": false
+}
