@@ -1,0 +1,23 @@
+{
+  "ignoreMatches": [
+    "@angular/*",
+    "typescript",
+    "tslib",
+    "rxjs",
+    "zone.js"
+  ],
+  "ignoreDirs": [
+    "dist",
+    "node_modules",
+    "coverage",
+    ".angular"
+  ],
+  "ignorePatterns": [
+    "*.spec.ts",
+    "*.config.ts"
+  ],
+  "specials": [
+    "eslint",
+    "webpack"
+  ]
+}

@@ -1,4 +1,4 @@
-# 📦 ngx-opalbytes-directives
+#  ngx-opalbytes-directives
 
 Uma biblioteca de diretivas reutilizáveis para aplicações Angular, focada em adicionar comportamentos e estilos dinâmicos aos elementos do DOM.
 
@@ -139,7 +139,7 @@ Esta diretiva não possui inputs ou outputs. Ela aplica o efeito automaticamente
 
 ---
 
-## 📜 Como Contribuir
+##  Como Contribuir
 
 Para adicionar uma nova diretiva a esta biblioteca, siga os passos abaixo:
 
@@ -154,7 +154,20 @@ Para adicionar uma nova diretiva a esta biblioteca, siga os passos abaixo:
 
 ---
 
-## 📜 Regras e Convenções
+##  Métricas de Qualidade
+
+Esta biblioteca passa por verificações automáticas de qualidade a cada release:
+
+- **Bundle Size**: Verificado para garantir otimização
+- **Testes Unitários**: Cobertura e execução automática
+- **Lint**: Verificação de qualidade de código
+- **Size Limit**: Controle de tamanho do pacote
+
+Os relatórios completos de métricas estão disponíveis no repositório.
+
+---
+
+##  Regras e Convenções
 
 ### Prefixo
 

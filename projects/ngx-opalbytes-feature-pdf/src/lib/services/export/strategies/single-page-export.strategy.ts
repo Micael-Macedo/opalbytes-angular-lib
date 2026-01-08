@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 
 
-import { IPdfExportOptions } from '@pdf.interfaces/export-options.interface';
-import { ExportStatus, IExportResult } from '@pdf.interfaces/export-result.interface';
 import { catchError, Observable, of } from 'rxjs';
 
 import { BaseExportStrategy } from './base-export.strategy';
+import { IPdfExportOptions } from '../../../interfaces/export-options.interface';
+import { ExportStatus, IExportResult } from '../../../interfaces/export-result.interface';
+
 
 @Injectable({
   providedIn: 'root',

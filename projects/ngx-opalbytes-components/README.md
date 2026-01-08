@@ -1,4 +1,4 @@
-# 📦 ngx-opalbytes-components
+#  ngx-opalbytes-components
 
 Uma biblioteca de componentes de UI reutilizáveis para aplicações Angular, projetada para acelerar o desenvolvimento e manter a consistência visual.
 
@@ -605,7 +605,7 @@ Um seletor de horário.
 
 ---
 
-## 📜 Como Contribuir
+##  Como Contribuir
 
 Para adicionar um novo componente a esta biblioteca, siga os passos abaixo:
 
@@ -620,7 +620,7 @@ Para adicionar um novo componente a esta biblioteca, siga os passos abaixo:
 
 ---
 
-## 📜 Regras e Convenções
+##  Regras e Convenções
 
 ### Prefixo
 

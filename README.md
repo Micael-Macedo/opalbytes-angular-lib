@@ -1,4 +1,4 @@
-# 🔗 Tecnologias
+#  Tecnologias
 
 *   **Angular**: Framework principal para a criação da biblioteca.
 *   **TypeScript**: Linguagem base do projeto.
@@ -16,7 +16,7 @@
 
 ---
 
-# 📦 Opalbytes Angular Libs
+#  Opalbytes Angular Libs
 
 Este é um monorepo que centraliza uma coleção de bibliotecas Angular reutilizáveis. O objetivo é fornecer um conjunto coeso e padronizado de componentes, diretivas, serviços e utilitários para acelerar o desenvolvimento de projetos.
 
@@ -24,7 +24,7 @@ O projeto está configurado com um fluxo de trabalho moderno, utilizando automa�
 
 ---
 
-## 🚀 Começo Rápido
+##  Começo Rápido
 
 1.  **Instalar Dependências**
     ```bash
@@ -75,10 +75,11 @@ opalbytes-angular-lib/
 │   ├── ngx-opalbytes-components/    # Biblioteca de componentes de UI
 │   ├── ngx-opalbytes-core/   # Biblioteca central com serviços, guards e modelos
 │   ├── ngx-opalbytes-directives/    # Biblioteca de diretivas de atributo e estruturais
-│   ├── ngx-opalbytes-feature-pdf/   # Biblioteca para geração de PDF
 │   ├── ngx-opalbytes-services/      # Biblioteca de serviços reutilizáveis
+│   ├── ngx-opalbytes-feature-pdf/   # Biblioteca para geração de PDF
 │   ├── ngx-opalbytes-shared/        # Módulos, pipes e componentes compartilhados
-│   └── ngx-opalbytes-utils/         # Funções e utilitários
+│   ├─── ngx-opalbytes-utils/         # Funções e utilitários
+│   └── ngx-opalbytes-performance/   # Monitoramento de performance em runtime
 │
 ├── .github/                         # Workflows de CI/CD (Release)
 ├── .husky/                          # Hooks do Git para validações
@@ -88,7 +89,7 @@ opalbytes-angular-lib/
 
 ---
 
-## 📚 Bibliotecas Disponíveis
+##  Bibliotecas Disponíveis
 
 ### `ngx-opalbytes-core`
 
@@ -173,7 +174,68 @@ Funções utilitárias e helpers para tarefas comuns.
 | --- | --- |
 | `NgxOpalbytesUtils` | Coleção de funções utilitárias (sem implementação no momento). |
 
---- 
+### `ngx-opalbytes-performance`
+
+Biblioteca para monitoramento de performance em runtime.
+
+| Serviço/Recurso                | Descrição                                                   |
+| ------------------------------ | ----------------------------------------------------------- |
+| `PerformanceMetricsService`    | Serviço central para métricas de performance               |
+| `WebVitalsService`             | Monitoramento de Web Vitals (LCP, FID, CLS, etc.)          |
+| `PerformanceObserverService`   | Detecção de long tasks e eventos de performance            |
+| `MemoryMetricsService`         | Monitoramento de uso de memória                            |
+
+Veja a [documentação completa](./projects/ngx-opalbytes-performance/README.md).
+
+---
+
+##  Performance Monitoring
+
+Este monorepo inclui ferramentas integradas de monitoramento de performance:
+
+### Bundle Size Monitoring
+- **size-limit**: Monitora o tamanho dos bundles de cada biblioteca
+- **bundlesize**: Garante que os bundles não excedam limites definidos
+
+```bash
+# Verificar tamanho de todas as bibliotecas
+npm run size
+
+# Verificar com bundlesize
+npm run bundlesize
+```
+
+### Test Coverage
+- Configurado com Vitest e @vitest/coverage-v8
+- Thresholds: 80% para statements, branches, functions e lines
+- Modo: reportar (não bloqueia builds)
+
+```bash
+# Gerar relatório de coverage para todas as libs
+npm run test:coverage
+
+# Coverage de uma lib específica
+npm run test:coverage:utils
+npm run test:coverage:components
+npm run test:coverage:performance
+```
+
+### Dependency Analysis
+- **depcheck**: Identifica dependências não utilizadas
+- **npm-check-updates**: Verifica atualizações disponíveis
+
+```bash
+# Verificar dependências não usadas
+npm run deps:check
+
+# Verificar atualizações disponíveis
+npm run deps:update
+
+# Atualizar interativamente
+npm run deps:update:interactive
+```
+
+---
 
 ## 🌿 Estratégia de Branches
 
@@ -194,7 +256,7 @@ Usamos uma convenção simples e eficiente para nomear branches:
 
 **Exemplos corretos:**
 ```bash
-# ✅ Branches válidas
+#  Branches válidas
 git checkout -b feat(directives)/add-input-mask-directive
 git checkout -b fix(component)/correcao-validacao-formato
 ```
@@ -211,7 +273,7 @@ git checkout -b fix(component)/correcao-validacao-formato
 
 ---
 
-## 📝 Como Contribuir
+##  Como Contribuir
 
 ### Adicionando Funcionalidades a uma Biblioteca Existente
 
@@ -271,19 +333,21 @@ O **escopo é obrigatório** e indica qual biblioteca do monorepo está sendo mo
 *   `pdf`
 *   `services`
 *   `shared`
+*   `performance`
+*   `libs`
 *   `utils`
 *   `root`
 
 **Exemplos de mensagens de commit VÁLIDAS:**
 
 ```bash
-# ✅ Nova funcionalidade na biblioteca de diretivas
+#  Nova funcionalidade na biblioteca de diretivas
 feat(directives): add currency formatting directive
 
-# ✅ Correção de um bug na biblioteca de componentes
+#  Correção de um bug na biblioteca de componentes
 fix(components): correct button alignment on mobile
 
-# ✅ Alteração na documentação do projeto raiz
+#  Alteração na documentação do projeto raiz
 docs(libs): update main README with contribution guide
 ```
 
@@ -319,7 +383,7 @@ Antes de cada push, o Husky executa automaticamente os seguintes scripts:
 
 ---
 
-## 🚀 Releases e Versionamento
+##  Releases e Versionamento
 
 O versionamento e a publicação de novas versões são totalmente automatizados com o **semantic-release**.
 
@@ -334,7 +398,7 @@ O versionamento e a publicação de novas versões são totalmente automatizados
 
 ---
 
-## 🛠️ Scripts Disponíveis
+##  Scripts Disponíveis
 
 *   `npm run build`: Compila a biblioteca para produção.
 *   `npm run watch`: Compila a biblioteca em modo de desenvolvimento e observa as alterações.

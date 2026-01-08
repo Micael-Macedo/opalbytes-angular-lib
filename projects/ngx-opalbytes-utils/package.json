@@ -1,6 +1,6 @@
 {
   "name": "ngx-opalbytes-utils",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "peerDependencies": {
     "@angular/common": "^21.0.0",
     "@angular/core": "^21.0.0"
@@ -8,5 +8,12 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "bundlesize": [
+    {
+      "path": "../../dist/ngx-opalbytes-utils/fesm2022/*.mjs",
+      "maxSize": "60 KB",
+      "compression": "gzip"
+    }
+  ]
 }

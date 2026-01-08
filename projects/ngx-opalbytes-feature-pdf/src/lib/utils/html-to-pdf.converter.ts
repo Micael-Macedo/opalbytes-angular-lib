@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { IPdfExportOptions } from '@pdf.interfaces/export-options.interface';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { from, Observable } from 'rxjs';
+
+import { IPdfExportOptions } from '../interfaces/export-options.interface';
 
 
 @Injectable({
