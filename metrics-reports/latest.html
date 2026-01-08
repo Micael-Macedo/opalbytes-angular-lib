@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatorio de Metricas - main</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header .meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        .header .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header .meta-item strong {
+            font-weight: 600;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .metric-section {
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .metric-header {
+            background: #f5f5f5;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .metric-header h2 {
+            font-size: 1.3em;
+            color: #333;
+        }
+
+        .status-badge {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-success {
+            background: #4caf50;
+            color: white;
+        }
+
+        .status-error {
+            background: #f44336;
+            color: white;
+        }
+
+        .metric-body {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #f9f9f9;
+            font-weight: 600;
+            color: #555;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .output-section {
+            margin-top: 15px;
+            background: #f5f5f5;
+            padding: 0;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .output-section summary {
+            padding: 12px 15px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #667eea;
+            user-select: none;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .output-section summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .output-section summary::before {
+            content: '▶';
+            display: inline-block;
+            margin-right: 8px;
+            transition: transform 0.2s;
+            font-size: 0.8em;
+        }
+
+        .output-section[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .output-section summary:hover {
+            background: #ebebeb;
+        }
+
+        .output-section pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            margin: 0;
+            border-radius: 0 0 6px 6px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+
+        .footer {
+            background: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .summary-card h3 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .summary-card .value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .list-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .list-items li {
+            padding: 8px 12px;
+            margin: 5px 0;
+            background: #f9f9f9;
+            border-left: 3px solid #667eea;
+            border-radius: 4px;
+        }
+
+        .no-items {
+            color: #4caf50;
+            font-style: italic;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Relatorio de Metricas</h1>
+            <div class="meta">
+                <div class="meta-item">
+                    <strong>Branch:</strong> <span>main</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Commit:</strong> <span>e00dd4b</span>
+                </div>
+                <div class="meta-item">
+                    <strong>Data:</strong> <span>08/01/2026, 13:01:56</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="summary-cards">
+                
+      <div class="summary-card">
+        <h3>Total de Metricas</h3>
+        <div class="value">6</div>
+      </div>
+      <div class="summary-card">
+        <h3>Sucesso</h3>
+        <div class="value">4</div>
+      </div>
+      <div class="summary-card">
+        <h3>Falhas</h3>
+        <div class="value">2</div>
+      </div>
+    
+            </div>
+
+            
+      <div class="metric-section">
+        <div class="metric-header">
+          <h2>Build</h2>
+          <span class="status-badge status-success">
+            Sucesso
+          </span>
+        </div>
+        <div class="metric-body">
+          <p>Todos os pacotes foram construidos com sucesso.</p>
+          
+            <details class="output-section">
+              <summary>Ver Saida do Build</summary>
+              <pre>
+&gt; opalbytes-angular-lib@1.19.0 build:all
+&gt; ng build ngx-opalbytes-directives &amp;&amp; ng build ngx-opalbytes-components &amp;&amp; ng build ngx-opalbytes-services &amp;&amp; ng build ngx-opalbytes-utils &amp;&amp; ng build ngx-opalbytes-core &amp;&amp; ng build ngx-opalbytes-shared &amp;&amp; ng build ngx-opalbytes-performance
+
+Building Angular Package
+
+------------------------------------------------------------------------------
+Building entry point &#039;ngx-opalbytes-directives&#039;
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Built Angular Package
+- from: /home/runner/work/opalbytes-angular-lib/opalbytes-angular-lib/projects/ngx-opalbytes-directives
+- to:   /home/runner/work/opalbytes-angular-lib/opalbytes-angular-lib/dist/ngx-opalbytes-directives
+------------------------------------------------------------------------------
+
+Build at: 2026-01-08T13:01:59.113Z - Time: 1067ms
+
+Building Angular Package
+
+------------------------------------------------------------------------------
+Building entry point &#039;ngx-opalbytes-components&#039;
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+Built Angular Package
+- from: /home/runner/work/opalbytes-angular-lib/opalbytes-angular-lib/projects/ngx-opalbytes-components
+- to:   /home/runner/work/opalbytes-angular-lib/opalbytes-angular-lib/dist/ngx-opalbytes-components
+------------------------------------------------------------------------------
+
+Build at: 2026-01-08T13:02:04.265Z - Time: 4354ms
+
+Building Angular Package
+
+------------------------------------------------------------------------------
+Building entry point &#039;ngx-opalbytes-services&#039;
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+Built Angular Package
+- from: /home/runner/work/opalbytes-angular-...</pre>
+            </details>
+          
+        </div>
+      </div>
+    
+            
+      <div class="metric-section">
+        <div class="metric-header">
+          <h2>Limite de Tamanho</h2>
+          <span class="status-badge status-error">
+            Falhou
+          </span>
+        </div>
+        <div class="metric-body">
+          
+            <table>
+              <thead>
+                <tr>
+                  <th>Pacote</th>
+                  <th>Limite</th>
+                  <th>Tamanho Atual</th>
+                  <th>Excedeu</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>ngx-opalbytes-directives</td>
+                    <td>100 KB</td>
+                    <td>N/A</td>
+                    <td>37.17 kB</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td>ngx-opalbytes-components</td>
+                    <td>200 KB</td>
+                    <td>N/A</td>
+                    <td>309.68 kB</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td>ngx-opalbytes-services</td>
+                    <td>100 KB</td>
+                    <td>N/A</td>
+                    <td>66.94 kB</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td>ngx-opalbytes-utils</td>
+                    <td>150 KB</td>
+                    <td>N/A</td>
+                    <td>-</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td>ngx-opalbytes-core-shared</td>
+                    <td>50 KB</td>
+                    <td>N/A</td>
+                    <td>-</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td>ngx-opalbytes-performance</td>
+                    <td>150 KB</td>
+                    <td>N/A</td>
+                    <td>-</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+          
+            <details class="output-section">
+              <summary>Ver Saida Completa</summary>
+              <pre>
+&gt; opalbytes-angular-lib@1.19.0 size
+&gt; size-limit
+
+  
+  [1mngx-opalbytes-directives[22m
+  [31mPackage size limit has exceeded by 37.17 kB[39m
+  Size limit: [31m[1m100 kB[22m[39m
+  Size:       [31m[1m137.17 kB[22m[39m [90mwith all dependencies, minified and gzipped[39m
+  
+  [1mngx-opalbytes-components[22m
+  [31mPackage size limit has exceeded by 309.68 kB[39m
+  Size limit: [31m[1m200 kB[22m[39m
+  Size:       [31m[1m509.68 kB[22m[39m [90mwith all dependencies, minified and gzipped[39m
+  
+  [1mngx-opalbytes-services[22m
+  [31mPackage size limit has exceeded by 66.94 kB[39m
+  Size limit: [31m[1m100 kB[22m[39m
+  Size:       [31m[1m166.94 kB[22m[39m [90mwith all dependencies, minified and gzipped[39m
+  
+  [1mngx-opalbytes-utils[22m
+  Size limit: [32m[1m150 kB[22m[39m
+  Size:       [32m[1m136.31 kB[22m[39m [90mwith all dependencies, minified and gzipped[39m
+  
+  [1mngx-opalbytes-core-shared[22m
+  [31mSize Limit can’t find files at dist/ngx-opalbytes-core-shared/fesm2022/*.mjs[39m
+  [1mngx-opalbytes-performance[22m
+  Size limit: [32m[1m150 kB[22m[39m
+  Size:       [32m[1m140.94 kB[22m[39m [90mwith all dependencies, minified and gzipped[39m
+  
+  [33mTry to reduce size or increase limit at [1m.size-limit.json[22m[39m
+</pre>
+            </details>
+          
+        </div>
+      </div>
+    
+            
+      <div class="metric-section">
+        <div class="metric-header">
+          <h2>Tamanho do Bundle</h2>
+          <span class="status-badge status-error">
+            Falhou
+          </span>
+        </div>
+        <div class="metric-body">
+          
+            <table>
+              <thead>
+                <tr>
+                  <th>Caminho</th>
+                  <th>Tamanho Maximo</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>dist/ngx-opalbytes-directives/fesm2022/*.mjs</td>
+                    <td>100 KB</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td>dist/ngx-opalbytes-components/fesm2022/*.mjs</td>
+                    <td>200 KB</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td>dist/ngx-opalbytes-services/fesm2022/*.mjs</td>
+                    <td>100 KB</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td>dist/ngx-opalbytes-utils/fesm2022/*.mjs</td>
+                    <td>150 KB</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td>dist/ngx-opalbytes-core-shared/fesm2022/*.mjs</td>
+                    <td>50 KB</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td>dist/ngx-opalbytes-performance/fesm2022/*.mjs</td>
+                    <td>150 KB</td>
+                    <td><span class="status-badge status-error">Excedeu</span></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+          
+            <details class="output-section">
+              <summary>Ver Saida Completa</summary>
+              <pre>
+&gt; opalbytes-angular-lib@1.19.0 bundlesize
+&gt; bundlesize
+
+There is no matching file for dist/ngx-opalbytes-core-shared/fesm2022/*.mjs in /home/runner/work/opalbytes-angular-lib/opalbytes-angular-lib
+</pre>
+            </details>
+          
+        </div>
+      </div>
+    
+            
+      <div class="metric-section">
+        <div class="metric-header">
+          <h2>Verificacao de Dependencias</h2>
+          <span class="status-badge status-error">
+            Problemas Encontrados
+          </span>
+        </div>
+        <div class="metric-body">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="value">5</div>
+              <div class="label">Dependencias Nao Utilizadas</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">9</div>
+              <div class="label">Dependencias Ausentes</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">5</div>
+              <div class="label">Bibliotecas com Problemas</div>
+            </div>
+          </div>
+
+          
+            <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 8px; border-left: 4px solid #ff9800;">
+              <h3 style="margin: 0 0 10px 0; color: #333; font-size: 1.1em;">
+                ngx-opalbytes-directives
+                <span class="status-badge status-error" style="margin-left: 10px; font-size: 0.75em;">
+                  Com Problemas
+                </span>
+              </h3>
+
+              
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Nao Utilizadas (1):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    <li>tslib</li>
+                  </ul>
+                </div>
+              
+
+              
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Ausentes (1):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    <li>vitest: ./tsconfig.spec.json</li>
+                  </ul>
+                </div>
+              
+
+              
+            </div>
+          
+            <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 8px; border-left: 4px solid #ff9800;">
+              <h3 style="margin: 0 0 10px 0; color: #333; font-size: 1.1em;">
+                ngx-opalbytes-components
+                <span class="status-badge status-error" style="margin-left: 10px; font-size: 0.75em;">
+                  Com Problemas
+                </span>
+              </h3>
+
+              
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Nao Utilizadas (1):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    <li>tslib</li>
+                  </ul>
+                </div>
+              
+
+              
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Ausentes (4):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    <li>vitest: ./tsconfig.spec.json</li><li>rxjs: ./src/lib/shared/features/base-table-paginated/base-filter-table-paginated.service.ts</li><li>@angular/forms: ./src/lib/shared/components/time-picker/time-picker.ts</li><li>@angular/router: ./src/lib/shared/components/links-button/links-button.ts</li>
+                  </ul>
+                </div>
+              
+
+              
+            </div>
+          
+            <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 8px; border-left: 4px solid #ff9800;">
+              <h3 style="margin: 0 0 10px 0; color: #333; font-size: 1.1em;">
+                ngx-opalbytes-services
+                <span class="status-badge status-error" style="margin-left: 10px; font-size: 0.75em;">
+                  Com Problemas
+                </span>
+              </h3>
+
+              
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Nao Utilizadas (1):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    <li>tslib</li>
+                  </ul>
+                </div>
+              
+
+              
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Ausentes (2):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    <li>vitest: ./tsconfig.spec.json</li><li>rxjs: ./src/lib/services/installer.service.ts</li>
+                  </ul>
+                </div>
+              
+
+              
+            </div>
+          
+            <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 8px; border-left: 4px solid #ff9800;">
+              <h3 style="margin: 0 0 10px 0; color: #333; font-size: 1.1em;">
+                ngx-opalbytes-utils
+                <span class="status-badge status-error" style="margin-left: 10px; font-size: 0.75em;">
+                  Com Problemas
+                </span>
+              </h3>
+
+              
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Nao Utilizadas (1):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    <li>tslib</li>
+                  </ul>
+                </div>
+              
+
+              
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Ausentes (1):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    <li>vitest: ./tsconfig.spec.json</li>
+                  </ul>
+                </div>
+              
+
+              
+            </div>
+          
+            <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 8px; border-left: 4px solid #ff9800;">
+              <h3 style="margin: 0 0 10px 0; color: #333; font-size: 1.1em;">
+                ngx-opalbytes-performance
+                <span class="status-badge status-error" style="margin-left: 10px; font-size: 0.75em;">
+                  Com Problemas
+                </span>
+              </h3>
+
+              
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Nao Utilizadas (1):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    <li>tslib</li>
+                  </ul>
+                </div>
+              
+
+              
+                <div style="margin-top: 10px;">
+                  <strong style="color: #666;">Dependencias Ausentes (1):</strong>
+                  <ul class="list-items" style="margin-top: 5px;">
+                    <li>vitest: ./tsconfig.spec.json</li>
+                  </ul>
+                </div>
+              
+
+              
+            </div>
+          
+
+          
+            <details class="output-section" style="margin-top: 20px;">
+              <summary>Ver Saida Completa de Todas as Bibliotecas</summary>
+              <pre>
+
+=== ngx-opalbytes-directives ===
+Unused dependencies
+* tslib
+Missing dependencies
+* vitest: ./tsconfig.spec.json
+
+
+=== ngx-opalbytes-components ===
+Unused dependencies
+* tslib
+Missing dependencies
+* vitest: ./tsconfig.spec.json
+* rxjs: ./src/lib/shared/features/base-table-paginated/base-filter-table-paginated.service.ts
+* @angular/forms: ./src/lib/shared/components/time-picker/time-picker.ts
+* @angular/router: ./src/lib/shared/components/links-button/links-button.ts
+
+
+=== ngx-opalbytes-services ===
+Unused dependencies
+* tslib
+Missing dependencies
+* vitest: ./tsconfig.spec.json
+* rxjs: ./src/lib/services/installer.service.ts
+
+
+=== ngx-opalbytes-utils ===
+Unused dependencies
+* tslib
+Missing dependencies
+* vitest: ./tsconfig.spec.json
+
+
+=== ngx-opalbytes-performance ===
+Unused dependencies
+* tslib
+Missing dependencies
+* vitest: ./tsconfig.spec.json
+</pre>
+            </details>
+          
+        </div>
+      </div>
+    
+            
+      <div class="metric-section">
+        <div class="metric-header">
+          <h2>Testes Unitarios</h2>
+          <span class="status-badge status-success">
+            Passou
+          </span>
+        </div>
+        <div class="metric-body">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="value">0</div>
+              <div class="label">Total de Testes</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">0</div>
+              <div class="label">Passaram</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">0</div>
+              <div class="label">Falharam</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">0</div>
+              <div class="label">Pulados</div>
+            </div>
+          </div>
+          
+            <details class="output-section">
+              <summary>Ver Saida dos Testes</summary>
+              <pre>
+&gt; opalbytes-angular-lib@1.19.0 test
+&gt; ng test --watch=false
+
+[33m❯[39m Building...
+[32m✔[39m Building...
+[1mInitial chunk files[22m                                  [2m | [22m[1mNames[22m                                             [2m | [22m[1mRaw size[22m
+[32mspec-lib-directives-skeleton-skeleton.directive.js[39m   [2m | [22m[2mspec-lib-directives-skeleton-skeleton.directive[22m   [2m | [22m[36m12.27 kB[39m[2m | [22m
+[32mspec-lib-directives-highlight-hightlight.directive.js[39m[2m | [22m[2mspec-lib-directives-highlight-hightlight.directive[22m[2m | [22m [36m4.97 kB[39m[2m | [22m
+[32mchunk-XSGC6WRG.js[39m                                    [2m | [22m[2m-[22m                                                 [2m | [22m [36m4.05 kB[39m[2m | [22m
+[32minit-testbed.js[39m                                      [2m | [22m[2minit-testbed[22m                                      [2m | [22m [36m1.20 kB[39m[2m | [22m
+
+[1m [22m                                                    [2m | [22m[1mInitial total[22m                                     [2m | [22m[1m22.48 kB[22m
+
+Application bundle generation complete. [1.757 seconds] - 2026-01-08T13:02:20.537Z
+
+
+[1m[46m RUN [49m[22m [36mv4.0.16 [39m[90m/home/runner/work/opalbytes-angular-lib/opalbytes-angular-lib[39m
+
+ [32m✓[39m [30m[43m ngx-opalbytes-directives [49m[39m projects/ngx-opalbytes-directives/src/lib/directives/highlight/hightlight.directive.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 64[2mms[22m[39m
+ [32m✓[39m [30m[43m ngx-opalbytes-directives [49m[39m projects/ngx-opalbytes-directives/src/lib/directives/skeleton/skeleton.directive.spec.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 4988[2mms[22m[39m
+     [33m[2m✓[22m[39m deve remover skeleton apos duracao configurada [33m 2207[2mms[22m[39m
+     [33m[2m✓[22m[39m deve restaurar estilos originais apos remover skeleton [33m 2206[2mms[22m[39m
+
+[2m Test Files [2...</pre>
+            </details>
+          
+        </div>
+      </div>
+    
+            
+      <div class="metric-section">
+        <div class="metric-header">
+          <h2>Lint</h2>
+          <span class="status-badge status-success">
+            Passou
+          </span>
+        </div>
+        <div class="metric-body">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="value">0</div>
+              <div class="label">Arquivos Verificados</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">0</div>
+              <div class="label">Erros</div>
+            </div>
+            <div class="stat-card">
+              <div class="value">22</div>
+              <div class="label">Avisos</div>
+            </div>
+          </div>
+          
+            <details class="output-section">
+              <summary>Ver Saida do Lint</summary>
+              <pre>
+&gt; opalbytes-angular-lib@1.19.0 lint
+&gt; ng lint
+
+
+Linting &quot;ngx-opalbytes-directives&quot;...
+
+/home/runner/work/opalbytes-angular-lib/opalbytes-angular-lib/projects/ngx-opalbytes-directives/src/lib/directives/skeleton/skeleton.directive.ts
+  22:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 1 problem (0 errors, 1 warning)
+
+
+Linting &quot;ngx-opalbytes-components&quot;...
+
+/home/runner/work/opalbytes-angular-lib/opalbytes-angular-lib/projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.ts
+   7:1   warning  The component&#039;s `changeDetection` value should be set to `ChangeDetectionStrategy.OnPush`  @angular-eslint/prefer-on-push-component-change-detection
+  13:14  warning  Component class names should end with one of these suffixes: &quot;Component&quot;                   @angular-eslint/component-class-suffix
+
+/home/runner/work/opalbytes-angular-lib/opalbytes-angular-lib/projects/ngx-opalbytes-components/src/lib/shared/components/base-input/base-input.ts
+    9:1   warning  The component&#039;s `changeDetection` value should be set to `ChangeDetectionStrategy.OnPush`  @angular-eslint/prefer-on-push-component-change-detection
+   23:14  warning  Component class names should end with one of these suffixes: &quot;Component&quot;                   @angular-eslint/component-class-suffix
+   65:13  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+   66:14  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  119:24  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  123:25  warning  Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+
+/home/runner/work/opalbytes-angular-lib/opalbytes-angular-lib/projects/ngx-opalbytes-...</pre>
+            </details>
+          
+        </div>
+      </div>
+    
+        </div>
+
+        <div class="footer">
+            <p>Gerado em 08/01/2026, 13:01:56</p>
+        </div>
+    </div>
+</body>
+</html>
