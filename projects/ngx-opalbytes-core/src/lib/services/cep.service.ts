@@ -3,16 +3,9 @@ import { Injectable, signal } from "@angular/core";
 
 import { Observable, of, catchError, finalize, map } from "rxjs";
 
-import { CEP_ENDPOINTS } from "../constants/cep-endpoints.constants";
-import { BRAZILIAN_STATES } from "../constants/states.constants";
-import {
-  ICEPData,
-  IMunicipality,
-  IState,
-  IBrasilAPICEPResponse,
-  IViaCEPResponse,
-  IBrasilAPIMunicipalityResponse,
-} from "../interfaces/cep.interface";
+import { CEP_ENDPOINTS } from "./constants/cep-endpoints.constants";
+import { IBrasilAPICEPResponse, IBrasilAPIMunicipalityResponse, ICEPData, IMunicipality, IState, IViaCEPResponse } from "./constants/interfaces/cep.interface";
+import { BRAZILIAN_STATES } from "./constants/states.constants";
 
 @Injectable({ providedIn: "root" })
 export class CEPService {
@@ -21,7 +14,7 @@ export class CEPService {
 
   readonly states: readonly IState[] = BRAZILIAN_STATES;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   searchCEP(cep: string): Observable<ICEPData | null> {
     if (!cep || cep.length !== 8) {
@@ -48,12 +41,12 @@ export class CEPService {
             data.erro
               ? null
               : {
-                  cep: data.cep,
-                  logradouro: data.logradouro,
-                  bairro: data.bairro,
-                  localidade: data.localidade,
-                  uf: data.uf,
-                }
+                cep: data.cep,
+                logradouro: data.logradouro,
+                bairro: data.bairro,
+                localidade: data.localidade,
+                uf: data.uf,
+              }
           ),
           catchError(() => of(null))
         )

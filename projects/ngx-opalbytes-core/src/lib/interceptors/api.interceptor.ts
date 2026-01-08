@@ -10,9 +10,10 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map, catchError, finalize } from "rxjs/operators";
 
-import { HttpErrorHandlerService } from "../services/http-error-handler.service";
-import { LoadingService } from "../services/loading.service";
-import { ResponseTransformerService } from "../services/response-transformer.service";
+import { HttpErrorHandlerService } from "./services/http-error-handler.service";
+import { LoadingService } from "./services/loading.service";
+import { ResponseTransformerService } from "./services/response-transformer.service";
+
 
 /**
  * Interceptor HTTP refatorado seguindo princípios SOLID
@@ -35,7 +36,7 @@ import { ResponseTransformerService } from "../services/response-transformer.ser
  * - X-Transform-Response / transform: Força transformação de resposta
  */
 @Injectable({ providedIn: "root" })
-export class ApiInterceptor implements HttpInterceptor {
+export class CaoApiInterceptor implements HttpInterceptor {
   constructor(
     private loadingService: LoadingService,
     private httpErrorHandler: HttpErrorHandlerService,

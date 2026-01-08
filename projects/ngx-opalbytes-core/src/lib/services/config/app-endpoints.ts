@@ -1,0 +1,64 @@
+export enum ApiUrl {
+  API = "API",
+  CROPPING = "CROPPING",
+  IIPM_CROPPING = "IIPM_CROPPING",
+  IIPM_DIGITALIZACAO = "IIPM_DIGITALIZACAO",
+}
+
+export enum ApiPath {
+  // Box
+  BOX = "BOX",
+  GET_RECORDS_BY_FRAME_ROLL = "GET_RECORDS_BY_FRAME_ROLL",
+
+  // Record
+  RECORD = "RECORD",
+  RECORD_CONSUMER = "RECORD_CONSUMER",
+  CHANGE_RECORD_STATUS = "CHANGE_RECORD_STATUS",
+  SKIP_RECORD = "SKIP_RECORD",
+  GET_DOCUMENTS = "GET_DOCUMENTS",
+  GET_DOCUMENTS_ZIP = "GET_DOCUMENTS_ZIP",
+
+  // Cropping
+  CROPPING = "CROPPING",
+
+  // Layout
+  LAYOUT = "LAYOUT",
+
+  // Person
+  PERSON = "PERSON",
+
+  // Transactions
+  TRANSACTIONS = "TRANSACTIONS",
+
+  // File
+  UPLOAD_FILE = "UPLOAD_FILE",
+  DOWNLOAD_FILE = "DOWNLOAD_FILE",
+  FILE_CONFIGURATION = "FILE_CONFIGURATION",
+
+  // Digitalização
+  PROCESSOS_DIGITALIZACAO = "PROCESSOS_DIGITALIZACAO",
+  STATUS = "STATUS",
+  FILES = "FILES",
+
+  // User
+  USER = "USER",
+  USER_ROLES = "USER_ROLES",
+
+  // Organization
+  ORGANIZATION = "ORGANIZATION",
+
+  // Dashboard
+  DASHBOARD = "DASHBOARD",
+}
+
+export enum AuthPath {
+  TOKEN = "TOKEN",
+}
+
+export enum HttpMethod {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  PATCH = "PATCH",
+  DELETE = "DELETE",
+}

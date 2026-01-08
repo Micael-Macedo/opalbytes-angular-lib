@@ -89,6 +89,107 @@ A biblioteca `ngx-opalbytes-shared` contém utilitários e definições que são
 | `formatRg` | Formata um valor como um RG. |
 | `formatTelefone` | Formata um número de telefone (ex: `(11) 99999-9999`). |
 
+#### Diretivas e Validadores Disponíveis
+
+Aqui está uma lista de diretivas e validadores disponíveis na biblioteca `ngx-opalbytes-shared`.
+
+##### Diretivas de Máscara
+
+Essas diretivas aplicam máscaras de formatação a campos de entrada (`<input>`).
+
+-   **`CepMaskDirective`**
+    -   **Seletor**: `[caoCepMask]`
+    -   **Descrição**: Aplica uma máscara de CEP (XXXXX-XXX) a um campo de entrada.
+    -   **Uso**: `<input type="text" caoCepMask>`
+
+-   **`CnpjMaskDirective`**
+    -   **Seletor**: `[caoCnpjMask]`
+    -   **Descrição**: Aplica uma máscara de CNPJ (XX.XXX.XXX/XXXX-XX) a um campo de entrada.
+    -   **Uso**: `<input type="text" caoCnpjMask>`
+
+-   **`CpfCnpjMaskDirective`**
+    -   **Seletor**: `[caoCpfCnpjMask]`
+    -   **Descrição**: Aplica uma máscara de CPF ou CNPJ, dependendo do número de dígitos.
+    -   **Uso**: `<input type="text" caoCpfCnpjMask>`
+
+-   **`CpfEmailMaskDirective`**
+    -   **Seletor**: `[caoCpfEmailMask]`
+    -   **Descrição**: Aplica uma máscara de CPF se o valor inserido forem apenas números, ou permite um e-mail.
+    -   **Uso**: `<input type="text" caoCpfEmailMask>`
+
+-   **`CpfMaskDirective`**
+    -   **Seletor**: `[caoCpfMask]`
+    -   **Descrição**: Aplica uma máscara de CPF (XXX.XXX.XXX-XX) a um campo de entrada.
+    -   **Uso**: `<input type="text" caoCpfMask>`
+
+##### Diretivas de Comportamento
+
+-   **`FormControlStateDirective`**
+    -   **Seletor**: `[caoControlState]`
+    -   **Descrição**: Adiciona classes e atributos ARIA a um campo de formulário para refletir seu estado (válido, inválido, obrigatório).
+    -   **Uso**: `<input formControlName="meuCampo" caoControlState>`
+
+-   **`FormHasErrorsDirective`**
+    -   **Seletor**: `[caoHasErrors]`
+    -   **Descrição**: Adiciona a classe `has-errors` a um elemento `form` ou `fieldset` se algum dos controles internos for inválido.
+    -   **Input**: `requireTouched` (boolean, padrão: `true`) - Se `true`, a classe só é aplicada se o campo foi tocado.
+    -   **Uso**: `<form [formGroup]="meuForm" caoHasErrors>`
+
+-   **`CaoSkeletonDirective`**
+    -   **Seletor**: `[caoSkeleton]`
+    -   **Descrição**: Exibe um efeito de "skeleton loading" nos elementos filhos, ideal para indicar que o conteúdo está carregando.
+    -   **Uso**: `<div caoSkeleton> ... </div>`
+
+##### Validadores de Formulário
+
+Essas são funções que retornam um `ValidatorFn` para uso em formulários reativos do Angular.
+
+-   **`cepValidator()`**
+    -   **Descrição**: Valida se o valor do controle é um CEP válido (8 dígitos).
+    -   **Uso**: `meuCampo: ['', [cepValidator()]]`
+
+-   **`cnpjValidator()`**
+    -   **Descrição**: Valida se o valor do controle é um CNPJ válido.
+    -   **Uso**: `meuCampo: ['', [cnpjValidator()]]`
+
+-   **`confirmarEmailValidator(emailField: string)`**
+    -   **Descrição**: Valida se o valor do controle é igual ao valor do campo de e-mail especificado.
+    -   **Parâmetro**: `emailField` - O nome do `FormControl` do campo de e-mail.
+    -   **Uso**: `confirmarEmail: ['', [confirmarEmailValidator('email')]]`
+
+-   **`cpfOrEmailValidator()`**
+    -   **Descrição**: Valida se o valor é um CPF válido ou um e-mail válido.
+    -   **Uso**: `login: ['', [cpfOrEmailValidator()]]`
+
+-   **`cpfValidator()`**
+    -   **Descrição**: Valida se o valor do controle é um CPF válido.
+    -   **Uso**: `meuCampo: ['', [cpfValidator()]]`
+
+-   **`dataNascimentoValidator()`**
+    -   **Descrição**: Valida se o valor do controle é uma data de nascimento válida (não futura e formato correto).
+    -   **Uso**: `dataNascimento: ['', [dataNascimentoValidator()]]`
+
+-   **`emailOrUsernameValidator()`**
+    -   **Descrição**: Valida se o valor é um e-mail válido ou um nome de usuário (3-50 caracteres, letras, números, `.`, `_`, `-`).
+    -   **Uso**: `login: ['', [emailOrUsernameValidator()]]`
+
+-   **`emailValidator()`**
+    -   **Descrição**: Valida se o valor do controle é um e-mail válido.
+    -   **Uso**: `email: ['', [emailValidator()]]`
+
+-   **`passwordValidator(options?: IPasswordValidatorOptions)`**
+    -   **Descrição**: Realiza uma validação de força de senha complexa.
+    -   **Opções**: `nomeField`, `sobrenomeField`, `emailField` para evitar que a senha contenha esses dados.
+    -   **Uso**: `senha: ['', [passwordValidator({ nomeField: 'nome' })]]`
+
+-   **`rgValidator()`**
+    -   **Descrição**: Valida se o valor do controle é um RG válido.
+    -   **Uso**: `rg: ['', [rgValidator()]]`
+
+-   **`telefoneValidator()`**
+    -   **Descrição**: Valida se o valor do controle é um número de telefone válido (10 ou 11 dígitos).
+    -   **Uso**: `telefone: ['', [telefoneValidator()]]`
+
 ---
 
 ## Como Usar
@@ -99,7 +200,7 @@ A biblioteca `ngx-opalbytes-shared` contém utilitários e definições que são
 
 ```typescript
 import { Component } from '@angular/core';
-import { FormatCpfPipe } from 'ngx-opalbytes-shared'; // Importação corrigida
+import { FormatCpfPipe } from 'ngx-opalbytes-shared';
 
 @Component({
   selector: 'app-user-info',
@@ -148,4 +249,4 @@ Para adicionar uma nova funcionalidade a esta biblioteca, siga os passos abaixo:
 
 ### Prefixo
 
-O prefixo para componentes e diretivas nesta biblioteca é `obs`.
+O prefixo para componentes e diretivas nesta biblioteca é `cao`.

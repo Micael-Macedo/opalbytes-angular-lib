@@ -1,6 +1,6 @@
-import { AppPaths, HttpMethods } from "@core.interfaces/app-config.interface";
-
 import { ApiPath, HttpMethod } from "../config/app-endpoints";
+import { AppPaths, HttpMethods } from "../interfaces/app-config.interface";
+
 
 /**
  * Paths base compartilhados entre TODOS os ambientes

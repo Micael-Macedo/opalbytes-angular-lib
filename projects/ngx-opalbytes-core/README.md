@@ -134,8 +134,8 @@ Este serviço é projetado para interagir com o sistema do usuário para verific
 
 A `ngx-opalbytes-core` inclui uma arquitetura robusta e extensível para trabalhar com WebSockets, projetada para ser flexível e fácil de usar. A arquitetura é baseada em três componentes principais:
 
--   `BaseWebSocketService`: Uma classe base abstrata que implementa o **Template Method Pattern**. Ela fornece toda a lógica de gerenciamento de conexão, reconexão automática com *exponential backoff*, e envio/recebimento de mensagens.
--   `WebSocketManagerService`: Um serviço singleton para gerenciar múltiplas instâncias de serviços WebSocket, permitindo um controle centralizado sobre todas as conexões ativas na aplicação.
+-   `CaoWebSocketService`: Uma classe base abstrata que implementa o **Template Method Pattern**. Ela fornece toda a lógica de gerenciamento de conexão, reconexão automática com *exponential backoff*, e envio/recebimento de mensagens.
+-   `CaoWebSocketManagerService`: Um serviço singleton para gerenciar múltiplas instâncias de serviços WebSocket, permitindo um controle centralizado sobre todas as conexões ativas na aplicação.
 -   `WebSocketConnection`: Um wrapper em torno da API nativa de WebSocket do navegador, que expõe os eventos como Observables RxJS para uma integração mais fácil com o Angular.
 
 #### `BaseWebSocketService<TRequest, TResponse>`
@@ -159,7 +159,7 @@ Esta é a classe que você deve estender para criar seu próprio serviço WebSoc
 
 **Métodos Abstratos (a serem implementados)**
 
-Ao estender `BaseWebSocketService`, você **deve** implementar os seguintes métodos:
+Ao estender `CaoWebSocketService`, você **deve** implementar os seguintes métodos:
 
 | Método | Descrição |
 | :--- | :--- |
@@ -168,7 +168,7 @@ Ao estender `BaseWebSocketService`, você **deve** implementar os seguintes mét
 | `transformResponse(data: unknown): TResponse` | Transforma a resposta crua recebida do servidor no tipo `TResponse` esperado. |
 | `handleError(error: unknown): void` | Lida com erros específicos do protocolo ou da conexão. |
 
-#### `WebSocketManagerService`
+#### `CaoWebSocketManagerService`
 
 Este serviço atua como um registro central para todas as conexões WebSocket da sua aplicação. É um singleton (`providedIn: 'root'`) que facilita o gerenciamento de múltiplos WebSockets (ex: um para notificações, outro para chat, etc.).
 

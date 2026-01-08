@@ -1,3 +1,5 @@
+import { InjectionToken } from "@angular/core";
+
 export interface IAppUrls {
     [key: string]: string;
 }
@@ -21,3 +23,11 @@ export interface IAppConfig {
     httpMethods?: HttpMethods;
     auth?: AppAuth;
 }
+
+
+// Token de injeção para o environment
+export const ENVIRONMENT = new InjectionToken<{ name: string }>("ENVIRONMENT");
+
+// Token de injeção para a configuração do app
+export const APP_CONFIG = new InjectionToken<IAppConfig>("APP_CONFIG");
+

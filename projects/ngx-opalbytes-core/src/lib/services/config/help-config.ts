@@ -4,7 +4,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 import { ApiPath, ApiUrl } from "./app-endpoints";
-import { ConfigService } from "./services/config.service";
+import { ConfigService } from "../../config/services/config.service";
+
 
 @Injectable({
   providedIn: "root",

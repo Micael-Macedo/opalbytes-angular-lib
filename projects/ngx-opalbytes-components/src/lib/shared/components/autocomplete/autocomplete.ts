@@ -39,12 +39,12 @@ interface IAutoCompleteOption {
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => RnvAutocompleteComponent),
+      useExisting: forwardRef(() => CaoAutocompleteComponent),
       multi: true,
     },
   ],
 })
-export class RnvAutocompleteComponent implements OnInit, ControlValueAccessor {
+export class CaoAutocompleteComponent implements OnInit, ControlValueAccessor {
   @Input() label = "";
   @Input() placeholder = "";
   @Input() options: IAutoCompleteOption[] = [];
@@ -56,8 +56,8 @@ export class RnvAutocompleteComponent implements OnInit, ControlValueAccessor {
   filteredOptions$!: Observable<IAutoCompleteOption[]>;
   isFocused = false;
 
-  private onChange: (value: IAutoCompleteOption | string) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: IAutoCompleteOption | string) => void = () => { };
+  private onTouched: () => void = () => { };
 
   ngOnInit(): void {
     this.filteredOptions$ = this.internalControl.valueChanges.pipe(
@@ -103,7 +103,7 @@ export class RnvAutocompleteComponent implements OnInit, ControlValueAccessor {
   }
 
   get errorText(): string | null {
-    if (!this.control) {return null;}
+    if (!this.control) { return null; }
 
     const isEmpty = this.control.value === null || this.control.value === "";
 
@@ -112,14 +112,14 @@ export class RnvAutocompleteComponent implements OnInit, ControlValueAccessor {
     }
 
     if (this.control.touched && this.control.invalid) {
-      if (this.control.hasError("cpfInvalid")) {return "CPF inválido";}
-      if (this.control.hasError("cellPhoneInvalid")) {return "Número inválido";}
-      if (this.control.hasError("emailInvalid")) {return "Email inválido";}
-      if (this.control.hasError("cnpjInvalid")) {return "CNPJ inválido";}
-      if (this.control.hasError("rgInvalid")) {return "RG inválido";}
-      if (this.control.hasError("dateInvalid")) {return "Data inválida";}
-      if (this.control.hasError("dateStartInvalid")) {return "Data Inicial inválida";}
-      if (this.control.hasError("dateEndInvalid")) {return "Data Final inválida";}
+      if (this.control.hasError("cpfInvalid")) { return "CPF inválido"; }
+      if (this.control.hasError("cellPhoneInvalid")) { return "Número inválido"; }
+      if (this.control.hasError("emailInvalid")) { return "Email inválido"; }
+      if (this.control.hasError("cnpjInvalid")) { return "CNPJ inválido"; }
+      if (this.control.hasError("rgInvalid")) { return "RG inválido"; }
+      if (this.control.hasError("dateInvalid")) { return "Data inválida"; }
+      if (this.control.hasError("dateStartInvalid")) { return "Data Inicial inválida"; }
+      if (this.control.hasError("dateEndInvalid")) { return "Data Final inválida"; }
       return "Formato inválido";
     }
 

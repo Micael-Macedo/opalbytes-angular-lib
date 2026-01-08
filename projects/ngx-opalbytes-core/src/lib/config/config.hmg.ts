@@ -1,6 +1,5 @@
 
-import { EnvironmentEnum, IAppConfig } from "@core.interfaces/app-config.interface";
-
+import { IAppConfig, EnvironmentEnum } from "./app-config";
 import { ApiUrl } from "./app-endpoints";
 import { BASE_PATHS, BASE_HTTP_METHODS } from "../utils/app-config.base";
 

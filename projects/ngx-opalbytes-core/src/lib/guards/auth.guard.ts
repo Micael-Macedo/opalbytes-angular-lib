@@ -1,12 +1,12 @@
 import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
 
-import { TokenService } from "../services/token.service";
+import { CaoTokenGuardService } from "src/public-api";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const authGuard: CanActivateFn = (_route, _state) => {
   const router = inject(Router);
-  const tokenService = inject(TokenService);
+  const tokenService = inject(CaoTokenGuardService);
 
   // Verificar se há token usando o TokenService
   const isAuthenticated = tokenService.hasToken();
