@@ -1,4 +1,4 @@
-# 📦 ngx-opalbytes-utils
+#  ngx-opalbytes-utils
 
 Esta biblioteca é designada para funções utilitárias puras, pipes e outras lógicas que podem ser compartilhadas entre diferentes projetos Angular.
 
@@ -81,7 +81,7 @@ Atualmente, não há utilitários ou pipes disponíveis nesta biblioteca.
 
 ---
 
-## 📜 Como Contribuir
+##  Como Contribuir
 
 Para adicionar um novo utilitario a esta biblioteca, siga os passos abaixo:
 
