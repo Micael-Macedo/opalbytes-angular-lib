@@ -35,3 +35,6 @@ export * from './lib/shared/features/base-table-paginated/base-pagination.servic
 export * from './lib/shared/features/base-alert/base-alert'
 export * from './lib/shared/features/base-alert/base-alert.service'
 export * from './lib/shared/features/base-alert/base-alert.interface'
+
+export * from './lib/shared/components/stepper/stepper'
+export * from './lib/shared/components/stepper/step/step'

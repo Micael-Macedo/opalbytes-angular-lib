@@ -44,20 +44,30 @@ Os componentes nesta biblioteca são `standalone`, o que significa que você pod
 
 ```typescript
 import { Component } from '@angular/core';
-// Importe o componente desejado
-import { BaseButton } from 'ngx-opalbytes-components';
+// Importe os componentes desejados
+import { BaseButton, CaoAutocompleteComponent } from 'ngx-opalbytes-components';
+import { FormControl, ReactiveFormsModule } from '@angular/forms'; // Adicione ReactiveFormsModule e FormControl
 
 @Component({
   selector: 'app-exemplo',
   standalone: true,
   imports: [
-    BaseButton // Adicione o componente aos imports
+    BaseButton, // Adicione o componente aos imports
+    CaoAutocompleteComponent, // Adicione o componente aos imports
+    ReactiveFormsModule // Importe ReactiveFormsModule
   ],
   template: `
     <cao-button buttonText="Clique Aqui"></cao-button>
+    <cao-autocomplete label="Selecione um Item" [options]="opcoesExemplo" [control]="meuControl"></cao-autocomplete>
   `
 })
-export class ExemploComponent { }
+export class ExemploComponent {
+  meuControl = new FormControl();
+  opcoesExemplo = [
+    { id: 1, nome: 'Opção 1' },
+    { id: 2, nome: 'Opção 2' }
+  ];
+}
 ```
 
 ---
@@ -406,7 +416,7 @@ Um componente de modal genérico que pode ser customizado.
 
 ---
 
-### `Autocomplete`
+### CaoAutocompleteComponent
 Um campo de preenchimento automático que funciona com `ngModel` ou `formControlName`.
 
 **Seletor:** `<cao-autocomplete>`
@@ -451,7 +461,7 @@ Uma tabela de dados com ordenação, paginação e seleção de linhas. A config
 
 ---
 
-### `TableLightPaginated`
+### BaseTablePaginated
 Uma tabela de dados leve com paginação no lado do cliente. Herda a maioria de suas funcionalidades do `BaseTable`.
 
 **Seletor:** `<cao-table-light-paginated>`
@@ -484,7 +494,7 @@ Uma tabela de dados leve com paginação no lado do cliente. Herda a maioria de 
 ### `BaseTimeRange`
 Um seletor de intervalo de datas.
 
-**Seletor:** `<cao-time-range>`
+**Seletor:** `<cao-base-time-range>`
 
 **Atributos (Inputs)**
 
