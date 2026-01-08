@@ -1,4 +1,4 @@
-# 🔗 Tecnologias
+#  Tecnologias
 
 *   **Angular**: Framework principal para a criação da biblioteca.
 *   **TypeScript**: Linguagem base do projeto.
@@ -16,7 +16,7 @@
 
 ---
 
-# 📦 Opalbytes Angular Libs
+#  Opalbytes Angular Libs
 
 Este é um monorepo que centraliza uma coleção de bibliotecas Angular reutilizáveis. O objetivo é fornecer um conjunto coeso e padronizado de componentes, diretivas, serviços e utilitários para acelerar o desenvolvimento de projetos.
 
@@ -24,7 +24,7 @@ O projeto está configurado com um fluxo de trabalho moderno, utilizando automa�
 
 ---
 
-## 🚀 Começo Rápido
+##  Começo Rápido
 
 1.  **Instalar Dependências**
     ```bash
@@ -89,7 +89,7 @@ opalbytes-angular-lib/
 
 ---
 
-## 📚 Bibliotecas Disponíveis
+##  Bibliotecas Disponíveis
 
 ### `ngx-opalbytes-core`
 
@@ -189,7 +189,7 @@ Veja a [documentação completa](./projects/ngx-opalbytes-performance/README.md)
 
 ---
 
-## 📊 Performance Monitoring
+##  Performance Monitoring
 
 Este monorepo inclui ferramentas integradas de monitoramento de performance:
 
@@ -256,7 +256,7 @@ Usamos uma convenção simples e eficiente para nomear branches:
 
 **Exemplos corretos:**
 ```bash
-# ✅ Branches válidas
+#  Branches válidas
 git checkout -b feat(directives)/add-input-mask-directive
 git checkout -b fix(component)/correcao-validacao-formato
 ```
@@ -273,7 +273,7 @@ git checkout -b fix(component)/correcao-validacao-formato
 
 ---
 
-## 📝 Como Contribuir
+##  Como Contribuir
 
 ### Adicionando Funcionalidades a uma Biblioteca Existente
 
@@ -341,13 +341,13 @@ O **escopo é obrigatório** e indica qual biblioteca do monorepo está sendo mo
 **Exemplos de mensagens de commit VÁLIDAS:**
 
 ```bash
-# ✅ Nova funcionalidade na biblioteca de diretivas
+#  Nova funcionalidade na biblioteca de diretivas
 feat(directives): add currency formatting directive
 
-# ✅ Correção de um bug na biblioteca de componentes
+#  Correção de um bug na biblioteca de componentes
 fix(components): correct button alignment on mobile
 
-# ✅ Alteração na documentação do projeto raiz
+#  Alteração na documentação do projeto raiz
 docs(libs): update main README with contribution guide
 ```
 
@@ -383,7 +383,7 @@ Antes de cada push, o Husky executa automaticamente os seguintes scripts:
 
 ---
 
-## 🚀 Releases e Versionamento
+##  Releases e Versionamento
 
 O versionamento e a publicação de novas versões são totalmente automatizados com o **semantic-release**.
 
@@ -398,7 +398,7 @@ O versionamento e a publicação de novas versões são totalmente automatizados
 
 ---
 
-## 🛠️ Scripts Disponíveis
+##  Scripts Disponíveis
 
 *   `npm run build`: Compila a biblioteca para produção.
 *   `npm run watch`: Compila a biblioteca em modo de desenvolvimento e observa as alterações.
