@@ -26,9 +26,17 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Check commits for library changes
+      - name: Verificar commits para mudanças nas bibliotecas
         id: check
         run: |
+          echo "========================================"
+          echo "ANALISANDO COMMITS"
+          echo "========================================"
+          echo "Branch: ${{ github.ref }}"
+          echo "Before: ${{ github.event.before }}"
+          echo "After: ${{ github.event.after }}"
+          echo ""
+
           # Obter todos os commits deste push
           if [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
             COMMITS=$(git log --pretty=format:"%s" ${{ github.event.before }}..${{ github.event.after }})
@@ -36,9 +44,10 @@ jobs:
             # Primeiro push para o branch
             COMMITS=$(git log --pretty=format:"%s" ${{ github.event.after }})
           fi
-          
+
           echo "Commits encontrados:"
           echo "$COMMITS"
+          echo ""
           
           # Verificar cada commit para cada biblioteca
           should_release_libs="false"
@@ -102,15 +111,29 @@ jobs:
           done <<< "$COMMITS"
           
           # Export results
+          echo ""
+          echo "========================================"
+          echo "RESUMO DAS DECISÕES"
+          echo "========================================"
           echo "should-release-libs=$should_release_libs" >> $GITHUB_OUTPUT
+          echo "libs: $should_release_libs"
           echo "should-release-components=$should_release_components" >> $GITHUB_OUTPUT
+          echo "components: $should_release_components"
           echo "should-release-directives=$should_release_directives" >> $GITHUB_OUTPUT
+          echo "directives: $should_release_directives"
           echo "should-release-services=$should_release_services" >> $GITHUB_OUTPUT
+          echo "services: $should_release_services"
           echo "should-release-utils=$should_release_utils" >> $GITHUB_OUTPUT
+          echo "utils: $should_release_utils"
           echo "should-release-core=$should_release_core" >> $GITHUB_OUTPUT
+          echo "core: $should_release_core"
           echo "should-release-performance=$should_release_performance" >> $GITHUB_OUTPUT
+          echo "performance: $should_release_performance"
           echo "should-release-shared=$should_release_shared" >> $GITHUB_OUTPUT
+          echo "shared: $should_release_shared"
           echo "should-release-pdf-export=$should_release_pdf_export" >> $GITHUB_OUTPUT
+          echo "pdf-export: $should_release_pdf_export"
+          echo "========================================"
 
   publish-sequentially:
     runs-on: ubuntu-latest
@@ -196,108 +219,238 @@ jobs:
             release-command: 'cd projects/ngx-opalbytes-feature-pdf && npx semantic-release'
 
     steps:
+      - name: Verificar condições do job publish-sequentially
+        run: |
+          echo "========================================"
+          echo "VERIFICAÇÃO DE CONDIÇÕES DO JOB"
+          echo "========================================"
+          echo "Este job foi EXECUTADO porque pelo menos uma das condições abaixo é 'true':"
+          echo ""
+          echo "Verificando cada condição:"
+          echo "  - should-release-core: ${{ needs.check-commits.outputs.should-release-core }}"
+          if [ "${{ needs.check-commits.outputs.should-release-core }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: core será publicado"
+          fi
+          echo "  - should-release-utils: ${{ needs.check-commits.outputs.should-release-utils }}"
+          if [ "${{ needs.check-commits.outputs.should-release-utils }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: utils será publicado"
+          fi
+          echo "  - should-release-services: ${{ needs.check-commits.outputs.should-release-services }}"
+          if [ "${{ needs.check-commits.outputs.should-release-services }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: services será publicado"
+          fi
+          echo "  - should-release-directives: ${{ needs.check-commits.outputs.should-release-directives }}"
+          if [ "${{ needs.check-commits.outputs.should-release-directives }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: directives será publicado"
+          fi
+          echo "  - should-release-components: ${{ needs.check-commits.outputs.should-release-components }}"
+          if [ "${{ needs.check-commits.outputs.should-release-components }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: components será publicado"
+          fi
+          echo "  - should-release-performance: ${{ needs.check-commits.outputs.should-release-performance }}"
+          if [ "${{ needs.check-commits.outputs.should-release-performance }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: performance será publicado"
+          fi
+          echo "  - should-release-libs: ${{ needs.check-commits.outputs.should-release-libs }}"
+          if [ "${{ needs.check-commits.outputs.should-release-libs }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: libs será publicado"
+          fi
+          echo "  - should-release-shared: ${{ needs.check-commits.outputs.should-release-shared }}"
+          if [ "${{ needs.check-commits.outputs.should-release-shared }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: shared será publicado"
+          fi
+          echo "  - should-release-pdf-export: ${{ needs.check-commits.outputs.should-release-pdf-export }}"
+          if [ "${{ needs.check-commits.outputs.should-release-pdf-export }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: pdf-export será publicado"
+          fi
+          echo ""
+          echo "========================================"
+
       - name: Iniciar processo para ${{ matrix.library }}
         run: |
           echo "========================================"
-          echo "📦 PROCESSANDO: ${{ matrix.library }}"
-          echo "📊 Condição para release: ${{ matrix.condition }}"
+          echo "PROCESSANDO: ${{ matrix.library }}"
+          echo "========================================"
+          echo "Condição para ${{ matrix.library }}: ${{ matrix.condition }}"
           echo "========================================"
       
       - name: Verificar se deve publicar
         id: check-release
         run: |
+          echo "========================================"
+          echo "VERIFICANDO CONDIÇÃO DE RELEASE"
+          echo "========================================"
+          echo "Library: ${{ matrix.library }}"
+          echo "Condition value: ${{ matrix.condition }}"
+          echo ""
           if [ "${{ matrix.condition }}" = "true" ]; then
-            echo "✅ Biblioteca ${{ matrix.library }} será publicada"
+            echo "Biblioteca ${{ matrix.library }} SERÁ PUBLICADA"
             echo "should-release=true" >> $GITHUB_OUTPUT
           else
-            echo "⏭️  Pulando ${{ matrix.library }} - nenhuma mudança detectada"
+            echo "PULANDO ${{ matrix.library }} - nenhuma mudança detectada"
             echo "should-release=false" >> $GITHUB_OUTPUT
           fi
+          echo "========================================"
       
-      # ⚠️ ADICIONAR if: steps.check-release.outputs.should-release == 'true' EM TODOS OS STEPS
-      - name: Checkout repository
+      - name: Início do checkout
+        if: steps.check-release.outputs.should-release == 'true'
+        run: |
+          echo "========================================"
+          echo "INICIANDO CHECKOUT DO REPOSITÓRIO"
+          echo "========================================"
+
+      - name: Fazer checkout do repositório
         if: steps.check-release.outputs.should-release == 'true'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Setup Node.js
+
+      - name: Checkout concluído
+        if: steps.check-release.outputs.should-release == 'true'
+        run: |
+          echo "Checkout concluído"
+          echo "Current directory: $(pwd)"
+          echo "========================================"
+
+      - name: Início da configuração do Node.js
+        if: steps.check-release.outputs.should-release == 'true'
+        run: |
+          echo "========================================"
+          echo "CONFIGURANDO NODE.JS"
+          echo "========================================"
+
+      - name: Configurar Node.js
         if: steps.check-release.outputs.should-release == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Configure npm authentication
+      - name: Node.js configurado
         if: steps.check-release.outputs.should-release == 'true'
         run: |
+          echo "Node.js configurado"
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+          echo "========================================"
+
+      - name: Configurar autenticação NPM
+        if: steps.check-release.outputs.should-release == 'true'
+        run: |
+          echo "========================================"
+          echo "CONFIGURANDO AUTENTICAÇÃO NPM"
+          echo "========================================"
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "Autenticação NPM configurada"
+          echo "========================================"
 
-      - name: Configure Git
+      - name: Configurar Git
         if: steps.check-release.outputs.should-release == 'true'
         run: |
+          echo "========================================"
+          echo "CONFIGURANDO GIT"
+          echo "========================================"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          echo "Git configurado"
+          echo "User: $(git config user.name)"
+          echo "Email: $(git config user.email)"
+          echo "========================================"
 
-      - name: Install dependencies
-        if: steps.check-release.outputs.should-release == 'true'
-        run: npm ci
-
-      # 🔄 ATUALIZAR REPOSITÓRIO ANTES DE CADA BIBLIOTECA
-      - name: Update repository
+      - name: Instalar dependências
         if: steps.check-release.outputs.should-release == 'true'
         run: |
-          echo "🔄 Atualizando repositório..."
+          echo "========================================"
+          echo "INSTALANDO DEPENDÊNCIAS"
+          echo "========================================"
+          npm ci
+          echo "Dependências instaladas com sucesso"
+          echo "========================================"
+
+      - name: Atualizar repositório
+        if: steps.check-release.outputs.should-release == 'true'
+        run: |
+          echo "========================================"
+          echo "ATUALIZANDO REPOSITÓRIO"
+          echo "========================================"
+          echo "Current branch: $(git branch --show-current)"
+          echo "Fetching latest changes from origin main..."
           git fetch origin main
           git checkout main
           git pull origin main
-          echo "✅ Repositório atualizado"
+          echo "Repositório atualizado"
+          echo "Latest commit: $(git log -1 --oneline)"
+          echo "========================================"
 
-      # 📊 GERAR RELATÓRIO DE MÉTRICAS
-      - name: Generate Metrics Report
+      - name: Gerar relatório de métricas
         if: steps.check-release.outputs.should-release == 'true'
         run: |
-          echo "📊 Gerando relatório de métricas..."
+          echo "Gerando relatório de métricas..."
           npm run metrics:report || echo "Aviso: Algumas métricas falharam, mas continuando..."
-          echo "✅ Relatório de métricas gerado"
+          echo "Relatório de métricas gerado"
         continue-on-error: true
 
-      # 📝 ADICIONAR MÉTRICAS AO CHANGELOG
-      - name: Add Metrics to Changelog
+      - name: Adicionar métricas ao changelog
         if: steps.check-release.outputs.should-release == 'true'
         run: |
-          echo "📝 Adicionando métricas ao changelog..."
+          echo "Adicionando métricas ao changelog..."
           npm run metrics:changelog
-          echo "✅ Métricas adicionadas ao changelog"
+          echo "Métricas adicionadas ao changelog"
         continue-on-error: true
-          
-      - name: Lint ${{ matrix.library }}
+
+      - name: Executar lint em ${{ matrix.library }}
         if: steps.check-release.outputs.should-release == 'true'
-        run: npm run lint
+        run: |
+          echo "========================================"
+          echo "EXECUTANDO LINT"
+          echo "========================================"
+          npm run lint
+          echo "Lint concluído com sucesso"
+          echo "========================================"
 
-      - name: Test ${{ matrix.library }}
+      - name: Executar testes em ${{ matrix.library }}
         if: steps.check-release.outputs.should-release == 'true' && matrix.test-command != 'echo "No tests for root"'
-        run: ${{ matrix.test-command }}
+        run: |
+          echo "========================================"
+          echo "EXECUTANDO TESTES"
+          echo "========================================"
+          echo "Command: ${{ matrix.test-command }}"
+          ${{ matrix.test-command }}
+          echo "Testes concluídos com sucesso"
+          echo "========================================"
 
-      - name: Build ${{ matrix.library }}
+      - name: Fazer build de ${{ matrix.library }}
         if: steps.check-release.outputs.should-release == 'true' && matrix.build-command != 'echo "No build needed for root"'
-        run: ${{ matrix.build-command }}
+        run: |
+          echo "========================================"
+          echo "BUILDING: ${{ matrix.library }}"
+          echo "========================================"
+          echo "Command: ${{ matrix.build-command }}"
+          ${{ matrix.build-command }}
+          echo "Build concluído com sucesso"
+          echo "========================================"
 
-      - name: Release ${{ matrix.library }}
+      - name: Fazer release de ${{ matrix.library }}
         if: steps.check-release.outputs.should-release == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "🚀 INICIANDO RELEASE: ${{ matrix.library }}"
+          echo "========================================"
+          echo "INICIANDO RELEASE: ${{ matrix.library }}"
+          echo "========================================"
+          echo "Command: ${{ matrix.release-command }}"
+          echo "Project path: ${{ matrix.project-path }}"
+          echo ""
           ${{ matrix.release-command }}
-          echo "✅ RELEASE CONCLUÍDO: ${{ matrix.library }}"
+          echo ""
+          echo "RELEASE CONCLUÍDO: ${{ matrix.library }}"
+          echo "========================================"
 
-      # 📤 PUBLICAR RELATÓRIO COMO ARTIFACT
-      - name: Upload Metrics Report
+      - name: Upload do relatório de métricas
         if: steps.check-release.outputs.should-release == 'true' && hashFiles('metrics-reports/latest.html') != ''
         uses: actions/upload-artifact@v4
         with:

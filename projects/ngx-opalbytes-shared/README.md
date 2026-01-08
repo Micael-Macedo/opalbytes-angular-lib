@@ -1,4 +1,4 @@
-# 📦 ngx-opalbytes-shared
+#  ngx-opalbytes-shared
 
 A biblioteca `ngx-opalbytes-shared` é um conjunto de módulos compartilhados que inclui componentes de UI genéricos, diretivas de atributo e estruturais, enums, interfaces, layouts, pipes para formatação de dados, resolvers e validadores. Ela foi projetada para promover a reutilização e a padronização em diferentes projetos Angular, centralizando elementos comuns de interface e lógica de apresentação.
 
@@ -129,7 +129,7 @@ export class InputCpfComponent {}
 
 ---
 
-## 📜 Como Contribuir
+##  Como Contribuir
 
 Para adicionar uma nova funcionalidade a esta biblioteca, siga os passos abaixo:
 
@@ -144,7 +144,7 @@ Para adicionar uma nova funcionalidade a esta biblioteca, siga os passos abaixo:
 
 ---
 
-## 📜 Regras e Convenções
+##  Regras e Convenções
 
 ### Prefixo
 
