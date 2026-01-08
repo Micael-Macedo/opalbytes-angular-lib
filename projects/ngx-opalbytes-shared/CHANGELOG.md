@@ -1,3 +1,36 @@
+# [1.1.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-shared@1.0.1...ngx-opalbytes-shared@1.1.0) (2026-01-08)
+
+
+### Bug Fixes
+
+* **components:** correcao step para lint ([c91c85d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c91c85d69256dba2b883b50c246d72b7cc4646ff))
+* correcao de testes ([2d9d1c5](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2d9d1c55a24adc67f5a8bb7062a817aacb60f452))
+* **performance:** remocao componente nao utilizado ([a34e4f6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a34e4f63606edd3b271152f42fd8ade63d5e7748))
+
+
+### Features
+
+* add html de metricas no artifacts do github ([6258ba3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/6258ba31047cc7b2d2d7128266357246ae5c50e7))
+* add metricas de perfomance ([7f47c9e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/7f47c9ea5a6753dca9c1fe14649686790fca6877))
+* add relatorio de metricas ([021ab35](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/021ab35f069ddaedfbad7d49e56a8cfc28d234e6))
+* **components:** add componente stepper e step ([9d26896](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9d2689624473a5f62f077517efa75f1151379190))
+* **components:** remove emojisæ₢ ([8db79cb](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8db79cb5f05b4d5d59f370b91f53a272b3505c16))
+* **core:** add elemento websocket ([e60d1bf](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e60d1bfb4bf055b7ff396c97d47406a97f576582))
+* **core:** remove emojis ([9fa223b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9fa223be16a9e97932843fabecde434e28c20351))
+* **directives:** remove emojis ([2a27642](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2a276424a2738de353bfbe4934e0265229d929c6))
+* **libs:** inclusao matriz publicacao pdf em release ([c48d9e3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c48d9e3dbaffb4cf37f48e9bfa191d132eb3e371))
+* **libs:** remove emojis ([cc00064](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/cc0006498a4150d06f49e2525a5f7810fea27df3))
+* metricas ([c5f7e22](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c5f7e2265ee0a30fa2e313953d9e0647ce618c1a))
+* **pdf:** add estrategias de exportacao de pag ([86fb462](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/86fb46244873798ae6b542399ed12647e1092bcf))
+* **pdf:** add-lib-pdf-convertor ([9bedfc0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9bedfc02026538c48e47c0fe3b829d1dcd585704))
+* **pdf:** atualizacao documentacao sobre lib pdf ([22a63be](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/22a63be2375e83be862c24bff91e5e0196d8adee))
+* **perfomance:** add logs no publish ([37b486d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/37b486d14cc0290581caa81b70c81803a74e5fda))
+* **perfomance:** correcao de lib ([9549311](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9549311389cee327172811f31ab9c942cb91c2cb))
+* **perfomance:** remove emojis ([a433fc3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a433fc390bf8f6db2f27fe0107cc6f2e1089a22d))
+* **services:** remove emojis ([8848ab6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8848ab61051f1633136a3b08e4ce0645ce8e9902))
+* **shared:** remove emojis ([2078b38](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2078b38f31bec09e8793a36f2533bf8e1f97fda3))
+* **utils:** remove emojis ([92c6bbf](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/92c6bbf52555955f9620708692b12ada01430cba))
+
 ## [1.0.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-shared@1.0.0...ngx-opalbytes-shared@1.0.1) (2026-01-05)
 
 
