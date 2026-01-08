@@ -17,5 +17,4 @@ export * from './lib/services/memory-metrics.service';
 export * from './lib/utils/performance.utils';
 export * from './lib/utils/metrics-aggregator.utils';
 
-// Component
-export * from './lib/ngx-opalbytes-performance';
+
