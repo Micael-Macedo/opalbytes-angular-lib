@@ -21,6 +21,7 @@ export * from './lib/directives/has-errors.directive';
 export * from './lib/directives/password-validator.directive';
 export * from './lib/directives/rg-validator.directive';
 export * from './lib/directives/telefone-validator.directive';
+export * from './lib/directives/skeleton.directive';
 
 // Enums
 export * from "./lib/enums/variaveis.enum";
