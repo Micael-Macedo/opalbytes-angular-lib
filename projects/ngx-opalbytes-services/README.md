@@ -1,4 +1,4 @@
-# 📦 ngx-opalbytes-services
+#  ngx-opalbytes-services
 
 Esta biblioteca destina-se a abrigar serviços (`services`) Angular reutilizáveis que encapsulam lógica de negócios, chamadas de API e outras funcionalidades compartilhadas.
 
@@ -198,7 +198,7 @@ ngOnDestroy() {
 
 ---
 
-## 📜 Como Contribuir
+##  Como Contribuir
 
 Para adicionar um novo serviço a esta biblioteca, siga os passos abaixo:
 

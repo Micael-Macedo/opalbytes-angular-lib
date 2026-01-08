@@ -1,4 +1,4 @@
-# 📊 ngx-opalbytes-performance
+#  ngx-opalbytes-performance
 
 Biblioteca Angular para monitoramento de performance em runtime. Fornece métricas detalhadas de Web Vitals, custom marks/measures, long tasks e uso de memória.
 

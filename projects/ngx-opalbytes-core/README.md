@@ -1,4 +1,4 @@
-# 📦 ngx-opalbytes-core
+#  ngx-opalbytes-core
 
 A biblioteca `ngx-opalbytes-core` é o coração das aplicações Angular da Opalbytes. Ela fornece um conjunto robusto de serviços, interceptors e interfaces essenciais que formam a base para o desenvolvimento de projetos, garantindo padronização e reutilização de código.
 
@@ -351,7 +351,7 @@ export class MeuComponente {
 
 ---
 
-## 📜 Como Contribuir
+##  Como Contribuir
 
 Para adicionar uma nova funcionalidade a esta biblioteca, siga os passos abaixo:
 
@@ -366,7 +366,7 @@ Para adicionar uma nova funcionalidade a esta biblioteca, siga os passos abaixo:
 
 ---
 
-## 📜 Regras e Convenções
+##  Regras e Convenções
 
 ### Prefixo
 
