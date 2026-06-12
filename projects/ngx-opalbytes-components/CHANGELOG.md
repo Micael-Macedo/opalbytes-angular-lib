@@ -1,3 +1,15 @@
+# [1.13.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.12.0...ngx-opalbytes-components@1.13.0) (2026-06-12)
+
+
+### Bug Fixes
+
+* correcao exportacao interface ([6679256](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/667925609d78a5947bf5ca433fac235c7929fa81))
+
+
+### Features
+
+* atualizacao icones componentes base ([133c33f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/133c33f0aac75776af65aa9bb72918b328f0a5f7))
+
 # [1.12.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.11.0...ngx-opalbytes-components@1.12.0) (2026-01-08)
 
 
