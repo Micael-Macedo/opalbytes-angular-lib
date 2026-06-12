@@ -1,19 +1,19 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
-import { BaseInput } from "./base-input";
+import { CaoBaseInput } from "./base-input";
 import { EventEmitter } from '@angular/core';
 
-describe("BaseInputComponent", () => {
-  let component: BaseInput;
-  let fixture: ComponentFixture<BaseInput>;
+describe("CaoBaseInputComponent", () => {
+  let component: CaoBaseInput;
+  let fixture: ComponentFixture<CaoBaseInput>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule, BaseInput],
+      imports: [FormsModule, CaoBaseInput],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(BaseInput);
+    fixture = TestBed.createComponent(CaoBaseInput);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

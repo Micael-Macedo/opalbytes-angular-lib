@@ -1,16 +1,17 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { CommonModule } from "@angular/common";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
-import { LucideAngularModule } from 'lucide-angular';
+import { LucideDynamicIcon } from "@lucide/angular";
 
 @Component({
-  selector: 'cao-button',
-  imports: [CommonModule, MatTooltipModule, NgOptimizedImage, LucideAngularModule],
-  templateUrl: './base-button.html',
-  styleUrl: './base-button.css',
+  standalone: true,
+  selector: "cao-button",
+  templateUrl: "./base-button.component.html",
+  styleUrls: ["./base-button.component.scss"],
+  imports: [CommonModule, MatTooltipModule, LucideDynamicIcon],
 })
-export class BaseButton implements OnInit {
+export class CaoBaseButtonComponent implements OnInit{
   @Output() readonly buttonClick = new EventEmitter<void>();
 
   @Input() buttonText = "Clique!";
@@ -24,6 +25,7 @@ export class BaseButton implements OnInit {
   @Input() leadingIcon?: string;
   @Input() isLucideIcon = true;
   @Input() dataCy?: string;
+  @Input() iconColor?: string;
 
   ngOnInit(): void {
     if (!this.dataCy) {

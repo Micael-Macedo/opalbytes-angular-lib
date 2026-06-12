@@ -37,7 +37,7 @@
     "typescript",
     "typescript-eslint",
     "vitest",
-    "lucide-angular",
+    "@lucide/angular",
     "ngx-mask",
     "ngx-webstorage",
     "rxjs",

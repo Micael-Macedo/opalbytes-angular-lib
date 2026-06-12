@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { DropDownComponent } from "./drop-down";
+import { CaoDropDownComponent } from "./drop-down";
 import { By } from "@angular/platform-browser";
 import { AbstractControl } from "@angular/forms";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 
-describe("DropDownComponent", () => {
-  let component: DropDownComponent;
-  let fixture: ComponentFixture<DropDownComponent>;
+describe("CaoDropDownComponent", () => {
+  let component: CaoDropDownComponent;
+  let fixture: ComponentFixture<CaoDropDownComponent>;
 
   const mockOptions = [{ nome: "Item 1", icon: "home" }, { nome: "Item 2" }];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DropDownComponent],
+      imports: [CaoDropDownComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DropDownComponent);
+    fixture = TestBed.createComponent(CaoDropDownComponent);
     component = fixture.componentInstance;
     component.options = mockOptions;
     component.textHeader = "Selecione";

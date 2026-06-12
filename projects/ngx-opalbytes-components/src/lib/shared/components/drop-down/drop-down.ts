@@ -21,7 +21,7 @@ import {
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
-interface IDropDownOption {
+export interface IDropDownOption {
   id?: string | number;
   nome: string;
   icon?: string;
@@ -43,12 +43,12 @@ interface IDropDownOption {
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DropDownComponent),
+      useExisting: forwardRef(() => CaoDropDownComponent),
       multi: true,
     },
   ],
 })
-export class DropDownComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class CaoDropDownComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() textHeader = "SELECIONE UM ITEM";
   @Input() options: IDropDownOption[] = [];
   @Input() dropDownClass = "";

@@ -1,29 +1,29 @@
-import { CommonModule, NgOptimizedImage } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR , FormsModule } from "@angular/forms";
+import { AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from "@angular/forms";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
-import { LucideAngularModule } from "lucide-angular";
+import { LucideDynamicIcon } from "@lucide/angular";
 import { NgxMaskDirective, provideNgxMask } from "ngx-mask";
 
 @Component({
+  standalone: true,
   selector: "cao-input",
   templateUrl: "./base-input.html",
   styleUrls: ["./base-input.css"],
-  imports: [CommonModule, FormsModule, NgxMaskDirective, MatTooltipModule, LucideAngularModule, NgOptimizedImage],
+  imports: [CommonModule, FormsModule, NgxMaskDirective, MatTooltipModule, LucideDynamicIcon],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: BaseInput,
+      useExisting: CaoBaseInput,
       multi: true,
     },
     provideNgxMask(),
   ],
 })
-export class BaseInput implements ControlValueAccessor {
+export class CaoBaseInput implements ControlValueAccessor {
   @Input() type = "text";
   @Input() placeholder = "";
-  @Input() label = "";
   @Input() inputClass = "";
   @Input() value: string | number | boolean | Date = "";
   @Input() errorMessage = "";
@@ -32,6 +32,7 @@ export class BaseInput implements ControlValueAccessor {
   @Input() searchMode = false;
   @Input() showBorder = false;
   @Input() isLucideIcon = false;
+  @Input() iconColor = "";
   @Input() mask?: string;
   @Input() control?: AbstractControl | null;
   @Input() tooltip = "";
@@ -44,12 +45,12 @@ export class BaseInput implements ControlValueAccessor {
   @Input() separatorLimit = "";
 
   @Input() set leadingIcon(value: string) {
-    this._leadingIcon = this.resolveIcon(value);
+    this._leadingIcon = value;
     this.icon = true;
   }
 
   @Input() set trailingIcon(value: string) {
-    this._trailingIcon = this.resolveIcon(value);
+    this._trailingIcon = value;
     this.icon = true;
   }
 
@@ -126,17 +127,5 @@ export class BaseInput implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
-  }
-
-  private resolveIcon(variant: string): string {
-    if (this.isLucideIcon) {return variant;}
-    const icons: Record<string, string> = {
-      doctor: "assets/images/svg/doctor.svg",
-      calendar: "assets/images/svg/calendar.svg",
-      time: "assets/images/svg/time.svg",
-      pay: "assets/images/svg/money.svg",
-      search: "assets/images/svg/search-icon.svg",
-    };
-    return icons[variant] || variant;
   }
 }

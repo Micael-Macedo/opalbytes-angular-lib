@@ -292,7 +292,7 @@ module.exports = [
       "@angular-eslint/template/no-call-expression": "warn",
       "@angular-eslint/template/no-any": "warn",
       "@angular-eslint/template/no-inline-styles": "warn",
-      "@angular-eslint/template/prefer-ngsrc": "error",
+      "@angular-eslint/template/prefer-ngsrc": "warn",
 
       // ========================================
       // Acessibilidade (A11y) - Básico

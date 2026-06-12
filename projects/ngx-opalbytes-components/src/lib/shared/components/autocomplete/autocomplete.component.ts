@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Input, OnInit, forwardRef } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, forwardRef, inject } from "@angular/core";
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -14,9 +14,10 @@ import {
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 
+import { LucideDynamicIcon } from "@lucide/angular";
 import { Observable, startWith, map } from "rxjs";
 
-interface IAutoCompleteOption {
+export interface ICaoAutoCompleteOption {
   id?: string | number;
   nome: string;
   icon?: string;
@@ -25,8 +26,8 @@ interface IAutoCompleteOption {
 
 @Component({
   selector: "cao-autocomplete",
-  templateUrl: "./autocomplete.html",
-  styleUrls: ["./autocomplete.css"],
+  templateUrl: "./autocomplete.component.html",
+  styleUrls: ["./autocomplete.component.scss"],
   standalone: true,
   imports: [
     CommonModule,
@@ -34,6 +35,7 @@ interface IAutoCompleteOption {
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
+    LucideDynamicIcon,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -47,16 +49,25 @@ interface IAutoCompleteOption {
 export class CaoAutocompleteComponent implements OnInit, ControlValueAccessor {
   @Input() label = "";
   @Input() placeholder = "";
-  @Input() options: IAutoCompleteOption[] = [];
+  @Input() options: ICaoAutoCompleteOption[] = [];
   @Input() control: AbstractControl = new FormControl();
   @Input() dataCy = "";
   @Input() controlName = "";
 
-  internalControl = new FormControl("");
-  filteredOptions$!: Observable<IAutoCompleteOption[]>;
-  isFocused = false;
+  @Input() isLucideIcon = false;
+  @Input() iconColor = "";
 
-  private onChange: (value: IAutoCompleteOption | string) => void = () => { };
+  @Input() _leadingIcon?: string;
+  @Input() _trailingIcon?: string;
+
+  internalControl = new FormControl("");
+  filteredOptions$!: Observable<ICaoAutoCompleteOption[]>;
+  isFocused = false;
+  icon = false;
+
+  private el = inject(ElementRef);
+
+  private onChange: (value: ICaoAutoCompleteOption | string) => void = () => { };
   private onTouched: () => void = () => { };
 
   ngOnInit(): void {
@@ -81,7 +92,7 @@ export class CaoAutocompleteComponent implements OnInit, ControlValueAccessor {
     this.onTouched();
   }
 
-  private filter(value: string | IAutoCompleteOption): IAutoCompleteOption[] {
+  private filter(value: string | ICaoAutoCompleteOption): ICaoAutoCompleteOption[] {
     const filterValue = (typeof value === "string" ? value : value?.nome)?.toLowerCase() || "";
     if (!this.options) {
       return [];
@@ -93,7 +104,7 @@ export class CaoAutocompleteComponent implements OnInit, ControlValueAccessor {
     });
   }
 
-  displayFn(option: IAutoCompleteOption): string {
+  displayFn(option: ICaoAutoCompleteOption): string {
     return option && option.nome ? option.nome : "";
   }
 
@@ -130,12 +141,12 @@ export class CaoAutocompleteComponent implements OnInit, ControlValueAccessor {
     return this.controlName;
   }
 
-  writeValue(value: IAutoCompleteOption | string): void {
+  writeValue(value: ICaoAutoCompleteOption | string): void {
     const displayValue = value && typeof value === "object" ? this.displayFn(value) : value;
     this.internalControl.setValue(displayValue, { emitEvent: false });
   }
 
-  registerOnChange(fn: (value: IAutoCompleteOption | string) => void): void {
+  registerOnChange(fn: (value: ICaoAutoCompleteOption | string) => void): void {
     this.onChange = fn;
   }
 
@@ -143,7 +154,8 @@ export class CaoAutocompleteComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    isDisabled ? this.internalControl.disable() : this.internalControl.enable();
+   setInputHeight(height: string): void {
+    this.el.nativeElement.style.setProperty('--form-field-height', height);
   }
+
 }
