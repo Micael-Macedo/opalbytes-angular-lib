@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { BaseButtonComponent } from "./base-button.component";
+import { CaoBaseButtonComponent } from "./base-button.component";
 
-describe("BaseButtonComponent", () => {
-  let component: BaseButtonComponent;
-  let fixture: ComponentFixture<BaseButtonComponent>;
+describe("CaoBaseButtonComponent", () => {
+  let component: CaoBaseButtonComponent;
+  let fixture: ComponentFixture<CaoBaseButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BaseButtonComponent],
+      imports: [CaoBaseButtonComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BaseButtonComponent);
+    fixture = TestBed.createComponent(CaoBaseButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
