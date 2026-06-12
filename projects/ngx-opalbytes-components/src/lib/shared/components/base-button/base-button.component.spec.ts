@@ -22,21 +22,21 @@ describe("CaoBaseButtonComponent", () => {
   });
 
   it("deve emitir o evento buttonClick quando clicado", () => {
-    spyOn(component.buttonClick, "emit");
+    vi.spyOn(component.buttonClick, "emit");
     component.onClick();
     expect(component.buttonClick.emit).toHaveBeenCalledWith();
   });
 
   it("não deve emitir o evento buttonClick quando desabilitado", () => {
     component.isDisabled = true;
-    spyOn(component.buttonClick, "emit");
+    vi.spyOn(component.buttonClick, "emit");
     component.onClick();
     expect(component.buttonClick.emit).not.toHaveBeenCalled();
   });
 
   it("não deve emitir o evento buttonClick ao carregar", () => {
     component.isLoading = true;
-    spyOn(component.buttonClick, "emit");
+    vi.spyOn(component.buttonClick, "emit");
     component.onClick();
     expect(component.buttonClick.emit).not.toHaveBeenCalled();
   });
