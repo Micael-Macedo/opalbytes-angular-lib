@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
 }
 
 label {
@@ -15,11 +16,13 @@ label {
 .input-wrapper {
   position: relative;
   width: 100%;
+  height: 100%;
 }
 
 .input-wrapper input,
 .input-wrapper textarea {
   width: 100%;
+  height: 100%;
   border: none;
   background-color: var(--input-background);
   border-radius: 8px;
@@ -54,39 +57,24 @@ label {
   height: auto;
 }
 
-.input-wrapper .leading-icon,
-.input-wrapper .icon:first-child {
+.input-wrapper .icon {
   position: absolute;
-  top: 53%;
-  left: 8px;
+  top: 50%;
   transform: translateY(-50%);
   width: 15px;
+  height: 15px;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.input-wrapper .leading-icon::placeholder,
-.input-wrapper .icon:first-child::placeholder {
-  margin-left: 20px;
+.input-wrapper.has-leading-icon .icon:first-of-type {
+  left: 8px;
 }
 
-.input-wrapper .trailing-icon,
-.input-wrapper .icon:last-child {
-  position: absolute;
-  top: 53%;
-  right: 14px;
-  transform: translateY(-50%);
-  width: 15px;
-}
-
-.input-wrapper .trailing-icon img,
-.input-wrapper .icon:last-child img {
-  width: 100%;
-  height: auto;
-}
-
-.input-wrapper .material-icons {
-  font-size: 20px;
-  color: var(--input-text);
+.input-wrapper.has-trailing-icon .icon:last-of-type {
+  right: 8px;
 }
 
 .input-wrapper .search-icon-border {

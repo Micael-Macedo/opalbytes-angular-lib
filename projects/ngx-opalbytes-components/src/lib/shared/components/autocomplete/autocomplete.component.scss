@@ -1,0 +1,108 @@
+:host {
+  --mat-form-field-container-height: stretch;
+  display: block;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0; /* Impede que o label encolha */
+}
+
+.rnv-autocomplete-mat-form-field {
+  width: 100%;
+  flex: 1; /* Faz o form-field ocupar o espaço restante */
+  min-height: 0; /* Importante para flex funcionar corretamente */
+}
+
+/* Remove a altura fixa do container do form-field */
+::ng-deep .rnv-autocomplete-mat-form-field .mat-mdc-text-field-wrapper {
+  height: 100% !important;
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+::ng-deep .rnv-autocomplete-mat-form-field .mat-mdc-form-field-flex {
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+
+::ng-deep .rnv-autocomplete-mat-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-infix {
+  padding: 0 !important;
+  min-height: unset !important;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+::ng-deep .rnv-autocomplete-mat-form-field .mat-mdc-form-field-infix input {
+  height: auto !important;
+  flex: 1;
+  padding: 12px 0; /* Ajuste conforme necessário */
+}
+
+/* Garante que o input-wrapper também ocupe 100% da altura */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Ajuste para os ícones */
+.input-wrapper .icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.input-wrapper.has-leading-icon input {
+  padding-left: 28px;
+}
+
+.input-wrapper.has-trailing-icon input {
+  padding-right: 28px;
+}
+
+/* Remove o outline padrão */
+::ng-deep .rnv-autocomplete-mat-form-field .mat-mdc-form-field-outline {
+  display: none;
+}
+
+/* Esconde o espaço do subscript (mensagem de erro) */
+::ng-deep .rnv-autocomplete-mat-form-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+/* Estilos adicionais para o autocomplete */
+.mat-mdc-option {
+  font-size: 1rem;
+  padding: 6px 16px;
+  text-transform: uppercase;
+}
+
+.mat-mdc-autocomplete-panel {
+  border-radius: 8px;
+  padding: 12px 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.trailing-icon{
+  right: 0;
+}

@@ -1,15 +1,13 @@
 <div class="form-field input-component" [class.search-mode]="searchMode">
-  @if (label) {
-  <label for="{{ controlNameValue }}">{{ label }}</label>
-  }
-
   <div class="input-wrapper" [class.has-leading-icon]="_leadingIcon" [class.has-trailing-icon]="_trailingIcon"
     [class.focused]="isFocused">
     @if (_leadingIcon) { @if (isLucideIcon) {
-         <lucide-angular class="my-icon" [name]="leadingIcon" />
+    <div class="icon">
+      <svg [lucideIcon]="_leadingIcon" [style.color]="iconColor"></svg>
+    </div>
     } @else {
     <div class="icon">
-      <img alt="ícone de início" [ngSrc]="_leadingIcon" [fill]="true" />
+      <img alt="ícone de início" [src]="_leadingIcon"/>
     </div>
     } } @switch (type) { @case ('textarea') {
     <textarea matTooltip="{{ tooltip }}" matTooltipPosition="above" matTooltipClass="custom-arrow-tooltip" [attr.data-cy]="dataCy"
@@ -31,22 +29,13 @@
       [mask]="mask" [allowNegativeNumbers]="allowNegativeNumbers" [thousandSeparator]="thousandSeparator" [decimalMarker]="decimalMarker" [separatorLimit]="separatorLimit" [(ngModel)]="value" (input)="onInput($event)"
       (change)="onInputChange($event)" (focus)="onFocus()" (blur)="onBlur()" />
     } } @if (_trailingIcon) { @if (isLucideIcon) {
-         <lucide-angular class="my-icon" [name]="leadingIcon" />
+    <div class="icon">
+      <svg [lucideIcon]="_trailingIcon" [style.color]="iconColor"></svg>
+    </div>
     } @else {
     <div class="icon">
-      <img alt="ícone de fim" [ngSrc]="_trailingIcon"
-      [fill]="true" />
+      <img alt="ícone de fim" [src]="_trailingIcon" />
     </div>
-    } } @if (searchMode) {
-    <div class="search-icon-border">
-      <img class="search-icon" alt="search" aria-hidden="false"
-        tabindex="0"  
-        [ngSrc]="'assets/images/svg/search-icon.svg'"
-        [fill]="true"
-        (keydown)="onSearchClick()"
-        (keydown.enter)="onSearchClick()"
-        (click)="onSearchClick()" />
-    </div>
-    }
+    } } 
   </div>
 </div>

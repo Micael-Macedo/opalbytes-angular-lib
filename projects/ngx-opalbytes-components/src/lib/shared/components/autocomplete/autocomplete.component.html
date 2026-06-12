@@ -3,8 +3,18 @@
   <label [for]="internalControl">{{ label }}</label>
   }
 
-  <mat-form-field appearance="outline" class="rnv-autocomplete-mat-form-field">
-    <div class="input-wrapper" [class.focused]="isFocused">
+  <mat-form-field appearance="outline" class="rnv-autocomplete-mat-form-field autocomplete">
+    <div class="input-wrapper" [class.has-leading-icon]="_leadingIcon" [class.has-trailing-icon]="_trailingIcon"
+      [class.focused]="isFocused">
+      @if (_leadingIcon) { @if (isLucideIcon) {
+      <div class="icon">
+        <svg [lucideIcon]="_leadingIcon" [style.color]="iconColor"></svg>
+      </div>
+      } @else {
+      <div class="icon">
+        <img alt="ícone de início" [src]="_leadingIcon" />
+      </div>
+      } }
       <input
         type="text"
         matInput
@@ -18,6 +28,15 @@
         ]"
         (focus)="onFocus()"
         (blur)="onBlur()" />
+      @if (_trailingIcon) { @if (isLucideIcon) {
+      <div class="icon trailing-icon">
+        <svg [lucideIcon]="_trailingIcon" [style.color]="iconColor"></svg>
+      </div>
+      } @else {
+      <div class="icon trailing-icon">
+        <img alt="ícone de fim" [src]="_trailingIcon" />
+      </div>
+      } }
       <mat-autocomplete
         #auto="matAutocomplete"
         autoActiveFirstOption
