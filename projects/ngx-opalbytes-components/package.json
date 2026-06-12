@@ -5,7 +5,7 @@
     "@angular/common": "^21.0.0",
     "@angular/core": "^21.0.0",
     "@angular/material": "^21.0.3",
-    "lucide-angular": "^0.562.0",
+    "@lucide/angular": ">=1.17.0",
     "@angular/cdk": "^21.0.5",
     "ngx-mask": "^20.0.3"
   },
