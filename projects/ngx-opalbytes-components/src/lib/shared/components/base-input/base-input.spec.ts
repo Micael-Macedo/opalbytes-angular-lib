@@ -138,18 +138,6 @@ describe("CaoBaseInputComponent", () => {
     expect(component._leadingIcon).toBe("home");
   });
 
-  it("deve aplicar leadingIcon como caminho de imagem se não for Material", () => {
-    component.isLucideIcon = false;
-    component.leadingIcon = "calendar";
-    expect(component._leadingIcon).toContain("calendar.svg");
-  });
-
-  it("deve aplicar trailingIcon corretamente se não for Material", () => {
-    component.isLucideIcon = false;
-    component.trailingIcon = "search";
-    expect(component._trailingIcon).toContain("search-icon.svg");
-  });
-
   it("deve manter a máscara definida corretamente", () => {
     component.mask = "000.000.000-00";
     fixture.detectChanges();

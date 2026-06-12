@@ -14,10 +14,10 @@ describe("CaoBaseButtonComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CaoBaseButtonComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it("deveria criar", () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 
