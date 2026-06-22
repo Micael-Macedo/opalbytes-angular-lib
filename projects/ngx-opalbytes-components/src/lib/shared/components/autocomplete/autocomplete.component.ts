@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, forwardRef, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, forwardRef, inject } from "@angular/core";
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -53,12 +53,17 @@ export class CaoAutocompleteComponent implements OnInit, ControlValueAccessor {
   @Input() control: AbstractControl = new FormControl();
   @Input() dataCy = "";
   @Input() controlName = "";
-
   @Input() isLucideIcon = false;
   @Input() iconColor = "";
-
   @Input() _leadingIcon?: string;
   @Input() _trailingIcon?: string;
+  @Input() optionIcon?: string;
+  @Input() optionIConColor?: string
+  @Input() isLucideOptionIcon?: boolean
+
+  @Output() readonly OnItemSelected = new EventEmitter<ICaoAutoCompleteOption>();
+  @Output() readonly OnBlur = new EventEmitter<void>();
+  @Output() readonly OnFocus = new EventEmitter<void>();
 
   internalControl = new FormControl("");
   filteredOptions$!: Observable<ICaoAutoCompleteOption[]>;
@@ -84,13 +89,22 @@ export class CaoAutocompleteComponent implements OnInit, ControlValueAccessor {
 
   onFocus() {
     this.isFocused = true;
+    this.OnFocus.emit()
     this.onTouched();
   }
 
   onBlur(): void {
     this.isFocused = false;
+    this.OnBlur.emit()
     this.onTouched();
   }
+
+  onOptionSelected(event: MatAutocompleteSelectedEvent): void {
+    this.onChange(event.option.value);
+    this.OnItemSelected.emit(event.option.value)
+    this.onTouched();
+  }
+
 
   private filter(value: string | ICaoAutoCompleteOption): ICaoAutoCompleteOption[] {
     const filterValue = (typeof value === "string" ? value : value?.nome)?.toLowerCase() || "";
@@ -106,11 +120,6 @@ export class CaoAutocompleteComponent implements OnInit, ControlValueAccessor {
 
   displayFn(option: ICaoAutoCompleteOption): string {
     return option && option.nome ? option.nome : "";
-  }
-
-  onOptionSelected(event: MatAutocompleteSelectedEvent): void {
-    this.onChange(event.option.value);
-    this.onTouched();
   }
 
   get errorText(): string | null {

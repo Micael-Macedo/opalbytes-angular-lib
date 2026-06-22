@@ -3,6 +3,12 @@
   display: block;
 }
 
+::ng-deep .rnv-autocomplete-mat-form-field {
+  --mat-form-field-outlined-outline-color: transparent;
+  --mat-form-field-outlined-hover-outline-color: transparent;
+  --mat-form-field-outlined-focus-outline-color: transparent;
+}
+
 .form-field {
   display: flex;
   flex-direction: column;
@@ -20,8 +26,8 @@ label {
 
 .rnv-autocomplete-mat-form-field {
   width: 100%;
-  flex: 1; /* Faz o form-field ocupar o espaço restante */
-  min-height: 0; /* Importante para flex funcionar corretamente */
+  flex: 1;
+  min-height: 0;
 }
 
 /* Remove a altura fixa do container do form-field */
@@ -52,6 +58,13 @@ label {
   padding: 12px 0; /* Ajuste conforme necessário */
 }
 
+::ng-deep .rnv-autocomplete-mat-form-field .mdc-list-item__primary-text{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 /* Garante que o input-wrapper também ocupe 100% da altura */
 .input-wrapper {
   position: relative;
@@ -78,11 +91,6 @@ label {
 
 .input-wrapper.has-trailing-icon input {
   padding-right: 28px;
-}
-
-/* Remove o outline padrão */
-::ng-deep .rnv-autocomplete-mat-form-field .mat-mdc-form-field-outline {
-  display: none;
 }
 
 /* Esconde o espaço do subscript (mensagem de erro) */
