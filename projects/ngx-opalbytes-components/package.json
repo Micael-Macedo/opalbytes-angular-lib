@@ -10,7 +10,8 @@
     "ngx-mask": "^20.0.3"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "@lucide/angular": ">=1.17.0"
   },
   "sideEffects": false
 }
