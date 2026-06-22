@@ -2,12 +2,12 @@
   <input #checkbox type="checkbox" class="checkbox" [checked]="isChecked" [disabled]="isDisabled" />
   <div
     class="d-flex checkbox-element aic jcsb"
+    tabindex="0"
+    role="button"
     [class.activated-toggle]="isChecked"
     (click)="onToggleCheckbox()"
     (keydown.enter)="onToggleCheckbox()"
-    (keydown.space)="onToggleCheckbox(); $event.preventDefault()"
-    tabindex="0"
-    role="button">
+    (keydown.space)="onToggleCheckbox(); $event.preventDefault()">
     @if (isChecked) {
     <mat-icon class="eye-icon" />
     <div class="check-text"> Ativada </div>
