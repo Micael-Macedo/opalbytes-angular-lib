@@ -21,7 +21,7 @@ import {
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
-export interface IDropDownOption {
+export interface ICaoDropDownOption {
   id?: string | number;
   nome: string;
   icon?: string;
@@ -50,29 +50,27 @@ export interface IDropDownOption {
 })
 export class CaoDropDownComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() textHeader = "SELECIONE UM ITEM";
-  @Input() options: IDropDownOption[] = [];
+  @Input() options: ICaoDropDownOption[] = [];
   @Input() dropDownClass = "";
   @Input() styleDropDown: { [klass: string]: unknown } = {};
   @Input() control?: AbstractControl | null;
   @Input() controlName = "";
   @Input() isDisabled = false;
-  @Output() readonly itemSelected = new EventEmitter<IDropDownOption>();
   @Input() tooltip = "";
   @Input() dropDirectionInput: "up" | "down" = "down";
   @Input() dataCy?: string = "";
 
-  @Input() trackByFn?: (index: number, item: IDropDownOption) => unknown;
+  @Input() trackByFn?: (index: number, item: ICaoDropDownOption) => unknown;
   @Input() compareWith?: (option: unknown, value: unknown) => boolean;
-
-
   @Input() ariaLabel?: string;
   @Input() ariaLabelledBy?: string;
   @Input() listAriaLabel?: string;
 
+  @Output() readonly itemSelected = new EventEmitter<ICaoDropDownOption>();
 
   isOpen = false;
-  selectedItem?: IDropDownOption;
-  filteredOptions: IDropDownOption[] = [];
+  selectedItem?: ICaoDropDownOption;
+  filteredOptions: ICaoDropDownOption[] = [];
   searchControl = new FormControl("");
   isTouched = false;
   isFocused = false;
@@ -140,7 +138,7 @@ export class CaoDropDownComponent implements ControlValueAccessor, OnInit, OnDes
     this.cdr.detectChanges();
   }
 
-  selectItem(option: IDropDownOption): void {
+  selectItem(option: ICaoDropDownOption): void {
     if (this.isDisabled) { return };
 
     this.selectedItem = option;
@@ -171,7 +169,7 @@ export class CaoDropDownComponent implements ControlValueAccessor, OnInit, OnDes
     );
   }
 
-  trackBy(index: number, item: IDropDownOption): unknown {
+  trackBy(index: number, item: ICaoDropDownOption): unknown {
     return this.trackByFn ? this.trackByFn(index, item) : item.id;
   }
 
