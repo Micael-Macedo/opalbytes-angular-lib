@@ -1,7 +1,8 @@
 import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, Output, ViewChild } from "@angular/core";
-import { MaterialModule } from "../../../material.module";
 import { AbstractControl } from "@angular/forms";
+
+import { MaterialModule } from "../../../material.module";
 
 @Component({
   selector: "cao-base-toggle",
