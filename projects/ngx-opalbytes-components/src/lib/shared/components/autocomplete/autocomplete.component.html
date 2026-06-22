@@ -43,7 +43,15 @@
         [displayWith]="displayFn"
         (optionSelected)="onOptionSelected($event)">
         @for (option of filteredOptions$ | async; track option.id) {
-        <mat-option [value]="option">{{ option.nome }}</mat-option>
+        <mat-option [value]="option" class="option-item">{{ option.nome }} 
+          @if(optionIcon){
+            @if (isLucideOptionIcon) {
+              <svg [lucideIcon]="optionIcon" [style.color]="iconColor"></svg>
+            }@else {
+              <img alt="" [src]="optionIcon" />
+            }
+          }
+        </mat-option>
         }
       </mat-autocomplete>
     </div>

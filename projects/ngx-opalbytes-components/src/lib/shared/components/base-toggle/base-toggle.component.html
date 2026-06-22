@@ -1,0 +1,24 @@
+<div class="d-flex col aic jcc base-toggle">
+  <input type="checkbox" [checked]="isChecked" class="checkbox" [disabled]="isDisabled" #checkbox />
+  <div
+    class="d-flex checkbox-element aic jcsb"
+    [class.activated-toggle]="isChecked"
+    (click)="onToggleCheckbox()">
+    @if (isChecked) {
+    <mat-icon class="eye-icon" />
+    <div class="check-text"> Ativada </div>
+    <div class="line"></div>
+    <p class="unchecked">Desativar</p>
+    }@else {
+    <mat-icon class="fa-circle" />
+    <div class="check-text"> Não ativada </div>
+    <div class="line"></div>
+    <p>Ativar</p>
+    }
+  </div>
+  @if(isChecked){
+  <span>{{ checkedTextPlaceholder }} ativada com sucesso</span>
+  } @else{
+  <span>Clique para ativar {{ uncheckedTextPlaceholder }}</span>
+  }
+</div>

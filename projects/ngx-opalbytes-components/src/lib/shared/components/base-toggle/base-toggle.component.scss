@@ -1,0 +1,45 @@
+.base-toggle {
+  input {
+    display: none;
+    visibility: hidden;
+  }
+
+  .checkbox-element {
+    border-radius: 24px;
+    cursor: pointer;
+    gap: 10px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border-toggle);
+    background-color: transparent;
+
+    .check-text {
+      font-weight: 700;
+    }
+
+    .line {
+      height: 24px;
+      width: 1px;
+      background-color: var(--data-bg);
+    }
+
+    &.activated-toggle {
+      border: 2px solid var(--border-toggle-checked);
+      background-color: var(--bg-toggle-checked);
+
+      .check-text {
+        color: var(--text-toggle-checked);
+      }
+
+      .unchecked {
+        color: var(--text-unselected-toggle-checked);
+      }
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
