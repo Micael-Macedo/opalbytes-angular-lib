@@ -1,10 +1,19 @@
 import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from "@angular/core/testing";
 import { INavContent, INavLink, LinksButton } from "./links-button";
-import { provideRouter } from "@angular/router";
-import { signal } from "@angular/core";
+import { provideRouter, Routes } from "@angular/router";
+import { Component, signal } from "@angular/core";
 import { provideHttpClientTesting } from "@angular/common/http/testing";
 import { provideHttpClient } from "@angular/common/http";
 import { describe, it, expect, beforeEach, vi } from "vitest";
+
+@Component({ template: '', standalone: true })
+class EmptyComponent {}
+
+const testRoutes: Routes = [
+  { path: '', component: EmptyComponent },
+  { path: 'reception', component: EmptyComponent },
+  { path: 'receptio', component: EmptyComponent },
+];
 
 describe("LinksButton", () => {
   let component: LinksButton;
@@ -58,7 +67,7 @@ describe("LinksButton", () => {
     await TestBed.configureTestingModule({
       imports: [LinksButton],
       providers: [
-        provideRouter([]),
+        provideRouter(testRoutes),
         provideHttpClient(),
         provideHttpClientTesting(),
         {provide: ComponentFixtureAutoDetect, useValue: true}
