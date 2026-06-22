@@ -43,7 +43,7 @@
         [displayWith]="displayFn"
         (optionSelected)="onOptionSelected($event)">
         @for (option of filteredOptions$ | async; track option.id) {
-        <mat-option [value]="option" class="option-item">{{ option.nome }} 
+        <mat-option class="option-item" [value]="option">{{ option.nome }} 
           @if(optionIcon){
             @if (isLucideOptionIcon) {
               <svg [lucideIcon]="optionIcon" [style.color]="iconColor"></svg>

@@ -61,9 +61,9 @@ export class CaoAutocompleteComponent implements OnInit, ControlValueAccessor {
   @Input() optionIConColor?: string
   @Input() isLucideOptionIcon?: boolean
 
-  @Output() readonly OnItemSelected = new EventEmitter<ICaoAutoCompleteOption>();
-  @Output() readonly OnBlur = new EventEmitter<void>();
-  @Output() readonly OnFocus = new EventEmitter<void>();
+  @Output() readonly onItemSelected = new EventEmitter<ICaoAutoCompleteOption>();
+  @Output() readonly onBlurEvent = new EventEmitter<void>();
+  @Output() readonly onFocusEvent = new EventEmitter<void>();
 
   internalControl = new FormControl("");
   filteredOptions$!: Observable<ICaoAutoCompleteOption[]>;
@@ -89,13 +89,13 @@ export class CaoAutocompleteComponent implements OnInit, ControlValueAccessor {
 
   onFocus() {
     this.isFocused = true;
-    this.OnFocus.emit()
+    this.onFocusEvent.emit()
     this.onTouched();
   }
 
   onBlur(): void {
     this.isFocused = false;
-    this.OnBlur.emit()
+    this.onBlurEvent.emit()
     this.onTouched();
   }
 
