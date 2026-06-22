@@ -85,6 +85,7 @@ src/
         |   ├── base-button/
         |   ├── base-input/
         |   ├── base-time-range/
+        |   ├── base-toggle/
         |   ├── drop-down/
         |   ├── footer/
         |   ├── links-button/
@@ -421,16 +422,52 @@ Um campo de preenchimento automático que funciona com `ngModel` ou `formControl
 
 **Seletor:** `<cao-autocomplete>`
 
+**Interface `ICaoAutoCompleteOption`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `id` | `string \| number` | (Opcional) Identificador único da opção. |
+| `nome` | `string` | Texto exibido (usado para filtro e exibição). |
+| `icon` | `string` | (Opcional) Caminho ou nome do ícone. |
+| `iconPosition` | `string` | (Opcional) Posição do ícone na opção. |
+
 **Atributos (Inputs)**
 
-| Atributo | Tipo | Descrição |
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `label` | `string` | `''` | O rótulo do campo. |
+| `placeholder` | `string` | `''` | O texto de placeholder. |
+| `options` | `ICaoAutoCompleteOption[]` | `[]` | A lista de opções para o autocomplete. |
+| `control` | `AbstractControl` | `new FormControl()` | O `FormControl` associado. |
+| `controlName` | `string` | `''` | O nome do controle de formulário. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E. |
+| `isLucideIcon` | `boolean` | `false` | Define se `leadingIcon`/`trailingIcon` são ícones Lucide. |
+| `iconColor` | `string` | `''` | Cor aplicada aos ícones SVG Lucide. |
+| `leadingIcon` | `string` | `undefined` | Ícone exibido antes do texto. |
+| `trailingIcon` | `string` | `undefined` | Ícone exibido após o texto. |
+| `optionIcon` | `string` | `undefined` | Ícone exibido dentro de cada opção do dropdown. |
+| `optionIConColor` | `string` | `undefined` | Cor do ícone das opções. |
+| `isLucideOptionIcon` | `boolean` | `undefined` | Define se `optionIcon` é um ícone Lucide. |
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
 | --- | --- | --- |
-| `label` | `string` | O rótulo do campo. |
-| `placeholder` | `string` | O texto de placeholder. |
-| `options` | `IAutoCompleteOption[]` | A lista de opções para o autocomplete. |
-| `control` | `AbstractControl` | O `FormControl` associado. |
-| `dataCy` | `string` | Atributo para testes E2E. |
-| `controlName` | `string` | O nome do controle de formulário. |
+| `OnItemSelected` | `EventEmitter<ICaoAutoCompleteOption>` | Emitido quando uma opção é selecionada. |
+| `OnBlur` | `EventEmitter<void>` | Emitido quando o campo perde o foco. |
+| `OnFocus` | `EventEmitter<void>` | Emitido quando o campo recebe o foco. |
+
+**Métodos**
+
+| Método | Descrição |
+| --- | --- |
+| `setInputHeight(height: string)` | Define a altura do campo via CSS custom property `--form-field-height`. |
+
+**Getter**
+
+| Getter | Tipo | Descrição |
+| --- | --- | --- |
+| `errorText` | `string \| null` | Retorna mensagens de erro de validação (requerido, CPF, CNPJ, email, etc). |
 
 ---
 
@@ -517,27 +554,93 @@ Um seletor de intervalo de datas.
 
 ---
 
-### `DropDown`
-Um menu suspenso (dropdown) com busca, que funciona com `ngModel` ou `formControlName`.
+### `BaseToggle`
+Um componente de alternância (toggle switch) que funciona com `ngModel` ou `formControlName`, com suporte a ícones, máscaras e validação.
 
-**Seletor:** `<cao-drop-down>`
+**Seletor:** `<cao-base-toggle>`
 
 **Atributos (Inputs)**
 
-| Atributo | Tipo | Descrição |
-| --- | --- | --- |
-| `textHeader` | `string` | Texto do cabeçalho do dropdown. |
-| `options` | `IDropDownOption[]` | Lista de opções. |
-| `isDisabled` | `boolean` | Desabilita o componente. |
-| `tooltip` | `string` | Texto para a tooltip. |
-| `dropDirectionInput`| `'up' \| 'down'` | Direção em que o dropdown abrirá. |
-| `control` | `AbstractControl` | O `FormControl` associado. |
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `type` | `string` | `'text'` | O tipo de input. |
+| `placeholder` | `string` | `''` | O texto de placeholder. |
+| `inputClass` | `string` | `''` | Classes CSS customizadas para o input. |
+| `value` | `string \| number \| boolean \| Date` | `''` | O valor do componente. |
+| `errorMessage` | `string` | `''` | Mensagem de erro a ser exibida. |
+| `isDisabled` | `boolean` | `false` | Desabilita o toggle. |
+| `maxLength` | `number` | `undefined` | Número máximo de caracteres. |
+| `searchMode` | `boolean` | `false` | Ativa o modo de busca. |
+| `showBorder` | `boolean` | `false` | Exibe uma borda no input. |
+| `isLucideIcon` | `boolean` | `false` | Define se o ícone é do pacote Lucide. |
+| `iconColor` | `string` | `''` | Cor do ícone. |
+| `mask` | `string` | `undefined` | Máscara a ser aplicada ao input. |
+| `control` | `AbstractControl \| null` | `undefined` | O `FormControl` associado. |
+| `tooltip` | `string` | `''` | Texto a ser exibido em uma tooltip. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E com Cypress. |
+| `textareaRows` | `string` | `''` | Número de linhas para um textarea. |
+| `decimalMarker` | `'.' \| ',' \| ['.', ',']` | `','` | Marcador decimal para números. |
+| `thousandSeparator` | `string` | `'.'` | Separador de milhares para números. |
+| `allowNegativeNumbers` | `boolean` | `false` | Permite números negativos. |
+| `separatorLimit` | `string` | `''` | Limite do separador. |
+| `controlName` | `string` | `''` | O nome do controle de formulário. |
+| `isChecked` | `boolean` | `false` | Define se o toggle está ativado. |
+| `checkedTextPlaceholder` | `string` | `''` | Texto exibido quando o toggle está ativado. |
+| `uncheckedTextPlaceholder` | `string` | `''` | Texto exibido quando o toggle está desativado. |
+| `leadingIcon` | `string` | `undefined` | Ícone exibido antes do texto. |
+| `trailingIcon` | `string` | `undefined` | Ícone exibido após o texto. |
 
 **Eventos (Outputs)**
 
 | Evento | Tipo | Descrição |
 | --- | --- | --- |
-| `itemSelected`| `EventEmitter<IDropDownOption>` | Emitido quando um item é selecionado. |
+| `valueChange` | `EventEmitter<string>` | Emitido quando o valor do input muda. |
+| `searchClick` | `EventEmitter<void>` | Emitido quando o ícone de busca é clicado. |
+| `inputChange` | `EventEmitter<string>` | Emitido a cada mudança no input. |
+| `statusChanged` | `EventEmitter<CaoBaseToggleComponent>` | Emitido quando o toggle é alternado. |
+
+---
+
+### `DropDown`
+Um menu suspenso (dropdown) com busca, que funciona com `ngModel` ou `formControlName`.
+
+**Seletor:** `<cao-drop-down>`
+
+**Interface `ICaoDropDownOption`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `id` | `string \| number` | (Opcional) Identificador único da opção. |
+| `nome` | `string` | Texto exibido da opção. |
+| `icon` | `string` | (Opcional) Caminho ou nome do ícone. |
+| `iconPosition` | `string` | (Opcional) Posição do ícone (`left` ou `right`). |
+| `dataCy` | `string` | (Opcional) Atributo para testes E2E. |
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `textHeader` | `string` | `'SELECIONE UM ITEM'` | Texto do cabeçalho do dropdown. |
+| `options` | `ICaoDropDownOption[]` | `[]` | Lista de opções. |
+| `dropDownClass` | `string` | `''` | Classe CSS para o container do dropdown. |
+| `styleDropDown` | `{ [klass: string]: unknown }` | `{}` | Estilos inline para o container. |
+| `control` | `AbstractControl \| null` | `undefined` | O `FormControl` associado. |
+| `controlName` | `string` | `''` | O nome do controle de formulário. |
+| `isDisabled` | `boolean` | `false` | Desabilita o componente. |
+| `tooltip` | `string` | `''` | Texto para a tooltip. |
+| `dropDirectionInput`| `'up' \| 'down'` | `'down'` | Direção em que o dropdown abrirá. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E. |
+| `trackByFn` | `(index: number, item: ICaoDropDownOption) => unknown` | `undefined` | Função personalizada de `trackBy`. |
+| `compareWith` | `(option: unknown, value: unknown) => boolean` | `undefined` | Função comparadora personalizada. |
+| `ariaLabel` | `string` | `undefined` | Atributo `aria-label` do combobox. |
+| `ariaLabelledBy` | `string` | `undefined` | Atributo `aria-labelledby` do combobox. |
+| `listAriaLabel` | `string` | `undefined` | Atributo `aria-label` da lista de opções. |
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `itemSelected`| `EventEmitter<ICaoDropDownOption>` | Emitido quando um item é selecionado. |
 
 ---
 
