@@ -1,3 +1,19 @@
+# [1.14.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.13.0...ngx-opalbytes-components@1.14.0) (2026-06-23)
+
+
+### Bug Fixes
+
+* add output item autocomplete selected ([9c0526d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9c0526def39516313e39764cf5599137dac93f45))
+* correcao acessibilidade toggle ([4bd945f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4bd945f07d30c01a0e9df1b3ad62a4b28bd14df4))
+* correcao camel case autocomplete ([19700f1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/19700f1cbfd960448253ff71acc5780366a67c64))
+* correcao nome outputs ([daaddc3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/daaddc3ebae1582547dfa707ab6ec45c5a6da73a))
+* correcao peer dependencies ([a0d7349](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a0d7349c5b4802b2f35fa7446f56cfe57b260d58))
+
+
+### Features
+
+* add base toggle component ([3b9e800](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3b9e8006f5aaebd5ec33eca525a1c661421fa4ed))
+
 # [1.13.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.12.0...ngx-opalbytes-components@1.13.0) (2026-06-12)
 
 
