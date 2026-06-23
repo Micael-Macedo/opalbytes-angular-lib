@@ -8,7 +8,8 @@ import {
   input,
   signal,
   effect,
-  untracked,
+  afterNextRender,
+  Injector,
 } from '@angular/core';
 
 export interface ICaoSkeletonEntry {
@@ -23,6 +24,7 @@ export interface ICaoSkeletonEntry {
 export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
   private el = inject(ElementRef);
   private renderer = inject(Renderer2);
+  private injector = inject(Injector);
 
   /** Controla se o skeleton está ativo. Bind via [caoSkeleton]="isLoading" */
   readonly caoSkeleton = input<boolean>(true);
@@ -72,17 +74,16 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
   private viewInitialized = signal(false);
   private isBuilding = false;
   private buildPending = false;
+  private hostPlaceholder: HTMLElement | null = null;
+  private resizeObserver: ResizeObserver | null = null;
 
-  // Tags nativas que devem ser ignoradas
   protected readonly SKIP_TAGS = new Set([
         'script', 'style', 'link', 'meta',
     'br', 'hr', 'wbr', 'source', 'track',
   ]);
 
   constructor() {
-    // Reage a mudanças em qualquer input signal
     effect(() => {
-      const initialized = this.viewInitialized();
       const active = this.caoSkeleton();
       this.caoSkeletonDeep();
       this.caoSkeletonColor();
@@ -92,21 +93,16 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
       this.caoSkeletonStyle();
       this.caoSkeletonStrategy();
 
-      if (!initialized) {return;}
+      if (!this.viewInitialized) { return };
 
-      untracked(() => {
-        if (active) {
-          if (!this.buildPending) {
-            this.buildPending = true;
-            setTimeout(() => {
-              this.buildPending = false;
-              this.buildSkeleton();
-            }, 0);
-          }
-        } else {
-          this.teardownSkeleton();
-        }
-      });
+      if (!active) {
+        this.teardownSkeleton();
+        return;
+      }
+
+      afterNextRender({
+        write: () => this.buildSkeleton(),
+      }, { injector: this.injector });
     });
   }
 
@@ -115,7 +111,6 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
     this.viewInitialized.set(true);
   }
 
-  // ─── Construção ──────────────────────────────────────────────────────────────
 
   private buildSkeleton(): void {
     if (this.isBuilding) {return;}
@@ -141,7 +136,6 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
    */
   private isAngularComponent(element: HTMLElement): boolean {
     const tag = element.tagName.toLowerCase();
-    // Elementos com hífen são componentes customizados (Web Components ou Angular)
     return tag.includes('-');
   }
 
@@ -149,19 +143,15 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
    * Encontra o elemento mais interno renderizável de um componente
    */
   private getInnermostRenderableElement(element: HTMLElement): HTMLElement {
-    // Se for um componente Angular, busca o primeiro filho que não seja componente
     if (this.isAngularComponent(element)) {
       const children = Array.from(element.children) as HTMLElement[];
       
-      // Se não tiver filhos, retorna o próprio elemento
       if (children.length === 0) {
         return element;
       }
       
-      // Tenta encontrar o primeiro filho com conteúdo
       for (const child of children) {
         if (!this.shouldSkip(child)) {
-          // Se o filho também for um componente, continua descendo
           if (this.isAngularComponent(child)) {
             return this.getInnermostRenderableElement(child);
           }
@@ -169,7 +159,6 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
         }
       }
       
-      // Se todos os filhos forem ignorados, retorna o primeiro não ignorado
       const firstValidChild = children.find(c => !this.shouldSkip(c));
       if (firstValidChild) {
         return firstValidChild;
@@ -185,7 +174,6 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
    * Aplica skeleton em um elemento, seja ele componente ou não
    */
   private replaceElementSkeleton(element: HTMLElement): void {
-    // Se for um componente, encontra o elemento mais interno
     const targetElement = this.getInnermostRenderableElement(element);
     this.replaceSkeleton(targetElement);
   }
@@ -196,7 +184,6 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
   private collectLeaves(element: HTMLElement): void {
     const children = Array.from(element.children) as HTMLElement[];
 
-    // Se não tem filhos renderizáveis, aplica skeleton no próprio elemento
     if (children.length === 0 || !this.hasRenderableChildren(element)) {
       this.replaceSkeleton(element);
       return;
@@ -229,7 +216,6 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
     if (style.display === 'none' || style.visibility === 'hidden') {return true;}
     if (parseFloat(style.width) === 0 && parseFloat(style.height) === 0) {return true;}
 
-    // Ignora elementos sem conteúdo visível
     if (el.textContent?.trim() === '' && el.children.length === 0 && tag !== 'img' && tag !== 'svg') {
       return true;
     }
@@ -243,19 +229,16 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
   private replaceSkeleton(target: HTMLElement): void {
     const targetElement = this.getInnermostRenderableElement(target);
     
-    // Já possui placeholder registrado? pula para evitar duplicatas
     if (this.entries.some(e => e.element === targetElement)) {return;}
     
     const rect = this.measureElement(targetElement);
     if (rect.width < 4 || rect.height < 4) {return;}
 
-    // Obtém o retângulo do host para posicionamento relativo
     const hostRect = (this.el.nativeElement as HTMLElement).getBoundingClientRect();
 
     const top = rect.top - hostRect.top;
     const left = rect.left - hostRect.left;
 
-    // Garante que o host tenha posição para servir de âncora
     const hostStyle = getComputedStyle(this.el.nativeElement);
     if (hostStyle.position === 'static') {
       this.renderer.setStyle(this.el.nativeElement, 'position', 'relative');
@@ -275,10 +258,8 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
     
     this.renderer.appendChild(this.el.nativeElement, placeholder);
     
-    // Aplica customizações
     this.applyCustomStyles(placeholder);
 
-    // Esconde o conteúdo real sem alterar o layout
     this.hideElement(targetElement);
 
     this.entries.push({ element: targetElement, placeholder });
@@ -298,12 +279,10 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
     const placeholder = this.renderer.createElement('span') as HTMLElement;
     this.renderer.addClass(placeholder, 'cao-skeleton-placeholder');
     
-    // Adiciona classe customizada se fornecida
     if (this.caoSkeletonClass()) {
       this.renderer.addClass(placeholder, this.caoSkeletonClass());
     }
     
-    // Estilos base com animação
     const baseStyles: Record<string, string> = {
       position: 'absolute',
       top: `${top}px`,
@@ -346,7 +325,6 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
     this.renderer.setStyle(element, 'user-select', 'none');
     this.renderer.setStyle(element, 'pointer-events', 'none');
     
-    // Mantém o tamanho do elemento
     const computed = getComputedStyle(element);
     if (computed.display === 'inline' || computed.display === 'inline-block') {
       this.renderer.setStyle(element, 'display', 'inline-block');
@@ -357,13 +335,14 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
    * Restaura o elemento para seu estado original
    */
   private restoreElement(element: HTMLElement): void {
+    this.renderer.setStyle(element, 'visibility', 'visible');
+    this.renderer.setStyle(element, 'color', '');
     this.renderer.removeStyle(element, 'color');
     this.renderer.removeStyle(element, 'user-select');
     this.renderer.removeStyle(element, 'pointer-events');
     this.renderer.removeStyle(element, 'display');
   }
 
-  // ─── Desmontagem ─────────────────────────────────────────────────────────────
 
   /**
    * Remove spans placeholder órfãos que porventura tenham ficado no DOM
@@ -375,17 +354,21 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
   }
 
   private teardownSkeleton(): void {
-    for (const { element, placeholder } of this.entries) {
-      this.restoreElement(element);
+    const entriesToRestore = [...this.entries];
+    this.entries = [];
+    this.hostPlaceholder = null;
 
+    for (const { element, placeholder } of entriesToRestore) {
+      this.restoreElement(element);
       if (placeholder.parentNode) {
         this.renderer.removeChild(placeholder.parentNode, placeholder);
       }
     }
-    this.entries = [];
+
+    this.resizeObserver?.disconnect();
+    this.resizeObserver = null;
   }
 
-  // ─── Medição ─────────────────────────────────────────────────────────────────
 
   private measureElement(el: HTMLElement): DOMRect {
     if (this.caoSkeletonStrategy() === 'bounding') {
@@ -401,7 +384,6 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
     );
   }
 
-  // ─── Forma e Raio ────────────────────────────────────────────────────────────
 
   private detectShape(el: HTMLElement): 'circle' | 'rounded' | 'rect' {
     const tag = el.tagName.toLowerCase();
@@ -434,8 +416,6 @@ export class CaoSkeletonDirective implements AfterViewInit, OnDestroy {
       default:        return '4px';
     }
   }
-
-  // ─── Estilos Globais ─────────────────────────────────────────────────────────
 
   private injectGlobalStyles(): void {
     const id = 'cao-skeleton-styles';
