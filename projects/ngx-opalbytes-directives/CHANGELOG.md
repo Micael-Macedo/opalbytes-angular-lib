@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.4.0...ngx-opalbytes-directives@1.4.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* correcao versao diretiva ([3c076c4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3c076c403630bb671e5cea678241463b05099100))
+
 # [1.4.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.3.0...ngx-opalbytes-directives@1.4.0) (2026-06-23)
 
 
