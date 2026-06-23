@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.4.1...ngx-opalbytes-directives@1.4.2) (2026-06-23)
+
+
+### Bug Fixes
+
+* exibicao elementos apos loading ([a2c72d8](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a2c72d8a23d5a1fada070d71e36a10df0630a7bd))
+
 ## [1.4.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.4.0...ngx-opalbytes-directives@1.4.1) (2026-06-23)
 
 
