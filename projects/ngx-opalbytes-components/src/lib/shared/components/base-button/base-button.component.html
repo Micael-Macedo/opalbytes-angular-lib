@@ -14,7 +14,7 @@
   @if (leadingIcon) {
   <span class="leading-icon">
     @if (isLucideIcon) {
-    <svg [lucideIcon]="leadingIcon" [style.color]="iconColor"></svg>
+    <svg [lucideIcon]="leadingIcon" [style.color]="iconColor" [strokeWidth]="strokeWidthIcon"></svg>
     } @else {
     <img alt="icon" [src]="leadingIcon" />
     }
@@ -22,7 +22,7 @@
   } {{ buttonText }} @if (trailingIcon) {
   <span class="trailing-icon">
     @if (isLucideIcon) {
-    <svg [lucideIcon]="trailingIcon" [style.color]="iconColor"></svg>
+    <svg [lucideIcon]="trailingIcon" [style.color]="iconColor" [strokeWidth]="strokeWidthIcon"></svg>
     } @else {
     <img alt="icon" [src]="trailingIcon" />
     }

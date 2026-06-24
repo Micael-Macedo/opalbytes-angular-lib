@@ -62,6 +62,7 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
   @Input() optionIConColor?: string;
   @Input() isLucideOptionIcon?: boolean;
   @Input() autocompleteBgColor = 'white';
+  @Input() strokeWidthIcon = 1
 
   @Output() readonly itemSelected = new EventEmitter<ICaoAutoCompleteOption>();
   @Output() readonly blurEvent = new EventEmitter<void>();

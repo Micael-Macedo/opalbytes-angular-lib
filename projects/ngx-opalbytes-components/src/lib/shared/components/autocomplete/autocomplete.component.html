@@ -8,7 +8,7 @@
       [class.focused]="isFocused">
       @if (_leadingIcon) { @if (isLucideIcon) {
       <div class="icon">
-        <svg [lucideIcon]="_leadingIcon" [style.color]="iconColor"></svg>
+        <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="_leadingIcon" [style.color]="iconColor"></svg>
       </div>
       } @else {
       <div class="icon">
@@ -31,7 +31,7 @@
         (blur)="onBlur()" />
       @if (_trailingIcon) { @if (isLucideIcon) {
       <div class="icon trailing-icon">
-        <svg [lucideIcon]="_trailingIcon" [style.color]="iconColor"></svg>
+        <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="_trailingIcon" [style.color]="iconColor"></svg>
       </div>
       } @else {
       <div class="icon trailing-icon">
@@ -47,7 +47,7 @@
         <mat-option class="option-item" [value]="option">{{ option.nome }} 
           @if(optionIcon){
             @if (isLucideOptionIcon) {
-              <svg [lucideIcon]="optionIcon" [style.color]="iconColor"></svg>
+              <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="optionIcon" [style.color]="iconColor"></svg>
             }@else {
               <img alt="" [src]="optionIcon" />
             }
