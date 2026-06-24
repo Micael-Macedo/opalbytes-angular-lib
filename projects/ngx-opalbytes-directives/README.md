@@ -120,22 +120,81 @@ Aplica uma máscara de CPF (`000.000.000-00`) a um campo de input.
 
 ---
 
-### `SkeletonDirective`
-Exibe um efeito de "esqueleto" de carregamento nos elementos filhos do container onde a diretiva é aplicada.
+### `CaoSkeletonDirective`
+Exibe placeholders de carregamento com animação shimmer sobre os elementos do container.
 
 **Seletor:** `[caoSkeleton]`
 
-Esta diretiva não possui inputs ou outputs. Ela aplica o efeito automaticamente por uma duração de 2 segundos.
+**Inputs**
 
-**Exemplo de Uso**
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `caoSkeleton` | `boolean` | `true` | Ativa/desativa o efeito skeleton |
+| `caoSkeletonStrategy` | `'computed' \| 'bounding'` | `'computed'` | Estratégia de medição: `computed` usa `getComputedStyle`, `bounding` usa `getBoundingClientRect` |
+| `caoSkeletonRadius` | `string` | `''` (herdado) | Raio de borda dos placeholders (ex: `'6px'`, `'50%'`) |
+| `caoSkeletonColor` | `string` | `'#e2e8f0'` | Cor base do skeleton |
+| `caoSkeletonShine` | `string` | `'#f8fafc'` | Cor do brilho animado (shimmer) |
+| `caoSkeletonDeep` | `boolean` | `false` | `true` percorre todos os filhos criando skeletons individuais; `false` aplica apenas no elemento hospedeiro |
+| `caoSkeletonClass` | `string` | `''` | Classe CSS customizada adicionada aos placeholders |
+| `caoSkeletonStyle` | `Record<string, string>` | `{}` | Estilos inline customizados aplicados aos placeholders |
+
+**Exemplos de Uso**
+
 ```html
-<!-- Aplica o efeito de esqueleto a todos os elementos internos -->
-<div caoSkeleton>
+<!-- 1. Uso básico: ativa skeleton no container -->
+<div [caoSkeleton]="isLoading">
   <h2>Título</h2>
-  <p>Este é um parágrafo de exemplo.</p>
-  <button>Botão</button>
+  <p>Conteúdo carregado.</p>
+</div>
+
+<!-- 2. Skeleton profundo: cria placeholders individuais para cada filho -->
+<div [caoSkeleton]="isLoading" [caoSkeletonDeep]="true">
+  <header>
+    <h1>Perfil</h1>
+  </header>
+  <section>
+    <p>Descrição do usuário</p>
+  </section>
+</div>
+
+<!-- 3. Cores personalizadas -->
+<div
+  [caoSkeleton]="loading"
+  caoSkeletonColor="#e0f2fe"
+  caoSkeletonShine="#bae6fd"
+>
+  <span>Notificações</span>
+</div>
+
+<!-- 4. Raio e classe customizados -->
+<div
+  [caoSkeleton]="loading"
+  caoSkeletonRadius="12px"
+  caoSkeletonClass="my-skeleton"
+  [caoSkeletonStyle]="{ margin: '4px 0' }"
+>
+  <div class="card">Conteúdo do card</div>
+</div>
+
+<!-- 5. Estratégia de bounding para medição mais precisa em animações -->
+<div [caoSkeleton]="loading" caoSkeletonStrategy="bounding">
+  <img src="avatar.jpg" alt="Avatar" />
+</div>
+
+<!-- 6. Alternar skeleton dinamicamente -->
+<button (click)="toggleLoading()">Alternar Loading</button>
+<div [caoSkeleton]="isLoading">
+  <p>Este conteúdo aparece/desaparece com skeleton.</p>
 </div>
 ```
+
+**Comportamento**
+- A diretiva cria placeholders `span` posicionados absolutamente sobre os elementos originais
+- O conteúdo original é ocultado (cor transparente, sem interação) mas mantém o layout
+- Componentes Angular (tags com hífen) são detectados automaticamente e a diretiva busca o elemento interno renderizável para aplicar o skeleton
+- Elementos com `display:none`, `visibility:hidden` ou dimensões zero são ignorados
+- A animação shimmer respeita a preferência `prefers-reduced-motion`
+- Placeholders órfãos são removidos automaticamente antes de reconstruir o skeleton
 
 ---
 

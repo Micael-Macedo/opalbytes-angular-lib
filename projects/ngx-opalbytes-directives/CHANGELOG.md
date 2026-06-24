@@ -1,3 +1,42 @@
+## [1.4.2](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.4.1...ngx-opalbytes-directives@1.4.2) (2026-06-23)
+
+
+### Bug Fixes
+
+* exibicao elementos apos loading ([a2c72d8](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a2c72d8a23d5a1fada070d71e36a10df0630a7bd))
+
+## [1.4.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.4.0...ngx-opalbytes-directives@1.4.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* correcao versao diretiva ([3c076c4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3c076c403630bb671e5cea678241463b05099100))
+
+# [1.4.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.3.0...ngx-opalbytes-directives@1.4.0) (2026-06-23)
+
+
+### Bug Fixes
+
+* add output item autocomplete selected ([9c0526d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9c0526def39516313e39764cf5599137dac93f45))
+* atualizacao funcional skeleton ([c000ba1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c000ba1072629692cb4f0291518a08824df7c096))
+* **core:** ajusta porvider e StorageService ([fc2137f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fc2137f3a553c13a0da65436cb13d8e5a6213c79))
+* correcao acessibilidade toggle ([4bd945f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4bd945f07d30c01a0e9df1b3ad62a4b28bd14df4))
+* correcao camel case autocomplete ([19700f1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/19700f1cbfd960448253ff71acc5780366a67c64))
+* correcao exportacao interface ([6679256](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/667925609d78a5947bf5ca433fac235c7929fa81))
+* correcao nome outputs ([daaddc3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/daaddc3ebae1582547dfa707ab6ec45c5a6da73a))
+* correcao peer dependencies ([a0d7349](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a0d7349c5b4802b2f35fa7446f56cfe57b260d58))
+* **pdf:** correcao importacao elementos internos ([e3ef756](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e3ef7561b902205316e86a1aeda76daf2a7af4c4))
+
+
+### Features
+
+* add base toggle component ([3b9e800](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3b9e8006f5aaebd5ec33eca525a1c661421fa4ed))
+* atualizacao icones componentes base ([133c33f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/133c33f0aac75776af65aa9bb72918b328f0a5f7))
+* **components:** add stepper e nomenclatura autocomplete ([474bfcd](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/474bfcdd763fa6ae392fc005ca96c3602fcf4412))
+* **core:** add independencia de pacotes ([2b05ea4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2b05ea4f9d2d1a530f850f2f0f09618b9a2c8615))
+* **core:** arquivos separados para dependecia de projetos ([e8b759b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e8b759b621ebdeb255eb6cdce2e9ccc8ad6b2a1f))
+* **shared:** add diretiva skeleton ([4edd388](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4edd388f7f0fa899f512711872b590191f03b1f6))
+
 # [1.3.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.2.1...ngx-opalbytes-directives@1.3.0) (2026-01-08)
 
 
