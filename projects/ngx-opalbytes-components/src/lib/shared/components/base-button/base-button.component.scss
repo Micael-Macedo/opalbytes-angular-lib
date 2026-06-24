@@ -3,4 +3,10 @@
     display: flex;
     gap: 5px;
     cursor: pointer;
+    &.disabled {
+        cursor: not-allowed;
+    }
+    &.loading{
+        cursor: progress;
+    }
 }
