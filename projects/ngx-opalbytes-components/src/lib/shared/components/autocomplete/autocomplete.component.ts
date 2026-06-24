@@ -77,7 +77,6 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
 
   private selectedOption: ICaoAutoCompleteOption | null = null;
 
-  // BehaviorSubject que emite sempre que o @Input options mudar
   private options$ = new BehaviorSubject<ICaoAutoCompleteOption[]>([]);
 
   private el = inject(ElementRef);
@@ -86,7 +85,6 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
   private onTouched: () => void = () => {};
 
   ngOnInit(): void {
-    // combineLatest garante que qualquer mudança no texto OU nas options re-executa o filtro
     this.filteredOptions$ = combineLatest([
       this.internalControl.valueChanges.pipe(startWith("")),
       this.options$,
@@ -111,7 +109,6 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // Sempre que o @Input options mudar, empurra o novo valor no BehaviorSubject
     if (changes['options']) {
       this.options$.next(changes['options'].currentValue ?? []);
     }
