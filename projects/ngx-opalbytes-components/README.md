@@ -123,7 +123,9 @@ Um botão customizável com suporte a ícones, estado de loading e tooltip.
 | `trailingIcon` | `string` | `undefined` | Ícone a ser exibido após o texto. |
 | `leadingIcon` | `string` | `undefined` | Ícone a ser exibido antes do texto. |
 | `isLucideIcon` | `boolean` | `true` | Define se o ícone é do pacote Lucide. |
+| `iconColor` | `string` | `undefined` | Cor aplicada aos ícones SVG Lucide. |
 | `dataCy` | `string` | `undefined` | Atributo para testes E2E com Cypress. |
+| `strokeWidthIcon` | `number` | `1` | Define a espessura (stroke width) do ícone. |
 
 **Eventos (Outputs)**
 
@@ -448,6 +450,8 @@ Um campo de preenchimento automático que funciona com `ngModel` ou `formControl
 | `optionIcon` | `string` | `undefined` | Ícone exibido dentro de cada opção do dropdown. |
 | `optionIConColor` | `string` | `undefined` | Cor do ícone das opções. |
 | `isLucideOptionIcon` | `boolean` | `undefined` | Define se `optionIcon` é um ícone Lucide. |
+| `autocompleteBgColor` | `string` | `'white'` | Cor de fundo do painel de autocomplete. |
+| `strokeWidthIcon` | `number` | `1` | Define a espessura (stroke width) do ícone. |
 
 **Eventos (Outputs)**
 

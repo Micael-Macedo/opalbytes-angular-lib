@@ -26,6 +26,7 @@ export class CaoBaseButtonComponent implements OnInit{
   @Input() isLucideIcon = true;
   @Input() dataCy?: string;
   @Input() iconColor?: string;
+  @Input() strokeWidthIcon = 1
 
   ngOnInit(): void {
     if (!this.dataCy) {

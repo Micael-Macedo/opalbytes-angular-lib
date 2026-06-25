@@ -1,5 +1,8 @@
 :host {
   --mat-form-field-container-height: stretch;
+  @include mat.autocomplete-overrides((
+        background-color: var(--autocomplete-bg-color, white),
+  ));
   display: block;
 }
 
@@ -8,6 +11,7 @@
   --mat-form-field-outlined-hover-outline-color: transparent;
   --mat-form-field-outlined-focus-outline-color: transparent;
 }
+
 
 .form-field {
   display: flex;
