@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 :host {
   --mat-form-field-container-height: stretch;
   @include mat.autocomplete-overrides((
