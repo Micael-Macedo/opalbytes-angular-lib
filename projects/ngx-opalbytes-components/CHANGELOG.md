@@ -1,3 +1,15 @@
+## [1.14.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.14.0...ngx-opalbytes-components@1.14.1) (2026-06-25)
+
+
+### Bug Fixes
+
+* add strokeWidth to lucideIcon ([1952dfd](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/1952dfd2821f6dbca5f4ebfc6ced182e164f4da2))
+* atualizacao funcional skeleton ([c000ba1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c000ba1072629692cb4f0291518a08824df7c096))
+* correcao style material scss autocomplete ([63326c7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/63326c7dfcbf6f727e10f2f66da44ca8ae90b4c7))
+* correcao versao diretiva ([3c076c4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3c076c403630bb671e5cea678241463b05099100))
+* exibicao elementos apos loading ([a2c72d8](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a2c72d8a23d5a1fada070d71e36a10df0630a7bd))
+* exibicao opcoes autocomplete ([0efaf2c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0efaf2c2c0a016d422ed9e846d6e2a6574e777c6))
+
 # [1.14.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.13.0...ngx-opalbytes-components@1.14.0) (2026-06-23)
 
 
