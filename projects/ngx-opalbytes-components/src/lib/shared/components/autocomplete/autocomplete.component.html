@@ -1,25 +1,40 @@
 <div class="form-field">
   @if (label) {
-  <label [for]="internalControl">{{ label }}</label>
+    <label [for]="internalControl">{{ label }}</label>
   }
-
   <mat-form-field appearance="outline" class="rnv-autocomplete-mat-form-field autocomplete">
-    <div class="input-wrapper" [class.has-leading-icon]="_leadingIcon" [class.has-trailing-icon]="_trailingIcon"
+    <div
+      class="input-wrapper"
+      [class.has-leading-icon]="_leadingIcon"
+      [class.has-trailing-icon]="_trailingIcon"
       [class.focused]="isFocused">
-      @if (_leadingIcon) { @if (isLucideIcon) {
-      <div class="icon">
-        <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="_leadingIcon" [style.color]="iconColor"></svg>
-      </div>
-      } @else {
-      <div class="icon">
-        <img alt="ícone de início" [src]="_leadingIcon" />
-      </div>
-      } }
+
+      @if (_leadingIcon) {
+        @if (isLucideIcon) {
+          <div class="icon" 
+          tabindex="0"
+            (click)="onLeadingIconClick($event)"
+            (keydown.enter)="onLeadingIconClick($event)"
+            >
+            <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="_leadingIcon" [style.color]="iconColor"></svg>
+          </div>
+        } @else {
+          <div class="icon" 
+          tabindex="0"
+          (click)="onLeadingIconClick($event)"
+          (keydown.enter)="onLeadingIconClick($event)"
+          >
+            <img alt="ícone de início" [src]="_leadingIcon" />
+          </div>
+        }
+      }
+
       <input
         #trigger="matAutocompleteTrigger"
         type="text"
         matInput
         [placeholder]="placeholder"
+        [disabled]="isDisabled"
         [formControl]="internalControl"
         [matAutocomplete]="auto"
         [attr.data-cy]="dataCy"
@@ -29,32 +44,46 @@
         ]"
         (focus)="onFocus()"
         (blur)="onBlur()" />
-      @if (_trailingIcon) { @if (isLucideIcon) {
-      <div class="icon trailing-icon">
-        <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="_trailingIcon" [style.color]="iconColor"></svg>
-      </div>
-      } @else {
-      <div class="icon trailing-icon">
-        <img alt="ícone de fim" [src]="_trailingIcon" />
-      </div>
-      } }
+
+      @if (_trailingIcon) {
+        @if (isLucideIcon) {
+          <div 
+          tabindex="0"
+          class="icon trailing-icon" (click)="onTrailingIconClick($event)"
+          (keydown.enter)="onTrailingIconClick($event)"
+          >
+            <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="_trailingIcon" [style.color]="iconColor"></svg>
+          </div>
+        } @else {
+          <div 
+          tabindex="0"
+          class="icon trailing-icon" (click)="onTrailingIconClick($event)"
+          (keydown.enter)="onTrailingIconClick($event)"
+          >
+            <img alt="ícone de fim" [src]="_trailingIcon" />
+          </div>
+        }
+      }
+
       <mat-autocomplete
         #auto="matAutocomplete"
         autoActiveFirstOption
         [displayWith]="displayFn"
         (optionSelected)="onOptionSelected($event)">
         @for (option of filteredOptions$ | async; track option.id) {
-        <mat-option class="option-item" [value]="option">{{ option.nome }} 
-          @if(optionIcon){
-            @if (isLucideOptionIcon) {
-              <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="optionIcon" [style.color]="iconColor"></svg>
-            }@else {
-              <img alt="" [src]="optionIcon" />
+          <mat-option class="option-item" [value]="option">
+            {{ option.nome }}
+            @if (optionIcon) {
+              @if (isLucideOptionIcon) {
+                <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="optionIcon" [style.color]="iconColor"></svg>
+              } @else {
+                <img alt="" [src]="optionIcon" />
+              }
             }
-          }
-        </mat-option>
+          </mat-option>
         }
       </mat-autocomplete>
+
     </div>
   </mat-form-field>
 </div>
