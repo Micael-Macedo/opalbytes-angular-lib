@@ -6,6 +6,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { LucideDynamicIcon } from "@lucide/angular";
 import { NgxMaskDirective, provideNgxMask } from "ngx-mask";
 
+export type CaoTypeInputs = 'text' | 'textarea' | 'number'
+
 @Component({
   standalone: true,
   selector: "cao-input",
@@ -22,7 +24,7 @@ import { NgxMaskDirective, provideNgxMask } from "ngx-mask";
   ],
 })
 export class CaoBaseInput implements ControlValueAccessor {
-  @Input() type = "text";
+  @Input() type: CaoTypeInputs = "text" ;
   @Input() placeholder = "";
   @Input() inputClass = "";
   @Input() value: string | number | boolean | Date = "";

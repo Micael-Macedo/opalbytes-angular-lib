@@ -105,14 +105,6 @@ label {
   padding: 14px 0 14px 12px !important;
 }
 
-[type="date"]::-webkit-calendar-picker-indicator {
-  background: url("/assets/images/svg/input-date-icon.svg") no-repeat center;
-  cursor: pointer;
-  border-left: 1px solid var(--line-color);
-  padding-left: 12px;
-  width: 30px;
-  height: 35px;
-}
 
 [type="date"].invalid::-webkit-calendar-picker-indicator {
   border-left: 1px solid var(--error);
