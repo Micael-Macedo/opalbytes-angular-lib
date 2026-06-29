@@ -12,7 +12,7 @@ import { MaterialModule } from "../../../material.module";
   selector: 'cao-date-picker',
   imports: [CommonModule, FormsModule, MatTooltipModule, LucideDynamicIcon, MaterialModule],
   templateUrl: './date-picker.html',
-  styleUrl: './date-picker.css',
+  styleUrl: './date-picker.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -6,7 +6,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { LucideDynamicIcon } from "@lucide/angular";
 import { NgxMaskDirective, provideNgxMask } from "ngx-mask";
 
-export type CaoTypeInputs = 'text' | 'textarea' | 'number'
+export type CaoTypeInputs = 'text' | 'textarea' | 'number' | 'password' | 'date'
 
 @Component({
   standalone: true,
