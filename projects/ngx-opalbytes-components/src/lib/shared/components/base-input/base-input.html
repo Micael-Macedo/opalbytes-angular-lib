@@ -9,7 +9,8 @@
     <div class="icon">
       <img alt="ícone de início" [src]="_leadingIcon"/>
     </div>
-    } } @switch (type) { @case ('textarea') {
+    } } @switch (type) { 
+      @case ('textarea') {
     <textarea matTooltip="{{ tooltip }}" matTooltipPosition="above" matTooltipClass="custom-arrow-tooltip" [attr.data-cy]="dataCy"
       [placeholder]="placeholder" [disabled]="isDisabled" [ngClass]="[
           inputClass,
@@ -19,7 +20,8 @@
       [rows]="textareaRows" [mask]="mask" [allowNegativeNumbers]="allowNegativeNumbers" [thousandSeparator]="thousandSeparator" [decimalMarker]="decimalMarker" [separatorLimit]="separatorLimit"
       [(ngModel)]="value" (input)="onInput($event)"
       (focus)="onFocus()" (blur)="onBlur()"></textarea>
-    } @default {
+    } 
+    @default {
     <input matTooltip="{{ tooltip }}" matTooltipPosition="below" matTooltipClass="custom-arrow-tooltip" [attr.data-cy]="dataCy" [type]="type"
       [placeholder]="placeholder" [disabled]="isDisabled" [ngClass]="[
           inputClass,

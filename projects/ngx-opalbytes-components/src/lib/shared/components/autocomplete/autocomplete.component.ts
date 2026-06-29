@@ -1,5 +1,20 @@
-import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, forwardRef, inject, OnChanges, SimpleChanges } from "@angular/core";
+import {
+  CommonModule
+} from "@angular/common";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  forwardRef,
+  inject,
+  OnChanges,
+  SimpleChanges
+} from "@angular/core";
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -16,7 +31,13 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 
 import { LucideDynamicIcon } from "@lucide/angular";
-import { Observable, startWith, map, BehaviorSubject, combineLatest } from "rxjs";
+import {
+  Observable,
+  startWith,
+  map,
+  BehaviorSubject,
+  combineLatest
+} from "rxjs";
 
 export interface ICaoAutoCompleteOption {
   id?: string | number;
@@ -62,11 +83,15 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
   @Input() optionIConColor?: string;
   @Input() isLucideOptionIcon?: boolean;
   @Input() autocompleteBgColor = 'white';
-  @Input() strokeWidthIcon = 1
+  @Input() strokeWidthIcon = 1;
+  @Input() isDisabled = false;
 
   @Output() readonly itemSelected = new EventEmitter<ICaoAutoCompleteOption>();
   @Output() readonly blurEvent = new EventEmitter<void>();
   @Output() readonly focusEvent = new EventEmitter<void>();
+
+  @Output() readonly leadingIconClick = new EventEmitter<MouseEvent | Event>();
+  @Output() readonly trailingIconClick = new EventEmitter<MouseEvent | Event>();
 
   @ViewChild(MatAutocompleteTrigger) autocompleteTrigger!: MatAutocompleteTrigger;
 
@@ -76,12 +101,10 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
   icon = false;
 
   private selectedOption: ICaoAutoCompleteOption | null = null;
-
   private options$ = new BehaviorSubject<ICaoAutoCompleteOption[]>([]);
-
   private el = inject(ElementRef);
 
-  private onChange: (value: ICaoAutoCompleteOption | string) => void = () => {};
+  private onChange: (value: ICaoAutoCompleteOption | string | null) => void = () => {};
   private onTouched: () => void = () => {};
 
   ngOnInit(): void {
@@ -98,14 +121,11 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
       this.selectedOption = value && typeof value === "object" ? value : null;
     });
 
-    this.setStyle()
+    this.setStyle();
   }
 
-  private setStyle(){
-     this.el.nativeElement.style.setProperty(
-      '--autocomplete-bg-color', 
-      this.autocompleteBgColor
-    );
+  private setStyle(): void {
+    this.el.nativeElement.style.setProperty('--autocomplete-bg-color', this.autocompleteBgColor);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -120,7 +140,6 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
     this.onTouched();
 
     const currentDisplay = this.internalControl.value;
-
     this.internalControl.setValue("", { emitEvent: true });
 
     if (currentDisplay) {
@@ -138,16 +157,51 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
     this.onTouched();
   }
 
+  selectItem(option: ICaoAutoCompleteOption): void {
+    this.selectedOption = option;
+    this.onChange(option);
+    this.itemSelected.emit(option);
+  }
+
   onOptionSelected(event: MatAutocompleteSelectedEvent): void {
-    this.selectedOption = event.option.value;
-    this.onChange(event.option.value);
-    this.itemSelected.emit(event.option.value);
+    this.selectItem(event.option.value);
+    this.onTouched();
+    this.closePanel()
+  }
+
+  selectOption(option: ICaoAutoCompleteOption): void {
+    this.internalControl.setValue(this.displayFn(option), { emitEvent: false });
+    this.selectItem(option);
+    this.closePanel()
+  }
+
+  closePanel(){
+      setTimeout(() => {
+      this.autocompleteTrigger?.closePanel();
+      this.el.nativeElement.querySelector('input')?.blur();
+    }, 10);
+  }
+
+  clearSelection(): void {
+    this.selectedOption = null;
+    this.internalControl.setValue("", { emitEvent: false });
+    this.control.setValue(null, { emitEvent: true });
+    this.onChange(null);
     this.onTouched();
 
     setTimeout(() => {
       this.autocompleteTrigger?.closePanel();
-      this.el.nativeElement.querySelector('input')?.blur();
-    }, 10);
+    }, 0);
+  }
+
+  onLeadingIconClick(event: MouseEvent | Event): void {
+    event.stopPropagation();
+    this.leadingIconClick.emit(event);
+  }
+
+  onTrailingIconClick(event: MouseEvent | Event): void {
+    event.stopPropagation();
+    this.trailingIconClick.emit(event);
   }
 
   private filter(value: string | ICaoAutoCompleteOption): ICaoAutoCompleteOption[] {
@@ -217,7 +271,7 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
     this.selectedOption = value && typeof value === "object" ? value : null;
   }
 
-  registerOnChange(fn: (value: ICaoAutoCompleteOption | string) => void): void {
+  registerOnChange(fn: (value: ICaoAutoCompleteOption | string | null) => void): void {
     this.onChange = fn;
   }
 

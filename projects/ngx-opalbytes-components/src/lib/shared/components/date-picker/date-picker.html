@@ -1,0 +1,82 @@
+<div class="form-field input-component" [class.search-mode]="searchMode">
+  <mat-form-field class="datepicker-form-field">
+    <div
+      class="input-wrapper"
+      [class.has-leading-icon]="_leadingIcon"
+      [class.has-trailing-icon]="_trailingIcon"
+      [class.focused]="isFocused">
+
+      @if (_leadingIcon) {
+        @if (isLucideIcon) {
+          <div class="icon" 
+          tabindex="0"
+          (click)="onLeadingIconClick($event)"             
+          (keydown.enter)="onLeadingIconClick($event)"
+>
+            <svg [lucideIcon]="_leadingIcon" [style.color]="iconColor"></svg>
+          </div>
+        } @else {
+          <div class="icon" 
+          tabindex="0"
+          (click)="onLeadingIconClick($event)"           
+          (keydown.enter)="onLeadingIconClick($event)">
+            <img alt="ícone de início" [src]="_leadingIcon" />
+          </div>
+        }
+      }
+
+      <input
+        matTooltip="{{ tooltip }}"
+        matTooltipPosition="below"
+        matTooltipClass="custom-arrow-tooltip"
+        matInput
+        [disabled]="isDisabled"
+        [matDatepicker]="pickerCao"
+        [attr.data-cy]="dataCy"
+        [placeholder]="placeholder"
+        [ngClass]="[
+          inputClass,
+          control?.touched && control?.invalid ? 'invalid' : '',
+          control?.touched && control?.valid && control?.value ? 'valid' : ''
+        ]"
+        [min]="minDate"
+        [max]="maxDate"
+        [(ngModel)]="value"
+        (input)="onInput($event)"
+        (change)="onInputChange($event)"
+        (focus)="onFocus()"
+        (blur)="onBlur()" />
+
+      @if (dateHint) {
+        <mat-hint>{{ dateHint }}</mat-hint>
+      }
+
+      <mat-datepicker-toggle matIconSuffix [for]="pickerCao" />
+
+      <mat-datepicker
+        #pickerCao
+        [startAt]="value || null" />
+
+      @if (_trailingIcon) {
+        @if (isLucideIcon) {
+          <div class="icon trailing-icon" 
+          tabindex="0"
+          (click)="onTrailingIconClick($event)"
+          (keydown.enter)="onTrailingIconClick($event)"
+          >
+            <svg [lucideIcon]="_trailingIcon" [style.color]="iconColor"></svg>
+          </div>
+        } @else {
+          <div class="icon trailing-icon" 
+          tabindex="0"
+          (click)="onTrailingIconClick($event)"
+          (keydown.enter)="onTrailingIconClick($event)"
+          >
+            <img alt="ícone de fim" [src]="_trailingIcon" />
+          </div>
+        }
+      }
+
+    </div>
+  </mat-form-field>
+</div>
