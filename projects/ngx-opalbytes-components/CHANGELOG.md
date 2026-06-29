@@ -1,3 +1,17 @@
+# [1.15.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.14.1...ngx-opalbytes-components@1.15.0) (2026-06-29)
+
+
+### Bug Fixes
+
+* correcao tipagem componentes ([4238eae](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4238eae8058d16220b5d0880373c7625aba05962))
+
+
+### Features
+
+* add componente date picker ([d3ac15c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d3ac15cb16644cf349ffdee9c0d40827545495fa))
+* add evento ao pressionar icones e selecao de option ([6beab9a](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/6beab9a84ffad1a7d3e2b012d13485475a2b84d2))
+* add tipagem tipo para input ([9d213ab](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9d213abbf55ebb2ceee0dde3dd22a46e5ac17e15))
+
 ## [1.14.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.14.0...ngx-opalbytes-components@1.14.1) (2026-06-25)
 
 
