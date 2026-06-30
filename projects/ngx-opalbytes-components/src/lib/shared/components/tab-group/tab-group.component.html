@@ -1,0 +1,84 @@
+<div
+  #header
+  [class]="'cao-tab-header cao-tab-header--align-' + labelAlign"
+>
+  <div class="cao-tab-label-list" role="tablist">
+    @for (tab of tabList; track $index; let i = $index) {
+      <button
+        #tabBtn
+        role="tab"
+        type="button"
+        class="cao-tab-label"
+        [class.cao-tab-label--active]="isActive(i)"
+        [class.cao-tab-label--disabled]="tab.isDisabled"
+        [attr.aria-selected]="isActive(i)"
+        [attr.aria-disabled]="tab.isDisabled || null"
+        [attr.tabindex]="isActive(i) ? 0 : -1"
+        [attr.id]="'cao-tab-label-' + i"
+        [attr.aria-controls]="'cao-tab-content-' + i"
+        (click)="onTabClick(i)"
+        (keydown)="onKeydown($event, i)"
+        (focus)="onFocus(i)"
+      >
+        @if (tab.leadingIcon) {
+        <span class="leading-icon">
+            @if (tab.isLucideIcon) {
+            <svg [lucideIcon]="tab.leadingIcon" [style.color]="isActive(i) ? iconColorActive : iconColorInactive" [strokeWidth]="strokeWidthIcon"></svg>
+            } @else {
+            <img alt="icon" [src]="tab.leadingIcon" />
+            }
+        </span>
+        }
+
+        @if (tab.labelTemplate) {
+          <ng-container [ngTemplateOutlet]="tab.labelTemplate" />
+        } @else {
+          <span class="cao-tab-labeltext">{{ tab.label }}</span>
+        }
+
+        @if (tab.trailingIcon) {
+        <span class="trailing-icon">
+            @if (tab.isLucideIcon) {
+            <svg [lucideIcon]="tab.trailingIcon" [style.color]="isActive(i) ? iconColorActive : iconColorInactive" [strokeWidth]="strokeWidthIcon"></svg>
+            } @else {
+            <img alt="icon" [src]="tab.trailingIcon" />
+            }
+        </span>
+        }
+      </button>
+    }
+  </div>
+
+  <!-- Ink bar animado -->
+  <div class="cao-tab-ink-bar-track">
+    <div #inkBar class="cao-tab-ink-bar"></div>
+  </div>
+</div>
+
+<!-- ═══ Tab Bodies ════════════════════════════════════════════════════════ -->
+<div
+  class="cao-tab-body-wrapper"
+  [class.cao-tab-body-wrapper--dynamic]="dynamicHeight"
+>
+  @for (tab of tabList; track $index; let i = $index) {
+    <div
+      role="tabpanel"
+      class="cao-tab-body"
+      [class.cao-tab-body--active]="isActive(i)"
+      [attr.id]="'cao-tab-content-' + i"
+      [attr.aria-labelledby]="'cao-tab-label-' + i"
+      [attr.aria-hidden]="!isActive(i)"
+      [style.--cao-tab-anim-duration]="animationDuration"
+    >
+      <div class="cao-tab-bodycontent">
+        @if (tab.lazyContent) {
+          @if (isActive(i) || wasActivated(i)) {
+            <ng-container [ngTemplateOutlet]="tab.lazyContent" />
+          }
+        } @else {
+          <ng-container [ngTemplateOutlet]="tab.content" />
+        }
+      </div>
+    </div>
+  }
+</div>

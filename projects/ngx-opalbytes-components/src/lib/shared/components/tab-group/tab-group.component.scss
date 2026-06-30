@@ -1,0 +1,146 @@
+:host {
+  --cao-tab-font-family:     inherit;
+  --cao-tab-font-size:       0.875rem;   
+  --cao-tab-font-weight:     500;
+  --caoTabLabelHeight:    48px;
+  --caoTabLabelPx:        16px;
+  --caoTabLabelGap:       6px;
+
+  --caoTabColorText:        #6b7280;  
+  --caoTabColorActive:      #4f46e5;  
+  --caoTabColorHoverBg:    #f3f4f6;  
+  --caoTabColorDisabled:    #d1d5db;  
+  --caoTabColorInkBar:     #4f46e5;
+  --caoTabColorHeaderBorder: #e5e7eb;
+
+  --caoTabInkBarHeight:  2px;
+  --caoTabContentPt:      20px;
+  --caoTabRadius:          4px;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cao-tab-header {
+  position: relative;
+  border-bottom: 1px solid var(--cao-tab-color-header-border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.cao-tab-header::-webkit-scrollbar { display: none; }
+
+.cao-tab-label-list {
+  display: flex;
+  align-items: center;
+  min-width: max-content;
+}
+
+.cao-tab-header--align-center .cao-tab-label-list { justify-content: center; }
+.cao-tab-header--align-end    .cao-tab-label-list { justify-content: flex-end; }
+.cao-tab-header--align-start  .cao-tab-label-list { justify-content: flex-start; }
+
+.cao-tab-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cao-tab-label-gap);
+  height: var(--cao-tab-label-height);
+  padding: 0 var(--cao-tab-label-px);
+
+  font-family: var(--cao-tab-font-family);
+  font-size:   var(--cao-tab-font-size);
+  font-weight: var(--cao-tab-font-weight);
+  color: var(--cao-tab-color-text);
+  white-space: nowrap;
+
+  background: transparent;
+  border: none;
+  border-radius: var(--cao-tab-radius) var(--cao-tab-radius) 0 0;
+  cursor: pointer;
+  user-select: none;
+  transition: color 180ms ease, background-color 180ms ease;
+
+  outline: none;
+}
+
+.cao-tab-label:focus-visible {
+  outline: 2px solid var(--cao-tab-color-active);
+  outline-offset: -2px;
+}
+
+.cao-tab-label:hover:not(.cao-tab-label--disabled) {
+  background-color: var(--cao-tab-color-hover-bg);
+  color: var(--cao-tab-color-active);
+}
+
+.cao-tab-label--active {
+  color: var(--cao-tab-color-active);
+}
+
+.cao-tab-label--disabled {
+  color: var(--cao-tab-color-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.cao-tab-label__icon {
+  flex-shrink: 0;
+  color: inherit;
+  transition: color 180ms ease;
+}
+
+.cao-tab-ink-bar-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--cao-tab-ink-bar-height);
+  pointer-events: none;
+}
+
+.cao-tab-ink-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  background-color: var(--cao-tab-color-ink-bar);
+  border-radius: 2px 2px 0 0;
+  transition-property: transform, width;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms; /* sobrescrito por JS */
+}
+
+.cao-tab-body-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.cao-tab-body-wrapper--dynamic {
+  height: auto;
+}
+
+.cao-tab-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(24px);
+  transition:
+    opacity   var(--cao-tab-anim-duration, 300ms) cubic-bezier(0.4, 0, 0.2, 1),
+    transform var(--cao-tab-anim-duration, 300ms) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cao-tab-body--active {
+  position: relative; 
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.cao-tab-body__content {
+  padding-top: var(--cao-tab-content-pt);
+}
