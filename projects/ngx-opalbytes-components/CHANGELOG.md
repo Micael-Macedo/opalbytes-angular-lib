@@ -1,3 +1,16 @@
+# [1.16.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.15.0...ngx-opalbytes-components@1.16.0) (2026-06-30)
+
+
+### Bug Fixes
+
+* correcao padronizacao css tab group ([4b202f6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4b202f6ac6c75337527e42b0775631856c9071df))
+* correcao selecao autocomplete ([0d66178](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0d66178f434eaf0befd67541fc7ce94c50ab6d53))
+
+
+### Features
+
+* add tab panel ([e3e24c8](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e3e24c811b9461aa15643549e24e4775b95e7239))
+
 # [1.15.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.14.1...ngx-opalbytes-components@1.15.0) (2026-06-29)
 
 
