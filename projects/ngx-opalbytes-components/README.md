@@ -91,6 +91,8 @@ src/
         |   ├── links-button/
         |   ├── paginator/
         |   ├── stepper/
+        |   ├── tab-group/
+        |   ├── tab-panel/
         |   └── time-picker/
         └── features/
             ├── base-modal/
@@ -645,6 +647,129 @@ Um menu suspenso (dropdown) com busca, que funciona com `ngModel` ou `formContro
 | Evento | Tipo | Descrição |
 | --- | --- | --- |
 | `itemSelected`| `EventEmitter<ICaoDropDownOption>` | Emitido quando um item é selecionado. |
+
+---
+
+### `CaoTabGroup` e `CaoTabPanel`
+
+Um sistema de abas (tabs) que permite navegar entre diferentes conteúdos organizados em painéis.
+
+**Seletores:**
+- `<cao-tab-group>` — Container de abas
+- `<cao-tab-panel>` — Painel individual de conteúdo
+
+#### Interface `ICaoTabChangeEvent`
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `previousIndex` | `number` | Índice da aba anteriormente ativa |
+| `index` | `number` | Índice da aba recém-selecionada |
+| `tab` | `CaoTabPanel` | Instância do painel selecionado |
+
+#### Atributos do `CaoTabGroup` (Inputs)
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `selectedIndex` | `number` | `0` | Índice da aba ativa |
+| `labelHeight` | `string` | `'48px'` | Altura do label de cada aba |
+| `labelPaddingX` | `string` | `'16px'` | Padding horizontal do label |
+| `labelGap` | `string` | `'6px'` | Espaçamento entre abas |
+| `colorText` | `string` | `'#6b7280'` | Cor do texto das abas inativas |
+| `colorActive` | `string` | `'#4f46e5'` | Cor do texto da aba ativa |
+| `colorHoverBg` | `string` | `'#f3f4f6'` | Cor de fundo ao passar o mouse |
+| `colorDisabled` | `string` | `'#d1d5db'` | Cor de texto de aba desabilitada |
+| `colorInkBar` | `string` | `'#4f46e5'` | Cor da barra indicadora (ink bar) |
+| `colorHeaderBorder` | `string` | `'#e5e7eb'` | Cor da borda inferior do cabeçalho |
+| `inkBarHeight` | `string` | `'2px'` | Altura da barra indicadora |
+| `contentPaddingTop` | `string` | `'20px'` | Padding superior do conteúdo |
+| `labelRadius` | `string` | `'4px'` | Border-radius do label |
+| `animationDuration` | `string` | `'300ms'` | Duração da animação da ink bar |
+| `dynamicHeight` | `boolean` | `false` | Altura dinâmica do conteúdo |
+| `labelAlign` | `'start' \| 'center' \| 'end'` | `'start'` | Alinhamento das abas no cabeçalho |
+| `iconColorActive` | `string` | `''` | Cor dos ícones na aba ativa |
+| `iconColorInactive` | `string` | `''` | Cor dos ícones nas abas inativas |
+| `strokeWidthIcon` | `number` | `1` | Espessura do stroke de ícones Lucide |
+
+#### Eventos do `CaoTabGroup` (Outputs)
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `selectedTabChange` | `EventEmitter<ICaoTabChangeEvent>` | Emitido quando a aba ativa muda |
+| `focusChange` | `EventEmitter<number>` | Emitido quando uma aba recebe foco |
+
+#### Atributos do `CaoTabPanel` (Inputs)
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `label` | `string` | `''` | Texto exibido no label da aba |
+| `isLucideIcon` | `boolean` | `true` | Define se os ícones são do Lucide |
+| `leadingIcon` | `string \| null` | `null` | Ícone exibido antes do label |
+| `trailingIcon` | `string \| null` | `null` | Ícone exibido após o label |
+| `isDisabled` | `boolean` | `false` | Desabilita a aba |
+
+#### Diretivas customizadas
+
+| Diretiva | Seletor | Descrição |
+| --- | --- | --- |
+| `CaoTabLabelDirective` | `[caoTabLabel]` | Template customizado para o label da aba |
+| `CaoTabContentDirective` | `[caoTabContent]` | Template para conteúdo lazy (renderizado apenas quando a aba é ativada) |
+
+#### Exemplo de uso
+
+```html
+<cao-tab-group
+  [selectedIndex]="1"
+  (selectedTabChange)="onTabChange($event)"
+  labelAlign="center"
+  colorActive="#dc2626"
+>
+  <cao-tab-panel label="Primeira">
+    <p>Conteúdo da primeira aba.</p>
+  </cao-tab-panel>
+
+  <cao-tab-panel label="Segunda" isDisabled>
+    <p>Esta aba está desabilitada.</p>
+  </cao-tab-panel>
+
+  <cao-tab-panel label="Com ícone" leadingIcon="home" [isLucideIcon]="true">
+    <p>Aba com ícone Lucide.</p>
+  </cao-tab-panel>
+
+  <cao-tab-panel label="Customizada">
+    <ng-template caoTabLabel>
+      <span style="font-weight: bold;">🌟 Custom</span>
+    </ng-template>
+
+    <ng-template caoTabContent>
+      <p>Conteúdo carregado sob demanda via diretiva <code>caoTabContent</code>.</p>
+    </ng-template>
+  </cao-tab-panel>
+</cao-tab-group>
+```
+
+#### CSS Custom Properties
+
+O componente `CaoTabGroup` expõe todas as suas propriedades visuais via CSS custom properties, que podem ser sobrescritas globalmente ou por instância:
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-tab-font-family` | `inherit` | Família da fonte dos labels |
+| `--cao-tab-font-size` | `0.875rem` | Tamanho da fonte dos labels |
+| `--cao-tab-font-weight` | `500` | Peso da fonte dos labels |
+| `--caoTabLabelHeight` | `48px` | Altura do label |
+| `--caoTabLabelPx` | `16px` | Padding horizontal do label |
+| `--caoTabLabelGap` | `6px` | Espaçamento entre abas |
+| `--caoTabColorText` | `#6b7280` | Cor do texto inativo |
+| `--caoTabColorActive` | `#4f46e5` | Cor do texto ativo |
+| `--caoTabColorHoverBg` | `#f3f4f6` | Fundo no hover |
+| `--caoTabColorDisabled` | `#d1d5db` | Cor do texto desabilitado |
+| `--caoTabColorInkBar` | `#4f46e5` | Cor da ink bar |
+| `--caoTabColorHeaderBorder` | `#e5e7eb` | Cor da borda do header |
+| `--caoTabInkBarHeight` | `2px` | Altura da ink bar |
+| `--caoTabContentPt` | `20px` | Padding superior do conteúdo |
+| `--caoTabRadius` | `4px` | Border-radius do label |
+
+> **Nota:** As propriedades com prefixo `--cao-` (hífen) podem ser definidas via CSS. As propriedades com prefixo `--cao` (sem hífen) são definidas via `@Input()` no componente, mas também podem ser sobrescritas via CSS.
 
 ---
 

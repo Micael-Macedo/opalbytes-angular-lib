@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TabPanel } from "./tab-panel";
+import { CaoTabPanel } from "./tab-panel";
 
-describe("TabPanel", () => {
-  let component: TabPanel;
-  let fixture: ComponentFixture<TabPanel>;
+describe("CaoTabPanel", () => {
+  let component: CaoTabPanel;
+  let fixture: ComponentFixture<CaoTabPanel>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TabPanel],
+      imports: [CaoTabPanel],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TabPanel);
+    fixture = TestBed.createComponent(CaoTabPanel);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -38,3 +38,6 @@ export * from './lib/shared/features/base-alert/base-alert.interface'
 
 export * from './lib/shared/components/stepper/stepper'
 export * from './lib/shared/components/stepper/step/step'
+
+export * from "./lib/shared/components/tab-group/tab-group"
+export * from "./lib/shared/components/tab-panel/tab-panel"
