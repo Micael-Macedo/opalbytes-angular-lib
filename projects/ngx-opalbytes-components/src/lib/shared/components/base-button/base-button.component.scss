@@ -1,7 +1,9 @@
-/* This file is intentionally empty */
 .base-button{
     display: flex;
     gap: 5px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     &.disabled {
         cursor: not-allowed;
