@@ -115,6 +115,15 @@ module.exports = [
           selector: "method",
           format: ["camelCase"],
         },
+        // CSS Custom Properties (ex: --cao*) são permitidas
+        {
+          selector: "property",
+          format: null,
+          filter: {
+            regex: "^--",
+            match: true,
+          },
+        },
         // Propriedades devem ser camelCase
         {
           selector: "property",
