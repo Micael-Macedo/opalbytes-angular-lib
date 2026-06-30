@@ -2,20 +2,22 @@
   --cao-tab-font-family:     inherit;
   --cao-tab-font-size:       0.875rem;   
   --cao-tab-font-weight:     500;
-  --caoTabLabelHeight:    48px;
-  --caoTabLabelPx:        16px;
-  --caoTabLabelGap:       6px;
+  --cao-tab-label-height:    48px;
+  --cao-tab-Label-px:        16px;
+  --cao-tab-Label-gap:       6px;
 
-  --caoTabColorText:        #6b7280;  
-  --caoTabColorActive:      #4f46e5;  
-  --caoTabColorHoverBg:    #f3f4f6;  
-  --caoTabColorDisabled:    #d1d5db;  
-  --caoTabColorInkBar:     #4f46e5;
-  --caoTabColorHeaderBorder: #e5e7eb;
+  --cao-tab-color-text:        #6b7280;  
+  --cao-tab-color-active:      #4f46e5;  
+  --cao-tab-color-hover-bg:    #f3f4f6;  
+  --cao-tab-color-disabled:    #d1d5db;  
+  --cao-tab-color-ink-bar:     #4f46e5;
+  --cao-tab-color-header-border: #e5e7eb;
 
-  --caoTabInkBarHeight:  2px;
-  --caoTabContentPt:      20px;
-  --caoTabRadius:          4px;
+  --cao-tab-color-header-border: #e5e7eb;
+
+  --cao-tab-ink-bar-height:  2px;
+  --cao-tab-content-pt:      20px;
+  --cao-tab-radius:          4px;
 
   display: flex;
   flex-direction: column;

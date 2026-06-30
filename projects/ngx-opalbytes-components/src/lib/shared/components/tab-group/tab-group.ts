@@ -42,18 +42,18 @@ export class CaoTabGroup implements AfterContentInit, OnDestroy {
   @HostBinding('style')
   get _hostStyles(): Record<string, string> {
     return {
-      '--caoTabLabelHeight': this.labelHeight,
-      '--caoTabLabelPx': this.labelPaddingX,
-      '--caoTabLabelGap': this.labelGap,
-      '--caoTabColorText': this.colorText,
-      '--caoTabColorActive': this.colorActive,
-      '--caoTabColorHoverBg': this.colorHoverBg,
-      '--caoTabColorDisabled': this.colorDisabled,
-      '--caoTabColorInkBar': this.colorInkBar,
-      '--caoTabColorHeaderBorder': this.colorHeaderBorder,
-      '--caoTabInkBarHeight': this.inkBarHeight,
-      '--caoTabContentPt': this.contentPaddingTop,
-      '--caoTabRadius': this.labelRadius,
+      '--cao-tab-label-height': this.labelHeight,
+      '--cao-tab-label-px': this.labelPaddingX,
+      '--cao-tab-label-gap': this.labelGap,
+      '--cao-tab-color-text': this.colorText,
+      '--cao-tab-color-active': this.colorActive,
+      '--cao-tab-color-hover-bg': this.colorHoverBg,
+      '--cao-tab-color-disabled': this.colorDisabled,
+      '--cao-tab-color-ink-bar': this.colorInkBar,
+      '--cao-tab-color-header-border': this.colorHeaderBorder,
+      '--cao-tab-ink-bar-height': this.inkBarHeight,
+      '--cao-tab-content-pt': this.contentPaddingTop,
+      '--cao-tab-radius': this.labelRadius,
     };
   }
   @Input()
