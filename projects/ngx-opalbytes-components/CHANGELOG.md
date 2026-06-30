@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.16.0...ngx-opalbytes-components@1.16.1) (2026-06-30)
+
+
+### Bug Fixes
+
+* correcao estilizacao tab group ([b024175](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/b024175d958f828219aebcd9f759b50e8ec42648))
+
 # [1.16.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.15.0...ngx-opalbytes-components@1.16.0) (2026-06-30)
 
 
