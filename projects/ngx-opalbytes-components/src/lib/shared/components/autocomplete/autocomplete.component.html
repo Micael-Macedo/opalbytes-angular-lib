@@ -43,7 +43,8 @@
           control?.touched && control?.valid && control?.value ? 'valid' : ''
         ]"
         (focus)="onFocus()"
-        (blur)="onBlur()" />
+        (blur)="onBlur()"
+        (keydown.escape)="clearSelection()" />
 
       @if (_trailingIcon) {
         @if (isLucideIcon) {

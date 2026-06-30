@@ -155,10 +155,15 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
     this.isFocused = false;
     this.blurEvent.emit();
     this.onTouched();
+
+    if (this.selectedOption) {
+      this.internalControl.setValue(this.displayFn(this.selectedOption), { emitEvent: false });
+    }
   }
 
   selectItem(option: ICaoAutoCompleteOption): void {
     this.selectedOption = option;
+    this.internalControl.setValue(this.displayFn(option), { emitEvent: false });
     this.onChange(option);
     this.itemSelected.emit(option);
   }
@@ -170,7 +175,6 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, ControlValue
   }
 
   selectOption(option: ICaoAutoCompleteOption): void {
-    this.internalControl.setValue(this.displayFn(option), { emitEvent: false });
     this.selectItem(option);
     this.closePanel()
   }
