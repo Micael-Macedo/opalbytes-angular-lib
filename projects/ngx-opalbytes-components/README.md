@@ -83,6 +83,7 @@ src/
         └── components/
         |   ├── autocomplete/
         |   ├── base-button/
+        |   ├── base-icon/
         |   ├── base-input/
         |   ├── base-time-range/
         |   ├── base-toggle/
@@ -134,6 +135,33 @@ Um botão customizável com suporte a ícones, estado de loading e tooltip.
 | Evento | Tipo | Descrição |
 | --- | --- | --- |
 | `buttonClick` | `EventEmitter<void>` | Emitido quando o botão é clicado. |
+
+---
+
+### `BaseIcon`
+Um componente para exibir ícones, com suporte a ícones Lucide ou imagens customizadas.
+
+**Seletor:** `<cao-base-icon>`
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `imgSource` | `string` | `''` | Caminho da imagem ou nome do ícone Lucide. |
+| `isLucideIcon` | `boolean` | `true` | Define se o ícone é do pacote Lucide. |
+| `strokeWidthIcon` | `number` | `1` | Define a espessura (stroke width) do ícone Lucide. |
+| `iconColor` | `string` | `''` | Cor aplicada ao ícone Lucide. |
+| `size` | `number` | `32` | Tamanho do ícone em pixels. |
+
+**Exemplo de uso:**
+
+```html
+<!-- Ícone Lucide -->
+<cao-base-icon imgSource="home" [isLucideIcon]="true" [iconColor]="'#4f46e5'" [size]="24"></cao-base-icon>
+
+<!-- Imagem customizada -->
+<cao-base-icon imgSource="assets/meu-icone.svg" [isLucideIcon]="false"></cao-base-icon>
+```
 
 ---
 
