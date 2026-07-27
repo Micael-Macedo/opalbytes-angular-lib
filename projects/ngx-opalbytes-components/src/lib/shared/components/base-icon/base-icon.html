@@ -1,9 +1,11 @@
-@if (isLucideIcon) {
-    <div class="icon">
-        <svg [lucideIcon]="imgSource" [style.color]="iconColor" [strokeWidth]="strokeWidthIcon" [size]="size"></svg>
-    </div>
-} @else {
-    <div class="icon">
-        <img alt="ícone de início" [src]="imgSource" />
-    </div>
+@if (imgSource) {
+    @if (isLucideIcon) {
+        <div class="icon">
+            <svg [lucideIcon]="imgSource" [style.color]="iconColor" [strokeWidth]="strokeWidthIcon" [size]="size"></svg>
+        </div>
+    } @else {
+        <div class="icon">
+            <img alt="ícone de início" [src]="imgSource" />
+        </div>
+    }
 }
