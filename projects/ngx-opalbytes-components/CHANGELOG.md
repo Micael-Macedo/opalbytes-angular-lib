@@ -1,3 +1,15 @@
+# [1.17.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.16.1...ngx-opalbytes-components@1.17.0) (2026-07-27)
+
+
+### Bug Fixes
+
+* correcao validacao img source caso icone vazio ([d69e1f2](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d69e1f2dd284e04309a05d1627251005ead3095a))
+
+
+### Features
+
+* add componente base icon ([41bb70f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/41bb70f07da819193a5920181c65c499ac477c2b))
+
 ## [1.16.1](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.16.0...ngx-opalbytes-components@1.16.1) (2026-06-30)
 
 
