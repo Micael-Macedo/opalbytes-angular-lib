@@ -43,7 +43,10 @@
 .cao-tab-header--align-start  .cao-tab-label-list { justify-content: flex-start; }
 
 .cao-tab-label {
+  width: 100%;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   align-items: center;
   gap: var(--cao-tab-label-gap);
   height: var(--cao-tab-label-height);
