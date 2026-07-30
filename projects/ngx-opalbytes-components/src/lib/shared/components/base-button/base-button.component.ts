@@ -27,13 +27,14 @@ export class CaoBaseButtonComponent implements OnInit{
   @Input() dataCy?: string;
   @Input() iconColor?: string;
   @Input() strokeWidthIcon = 1
+  @Input() minTextToTooltip = 20
 
   ngOnInit(): void {
     if (!this.dataCy) {
       this.dataCy = `btn-${this.buttonText.replace(/\s+/g, '-').toLowerCase()}`;
     }
 
-    if(!this.tooltip && this.buttonText.length >= 20){
+    if(!this.tooltip && this.buttonText.length >= this.minTextToTooltip){
       this.tooltip = this.buttonText
     }
   }
