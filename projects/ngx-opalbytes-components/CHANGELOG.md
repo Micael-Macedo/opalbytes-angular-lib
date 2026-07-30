@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.17.0...ngx-opalbytes-components@1.18.0) (2026-07-30)
+
+
+### Features
+
+* add input min text to tooltip ([8a5ea76](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8a5ea76f1387e5ae930a58f250216469eba481cd))
+
 # [1.17.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.16.1...ngx-opalbytes-components@1.17.0) (2026-07-27)
 
 
