@@ -9,27 +9,15 @@
     "noImplicitReturns": true,
     "preserveSymlinks": true,
     "paths": {
-      "ngx-opalbytes-components": [
-        "./dist/ngx-opalbytes-components"
-      ],
-      "ngx-opalbytes-core": [
-        "./dist/ngx-opalbytes-core"
-      ],
-      "ngx-opalbytes-directives": [
-        "./dist/ngx-opalbytes-directives"
-      ],
-      "ngx-opalbytes-feature-pdf": [
-        "./dist/ngx-opalbytes-feature-pdf"
-      ],
-      "ngx-opalbytes-services": [
-        "./dist/ngx-opalbytes-services"
-      ],
-      "ngx-opalbytes-utils": [
-        "./dist/ngx-opalbytes-utils"
-      ],
-      "ngx-opalbytes-performance": [
-        "./dist/ngx-opalbytes-performance"
-      ]
+      "ngx-opalbytes-chart": ["./dist/ngx-opalbytes-chart"],
+      "ngx-opalbytes-components": ["./dist/ngx-opalbytes-components"],
+      "ngx-opalbytes-core": ["./dist/ngx-opalbytes-core"],
+      "ngx-opalbytes-directives": ["./dist/ngx-opalbytes-directives"],
+      "ngx-opalbytes-feature-pdf": ["./dist/ngx-opalbytes-feature-pdf"],
+      "ngx-opalbytes-services": ["./dist/ngx-opalbytes-services"],
+      "ngx-opalbytes-utils": ["./dist/ngx-opalbytes-utils"],
+      "ngx-opalbytes-performance": ["./dist/ngx-opalbytes-performance"],
+      "ngx-opalbytes-video": ["./dist/ngx-opalbytes-video"]
     },
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
@@ -91,6 +79,18 @@
     },
     {
       "path": "./projects/ngx-opalbytes-feature-pdf/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-video/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-video/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-chart/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-chart/tsconfig.spec.json"
     }
   ]
 }

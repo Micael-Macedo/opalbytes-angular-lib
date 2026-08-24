@@ -1,0 +1,103 @@
+@switch (variant) {
+  @case ('horizontal') {
+    <div
+      class="card card-horizontal"
+      [class.card-clickable]="clickable"
+      [class.card-hover-shadow]="clickable"
+      [class.card-selected]="selected"
+      [ngClass]="[bgColor, borderColor]"
+      [attr.role]="clickable ? 'button' : null"
+      [attr.tabindex]="clickable ? 0 : null"
+      (click)="handleClick()"
+      (keydown)="handleKeydown($event)">
+      
+      @if (avatar) {
+        <div class="card-avatar-container" [ngClass]="avatarBg">
+          @if (avatar.src) {
+            <img 
+              class="card-avatar-img" 
+              [src]="avatar.src" 
+              [alt]="title" />
+          } @else { 
+            {{ avatar.initials }} 
+          }
+        </div>
+      } @else if (icon) {
+        <div class="card-icon-container">
+          <img 
+            class="card-icon-img" 
+            [src]="icon" 
+            [alt]="title" />
+        </div>
+      }
+
+      <div class="card-content">
+        @if (title) {
+          <span class="card-title">{{ title }}</span>
+        }
+        @if (subtitle) {
+          <span class="card-subtitle">{{ subtitle }}</span>
+        }
+        @if (detail) {
+          <span class="card-detail" [ngClass]="detailColor ?? ''">
+            {{ detail }}
+          </span>
+        }
+        <ng-content />
+      </div>
+
+      @if (badge || (meta && meta.length)) {
+        <div class="card-badge-wrapper">
+          @if (badge) {
+            <div 
+              class="card-badge"
+              [ngClass]="[badge.color ?? '', badge.borderColor ?? '']"
+              [style.background-color]="badge.bg">
+              {{ badge.label }}
+            </div>
+          }
+          @if (meta && meta.length) {
+            <div class="card-meta-list">
+              @for (m of meta; track m.label) {
+                <div class="card-meta-item">
+                  <img 
+                    class="card-meta-icon" 
+                    [src]="m.icon" 
+                    [alt]="m.label" />
+                  <span>{{ m.label }}</span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+
+  @case ('square') {
+    <div
+      class="card card-square"
+      [class.card-clickable]="clickable"
+      [class.card-hover-bg]="clickable"
+      [class.card-hover-bold]="clickable"
+      [class.card-selected]="selected"
+      [class.card-selected-border-2]="selected"
+      [attr.role]="clickable ? 'button' : null"
+      [attr.tabindex]="clickable ? 0 : null"
+      [matTooltip]="title"
+      (click)="handleClick()"
+      (keydown)="handleKeydown($event)">
+      
+      <div class="card-square-content">
+        <span class="card-square-title">{{ title }}</span>
+        
+        @if (icon) {
+          <img 
+            class="card-square-icon" 
+            [src]="icon" 
+            [alt]="title" />
+        }
+      </div>
+    </div>
+  }
+}
