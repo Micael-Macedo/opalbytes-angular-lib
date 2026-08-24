@@ -21,6 +21,8 @@ jobs:
       should-release-performance: ${{ steps.check.outputs.should-release-performance }}
       should-release-shared: ${{ steps.check.outputs.should-release-shared }}  
       should-release-pdf-export: ${{ steps.check.outputs.should-release-pdf-export }}  
+      should-release-chart: ${{ steps.check.outputs.should-release-chart }}  
+      should-release-video: ${{ steps.check.outputs.should-release-video }}  
     steps:
       - uses: actions/checkout@v4
         with:
@@ -59,6 +61,8 @@ jobs:
           should_release_performance="false"
           should_release_shared="false"
           should_release_pdf_export="false"
+          should_release_video="false"
+          should_release_chart="false"
           
           while IFS= read -r commit_message; do
             echo "Analisando commit: $commit_message"
@@ -108,6 +112,14 @@ jobs:
               should_release_pdf_export="true"
               echo "Commit relacionado a pdf-export encontrado"
             fi
+            if [[ "$commit_message" =~ (feat\(video\)|fix\(video\)|refactor\(video\)|docs\(video\)|chore\(video\)|release\(video\)|test\(video\)|style\(video\)|feature\(video\)) ]]; then
+              should_release_video="true"
+              echo "Commit relacionado a pdf-export encontrado"
+            fi
+            if [[ "$commit_message" =~ (feat\(chart\)|fix\(chart\)|refactor\(chart\)|docs\(chart\)|chore\(chart\)|release\(chart\)|test\(chart\)|style\(chart\)|feature\(chart\)) ]]; then
+              should_release_chart="true"
+              echo "Commit relacionado a chart encontrado"
+            fi
           done <<< "$COMMITS"
           
           # Export results
@@ -133,6 +145,10 @@ jobs:
           echo "shared: $should_release_shared"
           echo "should-release-pdf-export=$should_release_pdf_export" >> $GITHUB_OUTPUT
           echo "pdf-export: $should_release_pdf_export"
+          echo "should-release-pdf-export=$should_release_chart" >> $GITHUB_OUTPUT
+          echo "pdf-export: $should_release_chart"
+          echo "should-release-pdf-export=$should_release_video" >> $GITHUB_OUTPUT
+          echo "pdf-export: $should_release_video"
           echo "========================================"
 
   publish-sequentially:
@@ -147,13 +163,15 @@ jobs:
       needs.check-commits.outputs.should-release-performance == 'true' ||
       needs.check-commits.outputs.should-release-libs == 'true' ||
       needs.check-commits.outputs.should-release-shared == 'true' ||
-      needs.check-commits.outputs.should-release-pdf-export == 'true' 
+      needs.check-commits.outputs.should-release-pdf-export == 'true' ||
+      needs.check-commits.outputs.should-release-video == 'true' ||
+      needs.check-commits.outputs.should-release-chart == 'true' 
     
     strategy:
       max-parallel: 1
       fail-fast: false
       matrix:
-        library: ['core', 'utils', 'services', 'directives', 'components', 'libs','performance', 'shared', 'pdf-export']
+        library: ['core', 'utils', 'services', 'directives', 'components', 'libs','performance', 'shared', 'pdf-export', 'chart', 'video']
         include:
           - library: 'core'
             condition: ${{ needs.check-commits.outputs.should-release-core }}
@@ -218,6 +236,20 @@ jobs:
             test-command: 'npm run test:pdf'
             release-command: 'cd projects/ngx-opalbytes-feature-pdf && npx semantic-release'
 
+          - library: 'video'
+            condition: ${{ needs.check-commits.outputs.should-release-video }}
+            project-path: 'projects/ngx-opalbytes-video'
+            build-command: 'npm run build:video'
+            test-command: 'npm run test:video'
+            release-command: 'cd projects/ngx-opalbytes-video && npx semantic-release'
+
+          - library: 'chart'
+            condition: ${{ needs.check-commits.outputs.should-release-chart }}
+            project-path: 'projects/ngx-opalbytes-chart'
+            build-command: 'npm run build:chart'
+            test-command: 'npm run test:chart'
+            release-command: 'cd projects/ngx-opalbytes-chart && npx semantic-release'
+
     steps:
       - name: Verificar condições do job publish-sequentially
         run: |
@@ -262,6 +294,14 @@ jobs:
           echo "  - should-release-pdf-export: ${{ needs.check-commits.outputs.should-release-pdf-export }}"
           if [ "${{ needs.check-commits.outputs.should-release-pdf-export }}" = "true" ]; then
             echo "    ✓ CONDIÇÃO VERDADEIRA: pdf-export será publicado"
+          fi
+          echo "  - should-release-video: ${{ needs.check-commits.outputs.should-release-video }}"
+          if [ "${{ needs.check-commits.outputs.should-release-video }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: video será publicado"
+          fi
+          echo "  - should-release-chart: ${{ needs.check-commits.outputs.should-release-chart }}"
+          if [ "${{ needs.check-commits.outputs.should-release-chart }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: chart será publicado"
           fi
           echo ""
           echo "========================================"
