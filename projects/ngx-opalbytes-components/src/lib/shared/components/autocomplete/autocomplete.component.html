@@ -1,90 +1,126 @@
 <div class="form-field">
   @if (label) {
-    <label [for]="internalControl">{{ label }}</label>
+    <label [for]="dataCy">{{ label }}</label>
   }
-  <mat-form-field appearance="outline" class="rnv-autocomplete-mat-form-field autocomplete">
+
+  <div class="rnv-autocomplete-field autocomplete">
     <div
+      #wrapper
       class="input-wrapper"
       [class.has-leading-icon]="_leadingIcon"
       [class.has-trailing-icon]="_trailingIcon"
-      [class.focused]="isFocused">
+      [class.focused]="isFocused"
+      [class.invalid]="control?.touched && control?.invalid"
+      [class.valid]="control?.touched && control?.valid && control?.value">
 
       @if (_leadingIcon) {
         @if (isLucideIcon) {
-          <div class="icon" 
-          tabindex="0"
+          <div class="icon"
+            tabindex="0"
             (click)="onLeadingIconClick($event)"
-            (keydown.enter)="onLeadingIconClick($event)"
-            >
+            (keydown.enter)="onLeadingIconClick($event)">
             <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="_leadingIcon" [style.color]="iconColor"></svg>
           </div>
         } @else {
-          <div class="icon" 
-          tabindex="0"
-          (click)="onLeadingIconClick($event)"
-          (keydown.enter)="onLeadingIconClick($event)"
-          >
+          <div class="icon"
+            tabindex="0"
+            (click)="onLeadingIconClick($event)"
+            (keydown.enter)="onLeadingIconClick($event)">
             <img alt="ícone de início" [src]="_leadingIcon" />
           </div>
         }
       }
 
       <input
-        #trigger="matAutocompleteTrigger"
+        #inputEl
         type="text"
-        matInput
+        autocomplete="off"
+        role="combobox"
+        aria-haspopup="listbox"
+        [attr.aria-expanded]="isPanelOpen"
+        [attr.aria-controls]="isPanelOpen ? listboxId : null"
+        [attr.aria-activedescendant]="activeOptionId"
         [placeholder]="placeholder"
         [disabled]="isDisabled"
         [formControl]="internalControl"
-        [matAutocomplete]="auto"
         [attr.data-cy]="dataCy"
-        [ngClass]="[
-          control?.touched && control?.invalid ? 'invalid' : '',
-          control?.touched && control?.valid && control?.value ? 'valid' : ''
-        ]"
+        [id]="dataCy"
         (focus)="onFocus()"
         (blur)="onBlur()"
-        (keydown.escape)="clearSelection()" />
+        (input)="onUserInput()"
+        (keydown)="onInputKeydown($event)" />
 
       @if (_trailingIcon) {
         @if (isLucideIcon) {
-          <div 
-          tabindex="0"
-          class="icon trailing-icon" (click)="onTrailingIconClick($event)"
-          (keydown.enter)="onTrailingIconClick($event)"
-          >
+          <div
+            tabindex="0"
+            class="icon trailing-icon"
+            (click)="onTrailingIconClick($event)"
+            (keydown.enter)="onTrailingIconClick($event)">
             <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="_trailingIcon" [style.color]="iconColor"></svg>
           </div>
         } @else {
-          <div 
-          tabindex="0"
-          class="icon trailing-icon" (click)="onTrailingIconClick($event)"
-          (keydown.enter)="onTrailingIconClick($event)"
-          >
+          <div
+            tabindex="0"
+            class="icon trailing-icon"
+            (click)="onTrailingIconClick($event)"
+            (keydown.enter)="onTrailingIconClick($event)">
             <img alt="ícone de fim" [src]="_trailingIcon" />
           </div>
         }
       }
-
-      <mat-autocomplete
-        #auto="matAutocomplete"
-        autoActiveFirstOption
-        [displayWith]="displayFn"
-        (optionSelected)="onOptionSelected($event)">
-        @for (option of filteredOptions$ | async; track option.id) {
-          <mat-option class="option-item" [value]="option">
-            {{ option.nome }}
-            @if (optionIcon) {
-              @if (isLucideOptionIcon) {
-                <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="optionIcon" [style.color]="iconColor"></svg>
-              } @else {
-                <img alt="" [src]="optionIcon" />
-              }
-            }
-          </mat-option>
-        }
-      </mat-autocomplete>
-
     </div>
-  </mat-form-field>
+
+    @if (errorText) {
+      <span class="error-text">{{ errorText }}</span>
+    }
+  </div>
 </div>
+
+<ng-template #panel>
+  <div
+    class="autocomplete-panel"
+    cdkScrollable
+    role="listbox"
+    [id]="listboxId"
+    [style.width]="'100%'"
+    [style.max-height]="'260px'"
+    [style.background]="autocompleteBgColor">
+    
+    @if (!filteredOptionsList.length) {
+      <div class="empty-state">Nenhum resultado encontrado</div>
+    }
+
+    @for (option of filteredOptionsList; track trackByOptionId($index, option)) {
+      <div
+        class="option-item"
+        role="option"
+        [id]="optionId(option)"
+        [class.active]="$index === activeIndex"
+        [class.selected]="isOptionSelected(option)"
+        [attr.aria-selected]="$index === activeIndex"
+        (mousedown)="$event.preventDefault(); selectOption(option)"
+        (mouseenter)="activeIndex = $index">
+        <span>{{ option.nome }}</span>
+
+        <div class="option-item-icons">
+          @if (showCheckIcon && isOptionSelected(option)) {
+            @if (isLucideCheckIcon) {
+              <svg class="check-icon" [strokeWidth]="strokeWidthIcon" [lucideIcon]="checkIcon" [style.color]="iconColor"></svg>
+            } @else {
+              <span class="check-icon">{{ checkIcon }}</span>
+            }
+          }
+
+          @if (optionIcon) {
+            @if (isLucideOptionIcon) {
+              <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="optionIcon" [style.color]="optionIConColor || iconColor"></svg>
+            } @else {
+              <img alt="" [src]="optionIcon" />
+            }
+          }
+        </div>
+      </div>
+    }
+  </div>
+</ng-template>
