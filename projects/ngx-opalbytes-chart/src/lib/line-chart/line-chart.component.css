@@ -1,0 +1,166 @@
+.chart-wrapper {
+  width: 100%;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: #ffffff;
+  padding: 20px 16px 12px;
+  box-sizing: border-box;
+}
+
+/* ── Legend ── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: default;
+}
+
+.legend-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.legend-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #4b5563;
+  white-space: nowrap;
+}
+
+/* ── SVG ── */
+.chart-area {
+  position: relative;
+}
+
+.chart-svg {
+  display: block;
+  overflow: visible;
+}
+
+/* Hover guide line */
+.hover-guide {
+  stroke: #9ca3af;
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  pointer-events: none;
+}
+
+/* Invisible hover zones per column */
+.hover-zone {
+  fill: transparent;
+  cursor: pointer;
+}
+
+/* ── Custom Tooltip ── */
+.chart-tooltip-custom {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  min-width: 140px;
+  background: black;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(17, 24, 39, 0.15);
+  padding: 8px 10px;
+  pointer-events: none;
+  font-family: inherit;
+  z-index: 10;
+}
+
+.chart-tooltip-custom.flip {
+  transform: translate(-90%, -100%);
+}
+
+.tooltip-header {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 2px 0;
+}
+
+.tooltip-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.tooltip-name {
+  color: white;
+  font-weight: 500;
+  flex: 1;
+  white-space: nowrap;
+}
+
+.tooltip-value {
+  color: white;
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+/* Grid */
+.grid-line {
+  stroke: #e5e7eb;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+/* Axis labels */
+.axis-label {
+  font-size: 11px;
+  fill: #9ca3af;
+  font-family: inherit;
+}
+
+.y-label {
+  text-anchor: end;
+}
+
+.x-label {
+  text-anchor: middle;
+}
+
+/* Lines */
+.chart-line {
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-width 0.2s;
+}
+
+/* Data points */
+.data-point {
+  stroke: #ffffff;
+  stroke-width: 2;
+  cursor: pointer;
+  transition:
+    r 0.15s ease,
+    opacity 0.15s;
+  opacity: 0;
+}
+
+.chart-svg:hover .data-point {
+  opacity: 1;
+}
+
+.data-point:hover {
+  r: 7 !important;
+}

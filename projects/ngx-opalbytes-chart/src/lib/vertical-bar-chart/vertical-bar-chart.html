@@ -1,0 +1,30 @@
+<div class="chart-wrapper">
+  <div class="y-axis">
+    @for (tick of yTicks; track $index) {
+      <span class="y-tick">{{ tick }}</span>
+    }
+  </div>
+
+  <div class="bars-area">
+    <div class="grid-lines">
+      @for (tick of yTicks; track $index) {
+        <div class="grid-line"></div>
+      }
+    </div>
+
+    <div class="bars-row">
+      @for (item of data; track $index) {
+      <div
+        class="bar-column"
+        matTooltipPosition="above"
+        [matTooltip]="item.label"
+        [style.height.%]="getPercent(item.value)"
+        (mouseenter)="onEnter($event)"
+        (mouseleave)="onLeave($event)">
+        <div class="bar-tip" [style.background-color]="barTipColor"></div>
+        <div class="bar-body" [style.background-color]="barColor"></div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

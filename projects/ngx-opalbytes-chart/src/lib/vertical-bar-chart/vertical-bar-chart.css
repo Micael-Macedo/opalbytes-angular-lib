@@ -1,0 +1,82 @@
+:host {
+  display: block;
+}
+
+.chart-wrapper {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 36px;
+}
+
+.y-tick {
+  font-size: 11px;
+  color: #9ca3af;
+  line-height: 1;
+}
+
+.bars-area {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-lines {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.grid-line {
+  width: 100%;
+  height: 1px;
+  background: #f0f0f0;
+}
+
+.bars-row {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 0 4px;
+  z-index: 1;
+}
+
+.bar-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 5px;
+  cursor: default;
+  transition: filter 180ms ease;
+}
+
+.bar-column:hover {
+  filter: brightness(0.93);
+}
+
+.bar-tip {
+  height: 6px;
+  flex-shrink: 0;
+  transition: background-color 180ms ease;
+}
+
+.bar-body {
+  flex: 1;
+  transition: background-color 180ms ease;
+}

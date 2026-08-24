@@ -1,0 +1,78 @@
+<div #chartContainer class="chart-wrapper">
+  <div class="legend justify-end">
+    @for (s of computedSeries(); track s.name) {
+    <div class="legend-item">
+      <span class="legend-dot" [style.background]="s.color"></span>
+      <span class="legend-label">{{ s.name }}</span>
+    </div>
+    }
+  </div>
+
+  <div class="chart-area">
+    <svg
+      class="chart-svg"
+      aria-label="Gráfico de linhas"
+      role="img"
+      [attr.width]="svgWidth"
+      [attr.height]="svgHeight">
+      @for (tick of yTickValues(); track tick.value) {
+      <line
+        class="grid-line"
+        [attr.x1]="paddingLeft"
+        [attr.x2]="svgWidth - 24"
+        [attr.y1]="tick.y"
+        [attr.y2]="tick.y" />
+      <text class="axis-label y-label" [attr.x]="paddingLeft - 8" [attr.y]="tick.y + 4">
+        {{ tick.value | number:'1.0-0' }}
+      </text>
+      } @for (tick of xTickValues(); track tick.label) {
+      <text class="axis-label x-label" [attr.x]="tick.x" [attr.y]="svgHeight - 8">
+        {{ tick.label }}
+      </text>
+      } @if (tooltipData(); as td) {
+      <line
+        class="hover-guide"
+        [attr.x1]="td.x"
+        [attr.x2]="td.x"
+        [attr.y1]="paddingTop"
+        [attr.y2]="svgHeight - 28" />
+      } @for (s of computedSeries(); track s.name) {
+      <path class="chart-line" fill="none" [attr.d]="s.pathD" [attr.stroke]="s.color" />
+      } @for (s of computedSeries(); track s.name) { @for (pt of s.points; track pt.label) {
+      <circle
+        r="5"
+        class="data-point"
+        [attr.cx]="pt.x"
+        [attr.cy]="pt.y"
+        [attr.fill]="s.color"
+        [class.active]="activeXIndex() !== null && pt.label === tooltipData()?.label" />
+      } } @for (zone of hoverZones(); track $index; let i = $index) {
+      <rect
+        class="hover-zone"
+        [attr.x]="zone.x"
+        [attr.y]="paddingTop"
+        [attr.width]="zone.width"
+        [attr.height]="chartHeight"
+        (mouseenter)="onColumnEnter(i)"
+        (mouseleave)="onColumnLeave()" />
+      }
+    </svg>
+
+    @if (tooltipPosition(); as pos) {
+    <div
+      class="chart-tooltip-custom"
+      [class.flip]="pos.flip"
+      [style.left.px]="pos.left"
+      [style.top.px]="pos.top">
+      <div class="tooltip-header">{{ tooltipData()?.label }}</div>
+      @for (entry of tooltipData()?.entries; track entry.name) {
+      <div class="tooltip-row">
+        <span class="tooltip-dot" [style.background]="entry.color"></span>
+        <span class="tooltip-name">{{ entry.name }}</span>
+        <span class="tooltip-value">{{ entry.value | number:'1.0-0' }}</span>
+      </div>
+      }
+    </div>
+    }
+  </div>
+</div>
