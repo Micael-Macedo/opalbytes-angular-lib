@@ -1,3 +1,18 @@
+# [1.19.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.18.0...ngx-opalbytes-components@1.19.0) (2026-08-25)
+
+
+### Bug Fixes
+
+* **components:** correcao deteccao commit video ([e8d8454](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e8d845449a21bc5797fcb9a34bedb69f832ede67))
+* **video:** correcao echo deveria testar video ([be9ae9c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/be9ae9c023eebdd29576c00d6a233c62c81ef21a))
+
+
+### Features
+
+* add componentes atualizados do cftv ([62f823f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/62f823f06906c0a2bd3f9c0c98fce5067159d052))
+* add lib de graficos ([200184a](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/200184a42c96eaa1e42c77bdda62db2f85a38b6e))
+* add video lib ([88a925f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/88a925ff6487a0350900e7202a22320021268fcd))
+
 # [1.18.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.17.0...ngx-opalbytes-components@1.18.0) (2026-07-30)
 
 
