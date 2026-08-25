@@ -147,7 +147,7 @@ jobs:
           echo "pdf-export: $should_release_pdf_export"
           echo "should-release-chart=$should_release_chart" >> $GITHUB_OUTPUT
           echo "chart: $should_release_chart"
-          echo "should-release-pdf-export=$should_release_video" >> $GITHUB_OUTPUT
+          echo "should-release-video=$should_release_video" >> $GITHUB_OUTPUT
           echo "video: $should_release_video"
           echo "========================================"
 
