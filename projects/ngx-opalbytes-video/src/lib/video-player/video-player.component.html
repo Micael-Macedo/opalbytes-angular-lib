@@ -1,0 +1,163 @@
+<div #playerContainer
+  class="player-container flex items-center justify-center relative w-full h-full bg-[#1a1a1a] overflow-hidden group select-none"
+  [ngClass]="isMonitoringMode ? '' : 'rounded-xl'">
+  <!-- Elemento de vídeo — Video.js monta aqui -->
+  <video #videoEl class="video-js flex items-center justify-center" preload="auto" [id]="cameraId"> </video>
+
+  <!-- ─── Overlay de status ─── -->
+  @if (status() !== videoStatus.PLAYING && status() !== videoStatus.IDLE) {
+  <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/70 z-10 gap-2">
+    @if (status() === videoStatus.LOADING) {
+    <div class="relative flex flex-col justify-center items-center">
+      @if (loadingImage) {
+      <img alt="" [src]="loadingImage">
+      }
+      <svg class="w-8 h-8 text---color-primary) animate-spin" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+      </svg>
+    </div>
+    @if (!compact) {
+    <span class="text-white text-sm">Carregando</span>
+    } } @if (status() === videoStatus.RETRYING) {
+    <svg class="w-8 h-8 text-yellow-400 animate-spin" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+    </svg>
+    @if (!compact) {
+    <span class="text-yellow-400 text-sm text-center px-4">
+      Tentando reconectar @if (retryInfo(); as info) { ({{ info.attempt }}/{{ info.maxAttempts }}) }
+    </span>
+    } } @if (status() === videoStatus.OFFLINE) {
+    <svg class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+        d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+    </svg>
+    @if (!compact) {
+    <span class="text-gray-400 text-sm">Câmera offline</span>
+    @if (isLive) {
+    <span class="text-gray-500 text-xs">Aguardando reconexão...</span>
+    } } } @if (status() === videoStatus.ERROR) {
+    <svg class="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+        d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+    </svg>
+    @if (!compact) {
+    <span class="text-red-500 text-sm">Falha ao carregar</span>
+    } }
+  </div>
+  }
+
+  <!-- ─── Logo R-MONITORA ─── -->
+  @if (!isMonitoringMode && logoSrc) {
+
+  <div class="absolute top-2 left-3 z-20 pointer-events-none">
+    <img alt="R-MONITORA" [src]="logoSrc" [class.h-4]="compact" [class.h-5]="!compact" />
+  </div>
+  }
+
+  <!-- ─── Barra de controles ─── -->
+  <div
+    class="absolute bottom-0 left-0 right-0 z-20 flex flex-col bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-200"
+    [class.opacity-0]="compact" [class.group-hover:opacity-100]="compact" [class.px-3]="compact" [class.py-1]="compact"
+    [class.px-4]="!compact" [class.py-2]="!compact">
+    <!-- Seek bar — só no modo RECORDED -->
+    @if (!isLive) {
+    <div class="w-full mb-1">
+      <input type="range"
+        class="w-full h-1 appearance-none bg-white/30 rounded-full cursor-pointer accent-[var(--color-primary)]"
+        [min]="0" [max]="duration()" [value]="currentTime()" (input)="onSeek($event)" />
+    </div>
+    }
+
+    <!-- Controles principais -->
+    <div class="flex items-center justify-between w-full">
+      <!-- Esquerda: badge LIVE ou nome da câmera -->
+      <div class="flex items-center gap-2">
+        @if (isLive) {
+        <span
+          class="border border-[var(--color-primary)] text-[var(--color-primary)] font-bold rounded px-1.5 text-[10px] leading-tight"
+          [class.py-0.5]="compact" [class.py-1]="!compact">
+          LIVE
+        </span>
+        }
+        <span class="text-red-500 font-semibold truncate max-w-[120px]" [class.text-[10px]]="compact"
+          [class.text-xs]="!compact">
+          {{ cameraName }}
+        </span>
+      </div>
+
+      <!-- Direita: botões de controle -->
+      <div class="flex items-center" [class.gap-1]="compact" [class.gap-2]="!compact">
+        <!-- Play / Pause -->
+        <button type="button"
+          class="text-white hover:text-[var(--color-primary)] transition-colors cursor-pointer bg-transparent border-0 p-0 flex items-center"
+          [attr.aria-label]="isPlaying() ? 'Pausar' : 'Reproduzir'" (click)="togglePlay()">
+          @if (isPlaying()) {
+          <!-- Pause icon -->
+          <svg fill="currentColor" viewBox="0 0 24 24" [class.w-4]="compact" [class.h-4]="compact"
+            [class.w-5]="!compact" [class.h-5]="!compact">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+          </svg>
+          } @else {
+          <!-- Play icon -->
+          <svg fill="currentColor" viewBox="0 0 24 24" [class.w-4]="compact" [class.h-4]="compact"
+            [class.w-5]="!compact" [class.h-5]="!compact">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+          }
+        </button>
+
+        <!-- Indicador de áudio: somente leitura, sem botão de mute/unmute -->
+        <span class="text-white/70 flex items-center" [attr.aria-label]="muted ? 'Sem áudio' : 'Com áudio'">
+          @if (muted) {
+          <svg fill="currentColor" viewBox="0 0 24 24" [class.w-4]="compact" [class.h-4]="compact"
+            [class.w-5]="!compact" [class.h-5]="!compact">
+            <path
+              d="M16.5 12A4.5 4.5 0 0014 7.97v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0021 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06A8.99 8.99 0 0017.73 18L19 19.27 20.27 18 5.27 3 4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+          </svg>
+          } @else {
+          <svg fill="currentColor" viewBox="0 0 24 24" [class.w-4]="compact" [class.h-4]="compact"
+            [class.w-5]="!compact" [class.h-5]="!compact">
+            <path
+              d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z" />
+          </svg>
+          }
+        </span>
+
+        <!-- Velocidade — só RECORDED -->
+        @if (!isLive) {
+        <select
+          class="bg-transparent text-white border border-white/30 rounded cursor-pointer hover:border-[var(--color-primary)] transition-colors"
+          aria-label="Velocidade de reprodução" [class.text-[10px]]="compact" [class.text-xs]="!compact"
+          [class.px-1]="compact" [class.py-0]="compact" [class.px-1.5]="!compact" [class.py-0.5]="!compact"
+          (change)="setRate(+$any($event.target).value)">
+          <option value="0.5">0.5x</option>
+          <option value="1" selected>1x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2">2x</option>
+        </select>
+        }
+
+        <!-- Fullscreen -->
+        <button type="button"
+          class="text-white hover:text-[var(--color-primary)] transition-colors cursor-pointer bg-transparent border-0 p-0 flex items-center"
+          [attr.aria-label]="isFullscreen() ? 'Sair da tela cheia' : 'Tela cheia'" (click)="toggleFullscreen()">
+          @if (isFullscreen()) {
+          <!-- Exit fullscreen icon -->
+          <svg fill="currentColor" viewBox="0 0 24 24" [class.w-4]="compact" [class.h-4]="compact"
+            [class.w-5]="!compact" [class.h-5]="!compact">
+            <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z" />
+          </svg>
+          } @else {
+          <!-- Enter fullscreen icon -->
+          <svg fill="currentColor" viewBox="0 0 24 24" [class.w-4]="compact" [class.h-4]="compact"
+            [class.w-5]="!compact" [class.h-5]="!compact">
+            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+          </svg>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
