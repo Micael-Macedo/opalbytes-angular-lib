@@ -1,11 +1,10 @@
 {
   "name": "ngx-opalbytes-video",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0",
     "video.js": "^8.24.0"
-
   },
   "dependencies": {
     "tslib": "^2.3.0"
