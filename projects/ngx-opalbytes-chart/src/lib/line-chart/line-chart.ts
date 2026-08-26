@@ -130,6 +130,8 @@ export class CaoLineChartComponent implements OnChanges, AfterViewInit {
   }
 
   private observeWidth() {
+    if (!this.containerRef?.nativeElement) {return;}
+
     const ro = new ResizeObserver((entries) => {
       const w = entries[0]?.contentRect.width;
       if (w && Math.abs(w - this.width()) > 2) {
