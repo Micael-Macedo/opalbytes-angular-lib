@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BaseChart } from './base-chart';
+import { CaoBaseChart } from './base-chart';
 
-describe('BaseChart', () => {
-  let component: BaseChart;
-  let fixture: ComponentFixture<BaseChart>;
+describe('CaoBaseChart', () => {
+  let component: CaoBaseChart;
+  let fixture: ComponentFixture<CaoBaseChart>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BaseChart],
+      imports: [CaoBaseChart],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(BaseChart);
+    fixture = TestBed.createComponent(CaoBaseChart);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

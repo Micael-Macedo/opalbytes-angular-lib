@@ -16,14 +16,14 @@ export interface ICaoBarItem {
 }
 
 @Component({
-  selector: "cao-lateral-bar-chart",
+  selector: "cao-vertical-bar-chart",
   standalone: true,
   imports: [CommonModule, MatTooltipModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: "vertical-bar-chart.html",
   styleUrls: ["vertical-bar-chart.css"],
 })
-export class CaoLateralBarChartComponent implements OnChanges {
+export class CaoVerticalBarChartComponent implements OnChanges {
   @Input() data: ICaoBarItem[] = [];
 
   @Input() barColor = "#FFE5CA";
