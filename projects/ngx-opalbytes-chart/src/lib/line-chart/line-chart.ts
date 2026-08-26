@@ -6,7 +6,6 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
-  OnDestroy,
   ChangeDetectionStrategy,
   signal,
   computed,
@@ -60,14 +59,12 @@ interface IXGroup {
   styleUrl: "./line-chart.component.css",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CaoLineChartComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class CaoLineChartComponent implements OnChanges, AfterViewInit {
   @Input() data: IChartSeries[] = [];
   @Input() height = 320;
   @Input() yTicks = 6;
 
   @ViewChild("chartContainer") containerRef!: ElementRef<HTMLDivElement>;
-
-  private resizeObserver: ResizeObserver | null = null;
 
   private width = signal(800);
 
@@ -132,23 +129,15 @@ export class CaoLineChartComponent implements OnChanges, AfterViewInit, OnDestro
     this.observeWidth();
   }
 
-  ngOnDestroy(): void {
-    this.resizeObserver?.disconnect();
-  }
-
   private observeWidth() {
-    if (typeof ResizeObserver === 'undefined') {
-      return;
-    }
-
-    this.resizeObserver = new ResizeObserver((entries) => {
+    const ro = new ResizeObserver((entries) => {
       const w = entries[0]?.contentRect.width;
       if (w && Math.abs(w - this.width()) > 2) {
         this.width.set(w);
         this.compute();
       }
     });
-    this.resizeObserver.observe(this.containerRef.nativeElement);
+    ro.observe(this.containerRef.nativeElement);
   }
 
   private allSeriesPoints(): IChartSeriesPoint[] {

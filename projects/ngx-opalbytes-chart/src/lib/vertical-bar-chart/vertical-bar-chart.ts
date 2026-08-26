@@ -1,5 +1,13 @@
 import { CommonModule } from "@angular/common";
-import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
 export interface ICaoBarItem {
@@ -15,7 +23,7 @@ export interface ICaoBarItem {
   templateUrl: "vertical-bar-chart.html",
   styleUrls: ["vertical-bar-chart.css"],
 })
-export class CaoVerticalBarChartComponent implements OnChanges {
+export class CaoLateralBarChartComponent implements OnChanges {
   @Input() data: ICaoBarItem[] = [];
 
   @Input() barColor = "#FFE5CA";
@@ -24,9 +32,8 @@ export class CaoVerticalBarChartComponent implements OnChanges {
   @Input() barTipColor = "#FAB46F";
 
   @Input() tickCount = 6;
-
-  @Output() readonly mouseEnterEvent = new EventEmitter<MouseEvent>();
-  @Output() readonly mouseLeaveEvent = new EventEmitter<MouseEvent>();
+  @Output() readonly mouseEnter = new EventEmitter<MouseEvent>();
+  @Output() readonly mouseLeave = new EventEmitter<MouseEvent>();
 
   yTicks: number[] = [];
   maxValue = 0;
@@ -59,10 +66,10 @@ export class CaoVerticalBarChartComponent implements OnChanges {
   }
 
   onEnter(event: MouseEvent): void {
-    this.mouseEnterEvent.emit(event)
+    this.mouseEnter.emit(event);
   }
-  
+
   onLeave(event: MouseEvent): void {
-    this.mouseLeaveEvent.emit(event)
+    this.mouseLeave.emit(event);
   }
 }

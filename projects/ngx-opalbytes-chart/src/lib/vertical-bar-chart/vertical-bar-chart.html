@@ -1,14 +1,15 @@
+@if (data.length) {
 <div class="chart-wrapper">
   <div class="y-axis">
     @for (tick of yTicks; track $index) {
-      <span class="y-tick">{{ tick }}</span>
+    <span class="y-tick">{{ tick }}</span>
     }
   </div>
 
   <div class="bars-area">
     <div class="grid-lines">
       @for (tick of yTicks; track $index) {
-        <div class="grid-line"></div>
+      <div class="grid-line"></div>
       }
     </div>
 
@@ -28,3 +29,6 @@
     </div>
   </div>
 </div>
+} @else {
+<div class="chart-empty">Nenhum dado encontrado</div>
+}

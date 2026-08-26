@@ -1,3 +1,4 @@
+@if (hasData()) {
 <div class="hm-wrapper">
   <div class="hm-chart">
     <div class="hm-y-axis">
@@ -8,20 +9,20 @@
     <div class="hm-scroll">
       <div class="hm-columns" [style.grid-template-columns]="gridCols()">
         @for (col of effectiveCfg().columns; track $index) {
-          <div class="hm-column">
-            <div class="hm-cells">
-              @for (cell of col.cells; track $index) {
-                <div
-                class="hm-cell"
-                [matTooltip]="cell.value"
-                [style.height.px]="CELL_H - GAP"
-                [style.background-color]="colorFor(cell.value)"
-                [attr.data-level]="cell.value"
-                [attr.aria-label]="'Nível ' + (cell.value + 1) + ' de 4'"></div>
-              }
-            </div>
-            <div class="hm-col-label">{{ col.label }}</div>
+        <div class="hm-column">
+          <div class="hm-cells">
+            @for (cell of col.cells; track $index) {
+            <div
+              class="hm-cell"
+              [matTooltip]="cell.value"
+              [style.height.px]="CELL_H - GAP"
+              [style.background-color]="colorFor(cell.value)"
+              [attr.data-level]="cell.value"
+              [attr.aria-label]="'Nível ' + (cell.value + 1) + ' de 4'"></div>
+            }
           </div>
+          <div class="hm-col-label">{{ col.label }}</div>
+        </div>
         }
       </div>
     </div>
@@ -29,10 +30,8 @@
 
   <div class="hm-legend">
     <div class="hm-legend-track">
-      @for (item of resolvedColors(); track $index) {        
-      <div
-        class="hm-legend-swatch"
-        [style.background-color]="item"></div>
+      @for (c of resolvedColors(); track $index) {
+      <div class="hm-legend-swatch" [style.background-color]="c"></div>
       }
     </div>
     <div class="hm-legend-text">
@@ -42,3 +41,6 @@
     </div>
   </div>
 </div>
+} @else {
+<div class="chart-empty">Nenhum dado encontrado</div>
+}

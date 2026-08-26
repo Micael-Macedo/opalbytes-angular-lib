@@ -1,0 +1,148 @@
+:host {
+  display: block;
+}
+
+.pie-chart-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  position: relative;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+/* ── SVG container ── */
+.pie-chart-svg-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.pie-chart-svg {
+  display: block;
+  overflow: visible;
+}
+
+/* ── Slices ── */
+.slice {
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease;
+  transform-origin: center;
+  transform-box: fill-box;
+
+  &--hovered {
+    transform: scale(1.04);
+    filter: brightness(1.1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+  }
+}
+
+/* ── Center text ── */
+.center-total {
+  font-size: 22px;
+  font-weight: 700;
+  fill: #1a1a2e;
+  letter-spacing: -0.5px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.center-label {
+  font-size: 12px;
+  font-weight: 500;
+  fill: #6b7280;
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Tooltip ── */
+.pie-tooltip {
+  position: absolute;
+  background: #1a1a2e;
+  color: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  pointer-events: none;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+
+.pie-tooltop--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pie-tooltop__label {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.3px;
+}
+
+.pie-tooltop__value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+
+.pie-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pie-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pie-legend__dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.pie-legend__name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  flex: 1;
+  white-space: nowrap;
+}
+
+.pie-legend__pct {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  min-width: 36px;
+  text-align: right;
+}
+
+.chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 160px;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}

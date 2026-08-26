@@ -1,0 +1,52 @@
+@if (slices.length) {
+<div #chartWrapper class="pie-chart-wrapper">
+  <div class="pie-chart-svg-container">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="pie-chart-svg"
+      [attr.width]="svgSize"
+      [attr.height]="svgSize"
+      [attr.viewBox]="'0 0 ' + svgSize + ' ' + svgSize">
+      <g>
+        @for (slice of slices; track slice;) {
+        <path
+          class="slice"
+          [matTooltip]="slice.name + ': '+slice.value"
+          [attr.d]="slice.path"
+          [attr.fill]="normalizeColor(slice.color)" />
+        }
+      </g>
+
+      <text
+        text-anchor="middle"
+        dominant-baseline="middle"
+        class="center-total"
+        [attr.x]="cx"
+        [attr.y]="cy - 10">
+        {{ formatTotal(total) }}
+      </text>
+      <text
+        text-anchor="middle"
+        dominant-baseline="middle"
+        class="center-label"
+        [attr.x]="cx"
+        [attr.y]="cy + 14">
+        total
+      </text>
+    </svg>
+  </div>
+
+  <ul class="pie-legend" role="list">
+    @for (slice of slices; track $index) {
+
+    <li class="pie-legend__item">
+      <span class="pie-legend__dot" [style.background-color]="normalizeColor(slice.color)"></span>
+      <span class="pie-legend__name">{{ slice.name }} </span>
+      <span class="pie-legend__pct">{{ slice.percentage }}%</span>
+    </li>
+    }
+  </ul>
+</div>
+} @else {
+<div class="chart-empty">Nenhum dado encontrado</div>
+}
