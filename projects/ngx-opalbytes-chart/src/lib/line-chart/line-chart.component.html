@@ -1,3 +1,4 @@
+@if (computedSeries().length) {
 <div #chartContainer class="chart-wrapper">
   <div class="legend justify-end">
     @for (s of computedSeries(); track s.name) {
@@ -76,3 +77,6 @@
     }
   </div>
 </div>
+} @else {
+<div class="chart-empty">Nenhum dado encontrado</div>
+}

@@ -169,3 +169,14 @@
   height: 8px;
   flex: 1;
 }
+
+.chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 160px;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
