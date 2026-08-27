@@ -1,3 +1,13 @@
+# [1.20.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.19.0...ngx-opalbytes-components@1.20.0) (2026-08-27)
+
+
+### Features
+
+* add alerta caso dados vazios ([63d7a04](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/63d7a04670fcdf8fa17229733572c84ec4c428d8))
+* add componente kpi ([b52c25f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/b52c25fb872dcd3d1a99deb290d7d1558be78c69))
+* add icon size para componentes ([c2d97e9](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c2d97e920052594e8625da00eddb927da3527fd8))
+* add integracao comandos cli ([eedb93e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/eedb93e2e0d5eb6dc11f3b1a5348d028e70fa704))
+
 # [1.19.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.18.0...ngx-opalbytes-components@1.19.0) (2026-08-25)
 
 
