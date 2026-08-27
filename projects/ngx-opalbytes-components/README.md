@@ -72,6 +72,59 @@ export class ExemploComponent {
 
 ---
 
+## Comandos CLI
+
+A biblioteca disponibiliza uma CLI (`cao-comp`) para copiar o código-fonte de um componente da `ngx-opalbytes-components` para qualquer projeto. Isso é útil quando você precisa customizar o código-fonte de um componente internamente, sem depender apenas da API pública.
+
+### Instalação global
+
+Para utilizar o comando `cao-comp` de qualquer lugar, instale a biblioteca globalmente:
+
+```bash
+npm install -g ngx-opalbytes-components
+```
+
+Para desenvolvimento local, a partir da pasta `projects/ngx-opalbytes-components`:
+
+```bash
+npm link
+```
+
+> Caso não queira instalar, também é possível executar o script diretamente:
+> `node ./node_modules/ngx-opalbytes-components/cli/cao-comp.cjs ...`
+
+### Uso
+
+```bash
+cao-comp <componente> <destino> [opcoes]
+```
+
+**Argumentos:**
+
+| Argumento | Descrição |
+| --- | --- |
+| `<componente>` | Nome da pasta do componente em `shared/components` (ex: `base-button`). |
+| `<destino>` | Pasta de destino onde os arquivos serão gerados (criada se não existir). |
+
+**Opções:**
+
+| Opção | Descrição |
+| --- | --- |
+| `-h, --help` | Exibe a ajuda. |
+| `-l, --list` | Lista os componentes disponíveis para cópia. |
+| `-f, --force` | Sobrescreve arquivos existentes no destino. |
+| `-v, --version` | Exibe a versão. |
+
+**Exemplos:**
+
+```bash
+cao-comp base-button ./src/app/components
+cao-comp stepper ./src/app/components --force
+cao-comp --list
+```
+
+---
+
 ## Organização de Pastas
 
 Dentro da pasta `src/lib/`, os componentes são organizados em `shared/components/` e cada componente reside em sua própria pasta, contendo seus arquivos (`.ts`, `.html`, `.css`, `.spec.ts`).
@@ -89,6 +142,7 @@ src/
         |   ├── base-toggle/
         |   ├── drop-down/
         |   ├── footer/
+        |   ├── kpi/
         |   ├── links-button/
         |   ├── paginator/
         |   ├── stepper/
@@ -813,6 +867,55 @@ Um rodapé simples para a aplicação.
 | `currentRoute` | `string` | `undefined` | A rota atual (usado para lógica interna). |
 | `footerText` | `string` | `undefined` | Texto customizado para o rodapé. |
 | `isFixed` | `boolean` | `true` | Fixa o rodapé na parte inferior da página. |
+
+---
+
+### `CaoKpi`
+
+Um componente de KPI (Key Performance Indicator) que exibe um cartão com ícone, valor, título, cor de texto e cor de borda configuráveis.
+
+**Seletor:** `<cao-kpi>`
+
+**Interface `ICaoKPI`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `title` | `string` | O título do KPI. |
+| `value` | `string` | O valor exibido (ex: `"R$ 12.345"`). |
+| `textColor` | `string` | Cor do texto (valor e título). |
+| `borderColor` | `string` | Cor da borda do cartão. |
+| `icon` | `ICaoImage` | O ícone exibido no canto superior direito. |
+
+**Interface `ICaoImage`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `src` | `string` | Caminho ou URL da imagem do ícone. |
+| `alt` | `string` | Texto alternativo (acessibilidade) da imagem. |
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `kpiData` | `ICaoKPI` | — (obrigatório) | Dados do KPI, recebidos via `input.required`. |
+
+**Exemplo de uso:**
+
+```html
+<cao-kpi [kpiData]="meuKpi"></cao-kpi>
+```
+
+```typescript
+import { CaoKpi, ICaoKPI } from 'ngx-opalbytes-components';
+
+meuKpi: ICaoKPI = {
+  title: 'Total de Vendas',
+  value: 'R$ 12.345',
+  textColor: '#16a34a',
+  borderColor: '#16a34a',
+  icon: { src: 'assets/icon-vendas.svg', alt: 'Vendas' }
+};
+```
 
 ---
 

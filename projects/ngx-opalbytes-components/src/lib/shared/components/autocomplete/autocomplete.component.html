@@ -19,14 +19,14 @@
             tabindex="0"
             (click)="onLeadingIconClick($event)"
             (keydown.enter)="onLeadingIconClick($event)">
-            <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="_leadingIcon" [style.color]="iconColor"></svg>
+            <svg [strokeWidth]="strokeWidthIcon" [size]="iconSize" [lucideIcon]="_leadingIcon" [style.color]="iconColor"></svg>
           </div>
         } @else {
           <div class="icon"
             tabindex="0"
             (click)="onLeadingIconClick($event)"
             (keydown.enter)="onLeadingIconClick($event)">
-            <img alt="ícone de início" [src]="_leadingIcon" />
+            <img alt="ícone de início" [style.width]="iconSize" [src]="_leadingIcon" />
           </div>
         }
       }
@@ -57,7 +57,7 @@
             class="icon trailing-icon"
             (click)="onTrailingIconClick($event)"
             (keydown.enter)="onTrailingIconClick($event)">
-            <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="_trailingIcon" [style.color]="iconColor"></svg>
+            <svg [strokeWidth]="strokeWidthIcon" [size]="iconSize" [lucideIcon]="_trailingIcon" [style.color]="iconColor"></svg>
           </div>
         } @else {
           <div
@@ -65,7 +65,7 @@
             class="icon trailing-icon"
             (click)="onTrailingIconClick($event)"
             (keydown.enter)="onTrailingIconClick($event)">
-            <img alt="ícone de fim" [src]="_trailingIcon" />
+            <img alt="ícone de fim" [style.width]="iconSize"  [src]="_trailingIcon" />
           </div>
         }
       }
@@ -114,7 +114,7 @@
 
           @if (optionIcon) {
             @if (isLucideOptionIcon) {
-              <svg [strokeWidth]="strokeWidthIcon" [lucideIcon]="optionIcon" [style.color]="optionIConColor || iconColor"></svg>
+              <svg [strokeWidth]="strokeWidthIcon" [size]="iconSize" [lucideIcon]="optionIcon" [style.color]="optionIConColor || iconColor"></svg>
             } @else {
               <img alt="" [src]="optionIcon" />
             }

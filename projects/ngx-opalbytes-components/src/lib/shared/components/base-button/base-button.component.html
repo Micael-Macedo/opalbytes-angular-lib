@@ -14,17 +14,17 @@
   @if (leadingIcon) {
   <span class="leading-icon">
     @if (isLucideIcon) {
-    <svg [lucideIcon]="leadingIcon" [style.color]="iconColor" [strokeWidth]="strokeWidthIcon"></svg>
+    <svg [lucideIcon]="leadingIcon" [size]="iconSize" [style.color]="iconColor" [strokeWidth]="strokeWidthIcon"></svg>
     } @else {
-    <img alt="icon" [src]="leadingIcon" />
+    <img alt="icon" [src]="leadingIcon" [style.width]="iconSize" />
     }
   </span>
   } {{ buttonText }} @if (trailingIcon) {
   <span class="trailing-icon">
     @if (isLucideIcon) {
-    <svg [lucideIcon]="trailingIcon" [style.color]="iconColor" [strokeWidth]="strokeWidthIcon"></svg>
+    <svg [lucideIcon]="trailingIcon" [size]="iconSize" [style.color]="iconColor" [strokeWidth]="strokeWidthIcon"></svg>
     } @else {
-    <img alt="icon" [src]="trailingIcon" />
+    <img alt="icon" [src]="trailingIcon" [style.width]="iconSize" />
     }
   </span>
   } @if (isLoading) {

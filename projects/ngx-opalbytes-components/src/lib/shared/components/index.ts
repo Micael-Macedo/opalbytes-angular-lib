@@ -16,3 +16,4 @@ export * from "./tab-group/tab-group"
 export * from "./tab-panel/tab-panel"
 
 export * from "./base-icon/base-icon"
+export * from "./kpi/kpi"
