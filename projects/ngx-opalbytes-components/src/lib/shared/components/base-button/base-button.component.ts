@@ -28,6 +28,7 @@ export class CaoBaseButtonComponent implements OnInit{
   @Input() iconColor?: string;
   @Input() strokeWidthIcon = 1
   @Input() minTextToTooltip = 20
+  @Input() iconSize = 24
 
   ngOnInit(): void {
     if (!this.dataCy) {

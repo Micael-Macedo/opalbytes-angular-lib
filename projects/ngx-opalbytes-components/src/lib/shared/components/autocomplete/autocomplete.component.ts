@@ -90,6 +90,7 @@ export class CaoAutocompleteComponent implements OnInit, OnChanges, OnDestroy, A
   @Input() strokeWidthIcon = 1;
   @Input() isDisabled = false;
   @Input() inputHeigth = '50px';
+  @Input() iconSize = 24
 
   @Input() checkIcon = '✓';
   @Input() showCheckIcon = true;
