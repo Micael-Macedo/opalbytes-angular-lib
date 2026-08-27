@@ -6,6 +6,8 @@
     "styleIncludePaths": ["src/styles"]
   },
   "assets": [
-    "./src/assets"
+    "./src/assets",
+    "./cli",
+    "./src/lib/shared/components"
   ]
 }
