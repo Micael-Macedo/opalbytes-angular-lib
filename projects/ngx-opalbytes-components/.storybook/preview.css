@@ -1,0 +1,25 @@
+:root {
+  --primary: #4f46e5;
+  --white: #ffffff;
+  --black: #000000;
+  --error: #dc2626;
+  --success: #16a34a;
+  --data-bg: #f3f4f6;
+  --title-info: #4b5563;
+  --shadow-black: rgba(0, 0, 0, 0.08);
+  --input-disabled-bg: #f3f4f6;
+  --active-success-btn: #16a34a;
+  --confirm-color: #16a34a;
+  --border-toggle: #d1d5db;
+  --border-toggle-checked: #4f46e5;
+  --bg-toggle-checked: #4f46e5;
+  --text-toggle-checked: #ffffff;
+  --text-unselected-toggle-checked: #6b7280;
+  --hover-drop-down: #eef2ff;
+  --input-background: #ffffff;
+  --text-color-input: #111827;
+  --input-text: #9ca3af;
+  --line-color: #e5e7eb;
+  --color-tooltip: #111827;
+  --return-color: #6b7280;
+}

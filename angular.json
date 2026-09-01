@@ -77,6 +77,22 @@
             ],
             "eslintConfig": "projects/ngx-opalbytes-components/eslint.config.js"
           }
+        },
+        "storybook": {
+          "builder": "@storybook/angular-vite:start-storybook",
+          "options": {
+            "configDir": "projects/ngx-opalbytes-components/.storybook",
+            "browserTarget": "ngx-opalbytes-components:build",
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular-vite:build-storybook",
+          "options": {
+            "configDir": "projects/ngx-opalbytes-components/.storybook",
+            "browserTarget": "ngx-opalbytes-components:build",
+            "outputDir": "dist/storybook/ngx-opalbytes-components"
+          }
         }
       }
     },
