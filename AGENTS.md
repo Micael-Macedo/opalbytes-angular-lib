@@ -20,11 +20,14 @@ Angular 21 monorepo of reusable, published libraries. Ten distributable libs liv
 - **Vitest** backs coverage: `test:coverage*`, `test:perf`. Configured in `vitest.config.ts` (jsdom env, v8 provider, coverage excludes `public-api.ts`). `vitest.setup.ts` bootstraps the Angular TestBed and mocks `ResizeObserver`.
 - **`ngx-opalbytes-core` has NO spec files and NO `test` architect** (only build + lint). Do not run `test:core`; CI itself uses `echo "No tests for core"` for it.
 
-## Commits and release (enforced by CI) — scope is mandatory
+## Commits and release (enforced by CI) — scope comes from the branch name
 
-- Conventional Commits with a **required scope**: `feat(components): ...`. The scope drives which library semantic-release publishes. Valid scopes (see README): `components`, `core`, `directives`, `pdf`, `services`, `shared`, `performance`, `libs`, `utils`, `root`.
-- A commit without a valid scope is rejected by commitlint (`.husky/commit-msg`). Commit type also matters: `feat`→minor, `fix`/`refactor`→patch, `docs`/`chore`/`test`/`style`→no release.
+- Conventional Commits using the default `@commitlint/config-conventional` preset (`commitlint.config.js`): **scope in the commit message is NOT required**. Library/directive/PDF/etc. work may commit freely without a scope (e.g. `feat: add componente kpi`).
+- The library being released is defined by the **branch name** and its scope token, e.g. `feature(components)/add-component`, `fix(services)/correcao`, `feature(chart)/add-lib-graficos`. Valid scopes (see README): `components`, `core`, `directives`, `pdf`, `services`, `shared`, `performance`, `libs`, `utils`.
+- Commits are attributed to the library that owns the branch which introduced them (via `git log --first-parent --merges`), so each changelog only lists commits merged through branches of its own lib.
+- Commit type still matters: `feat`→minor, `fix`/`refactor`→patch, `docs`/`chore`/`test`/`style`→no release.
 - **No direct commits or pushes to `main`** — all changes go through a PR. Versioning is fully automated via semantic-release on push to `main` (`.github/workflows/release.yml` + per-lib `.releaserc.js`). Do not manually bump versions.
+- Each per-lib `.releaserc.js` delegates `commit-analyzer` and `release-notes-generator` to `scripts/release-branch-filter.cjs`, which filters the commit range by the scope of the PR branch that introduced each commit — so a lib's changelog never leaks commits from other libs.
 
 ## Husky / Git flow
 
