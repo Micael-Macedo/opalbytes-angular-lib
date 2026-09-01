@@ -189,6 +189,49 @@ Veja a [documentação completa](./projects/ngx-opalbytes-performance/README.md)
 
 ---
 
+##  Storybook (ngx-opalbytes-components)
+
+Os componentes da lib `ngx-opalbytes-components` possuem stories
+(`*.stories.ts`) co-localizados com seus arquivos de origem, mostrando
+exemplos **com e sem ícones** (Lucide, imagens e Material Icons).
+
+### Abrir o Storybook (desenvolvimento)
+
+```bash
+npm run storybook
+```
+
+Abre o Storybook na porta **6006** (config em
+`projects/ngx-opalbytes-components/.storybook/`).
+
+### Build estático do Storybook
+
+```bash
+npm run build-storybook
+```
+
+Gera o build estático em `dist/storybook/ngx-opalbytes-components`.
+
+### Storybook em projetos externos (`cao-comp storybook`)
+
+O CLI `cao-comp` possui o subcomando `storybook` que gera o **setup mínimo**
+do Storybook (`.storybook/`, exemplo de story e guia `STORYBOOK-SETUP.md`)
+em qualquer projeto, para visualizar os componentes copiados:
+
+```bash
+# 1. Copie um componente para o projeto externo
+cao-comp base-button ./meu-projeto/src/app/components
+
+# 2. Gere o setup do Storybook no projeto externo
+cao-comp storybook ./meu-projeto
+```
+
+Siga o `STORYBOOK-SETUP.md` gerado para instalar as dependências
+(`storybook`, `@storybook/angular-vite`, addons) e rodar com
+`npx storybook dev -c .storybook -p 6006`.
+
+---
+
 ##  Performance Monitoring
 
 Este monorepo inclui ferramentas integradas de monitoramento de performance:
@@ -417,4 +460,7 @@ O versionamento e a publicação de novas versões são totalmente automatizados
 *   `npm run test`: Executa os testes unitários com Vitest fechando o terminal ao finalizar.
 *   `npm run test_watch`: Executa os testes unitários com Vitest.
 *   `npm run lint`: Analisa o código em busca de erros de estilo e padrões.
+*   `npm run storybook`: Abre o Storybook dos componentes (porta 6006).
+*   `npm run build-storybook`: Gera o build estático do Storybook.
+*   `npm run cao-comp -- <args>`: Invoca o CLI `cao-comp` localmente (ex: `npm run cao-comp -- base-button ./dest`, `npm run cao-comp -- storybook ./meu-projeto`).
 

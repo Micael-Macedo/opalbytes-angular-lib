@@ -71,16 +71,21 @@ function generateDocs() {
   lines.push('mantendo os arquivos originais (.ts, .html, .scss/.css, .spec.ts,');
   lines.push('subpastas e servicos) para customizacao livre de estilo e logica.');
   lines.push('');
+  lines.push('Tambem gera o setup minimo de Storybook para visualizar os');
+  lines.push('componentes em projetos externos.');
+  lines.push('');
   lines.push('## Uso');
   lines.push('');
   lines.push('```bash');
   lines.push('cao-comp <componente> <destino> [--force]');
+  lines.push('cao-comp storybook <destino> [--force]');
   lines.push('```');
   lines.push('');
   lines.push('| Argumento    | Descricao                                                 |');
   lines.push('|--------------|-----------------------------------------------------------|');
   lines.push('| `<componente>` | Nome da pasta em `shared/components` (ex: `base-button`) |');
   lines.push('| `<destino>`    | Pasta onde os arquivos serao gerados (criada se nao existir) |');
+  lines.push('| `storybook`    | Gera o setup do Storybook (.storybook/ + exemplo + doc)  |');
   lines.push('');
   lines.push('## Opcoes');
   lines.push('');
@@ -97,6 +102,8 @@ function generateDocs() {
   lines.push('cao-comp base-button ./src/app/components');
   lines.push('cao-comp stepper ./src/app/components --force');
   lines.push('cao-comp --list');
+  lines.push('cao-comp storybook ./meu-projeto');
+  lines.push('cao-comp base-button ./meu-projeto/src/app/components && cao-comp storybook ./meu-projeto');
   lines.push('```');
   lines.push('');
   lines.push(`## Componentes disponiveis (${components.length})`);
@@ -104,6 +111,14 @@ function generateDocs() {
   for (const c of components) {
     lines.push(`- ${c}`);
   }
+  lines.push('');
+  lines.push('## Storybook em projetos externos');
+  lines.push('');
+  lines.push('O subcomando `storybook` gera: `.storybook/` (main.ts, preview.ts,');
+  lines.push('tsconfig.json, typings.d.ts), um exemplo em `src/stories/` e o');
+  lines.push('guia `STORYBOOK-SETUP.md`. Siga o guia para instalar as');
+  lines.push('dependencias (`storybook`, `@storybook/angular-vite`, addons) e');
+  lines.push('rodar com `npx storybook dev -c .storybook -p 6006`.');
   lines.push('');
   lines.push('## Observacoes');
   lines.push('');

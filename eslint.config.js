@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+const storybook = require("eslint-plugin-storybook");
+
 const typescriptEslint = require("@typescript-eslint/eslint-plugin");
 const angularEslint = require("@angular-eslint/eslint-plugin");
 const unusedImports = require("eslint-plugin-unused-imports");
@@ -19,6 +22,7 @@ module.exports = [
       "**/*.spec.ts",
       "**/*.css",
       "**/*.scss",
+      "**/.storybook/**",
     ],
   },
 
