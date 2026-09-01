@@ -240,14 +240,14 @@ npm run deps:update:interactive
 ## 🌿 Estratégia de Branches
 
 ### Convenção de Nomenclatura
-Usamos uma convenção simples e eficiente para nomear branches:
+Usamos uma convenção simples e eficiente para nomear branches. **O escopo no nome da branch é obrigatório** e define qual biblioteca será publicada e qual changelog receberá os commits do PR:
 
 ```
-<tipo>/descricao-breve
+<tipo>(<escopo>)/descricao-breve
 ```
 
 **Tipos recomendados:**
-- `feat/` - Nova funcionalidade
+- `feat/` ou `feature/` - Nova funcionalidade
 - `fix/` - Correção de bug
 - `docs/` - Documentação
 - `refactor/` - Refatoração de código
@@ -257,8 +257,9 @@ Usamos uma convenção simples e eficiente para nomear branches:
 **Exemplos corretos:**
 ```bash
 #  Branches válidas
-git checkout -b feat(directives)/add-input-mask-directive
-git checkout -b fix(component)/correcao-validacao-formato
+git checkout -b feature(directives)/add-input-mask-directive
+git checkout -b fix(components)/correcao-validacao-formato
+git checkout -b feature(chart)/add-lib-graficos
 ```
 
 ### Fluxo de Trabalho
@@ -268,8 +269,8 @@ git checkout -b fix(component)/correcao-validacao-formato
    git pull origin main
    git checkout -b tipo(escopo)/nome-da-feature
    ```
-2. Desenvolva e faça commits seguindo as regras de Conventional Commits.
-3. Abra um Pull Request para revisão.
+2. Desenvolva e faça commits seguindo as regras de Conventional Commits (o escopo **não** é obrigatório na mensagem do commit).
+3. Abra um Pull Request para revisão. Ao ser mergeado, o workflow de release publica apenas a biblioteca cujo escopo está no nome da branch.
 
 ---
 
@@ -280,7 +281,7 @@ git checkout -b fix(component)/correcao-validacao-formato
 1.  **Crie os arquivos** da sua nova funcionalidade (componente, diretiva, serviço, etc.) dentro da pasta `src/lib/` da biblioteca correspondente.
 2.  **Exponha sua funcionalidade** na API pública da biblioteca, adicionando uma linha de exportação no arquivo `public-api.ts` da biblioteca.
 3.  **Adicione ou atualize os testes unitários** para garantir a cobertura da sua nova funcionalidade.
-4.  **Crie seu commit** seguindo as regras de escopo descritas na próxima seção.
+4.  **Crie seu commit** seguindo as regras de Conventional Commits descritas na próxima seção (o escopo é livre na mensagem do commit).
 
 ### Adicionando uma Nova Biblioteca
 
@@ -302,30 +303,43 @@ Para adicionar uma nova biblioteca ao monorepo (ex: `ngx-opalbytes-nova-lib`), s
     ```
 
 3.  **Atualize o Workflow de Release (`.github/workflows/release.yml`)**:
-    *   Copie um job existente (ex: `release-directives`).
-    *   Renomeie o job para `release-nova-lib`.
-    *   Atualize a condição `if` para usar o escopo da sua nova lib (ex: `contains(github.event.head_commit.message, 'feat(nova-lib)')`).
-    *   Altere os comandos de teste e build (ex: `npm run test:nova-lib` e `npm run build:nova-lib`).
-    *   Atualize o caminho no passo de Release (ex: `cd projects/ngx-opalbytes-nova-lib && npx semantic-release`).
+    *   Adicione o escopo da nova biblioteca à detecção de releases (o job `check-commits` usa regex sobre o nome das branches dos merge PRs).
+    *   Adicione um item no `matrix` com as condições de build, teste e release (ex: `cd projects/ngx-opalbytes-nova-lib && npx semantic-release`).
+    *   Crie o arquivo `projects/ngx-opalbytes-nova-lib/.releaserc.js` apontando para `scripts/release-branch-filter.cjs` com `libraryScope: "nova-lib"`.
 
 4.  **Atualize este `README.md`**: Adicione o escopo da sua nova biblioteca (`nova-lib`) à lista de escopos válidos na seção de "Regras de Commit".
 
 ---
 
-## 룰 Regras de Commit (com Escopo Obrigatório)
+## 📝 Regras de Commit
 
-Este projeto utiliza o padrão **Conventional Commits**. Esse padrão é obrigatório e validado automaticamente antes de cada commit.
+Este projeto utiliza o padrão **Conventional Commits**, validado automaticamente pelo commitlint antes de cada commit (`@commitlint/config-conventional`). **O escopo na mensagem do commit não é obrigatório** — ele fica apenas no nome da branch, que é o que define a biblioteca a ser publicada.
 
 O formato é:
 ```
-<tipo>(<escopo>): <descrição>
+<tipo>: <descrição>
 ```
+(Ex.: `feat: add componente kpi`, `fix: correcao validacao img source`)
 
-### A Importância do Escopo
+### De onde vem o Escopo
 
-O **escopo é obrigatório** e indica qual biblioteca do monorepo está sendo modificada. Isso é **crucial** para que o `semantic-release` possa versionar e publicar apenas os pacotes que foram alterados.
+O escopo (que decide qual biblioteca é publicada) está no **nome da branch** do Pull Request:
 
-**O escopo DEVE ser um dos seguintes:**
+| Prefixo da branch | Biblioteca publicada |
+|---|---|
+| `feature(components)/...` ou `fix(components)/...` | `ngx-opalbytes-components` |
+| `feature(core)/...` | `ngx-opalbytes-core` |
+| `feature(directives)/...` | `ngx-opalbytes-directives` |
+| `feature(services)/...` | `ngx-opalbytes-services` |
+| `feature(shared)/...` | `ngx-opalbytes-shared` |
+| `feature(performance)/...` | `ngx-opalbytes-performance` |
+| `feature(utils)/...` | `ngx-opalbytes-utils` |
+| `feature(pdf)/...` | `ngx-opalbytes-feature-pdf` |
+| `feature(video)/...` | `ngx-opalbytes-video` |
+| `feature(chart)/...` | `ngx-opalbytes-chart` |
+| `feature(libs)/...` | `root` (`libs`) |
+
+**Escopos válidos no nome da branch:**
 
 *   `components`
 *   `core`
@@ -336,22 +350,20 @@ O **escopo é obrigatório** e indica qual biblioteca do monorepo está sendo mo
 *   `performance`
 *   `libs`
 *   `utils`
-*   `root`
 
-**Exemplos de mensagens de commit VÁLIDAS:**
-
+**Exemplos de branches VÁLIDAS:**
 ```bash
 #  Nova funcionalidade na biblioteca de diretivas
-feat(directives): add currency formatting directive
+git checkout -b feature(directives)/add-currency-formatting-directive
 
 #  Correção de um bug na biblioteca de componentes
-fix(components): correct button alignment on mobile
+git checkout -b fix(components)/correct-button-alignment-on-mobile
 
 #  Alteração na documentação do projeto raiz
-docs(libs): update main README with contribution guide
+git checkout -b docs(libs)/update-main-readme
 ```
 
-**Um commit sem um escopo válido será rejeitado.**
+**O escopo na mensagem do commit não é exigido** — apenas o tipo é validado pelo commitlint.
 
 ---
 

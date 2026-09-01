@@ -6,24 +6,26 @@ module.exports = {
     branches: ["main"],
     tagFormat: libraryName + '@${version}',
     plugins: [
-        ["@semantic-release/commit-analyzer", {
-            preset: "conventionalcommits",
-            releaseRules: [
-                { type: "docs", release: null },
-                { type: "feat", release: "minor" },
-                { type: "fix", release: "patch" },
-                { type: "chore", release: null },
-                { type: "refactor", release: "patch" },
-                { type: "style", release: null },
-                { type: "test", release: null },
-                { scope: "release", release: "patch" },
-                { breaking: true, release: "major" }
-            ],
-            parserOpts: {
-                noteKeywords: ["BREAKING CHANGE", "BREAKING CHANGES"]
-            }
-        }],
-        "@semantic-release/release-notes-generator",
+        [
+            path.resolve(__dirname, '../../scripts/release-branch-filter.cjs'),
+            {
+                libraryScope: "pdf",
+                preset: "conventionalcommits",
+                releaseRules: [
+                    { type: "docs", release: null },
+                    { type: "feat", release: "minor" },
+                    { type: "fix", release: "patch" },
+                    { type: "chore", release: null },
+                    { type: "refactor", release: "patch" },
+                    { type: "style", release: null },
+                    { type: "test", release: null },
+                    { breaking: true, release: "major" }
+                ],
+                parserOpts: {
+                    noteKeywords: ["BREAKING CHANGE", "BREAKING CHANGES"]
+                }
+            },
+        ],
         ["@semantic-release/changelog", {
             changelogFile: "CHANGELOG.md",
         }],

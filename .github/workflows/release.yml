@@ -39,12 +39,13 @@ jobs:
           echo "After: ${{ github.event.after }}"
           echo ""
 
-          # Obter todos os commits deste push
+          # Obter os merge pull requests deste push (a lib e definida pelo nome da branch,
+          # ex: feature(components)/add-component)
           if [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
-            COMMITS=$(git log --pretty=format:"%s" ${{ github.event.before }}..${{ github.event.after }})
+            COMMITS=$(git log --first-parent --merges --pretty=format:"%s" ${{ github.event.before }}..${{ github.event.after }})
           else
             # Primeiro push para o branch
-            COMMITS=$(git log --pretty=format:"%s" ${{ github.event.after }})
+            COMMITS=$(git log --first-parent --merges --pretty=format:"%s" ${{ github.event.after }})
           fi
 
           echo "Commits encontrados:"
