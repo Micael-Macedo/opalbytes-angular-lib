@@ -23,6 +23,7 @@ jobs:
       should-release-pdf-export: ${{ steps.check.outputs.should-release-pdf-export }}  
       should-release-chart: ${{ steps.check.outputs.should-release-chart }}  
       should-release-video: ${{ steps.check.outputs.should-release-video }}  
+      should-release-websocket: ${{ steps.check.outputs.should-release-websocket }}  
     steps:
       - uses: actions/checkout@v4
         with:
@@ -64,6 +65,7 @@ jobs:
           should_release_pdf_export="false"
           should_release_video="false"
           should_release_chart="false"
+          should_release_websocket="false"
           
           while IFS= read -r commit_message; do
             echo "Analisando commit: $commit_message"
@@ -121,6 +123,10 @@ jobs:
               should_release_chart="true"
               echo "Commit relacionado a chart encontrado"
             fi
+            if [[ "$commit_message" =~ (feat\(websocket\)|fix\(websocket\)|refactor\(websocket\)|docs\(websocket\)|chore\(websocket\)|release\(websocket\)|test\(websocket\)|style\(websocket\)|feature\(websocket\)) ]]; then
+              should_release_websocket="true"
+              echo "Commit relacionado a websocket encontrado"
+            fi
           done <<< "$COMMITS"
           
           # Export results
@@ -150,6 +156,8 @@ jobs:
           echo "chart: $should_release_chart"
           echo "should-release-video=$should_release_video" >> $GITHUB_OUTPUT
           echo "video: $should_release_video"
+          echo "should-release-video=$should_release_websocket" >> $GITHUB_OUTPUT
+          echo "websocket: $should_release_websocket"
           echo "========================================"
 
   publish-sequentially:
@@ -166,7 +174,8 @@ jobs:
       needs.check-commits.outputs.should-release-shared == 'true' ||
       needs.check-commits.outputs.should-release-pdf-export == 'true' ||
       needs.check-commits.outputs.should-release-video == 'true' ||
-      needs.check-commits.outputs.should-release-chart == 'true' 
+      needs.check-commits.outputs.should-release-chart == 'true' ||
+      needs.check-commits.outputs.should-release-websocket == 'true' 
     
     strategy:
       max-parallel: 1
@@ -251,6 +260,13 @@ jobs:
             test-command: 'npm run test:chart'
             release-command: 'cd projects/ngx-opalbytes-chart && npx semantic-release'
 
+          - library: 'websocket'
+            condition: ${{ needs.check-commits.outputs.should-release-websocket }}
+            project-path: 'projects/ngx-opalbytes-websocket'
+            build-command: 'npm run build:websocket'
+            test-command: 'npm run test:websocket'
+            release-command: 'cd projects/ngx-opalbytes-websocket && npx semantic-release'
+
     steps:
       - name: Verificar condições do job publish-sequentially
         run: |
@@ -303,6 +319,10 @@ jobs:
           echo "  - should-release-chart: ${{ needs.check-commits.outputs.should-release-chart }}"
           if [ "${{ needs.check-commits.outputs.should-release-chart }}" = "true" ]; then
             echo "    ✓ CONDIÇÃO VERDADEIRA: chart será publicado"
+          fi
+          echo "  - should-release-websocket: ${{ needs.check-commits.outputs.should-release-websocket }}"
+          if [ "${{ needs.check-commits.outputs.should-release-websocket }}" = "true" ]; then
+            echo "    ✓ CONDIÇÃO VERDADEIRA: websocket será publicado"
           fi
           echo ""
           echo "========================================"

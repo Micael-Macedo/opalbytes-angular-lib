@@ -377,6 +377,42 @@
           }
         }
       }
+    },
+    "ngx-opalbytes-websocket": {
+      "projectType": "library",
+      "root": "projects/ngx-opalbytes-websocket",
+      "sourceRoot": "projects/ngx-opalbytes-websocket/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-opalbytes-websocket/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-opalbytes-websocket/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-opalbytes-websocket/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-opalbytes-websocket/**/*.ts",
+              "projects/ngx-opalbytes-websocket/**/*.html"
+            ],
+            "eslintConfig": "projects/ngx-opalbytes-websocket/eslint.config.js"
+          }
+        }
+      }
     }
   }
 }

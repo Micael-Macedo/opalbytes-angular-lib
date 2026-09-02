@@ -17,7 +17,8 @@
       "ngx-opalbytes-services": ["./dist/ngx-opalbytes-services"],
       "ngx-opalbytes-utils": ["./dist/ngx-opalbytes-utils"],
       "ngx-opalbytes-performance": ["./dist/ngx-opalbytes-performance"],
-      "ngx-opalbytes-video": ["./dist/ngx-opalbytes-video"]
+      "ngx-opalbytes-video": ["./dist/ngx-opalbytes-video"],
+      "ngx-opalbytes-websocket": ["./dist/ngx-opalbytes-websocket"]
     },
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
@@ -91,6 +92,12 @@
     },
     {
       "path": "./projects/ngx-opalbytes-chart/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-websocket/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-opalbytes-websocket/tsconfig.spec.json"
     }
   ]
 }
