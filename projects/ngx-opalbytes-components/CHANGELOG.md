@@ -1,3 +1,12 @@
+## 1.21.0 (2026-09-02)
+
+* Merge pull request #80 from Micael-Macedo/feature(components)/add-storybook-integration ([96f4428](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/96f4428)), closes [#80](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/80)
+* Merge pull request #81 from Micael-Macedo/feature(components)/add-storybook-integration ([5aaf81f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/5aaf81f)), closes [#81](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/81)
+* Merge pull request #82 from Micael-Macedo/feature(components)/add-storybook-integration ([122f312](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/122f312)), closes [#82](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/82)
+* fix: sync package and lock files ([d99cfd5](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d99cfd5))
+* fix: sync package lock and package json ([62b2fe6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/62b2fe6))
+* feat: add storybook integration ([59a7ba2](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/59a7ba2))
+
 # [1.20.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-components@1.19.0...ngx-opalbytes-components@1.20.0) (2026-08-27)
 
 
