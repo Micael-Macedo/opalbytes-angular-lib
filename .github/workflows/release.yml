@@ -123,6 +123,7 @@ jobs:
               should_release_chart="true"
               echo "Commit relacionado a chart encontrado"
             fi
+
             if [[ "$commit_message" =~ (feat\(websocket\)|fix\(websocket\)|refactor\(websocket\)|docs\(websocket\)|chore\(websocket\)|release\(websocket\)|test\(websocket\)|style\(websocket\)|feature\(websocket\)) ]]; then
               should_release_websocket="true"
               echo "Commit relacionado a websocket encontrado"
@@ -181,7 +182,7 @@ jobs:
       max-parallel: 1
       fail-fast: false
       matrix:
-        library: ['core', 'utils', 'services', 'directives', 'components', 'libs','performance', 'shared', 'pdf-export', 'chart', 'video']
+        library: ['core', 'utils', 'services', 'directives', 'components', 'libs','performance', 'shared', 'pdf-export', 'chart', 'video', 'websocket']
         include:
           - library: 'core'
             condition: ${{ needs.check-commits.outputs.should-release-core }}
