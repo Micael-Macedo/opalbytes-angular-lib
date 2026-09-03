@@ -9,7 +9,7 @@ module.exports = {
         [
             path.resolve(__dirname, '../../scripts/release-branch-filter.cjs'),
             {
-                libraryScope: "video",
+                libraryScope: "websocket",
                 preset: "conventionalcommits",
                 releaseRules: [
                     { type: "docs", release: null },
