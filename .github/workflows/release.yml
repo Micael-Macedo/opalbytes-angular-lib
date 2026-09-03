@@ -157,7 +157,7 @@ jobs:
           echo "chart: $should_release_chart"
           echo "should-release-video=$should_release_video" >> $GITHUB_OUTPUT
           echo "video: $should_release_video"
-          echo "should-release-video=$should_release_websocket" >> $GITHUB_OUTPUT
+          echo "should-release-websocket=$should_release_websocket" >> $GITHUB_OUTPUT
           echo "websocket: $should_release_websocket"
           echo "========================================"
 
