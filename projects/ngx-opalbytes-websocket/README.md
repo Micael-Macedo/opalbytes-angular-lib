@@ -532,6 +532,7 @@ constructor(config: ICaoWebSocketConfig)
 ## Como Contribuir
 
 1. **Crie os arquivos** do seu serviço dentro da pasta `src/lib/service/`, seguindo a estrutura de pastas existente.
+2. **Importe o serviço via arquivo index** no arquivo `src/lib/service/index.ts`
 2. **Exponha na API pública** adicionando uma linha de exportação no arquivo `src/lib/index.ts`.
 3. **Adicione ou atualize os testes unitários** para garantir cobertura.
 4. **Faça o commit** seguindo as regras do projeto, usando o escopo `websocket`:
