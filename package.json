@@ -97,7 +97,6 @@
     "@angular/build": "^21.0.1",
     "@angular/cli": "^21.0.1",
     "@angular/compiler-cli": "^21.0.0",
-    "@angular/platform-browser-dynamic": "^20.0.7",
     "@chromatic-com/storybook": "latest",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
