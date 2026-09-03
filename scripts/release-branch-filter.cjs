@@ -13,6 +13,7 @@ const VALID_SCOPES = [
   'pdf',
   'video',
   'chart',
+  'websocket',
 ];
 
 // Extracts the library scope from a PR/feature branch name,
