@@ -145,6 +145,7 @@ src/
         |   ├── kpi/
         |   ├── links-button/
         |   ├── paginator/
+        |   ├── skeleton/
         |   ├── stepper/
         |   ├── tab-group/
         |   ├── tab-panel/
@@ -952,6 +953,80 @@ Controle de paginação para tabelas ou listas.
 | Evento | Tipo | Descrição |
 | --- | --- | --- |
 | `pageEvent` | `EventEmitter<PageEvent>` | Emitido em qualquer evento de paginação. |
+
+---
+
+### `CaoSkeleton`
+Um componente de esqueleto de carregamento (skeleton/placeholder) com variantes de retângulo, círculo e texto, animação shimmer customizável e cor configurável.
+
+**Seletor:** `<cao-skeleton>`
+
+**Tipo `CaoSkeletonVariant`**
+
+| Valor | Descrição |
+| --- | --- |
+| `'rect'` | Retângulo (padrão). |
+| `'circle'` | Círculo (largura/altura devem ser iguais, mas é garantido via `aspect-ratio`). |
+| `'text'` | Linha de texto (altura `1em`, raio `4px`). |
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `borderRadius` | `string` | `'14px'` | Raio da borda do retângulo (ignorado nas variantes `circle` e `text`). |
+| `width` | `string` | `'100%'` | Largura do esqueleto (usada quando `size` não é informado). |
+| `height` | `string` | `'100%'` | Altura do esqueleto (usada quando `size` não é informado). |
+| `bgColor` | `string` | `'#e2e8f0'` | Cor de fundo do esqueleto. |
+| `shine` | `string` | `'#f8fafc'` | Cor do reflexo (shimmer). |
+| `variant` | `CaoSkeletonVariant` | `'rect'` | Formato do esqueleto (`'rect'`, `'circle'` ou `'text'`). |
+| `speed` | `string` | `'2s'` | Duração da animação shimmer. |
+| `size` | `string` | `undefined` | Quando definido, sobrescreve `width` e `height` simultaneamente (ex.: `'48px'`). |
+| `animationDeg` | `string` | `'90deg'` | Ângulo do gradiente da animação shimmer. |
+
+**CSS Custom Properties**
+
+O componente expõe todas as suas propriedades visuais via CSS custom properties, que cascateiam naturalmente e podem ser sobrescritas por um elemento pai ou globalmente:
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--skeleton-width` | `100%` | Largura do esqueleto. |
+| `--skeleton-height` | `100%` | Altura do esqueleto. |
+| `--skeleton-bg` | `#e2e8f0` | Cor de fundo do esqueleto. |
+| `--skeleton-shine` | `#f8fafc` | Cor do reflexo (shimmer). |
+| `--skeleton-radius` | `14px` | Raio da borda. |
+| `--skeleton-speed` | `2s` | Duração da animação shimmer. |
+| `--skeleton-animation-deg` | `90deg` | Ângulo do gradiente do shimmer. |
+
+```css
+.my-card {
+  --skeleton-bg: #d1d5db;
+  --skeleton-shine: #f3f4f6;
+  --skeleton-radius: 8px;
+  --skeleton-speed: 2s;
+}
+```
+
+**Exemplo de uso:**
+
+```html
+<!-- Retângulo -->
+<cao-skeleton width="200px" height="40px"></cao-skeleton>
+
+<!-- Círculo -->
+<cao-skeleton variant="circle" size="48px"></cao-skeleton>
+
+<!-- Linha de texto -->
+<cao-skeleton variant="text" width="120px"></cao-skeleton>
+
+<!-- Cores customizadas e duração da animação -->
+<cao-skeleton
+  width="100%"
+  height="24px"
+  bgColor="#e0e7ff"
+  shine="#ffffff"
+  speed="1.5s"
+></cao-skeleton>
+```
 
 ---
 
