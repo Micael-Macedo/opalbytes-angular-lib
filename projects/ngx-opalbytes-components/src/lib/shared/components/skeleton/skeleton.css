@@ -1,0 +1,92 @@
+/*
+ * CSS Custom Properties — all prefixed with --skeleton-*
+ * These cascade naturally, so a parent component can override any token:
+ *
+ *   .my-card {
+ *     --skeleton-bg: #d1d5db;
+ *     --skeleton-shine: #f3f4f6;
+ *     --skeleton-radius: 8px;
+ *     --skeleton-speed: 2s;
+ *   }
+ */
+
+:host {
+  /* ─── Layout defaults (overridable via [width]/[height] inputs) ─── */
+  --skeleton-width: 100%;
+  --skeleton-height: 100%;
+
+  /* ─── Visual tokens — inherit from parent if set there ─── */
+  --skeleton-bg: #e2e8f0;
+  --skeleton-shine: #f8fafc;
+  --skeleton-radius: 14px;
+  --skeleton-speed: 2s;
+  --skeleton-animation-deg: 90deg;
+
+  display: contents; /* host element is transparent to layout */
+}
+
+/* ─────────────────────────── Base block ─────────────────────────── */
+
+.cao-skeleton {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: var(--skeleton-width);
+  height: var(--skeleton-height);
+  background-color: var(--skeleton-bg);
+  border-radius: var(--skeleton-radius);
+
+  /* Prevent content from leaking during SSR */
+  color: transparent;
+  user-select: none;
+  pointer-events: none;
+
+  /* Respect reduced-motion preference */
+  @media (prefers-reduced-motion: no-preference) {
+    will-change: transform; /* promote shimmer layer */
+  }
+}
+
+/* ─────────────────────────── Variants ───────────────────────────── */
+
+.cao-skeleton--circle {
+  --skeleton-radius: 50%;
+  /* For circles the consumer usually sets equal width/height;
+     but we guard with aspect-ratio so it stays circular even
+     when only width is specified. */
+  aspect-ratio: 1 / 1;
+}
+
+.cao-skeleton--text {
+  --skeleton-radius: 4px;
+  height: 1em; /* matches current font-size of parent context */
+  width: var(--skeleton-width);
+}
+
+/* ─────────────────────────── Shimmer ────────────────────────────── */
+
+.cao-skeleton__shimmer {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    var(--skeleton-animation-deg),
+    transparent 30%,
+    var(--skeleton-shine) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: skeleton-shimmer var(--skeleton-speed) ease-in-out infinite;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
