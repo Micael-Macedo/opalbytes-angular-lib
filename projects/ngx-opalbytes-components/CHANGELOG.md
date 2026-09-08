@@ -1,3 +1,14 @@
+## 1.22.0 (2026-09-08)
+
+* Merge branch 'main' of https://github.com/Micael-Macedo/opalbytes-angular-lib into feature(component ([dd5cbc0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/dd5cbc0))
+* Merge branch 'main' of https://github.com/Micael-Macedo/opalbytes-angular-lib into feature(component ([e757184](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e757184))
+* Merge pull request #88 from Micael-Macedo/feature(components)/add-skeleton-shapes ([c67abc6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c67abc6)), closes [#88](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/88)
+* Merge pull request #89 from Micael-Macedo/feature(components)/add-skeleton-shapes ([fedd3bf](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fedd3bf)), closes [#89](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/89)
+* Merge pull request #90 from Micael-Macedo/feature(components)/add-skeleton-shapes ([06ba7a5](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/06ba7a5)), closes [#90](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/90)
+* fix: add missing components ([fea1e12](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fea1e12))
+* fix: add runtime package ([2b32dd7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2b32dd7))
+* feat: add skeleton component ([b48a640](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/b48a640))
+
 ## 1.21.0 (2026-09-02)
 
 * Merge pull request #80 from Micael-Macedo/feature(components)/add-storybook-integration ([96f4428](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/96f4428)), closes [#80](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/80)
