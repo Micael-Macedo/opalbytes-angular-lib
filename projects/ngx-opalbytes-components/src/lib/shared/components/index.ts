@@ -18,3 +18,7 @@ export * from "./tab-panel/tab-panel"
 export * from "./base-icon/base-icon"
 export * from "./kpi/kpi"
 export * from "./skeleton/skeleton"
+
+export * from "./card/card.component"
+export * from "./base-toggle/base-toggle.component"
+export * from "./footer/footer"
