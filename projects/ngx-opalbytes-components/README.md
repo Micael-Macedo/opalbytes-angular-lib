@@ -125,6 +125,104 @@ cao-comp --list
 
 ---
 
+## Quando usar `cao-comp` vs. a biblioteca (`npm install`)
+
+A `ngx-opalbytes-components` pode ser consumida de duas formas distintas, e cada uma atende a necessidades diferentes:
+
+- **Usar o pacote (`npm install ngx-opalbytes-components`)** — você consome a **API pública** dos componentes, como qualquer dependência externa. O código vive dentro do `node_modules`, é versionado e atualizado por você (ou pela própria biblioteca). A biblioteca funciona como uma "caixa preta": você usa os `@Input`s, `@Output`s e métodos que ela expõe, mas não altera o comportamento interno.
+- **Copiar o código-fonte (`cao-comp`)** — você copia o fonte de um componente para dentro do **seu próprio projeto**. A partir daí o componente deixa de ser gerenciado pela biblioteca e se torna **seu código**, com total liberdade de edição (template, estilos, lógica e eventos). A biblioteca funciona como uma "caixa aberta": você passa a ter a posse daquele componente.
+
+A escolha entre uma abordagem e outra não é sobre "qual é melhor", mas sobre **o quanto você precisa de controle sobre o componente**.
+
+### Tabela comparativa
+
+| Critério | `cao-comp` (copiar o código) | `npm install` (usar a lib) |
+| --- | --- | --- |
+| **Explorar/visualizar componentes e inputs** | Ideal — gera o setup de **Storybook** para navegar os componentes e seus `@Input`s/`@Output`s. | Não oferece isso diretamente — a visualização depende de documentação ou de você montar Storybook por conta própria. |
+| **Grau de customização** | Total — você edita template, CSS e lógica internos. | Limitado à API pública (`@Input`/`@Output`/métodos expostos). |
+| **Estratégia de extensão** | Modificar o comportamento interno do componente (fork). | Compor/envolver o componente com a estrutura da lib (ex.: estender `AlertService`/`DialogService` via `generateComponentPortal()`). |
+| **Volume de inputs/eventos para repassar** | Baixo — você edita onde precisa, sem re-expor dezenas de `@Input`s de um wrapper. | Alto em wrappers — cada `@Input`/`@Output` que você quiser repassar precisa ser declarado e repassado manualmente no componente que envolve o da lib. |
+| **Atualização / manutenção** | **Não** acompanha a lib — o código vira seu; correções e novas versões precisam ser reaplicadas à mão. | Acompanha a lib — `npm update`/`npm install` entrega fixes, features e novas versões automaticamente. |
+| **Consistência entre projetos** | Divisão de risco — cada projeto pode divergir do padrão visual/lógico da lib. | Alta consistência — todos os projetos usam a mesma versão publicada. |
+| **Testes, acessibilidade e qualidade** | Ficam sob responsabilidade do time local após o fork. | Já prontos e centralizados (testes, a11y e convenções da lib). |
+| **Ownership do código** | Seu projeto assume a posse e a responsabilidade do componente. | A biblioteca mantém a responsabilidade da manutenção. |
+
+### Use `cao-comp` quando:
+
+- **Precisar visualizar** os componentes existentes e seus inputs **antes** de usá-los — o `cao-comp storybook` gera o setup mínimo para explorar tudo visualmente.
+- A customização **escapa da API pública** — por exemplo, alterar estilização, atributos, funcionalidades ou eventos que só existem no código-fonte do componente (ex.: um **tooltip customizável** que o componente base não expõe como input).
+- Você **não quer estender** um componente a partir do componente da lib (isso costuma gerar wrappers frágeis), mas sim **modificar o componente em si**.
+- Quer **reduzir o trabalho de repassar todos os `@Input`s e `@Output`s** de um componente pai para um componente da lib — em vez de declarar e propagar dezenas de entradas/saídas, você edita o componente diretamente.
+- O componente funcionará como um **fork**: você quer posse total do código e **não precisa** acompanhar as versões da biblioteca (seja por questão de isolamento, build offline ou regra de não instalar a dependência).
+- Um componente da lib já expõe boa parte, **mas** atende a um caso tão específico do seu domínio que a manutenção local é mais simples do que manter um wrapper enorme.
+
+### Use `npm install` (a lib) quando:
+
+- Quiser ter **sempre a versão mais atualizada** da biblioteca, com fixes e melhorias centralizados.
+- **Não precisar visualizar** os componentes existentes em detalhe — a API pública e a documentação já são suficientes.
+- Pretender usar **somente os eventos e atributos** expostos, **criando componentes que estendem/compoem a estrutura da lib** — por exemplo `AlertService`/`DialogService` (veja a seção "Como estender o `AlertService`" e "Como estender o `DialogService`" abaixo), que permitem customizar a aparência mantendo o consumo via npm, sem precisar copiar fonte nenhum.
+- O componente pronto (com a API atual) já atende ao caso, e você valoriza testes, acessibilidade e padrão visual já validados.
+- Precisar de **consistência visual e de comportamento entre múltiplos projetos** — todos passam a usar a mesma versão publicada e atualizada.
+
+### Prós e contras
+
+**`cao-comp` (copiar o código)**
+
+- ✅ Liberdade total de edição (template, estilos, lógica, eventos).
+- ✅ Sem custo de repasse de dezenas de `@Input`s/`@Output`s.
+- ✅ Visualização imediata via Storybook.
+- ❌ O código vira seu: **não** recebe atualizações/fixes da lib automaticamente.
+- ❌ Código duplicado: a cópia pode divergir da lib com o tempo.
+- ❌ Testes, a11y e manutenção passam a ser responsabilidade do seu time.
+
+**`npm install` (a lib)**
+
+- ✅ Sempre atualizado (`npm update`/`npm install`).
+- ✅ Testes, acessibilidade e convenções já prontas e centralizadas.
+- ✅ Consistência entre projetos e equipas.
+- ❌ Limitado à API pública (sem alterar comportamento interno).
+- ❌ Wrappers para mais inputs/eventos podem crescer muito.
+- ❌ Sem visualização direta dos componentes (depende de docs/Storybook próprio).
+
+### Exemplo prático — quando vale usar `cao-comp`
+
+Suponha que sua aplicação precise de um `<cao-input>` com um **tooltip mais elaborado** e um **layout interno específico** que a API pública do `BaseInput` não expõe. A API atual só oferece `tooltip` (texto simples), mas você precisa de tooltip customizada (com título, conteúdo rico e ícone) e de uma estrutura interna diferente.
+
+**Abordagem ruim (com a lib):** você cria um wrapper `AppInputComponent` que envolve `<cao-input>` e tenta "empacotar" todos os `@Input`s/`@Output`s do `BaseInput`, além de tentar replicar uma tooltip customizada que o componente interno nem sequer aceita. Resultado: muito código de repasse, frágil, e ainda assim sem atingir o layout interno desejado.
+
+**Abordagem boa (com `cao-comp`):**
+
+1. Explore os componentes disponíveis:
+   ```bash
+   cao-comp --list
+   ```
+2. Copie o fonte do componente para o seu projeto:
+   ```bash
+   cao-comp base-input ./src/app/components/base-input-custom
+   ```
+3. Gere o Storybook para visualizar e validar:
+   ```bash
+   cao-comp base-input ./src/app/components/base-input-custom
+   cao-comp storybook .
+   ```
+4. Edite diretamente o `template` e os estilos do componente copiado para incluir o novo layout e a tooltip customizada, e adicione os novos `@Input`s/`@Output`s que o seu caso precisa — sem repassar nada de um wrapper.
+
+Agora o componente copiado é seu, atende exatamente ao domínio da aplicação, e você validou visualmente via Storybook.
+
+### Checklist de decisão rápida
+
+- Preciso explorar os componentes e seus inputs (Storybook)? → **`cao-comp`**
+- A customização que preciso (estilo/comportamento/eventos) **não** está na API pública? → **`cao-comp`**
+- Quero modificar o componente em si, não apenas compor/estender? → **`cao-comp`**
+- Estou disposto a assumir a manutenção do código (sem updates automáticos)? → **`cao-comp`**
+- Prefiro sempre a versão mais atualizada e manutenção centralizada? → **`npm install`**
+- A API pública já atende (só uso eventos/atributos) e vou compor/extender a estrutura da lib? → **`npm install`**
+- Preciso de consistência visual/qualidade (testes, a11y) entre projetos? → **`npm install`**
+
+> **Importante quanto ao `cao-comp`:** ao copiar componentes, observe as **dependências internas**. Alguns componentes dependem de outros que precisam ser copiados juntos (ex.: `tab-group` depende de `tab-panel`, `stepper` depende de `step`; serviços que usam `ComponentPortal`, como `AlertService`/`DialogService`, precisam do componente correspondente). Além disso, o projeto de destino precisa ter as **peer dependencies** instaladas (`@angular/material`, `ngx-mask`, `@lucide/angular`, `@angular/cdk`) — o setup de Storybook gerado já orienta essa instalação.
+
+---
+
 ## Organização de Pastas
 
 Dentro da pasta `src/lib/`, os componentes são organizados em `shared/components/` e cada componente reside em sua própria pasta, contendo seus arquivos (`.ts`, `.html`, `.css`, `.spec.ts`).
