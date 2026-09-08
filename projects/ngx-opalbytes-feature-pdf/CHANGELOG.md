@@ -1,3 +1,12 @@
+## 1.2.0 (2026-09-08)
+
+* feat!: add new project pattern with prefix ([59b038b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/59b038b))
+* Merge pull request #92 from Micael-Macedo/feature(pdf)!/add-padronizacao-pdf-com-testes-e-watermark ([c8dcae3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c8dcae3)), closes [#92](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/92)
+* Merge pull request #93 from Micael-Macedo/fix(pdf)/corrige-escopo-nome-branch-com-breaking ([ed3f4fa](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ed3f4fa)), closes [#93](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/93)
+* fix(pdf): corrige release quando a branch usa sufixo breaking (!) ([4e63d9f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4e63d9f))
+* test: add pdf test files ([b9c1cd1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/b9c1cd1))
+* feat(pdf): add watermark option ([d719c1b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d719c1b))
+
 # [1.1.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-feature-pdf@1.0.0...ngx-opalbytes-feature-pdf@1.1.0) (2026-01-08)
 
 
