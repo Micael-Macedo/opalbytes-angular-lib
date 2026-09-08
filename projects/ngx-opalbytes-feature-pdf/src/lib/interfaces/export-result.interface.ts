@@ -1,20 +1,14 @@
-export enum ExportStatus {
+export enum CaoExportStatus {
   Idle = 'idle',
   InProgress = 'in_progress',
   Success = 'success',
   Error = 'error',
 }
 
-export interface IExportResult {
-  status: ExportStatus;
+export interface ICaoExportResult {
+  status: CaoExportStatus;
   filename?: string;
   error?: string;
   timestamp: Date;
   size?: number; // tamanho do arquivo em bytes
-}
-
-export interface IExportProgress {
-  stage: 'capturing' | 'converting' | 'saving';
-  progress: number; // 0-100
-  message: string;
 }
