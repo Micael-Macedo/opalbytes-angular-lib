@@ -18,7 +18,7 @@ const VALID_SCOPES = [
 
 // Extracts the library scope from a PR/feature branch name,
 // e.g. "feature(components)/add-component" or "fix(services)/correcao".
-const BRANCH_SCOPE_RE = /(?:feat|fix|feature|docs|chore|refactor|test|style|release)\(([a-z-]+)\)\//i;
+const BRANCH_SCOPE_RE = /(?:feat|fix|feature|docs|chore|refactor|test|style|release)\(([a-z-]+)\)!?\//i;
 
 let commitScopeCache = null;
 
