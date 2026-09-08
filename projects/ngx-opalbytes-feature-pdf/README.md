@@ -29,64 +29,52 @@ Esta biblioteca possui as seguintes dependências de pacotes, que devem ser inst
 
 ### Exemplo de Utilização
 
-O `ProcessoDetalhesExportService` demonstra um caso de uso avançado onde um componente dinâmico (`ProtocoloPdfTemplateComponent`) é criado, preenchido com dados, e então exportado para PDF.
+O exemplo abaixo cria um container simples, aguarda a renderização e exporta seu conteúdo para PDF em uma única página.
 
 ```typescript
-import (
-  ApplicationRef,
-  createComponent,
-  EnvironmentInjector,
-  inject,
-  Injectable,
-} from '@angular/core';
-
+import { ApplicationRef, Component, createComponent, EnvironmentInjector, inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { CaoPdfExportService, IPdfExportOptions, IExportResult } from 'ngx-opalbytes-feature-pdf';
+import { CaoPdfExportService, ICaoExportResult, ICaoPdfExportOptions } from 'ngx-opalbytes-feature-pdf';
 
-import { IProtocoloData } from '@domain.models/processo/protocolo-data.interface';
-
-import { ProtocoloPdfTemplateComponent } from '@shared.components/protocolo-pdf-template/protocolo-pdf-template';
-
-@Injectable({
-  providedIn: 'root',
+@Component({
+  selector: 'cao-pdf-template',
+  template: `<h1>Relatório</h1><p>Conteúdo exportado para PDF.</p>`,
 })
-export class ProcessoDetalhesExportService {
+class CaoPdfTemplateComponent {}
+
+@Injectable({ providedIn: 'root' })
+export class ExemploExportService {
   private pdfExportService = inject(CaoPdfExportService);
   private appRef = inject(ApplicationRef);
   private injector = inject(EnvironmentInjector);
 
-  /**
-   * Exporta protocolo para PDF usando template customizado
-   */
-  exportProtocoloPdf(protocoloData: IProtocoloData): Observable<IExportResult> {
-    const timestamp = new Date().toISOString().slice(0, 10);
-    const filename = `protocolo-${protocoloData.numeroProtocolo}-${timestamp}.pdf`;
-
-    const options: IPdfExportOptions = {
-      filename,
+  exportarRelatorio(): Observable<ICaoExportResult> {
+    const options: ICaoPdfExportOptions = {
+      filename: 'relatorio.pdf',
       format: 'a4',
       orientation: 'portrait',
       quality: 0.95,
       compress: true,
-      includeDate: false, // Já tem data no template
-      margin: {
-        top: 10,
-        right: 10,
-        bottom: 10,
-        left: 10,
-      },
+      includeDate: false,
+      margin: { top: 10, right: 10, bottom: 10, left: 10 },
       scale: 2,
       backgroundColor: '#ffffff',
+      watermark: {
+        text: 'Confidencial',
+        opacity: 0.3,
+        color: '#c8c8c8',
+        fontSize: 60,
+        angle: 45,
+        position: 'center',
+        pages: 'all',
+      },
     };
 
     // Criar componente dinamicamente
-    const componentRef = createComponent(ProtocoloPdfTemplateComponent, {
+    const componentRef = createComponent(CaoPdfTemplateComponent, {
       environmentInjector: this.injector,
     });
-
-    // Definir os dados do protocolo
-    componentRef.setInput('data', protocoloData);
 
     // Anexar ao DOM
     this.appRef.attachView(componentRef.hostView);
@@ -96,7 +84,6 @@ export class ProcessoDetalhesExportService {
     // Aguardar um tick para garantir renderização
     return new Observable((observer) => {
       setTimeout(() => {
-        // Exportar para PDF
         this.pdfExportService.exportToPdf(domElement, options, 'single-page').subscribe({
           next: (result) => {
             // Limpar o componente do DOM
@@ -108,7 +95,6 @@ export class ProcessoDetalhesExportService {
             observer.complete();
           },
           error: (error) => {
-            // Limpar o componente do DOM em caso de erro
             document.body.removeChild(domElement);
             this.appRef.detachView(componentRef.hostView);
             componentRef.destroy();
@@ -124,7 +110,7 @@ export class ProcessoDetalhesExportService {
 
 ## Detalhes das Interfaces
 
-### `IPdfExportOptions`
+### `ICaoPdfExportOptions`
 Define as opções detalhadas para a exportação de PDF.
 
 | Atributo | Tipo | Obrigatório | Descrição |
@@ -138,78 +124,91 @@ Define as opções detalhadas para a exportação de PDF.
 | `margin` | `{ top, right, bottom, left }` | Não | Margens da página em `mm`. |
 | `scale` | `number` | Não | Fator de escala para o `html2canvas`. Padrão: `2`. |
 | `backgroundColor` | `string` | Não | Cor de fundo do canvas. Padrão: `'#ffffff'`. |
-| `watermark` | `{ text, opacity }` | Não | Adiciona uma marca d'água de texto ao PDF. |
+| `watermark` | `ICaoWatermark` | Não | Adiciona uma marca d'água de texto customizável ao PDF. |
 
-### `IHtmlElementOptions`
-Opções para elementos HTML, permitindo especificar seletores CSS para incluir ou excluir certos elementos da captura para PDF.
+### `ICaoWatermark`
+Configuração da marca d'água aplicada no PDF.
 
 | Atributo | Tipo | Obrigatório | Descrição |
 | :--- | :--- | :--- | :--- |
-| `element` | `HTMLElement` | Sim | O elemento HTML a ser exportado. |
-| `excludeSelectors`| `string[]` | Não | Array de seletores CSS para excluir da captura. |
-| `includeSelectors`| `string[]` | Não | Array de seletores CSS para incluir na captura. |
+| `text` | `string` | Sim | Texto a ser exibido na marca d'água. |
+| `opacity` | `number` | Não | Opacidade do texto (0 a 1). Padrão: `0.3`. |
+| `color` | `string` | Não | Cor do texto em formato hex (`'#c8c8c8'`) ou RGB (`'200, 200, 200'`). Padrão: cor cinza claro. |
+| `fontSize` | `number` | Não | Tamanho da fonte do texto. Padrão: `60`. |
+| `angle` | `number` | Não | Ângulo de rotação do texto em graus. Padrão: `45`. |
+| `position` | `'center' \| 'top-left' \| 'top-right' \| 'bottom-left' \| 'bottom-right' \| 'tile'` | Não | Posição/ancoragem da marca d'água. `'tile'` repete o texto em mosaico pela página. Padrão: `'center'`. |
+| `pages` | `'first' \| 'first-last' \| 'all'` | Não | Páginas que recebem a marca d'água: apenas a primeira, primeira e última, ou todas. Padrão: `'all'`. |
 
-### `IExportResult`
+**Exemplo de marca d'água customizável:**
+
+```typescript
+const options: ICaoPdfExportOptions = {
+  filename: 'documento.pdf',
+  watermark: {
+    text: 'Rascunho',
+    opacity: 0.4,
+    color: '#ff0000',
+    fontSize: 40,
+    angle: 30,
+    position: 'top-right',
+    pages: 'first-last',
+  },
+};
+```
+
+### `ICaoExportResult`
 Representa o resultado de uma operação de exportação.
 
 | Atributo | Tipo | Descrição |
 | :--- | :--- | :--- |
-| `status` | `ExportStatus` | O status final da exportação (`Success`, `Error`). |
+| `status` | `CaoExportStatus` | O status final da exportação (`Success`, `Error`, etc.). |
 | `filename` | `string` | O nome do arquivo gerado (em caso de sucesso). |
 | `error` | `string` | Mensagem de erro (em caso de falha). |
 | `timestamp` | `Date` | Data e hora da conclusão da exportação. |
 | `size` | `number` | Tamanho estimado do arquivo em bytes. |
 
-### `IExportProgress`
-Descreve o progresso da exportação em tempo real.
-
-| Atributo | Tipo | Descrição |
-| :--- | :--- | :--- |
-| `stage` | `'capturing' \| 'converting' \| 'saving'`| O estágio atual do processo de exportação. |
-| `progress` | `number` | Percentual de progresso (0 a 100). |
-| `message` | `string` | Mensagem descritiva do estágio atual. |
-
-### `IExportStrategy`
+### `ICaoExportStrategy`
 Interface para definir estratégias de exportação.
 
 | Método | Retorno | Descrição |
 | :--- | :--- | :--- |
-| `export(element, options)` | `Observable<IExportResult>`| Executa a lógica de exportação para um dado elemento HTML e opções. |
+| `export(element, options)` | `Observable<ICaoExportResult>`| Executa a lógica de exportação para um dado elemento HTML e opções. |
 
 ---
 
 ## Detalhes dos Serviços e Utilitários
 
-### `PdfExportService`
+### `CaoPdfExportService`
 Serviço principal que orquestra o processo de exportação e gerencia o estado.
 
 **Funcionalidades:**
 *   **`exportToPdf(element, options, type)`**: Inicia o processo de exportação.
     *   `element`: O `HTMLElement` a ser exportado.
-    *   `options`: `IPdfExportOptions` para configurar a saída.
+    *   `options`: `ICaoPdfExportOptions` para configurar a saída.
     *   `type`: `'single-page'` ou `'multi-page'` para selecionar a estratégia.
 *   **`reset()`**: Reseta o estado do serviço para o estado inicial (`Idle`).
 
 **Estado Reativo (Signals):**
 *   **`isExporting()`**: `computed<boolean>` - Retorna `true` se uma exportação estiver em andamento.
 *   **`hasError()`**: `computed<boolean>` - Retorna `true` se a última exportação resultou em erro.
-*   **`lastResult()`**: `Signal<IExportResult | null>` - Contém o resultado da última exportação.
+*   **`lastResult()`**: `Signal<ICaoExportResult | null>` - Contém o resultado da última exportação.
 *   **`errorMessage()`**: `Signal<string | null>` - Contém a mensagem de erro da última exportação.
 
-### Estratégias de Exportação (`IExportStrategy`)
+### Estratégias de Exportação (`ICaoExportStrategy`)
 O serviço utiliza um padrão de estratégia para lidar com diferentes tipos de exportação.
 
-*   **`SinglePageExportStrategy`**: Estratégia para exportar conteúdo que cabe em uma única página. Ajusta as opções para otimizar para uma página.
-*   **`MultiPageExportStrategy`**: Estratégia padrão para conteúdo longo que pode se estender por várias páginas.
+*   **`CaoSinglePageExportStrategy`**: Estratégia para exportar todo o conteúdo em **uma única página**. A imagem é redimensionada (preservando proporção) para caber no box definido pelas margens, centralizada na página. O `margin.bottom` é considerado para o cálculo. Usa orientação `portrait` por padrão.
+*   **`CaoMultiPageExportStrategy`**: Estratégia padrão para conteúdo longo que pode se estender por várias páginas, adicionando páginas automaticamente conforme o conteúdo excede a altura da página.
 
-### `HtmlToPdfConverter`
+### `CaoHtmlToPdfConverter`
 Utilitário injetável que lida com a conversão de baixo nível.
 
 **Funcionalidades:**
-*   **`captureHtmlToCanvas(element, options)`**: Captura um `HTMLElement` e o renderiza em um `<canvas>` usando `html2canvas`. Ignora elementos com a classe `.no-print` ou o atributo `data-no-export`.
-*   **`convertCanvasToPdf(canvas, options)`**: Converte o `<canvas>` gerado em um objeto `jsPDF`, lidando com paginação, margens e orientação.
+*   **`captureHtmlToCanvas(element, options)`**: Captura um `HTMLElement` e o renderiza em um `<canvas>` usando `html2canvas`. Ignora elementos com a classe `.no-print`, o atributo `data-no-export` e botões (`<button>`).
+*   **`convertCanvasToPdf(canvas, options)`**: Converte o `<canvas>` gerado em um objeto `jsPDF`, lidando com paginação (multi-page), margens e orientação.
+*   **`convertCanvasToSinglePagePdf(canvas, options)`**: Converte o `<canvas>` gerado em um objeto `jsPDF` de página única, ajustando a imagem (contain-fit) para caber no box das margens.
 *   **`savePdf(pdf, filename)`**: Inicia o download do arquivo PDF gerado no navegador.
-*   **`addWatermark(pdf, watermark)`** (privado): Adiciona uma marca d'água em todas as páginas do PDF.
+*   **`addWatermark(pdf, watermark)`** (privado): Adiciona uma marca d'água customizável (cor, fonte, ângulo, posição e escopo de páginas) ao PDF.
 *   **`addDateFooter(pdf)`** (privado): Adiciona um rodapé com a data e hora de geração em todas as páginas.
 
 ## Construindo a Biblioteca
@@ -221,6 +220,14 @@ ng build ngx-opalbytes-feature-pdf
 ```
 
 Os artefatos de construção serão armazenados no diretório `dist/ngx-opalbytes-feature-pdf`.
+
+## Testes
+
+Para executar os testes unitários:
+
+```bash
+npm run test:pdf
+```
 
 ## Publicando a Biblioteca
 
