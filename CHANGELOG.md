@@ -1,3 +1,14 @@
+# [1.23.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.22.0...v1.23.0) (2026-09-09)
+
+
+### Features
+
+* add contributing file ([03b7040](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/03b7040d1b67f69bbcd47798e2783b1905d5241d))
+* add erro label component ([86753e7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/86753e7bf4eb40cacae18daf06ce389c1dec810f))
+* add form field component ([52052ac](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/52052acb6bc7366f7823d42df7920e5aee8327eb))
+* add form field component ([554cf0f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/554cf0fcb28e01c5a1110f181c0a8be685138022))
+* add hint component ([97bc028](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/97bc0287d08c2219e1bcf17371da67903f2a596c))
+
 # [1.22.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.21.0...v1.22.0) (2026-09-09)
 
 
@@ -183,11 +194,22 @@
 ---
 
 
+
+### Resumo
+- Total de métricas: 4
+- Sucessos: 3
+- Falhas: 1
+
+[📈 Ver Relatório Completo (HTML)](./metrics-reports/latest.html)
+
+---
+
+
 ## 📊 Relatório de Métricas
 
-**Data**: 09/09/2026, 11:27:12
+**Data**: 09/09/2026, 18:21:06
 **Branch**: main
-**Commit**: af04f00
+**Commit**: 86dd213
 
 ### Resumo
 - Total de métricas: 4
