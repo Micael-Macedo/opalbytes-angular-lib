@@ -1099,12 +1099,12 @@
         },
         {
             "name": "IErrorStateMatcher",
-            "id": "interface-IErrorStateMatcher-069fda29b6e4df4f3e210e923b416fa359aba6a1fe3fbf7fff1a6f75baeebb214dfa885bb5e933c6f55b27d7bf1da36597064fdc1de15da4baf8abf2e7d5ec55",
+            "id": "interface-IErrorStateMatcher-da62f03511078af21ddf81eef37e90b597a561deacde811cd260ba119c60fac2e1010541a0879e0022e735138c712f4eeee9daa3dbebc29901199c64de28b217",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/error-state-matcher.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { AbstractControl } from '@angular/forms';\n\nimport { IFormFieldControl } from './form-field-control';\n\nexport interface IErrorStateMatcher {\n  isErrorState(\n    control: AbstractControl | null,\n    formFieldControl: IFormFieldControl | null\n  ): boolean;\n}\n\nexport class ErrorStateMatcher implements IErrorStateMatcher {\n  isErrorState(\n    control: AbstractControl | null,\n    formFieldControl: IFormFieldControl | null\n  ): boolean {\n    if (!control) {\n      return false;\n    }\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\n    return !!(\n      control.invalid &&\n      (control.touched || control.dirty || isSubmitted)\n    );\n  }\n}\n\nexport class ShowOnDirtyErrorStateMatcher implements IErrorStateMatcher {\n  isErrorState(\n    control: AbstractControl | null,\n    formFieldControl: IFormFieldControl | null\n  ): boolean {\n    if (!control) {\n      return false;\n    }\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\n    return !!(control.invalid && (control.dirty || isSubmitted));\n  }\n}\n\nexport const DEFAULT_ERROR_STATE_MATCHER = new ErrorStateMatcher();\n",
+            "sourceCode": "import { AbstractControl } from '@angular/forms';\r\n\r\nimport { IFormFieldControl } from './form-field-control';\r\n\r\nexport interface IErrorStateMatcher {\r\n  isErrorState(\r\n    control: AbstractControl | null,\r\n    formFieldControl: IFormFieldControl | null\r\n  ): boolean;\r\n}\r\n\r\nexport class ErrorStateMatcher implements IErrorStateMatcher {\r\n  isErrorState(\r\n    control: AbstractControl | null,\r\n    formFieldControl: IFormFieldControl | null\r\n  ): boolean {\r\n    if (!control) {\r\n      return false;\r\n    }\r\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\r\n    return !!(\r\n      control.invalid &&\r\n      (control.touched || control.dirty || isSubmitted)\r\n    );\r\n  }\r\n}\r\n\r\nexport class ShowOnDirtyErrorStateMatcher implements IErrorStateMatcher {\r\n  isErrorState(\r\n    control: AbstractControl | null,\r\n    formFieldControl: IFormFieldControl | null\r\n  ): boolean {\r\n    if (!control) {\r\n      return false;\r\n    }\r\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\r\n    return !!(control.invalid && (control.dirty || isSubmitted));\r\n  }\r\n}\r\n\r\nexport const DEFAULT_ERROR_STATE_MATCHER = new ErrorStateMatcher();\r\n",
             "displayName": "IErrorStateMatcher",
             "properties": [],
             "indexSignatures": [],
@@ -1182,12 +1182,12 @@
         },
         {
             "name": "IFormFieldControl",
-            "id": "interface-IFormFieldControl-f3d683a8860125ca14c10b04ecaf5653337cb6b04d881299f5aa599df33bb733d459113aeee60aff54489fd1d260d2b3cf5984a36398802a45d74453f3e1d537",
+            "id": "interface-IFormFieldControl-4f04404eba315a1c51430c0171dc529f9af6a9f2d2cb1e675b1b85587171b27e682800eab72c143d2f5d5b5c98b3f27c6e91ed65fc94ce65d40f2364214e65ae",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field-control.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { AbstractControl } from '@angular/forms';\n\nexport interface IFormFieldControl<T = any> {\n  readonly control: AbstractControl<T> | null | undefined;\n  readonly id: string;\n  readonly label: string;\n  readonly labelInside: boolean;\n  readonly disabled: boolean;\n  readonly required: boolean;\n}\n",
+            "sourceCode": "import { AbstractControl } from '@angular/forms';\r\n\r\nexport interface IFormFieldControl<T = any> {\r\n  readonly control: AbstractControl<T> | null | undefined;\r\n  readonly id: string;\r\n  readonly label: string;\r\n  readonly labelInside: boolean;\r\n  readonly disabled: boolean;\r\n  readonly required: boolean;\r\n}\r\n",
             "displayName": "IFormFieldControl<T = any>",
             "typeParameters": [
                 "T = any"
@@ -3513,13 +3513,13 @@
     "classes": [
         {
             "name": "ErrorStateMatcher",
-            "id": "class-ErrorStateMatcher-069fda29b6e4df4f3e210e923b416fa359aba6a1fe3fbf7fff1a6f75baeebb214dfa885bb5e933c6f55b27d7bf1da36597064fdc1de15da4baf8abf2e7d5ec55",
+            "id": "class-ErrorStateMatcher-da62f03511078af21ddf81eef37e90b597a561deacde811cd260ba119c60fac2e1010541a0879e0022e735138c712f4eeee9daa3dbebc29901199c64de28b217",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/error-state-matcher.ts",
             "coverageIgnore": false,
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import { AbstractControl } from '@angular/forms';\n\nimport { IFormFieldControl } from './form-field-control';\n\nexport interface IErrorStateMatcher {\n  isErrorState(\n    control: AbstractControl | null,\n    formFieldControl: IFormFieldControl | null\n  ): boolean;\n}\n\nexport class ErrorStateMatcher implements IErrorStateMatcher {\n  isErrorState(\n    control: AbstractControl | null,\n    formFieldControl: IFormFieldControl | null\n  ): boolean {\n    if (!control) {\n      return false;\n    }\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\n    return !!(\n      control.invalid &&\n      (control.touched || control.dirty || isSubmitted)\n    );\n  }\n}\n\nexport class ShowOnDirtyErrorStateMatcher implements IErrorStateMatcher {\n  isErrorState(\n    control: AbstractControl | null,\n    formFieldControl: IFormFieldControl | null\n  ): boolean {\n    if (!control) {\n      return false;\n    }\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\n    return !!(control.invalid && (control.dirty || isSubmitted));\n  }\n}\n\nexport const DEFAULT_ERROR_STATE_MATCHER = new ErrorStateMatcher();\n",
+            "sourceCode": "import { AbstractControl } from '@angular/forms';\r\n\r\nimport { IFormFieldControl } from './form-field-control';\r\n\r\nexport interface IErrorStateMatcher {\r\n  isErrorState(\r\n    control: AbstractControl | null,\r\n    formFieldControl: IFormFieldControl | null\r\n  ): boolean;\r\n}\r\n\r\nexport class ErrorStateMatcher implements IErrorStateMatcher {\r\n  isErrorState(\r\n    control: AbstractControl | null,\r\n    formFieldControl: IFormFieldControl | null\r\n  ): boolean {\r\n    if (!control) {\r\n      return false;\r\n    }\r\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\r\n    return !!(\r\n      control.invalid &&\r\n      (control.touched || control.dirty || isSubmitted)\r\n    );\r\n  }\r\n}\r\n\r\nexport class ShowOnDirtyErrorStateMatcher implements IErrorStateMatcher {\r\n  isErrorState(\r\n    control: AbstractControl | null,\r\n    formFieldControl: IFormFieldControl | null\r\n  ): boolean {\r\n    if (!control) {\r\n      return false;\r\n    }\r\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\r\n    return !!(control.invalid && (control.dirty || isSubmitted));\r\n  }\r\n}\r\n\r\nexport const DEFAULT_ERROR_STATE_MATCHER = new ErrorStateMatcher();\r\n",
             "displayName": "ErrorStateMatcher",
             "inputsClass": [],
             "outputsClass": [],
@@ -3599,13 +3599,13 @@
         },
         {
             "name": "ShowOnDirtyErrorStateMatcher",
-            "id": "class-ShowOnDirtyErrorStateMatcher-069fda29b6e4df4f3e210e923b416fa359aba6a1fe3fbf7fff1a6f75baeebb214dfa885bb5e933c6f55b27d7bf1da36597064fdc1de15da4baf8abf2e7d5ec55",
+            "id": "class-ShowOnDirtyErrorStateMatcher-da62f03511078af21ddf81eef37e90b597a561deacde811cd260ba119c60fac2e1010541a0879e0022e735138c712f4eeee9daa3dbebc29901199c64de28b217",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/error-state-matcher.ts",
             "coverageIgnore": false,
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import { AbstractControl } from '@angular/forms';\n\nimport { IFormFieldControl } from './form-field-control';\n\nexport interface IErrorStateMatcher {\n  isErrorState(\n    control: AbstractControl | null,\n    formFieldControl: IFormFieldControl | null\n  ): boolean;\n}\n\nexport class ErrorStateMatcher implements IErrorStateMatcher {\n  isErrorState(\n    control: AbstractControl | null,\n    formFieldControl: IFormFieldControl | null\n  ): boolean {\n    if (!control) {\n      return false;\n    }\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\n    return !!(\n      control.invalid &&\n      (control.touched || control.dirty || isSubmitted)\n    );\n  }\n}\n\nexport class ShowOnDirtyErrorStateMatcher implements IErrorStateMatcher {\n  isErrorState(\n    control: AbstractControl | null,\n    formFieldControl: IFormFieldControl | null\n  ): boolean {\n    if (!control) {\n      return false;\n    }\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\n    return !!(control.invalid && (control.dirty || isSubmitted));\n  }\n}\n\nexport const DEFAULT_ERROR_STATE_MATCHER = new ErrorStateMatcher();\n",
+            "sourceCode": "import { AbstractControl } from '@angular/forms';\r\n\r\nimport { IFormFieldControl } from './form-field-control';\r\n\r\nexport interface IErrorStateMatcher {\r\n  isErrorState(\r\n    control: AbstractControl | null,\r\n    formFieldControl: IFormFieldControl | null\r\n  ): boolean;\r\n}\r\n\r\nexport class ErrorStateMatcher implements IErrorStateMatcher {\r\n  isErrorState(\r\n    control: AbstractControl | null,\r\n    formFieldControl: IFormFieldControl | null\r\n  ): boolean {\r\n    if (!control) {\r\n      return false;\r\n    }\r\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\r\n    return !!(\r\n      control.invalid &&\r\n      (control.touched || control.dirty || isSubmitted)\r\n    );\r\n  }\r\n}\r\n\r\nexport class ShowOnDirtyErrorStateMatcher implements IErrorStateMatcher {\r\n  isErrorState(\r\n    control: AbstractControl | null,\r\n    formFieldControl: IFormFieldControl | null\r\n  ): boolean {\r\n    if (!control) {\r\n      return false;\r\n    }\r\n    const isSubmitted = formFieldControl && (formFieldControl as any)._isSubmitted;\r\n    return !!(control.invalid && (control.dirty || isSubmitted));\r\n  }\r\n}\r\n\r\nexport const DEFAULT_ERROR_STATE_MATCHER = new ErrorStateMatcher();\r\n",
             "displayName": "ShowOnDirtyErrorStateMatcher",
             "inputsClass": [],
             "outputsClass": [],
@@ -9688,10 +9688,6 @@
                         "type": "component"
                     },
                     {
-                        "name": "CaoFormFieldStoryComponent",
-                        "type": "component"
-                    },
-                    {
                         "name": "CaoHintStoryComponent",
                         "type": "component"
                     }
@@ -12896,7 +12892,7 @@
         },
         {
             "name": "CaoError",
-            "id": "component-CaoError-840d105e52c9622727821216d5250ba54f29858343cf905326d4e28a4351f49b0d25d044e299ded8aa8eec612b6341850f2e8345e5aad3192b22c20622c6a82e",
+            "id": "component-CaoError-f4a3d54527de619c846924188a60eec1d86366233c7f5e2dfda5d7ec1f9598e13cf0f6654721b61f9d576389d07f282e4c0f1eecfb8c20a6bf5b137d91b3e322",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/error/error.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -12932,7 +12928,7 @@
                 {
                     "name": "formField",
                     "coverageIgnore": false,
-                    "defaultValue": "inject(CaoFormField, { optional: true }) as\n    | CaoFormField\n    | null",
+                    "defaultValue": "inject(CaoFormField, { optional: true }) as\r\n    | CaoFormField\r\n    | null",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
@@ -12958,12 +12954,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, inject, Input } from '@angular/core';\n\nimport { IErrorStateMatcher } from '../form-field/error-state-matcher';\nimport { CaoFormField } from '../form-field/form-field';\n\n@Component({\n  selector: 'cao-error',\n  imports: [],\n  templateUrl: './error.html',\n  styleUrl: './error.css',\n})\nexport class CaoError {\n  @Input() errorStateMatcher?: IErrorStateMatcher;\n\n  private readonly formField = inject(CaoFormField, { optional: true }) as\n    | CaoFormField\n    | null;\n\n  get control() {\n    return this.formField?.control ?? null;\n  }\n\n  get hasErrorState(): boolean {\n    const control = this.control;\n    if (!control) {\n      return false;\n    }\n    const matcher = this.errorStateMatcher ?? this.formField?.errorStateMatcher;\n    return matcher\n      ? matcher.isErrorState(control, this.formField)\n      : !!(control.invalid && (control.touched || control.dirty));\n  }\n}\n",
+            "sourceCode": "import { Component, inject, Input } from '@angular/core';\r\n\r\nimport { IErrorStateMatcher } from '../form-field/error-state-matcher';\r\nimport { CaoFormField } from '../form-field/form-field';\r\n\r\n@Component({\r\n  selector: 'cao-error',\r\n  imports: [],\r\n  templateUrl: './error.html',\r\n  styleUrl: './error.css',\r\n})\r\nexport class CaoError {\r\n  @Input() errorStateMatcher?: IErrorStateMatcher;\r\n\r\n  private readonly formField = inject(CaoFormField, { optional: true }) as\r\n    | CaoFormField\r\n    | null;\r\n\r\n  get control() {\r\n    return this.formField?.control ?? null;\r\n  }\r\n\r\n  get hasErrorState(): boolean {\r\n    const control = this.control;\r\n    if (!control) {\r\n      return false;\r\n    }\r\n    const matcher = this.errorStateMatcher ?? this.formField?.errorStateMatcher;\r\n    return matcher\r\n      ? matcher.isErrorState(control, this.formField)\r\n      : !!(control.invalid && (control.touched || control.dirty));\r\n  }\r\n}\r\n",
             "styleUrl": "./error.css",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\n  display: block;\n  font-size: 0.75rem;\n  line-height: 1.25rem;\n  color: var(--cao-form-field-color-error, var(--error, #dc2626));\n}\n\n.cao-error {\n  display: block;\n}",
+                    "data": ":host {\r\n  display: block;\r\n  font-size: 0.75rem;\r\n  line-height: 1.25rem;\r\n  color: var(--cao-form-field-color-error, var(--error, #dc2626));\r\n}\r\n\r\n.cao-error {\r\n  display: block;\r\n}",
                     "styleUrl": "./error.css"
                 }
             ],
@@ -12998,19 +12994,15 @@
                     {
                         "name": "CaoErrorStoryComponent",
                         "type": "component"
-                    },
-                    {
-                        "name": "CaoFormFieldStoryComponent",
-                        "type": "component"
                     }
                 ],
                 "outgoing": []
             },
-            "templateData": "@if (hasErrorState) {\n  <div class=\"cao-error\" role=\"alert\">\n    <ng-content />\n  </div>\n}"
+            "templateData": "@if (hasErrorState) {\r\n  <div class=\"cao-error\" role=\"alert\">\r\n    <ng-content />\r\n  </div>\r\n}"
         },
         {
             "name": "CaoErrorStoryComponent",
-            "id": "component-CaoErrorStoryComponent-72e177c6996b62f85d70edfd347f078564758ba8f50d90292cb0cb97be03f799a7c90300fcde91bc07a16cdf8f0ff9c917e4d7a8809b6b79f8b6ff985038072b",
+            "id": "component-CaoErrorStoryComponent-863bb5f25aec4433e8ae1be802900a57fc61e33745f5cf8061c9e2c67a2ecbf60fe0751e224ae85c95de32e43945ce4badad63d89f2282de9bea66bcdc37d7d9",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/error/error.stories.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -13031,7 +13023,7 @@
                 {
                     "name": "patternControl",
                     "coverageIgnore": false,
-                    "defaultValue": "new FormControl('', [\n    Validators.pattern(/^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$/),\n  ])",
+                    "defaultValue": "new FormControl('', [\r\n    Validators.pattern(/^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$/),\r\n  ])",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "AbstractControl",
@@ -13080,7 +13072,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { AbstractControl, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';\n\nimport type { Meta, StoryObj } from '@storybook/angular-vite';\n\nimport { CaoError } from './error';\nimport { CaoBaseInput } from '../base-input/base-input';\nimport { CaoFormField } from '../form-field/form-field';\n\n@Component({\n  selector: 'cao-error-story',\n  imports: [ReactiveFormsModule, CaoFormField, CaoBaseInput, CaoError],\n  template: `\n    <div style=\"max-width: 420px; display: flex; flex-direction: column; gap: 24px;\">\n      <cao-form-field [control]=\"requiredControl\" label=\"E-mail\">\n        <cao-input [control]=\"requiredControl\" placeholder=\"Digite seu e-mail\"></cao-input>\n        <cao-error>O campo é obrigatório</cao-error>\n      </cao-form-field>\n      <cao-form-field [control]=\"patternControl\" label=\"CPF\">\n        <cao-input [control]=\"patternControl\" placeholder=\"000.000.000-00\"></cao-input>\n        @if (patternControl.hasError('pattern')) {\n          <cao-error>Formato de CPF inválido</cao-error>\n        }\n      </cao-form-field>\n    </div>\n  `,\n})\nclass CaoErrorStoryComponent {\n  requiredControl: AbstractControl = new FormControl('', [Validators.required]);\n  patternControl: AbstractControl = new FormControl('', [\n    Validators.pattern(/^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$/),\n  ]);\n\n  constructor() {\n    this.requiredControl.markAsTouched();\n    this.patternControl.markAsTouched();\n  }\n}\n\nconst render = () => ({\n  component: CaoErrorStoryComponent,\n});\n\nconst meta: Meta<CaoError> = {\n  title: 'Componentes/Error',\n  component: CaoError,\n  tags: ['autodocs'],\n  args: {},\n};\n\nexport default meta;\ntype Story = StoryObj<CaoError>;\n\nexport const ErroObrigatorio: Story = {\n  render,\n};\n\nexport const ErroPorPadrao: Story = {\n  args: {},\n  render,\n};",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { AbstractControl, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';\r\n\r\nimport type { Meta, StoryObj } from '@storybook/angular-vite';\r\n\r\nimport { CaoError } from './error';\r\nimport { CaoBaseInput } from '../base-input/base-input';\r\nimport { CaoFormField } from '../form-field/form-field';\r\n\r\n@Component({\r\n  selector: 'cao-error-story',\r\n  imports: [ReactiveFormsModule, CaoFormField, CaoBaseInput, CaoError],\r\n  template: `\r\n    <div style=\"max-width: 420px; display: flex; flex-direction: column; gap: 24px;\">\r\n      <cao-form-field [control]=\"requiredControl\" label=\"E-mail\">\r\n        <cao-input [control]=\"requiredControl\" placeholder=\"Digite seu e-mail\"></cao-input>\r\n        <cao-error>O campo é obrigatório</cao-error>\r\n      </cao-form-field>\r\n      <cao-form-field [control]=\"patternControl\" label=\"CPF\">\r\n        <cao-input [control]=\"patternControl\" placeholder=\"000.000.000-00\"></cao-input>\r\n        @if (patternControl.hasError('pattern')) {\r\n          <cao-error>Formato de CPF inválido</cao-error>\r\n        }\r\n      </cao-form-field>\r\n    </div>\r\n  `,\r\n})\r\nclass CaoErrorStoryComponent {\r\n  requiredControl: AbstractControl = new FormControl('', [Validators.required]);\r\n  patternControl: AbstractControl = new FormControl('', [\r\n    Validators.pattern(/^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$/),\r\n  ]);\r\n\r\n  constructor() {\r\n    this.requiredControl.markAsTouched();\r\n    this.patternControl.markAsTouched();\r\n  }\r\n}\r\n\r\nconst render = () => ({\r\n  component: CaoErrorStoryComponent,\r\n});\r\n\r\nconst meta: Meta<CaoError> = {\r\n  title: 'Componentes/Error',\r\n  component: CaoError,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n};\r\n\r\nexport default meta;\r\ntype Story = StoryObj<CaoError>;\r\n\r\nexport const ErroObrigatorio: Story = {\r\n  render,\r\n};\r\n\r\nexport const ErroPorPadrao: Story = {\r\n  args: {},\r\n  render,\r\n};",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -13118,7 +13110,7 @@
         },
         {
             "name": "CaoFormField",
-            "id": "component-CaoFormField-53ee8900acac51a371cf6fa1edc8205f7433a5b16bfb5cdb90b95f3338b62e37d60ebb554e4c51ee657b5a8e50f9968274ac89d32f51b21daba626c6bbefdab1",
+            "id": "component-CaoFormField-ad6a7553da1ec0cfe2289cdb45c11c3ff5cd981781a15c5d04c5decb55644ca21e4e7ea7a2c641541a8b138b86a6f02f8e9a91bf3b947ef4c99efcb2bbd50414",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -13139,58 +13131,14 @@
             "inputsClass": [
                 {
                     "coverageIgnore": false,
-                    "name": "borderColor",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n",
-                    "description": "",
-                    "line": 52,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "coverageIgnore": false,
-                    "name": "borderRadius",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n",
-                    "description": "",
-                    "line": 54,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "coverageIgnore": false,
-                    "name": "borderWidth",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n",
-                    "description": "",
-                    "line": 53,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "coverageIgnore": false,
                     "name": "control",
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n",
                     "description": "",
-                    "line": 64,
+                    "line": 65,
                     "type": "AbstractControl | null",
-                    "decorators": []
-                },
-                {
-                    "coverageIgnore": false,
-                    "name": "errorColor",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n",
-                    "description": "",
-                    "line": 55,
-                    "type": "string",
                     "decorators": []
                 },
                 {
@@ -13200,19 +13148,8 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n",
                     "description": "",
-                    "line": 66,
+                    "line": 67,
                     "type": "IErrorStateMatcher",
-                    "decorators": []
-                },
-                {
-                    "coverageIgnore": false,
-                    "name": "focusBorderColor",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n",
-                    "description": "",
-                    "line": 59,
-                    "type": "string",
                     "decorators": []
                 },
                 {
@@ -13223,18 +13160,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n",
                     "description": "",
-                    "line": 65,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "coverageIgnore": false,
-                    "name": "hintColor",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n",
-                    "description": "",
-                    "line": 57,
+                    "line": 66,
                     "type": "string",
                     "decorators": []
                 },
@@ -13246,18 +13172,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n",
                     "description": "",
-                    "line": 63,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "coverageIgnore": false,
-                    "name": "inputBackground",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n",
-                    "description": "",
-                    "line": 51,
+                    "line": 64,
                     "type": "string",
                     "decorators": []
                 },
@@ -13269,18 +13184,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n",
                     "description": "",
-                    "line": 61,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "coverageIgnore": false,
-                    "name": "labelColor",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n",
-                    "description": "",
-                    "line": 56,
+                    "line": 62,
                     "type": "string",
                     "decorators": []
                 },
@@ -13292,7 +13196,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n",
                     "description": "",
-                    "line": 62,
+                    "line": 63,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -13303,29 +13207,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n",
                     "description": "",
-                    "line": 67,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "coverageIgnore": false,
-                    "name": "successBorderColor",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n",
-                    "description": "",
-                    "line": 60,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "coverageIgnore": false,
-                    "name": "textColor",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n",
-                    "description": "",
-                    "line": 58,
+                    "line": 68,
                     "type": "string",
                     "decorators": []
                 },
@@ -13336,9 +13218,139 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n",
                     "description": "",
-                    "line": 68,
+                    "line": 69,
                     "type": "string",
                     "decorators": []
+                },
+                {
+                    "name": "borderColor",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "rawdescription": "\n",
+                    "required": false
+                },
+                {
+                    "name": "borderRadius",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "rawdescription": "\n",
+                    "required": false
+                },
+                {
+                    "name": "borderWidth",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "rawdescription": "\n",
+                    "required": false
+                },
+                {
+                    "name": "errorColor",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
+                    "rawdescription": "\n",
+                    "required": false
+                },
+                {
+                    "name": "focusBorderColor",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23,
+                    "rawdescription": "\n",
+                    "required": false
+                },
+                {
+                    "name": "hintColor",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21,
+                    "rawdescription": "\n",
+                    "required": false
+                },
+                {
+                    "name": "inputBackground",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15,
+                    "rawdescription": "\n",
+                    "required": false
+                },
+                {
+                    "name": "labelColor",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "rawdescription": "\n",
+                    "required": false
+                },
+                {
+                    "name": "successBorderColor",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 24,
+                    "rawdescription": "\n",
+                    "required": false
+                },
+                {
+                    "name": "textColor",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22,
+                    "rawdescription": "\n",
+                    "required": false
                 },
                 {
                     "coverageIgnore": false,
@@ -13428,7 +13440,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 71,
+                    "line": 72,
                     "rawdescription": "\n"
                 },
                 {
@@ -13441,7 +13453,20 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 70,
+                    "line": 71,
+                    "rawdescription": "\n"
+                },
+                {
+                    "name": "formFieldStyles",
+                    "coverageIgnore": false,
+                    "defaultValue": "computed(() => {\r\n    const styles: Record<string, string> = {};\r\n\r\n    if (this.inputBackground()) {\r\n      styles['--cao-form-field-bg-background'] = this.inputBackground()!;\r\n    }\r\n    if (this.borderColor()) {\r\n      styles['--cao-form-field-border-color'] = this.borderColor()!;\r\n    }\r\n    if (this.borderWidth()) {\r\n      styles['--cao-form-field-border-width'] = this.borderWidth()!;\r\n    }\r\n    if (this.borderRadius()) {\r\n      styles['--cao-form-field-border-radius'] = this.borderRadius()!;\r\n    }\r\n    if (this.errorColor()) {\r\n      styles['--cao-form-field-color-error'] = this.errorColor()!;\r\n    }\r\n    if (this.labelColor()) {\r\n      styles['--cao-form-field-color-label'] = this.labelColor()!;\r\n    }\r\n    if (this.hintColor()) {\r\n      styles['--cao-form-field-color-hint'] = this.hintColor()!;\r\n    }\r\n    if (this.textColor()) {\r\n      styles['--cao-form-field-color-text'] = this.textColor()!;\r\n    }\r\n    if (this.focusBorderColor()) {\r\n      styles['--cao-form-field-focus-border'] = this.focusBorderColor()!;\r\n    }\r\n    if (this.successBorderColor()) {\r\n      styles['--cao-form-field-success-border'] = this.successBorderColor()!;\r\n    }\r\n\r\n    return styles;\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26,
                     "rawdescription": "\n"
                 }
             ],
@@ -13453,7 +13478,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 108,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n",
@@ -13466,7 +13491,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 114,
+                    "line": 115,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n",
@@ -13476,20 +13501,7 @@
             "coverageIgnore": false,
             "deprecated": false,
             "deprecationMessage": "",
-            "hostBindings": [
-                {
-                    "coverageIgnore": false,
-                    "name": "style",
-                    "actualName": "_hostStyles",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n",
-                    "description": "",
-                    "line": 16,
-                    "type": "Record<string, string>",
-                    "decorators": []
-                }
-            ],
+            "hostBindings": [],
             "hostListeners": [],
             "standalone": true,
             "imports": [
@@ -13500,12 +13512,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, HostBinding, Input } from '@angular/core';\nimport { AbstractControl, Validators } from '@angular/forms';\n\nimport { IErrorStateMatcher } from './error-state-matcher';\nimport { IFormFieldControl } from './form-field-control';\nimport { CaoBaseIcon } from '../base-icon/base-icon';\n\n@Component({\n  selector: 'cao-form-field',\n  imports: [CaoBaseIcon],\n  templateUrl: './form-field.html',\n  styleUrl: './form-field.css',\n})\nexport class CaoFormField extends CaoBaseIcon implements IFormFieldControl {\n  @HostBinding('style')\n  get _hostStyles(): Record<string, string> {\n    const styles: Record<string, string> = {};\n    if (this.inputBackground !== undefined) {\n      styles['--cao-form-field-bg-background'] = this.inputBackground;\n    }\n    if (this.borderColor !== undefined) {\n      styles['--cao-form-field-border-color'] = this.borderColor;\n    }\n    if (this.borderWidth !== undefined) {\n      styles['--cao-form-field-border-width'] = this.borderWidth;\n    }\n    if (this.borderRadius !== undefined) {\n      styles['--cao-form-field-border-radius'] = this.borderRadius;\n    }\n    if (this.errorColor !== undefined) {\n      styles['--cao-form-field-color-error'] = this.errorColor;\n    }\n    if (this.labelColor !== undefined) {\n      styles['--cao-form-field-color-label'] = this.labelColor;\n    }\n    if (this.hintColor !== undefined) {\n      styles['--cao-form-field-color-hint'] = this.hintColor;\n    }\n    if (this.textColor !== undefined) {\n      styles['--cao-form-field-color-text'] = this.textColor;\n    }\n    if (this.focusBorderColor !== undefined) {\n      styles['--cao-form-field-focus-border'] = this.focusBorderColor;\n    }\n    if (this.successBorderColor !== undefined) {\n      styles['--cao-form-field-success-border'] = this.successBorderColor;\n    }\n    return styles;\n  }\n\n  @Input() inputBackground?: string;\n  @Input() borderColor?: string;\n  @Input() borderWidth?: string;\n  @Input() borderRadius?: string;\n  @Input() errorColor?: string;\n  @Input() labelColor?: string;\n  @Input() hintColor?: string;\n  @Input() textColor?: string;\n  @Input() focusBorderColor?: string;\n  @Input() successBorderColor?: string;\n  @Input() label = '';\n  @Input() labelInside = false;\n  @Input() hintLabel = '';\n  @Input() control: AbstractControl | null = null;\n  @Input() forId = '';\n  @Input() errorStateMatcher?: IErrorStateMatcher;\n  @Input() leadingIcon?: string;\n  @Input() trailingIcon?: string;\n\n  _isSubmitted = false;\n  _focused = false;\n\n  get id(): string {\n    return this.forId;\n  }\n\n  get disabled(): boolean {\n    return !!this.control?.disabled;\n  }\n\n  get required(): boolean {\n    if (!this.control) {\n      return false;\n    }\n    const hasValidator =\n      typeof this.control.hasValidator === 'function'\n        ? this.control.hasValidator(Validators.required)\n        : false;\n    return hasValidator;\n  }\n\n  get floating(): boolean {\n    return this._focused || !!this.control?.value;\n  }\n\n  get errorStateActive(): boolean {\n    const control = this.control;\n    if (!control) {\n      return false;\n    }\n    const matcher = this.errorStateMatcher;\n    return matcher\n      ? matcher.isErrorState(control, this)\n      : !!(control.invalid && (control.touched || control.dirty || this._isSubmitted));\n  }\n\n  onFocusIn(): void {\n    this._focused = true;\n    if (this.control && !this._isSubmitted) {\n      this.control.markAsTouched();\n    }\n  }\n\n  onFocusOut(): void {\n    this._focused = false;\n  }\n}",
+            "sourceCode": "import { Component, computed, input, Input } from '@angular/core';\r\nimport { AbstractControl, Validators } from '@angular/forms';\r\n\r\nimport { IErrorStateMatcher } from './error-state-matcher';\r\nimport { IFormFieldControl } from './form-field-control';\r\nimport { CaoBaseIcon } from '../base-icon/base-icon';\r\n\r\n@Component({\r\n  selector: 'cao-form-field',\r\n  imports: [CaoBaseIcon],\r\n  templateUrl: './form-field.html',\r\n  styleUrl: './form-field.css',\r\n})\r\nexport class CaoFormField extends CaoBaseIcon implements IFormFieldControl {\r\n  inputBackground = input<string>();\r\n  borderColor = input<string>();\r\n  borderWidth = input<string>();\r\n  borderRadius = input<string>();\r\n  errorColor = input<string>();\r\n  labelColor = input<string>();\r\n  hintColor = input<string>();\r\n  textColor = input<string>();\r\n  focusBorderColor = input<string>();\r\n  successBorderColor = input<string>();\r\n\r\n  formFieldStyles = computed(() => {\r\n    const styles: Record<string, string> = {};\r\n\r\n    if (this.inputBackground()) {\r\n      styles['--cao-form-field-bg-background'] = this.inputBackground()!;\r\n    }\r\n    if (this.borderColor()) {\r\n      styles['--cao-form-field-border-color'] = this.borderColor()!;\r\n    }\r\n    if (this.borderWidth()) {\r\n      styles['--cao-form-field-border-width'] = this.borderWidth()!;\r\n    }\r\n    if (this.borderRadius()) {\r\n      styles['--cao-form-field-border-radius'] = this.borderRadius()!;\r\n    }\r\n    if (this.errorColor()) {\r\n      styles['--cao-form-field-color-error'] = this.errorColor()!;\r\n    }\r\n    if (this.labelColor()) {\r\n      styles['--cao-form-field-color-label'] = this.labelColor()!;\r\n    }\r\n    if (this.hintColor()) {\r\n      styles['--cao-form-field-color-hint'] = this.hintColor()!;\r\n    }\r\n    if (this.textColor()) {\r\n      styles['--cao-form-field-color-text'] = this.textColor()!;\r\n    }\r\n    if (this.focusBorderColor()) {\r\n      styles['--cao-form-field-focus-border'] = this.focusBorderColor()!;\r\n    }\r\n    if (this.successBorderColor()) {\r\n      styles['--cao-form-field-success-border'] = this.successBorderColor()!;\r\n    }\r\n\r\n    return styles;\r\n  });\r\n  @Input() label = '';\r\n  @Input() labelInside = false;\r\n  @Input() hintLabel = '';\r\n  @Input() control: AbstractControl | null = null;\r\n  @Input() forId = '';\r\n  @Input() errorStateMatcher?: IErrorStateMatcher;\r\n  @Input() leadingIcon?: string;\r\n  @Input() trailingIcon?: string;\r\n\r\n  _isSubmitted = false;\r\n  _focused = false;\r\n\r\n  get id(): string {\r\n    return this.forId;\r\n  }\r\n\r\n  get disabled(): boolean {\r\n    return !!this.control?.disabled;\r\n  }\r\n\r\n  get required(): boolean {\r\n    if (!this.control) {\r\n      return false;\r\n    }\r\n    const hasValidator =\r\n      typeof this.control.hasValidator === 'function'\r\n        ? this.control.hasValidator(Validators.required)\r\n        : false;\r\n    return hasValidator;\r\n  }\r\n\r\n  get floating(): boolean {\r\n    return this._focused || !!this.control?.value;\r\n  }\r\n\r\n  get errorStateActive(): boolean {\r\n    const control = this.control;\r\n    if (!control) {\r\n      return false;\r\n    }\r\n    const matcher = this.errorStateMatcher;\r\n    return matcher\r\n      ? matcher.isErrorState(control, this)\r\n      : !!(control.invalid && (control.touched || control.dirty || this._isSubmitted));\r\n  }\r\n\r\n  onFocusIn(): void {\r\n    this._focused = true;\r\n    if (this.control && !this._isSubmitted) {\r\n      this.control.markAsTouched();\r\n    }\r\n  }\r\n\r\n  onFocusOut(): void {\r\n    this._focused = false;\r\n  }\r\n}",
             "styleUrl": "./form-field.css",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\n  --cao-form-field-bg-background: var(--input-background, #ffffff);\n  --cao-form-field-border-color: var(--line-color, #e5e7eb);\n  --cao-form-field-border-width: 1px;\n  --cao-form-field-border-radius: 8px;\n  --cao-form-field-color-error: var(--error, #dc2626);\n  --cao-form-field-color-label: var(--primary, #4f46e5);\n  --cao-form-field-color-hint: var(--input-text, #9ca3af);\n  --cao-form-field-color-text: var(--text-color-input, #111827);\n  --cao-form-field-focus-border: var(--primary, #4f46e5);\n  --cao-form-field-success-border: var(--success, #16a34a);\n\n  display: block;\n  width: 100%;\n}\n\n.cao-form-field {\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n  width: 100%;\n  font-family: inherit;\n}\n\n.cao-form-field__label {\n  display: block;\n  font-size: 0.75rem;\n  font-weight: 700;\n  line-height: 1.25rem;\n  color: var(--cao-form-field-color-label);\n  text-transform: uppercase;\n  letter-spacing: 0.02em;\n  white-space: nowrap;\n}\n\n.cao-form-field__label--float {\n  position: absolute;\n  top: 50%;\n  left: 12px;\n  transform: translateY(-50%);\n  font-weight: 500;\n  text-transform: none;\n  letter-spacing: 0;\n  color: var(--cao-form-field-color-hint);\n  pointer-events: none;\n  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1),\n    font-size 150ms cubic-bezier(0.4, 0, 0.2, 1),\n    color 150ms cubic-bezier(0.4, 0, 0.2, 1);\n  max-width: calc(100% - 24px);\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.cao-form-field__label--floated {\n  transform: translateY(calc(-50% - 14px)) scale(0.75);\n  transform-origin: left top;\n  color: var(--cao-form-field-color-label);\n  font-weight: 700;\n}\n\n.input-field {\n  position: relative;\n  display: flex;\n  align-items: center;\n  width: 100%;\n  min-height: 44px;\n  background-color: var(--cao-form-field-bg-background);\n  border: var(--cao-form-field-border-width) solid var(--cao-form-field-border-color);\n  border-radius: var(--cao-form-field-border-radius);\n  transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),\n    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);\n}\n\n.input-field:focus-within {\n  border-color: var(--cao-form-field-focus-border);\n}\n\n.cao-form-field.error-state .input-field {\n  border-color: var(--cao-form-field-color-error);\n}\n\n.cao-form-field.disabled .input-field {\n  opacity: 0.7;\n}\n\n.input-slot {\n  position: relative;\n  flex: 1;\n  display: flex;\n  align-items: center;\n  width: 100%;\n}\n\n.input-slot ::ng-deep input,\n.input-slot ::ng-deep textarea,\n.input-slot ::ng-deep select {\n  width: 100%;\n  min-height: 40px;\n  border: none;\n  outline: none;\n  background: transparent;\n  color: var(--cao-form-field-color-text);\n  font-family: inherit;\n  font-size: 0.875rem;\n  padding: 6px 12px;\n  box-sizing: border-box;\n}\n\n.input-slot ::ng-deep cao-input,\n.input-slot ::ng-deep .cao-input {\n  width: 100%;\n}\n\n.input-slot ::ng-deep cao-input .input-component,\n.input-slot ::ng-deep cao-input .input-wrapper {\n  width: 100%;\n  background: transparent;\n}\n\n.input-slot ::ng-deep cao-input input,\n.input-slot ::ng-deep cao-input textarea {\n  background: transparent;\n  border: none;\n  color: var(--cao-form-field-color-text);\n}\n\n.label-inside .input-slot ::ng-deep input,\n.label-inside .input-slot ::ng-deep textarea,\n.label-inside .input-slot ::ng-deep select {\n  padding-top: 16px;\n  padding-bottom: 8px;\n}\n\n.subscript-wrapper {\n  display: flex;\n  flex-direction: column;\n  gap: 2px;\n}\n\n.cao-form-field__hint {\n  font-size: 0.75rem;\n  line-height: 1.25rem;\n  color: var(--cao-form-field-color-hint);\n}\n\n.cao-form-field__hint + .subscript-wrapper {\n  margin-top: 0;\n}\n\n.cao-form-field.required .cao-form-field__label::after {\n  content: \" *\";\n  color: var(--cao-form-field-color-error);\n}",
+                    "data": ":host {\r\n  --cao-form-field-bg-background: var(--input-background, #ffffff);\r\n  --cao-form-field-border-color: var(--line-color, #e5e7eb);\r\n  --cao-form-field-border-width: 1px;\r\n  --cao-form-field-border-radius: 8px;\r\n  --cao-form-field-color-error: var(--error, #dc2626);\r\n  --cao-form-field-color-label: var(--primary, #4f46e5);\r\n  --cao-form-field-color-hint: var(--input-text, #9ca3af);\r\n  --cao-form-field-color-text: var(--text-color-input, #111827);\r\n  --cao-form-field-focus-border: var(--primary, #4f46e5);\r\n  --cao-form-field-success-border: var(--success, #16a34a);\r\n\r\n  display: block;\r\n  width: 100%;\r\n}\r\n\r\n.cao-form-field {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 4px;\r\n  width: 100%;\r\n  font-family: inherit;\r\n}\r\n\r\n.cao-form-field__label {\r\n  display: block;\r\n  font-size: 0.75rem;\r\n  font-weight: 700;\r\n  line-height: 1.25rem;\r\n  color: var(--cao-form-field-color-label);\r\n  text-transform: uppercase;\r\n  letter-spacing: 0.02em;\r\n  white-space: nowrap;\r\n}\r\n\r\n.cao-form-field__label--float {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 12px;\r\n  transform: translateY(-50%);\r\n  font-weight: 500;\r\n  text-transform: none;\r\n  letter-spacing: 0;\r\n  color: var(--cao-form-field-color-hint);\r\n  pointer-events: none;\r\n  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1),\r\n    font-size 150ms cubic-bezier(0.4, 0, 0.2, 1),\r\n    color 150ms cubic-bezier(0.4, 0, 0.2, 1);\r\n  max-width: calc(100% - 24px);\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n}\r\n\r\n.cao-form-field__label--floated {\r\n  transform: translateY(calc(-50% - 14px)) scale(0.75);\r\n  transform-origin: left top;\r\n  color: var(--cao-form-field-color-label);\r\n  font-weight: 700;\r\n}\r\n\r\n.input-field {\r\n  position: relative;\r\n  display: flex;\r\n  align-items: center;\r\n  width: 100%;\r\n  min-height: 44px;\r\n  background-color: var(--cao-form-field-bg-background);\r\n  border: var(--cao-form-field-border-width) solid var(--cao-form-field-border-color);\r\n  border-radius: var(--cao-form-field-border-radius);\r\n  transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),\r\n    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);\r\n}\r\n\r\n.input-field:focus-within {\r\n  border-color: var(--cao-form-field-focus-border);\r\n}\r\n\r\n.cao-form-field.error-state .input-field {\r\n  border-color: var(--cao-form-field-color-error);\r\n}\r\n\r\n.cao-form-field.disabled .input-field {\r\n  opacity: 0.7;\r\n}\r\n\r\n.input-slot {\r\n  position: relative;\r\n  flex: 1;\r\n  display: flex;\r\n  align-items: center;\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.input-slot ::ng-deep input,\r\n.input-slot ::ng-deep textarea,\r\n.input-slot ::ng-deep select {\r\n  width: 100%;\r\n  min-height: 40px;\r\n  border: none;\r\n  outline: none;\r\n  background: transparent;\r\n  color: var(--cao-form-field-color-text);\r\n  font-family: inherit;\r\n  font-size: 0.875rem;\r\n  padding: 6px 12px;\r\n  box-sizing: border-box;\r\n}\r\n\r\n.input-slot ::ng-deep cao-input,\r\n.input-slot ::ng-deep .cao-input {\r\n  width: 100%;\r\n}\r\n\r\n.input-slot ::ng-deep cao-input .input-component,\r\n.input-slot ::ng-deep cao-input .input-wrapper {\r\n  width: 100%;\r\n  background: transparent;\r\n}\r\n\r\n.input-slot ::ng-deep cao-input input,\r\n.input-slot ::ng-deep cao-input textarea {\r\n  background: transparent;\r\n  border: none;\r\n  color: var(--cao-form-field-color-text);\r\n}\r\n\r\n.label-inside .input-slot ::ng-deep input,\r\n.label-inside .input-slot ::ng-deep textarea,\r\n.label-inside .input-slot ::ng-deep select {\r\n  padding-top: 16px;\r\n  padding-bottom: 8px;\r\n}\r\n\r\n.subscript-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 2px;\r\n}\r\n\r\n.cao-form-field__hint {\r\n  font-size: 0.75rem;\r\n  line-height: 1.25rem;\r\n  color: var(--cao-form-field-color-hint);\r\n}\r\n\r\n.cao-form-field__hint + .subscript-wrapper {\r\n  margin-top: 0;\r\n}\r\n\r\n.cao-form-field.required .cao-form-field__label::after {\r\n  content: \" *\";\r\n  color: var(--cao-form-field-color-error);\r\n}",
                     "styleUrl": "./form-field.css"
                 }
             ],
@@ -13517,24 +13529,13 @@
                 "IFormFieldControl"
             ],
             "accessors": {
-                "_hostStyles": {
-                    "name": "_hostStyles",
-                    "getSignature": {
-                        "name": "_hostStyles",
-                        "type": "unknown",
-                        "returnType": "Record<string, string>",
-                        "line": 16,
-                        "rawdescription": "\n",
-                        "description": ""
-                    }
-                },
                 "id": {
                     "name": "id",
                     "getSignature": {
                         "name": "id",
                         "type": "string",
                         "returnType": "string",
-                        "line": 73,
+                        "line": 74,
                         "rawdescription": "\n",
                         "description": ""
                     }
@@ -13545,7 +13546,7 @@
                         "name": "disabled",
                         "type": "boolean",
                         "returnType": "boolean",
-                        "line": 77,
+                        "line": 78,
                         "rawdescription": "\n",
                         "description": ""
                     }
@@ -13556,7 +13557,7 @@
                         "name": "required",
                         "type": "boolean",
                         "returnType": "boolean",
-                        "line": 81,
+                        "line": 82,
                         "rawdescription": "\n",
                         "description": ""
                     }
@@ -13567,7 +13568,7 @@
                         "name": "floating",
                         "type": "boolean",
                         "returnType": "boolean",
-                        "line": 92,
+                        "line": 93,
                         "rawdescription": "\n",
                         "description": ""
                     }
@@ -13578,7 +13579,7 @@
                         "name": "errorStateActive",
                         "type": "boolean",
                         "returnType": "boolean",
-                        "line": 96,
+                        "line": 97,
                         "rawdescription": "\n",
                         "description": ""
                     }
@@ -13588,10 +13589,6 @@
                 "incoming": [
                     {
                         "name": "CaoErrorStoryComponent",
-                        "type": "component"
-                    },
-                    {
-                        "name": "CaoFormFieldStoryComponent",
                         "type": "component"
                     },
                     {
@@ -13610,376 +13607,11 @@
                     }
                 ]
             },
-            "templateData": "<div\n  class=\"cao-form-field\"\n  [class.label-inside]=\"labelInside\"\n  [class.error-state]=\"errorStateActive\"\n  [class.disabled]=\"disabled\"\n  [class.required]=\"required\">\n  @if (label && !labelInside) {\n    <label class=\"cao-form-field__label\" [for]=\"forId\">{{ label }}</label>\n  }\n  <div class=\"input-field\" (focusin)=\"onFocusIn()\" (focusout)=\"onFocusOut()\">\n    @if (leadingIcon) {\n      <cao-base-icon\n        [isLucideIcon]=\"isLucideIcon\"\n        [strokeWidthIcon]=\"strokeWidthIcon\"\n        [imgSource]=\"leadingIcon\"\n        [iconColor]=\"iconColor\"\n        [size]=\"size\" />\n    }\n    <div class=\"input-slot\">\n      @if (label && labelInside) {\n        <label\n          class=\"cao-form-field__label cao-form-field__label--float\"\n          [class.cao-form-field__label--floated]=\"floating\"\n          [for]=\"forId\">{{ label }}</label>\n      }\n      <ng-content select=\"[caoInput]\" />\n      <ng-content select=\"cao-input\" />\n      <ng-content select=\"input\" />\n      <ng-content select=\"select\" />\n      <ng-content select=\"textarea\" />\n      <ng-content select=\"h2\" />\n      <ng-content />\n    </div>\n    @if (trailingIcon) {\n      <cao-base-icon\n        [isLucideIcon]=\"isLucideIcon\"\n        [iconColor]=\"iconColor\"\n        [size]=\"size\"\n        [imgSource]=\"trailingIcon\"\n        [strokeWidthIcon]=\"strokeWidthIcon\" />\n    }\n  </div>\n  <div class=\"subscript-wrapper\">\n    @if (hintLabel) {\n      <small class=\"cao-form-field__hint\">{{ hintLabel }}</small>\n    }\n    <ng-content select=\"cao-hint\" />\n    <ng-content select=\"cao-error\" />\n  </div>\n</div>"
-        },
-        {
-            "name": "CaoFormFieldStoryComponent",
-            "id": "component-CaoFormFieldStoryComponent-9de9b1ed8d1d30b3c79468e024919328a1d2d637d19745a479cf57dbe60cf0ab29c1455d136fa2cea15f6486ebf62f1efd0df4b2f30f21c887aa27555a3b4e51",
-            "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "cao-form-field-story",
-            "styleUrls": [],
-            "styles": [],
-            "template": "<div style=\"max-width: 420px;\">\n  <cao-form-field\n    [control]=\"control\"\n    forId=\"cao-form-field-story\"\n    [label]=\"label\"\n    [labelInside]=\"labelInside\"\n    [hintLabel]=\"hintLabel\"\n    [leadingIcon]=\"leadingIcon\"\n    [trailingIcon]=\"trailingIcon\"\n    [isLucideIcon]=\"isLucideIcon\"\n    [iconColor]=\"iconColor\"\n    [inputBackground]=\"inputBackground\"\n    [borderColor]=\"borderColor\"\n    [borderWidth]=\"borderWidth\"\n    [borderRadius]=\"borderRadius\"\n    [errorColor]=\"errorColor\"\n    [labelColor]=\"labelColor\"\n    [hintColor]=\"hintColor\"\n    [textColor]=\"textColor\"\n    [focusBorderColor]=\"focusBorderColor\"\n    [successBorderColor]=\"successBorderColor\">\n    <cao-input\n      [control]=\"control\"\n      [isDisabled]=\"control?.disabled === true\"\n      [placeholder]=\"placeholder\"\n      [mask]=\"mask\"></cao-input>\n    @if (showHint) {\n      <cao-hint>{{ hintLabel }}</cao-hint>\n    }\n    @if (showError) {\n      <cao-error>Campo obrigatório</cao-error>\n    }\n  </cao-form-field>\n</div>\n",
-            "templateUrl": [],
-            "templateVariables": [],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "borderColor",
-                    "coverageIgnore": false,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 65,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "borderRadius",
-                    "coverageIgnore": false,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 67,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "borderWidth",
-                    "coverageIgnore": false,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 66,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "control",
-                    "coverageIgnore": false,
-                    "defaultValue": "new FormControl('', [Validators.required])",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "AbstractControl",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 52,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "errorColor",
-                    "coverageIgnore": false,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 68,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "focusBorderColor",
-                    "coverageIgnore": false,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 72,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "hintColor",
-                    "coverageIgnore": false,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 70,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "hintLabel",
-                    "coverageIgnore": false,
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 55,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "iconColor",
-                    "coverageIgnore": false,
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 60,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "inputBackground",
-                    "coverageIgnore": false,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 64,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "isLucideIcon",
-                    "coverageIgnore": false,
-                    "defaultValue": "true",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 59,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "label",
-                    "coverageIgnore": false,
-                    "defaultValue": "'Nome'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 53,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "labelColor",
-                    "coverageIgnore": false,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 69,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "labelInside",
-                    "coverageIgnore": false,
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 54,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "leadingIcon",
-                    "coverageIgnore": false,
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 57,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "mask",
-                    "coverageIgnore": false,
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 61,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "placeholder",
-                    "coverageIgnore": false,
-                    "defaultValue": "'Digite aqui...'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 56,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "showError",
-                    "coverageIgnore": false,
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 63,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "showHint",
-                    "coverageIgnore": false,
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "unknown",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 62,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "successBorderColor",
-                    "coverageIgnore": false,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 73,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "textColor",
-                    "coverageIgnore": false,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 71,
-                    "rawdescription": "\n"
-                },
-                {
-                    "name": "trailingIcon",
-                    "coverageIgnore": false,
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 58,
-                    "rawdescription": "\n"
-                }
-            ],
-            "methodsClass": [],
-            "coverageIgnore": false,
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "ReactiveFormsModule",
-                    "type": "module"
-                },
-                {
-                    "name": "CaoFormField"
-                },
-                {
-                    "name": "CaoBaseInput"
-                },
-                {
-                    "name": "CaoError"
-                },
-                {
-                    "name": "CaoHint"
-                }
-            ],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { AbstractControl, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';\n\nimport type { Meta, StoryObj } from '@storybook/angular-vite';\n\nimport { CaoFormField } from './form-field';\nimport { CaoBaseInput } from '../base-input/base-input';\nimport { CaoError } from '../error/error';\nimport { CaoHint } from '../hint/hint';\n\n@Component({\n  selector: 'cao-form-field-story',\n  imports: [ReactiveFormsModule, CaoFormField, CaoBaseInput, CaoError, CaoHint],\n  template: `\n    <div style=\"max-width: 420px;\">\n      <cao-form-field\n        [control]=\"control\"\n        forId=\"cao-form-field-story\"\n        [label]=\"label\"\n        [labelInside]=\"labelInside\"\n        [hintLabel]=\"hintLabel\"\n        [leadingIcon]=\"leadingIcon\"\n        [trailingIcon]=\"trailingIcon\"\n        [isLucideIcon]=\"isLucideIcon\"\n        [iconColor]=\"iconColor\"\n        [inputBackground]=\"inputBackground\"\n        [borderColor]=\"borderColor\"\n        [borderWidth]=\"borderWidth\"\n        [borderRadius]=\"borderRadius\"\n        [errorColor]=\"errorColor\"\n        [labelColor]=\"labelColor\"\n        [hintColor]=\"hintColor\"\n        [textColor]=\"textColor\"\n        [focusBorderColor]=\"focusBorderColor\"\n        [successBorderColor]=\"successBorderColor\">\n        <cao-input\n          [control]=\"control\"\n          [isDisabled]=\"control?.disabled === true\"\n          [placeholder]=\"placeholder\"\n          [mask]=\"mask\"></cao-input>\n        @if (showHint) {\n          <cao-hint>{{ hintLabel }}</cao-hint>\n        }\n        @if (showError) {\n          <cao-error>Campo obrigatório</cao-error>\n        }\n      </cao-form-field>\n    </div>\n  `,\n})\nclass CaoFormFieldStoryComponent {\n  control: AbstractControl = new FormControl('', [Validators.required]);\n  label = 'Nome';\n  labelInside = false;\n  hintLabel = '';\n  placeholder = 'Digite aqui...';\n  leadingIcon = '';\n  trailingIcon = '';\n  isLucideIcon = true;\n  iconColor = '';\n  mask = '';\n  showHint = false;\n  showError = false;\n  inputBackground?: string;\n  borderColor?: string;\n  borderWidth?: string;\n  borderRadius?: string;\n  errorColor?: string;\n  labelColor?: string;\n  hintColor?: string;\n  textColor?: string;\n  focusBorderColor?: string;\n  successBorderColor?: string;\n\n  constructor() {\n    this.control.markAsTouched();\n  }\n}\n\nconst render = (args: Partial<CaoFormFieldStoryComponent>) => ({\n  component: CaoFormFieldStoryComponent,\n  props: args,\n});\n\nconst meta: Meta<CaoFormField> = {\n  title: 'Componentes/Form Field',\n  component: CaoFormField,\n  tags: ['autodocs'],\n  argTypes: {\n    label: { control: 'text' },\n    labelInside: { control: 'boolean' },\n    hintLabel: { control: 'text' },\n    forId: { control: 'text' },\n    leadingIcon: { control: 'text' },\n    trailingIcon: { control: 'text' },\n    isLucideIcon: { control: 'boolean' },\n    iconColor: { control: 'color' },\n    inputBackground: { control: 'color' },\n    borderColor: { control: 'color' },\n    borderWidth: { control: 'text' },\n    borderRadius: { control: 'text' },\n    errorColor: { control: 'color' },\n    labelColor: { control: 'color' },\n    hintColor: { control: 'color' },\n    textColor: { control: 'color' },\n    focusBorderColor: { control: 'color' },\n    successBorderColor: { control: 'color' },\n  },\n  args: {\n    label: 'Nome',\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<CaoFormField>;\n\nexport const Padrao: Story = {\n  render: () => render({ label: 'Nome', placeholder: 'Digite seu nome' }),\n};\n\nexport const LabelDentro: Story = {\n  render: () => render({ label: 'Nome', labelInside: true, placeholder: ' ' }),\n};\n\nexport const ComHint: Story = {\n  render: () =>\n    render({\n      label: 'CEP',\n      placeholder: '00000-000',\n      hintLabel: 'Formato: 00000-000',\n      showHint: true,\n    }),\n};\n\nexport const ComErro: Story = {\n  render: () =>\n    render({\n      label: 'E-mail',\n      placeholder: 'Digite seu e-mail',\n      showError: true,\n    }),\n};\n\nexport const ComIcones: Story = {\n  render: () =>\n    render({\n      label: 'Buscar',\n      placeholder: 'Pesquisar...',\n      leadingIcon: 'Search',\n      trailingIcon: 'SlidersHorizontal',\n      iconColor: '#4f46e5',\n    }),\n};\n\nexport const ComMascaraCPF: Story = {\n  render: () =>\n    render({\n      label: 'CPF',\n      placeholder: '000.000.000-00',\n      mask: '000.000.000-00',\n    }),\n};\n\nexport const Desabilitado: Story = {\n  render: () =>\n    render({\n      control: new FormControl({ value: '', disabled: true }),\n      label: 'Campo bloqueado',\n      placeholder: 'Valor indisponível',\n    }),\n};\n\nexport const CoresCustomizadas: Story = {\n  render: () =>\n    render({\n      label: 'Personalizado',\n      placeholder: 'Cores via input',\n      inputBackground: '#f8fafc',\n      borderColor: '#94a3b8',\n      borderWidth: '2px',\n      borderRadius: '16px',\n      errorColor: '#e11d48',\n      labelColor: '#0f766e',\n      hintColor: '#64748b',\n      textColor: '#0f172a',\n      focusBorderColor: '#0d9488',\n      successBorderColor: '#16a34a',\n    }),\n};",
-            "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 73,
-                "rawdescription": "\n"
-            },
-            "extends": [],
-            "relationships": {
-                "incoming": [],
-                "outgoing": [
-                    {
-                        "name": "ReactiveFormsModule",
-                        "type": "module"
-                    },
-                    {
-                        "name": "CaoFormField",
-                        "type": "component"
-                    },
-                    {
-                        "name": "CaoBaseInput",
-                        "type": "component"
-                    },
-                    {
-                        "name": "CaoError",
-                        "type": "component"
-                    },
-                    {
-                        "name": "CaoHint",
-                        "type": "component"
-                    }
-                ]
-            }
+            "templateData": "<div\r\n  class=\"cao-form-field\"\r\n  [class.label-inside]=\"labelInside\"\r\n  [class.error-state]=\"errorStateActive\"\r\n  [class.disabled]=\"disabled\"\r\n  [class.required]=\"required\"\r\n  [style]=\"formFieldStyles()\">\r\n  @if (label && !labelInside) {\r\n    <label class=\"cao-form-field__label\" [for]=\"forId\">{{ label }}</label>\r\n  }\r\n  <div class=\"input-field\" (focusin)=\"onFocusIn()\" (focusout)=\"onFocusOut()\">\r\n    @if (leadingIcon) {\r\n      <cao-base-icon\r\n        [isLucideIcon]=\"isLucideIcon\"\r\n        [strokeWidthIcon]=\"strokeWidthIcon\"\r\n        [imgSource]=\"leadingIcon\"\r\n        [iconColor]=\"iconColor\"\r\n        [size]=\"size\" />\r\n    }\r\n    <div class=\"input-slot\">\r\n      @if (label && labelInside) {\r\n        <label\r\n          class=\"cao-form-field__label cao-form-field__label--float\"\r\n          [class.cao-form-field__label--floated]=\"floating\"\r\n          [for]=\"forId\">{{ label }}</label>\r\n      }\r\n      <ng-content select=\"[caoInput]\" />\r\n      <ng-content select=\"cao-input\" />\r\n      <ng-content select=\"input\" />\r\n      <ng-content select=\"select\" />\r\n      <ng-content select=\"textarea\" />\r\n      <ng-content select=\"h2\" />\r\n      <ng-content />\r\n    </div>\r\n    @if (trailingIcon) {\r\n      <cao-base-icon\r\n        [isLucideIcon]=\"isLucideIcon\"\r\n        [iconColor]=\"iconColor\"\r\n        [size]=\"size\"\r\n        [imgSource]=\"trailingIcon\"\r\n        [strokeWidthIcon]=\"strokeWidthIcon\" />\r\n    }\r\n  </div>\r\n  <div class=\"subscript-wrapper\">\r\n    @if (hintLabel) {\r\n      <small class=\"cao-form-field__hint\">{{ hintLabel }}</small>\r\n    }\r\n    <ng-content select=\"cao-hint\" />\r\n    <ng-content select=\"cao-error\" />\r\n  </div>\r\n</div>"
         },
         {
             "name": "CaoHint",
-            "id": "component-CaoHint-40a114c1acd46aff3310632fde6b625bf948675eb344d45e8941417c6b8db1c44b7bdc71f2adb89c986846c64cfe3db6548b3beffc1f0339843a6db9fc65942b",
+            "id": "component-CaoHint-c5df1f3c40d274598766b2d94eb1f0afe60bce8ad922b516081a6ea3c471818466844f2a544da98f5ced5960713a05f11c6c4418c05481711210389d5e116f8c",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -14011,12 +13643,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'cao-hint',\n  imports: [],\n  templateUrl: './hint.html',\n  styleUrl: './hint.css',\n})\nexport class CaoHint {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'cao-hint',\r\n  imports: [],\r\n  templateUrl: './hint.html',\r\n  styleUrl: './hint.css',\r\n})\r\nexport class CaoHint {}\r\n",
             "styleUrl": "./hint.css",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\n  display: block;\n  font-size: 0.75rem;\n  line-height: 1.25rem;\n  color: var(--cao-form-field-color-hint, var(--input-text, #9ca3af));\n}\n\n.cao-hint {\n  display: block;\n}\n",
+                    "data": ":host {\r\n  display: block;\r\n  font-size: 0.75rem;\r\n  line-height: 1.25rem;\r\n  color: var(--cao-form-field-color-hint, var(--input-text, #9ca3af));\r\n}\r\n\r\n.cao-hint {\r\n  display: block;\r\n}\r\n",
                     "styleUrl": "./hint.css"
                 }
             ],
@@ -14025,21 +13657,17 @@
             "relationships": {
                 "incoming": [
                     {
-                        "name": "CaoFormFieldStoryComponent",
-                        "type": "component"
-                    },
-                    {
                         "name": "CaoHintStoryComponent",
                         "type": "component"
                     }
                 ],
                 "outgoing": []
             },
-            "templateData": "<span class=\"cao-hint\"><ng-content /></span>\n"
+            "templateData": "<span class=\"cao-hint\"><ng-content /></span>\r\n"
         },
         {
             "name": "CaoHintStoryComponent",
-            "id": "component-CaoHintStoryComponent-76c1a427392c9f006ffb16edc57908c76a331e8d417cfe462092d905f53e6edada0e183deaf64475ae394d7c461d4de88832c35efd06ff5ef0ce6c0eef4669d8",
+            "id": "component-CaoHintStoryComponent-5491b5b8e821ba348711da238e648b96cae0e30cbd2730703fe14bd4ae468afc408e637e1657d63d0d6c2d848f4743357bdfb97aec72ea7ca2c121fd12d68530",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.stories.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -14109,7 +13737,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, ReactiveFormsModule } from '@angular/forms';\n\nimport type { Meta, StoryObj } from '@storybook/angular-vite';\n\nimport { CaoHint } from './hint';\nimport { CaoBaseInput } from '../base-input/base-input';\nimport { CaoFormField } from '../form-field/form-field';\n\n@Component({\n  selector: 'cao-hint-story',\n  imports: [ReactiveFormsModule, CaoFormField, CaoBaseInput, CaoHint],\n  template: `\n    <div style=\"max-width: 420px;\">\n      <cao-form-field [control]=\"control\" label=\"Usuário\">\n        <cao-input [control]=\"control\" placeholder=\"nome.sobrenome\"></cao-input>\n        <cao-hint>{{ text }}</cao-hint>\n      </cao-form-field>\n    </div>\n  `,\n})\nclass CaoHintStoryComponent {\n  control = new FormControl('');\n  text = 'Use seu nome de usuário ou e-mail';\n}\n\nconst render = (args: Partial<CaoHintStoryComponent>) => ({\n  component: CaoHintStoryComponent,\n  props: args,\n});\n\nconst meta: Meta<CaoHint> = {\n  title: 'Componentes/Hint',\n  component: CaoHint,\n  tags: ['autodocs'],\n  argTypes: {\n    text: { control: 'text' },\n  },\n  args: {\n    text: 'Use seu nome de usuário ou e-mail',\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<CaoHint>;\n\nexport const Padrao: Story = {\n  render: () => render({ text: 'Uma dica para auxiliar o preenchimento' }),\n};\n\nexport const ComTextoExemplo: Story = {\n  render: () => render({ text: 'Formato esperado: 000.000.000-00' }),\n};",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { FormControl, ReactiveFormsModule } from '@angular/forms';\r\n\r\nimport type { Meta, StoryObj } from '@storybook/angular-vite';\r\n\r\nimport { CaoHint } from './hint';\r\nimport { CaoBaseInput } from '../base-input/base-input';\r\nimport { CaoFormField } from '../form-field/form-field';\r\n\r\n@Component({\r\n  selector: 'cao-hint-story',\r\n  imports: [ReactiveFormsModule, CaoFormField, CaoBaseInput, CaoHint],\r\n  template: `\r\n    <div style=\"max-width: 420px;\">\r\n      <cao-form-field [control]=\"control\" label=\"Usuário\">\r\n        <cao-input [control]=\"control\" placeholder=\"nome.sobrenome\"></cao-input>\r\n        <cao-hint>{{ text }}</cao-hint>\r\n      </cao-form-field>\r\n    </div>\r\n  `,\r\n})\r\nclass CaoHintStoryComponent {\r\n  control = new FormControl('');\r\n  text = 'Use seu nome de usuário ou e-mail';\r\n}\r\n\r\nconst render = (args: Partial<CaoHintStoryComponent>) => ({\r\n  component: CaoHintStoryComponent,\r\n  props: args,\r\n});\r\n\r\nconst meta: Meta<CaoHint> = {\r\n  title: 'Componentes/Hint',\r\n  component: CaoHint,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    text: { control: 'text' },\r\n  },\r\n  args: {\r\n    text: 'Use seu nome de usuário ou e-mail',\r\n  },\r\n};\r\n\r\nexport default meta;\r\ntype Story = StoryObj<CaoHint>;\r\n\r\nexport const Padrao: Story = {\r\n  render: () => render({ text: 'Uma dica para auxiliar o preenchimento' }),\r\n};\r\n\r\nexport const ComTextoExemplo: Story = {\r\n  render: () => render({ text: 'Formato esperado: 000.000.000-00' }),\r\n};",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -17158,7 +16786,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () =>\n    render({\n      label: 'E-mail',\n      placeholder: 'Digite seu e-mail',\n      showError: true,\n    }),\n}"
+                "defaultValue": "{\n  render: () => {\n    const erroControl = control();\n    erroControl.markAsTouched();\n    return renderFormField(\n      `\n        <cao-form-field forId=\"email\" [label]=\"'E-mail'\" [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"'Digite seu e-mail'\"></cao-input>\n          <cao-error>Campo obrigatório</cao-error>\n        </cao-form-field>\n      `,\n      { control: erroControl }\n    );\n  },\n}"
             },
             {
                 "name": "ComHint",
@@ -17169,7 +16797,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () =>\n    render({\n      label: 'CEP',\n      placeholder: '00000-000',\n      hintLabel: 'Formato: 00000-000',\n      showHint: true,\n    }),\n}"
+                "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field forId=\"cep\" [label]=\"'CEP'\" [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"'00000-000'\"></cao-input>\n          <cao-hint>Formato: 00000-000</cao-hint>\n        </cao-form-field>\n      `,\n      { control: control() }\n    ),\n}"
             },
             {
                 "name": "ComIcones",
@@ -17186,23 +16814,23 @@
                 "name": "ComIcones",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field\n          forId=\"buscar\"\n          [label]=\"'Buscar'\"\n          leadingIcon=\"Search\"\n          trailingIcon=\"SlidersHorizontal\"\n          iconColor=\"#4f46e5\"\n          [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"'Pesquisar...'\"></cao-input>\n        </cao-form-field>\n      `,\n      { control: control() }\n    ),\n}"
+            },
+            {
+                "name": "ComIcones",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-group/tab-group.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  render: () => renderTabs(panelsWithIcons),\r\n}"
-            },
-            {
-                "name": "ComIcones",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  render: () =>\n    render({\n      label: 'Buscar',\n      placeholder: 'Pesquisar...',\n      leadingIcon: 'Search',\n      trailingIcon: 'SlidersHorizontal',\n      iconColor: '#4f46e5',\n    }),\n}"
             },
             {
                 "name": "ComIconesNasOpcoes",
@@ -17241,17 +16869,6 @@
                 "name": "ComLeadingIcon",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Usuários',\r\n    placeholder: 'Buscar usuário...',\r\n    options: defaultOptions,\r\n    _leadingIcon: 'Search',\r\n    isLucideIcon: true,\r\n    iconColor: '#6b7280',\r\n  },\r\n}"
-            },
-            {
-                "name": "ComLeadingIcon",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -17269,6 +16886,17 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Buscar usuário',\r\n    type: 'text',\r\n    leadingIcon: 'Search',\r\n    isLucideIcon: true,\r\n  },\r\n}"
+            },
+            {
+                "name": "ComLeadingIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Usuários',\r\n    placeholder: 'Buscar usuário...',\r\n    options: defaultOptions,\r\n    _leadingIcon: 'Search',\r\n    isLucideIcon: true,\r\n    iconColor: '#6b7280',\r\n  },\r\n}"
             },
             {
                 "name": "ComLeadingIcon",
@@ -17323,7 +16951,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () =>\n    render({\n      label: 'CPF',\n      placeholder: '000.000.000-00',\n      mask: '000.000.000-00',\n    }),\n}"
+                "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field forId=\"cpf\" [label]=\"'CPF'\" [control]=\"control\">\n          <cao-input\n            [control]=\"control\"\n            [placeholder]=\"'000.000.000-00'\"\n            [mask]=\"'000.000.000-00'\"></cao-input>\n        </cao-form-field>\n      `,\n      { control: control() }\n    ),\n}"
             },
             {
                 "name": "ComMeta",
@@ -17400,7 +17028,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => render({ text: 'Formato esperado: 000.000.000-00' }),\n}"
+                "defaultValue": "{\r\n  render: () => render({ text: 'Formato esperado: 000.000.000-00' }),\r\n}"
             },
             {
                 "name": "ComTitulo",
@@ -17480,6 +17108,17 @@
                 "defaultValue": "{\r\n  render: (args) => ({\r\n    template: `\r\n      <cao-time-picker\r\n        [control]=\"control\"\r\n        [min]=\"min\"\r\n        [max]=\"max\"\r\n        [isDisabled]=\"isDisabled\"\r\n        (timeChange)=\"timeChange($event)\" />\r\n    `,\r\n    props: {\r\n      control: new FormControl<Date | null>(new Date(2026, 0, 1, 14, 30)),\r\n      min: args.min,\r\n      max: args.max,\r\n      isDisabled: args.isDisabled,\r\n      timeChange: fn(),\r\n    },\r\n  }),\r\n}"
             },
             {
+                "name": "control",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "() => new FormControl('', [Validators.required])"
+            },
+            {
                 "name": "CorCustomizada",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -17499,7 +17138,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () =>\n    render({\n      label: 'Personalizado',\n      placeholder: 'Cores via input',\n      inputBackground: '#f8fafc',\n      borderColor: '#94a3b8',\n      borderWidth: '2px',\n      borderRadius: '16px',\n      errorColor: '#e11d48',\n      labelColor: '#0f766e',\n      hintColor: '#64748b',\n      textColor: '#0f172a',\n      focusBorderColor: '#0d9488',\n      successBorderColor: '#16a34a',\n    }),\n}"
+                "defaultValue": "{\n  render: () => {\n    const coresControl = control();\n    coresControl.markAsTouched();\n    return renderFormField(\n      `\n        <cao-form-field\n          forId=\"cores\"\n          [label]=\"'Personalizado'\"\n          inputBackground=\"#f8fafc\"\n          borderColor=\"#94a3b8\"\n          borderWidth=\"2px\"\n          borderRadius=\"16px\"\n          errorColor=\"#e11d48\"\n          labelColor=\"#0f766e\"\n          hintColor=\"#64748b\"\n          textColor=\"#0f172a\"\n          focusBorderColor=\"#0d9488\"\n          successBorderColor=\"#16a34a\"\n          [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"'Cores via input'\"></cao-input>\n          <cao-hint>Hint customizado</cao-hint>\n          <cao-error>Erro customizado</cao-error>\n        </cao-form-field>\n      `,\n      { control: coresControl }\n    );\n  },\n}"
             },
             {
                 "name": "CoresPersonalizadas",
@@ -17582,17 +17221,6 @@
                 "name": "Desabilitado",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Usuários',\r\n    placeholder: 'Buscar usuário...',\r\n    options: defaultOptions,\r\n    isDisabled: true,\r\n  },\r\n}"
-            },
-            {
-                "name": "Desabilitado",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -17615,23 +17243,12 @@
                 "name": "Desabilitado",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    textHeader: 'Selecione um status',\r\n    options: defaultOptions,\r\n    isDisabled: true,\r\n  },\r\n}"
-            },
-            {
-                "name": "Desabilitado",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    isDisabled: true,\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Usuários',\r\n    placeholder: 'Buscar usuário...',\r\n    options: defaultOptions,\r\n    isDisabled: true,\r\n  },\r\n}"
             },
             {
                 "name": "Desabilitado",
@@ -17659,6 +17276,28 @@
                 "name": "Desabilitado",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    textHeader: 'Selecione um status',\r\n    options: defaultOptions,\r\n    isDisabled: true,\r\n  },\r\n}"
+            },
+            {
+                "name": "Desabilitado",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field forId=\"bloqueado\" [label]=\"'Campo bloqueado'\" [control]=\"control\">\n          <cao-input [control]=\"control\" [isDisabled]=\"true\" [placeholder]=\"'Valor indisponível'\"></cao-input>\n        </cao-form-field>\n      `,\n      { control: new FormControl({ value: '', disabled: true }) }\n    ),\n}"
+            },
+            {
+                "name": "Desabilitado",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -17670,12 +17309,12 @@
                 "name": "Desabilitado",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () =>\n    render({\n      control: new FormControl({ value: '', disabled: true }),\n      label: 'Campo bloqueado',\n      placeholder: 'Valor indisponível',\n    }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    isDisabled: true,\r\n  },\r\n}"
             },
             {
                 "name": "DesabilitadoComIcone",
@@ -17708,7 +17347,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render,\n}"
+                "defaultValue": "{\r\n  render,\r\n}"
             },
             {
                 "name": "ErroPorPadrao",
@@ -17719,7 +17358,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  render,\n}"
+                "defaultValue": "{\r\n  args: {},\r\n  render,\r\n}"
             },
             {
                 "name": "Fixo",
@@ -17851,7 +17490,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => render({ label: 'Nome', labelInside: true, placeholder: ' ' }),\n}"
+                "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field forId=\"label-dentro\" [label]=\"'Nome'\" [labelInside]=\"true\" [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"' '\"></cao-input>\n        </cao-form-field>\n      `,\n      { control: control() }\n    ),\n}"
             },
             {
                 "name": "LabelsCentralizados",
@@ -17879,23 +17518,23 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<CaoAutocompleteComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Autocomplete',\r\n  component: CaoAutocompleteComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    label: { control: 'text' },\r\n    placeholder: { control: 'text' },\r\n    options: { control: 'object' },\r\n    dataCy: { control: 'text' },\r\n    controlName: { control: 'text' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    iconColor: { control: 'color' },\r\n    optionIcon: { control: 'text' },\r\n    optionIConColor: { control: 'color' },\r\n    isLucideOptionIcon: { control: 'boolean' },\r\n    autocompleteBgColor: { control: 'color' },\r\n    strokeWidthIcon: { control: { type: 'number', min: 0.5, max: 3, step: 0.1 } },\r\n    isDisabled: { control: 'boolean' },\r\n    inputHeigth: { control: 'text' },\r\n    iconSize: { control: { type: 'number', min: 8, max: 48 } },\r\n    showCheckIcon: { control: 'boolean' },\r\n    isLucideCheckIcon: { control: 'boolean' },\r\n  },\r\n  args: {\r\n    itemSelected: fn(),\r\n    blurEvent: fn(),\r\n    focusEvent: fn(),\r\n    leadingIconClick: fn(),\r\n    trailingIconClick: fn(),\r\n    label: 'Selecione um usuário',\r\n    placeholder: 'Buscar usuário...',\r\n    options: defaultOptions,\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<CaoBaseButtonComponent>",
                 "defaultValue": "{\r\n  title: 'Componentes/Base Button',\r\n  component: CaoBaseButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    buttonText: { control: 'text' },\r\n    btnClass: { control: 'text' },\r\n    tooltip: { control: 'text' },\r\n    leadingIcon: { control: 'text' },\r\n    trailingIcon: { control: 'text' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    iconColor: { control: 'color' },\r\n    isDarkMode: { control: 'boolean' },\r\n    isDisabled: { control: 'boolean' },\r\n    isLoading: { control: 'boolean' },\r\n    strokeWidthIcon: { control: { type: 'number', min: 0.5, max: 3, step: 0.1 } },\r\n    minTextToTooltip: { control: { type: 'number', min: 1, max: 100 } },\r\n    iconSize: { control: { type: 'number', min: 8, max: 64 } },\r\n    dataCy: { control: 'text' },\r\n  },\r\n  args: {\r\n    buttonClick: fn(),\r\n    buttonText: 'Clique!',\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CaoBaseIcon>",
+                "defaultValue": "{\r\n  title: 'Componentes/Base Icon',\r\n  component: CaoBaseIcon,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    imgSource: { control: 'text' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    strokeWidthIcon: { control: { type: 'number', min: 0.5, max: 3, step: 0.1 } },\r\n    iconColor: { control: 'color' },\r\n    size: { control: { type: 'number', min: 8, max: 96 } },\r\n  },\r\n  args: {\r\n    imgSource: 'Home',\r\n    isLucideIcon: true,\r\n    size: 32,\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -17912,78 +17551,12 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-time-range/base-time-range.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<BaseTimeRange>",
-                "defaultValue": "{\r\n  title: 'Componentes/Base Time Range',\r\n  component: BaseTimeRange,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    label: { control: 'text' },\r\n    dataCy: { control: 'text' },\r\n    controlName: { control: 'text' },\r\n  },\r\n  args: {\r\n    rangeSelected: fn(),\r\n    label: 'Período',\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<CaoDropDownComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Drop Down',\r\n  component: CaoDropDownComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    textHeader: { control: 'text' },\r\n    options: { control: 'object' },\r\n    dropDownClass: { control: 'text' },\r\n    isDisabled: { control: 'boolean' },\r\n    tooltip: { control: 'text' },\r\n    dropDirectionInput: { control: 'select', options: ['up', 'down'] },\r\n    dataCy: { control: 'text' },\r\n    ariaLabel: { control: 'text' },\r\n    ariaLabelledBy: { control: 'text' },\r\n    listAriaLabel: { control: 'text' },\r\n  },\r\n  args: {\r\n    itemSelected: fn(),\r\n    textHeader: 'SELECIONE UM ITEM',\r\n    options: defaultOptions,\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<Footer>",
-                "defaultValue": "{\r\n  title: 'Componentes/Footer',\r\n  component: Footer,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    currentRoute: { control: 'text' },\r\n    footerText: { control: 'text' },\r\n    isFixed: { control: 'boolean' },\r\n  },\r\n  args: {\r\n    footerText: 'Opalbytes',\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/links-button/links-button.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<LinksButton>",
-                "defaultValue": "{\r\n  title: 'Componentes/Links Button',\r\n  component: LinksButton,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      providers: [\r\n        { provide: Router, useValue: { navigate: () => Promise.resolve(true) } },\r\n        { provide: ActivatedRoute, useValue: {} },\r\n      ],\r\n    }),\r\n  ],\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<Paginator>",
-                "defaultValue": "{\r\n  title: 'Componentes/Paginator',\r\n  component: Paginator,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    totalItems: { control: { type: 'number', min: 0 } },\r\n    pageSize: { control: { type: 'number', min: 1 } },\r\n    currentPage: { control: { type: 'number', min: 1 } },\r\n    pageSizeOptions: { control: 'object' },\r\n    customClass: { control: 'text' },\r\n    showFirstLastButtons: { control: 'boolean' },\r\n  },\r\n  args: {\r\n    pageEvent: fn(),\r\n    totalItems: 250,\r\n    pageSize: 10,\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<TimePicker>",
-                "defaultValue": "{\r\n  title: 'Componentes/Time Picker',\r\n  component: TimePicker,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    isDisabled: { control: 'boolean' },\r\n    dataCy: { control: 'text' },\r\n    min: { control: 'text' },\r\n    max: { control: 'text' },\r\n  },\r\n  args: {\r\n    timeChange: fn(),\r\n    min: '07:00',\r\n    max: '23:00',\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<StepperComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Stepper',\r\n  component: StepperComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    title: { control: 'text' },\r\n  },\r\n  args: {\r\n    maxReachedEvent: fn(),\r\n  },\r\n}"
+                "type": "Meta<CaoAutocompleteComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Autocomplete',\r\n  component: CaoAutocompleteComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    label: { control: 'text' },\r\n    placeholder: { control: 'text' },\r\n    options: { control: 'object' },\r\n    dataCy: { control: 'text' },\r\n    controlName: { control: 'text' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    iconColor: { control: 'color' },\r\n    optionIcon: { control: 'text' },\r\n    optionIConColor: { control: 'color' },\r\n    isLucideOptionIcon: { control: 'boolean' },\r\n    autocompleteBgColor: { control: 'color' },\r\n    strokeWidthIcon: { control: { type: 'number', min: 0.5, max: 3, step: 0.1 } },\r\n    isDisabled: { control: 'boolean' },\r\n    inputHeigth: { control: 'text' },\r\n    iconSize: { control: { type: 'number', min: 8, max: 48 } },\r\n    showCheckIcon: { control: 'boolean' },\r\n    isLucideCheckIcon: { control: 'boolean' },\r\n  },\r\n  args: {\r\n    itemSelected: fn(),\r\n    blurEvent: fn(),\r\n    focusEvent: fn(),\r\n    leadingIconClick: fn(),\r\n    trailingIconClick: fn(),\r\n    label: 'Selecione um usuário',\r\n    placeholder: 'Buscar usuário...',\r\n    options: defaultOptions,\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -18000,12 +17573,12 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-time-range/base-time-range.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<CaoBaseIcon>",
-                "defaultValue": "{\r\n  title: 'Componentes/Base Icon',\r\n  component: CaoBaseIcon,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    imgSource: { control: 'text' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    strokeWidthIcon: { control: { type: 'number', min: 0.5, max: 3, step: 0.1 } },\r\n    iconColor: { control: 'color' },\r\n    size: { control: { type: 'number', min: 8, max: 96 } },\r\n  },\r\n  args: {\r\n    imgSource: 'Home',\r\n    isLucideIcon: true,\r\n    size: 32,\r\n  },\r\n}"
+                "type": "Meta<BaseTimeRange>",
+                "defaultValue": "{\r\n  title: 'Componentes/Base Time Range',\r\n  component: BaseTimeRange,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    label: { control: 'text' },\r\n    dataCy: { control: 'text' },\r\n    controlName: { control: 'text' },\r\n  },\r\n  args: {\r\n    rangeSelected: fn(),\r\n    label: 'Período',\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -18033,6 +17606,61 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CaoDropDownComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Drop Down',\r\n  component: CaoDropDownComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    textHeader: { control: 'text' },\r\n    options: { control: 'object' },\r\n    dropDownClass: { control: 'text' },\r\n    isDisabled: { control: 'boolean' },\r\n    tooltip: { control: 'text' },\r\n    dropDirectionInput: { control: 'select', options: ['up', 'down'] },\r\n    dataCy: { control: 'text' },\r\n    ariaLabel: { control: 'text' },\r\n    ariaLabelledBy: { control: 'text' },\r\n    listAriaLabel: { control: 'text' },\r\n  },\r\n  args: {\r\n    itemSelected: fn(),\r\n    textHeader: 'SELECIONE UM ITEM',\r\n    options: defaultOptions,\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<Footer>",
+                "defaultValue": "{\r\n  title: 'Componentes/Footer',\r\n  component: Footer,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    currentRoute: { control: 'text' },\r\n    footerText: { control: 'text' },\r\n    isFixed: { control: 'boolean' },\r\n  },\r\n  args: {\r\n    footerText: 'Opalbytes',\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/error/error.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CaoError>",
+                "defaultValue": "{\r\n  title: 'Componentes/Error',\r\n  component: CaoError,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CaoHint>",
+                "defaultValue": "{\r\n  title: 'Componentes/Hint',\r\n  component: CaoHint,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    text: { control: 'text' },\r\n  },\r\n  args: {\r\n    text: 'Use seu nome de usuário ou e-mail',\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CaoFormField>",
+                "defaultValue": "{\n  title: 'Componentes/Form Field',\n  component: CaoFormField,\n  subcomponents: {\n    caoBaseInput: CaoBaseInput,\n    caoHint: CaoHint,\n    caoError: CaoError,\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    label: { control: 'text' },\n    labelInside: { control: 'boolean' },\n    hintLabel: { control: 'text' },\n    leadingIcon: { control: 'text' },\n    trailingIcon: { control: 'text' },\n    inputBackground: { control: 'color' },\n    borderColor: { control: 'color' },\n    borderWidth: { control: 'text' },\n    borderRadius: { control: 'text' },\n    errorColor: { control: 'color' },\n    labelColor: { control: 'color' },\n    hintColor: { control: 'color' },\n    textColor: { control: 'color' },\n    focusBorderColor: { control: 'color' },\n    successBorderColor: { control: 'color' },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/kpi/kpi.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -18044,12 +17672,45 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/links-button/links-button.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<LinksButton>",
+                "defaultValue": "{\r\n  title: 'Componentes/Links Button',\r\n  component: LinksButton,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      providers: [\r\n        { provide: Router, useValue: { navigate: () => Promise.resolve(true) } },\r\n        { provide: ActivatedRoute, useValue: {} },\r\n      ],\r\n    }),\r\n  ],\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<Paginator>",
+                "defaultValue": "{\r\n  title: 'Componentes/Paginator',\r\n  component: Paginator,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    totalItems: { control: { type: 'number', min: 0 } },\r\n    pageSize: { control: { type: 'number', min: 1 } },\r\n    currentPage: { control: { type: 'number', min: 1 } },\r\n    pageSizeOptions: { control: 'object' },\r\n    customClass: { control: 'text' },\r\n    showFirstLastButtons: { control: 'boolean' },\r\n  },\r\n  args: {\r\n    pageEvent: fn(),\r\n    totalItems: 250,\r\n    pageSize: 10,\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-group/tab-group.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<CaoTabGroup>",
                 "defaultValue": "{\r\n  title: 'Componentes/Tab Group',\r\n  component: CaoTabGroup,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    selectedIndex: { control: { type: 'number', min: 0 } },\r\n    labelHeight: { control: 'text' },\r\n    labelPaddingX: { control: 'text' },\r\n    labelGap: { control: 'text' },\r\n    colorText: { control: 'color' },\r\n    colorActive: { control: 'color' },\r\n    colorHoverBg: { control: 'color' },\r\n    colorDisabled: { control: 'color' },\r\n    colorInkBar: { control: 'color' },\r\n    colorHeaderBorder: { control: 'color' },\r\n    inkBarHeight: { control: 'text' },\r\n    contentPaddingTop: { control: 'text' },\r\n    labelRadius: { control: 'text' },\r\n    animationDuration: { control: 'text' },\r\n    dynamicHeight: { control: 'boolean' },\r\n    labelAlign: { control: 'select', options: ['start', 'center', 'end'] },\r\n    iconColorActive: { control: 'color' },\r\n    iconColorInactive: { control: 'color' },\r\n    strokeWidthIcon: { control: { type: 'number', min: 0.5, max: 3, step: 0.1 } },\r\n  },\r\n  args: {\r\n    selectedTabChange: fn(),\r\n    focusChange: fn(),\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<StepperComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Stepper',\r\n  component: StepperComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    title: { control: 'text' },\r\n  },\r\n  args: {\r\n    maxReachedEvent: fn(),\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -18077,34 +17738,12 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<CaoFormField>",
-                "defaultValue": "{\n  title: 'Componentes/Form Field',\n  component: CaoFormField,\n  tags: ['autodocs'],\n  argTypes: {\n    label: { control: 'text' },\n    labelInside: { control: 'boolean' },\n    hintLabel: { control: 'text' },\n    forId: { control: 'text' },\n    leadingIcon: { control: 'text' },\n    trailingIcon: { control: 'text' },\n    isLucideIcon: { control: 'boolean' },\n    iconColor: { control: 'color' },\n    inputBackground: { control: 'color' },\n    borderColor: { control: 'color' },\n    borderWidth: { control: 'text' },\n    borderRadius: { control: 'text' },\n    errorColor: { control: 'color' },\n    labelColor: { control: 'color' },\n    hintColor: { control: 'color' },\n    textColor: { control: 'color' },\n    focusBorderColor: { control: 'color' },\n    successBorderColor: { control: 'color' },\n  },\n  args: {\n    label: 'Nome',\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/error/error.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<CaoError>",
-                "defaultValue": "{\n  title: 'Componentes/Error',\n  component: CaoError,\n  tags: ['autodocs'],\n  args: {},\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<CaoHint>",
-                "defaultValue": "{\n  title: 'Componentes/Hint',\n  component: CaoHint,\n  tags: ['autodocs'],\n  argTypes: {\n    text: { control: 'text' },\n  },\n  args: {\n    text: 'Use seu nome de usuário ou e-mail',\n  },\n}"
+                "type": "Meta<TimePicker>",
+                "defaultValue": "{\r\n  title: 'Componentes/Time Picker',\r\n  component: TimePicker,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    isDisabled: { control: 'boolean' },\r\n    dataCy: { control: 'text' },\r\n    min: { control: 'text' },\r\n    max: { control: 'text' },\r\n  },\r\n  args: {\r\n    timeChange: fn(),\r\n    min: '07:00',\r\n    max: '23:00',\r\n  },\r\n}"
             },
             {
                 "name": "ModoEscuro",
@@ -18187,17 +17826,6 @@
                 "name": "Padrao",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    label: 'Usuários',\r\n    placeholder: 'Buscar usuário...',\r\n    options: defaultOptions,\r\n  },\r\n}"
-            },
-            {
-                "name": "Padrao",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -18220,12 +17848,45 @@
                 "name": "Padrao",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    label: 'Usuários',\r\n    placeholder: 'Buscar usuário...',\r\n    options: defaultOptions,\r\n  },\r\n}"
+            },
+            {
+                "name": "Padrao",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-toggle/base-toggle.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    isChecked: false,\r\n  },\r\n}"
+            },
+            {
+                "name": "Padrao",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-time-range/base-time-range.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    label: 'Período de análise',\r\n  },\r\n}"
+            },
+            {
+                "name": "Padrao",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Selecione uma data',\r\n  },\r\n}"
             },
             {
                 "name": "Padrao",
@@ -18253,6 +17914,39 @@
                 "name": "Padrao",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  render: () => render({ text: 'Uma dica para auxiliar o preenchimento' }),\r\n}"
+            },
+            {
+                "name": "Padrao",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field forId=\"padrao\" [label]=\"'Nome'\" [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"'Digite seu nome'\"></cao-input>\n        </cao-form-field>\n      `,\n      { control: control() }\n    ),\n}"
+            },
+            {
+                "name": "Padrao",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/kpi/kpi.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    kpiData: defaultKpi,\r\n  },\r\n}"
+            },
+            {
+                "name": "Padrao",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/links-button/links-button.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -18275,12 +17969,12 @@
                 "name": "Padrao",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-group/tab-group.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    min: '07:00',\r\n    max: '23:00',\r\n  },\r\n}"
+                "defaultValue": "{\r\n  render: () => renderTabs(defaultPanels),\r\n}"
             },
             {
                 "name": "Padrao",
@@ -18297,50 +17991,6 @@
                 "name": "Padrao",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-toggle/base-toggle.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    isChecked: false,\r\n  },\r\n}"
-            },
-            {
-                "name": "Padrao",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Selecione uma data',\r\n  },\r\n}"
-            },
-            {
-                "name": "Padrao",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/kpi/kpi.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    kpiData: defaultKpi,\r\n  },\r\n}"
-            },
-            {
-                "name": "Padrao",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-group/tab-group.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  render: () => renderTabs(defaultPanels),\r\n}"
-            },
-            {
-                "name": "Padrao",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -18352,23 +18002,12 @@
                 "name": "Padrao",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  render: () => render({ label: 'Nome', placeholder: 'Digite seu nome' }),\n}"
-            },
-            {
-                "name": "Padrao",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  render: () => render({ text: 'Uma dica para auxiliar o preenchimento' }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    min: '07:00',\r\n    max: '23:00',\r\n  },\r\n}"
             },
             {
                 "name": "PadraoComIconeSVG",
@@ -18440,23 +18079,12 @@
                 "name": "render",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "unknown",
-                "defaultValue": "(args: Partial<CaoFormFieldStoryComponent>) => ({\n  component: CaoFormFieldStoryComponent,\n  props: args,\n})"
-            },
-            {
-                "name": "render",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/error/error.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "unknown",
-                "defaultValue": "() => ({\n  component: CaoErrorStoryComponent,\n})"
+                "defaultValue": "() => ({\r\n  component: CaoErrorStoryComponent,\r\n})"
             },
             {
                 "name": "render",
@@ -18467,7 +18095,18 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "unknown",
-                "defaultValue": "(args: Partial<CaoHintStoryComponent>) => ({\n  component: CaoHintStoryComponent,\n  props: args,\n})"
+                "defaultValue": "(args: Partial<CaoHintStoryComponent>) => ({\r\n  component: CaoHintStoryComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "renderFormField",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "(inner: string, props: Record<string, unknown> = {}) => ({\n  template: `<div style=\"max-width: 420px;\">${inner}</div>`,\n  moduleMetadata: { imports: storyImports },\n  props,\n})"
             },
             {
                 "name": "renderStepper",
@@ -18578,6 +18217,17 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  render: () =>\r\n    renderStepper(`\r\n      <cao-step title=\"Primeira\" />\r\n      <cao-step title=\"Segunda\" />\r\n      <cao-step title=\"Terceira\" isActive=\"true\" />\r\n    `),\r\n}"
+            },
+            {
+                "name": "storyImports",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[ReactiveFormsModule, CaoFormField, CaoBaseInput, CaoHint, CaoError]"
             },
             {
                 "name": "Sucesso",
@@ -18764,8 +18414,8 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoAutocompleteComponent>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
+                "rawtype": "StoryObj<CaoBaseButtonComponent>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -18777,8 +18427,8 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoBaseButtonComponent>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
+                "rawtype": "StoryObj<CaoBaseIcon>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -18803,86 +18453,8 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
-                "rawtype": "StoryObj<BaseTimeRange>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-time-range/base-time-range.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoDropDownComponent>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
-                "rawtype": "StoryObj<Footer>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
-                "rawtype": "StoryObj<LinksButton>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/links-button/links-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
-                "rawtype": "StoryObj<Paginator>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
-                "rawtype": "StoryObj<TimePicker>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
-                "rawtype": "StoryObj<StepperComponent>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts",
+                "rawtype": "StoryObj<CaoAutocompleteComponent>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -18907,8 +18479,8 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoBaseIcon>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
+                "rawtype": "StoryObj<BaseTimeRange>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-time-range/base-time-range.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -18946,6 +18518,71 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
+                "rawtype": "StoryObj<CaoDropDownComponent>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "StoryObj<Footer>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "StoryObj<CaoError>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/error/error.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "StoryObj<CaoHint>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "StoryObj<CaoFormField>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
                 "rawtype": "StoryObj<CaoKpi>",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/kpi/kpi.stories.ts",
                 "deprecated": false,
@@ -18959,8 +18596,47 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
+                "rawtype": "StoryObj<LinksButton>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/links-button/links-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "StoryObj<Paginator>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
                 "rawtype": "StoryObj<CaoTabGroup>",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-group/tab-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "StoryObj<StepperComponent>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -18998,34 +18674,8 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoFormField>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoError>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/error/error.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoHint>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.stories.ts",
+                "rawtype": "StoryObj<TimePicker>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -20349,7 +19999,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () =>\n    render({\n      label: 'E-mail',\n      placeholder: 'Digite seu e-mail',\n      showError: true,\n    }),\n}"
+                    "defaultValue": "{\n  render: () => {\n    const erroControl = control();\n    erroControl.markAsTouched();\n    return renderFormField(\n      `\n        <cao-form-field forId=\"email\" [label]=\"'E-mail'\" [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"'Digite seu e-mail'\"></cao-input>\n          <cao-error>Campo obrigatório</cao-error>\n        </cao-form-field>\n      `,\n      { control: erroControl }\n    );\n  },\n}"
                 },
                 {
                     "name": "ComHint",
@@ -20360,7 +20010,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () =>\n    render({\n      label: 'CEP',\n      placeholder: '00000-000',\n      hintLabel: 'Formato: 00000-000',\n      showHint: true,\n    }),\n}"
+                    "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field forId=\"cep\" [label]=\"'CEP'\" [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"'00000-000'\"></cao-input>\n          <cao-hint>Formato: 00000-000</cao-hint>\n        </cao-form-field>\n      `,\n      { control: control() }\n    ),\n}"
                 },
                 {
                     "name": "ComIcones",
@@ -20371,7 +20021,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () =>\n    render({\n      label: 'Buscar',\n      placeholder: 'Pesquisar...',\n      leadingIcon: 'Search',\n      trailingIcon: 'SlidersHorizontal',\n      iconColor: '#4f46e5',\n    }),\n}"
+                    "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field\n          forId=\"buscar\"\n          [label]=\"'Buscar'\"\n          leadingIcon=\"Search\"\n          trailingIcon=\"SlidersHorizontal\"\n          iconColor=\"#4f46e5\"\n          [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"'Pesquisar...'\"></cao-input>\n        </cao-form-field>\n      `,\n      { control: control() }\n    ),\n}"
                 },
                 {
                     "name": "ComMascaraCPF",
@@ -20382,7 +20032,18 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () =>\n    render({\n      label: 'CPF',\n      placeholder: '000.000.000-00',\n      mask: '000.000.000-00',\n    }),\n}"
+                    "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field forId=\"cpf\" [label]=\"'CPF'\" [control]=\"control\">\n          <cao-input\n            [control]=\"control\"\n            [placeholder]=\"'000.000.000-00'\"\n            [mask]=\"'000.000.000-00'\"></cao-input>\n        </cao-form-field>\n      `,\n      { control: control() }\n    ),\n}"
+                },
+                {
+                    "name": "control",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "() => new FormControl('', [Validators.required])"
                 },
                 {
                     "name": "CoresCustomizadas",
@@ -20393,7 +20054,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () =>\n    render({\n      label: 'Personalizado',\n      placeholder: 'Cores via input',\n      inputBackground: '#f8fafc',\n      borderColor: '#94a3b8',\n      borderWidth: '2px',\n      borderRadius: '16px',\n      errorColor: '#e11d48',\n      labelColor: '#0f766e',\n      hintColor: '#64748b',\n      textColor: '#0f172a',\n      focusBorderColor: '#0d9488',\n      successBorderColor: '#16a34a',\n    }),\n}"
+                    "defaultValue": "{\n  render: () => {\n    const coresControl = control();\n    coresControl.markAsTouched();\n    return renderFormField(\n      `\n        <cao-form-field\n          forId=\"cores\"\n          [label]=\"'Personalizado'\"\n          inputBackground=\"#f8fafc\"\n          borderColor=\"#94a3b8\"\n          borderWidth=\"2px\"\n          borderRadius=\"16px\"\n          errorColor=\"#e11d48\"\n          labelColor=\"#0f766e\"\n          hintColor=\"#64748b\"\n          textColor=\"#0f172a\"\n          focusBorderColor=\"#0d9488\"\n          successBorderColor=\"#16a34a\"\n          [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"'Cores via input'\"></cao-input>\n          <cao-hint>Hint customizado</cao-hint>\n          <cao-error>Erro customizado</cao-error>\n        </cao-form-field>\n      `,\n      { control: coresControl }\n    );\n  },\n}"
                 },
                 {
                     "name": "Desabilitado",
@@ -20404,7 +20065,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () =>\n    render({\n      control: new FormControl({ value: '', disabled: true }),\n      label: 'Campo bloqueado',\n      placeholder: 'Valor indisponível',\n    }),\n}"
+                    "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field forId=\"bloqueado\" [label]=\"'Campo bloqueado'\" [control]=\"control\">\n          <cao-input [control]=\"control\" [isDisabled]=\"true\" [placeholder]=\"'Valor indisponível'\"></cao-input>\n        </cao-form-field>\n      `,\n      { control: new FormControl({ value: '', disabled: true }) }\n    ),\n}"
                 },
                 {
                     "name": "LabelDentro",
@@ -20415,7 +20076,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => render({ label: 'Nome', labelInside: true, placeholder: ' ' }),\n}"
+                    "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field forId=\"label-dentro\" [label]=\"'Nome'\" [labelInside]=\"true\" [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"' '\"></cao-input>\n        </cao-form-field>\n      `,\n      { control: control() }\n    ),\n}"
                 },
                 {
                     "name": "meta",
@@ -20426,7 +20087,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<CaoFormField>",
-                    "defaultValue": "{\n  title: 'Componentes/Form Field',\n  component: CaoFormField,\n  tags: ['autodocs'],\n  argTypes: {\n    label: { control: 'text' },\n    labelInside: { control: 'boolean' },\n    hintLabel: { control: 'text' },\n    forId: { control: 'text' },\n    leadingIcon: { control: 'text' },\n    trailingIcon: { control: 'text' },\n    isLucideIcon: { control: 'boolean' },\n    iconColor: { control: 'color' },\n    inputBackground: { control: 'color' },\n    borderColor: { control: 'color' },\n    borderWidth: { control: 'text' },\n    borderRadius: { control: 'text' },\n    errorColor: { control: 'color' },\n    labelColor: { control: 'color' },\n    hintColor: { control: 'color' },\n    textColor: { control: 'color' },\n    focusBorderColor: { control: 'color' },\n    successBorderColor: { control: 'color' },\n  },\n  args: {\n    label: 'Nome',\n  },\n}"
+                    "defaultValue": "{\n  title: 'Componentes/Form Field',\n  component: CaoFormField,\n  subcomponents: {\n    caoBaseInput: CaoBaseInput,\n    caoHint: CaoHint,\n    caoError: CaoError,\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    label: { control: 'text' },\n    labelInside: { control: 'boolean' },\n    hintLabel: { control: 'text' },\n    leadingIcon: { control: 'text' },\n    trailingIcon: { control: 'text' },\n    inputBackground: { control: 'color' },\n    borderColor: { control: 'color' },\n    borderWidth: { control: 'text' },\n    borderRadius: { control: 'text' },\n    errorColor: { control: 'color' },\n    labelColor: { control: 'color' },\n    hintColor: { control: 'color' },\n    textColor: { control: 'color' },\n    focusBorderColor: { control: 'color' },\n    successBorderColor: { control: 'color' },\n  },\n}"
                 },
                 {
                     "name": "Padrao",
@@ -20437,10 +20098,10 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => render({ label: 'Nome', placeholder: 'Digite seu nome' }),\n}"
+                    "defaultValue": "{\n  render: () =>\n    renderFormField(\n      `\n        <cao-form-field forId=\"padrao\" [label]=\"'Nome'\" [control]=\"control\">\n          <cao-input [control]=\"control\" [placeholder]=\"'Digite seu nome'\"></cao-input>\n        </cao-form-field>\n      `,\n      { control: control() }\n    ),\n}"
                 },
                 {
-                    "name": "render",
+                    "name": "renderFormField",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
@@ -20448,7 +20109,18 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "(args: Partial<CaoFormFieldStoryComponent>) => ({\n  component: CaoFormFieldStoryComponent,\n  props: args,\n})"
+                    "defaultValue": "(inner: string, props: Record<string, unknown> = {}) => ({\n  template: `<div style=\"max-width: 420px;\">${inner}</div>`,\n  moduleMetadata: { imports: storyImports },\n  props,\n})"
+                },
+                {
+                    "name": "storyImports",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[ReactiveFormsModule, CaoFormField, CaoBaseInput, CaoHint, CaoError]"
                 }
             ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts": [
@@ -20518,7 +20190,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => render({ text: 'Formato esperado: 000.000.000-00' }),\n}"
+                    "defaultValue": "{\r\n  render: () => render({ text: 'Formato esperado: 000.000.000-00' }),\r\n}"
                 },
                 {
                     "name": "meta",
@@ -20529,7 +20201,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<CaoHint>",
-                    "defaultValue": "{\n  title: 'Componentes/Hint',\n  component: CaoHint,\n  tags: ['autodocs'],\n  argTypes: {\n    text: { control: 'text' },\n  },\n  args: {\n    text: 'Use seu nome de usuário ou e-mail',\n  },\n}"
+                    "defaultValue": "{\r\n  title: 'Componentes/Hint',\r\n  component: CaoHint,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    text: { control: 'text' },\r\n  },\r\n  args: {\r\n    text: 'Use seu nome de usuário ou e-mail',\r\n  },\r\n}"
                 },
                 {
                     "name": "Padrao",
@@ -20540,7 +20212,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render: () => render({ text: 'Uma dica para auxiliar o preenchimento' }),\n}"
+                    "defaultValue": "{\r\n  render: () => render({ text: 'Uma dica para auxiliar o preenchimento' }),\r\n}"
                 },
                 {
                     "name": "render",
@@ -20551,7 +20223,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "(args: Partial<CaoHintStoryComponent>) => ({\n  component: CaoHintStoryComponent,\n  props: args,\n})"
+                    "defaultValue": "(args: Partial<CaoHintStoryComponent>) => ({\r\n  component: CaoHintStoryComponent,\r\n  props: args,\r\n})"
                 }
             ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts": [
@@ -20656,7 +20328,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  render,\n}"
+                    "defaultValue": "{\r\n  render,\r\n}"
                 },
                 {
                     "name": "ErroPorPadrao",
@@ -20667,7 +20339,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  render,\n}"
+                    "defaultValue": "{\r\n  args: {},\r\n  render,\r\n}"
                 },
                 {
                     "name": "meta",
@@ -20678,7 +20350,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<CaoError>",
-                    "defaultValue": "{\n  title: 'Componentes/Error',\n  component: CaoError,\n  tags: ['autodocs'],\n  args: {},\n}"
+                    "defaultValue": "{\r\n  title: 'Componentes/Error',\r\n  component: CaoError,\r\n  tags: ['autodocs'],\r\n  args: {},\r\n}"
                 },
                 {
                     "name": "render",
@@ -20689,7 +20361,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "() => ({\n  component: CaoErrorStoryComponent,\n})"
+                    "defaultValue": "() => ({\r\n  component: CaoErrorStoryComponent,\r\n})"
                 }
             ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts": [
@@ -20985,21 +20657,6 @@
                     "kind": 193
                 }
             ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoAutocompleteComponent>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts": [
                 {
                     "name": "Story",
@@ -21008,6 +20665,21 @@
                     "coverageIgnore": false,
                     "rawtype": "StoryObj<CaoBaseButtonComponent>",
                     "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<CaoBaseIcon>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "",
@@ -21030,104 +20702,14 @@
                     "kind": 184
                 }
             ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/base-time-range/base-time-range.stories.ts": [
+            "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
                     "coverageIgnore": false,
-                    "rawtype": "StoryObj<BaseTimeRange>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-time-range/base-time-range.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoDropDownComponent>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<Footer>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/links-button/links-button.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<LinksButton>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/links-button/links-button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<Paginator>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<TimePicker>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<StepperComponent>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts",
+                    "rawtype": "StoryObj<CaoAutocompleteComponent>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/autocomplete/autocomplete.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "",
@@ -21150,14 +20732,14 @@
                     "kind": 184
                 }
             ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts": [
+            "projects/ngx-opalbytes-components/src/lib/shared/components/base-time-range/base-time-range.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
                     "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoBaseIcon>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
+                    "rawtype": "StoryObj<BaseTimeRange>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-time-range/base-time-range.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "",
@@ -21195,6 +20777,81 @@
                     "kind": 184
                 }
             ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<CaoDropDownComponent>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<Footer>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/error/error.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<CaoError>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/error/error.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<CaoHint>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<CaoFormField>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/kpi/kpi.stories.ts": [
                 {
                     "name": "Story",
@@ -21210,6 +20867,36 @@
                     "kind": 184
                 }
             ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/links-button/links-button.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<LinksButton>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/links-button/links-button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<Paginator>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/tab-group/tab-group.stories.ts": [
                 {
                     "name": "Story",
@@ -21218,6 +20905,21 @@
                     "coverageIgnore": false,
                     "rawtype": "StoryObj<CaoTabGroup>",
                     "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-group/tab-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<StepperComponent>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "",
@@ -21255,44 +20957,14 @@
                     "kind": 184
                 }
             ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts": [
+            "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
                     "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoFormField>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/error/error.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoError>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/error/error.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoHint>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/hint/hint.stories.ts",
+                    "rawtype": "StoryObj<TimePicker>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "",
@@ -22542,15 +22214,6 @@
             },
             {
                 "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "CaoFormFieldStoryComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/24",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -22585,6 +22248,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "ComMascaraCPF",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "control",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -22644,7 +22317,17 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "render",
+                "name": "renderFormField",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/form-field/form-field.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "storyImports",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, computed, input, Input } from '@angular/core';
 import { AbstractControl, Validators } from '@angular/forms';
 
 import { IErrorStateMatcher } from './error-state-matcher';
@@ -12,52 +12,53 @@ import { CaoBaseIcon } from '../base-icon/base-icon';
   styleUrl: './form-field.css',
 })
 export class CaoFormField extends CaoBaseIcon implements IFormFieldControl {
-  @HostBinding('style')
-  get _hostStyles(): Record<string, string> {
-    const styles: Record<string, string> = {};
-    if (this.inputBackground !== undefined) {
-      styles['--cao-form-field-bg-background'] = this.inputBackground;
-    }
-    if (this.borderColor !== undefined) {
-      styles['--cao-form-field-border-color'] = this.borderColor;
-    }
-    if (this.borderWidth !== undefined) {
-      styles['--cao-form-field-border-width'] = this.borderWidth;
-    }
-    if (this.borderRadius !== undefined) {
-      styles['--cao-form-field-border-radius'] = this.borderRadius;
-    }
-    if (this.errorColor !== undefined) {
-      styles['--cao-form-field-color-error'] = this.errorColor;
-    }
-    if (this.labelColor !== undefined) {
-      styles['--cao-form-field-color-label'] = this.labelColor;
-    }
-    if (this.hintColor !== undefined) {
-      styles['--cao-form-field-color-hint'] = this.hintColor;
-    }
-    if (this.textColor !== undefined) {
-      styles['--cao-form-field-color-text'] = this.textColor;
-    }
-    if (this.focusBorderColor !== undefined) {
-      styles['--cao-form-field-focus-border'] = this.focusBorderColor;
-    }
-    if (this.successBorderColor !== undefined) {
-      styles['--cao-form-field-success-border'] = this.successBorderColor;
-    }
-    return styles;
-  }
+  inputBackground = input<string>();
+  borderColor = input<string>();
+  borderWidth = input<string>();
+  borderRadius = input<string>();
+  errorColor = input<string>();
+  labelColor = input<string>();
+  hintColor = input<string>();
+  textColor = input<string>();
+  focusBorderColor = input<string>();
+  successBorderColor = input<string>();
 
-  @Input() inputBackground?: string;
-  @Input() borderColor?: string;
-  @Input() borderWidth?: string;
-  @Input() borderRadius?: string;
-  @Input() errorColor?: string;
-  @Input() labelColor?: string;
-  @Input() hintColor?: string;
-  @Input() textColor?: string;
-  @Input() focusBorderColor?: string;
-  @Input() successBorderColor?: string;
+  formFieldStyles = computed(() => {
+    const styles: Record<string, string> = {};
+
+    if (this.inputBackground()) {
+      styles['--cao-form-field-bg-background'] = this.inputBackground()!;
+    }
+    if (this.borderColor()) {
+      styles['--cao-form-field-border-color'] = this.borderColor()!;
+    }
+    if (this.borderWidth()) {
+      styles['--cao-form-field-border-width'] = this.borderWidth()!;
+    }
+    if (this.borderRadius()) {
+      styles['--cao-form-field-border-radius'] = this.borderRadius()!;
+    }
+    if (this.errorColor()) {
+      styles['--cao-form-field-color-error'] = this.errorColor()!;
+    }
+    if (this.labelColor()) {
+      styles['--cao-form-field-color-label'] = this.labelColor()!;
+    }
+    if (this.hintColor()) {
+      styles['--cao-form-field-color-hint'] = this.hintColor()!;
+    }
+    if (this.textColor()) {
+      styles['--cao-form-field-color-text'] = this.textColor()!;
+    }
+    if (this.focusBorderColor()) {
+      styles['--cao-form-field-focus-border'] = this.focusBorderColor()!;
+    }
+    if (this.successBorderColor()) {
+      styles['--cao-form-field-success-border'] = this.successBorderColor()!;
+    }
+
+    return styles;
+  });
   @Input() label = '';
   @Input() labelInside = false;
   @Input() hintLabel = '';

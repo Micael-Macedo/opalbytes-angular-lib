@@ -4,10 +4,10 @@
   --cao-form-field-border-width: 1px;
   --cao-form-field-border-radius: 8px;
   --cao-form-field-color-error: var(--error, #dc2626);
-  --cao-form-field-color-label: var(--primary, #4f46e5);
+  --cao-form-field-color-label: var(--primary, #111827);
   --cao-form-field-color-hint: var(--input-text, #9ca3af);
   --cao-form-field-color-text: var(--text-color-input, #111827);
-  --cao-form-field-focus-border: var(--primary, #4f46e5);
+  --cao-form-field-focus-border: var(--primary, #111827);
   --cao-form-field-success-border: var(--success, #16a34a);
 
   display: block;

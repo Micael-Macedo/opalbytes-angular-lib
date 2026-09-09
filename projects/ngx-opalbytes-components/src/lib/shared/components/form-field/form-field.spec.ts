@@ -95,20 +95,20 @@ describe('CaoFormField', () => {
     expect(component.disabled).toBe(false);
   });
 
-  it('deve aplicar as cores customizadas como custom props no host', () => {
+  it('deve aplicar as cores customizadas como custom props no elemento interno', () => {
     fixture.componentRef.setInput('inputBackground', '#f8fafc');
     fixture.componentRef.setInput('errorColor', '#e11d48');
     fixture.componentRef.setInput('borderRadius', '16px');
     fixture.detectChanges();
-    const host = fixture.nativeElement as HTMLElement;
-    expect(host.style.getPropertyValue('--cao-form-field-bg-background')).toBe('#f8fafc');
-    expect(host.style.getPropertyValue('--cao-form-field-color-error')).toBe('#e11d48');
-    expect(host.style.getPropertyValue('--cao-form-field-border-radius')).toBe('16px');
+    const el = fixture.nativeElement.querySelector('.cao-form-field') as HTMLElement;
+    expect(el.style.getPropertyValue('--cao-form-field-bg-background')).toBe('#f8fafc');
+    expect(el.style.getPropertyValue('--cao-form-field-color-error')).toBe('#e11d48');
+    expect(el.style.getPropertyValue('--cao-form-field-border-radius')).toBe('16px');
   });
 
   it('nao deve aplicar custom props de cor quando o input tem undefined', () => {
     fixture.detectChanges();
-    const host = fixture.nativeElement as HTMLElement;
-    expect(host.style.getPropertyValue('--cao-form-field-bg-background')).toBe('');
+    const el = fixture.nativeElement.querySelector('.cao-form-field') as HTMLElement;
+    expect(el.style.getPropertyValue('--cao-form-field-bg-background')).toBe('');
   });
 });

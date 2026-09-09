@@ -3,7 +3,8 @@
   [class.label-inside]="labelInside"
   [class.error-state]="errorStateActive"
   [class.disabled]="disabled"
-  [class.required]="required">
+  [class.required]="required"
+  [style]="formFieldStyles()">
   @if (label && !labelInside) {
     <label class="cao-form-field__label" [for]="forId">{{ label }}</label>
   }
