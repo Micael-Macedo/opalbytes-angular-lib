@@ -1,3 +1,26 @@
+# [1.22.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.21.0...v1.22.0) (2026-09-09)
+
+
+### Bug Fixes
+
+* add missing components ([fea1e12](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fea1e12880ac9d63c95b8d2ba30054f5b60fba60))
+* add runtime package ([2b32dd7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2b32dd7aceea00e905af5f673c93d5c96c447f25))
+* add websocket scope to release ([f87d9fc](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/f87d9fca6897d149476a62922449c053c74095dc))
+* correcao release websocket lib ([fb98231](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fb98231139bf3b9d3122de6cf20da00b909de5a3))
+* correcao sincronizacao pacote json ([8c59b1d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8c59b1d20ecc670b2250c64f4175f76fb0385b21))
+* **pdf:** corrige release quando a branch usa sufixo breaking (!) ([4e63d9f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4e63d9f1be45bf158130cb7a962528a45e6a4722))
+* release websocket lib ([2cbeb95](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2cbeb950da54549c8a8d0658a026b34af1cd56e6))
+* sync package and lock files ([d99cfd5](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d99cfd50dfa4950e30a7bf097f0553b1c434f290))
+* sync package lock and package json ([62b2fe6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/62b2fe613e01566cbf9a04f61fb8c6d35061256d))
+
+
+### Features
+
+* add skeleton component ([b48a640](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/b48a64025b8e51f80a030ef56f5bc0431f6a0fa2))
+* add storybook integration ([59a7ba2](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/59a7ba2e634e86bf571173a6d60d3953edd8f898))
+* add websocket lib ([a8db9ea](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a8db9ea555cccd63596d2f0f50d6581d71ca35f4))
+* **pdf:** add watermark option ([d719c1b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d719c1b91a0f0e53b72e3a95338f2f34096be85c))
+
 # [1.21.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/v1.20.0...v1.21.0) (2026-09-01)
 
 
@@ -149,11 +172,22 @@
 ---
 
 
+
+### Resumo
+- Total de métricas: 4
+- Sucessos: 3
+- Falhas: 1
+
+[📈 Ver Relatório Completo (HTML)](./metrics-reports/latest.html)
+
+---
+
+
 ## 📊 Relatório de Métricas
 
-**Data**: 01/09/2026, 16:22:38
+**Data**: 09/09/2026, 11:27:12
 **Branch**: main
-**Commit**: 698b7a0
+**Commit**: af04f00
 
 ### Resumo
 - Total de métricas: 4

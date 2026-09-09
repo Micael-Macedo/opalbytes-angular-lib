@@ -1,6 +1,6 @@
 {
   "name": "opalbytes-angular-lib",
-  "version": "1.21.0",
+  "version": "1.22.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -46,7 +46,6 @@
     "deps:check": "depcheck",
     "deps:update": "ncu",
     "deps:update:interactive": "ncu -i",
-
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "metrics:report": "node scripts/run-metrics.js",
