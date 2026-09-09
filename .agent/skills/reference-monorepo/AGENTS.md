@@ -1,6 +1,14 @@
-# AGENTS.md
+---
+name: reference-monorepo
+description: >-
+  Explains the mental model and architecture of the opalbytes-angular-lib
+  monorepo. You MUST use this skill any time you plan to work with code in
+  any `projects/ngx-opalbytes-*` library.
+---
 
-Angular 21 monorepo of reusable, published libraries. Ten distributable libs live under `projects/` (`ngx-opalbytes-*`): `core`, `shared`, `components`, `directives`, `services`, `utils`, `performance`, `feature-pdf`, `video`, `chart`. Each lib has its own `package.json`, `ng-package.json`, `src/public-api.ts`, and `.releaserc.js`.
+# Opalbytes Angular Libs — Referência do Monorepo
+
+Angular 21 monorepo of reusable, published libraries. Eleven distributable libs live under `projects/` (`ngx-opalbytes-*`): `core`, `shared`, `components`, `directives`, `services`, `utils`, `performance`, `feature-pdf`, `video`, `chart`, `websocket`. Each lib has its own `package.json`, `ng-package.json`, `src/public-api.ts`, and `.releaserc.js`.
 
 ## Library independence (no cross-lib dependencies)
 

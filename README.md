@@ -319,6 +319,8 @@ git checkout -b feature(chart)/add-lib-graficos
 
 ##  Como Contribuir
 
+> Para um guia completo de como contribuir, consulte o arquivo [CONTRIBUTING.md](./CONTRIBUTING.md).
+
 ### Adicionando Funcionalidades a uma Biblioteca Existente
 
 1.  **Crie os arquivos** da sua nova funcionalidade (componente, diretiva, serviço, etc.) dentro da pasta `src/lib/` da biblioteca correspondente.
