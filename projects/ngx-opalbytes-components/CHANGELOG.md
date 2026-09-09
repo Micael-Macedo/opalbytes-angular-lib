@@ -1,3 +1,14 @@
+## 1.23.0 (2026-09-09)
+
+* Merge pull request #91 from Micael-Macedo/chore(components)/add-cao-comp-x-npm-i-where-to-use ([8893c79](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8893c79)), closes [#91](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/91)
+* Merge pull request #95 from Micael-Macedo/feature(components)/-add-form-field-component ([30b9fc1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/30b9fc1)), closes [#95](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/95)
+* chore: add where to use cao comp x npm i in applications ([b248d95](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/b248d95))
+* chore: remove peer dependencies at package lock ([ab74de0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ab74de0))
+* feat: add erro label component ([86753e7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/86753e7))
+* feat: add form field component ([52052ac](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/52052ac))
+* feat: add form field component ([554cf0f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/554cf0f))
+* feat: add hint component ([97bc028](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/97bc028))
+
 ## 1.22.0 (2026-09-08)
 
 * Merge branch 'main' of https://github.com/Micael-Macedo/opalbytes-angular-lib into feature(component ([dd5cbc0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/dd5cbc0))
