@@ -1,0 +1,50 @@
+<div
+  class="cao-form-field"
+  [class.label-inside]="labelInside"
+  [class.error-state]="errorStateActive"
+  [class.disabled]="disabled"
+  [class.required]="required">
+  @if (label && !labelInside) {
+    <label class="cao-form-field__label" [for]="forId">{{ label }}</label>
+  }
+  <div class="input-field" (focusin)="onFocusIn()" (focusout)="onFocusOut()">
+    @if (leadingIcon) {
+      <cao-base-icon
+        [isLucideIcon]="isLucideIcon"
+        [strokeWidthIcon]="strokeWidthIcon"
+        [imgSource]="leadingIcon"
+        [iconColor]="iconColor"
+        [size]="size" />
+    }
+    <div class="input-slot">
+      @if (label && labelInside) {
+        <label
+          class="cao-form-field__label cao-form-field__label--float"
+          [class.cao-form-field__label--floated]="floating"
+          [for]="forId">{{ label }}</label>
+      }
+      <ng-content select="[caoInput]" />
+      <ng-content select="cao-input" />
+      <ng-content select="input" />
+      <ng-content select="select" />
+      <ng-content select="textarea" />
+      <ng-content select="h2" />
+      <ng-content />
+    </div>
+    @if (trailingIcon) {
+      <cao-base-icon
+        [isLucideIcon]="isLucideIcon"
+        [iconColor]="iconColor"
+        [size]="size"
+        [imgSource]="trailingIcon"
+        [strokeWidthIcon]="strokeWidthIcon" />
+    }
+  </div>
+  <div class="subscript-wrapper">
+    @if (hintLabel) {
+      <small class="cao-form-field__hint">{{ hintLabel }}</small>
+    }
+    <ng-content select="cao-hint" />
+    <ng-content select="cao-error" />
+  </div>
+</div>
