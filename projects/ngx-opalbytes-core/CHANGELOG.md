@@ -1,3 +1,20 @@
+## 1.2.0 (2026-09-10)
+
+* Merge branch 'main' of https://github.com/Micael-Macedo/opalbytes-angular-lib into feature(core)/add ([2f96f83](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2f96f83))
+* Merge branch 'main' of https://github.com/Micael-Macedo/opalbytes-angular-lib into test(core)/add-te ([5abba71](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/5abba71))
+* Merge pull request #54 from Micael-Macedo/feature(core)/add-independencia-pastas-dependencia ([1791a15](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/1791a15)), closes [#54](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/54)
+* Merge pull request #97 from Micael-Macedo/test(core)/add-test-files-core ([4b1f207](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4b1f207)), closes [#97](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/97)
+* Merge pull request #98 from Micael-Macedo/test(core)/add-test-files-core ([322a198](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/322a198)), closes [#98](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/98)
+* fix: correcao validacao release core lib ([32c5ee9](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/32c5ee9))
+* fix(core): ajusta porvider e StorageService ([fc2137f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fc2137f))
+* feat: add unused content ([4a61fc4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4a61fc4))
+* feat: config files based on domain ([eec8736](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/eec8736))
+* feat(components): add stepper e nomenclatura autocomplete ([474bfcd](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/474bfcd))
+* feat(core): add independencia de pacotes ([2b05ea4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2b05ea4))
+* feat(core): arquivos separados para dependecia de projetos ([e8b759b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e8b759b))
+* feat(shared): add diretiva skeleton ([4edd388](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4edd388))
+* test: add test files ([b6a182f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/b6a182f))
+
 # [1.1.0](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-core@1.0.0...ngx-opalbytes-core@1.1.0) (2026-01-05)
 
 
