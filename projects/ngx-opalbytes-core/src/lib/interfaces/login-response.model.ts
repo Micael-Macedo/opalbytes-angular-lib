@@ -1,4 +1,4 @@
-export interface ILoginResponse {
+export interface ICaoLoginResponse {
   token: string;
   name: string;
 }

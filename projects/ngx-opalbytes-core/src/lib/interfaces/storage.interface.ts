@@ -3,7 +3,7 @@
  * @property encrypt Define se o valor deve ser criptografado
  * @property expiresIn Tempo em milissegundos até a expiração do item
  */
-export interface IStorageOptions {
+export interface ICaoStorageOptions {
   encrypt?: boolean;
   expiresIn?: number; // Em milissegundos
 }
@@ -14,7 +14,7 @@ export interface IStorageOptions {
  * @property timestamp Momento da criação/atualização
  * @property expiresAt Momento em que o item expira (opcional)
  */
-export interface IStorageItem<T> {
+export interface ICaoStorageItem<T> {
   value: T;
   timestamp: number;
   expiresAt?: number;

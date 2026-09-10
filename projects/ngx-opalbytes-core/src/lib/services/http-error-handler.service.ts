@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { Observable, from, throwError } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
 
-import { AlertService } from "./alert.service";
+import { AlertService } from "./alert/alert.service";
 import { HttpErrorModel } from "../models/http-error.model";
 import { AlertMessageBuilder } from "../utils/alert-message.builder";
 
@@ -21,7 +21,7 @@ export class HttpErrorHandlerService {
   constructor(
     private alertService: AlertService,
     private router: Router
-  ) {}
+  ) { }
 
   /**
    * Processa um erro HTTP e lança o erro novamente

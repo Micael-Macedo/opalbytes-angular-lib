@@ -12,7 +12,7 @@ type RouteConfig = {
 /**
  * Opções de navegação
  */
-export interface INavigationOptions extends NavigationExtras {
+export interface ICaoNavigationOptions extends NavigationExtras {
   onError?: (error: unknown) => void;
   onSuccess?: () => void;
 }
@@ -49,7 +49,7 @@ export class NavigationUtil {
    * @param options - Opções de navegação e callbacks
    * @returns Promise<boolean>
    */
-  async navigateTo(route: RouteConfig, options?: INavigationOptions): Promise<boolean> {
+  async navigateTo(route: RouteConfig, options?: ICaoNavigationOptions): Promise<boolean> {
     const { onError, onSuccess, ...navigationExtras } = options || {};
 
     try {
@@ -88,7 +88,7 @@ export class NavigationUtil {
   async navigateToWithParams(
     route: RouteConfig,
     params: Record<string, string | number>,
-    options?: INavigationOptions
+    options?: ICaoNavigationOptions
   ): Promise<boolean> {
     const { onError, onSuccess, ...navigationExtras } = options || {};
 
@@ -123,7 +123,7 @@ export class NavigationUtil {
    * @param options - Opções de navegação e callbacks
    * @returns Promise<boolean>
    */
-  async navigateByUrl(url: string | UrlTree, options?: INavigationOptions): Promise<boolean> {
+  async navigateByUrl(url: string | UrlTree, options?: ICaoNavigationOptions): Promise<boolean> {
     const { onError, onSuccess, ...navigationExtras } = options || {};
 
     try {
@@ -160,7 +160,7 @@ export class NavigationUtil {
    * Recarrega a rota atual
    * @param options - Opções de navegação
    */
-  async reload(options?: INavigationOptions): Promise<boolean> {
+  async reload(options?: ICaoNavigationOptions): Promise<boolean> {
     const currentUrl = this.router.url;
 
     // Navega para uma rota dummy e volta
@@ -198,7 +198,7 @@ export class NavigationUtil {
    * // Na rota '/curso', navegar para '/curso/detalhes'
    * this.navigationUtil.navigateRelative(['detalhes']);
    */
-  async navigateRelative(commands: string[], options?: INavigationOptions): Promise<boolean> {
+  async navigateRelative(commands: string[], options?: ICaoNavigationOptions): Promise<boolean> {
     const { onError, onSuccess, ...navigationExtras } = options || {};
 
     try {

@@ -1,9 +1,10 @@
 
-import { IAppConfig, EnvironmentEnum } from "./app-config";
+import type { ICaoAppConfig } from "./app-config";
 import { ApiUrl } from "./app-endpoints";
+import { EnvironmentEnum } from "../enums";
 import { BASE_PATHS, BASE_HTTP_METHODS } from "../utils/app-config.base";
 
-export const productionConfig: IAppConfig = {
+export const productionConfig: ICaoAppConfig = {
   production: true,
   environment: EnvironmentEnum.production,
   urls: {

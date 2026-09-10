@@ -195,6 +195,12 @@
             ],
             "eslintConfig": "projects/ngx-opalbytes-core/eslint.config.js"
           }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-opalbytes-core/tsconfig.spec.json"
+          }
         }
       }
     },

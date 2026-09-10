@@ -4,14 +4,14 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 import { ApiPath, ApiUrl } from "./app-endpoints";
-import { ConfigService } from "./services/config.service";
+import { CaoConfigService } from "../services/config/config.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class HelpConfig {
   constructor(
-    private configService: ConfigService,
+    private configService: CaoConfigService,
     private httpClient: HttpClient
   ) { }
 

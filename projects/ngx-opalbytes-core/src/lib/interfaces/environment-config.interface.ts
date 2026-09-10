@@ -1,11 +1,12 @@
-export interface IEnvironmentConfig {
+export interface ICaoEnvironmentConfig {
     production: boolean;
-    name: "production" | "homologation" | "development" | "local";
+    name: "production" | "homologation" | "development" | "local" | "dev" | "hmg" | "prod",
+    buildDate: string
 }
 /**
 * Detecção automática de ambiente baseado na URL
 */
-function detectEnvironment(): IEnvironmentConfig["name"] {
+function detectEnvironment(): ICaoEnvironmentConfig["name"] {
     if (typeof window === "undefined") {
         return "development";
     }
@@ -35,7 +36,8 @@ function detectEnvironment(): IEnvironmentConfig["name"] {
     return "development";
 }
 
-export const environment: IEnvironmentConfig = {
+export const environment: ICaoEnvironmentConfig = {
     name: detectEnvironment(),
-    production: false
+    production: false,
+    buildDate: ""
 };

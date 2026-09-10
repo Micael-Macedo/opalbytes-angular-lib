@@ -1,4 +1,4 @@
-export interface IApiResponse<T = unknown> {
+export interface ICaoApiResponse<T = unknown> {
   data: T[];
   totalCount: number;
   pageNumber: number;

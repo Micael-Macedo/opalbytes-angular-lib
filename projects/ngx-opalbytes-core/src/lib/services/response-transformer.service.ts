@@ -2,7 +2,7 @@ import { HttpEvent, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 import { HttpErrorHandlerService } from "./http-error-handler.service";
-import { IApiResponse } from "../interfaces/api.interface";
+import { ICaoApiResponse } from "../interfaces/api.interface";
 import { AlertMessageBuilder } from "../utils/alert-message.builder";
 
 /**
@@ -28,7 +28,7 @@ export class ResponseTransformerService {
     event: HttpEvent<T>,
     shouldTransform: boolean,
     skipAlert: boolean
-  ): HttpEvent<T> | HttpEvent<IApiResponse> {
+  ): HttpEvent<T> | HttpEvent<ICaoApiResponse> {
     if (!(event instanceof HttpResponse)) {
       return event;
     }
@@ -88,16 +88,16 @@ export class ResponseTransformerService {
   }
 
   /**
-   * Transforma resposta para formato IApiResponse
+   * Transforma resposta para formato ICaoApiResponse
    */
   private transformResponse<T>(
     event: HttpResponse<T>,
     response: Record<string, unknown>
-  ): HttpResponse<IApiResponse> {
+  ): HttpResponse<ICaoApiResponse> {
     const isSuccess = response["success"] !== false;
     const message = this.buildResponseMessage(response, isSuccess);
 
-    const transformed: IApiResponse = {
+    const transformed: ICaoApiResponse = {
       data: (response["data"] as never[]) || [],
       totalCount: (response["totalCount"] as number) || 0,
       pageNumber: (response["pageNumber"] as number) || 1,

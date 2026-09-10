@@ -188,7 +188,7 @@ jobs:
             condition: ${{ needs.check-commits.outputs.should-release-core }}
             project-path: 'projects/ngx-opalbytes-core'
             build-command: 'npm run build:core'
-            test-command: 'echo "No tests for core"'
+            test-command: 'npm run test:core'
             release-command: 'cd projects/ngx-opalbytes-core && npx semantic-release'
           
           - library: 'utils'
