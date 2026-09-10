@@ -18,7 +18,8 @@ Angular 21 monorepo of reusable, published libraries. Ten distributable libs liv
 
 - `ng test` (Angular `@angular/build:unit-test` builder) backs the per-lib scripts `test:<name>` (`--watch=false`).
 - **Vitest** backs coverage: `test:coverage*`, `test:perf`. Configured in `vitest.config.ts` (jsdom env, v8 provider, coverage excludes `public-api.ts`). `vitest.setup.ts` bootstraps the Angular TestBed and mocks `ResizeObserver`.
-- **`ngx-opalbytes-core` has NO spec files and NO `test` architect** (only build + lint). Do not run `test:core`; CI itself uses `echo "No tests for core"` for it.
+- **`ngx-opalbytes-core`** uses `@angular/build:unit-test` and has spec files for its services, guards, interceptors, utils, models and providers. Run them with `npm run test:core`.
+- **`ngx-opalbytes-core`** has NO `test:coverage:core` script; coverage for it runs under the shared `test:coverage`/`test:perf` (Vitest) setup.
 
 ## Commits and release (enforced by CI) — scope comes from the branch name
 
