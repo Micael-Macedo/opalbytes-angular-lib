@@ -1,6 +1,6 @@
-import { IState } from "./interfaces/cep.interface";
+import { ICaoState } from "../interfaces/cep.interface";
 
-export const BRAZILIAN_STATES: readonly IState[] = [
+export const BRAZILIAN_STATES: readonly ICaoState[] = [
   { id: 12, sigla: "AC", nome: "Acre" },
   { id: 27, sigla: "AL", nome: "Alagoas" },
   { id: 16, sigla: "AP", nome: "Amapá" },

@@ -1,10 +1,10 @@
 import { HttpStatus, HttpStatusUtil } from "../enums/http-status.enum";
-import { IHttpErrorConfig } from "../models/http-error.model";
+import { ICaoHttpErrorConfig } from "../models/http-error.model";
 
 /**
  * Interface para mensagem de status HTTP
  */
-interface IHttpStatusMessage {
+interface ICaoHttpStatusMessage {
   title: string;
   message: string;
   shouldRedirect?: boolean;
@@ -21,7 +21,7 @@ export class AlertMessageBuilder {
    * Mapa de mensagens por status code
    * Facilita extensão e manutenção (Open/Closed Principle)
    */
-  private static readonly STATUS_MESSAGES: Map<number, IHttpStatusMessage> = new Map([
+  private static readonly STATUS_MESSAGES: Map<number, ICaoHttpStatusMessage> = new Map([
     // ========================================
     // 2xx Success
     // ========================================
@@ -189,7 +189,7 @@ export class AlertMessageBuilder {
   /**
    * Mensagem padrão para status desconhecidos
    */
-  private static readonly DEFAULT_MESSAGE: IHttpStatusMessage = {
+  private static readonly DEFAULT_MESSAGE: ICaoHttpStatusMessage = {
     title: "Erro Inesperado",
     message: "Ocorreu um erro inesperado. Tente novamente.",
   };
@@ -197,7 +197,7 @@ export class AlertMessageBuilder {
   /**
    * Constrói configuração de erro HTTP a partir de um status code
    */
-  static buildErrorConfig(status: number, customMessage?: string): IHttpErrorConfig {
+  static buildErrorConfig(status: number, customMessage?: string): ICaoHttpErrorConfig {
     const statusMessage = this.STATUS_MESSAGES.get(status) || this.DEFAULT_MESSAGE;
     const category = HttpStatusUtil.getCategory(status);
 
@@ -215,7 +215,7 @@ export class AlertMessageBuilder {
   /**
    * Constrói configuração de sucesso
    */
-  static buildSuccessConfig(customMessage?: string): IHttpErrorConfig {
+  static buildSuccessConfig(customMessage?: string): ICaoHttpErrorConfig {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const statusMessage = this.STATUS_MESSAGES.get(HttpStatus.OK)!;
 

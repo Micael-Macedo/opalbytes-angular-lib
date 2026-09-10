@@ -1,10 +1,10 @@
-export interface IApiUrls {
+export interface ICaoApiUrls {
     dev?: string;
     hmg?: string;
     prd?: string;
     local?: string;
   }
-  export interface IApiConfig {
+  export interface ICaoApiConfig {
     /**
      * URLs base por ambiente (opcional - usa defaults da lib se não fornecido)
      *
@@ -14,27 +14,27 @@ export interface IApiUrls {
       /**
        * URL da API principal
        */
-      API?: IApiUrls;
+      API?: ICaoApiUrls;
    
       /**
        * URL do serviço de cropping
        */
-      CROPPING?: IApiUrls;
+      CROPPING?: ICaoApiUrls;
    
       /**
        * URL do serviço de cropping do IIPM
        */
-      IIPM_CROPPING?: IApiUrls;
+      IIPM_CROPPING?: ICaoApiUrls;
    
       /**
        * URL do serviço de digitalização do IIPM
        */
-      IIPM_DIGITALIZACAO?: IApiUrls;
+      IIPM_DIGITALIZACAO?: ICaoApiUrls;
    
       /**
        * Permite adicionar URLs customizadas
        */
-      [key: string]: IApiUrls | undefined;
+      [key: string]: ICaoApiUrls | undefined;
     };
    
     /**
@@ -51,7 +51,7 @@ export interface IApiUrls {
   * Este arquivo centraliza todos os endpoints e URLs customizadas
   * específicas do aluno PWA.
   */
-  export const alunoPwaApiConfig: IApiConfig = {
+  export const alunoPwaApiConfig: ICaoApiConfig = {
     /**
      * URLs customizadas por ambiente (opcional)
      */

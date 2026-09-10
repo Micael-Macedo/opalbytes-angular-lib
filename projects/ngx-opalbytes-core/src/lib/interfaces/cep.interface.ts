@@ -1,4 +1,4 @@
-export interface ICEPData {
+export interface ICaoCEPData {
   cep: string;
   logradouro: string;
   bairro: string;
@@ -6,19 +6,19 @@ export interface ICEPData {
   uf: string;
 }
 
-export interface IMunicipality {
+export interface ICaoMunicipality {
   code: string;
   name: string;
 }
 
-export interface IState {
+export interface ICaoState {
   id: number;
   sigla: string;
   nome: string;
 }
 
 // API Response types from BrasilAPI
-export interface IBrasilAPICEPResponse {
+export interface ICaoBrasilAPICEPResponse {
   cep: string;
   street: string;
   neighborhood: string;
@@ -27,7 +27,7 @@ export interface IBrasilAPICEPResponse {
 }
 
 // API Response types from ViaCEP
-export interface IViaCEPResponse {
+export interface ICaoViaCEPResponse {
   cep: string;
   logradouro: string;
   bairro: string;
@@ -37,7 +37,7 @@ export interface IViaCEPResponse {
 }
 
 // API Response types from BrasilAPI Municipalities
-export interface IBrasilAPIMunicipalityResponse {
+export interface ICaoBrasilAPIMunicipalityResponse {
   CODIGO_IBGE: string;
   nome: string;
 }

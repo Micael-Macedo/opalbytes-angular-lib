@@ -3,7 +3,7 @@ import { ErrorHandler, Injectable, Injector } from "@angular/core";
 
 import { AlertMessageBuilder } from "./alert-message.builder";
 import { HttpErrorModel } from "../models/http-error.model";
-import { AlertService } from "../services/alert.service";
+import { AlertService } from "../services/alert/alert.service";
 
 /**
  * Handler global de erros não tratados
@@ -19,7 +19,7 @@ import { AlertService } from "../services/alert.service";
  */
 @Injectable({ providedIn: "platform" })
 export class GlobalErrorHandler implements ErrorHandler {
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector) { }
 
   handleError(error: Error | HttpErrorResponse): void {
     // Obter AlertService via injector (evita dependência circular)

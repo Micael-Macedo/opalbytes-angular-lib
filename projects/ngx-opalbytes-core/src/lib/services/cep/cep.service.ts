@@ -3,20 +3,20 @@ import { Injectable, signal } from "@angular/core";
 
 import { Observable, of, catchError, finalize, map } from "rxjs";
 
-import { CEP_ENDPOINTS } from "./constants/cep-endpoints.constants";
-import { IBrasilAPICEPResponse, IBrasilAPIMunicipalityResponse, ICEPData, IMunicipality, IState, IViaCEPResponse } from "./constants/interfaces/cep.interface";
-import { BRAZILIAN_STATES } from "./constants/states.constants";
+import { CEP_ENDPOINTS , BRAZILIAN_STATES } from './../../constants';
+import { ICaoState, ICaoCEPData, ICaoBrasilAPICEPResponse, ICaoViaCEPResponse, ICaoMunicipality, ICaoBrasilAPIMunicipalityResponse } from './../../interfaces';
+
 
 @Injectable({ providedIn: "root" })
 export class CEPService {
   private loadingSignal = signal(false);
   loading$ = this.loadingSignal.asReadonly();
 
-  readonly states: readonly IState[] = BRAZILIAN_STATES;
+  readonly states: readonly ICaoState[] = BRAZILIAN_STATES;
 
   constructor(private http: HttpClient) { }
 
-  searchCEP(cep: string): Observable<ICEPData | null> {
+  searchCEP(cep: string): Observable<ICaoCEPData | null> {
     if (!cep || cep.length !== 8) {
       return of(null);
     }
@@ -26,7 +26,7 @@ export class CEPService {
     const brasilApiUrl = `${CEP_ENDPOINTS.BRASIL_API_CEP}/${cep}`;
     const viaCepUrl = `${CEP_ENDPOINTS.VIA_CEP}/${cep}/json/`;
 
-    return this.http.get<IBrasilAPICEPResponse>(brasilApiUrl).pipe(
+    return this.http.get<ICaoBrasilAPICEPResponse>(brasilApiUrl).pipe(
       map((data) => ({
         cep: data.cep,
         logradouro: data.street,
@@ -36,7 +36,7 @@ export class CEPService {
       })),
       catchError(() =>
         // fallback para ViaCEP
-        this.http.get<IViaCEPResponse>(viaCepUrl).pipe(
+        this.http.get<ICaoViaCEPResponse>(viaCepUrl).pipe(
           map((data) =>
             data.erro
               ? null
@@ -55,10 +55,10 @@ export class CEPService {
     );
   }
 
-  fetchMunicipalities(uf: string): Observable<IMunicipality[]> {
+  fetchMunicipalities(uf: string): Observable<ICaoMunicipality[]> {
     const url = `${CEP_ENDPOINTS.BRASIL_API_MUNICIPALITIES}/${uf}`;
 
-    return this.http.get<IBrasilAPIMunicipalityResponse[]>(url).pipe(
+    return this.http.get<ICaoBrasilAPIMunicipalityResponse[]>(url).pipe(
       map((data) =>
         data.map((item) => ({
           code: item.CODIGO_IBGE,

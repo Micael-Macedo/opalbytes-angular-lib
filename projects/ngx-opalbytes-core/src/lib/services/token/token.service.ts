@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 
-import { StorageService } from "src/public-api";
-
-import { Variables } from "../enums/variaveis.enum";
+import { CaoVariables } from "../../enums/variaveis.enum";
+import { StorageService } from "../storage/storage.service";
 
 
 @Injectable({
@@ -16,7 +15,7 @@ export class CaoTokenGuardService {
   }
 
   getToken(): string | null {
-    const token = this.storageService.getItem<string>(Variables.STORAGE_AUTH);
+    const token = this.storageService.getItem<string>(CaoVariables.STORAGE_AUTH);
     if (!token) {
       return null;
     }

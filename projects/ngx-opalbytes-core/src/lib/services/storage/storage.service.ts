@@ -3,9 +3,9 @@ import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
 
 import { BehaviorSubject, Observable, map } from "rxjs";
 
-import { CookieService, ICookieOptions } from "./cookie.service";
-import { EnvironmentEnum } from "../config/app-config";
-import { IStorageOptions, IStorageItem } from "../interfaces/storage.interface";
+import { ICaoStorageOptions, ICaoStorageItem } from "../../interfaces/storage.interface";
+import { CookieService, ICaoCookieOptions } from "../cookie/cookie.service";
+import { EnvironmentEnum } from './../../enums/enviroment.enum';
 
 /**
  * Serviço para gerenciar o armazenamento local com recursos avançados
@@ -61,7 +61,7 @@ export class StorageService {
    *   expiresIn: 3600000 // 1 hora em milissegundos
    * });
    */
-  public setItem<T>(key: string, value: T, options: IStorageOptions = {}): void {
+  public setItem<T>(key: string, value: T, options: ICaoStorageOptions = {}): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
@@ -69,7 +69,7 @@ export class StorageService {
     const normalizedKey = this.normalizeKey(key);
     const cookieName = this.getCookieName(normalizedKey);
 
-    const storageItem: IStorageItem<T> = {
+    const storageItem: ICaoStorageItem<T> = {
       value: options.encrypt ? this.encrypt(value) : value,
       timestamp: Date.now(),
     };
@@ -166,7 +166,7 @@ export class StorageService {
    * const token = storageService.getItem<string>('tokenAuth', { encrypt: true });
    * // Na realidade, o sistema busca por 'TOKENAUTH' internamente
    */
-  public getItem<T>(key: string, options: IStorageOptions = {}): T | null {
+  public getItem<T>(key: string, options: ICaoStorageOptions = {}): T | null {
     if (!isPlatformBrowser(this.platformId)) {
       return null;
     }
@@ -192,7 +192,7 @@ export class StorageService {
     }
 
     try {
-      const item = JSON.parse(cookieValue) as IStorageItem<T>;
+      const item = JSON.parse(cookieValue) as ICaoStorageItem<T>;
 
       // Verifica se o item expirou
       if (item.expiresAt && item.expiresAt < Date.now()) {
@@ -314,7 +314,7 @@ export class StorageService {
 
     if (storageValue) {
       try {
-        const parsed = JSON.parse(storageValue) as IStorageItem<unknown>;
+        const parsed = JSON.parse(storageValue) as ICaoStorageItem<unknown>;
         if (parsed.expiresAt && parsed.expiresAt < Date.now()) {
           this.removeItem(normalizedKey);
           return false;
@@ -383,7 +383,7 @@ export class StorageService {
   /**
    * Retorna opções de cookie específicas baseadas na chave
    */
-  private getCookieOptionsForKey(key: string, expiresInDays: number): ICookieOptions {
+  private getCookieOptionsForKey(key: string, expiresInDays: number): ICaoCookieOptions {
     // Tokens de autenticação requerem configurações mais restritivas
     if (key === "TOKEN" || key === "REFRESH_TOKEN") {
       return {

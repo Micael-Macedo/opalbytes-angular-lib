@@ -1,7 +1,7 @@
 import { isPlatformBrowser, DOCUMENT } from "@angular/common";
 import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
 
-export interface ICookieOptions {
+export interface ICaoCookieOptions {
   expires?: number | Date; // Dias ou data específica
   path?: string;
   domain?: string;
@@ -22,7 +22,7 @@ export class CookieService {
   /**
    * Define um cookie
    */
-  set(name: string, value: string, options: ICookieOptions = {}): void {
+  set(name: string, value: string, options: ICaoCookieOptions = {}): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
@@ -108,7 +108,7 @@ export class CookieService {
   /**
    * Remove um cookie
    */
-  remove(name: string, options: Pick<ICookieOptions, "path" | "domain"> = {}): void {
+  remove(name: string, options: Pick<ICaoCookieOptions, "path" | "domain"> = {}): void {
     this.set(name, "", {
       ...options,
       expires: new Date(0),

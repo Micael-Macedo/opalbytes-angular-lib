@@ -1,14 +1,15 @@
 import { Injectable, inject } from "@angular/core";
 
-import { APP_CONFIG, ApiUrl, ApiPath, HttpMethod, IAppConfig } from "..";
+import { APP_CONFIG, ICaoAppConfig } from "../../config/app-config";
+import { ApiUrl, ApiPath, HttpMethod } from "../../config/app-endpoints";
 
 @Injectable({
   providedIn: "root",
 })
-export class ConfigService {
-  private readonly config: IAppConfig = inject(APP_CONFIG);
+export class CaoConfigService {
+  private readonly config: ICaoAppConfig = inject(APP_CONFIG);
 
-  getConfig(): IAppConfig {
+  getConfig(): ICaoAppConfig {
     return this.config;
   }
 

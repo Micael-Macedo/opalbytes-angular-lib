@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { shareReplay, tap } from "rxjs/operators";
 
-interface ICacheEntry<T> {
+interface ICaoCacheEntry<T> {
   data: T;
   timestamp: number;
 }
@@ -13,7 +13,7 @@ interface ICacheEntry<T> {
  */
 @Injectable({ providedIn: "root" })
 export class HttpCacheService {
-  private cache = new Map<string, ICacheEntry<unknown>>();
+  private cache = new Map<string, ICaoCacheEntry<unknown>>();
   private readonly DEFAULT_TTL = 5 * 60 * 1000; // 5 minutos
 
   /**

@@ -3,7 +3,7 @@ import { HttpStatusCategory } from "../enums/http-status.enum";
 /**
  * Interface para configuração de erro HTTP
  */
-export interface IHttpErrorConfig {
+export interface ICaoHttpErrorConfig {
   status: number;
   title: string;
   message: string;
@@ -32,7 +32,7 @@ export class HttpErrorModel {
   /**
    * Factory method para criar HttpErrorModel a partir de config
    */
-  static fromConfig(config: IHttpErrorConfig, originalError?: unknown): HttpErrorModel {
+  static fromConfig(config: ICaoHttpErrorConfig, originalError?: unknown): HttpErrorModel {
     return new HttpErrorModel(
       config.status,
       config.title,

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-export interface IResourceAccess {
+export interface ICaoResourceAccess {
   roles: string[];
 }
 
-export interface IJwtPayload {
+export interface ICaoJwtPayload {
   "exp": number;
   "iat"?: number;
   "jti"?: string;
@@ -18,7 +18,7 @@ export interface IJwtPayload {
   "realm_access": {
     roles: string[];
   };
-  "resource_access": Record<string, IResourceAccess | undefined>;
+  "resource_access": Record<string, ICaoResourceAccess | undefined>;
   "scope"?: string;
   "email_verified"?: boolean;
   "name"?: string;

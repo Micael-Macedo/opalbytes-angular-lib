@@ -1,4 +1,4 @@
-export enum Variables {
+export enum CaoVariables {
   STORAGE_AUTH = "TOKEN",
   USER_LOGIN = "USER_LOGIN",
   USER_AUTH = "USER_AUTH",

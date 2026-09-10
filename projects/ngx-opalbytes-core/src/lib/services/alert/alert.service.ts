@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 
-import { IAlertConfig } from "./interfaces/alert-config.interface";
-import { ToastService } from "./toast.service";
+import { ICaoAlertConfig } from "../../interfaces";
+import { ToastService } from "../toast.service";
 
 @Injectable({
   providedIn: "root",
@@ -9,7 +9,7 @@ import { ToastService } from "./toast.service";
 export class AlertService {
   private toastService = inject(ToastService);
 
-  show(config: IAlertConfig) {
+  show(config: ICaoAlertConfig) {
     const message = config.title ? `${config.title}: ${config.message}` : config.message;
 
     switch (config.type) {
