@@ -1,3 +1,8 @@
+## 1.5.0 (2026-09-14)
+
+* Merge pull request #100 from Micael-Macedo/feature(directives)/create-tooltip-directive ([d2ab6e0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d2ab6e0)), closes [#100](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/100)
+* feat: create tooltip directive ([54b50e7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/54b50e7))
+
 ## [1.4.2](https://github.com/Micael-Macedo/opalbytes-angular-lib/compare/ngx-opalbytes-directives@1.4.1...ngx-opalbytes-directives@1.4.2) (2026-06-23)
 
 
