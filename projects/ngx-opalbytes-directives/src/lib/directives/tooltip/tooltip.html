@@ -1,0 +1,11 @@
+    <div
+      class="cao-tooltip"
+      [class.cao-tooltip--visible]="visible"
+      [ngClass]="'cao-tooltip--' + position"
+      [style]="styles"
+    >
+      <span [innerHTML]="content"></span>
+      @if (showArrow) {
+        <div class="cao-tooltip__arrow"></div>
+      }
+    </div>

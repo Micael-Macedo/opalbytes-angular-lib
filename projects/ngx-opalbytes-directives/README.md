@@ -69,9 +69,9 @@ Dentro da pasta `src/lib/`, as diretivas são organizadas em `directives/` e cad
 src/
 └── lib/
     └── directives/
-        ├── cpf-mask/
         ├── highlight/
-        └── skeleton/
+        ├── skeleton/
+        └── tooltip/
 ```
 
 ---
@@ -195,6 +195,65 @@ Exibe placeholders de carregamento com animação shimmer sobre os elementos do 
 - Elementos com `display:none`, `visibility:hidden` ou dimensões zero são ignorados
 - A animação shimmer respeita a preferência `prefers-reduced-motion`
 - Placeholders órfãos são removidos automaticamente antes de reconstruir o skeleton
+
+---
+
+### `CaoTooltipDirective`
+Exibe uma dica (tooltip) ao lado de um elemento quando o usuário passa o mouse ou dá foco nele.
+
+**Seletor:** `[caoTooltip]`
+
+**Inputs**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `caoTooltip` | `string` | obrigatório | Conteúdo exibido no tooltip (suporta HTML via `innerHTML`) |
+| `tooltipPosition` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Posição do tooltip em relação ao elemento hospedeiro |
+| `tooltipBgColor` | `string` | `'#323232'` | Cor de fundo do tooltip |
+| `tooltipTextColor` | `string` | `'#ffffff'` | Cor do texto |
+| `tooltipFontSize` | `string` | `'13px'` | Tamanho da fonte do texto |
+| `tooltipMaxWidth` | `string` | `'220px'` | Largura máxima do tooltip |
+| `tooltipArrow` | `boolean` | `true` | Exibe a seta indicadora apontando para o elemento |
+| `tooltipOffsetPx` | `number` | `8` | Distância (em px) entre o tooltip e o elemento |
+
+**Exemplos de Uso**
+
+```html
+<!-- 1. Uso básico -->
+<button caoTooltip="Salvar alterações">Salvar</button>
+
+<!-- 2. Com conteúdo HTML e posição personalizada -->
+<p [caoTooltip]="'Dica com <b>negrito</b>'" tooltipPosition="top">
+  Passe o mouse aqui
+</p>
+
+<!-- 3. Cores customizadas -->
+<button
+  caoTooltip="Clique para excluir"
+  tooltipBgColor="#dc2626"
+  tooltipTextColor="#ffffff"
+>
+  Excluir
+</button>
+
+<!-- 4. Sem seta indicadora e com offset maior -->
+<span [caoTooltip]="'Apenas um texto'" [tooltipArrow]="false" [tooltipOffsetPx]="16">
+  Hover
+</span>
+
+<!-- 5. Limite de largura -->
+<div [caoTooltip]="'Texto longo que quebra em múltiplas linhas'" tooltipMaxWidth="300px">
+  Ler mais
+</div>
+```
+
+**Comportamento**
+- O tooltip é exibido em `mouseenter`/`focus` e ocultado em `mouseleave`/`blur`
+- É renderizado no `document.body` com posicionamento absoluto calculado via `getBoundingClientRect`
+- A página pode ter apenas um tooltip aberto por elemento (eventos repetidos não duplicam)
+- A seta se orienta automaticamente conforme a posição (`tooltipPosition`)
+- As cores/tamanho/largura são aplicadas por CSS custom properties (`--cao-tooltip-bg`, `--cao-tooltip-text-color`, `--cao-tooltip-font-size`, `--cao-tooltip-max-width`)
+- Possui animação de entrada (fade/scale) e `pointer-events: none` para não interferir na interação
 
 ---
 

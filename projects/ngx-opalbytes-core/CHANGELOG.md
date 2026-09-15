@@ -1,3 +1,8 @@
+## <small>1.2.1 (2026-09-14)</small>
+
+* Merge pull request #99 from Micael-Macedo/fix(core)/environment-type-to-config-provider ([614a9e6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/614a9e6)), closes [#99](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/99)
+* fix: environment type to provider core config ([3fadb4d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3fadb4d))
+
 ## 1.2.0 (2026-09-10)
 
 * Merge branch 'main' of https://github.com/Micael-Macedo/opalbytes-angular-lib into feature(core)/add ([2f96f83](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2f96f83))

@@ -1,12 +1,15 @@
+
+export type CaoEnviromentType = "production" | "homologation" | "development" | "local" | "dev" | "hmg" | "prod" | "stage"
+
 export interface ICaoEnvironmentConfig {
     production: boolean;
-    name: "production" | "homologation" | "development" | "local" | "dev" | "hmg" | "prod",
+    name: CaoEnviromentType,
     buildDate: string
 }
 /**
 * Detecção automática de ambiente baseado na URL
 */
-function detectEnvironment(): ICaoEnvironmentConfig["name"] {
+function detectEnvironment(): CaoEnviromentType {
     if (typeof window === "undefined") {
         return "development";
     }
