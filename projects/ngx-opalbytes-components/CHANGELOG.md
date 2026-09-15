@@ -1,3 +1,9 @@
+## 1.24.0 (2026-09-15)
+
+* Merge branch 'main' of https://github.com/Micael-Macedo/opalbytes-angular-lib into feature(component ([402a5b3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/402a5b3))
+* Merge pull request #102 from Micael-Macedo/feature(components)/add-toast-component ([eceef6b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/eceef6b)), closes [#102](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/102)
+* feat: add toast component ([a57ac79](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a57ac79))
+
 ## 1.23.0 (2026-09-09)
 
 * Merge pull request #91 from Micael-Macedo/chore(components)/add-cao-comp-x-npm-i-where-to-use ([8893c79](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8893c79)), closes [#91](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/91)
