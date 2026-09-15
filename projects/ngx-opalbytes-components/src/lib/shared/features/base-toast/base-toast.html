@@ -1,0 +1,23 @@
+<div
+  role="status"
+  aria-live="polite"
+  [class]="'toast-container ' + data.type"
+  [style.--toast-progress-duration.ms]="progressDuration">
+  <div class="toast-content">
+    <div class="icon-container">
+      <svg [lucideIcon]="iconName" [size]="20" [strokeWidth]="2"></svg>
+    </div>
+    <div class="message">{{ data.message }}</div>
+    <button
+      type="button"
+      class="close-button"
+      aria-label="Fechar notificação"
+      [attr.data-cy]="'toast-close'"
+      (click)="closeToast()">
+      <svg lucideIcon="x" [size]="16" [strokeWidth]="2"></svg>
+    </button>
+  </div>
+  <div class="progress-track">
+    <div class="progress-bar"></div>
+  </div>
+</div>
