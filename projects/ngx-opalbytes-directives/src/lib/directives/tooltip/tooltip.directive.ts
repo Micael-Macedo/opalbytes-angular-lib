@@ -35,8 +35,8 @@ export class CaoTooltipDirective implements OnDestroy {
   private readonly _position = signal<CaoTooltipPosition>('bottom');
   private readonly _bgColor = signal<string>('#323232');
   private readonly _textColor = signal<string>('#ffffff');
-  private readonly _fontSize = signal<string>('13px');
-  private readonly _maxWidth = signal<string>('220px');
+  private readonly _fontSize = signal<string>('12px');
+  private readonly _maxWidth = signal<string>('250px');
   private readonly _arrow = signal<boolean>(true);
   private readonly _offsetPx = signal<number>(8);
 
