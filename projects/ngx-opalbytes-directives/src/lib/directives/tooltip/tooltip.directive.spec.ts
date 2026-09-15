@@ -270,7 +270,7 @@ describe('CaoTooltipDirective default values', () => {
     const tooltip = document.querySelector('.cao-tooltip') as HTMLElement;
     expect(tooltip.style.getPropertyValue('--cao-tooltip-bg')).toBe('#323232');
     expect(tooltip.style.getPropertyValue('--cao-tooltip-text-color')).toBe('#ffffff');
-    expect(tooltip.style.getPropertyValue('--cao-tooltip-font-size')).toBe('13px');
-    expect(tooltip.style.getPropertyValue('--cao-tooltip-max-width')).toBe('220px');
+    expect(tooltip.style.getPropertyValue('--cao-tooltip-font-size')).toBe('12px');
+    expect(tooltip.style.getPropertyValue('--cao-tooltip-max-width')).toBe('250px');
   });
 });
