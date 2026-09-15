@@ -1,3 +1,10 @@
+## <small>1.5.1 (2026-09-15)</small>
+
+* Merge pull request #103 from Micael-Macedo/fix(directives)/adjust-tooltip-size-and-width ([9be13cc](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9be13cc)), closes [#103](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/103)
+* Merge pull request #104 from Micael-Macedo/fix(directives)/adjust-tooltip-size-and-width ([cb911ff](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/cb911ff)), closes [#104](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/104)
+* fix: adjust tooltip size and width ([1305041](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/1305041))
+* fix: fix test tooltip file ([0381533](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0381533))
+
 ## 1.5.0 (2026-09-14)
 
 * Merge pull request #100 from Micael-Macedo/feature(directives)/create-tooltip-directive ([d2ab6e0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d2ab6e0)), closes [#100](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/100)
