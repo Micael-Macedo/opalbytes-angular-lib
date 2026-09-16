@@ -10,8 +10,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map, catchError, finalize } from "rxjs/operators";
 
-import { LoadingService, ResponseTransformerService } from "../services";
-import { HttpErrorHandlerService } from "../services/http-error-handler.service";
+import { HttpErrorHandlerService, LoadingService, ResponseTransformerService } from "../services";
 
 /**
  * Interceptor HTTP refatorado seguindo princípios SOLID
@@ -39,7 +38,7 @@ export class CaoApiInterceptor implements HttpInterceptor {
     private loadingService: LoadingService,
     private httpErrorHandler: HttpErrorHandlerService,
     private responseTransformer: ResponseTransformerService
-  ) {}
+  ) { }
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const skipLoading = this.shouldSkipLoading(req);
