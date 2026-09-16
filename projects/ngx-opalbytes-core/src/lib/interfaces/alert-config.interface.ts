@@ -3,3 +3,5 @@ export interface ICaoAlertConfig {
   message: string;
   title: string;
 }
+
+export type IAlertEvent = ICaoAlertConfig;

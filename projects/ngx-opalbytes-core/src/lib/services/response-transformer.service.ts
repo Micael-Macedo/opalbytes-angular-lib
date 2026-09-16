@@ -19,7 +19,7 @@ type AlertSeverity = "success" | "error" | "info" | "warning";
   providedIn: "root",
 })
 export class ResponseTransformerService {
-  constructor(private httpErrorHandler: HttpErrorHandlerService) {}
+  constructor(private httpErrorHandler: HttpErrorHandlerService) { }
 
   /**
    * Processa evento HTTP e retorna transformado (se necessário)
