@@ -1,3 +1,10 @@
+## 1.3.0 (2026-09-16)
+
+* Merge pull request #105 from Micael-Macedo/feature(core)/remove-alert-service-at-core-lib ([65fb8d2](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/65fb8d2)), closes [#105](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/105)
+* Merge pull request #106 from Micael-Macedo/feature(core)/remove-alert-service-at-core-lib ([4ab6dc0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4ab6dc0)), closes [#106](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/106)
+* fix: correcao dependecias global error ([835b417](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/835b417))
+* feat: delete alert service at core lib ([0049fef](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0049fef))
+
 ## <small>1.2.1 (2026-09-14)</small>
 
 * Merge pull request #99 from Micael-Macedo/fix(core)/environment-type-to-config-provider ([614a9e6](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/614a9e6)), closes [#99](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/99)
