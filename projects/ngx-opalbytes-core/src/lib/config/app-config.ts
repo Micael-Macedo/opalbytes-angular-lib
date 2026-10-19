@@ -4,12 +4,11 @@ import { developmentConfig } from "./config.dev";
 import { homologationConfig } from "./config.hmg";
 import { localConfig } from "./config.local";
 import { productionConfig } from "./config.prod";
-import { EnvironmentEnum } from "../enums";
-import { ICaoAppUrlsRecord, AppPaths, HttpMethods, AppAuth } from "../interfaces";
+import { ICaoAppUrlsRecord, AppPaths, HttpMethods, AppAuth, CaoEnviromentType } from "../interfaces";
 
 export interface ICaoAppConfig {
   production: boolean;
-  environment: EnvironmentEnum;
+  environment: CaoEnviromentType;
   urls: ICaoAppUrlsRecord;
   paths: AppPaths;
   httpMethods?: HttpMethods;
