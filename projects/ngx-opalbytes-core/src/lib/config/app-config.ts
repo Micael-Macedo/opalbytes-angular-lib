@@ -21,8 +21,10 @@ export const ENVIRONMENT = new InjectionToken<{ name: string }>("ENVIRONMENT");
 // Token de injeção para a configuração do app
 export const APP_CONFIG = new InjectionToken<ICaoAppConfig>("APP_CONFIG");
 
+export type EnvType = "prod" | "hmg" | "local" | "dev"
+
 // Função auxiliar para obter a config baseada no environment
-export function getConfigByEnvironment(envName: string): ICaoAppConfig {
+export function getConfigByEnvironment(envName: EnvType): ICaoAppConfig {
   switch (envName) {
     case "prod":
       return productionConfig;
