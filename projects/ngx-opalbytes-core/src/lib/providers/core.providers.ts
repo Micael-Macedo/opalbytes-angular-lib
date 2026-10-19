@@ -11,7 +11,7 @@ import {
   withSessionStorage,
 } from "ngx-webstorage";
 
-import { APP_CONFIG, ENVIRONMENT, getConfigByEnvironment } from '../config/index';
+import { APP_CONFIG, ENVIRONMENT, ICaoAppConfig } from '../config/index';
 import { CaoApiInterceptor } from '../interceptors/api.interceptor';
 import { CaoLoadingInterceptor } from '../interceptors/loading.interceptor';
 import { ICaoEnvironmentConfig } from '../interfaces/environment-config.interface';
@@ -23,7 +23,7 @@ export interface ICaoProvideConfig {
   environment: ICaoEnvironmentConfig,
 }
 
-export function caoProvideCore(provideConfig: ICaoProvideConfig): EnvironmentProviders {
+export function caoProvideCore(provideConfig: ICaoProvideConfig, appConfig: ICaoAppConfig): EnvironmentProviders {
   return makeEnvironmentProviders([
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
@@ -43,7 +43,7 @@ export function caoProvideCore(provideConfig: ICaoProvideConfig): EnvironmentPro
     },
     {
       provide: APP_CONFIG,
-      useFactory: () => getConfigByEnvironment(provideConfig.environment.name),
+      useFactory: () => appConfig,
     },
     {
       provide: HTTP_INTERCEPTORS,
