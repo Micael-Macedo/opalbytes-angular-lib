@@ -1,3 +1,10 @@
+## 1.4.0 (2026-10-19)
+
+* Merge pull request #107 from Micael-Macedo/feature(core)/update-provide-core-config ([2e93912](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2e93912)), closes [#107](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/107)
+* Merge pull request #108 from Micael-Macedo/feature(core)/update-provide-core-config ([9a95e57](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9a95e57)), closes [#108](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/108)
+* test: correcao teste com appConfig em core provider ([26cbcce](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/26cbcce))
+* feat: update provide core config ([1f23111](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/1f23111))
+
 ## 1.3.0 (2026-09-16)
 
 * Merge pull request #105 from Micael-Macedo/feature(core)/remove-alert-service-at-core-lib ([65fb8d2](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/65fb8d2)), closes [#105](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/105)
