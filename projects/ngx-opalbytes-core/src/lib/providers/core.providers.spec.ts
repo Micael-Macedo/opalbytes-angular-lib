@@ -3,12 +3,14 @@ import { EnvironmentProviders } from "@angular/core";
 
 import { caoProvideCore, ICaoProvideConfig } from "./core.providers";
 import { ICaoEnvironmentConfig } from "../interfaces/environment-config.interface";
+import { getConfigByEnvironment } from "../config";
 
 const environment: ICaoEnvironmentConfig = {
   production: false,
   name: "local",
   buildDate: "2026-01-01",
 };
+const appConfig = getConfigByEnvironment("prod")
 
 describe("caoProvideCore", () => {
   it("should return EnvironmentProviders for a valid config", () => {
@@ -17,7 +19,9 @@ describe("caoProvideCore", () => {
       environment,
     };
 
-    const providers = caoProvideCore(config);
+
+
+    const providers = caoProvideCore(config, appConfig);
     expect(providers).toBeTruthy();
     expect(providers).toBeInstanceOf(Object);
   });
@@ -27,8 +31,8 @@ describe("caoProvideCore", () => {
       routes: [],
       environment,
     };
-
-    const providers = caoProvideCore(config);
+    
+    const providers = caoProvideCore(config, appConfig);
     expect(providers).toBeTruthy();
   });
 
@@ -39,7 +43,7 @@ describe("caoProvideCore", () => {
       buildDate: "2026-01-01",
     };
 
-    const providers = caoProvideCore({ routes: [], environment: prodEnv });
+    const providers = caoProvideCore({ routes: [], environment: prodEnv }, appConfig);
     expect(providers).toBeTruthy();
   });
 });
