@@ -27,4 +27,7 @@ export * from "./error/error"
 
 export * from "./card/card.component"
 export * from "./base-toggle/base-toggle.component"
+export * from "./slide-toggle/slide-toggle.component"
+export * from "./radio/radio-group.component"
+export * from "./radio/radio-button.component"
 export * from "./footer/footer"
