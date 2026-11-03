@@ -1,3 +1,8 @@
+## <small>1.25.1 (2026-11-03)</small>
+
+* Merge pull request #111 from Micael-Macedo/fix(components)/optional-direction-widget-position ([588ef19](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/588ef19)), closes [#111](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/111)
+* fix: widget readme info ([549bb27](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/549bb27))
+
 ## 1.25.0 (2026-11-03)
 
 * Merge pull request #109 from Micael-Macedo/feature(components)/add-drawner-component ([4bc3405](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4bc3405)), closes [#109](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/109)
