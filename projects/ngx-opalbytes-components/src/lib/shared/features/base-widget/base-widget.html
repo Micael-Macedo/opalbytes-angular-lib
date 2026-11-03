@@ -1,0 +1,27 @@
+<div
+  class="widget-backdrop"
+  role="presentation"
+  tabindex="-1"
+  [class.widget-backdrop--closing]="closing()"
+  (mousedown)="onBackdropMouseDown($event)"
+  (mouseup)="onBackdropMouseUp($event)"
+  (animationend)="onAnimationEnd($event)">
+  <div
+    class="widget-panel"
+    [class.widget-panel--closing]="closing()"
+    (mousedown)="$event.stopPropagation()"
+    (mouseup)="$event.stopPropagation()">
+    <div class="widget-body">
+        <div class="widget-header">
+            <div class="widget-title">
+                <h1>{{ title() }}</h1>
+                <h2>{{ subtitle() }}</h2>
+            </div>
+            <ng-content select="widget-title" />
+        </div>
+      <div class="widget-scroll">
+        <ng-content />
+      </div>
+    </div>
+  </div>
+</div>

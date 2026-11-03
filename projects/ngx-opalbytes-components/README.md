@@ -253,7 +253,8 @@ src/
             ├── base-table/
             ├── base-table-paginated/
             ├── base-dialog/
-            └── base-alert/
+            ├── base-alert/
+            └── base-widget/
             
 ```
 
@@ -581,6 +582,144 @@ Para personalizar a aparência ou o comportamento dos dialogos, você pode esten
       }
     }
     ```
+---
+
+### `BaseWidget` e `CaoWidgetService`
+
+Um painel lateral (drawer) para formulários e fluxos que precisam de mais espaço, aberto via `Overlay` do `@angular/cdk`. O componente fornece o backdrop, o header e a área de conteúdo com scroll; o `CaoWidgetService` é responsável por abrir o widget e integrá-lo ao histórico do navegador.
+
+**Seletor:** `<cao-base-widget>`
+
+**Classe genérica:** `CaoBaseWidgetComponent<TData>` — a forma recomendada de uso é **estender** o componente para criar widgets concretos e tipar o `widgetData`.
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `title` | `string` | `'Titulo'` | Título exibido no header do widget. |
+| `subtitle` | `string` | `''` | Subtítulo exibido abaixo do título. |
+| `widgetIcon` | `string` | `''` | Ícone do widget (disponível para classes derivadas). |
+| `widgetData` | `TData \| undefined` | `undefined` | Dados genéricos passados ao conteúdo do widget. |
+| `cancelTextButton` | `string` | `'Cancelar'` | Texto do botão de cancelamento (disponível para classes derivadas). |
+| `saveTextButton` | `string` | `'Gerar'` | Texto do botão de ação principal (disponível para classes derivadas). |
+| `displayActionButton` | `boolean` | `true` | Exibe o botão principal (disponível para classes derivadas). |
+| `displaySaveButton` | `boolean` | `true` | Exibe o botão de salvar (disponível para classes derivadas). |
+| `displayCancelButton` | `boolean` | `true` | Exibe o botão de cancelar (disponível para classes derivadas). |
+| `shouldCloseWhenCancel` | `boolean` | `true` | Define se o cancelamento deve fechar o widget (disponível para classes derivadas). |
+| `typeCancel` | `'cancel' \| 'back'` | `'cancel'` | Tipo do botão de cancelamento (disponível para classes derivadas). |
+| `saveDisabled` | `boolean` | `false` | Desabilita a ação de salvar (disponível para classes derivadas). |
+| `saveIcon` | `string` | `'arrow-right'` | Ícone do botão de salvar (disponível para classes derivadas). |
+| `saveIconPosition` | `'leading' \| 'trailing'` | `'trailing'` | Posição do ícone do botão de salvar (disponível para classes derivadas). |
+| `closeOnClickOutside` | `boolean` | `true` | Fecha o widget ao clicar no backdrop. |
+| `confirmOnClose` | `boolean` | `false` | Exige confirmação antes de fechar (disponível para classes derivadas). |
+
+> **Nota:** o template base atual renderiza o header (`title`/`subtitle` + projeção `widget-title`) e a área de conteúdo com scroll. `widgetIcon`, os textos e os controles de ação (`display*`, `saveIcon`, `saveIconPosition`, `saveDisabled`, `typeCancel`, `shouldCloseWhenCancel`, `confirmOnClose`) ficam disponíveis na classe para que componentes derivados montem sua própria barra de ações.
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `save` | `output<void>` | Emitido quando a ação de salvar é acionada. |
+| `deleted` | `output<void>` | Emitido quando a ação de exclusão é acionada. |
+| `cancelEvent` | `output<void>` | Emitido quando o usuário cancela. |
+| `closeRequest` | `output<void>` | Emitido ao final da animação de fechamento. |
+
+**Métodos**
+
+| Método | Descrição |
+| --- | --- |
+| `closeWidget()` | Inicia o fechamento com animação e emite `closeRequest` ao final. Chamadas repetidas são ignoradas. |
+| `saveWidget()` | Emite o evento `save`. |
+| `cancelWidget()` | Emite o evento `cancelEvent`. |
+| `deletedWidget()` | Emite o evento `deleted`. |
+| `onEscapeKey()` | Fecha o widget ao pressionar `ESC`. |
+| `onBackdropMouseDown(event)` / `onBackdropMouseUp(event)` | Controlam o fechamento por clique no backdrop, ignorando arrastes que começam no backdrop e terminam no painel. |
+| `forwardCloseRequest()` | Repassa o evento `closeRequest` (útil em classes derivadas). |
+
+**Projeção de conteúdo**
+
+- Slot padrão (`<ng-content />`): conteúdo do widget, renderizado dentro da área com scroll.
+- Slot nomeado `<widget-title>`: conteúdo adicional no header, ao lado do título.
+
+**Interface `ICaoWidgetOptions<TData>`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `inputs` | `Partial<Record<string, unknown>>` | Inputs aplicados ao componente no momento da abertura. |
+| `data` | `TData` | Atalho para o input `widgetData`. |
+| `onSave` | `() => void` | Callback executado quando o widget emite `save`. |
+| `onDelete` | `() => void` | Callback executado quando o widget emite `deleted`. |
+| `onClose` | `() => void` | Callback executado ao fechar o widget. |
+
+**`CaoWidgetService`**
+
+| Método | Descrição |
+| --- | --- |
+| `open<TComponent>(component, options?)` | Abre o componente informado em um overlay. Apenas um widget fica aberto por vez: se já houver um, ele é descartado antes de abrir o novo. |
+| `close()` | Fecha o widget aberto programaticamente. |
+
+**Comportamentos importantes**
+
+- O overlay é criado **sem backdrop próprio** e com scroll bloqueado; o backdrop visual e as animações vêm do `BaseWidget`.
+- Ao abrir, o serviço registra um estado no histórico do navegador. O botão **voltar** fecha o widget, e o fechamento pelo componente também retorna o histórico.
+- Os eventos `save`, `deleted` e `closeRequest` são conectados automaticamente aos callbacks `onSave`, `onDelete` e `onClose`.
+- O serviço depende de `window`/`history`, portanto requer ambiente de browser (atenção em SSR).
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--widget-animation-duration` | `250ms` | Duração das animações de entrada e saída do widget. |
+
+**Exemplo de uso — criando um widget**
+
+```typescript
+// gerar-exames.widget.ts
+import { Component } from '@angular/core';
+import { CaoBaseWidgetComponent } from 'ngx-opalbytes-components';
+
+@Component({
+  selector: 'app-gerar-exames-widget',
+  imports: [CaoBaseWidgetComponent],
+  template: `
+    <cao-base-widget
+      title="Gerar exames"
+      subtitle="Selecione as sessões"
+      [widgetData]="widgetData()"
+      (save)="saveWidget()"
+      (closeRequest)="forwardCloseRequest()">
+      <p>Total de sessões: {{ widgetData()?.total }}</p>
+    </cao-base-widget>
+  `,
+})
+export class GerarExamesWidget extends CaoBaseWidgetComponent<{ total: number }> {}
+```
+
+**Exemplo de uso — abrindo via serviço**
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { CaoWidgetService } from 'ngx-opalbytes-components';
+import { GerarExamesWidget } from './gerar-exames.widget';
+
+@Component({ /* ... */ })
+export class MinhaPaginaComponent {
+  private readonly widgetService = inject(CaoWidgetService);
+
+  abrirWidget(): void {
+    this.widgetService.open(GerarExamesWidget, {
+      inputs: { subtitle: 'Sessões de hoje' },
+      data: { total: 42 },
+      onSave: () => console.log('salvar'),
+      onDelete: () => console.log('excluir'),
+      onClose: () => console.log('fechado'),
+    });
+  }
+}
+```
+
+> Os três símbolos (`CaoBaseWidgetComponent`, `CaoWidgetService` e `ICaoWidgetOptions`) são exportados pela API pública da biblioteca.
+
 ---
 
 ### `FeatureBaseModal`

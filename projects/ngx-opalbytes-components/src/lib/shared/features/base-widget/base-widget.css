@@ -1,0 +1,102 @@
+:host {
+  --widget-animation-duration: 250ms;
+  display: block;
+}
+
+.widget-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.4);
+  animation: widget-fade-in var(--widget-animation-duration) ease-out;
+}
+
+.widget-backdrop--closing {
+  pointer-events: none;
+  animation: widget-fade-out var(--widget-animation-duration) ease-out forwards;
+}
+
+.widget-panel {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  width: 90vh;
+  max-width: 520px;
+  padding: 20px;
+  border-radius: 0.5rem 0 0 0.5rem;
+  background-color: var(--color-white, var(--white, #ffffff));
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  animation: widget-slide-in-right var(--widget-animation-duration) ease-out;
+}
+
+.widget-panel--closing {
+  animation: widget-slide-out-right var(--widget-animation-duration) ease-out forwards;
+}
+
+.widget-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.widget-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-shrink: 0;
+}
+
+.widget-title{
+  display: flex;
+  flex-direction: column;
+}
+
+.widget-scroll {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+@keyframes widget-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes widget-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes widget-slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes widget-slide-out-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

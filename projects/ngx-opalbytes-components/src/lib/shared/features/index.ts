@@ -20,3 +20,7 @@ export * from './base-table-paginated/base-pagination.service'
 export * from './base-alert/base-alert'
 export * from './base-alert/base-alert.service'
 export * from './base-alert/base-alert.interface'
+
+export * from './base-widget/base-widget'
+export * from './base-widget/base-widget.interface'
+export * from './base-widget/widget.service'
