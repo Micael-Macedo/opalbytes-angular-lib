@@ -1,3 +1,9 @@
+## 1.26.0 (2026-11-03)
+
+* Merge pull request #112 from Micael-Macedo/feature(components)/add-radio-slide-components ([ac2bd7c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ac2bd7c)), closes [#112](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/112)
+* feat: add radio button component ([681a066](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/681a066))
+* feat: add slide toggle component ([07cd069](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/07cd069))
+
 ## <small>1.25.1 (2026-11-03)</small>
 
 * Merge pull request #111 from Micael-Macedo/fix(components)/optional-direction-widget-position ([588ef19](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/588ef19)), closes [#111](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/111)
