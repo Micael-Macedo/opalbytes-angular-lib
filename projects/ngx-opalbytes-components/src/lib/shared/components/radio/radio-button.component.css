@@ -1,0 +1,95 @@
+:host {
+  display: inline-flex;
+}
+
+.cao-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cao-radio--disabled {
+  cursor: not-allowed;
+}
+
+.cao-radio__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.cao-radio__control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--cao-radio-size, 20px);
+  height: var(--cao-radio-size, 20px);
+  box-sizing: border-box;
+  border: 2px solid var(--cao-radio-unselected, #6b7280);
+  border-radius: 50%;
+  transition: border-color var(--cao-radio-duration, 200ms) ease;
+}
+
+.cao-radio__dot {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background-color: var(--cao-radio-color, #4f46e5);
+  transform: scale(0);
+  transition:
+    transform var(--cao-radio-duration, 200ms) ease,
+    background-color var(--cao-radio-duration, 200ms) ease;
+}
+
+.cao-radio__label {
+  color: var(--cao-radio-label, #111827);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.cao-radio__label:empty {
+  display: none;
+}
+
+.cao-radio:not(.cao-radio--disabled):hover .cao-radio__control,
+.cao-radio--checked .cao-radio__control {
+  border-color: var(--cao-radio-color, #4f46e5);
+}
+
+.cao-radio--checked .cao-radio__dot {
+  transform: scale(1);
+}
+
+.cao-radio--disabled .cao-radio__control {
+  border-color: var(--cao-radio-disabled, #d1d5db);
+}
+
+.cao-radio--disabled .cao-radio__dot {
+  background-color: var(--cao-radio-disabled, #d1d5db);
+}
+
+.cao-radio--disabled .cao-radio__label {
+  color: var(--cao-radio-label-disabled, #9ca3af);
+}
+
+.cao-radio__input:focus-visible + .cao-radio__control {
+  box-shadow: 0 0 0 3px var(--cao-radio-focus-ring, rgba(79, 70, 229, 0.35));
+}
+
+.cao-radio--label-before .cao-radio__control {
+  order: 2;
+}
+
+.cao-radio--label-before .cao-radio__label {
+  order: 1;
+}

@@ -243,7 +243,9 @@ src/
         |   ├── kpi/
         |   ├── links-button/
         |   ├── paginator/
+        |   ├── radio/
         |   ├── skeleton/
+        |   ├── slide-toggle/
         |   ├── stepper/
         |   ├── tab-group/
         |   ├── tab-panel/
@@ -925,6 +927,332 @@ Um componente de alternância (toggle switch) que funciona com `ngModel` ou `for
 | `searchClick` | `EventEmitter<void>` | Emitido quando o ícone de busca é clicado. |
 | `inputChange` | `EventEmitter<string>` | Emitido a cada mudança no input. |
 | `statusChanged` | `EventEmitter<CaoBaseToggleComponent>` | Emitido quando o toggle é alternado. |
+
+---
+
+### `CaoSlideToggleComponent`
+
+Um switch (slide toggle) acessível e customizável, com suporte a `ngModel` e formulários reativos via `ControlValueAccessor`. O visual é construído com trilho e thumb animados, sem depender do Material em runtime.
+
+**Seletor:** `<cao-slide-toggle>`
+
+**Interface `ICaoSlideToggleChangeEvent`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `checked` | `boolean` | Novo estado do switch. |
+| `source` | `CaoSlideToggleComponent` | Instância que originou o evento. |
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `checked` | `boolean` | `false` | Estado inicial/atual do switch. |
+| `isDisabled` | `boolean` | `false` | Desabilita o componente. |
+| `disabled` | `boolean` | `false` | Alias de `isDisabled` (mesmo comportamento). |
+| `label` | `string` | `''` | Texto do label. Também aceita conteúdo projetado (`<ng-content>`). |
+| `labelPosition` | `'before' \| 'after'` | `'after'` | Posição do label em relação ao switch. |
+| `name` | `string` | `''` | Atributo `name` do input nativo. |
+| `id` | `string` | `''` | Atributo `id` do input nativo. |
+| `ariaLabel` | `string` | `''` | Atributo `aria-label` do switch. |
+| `required` | `boolean` | `false` | Marca o input como obrigatório. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E com Cypress. |
+| `trackColor` | `string` | `#d1d5db` | Cor do trilho desligado. |
+| `trackCheckedColor` | `string` | `#4f46e5` | Cor do trilho ligado. |
+| `thumbColor` | `string` | `#ffffff` | Cor do thumb desligado. |
+| `thumbCheckedColor` | `string` | `#ffffff` | Cor do thumb ligado. |
+| `disabledTrackColor` | `string` | `#e5e7eb` | Cor do trilho desabilitado. |
+| `disabledThumbColor` | `string` | `#f3f4f6` | Cor do thumb desabilitado. |
+| `labelColor` | `string` | `#111827` | Cor do label. |
+| `disabledLabelColor` | `string` | `#9ca3af` | Cor do label desabilitado. |
+| `focusRingColor` | `string` | `rgba(79, 70, 229, 0.35)` | Cor do anel de foco. |
+| `trackWidth` | `string` | `36px` | Largura do trilho. |
+| `trackHeight` | `string` | `20px` | Altura do trilho. |
+| `thumbSize` | `string` | `16px` | Tamanho do thumb. |
+| `animationDuration` | `string` | `200ms` | Duração da animação. |
+| `thumbIcon` | `string` | `''` | Ícone exibido no thumb desligado. Pode ser um nome Lucide ou uma URL de imagem. |
+| `thumbCheckedIcon` | `string` | `''` | Ícone exibido no thumb ligado. Se vazio, usa `thumbIcon`. |
+| `isLucideThumbIcon` | `boolean` | `false` | Interpreta os ícones do thumb como nomes Lucide. Quando `false`, usa `<img>`. |
+| `thumbIconColor` | `string` | `''` | Cor do ícone Lucide no estado desligado. |
+| `thumbCheckedIconColor` | `string` | `''` | Cor do ícone Lucide no estado ligado. Se vazio, usa `thumbIconColor`. |
+| `thumbIconSize` | `string \| number` | `12` | Tamanho do ícone do thumb. |
+| `thumbIconStrokeWidth` | `string \| number` | `2` | Espessura do traço do ícone Lucide. |
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `checkedChange` | `EventEmitter<boolean>` | Emitido quando o estado muda. |
+| `toggleChange` | `EventEmitter<ICaoSlideToggleChangeEvent>` | Emitido com o novo estado e a origem. |
+
+**Métodos**
+
+| Método | Descrição |
+| --- | --- |
+| `toggle()` | Alterna o estado, se não estiver desabilitado. |
+| `setChecked(value: boolean)` | Define o estado programaticamente, se não estiver desabilitado. |
+| `enable()` | Habilita o componente. |
+| `disable()` | Desabilita o componente. |
+| `writeValue(value)` | Implementação de `ControlValueAccessor`. |
+| `setDisabledState(isDisabled)` | Implementação de `ControlValueAccessor`. |
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-slide-toggle-track` | `#d1d5db` | Cor do trilho desligado. |
+| `--cao-slide-toggle-track-checked` | `#4f46e5` | Cor do trilho ligado. |
+| `--cao-slide-toggle-thumb` | `#ffffff` | Cor do thumb desligado. |
+| `--cao-slide-toggle-thumb-checked` | `#ffffff` | Cor do thumb ligado. |
+| `--cao-slide-toggle-track-disabled` | `#e5e7eb` | Cor do trilho desabilitado. |
+| `--cao-slide-toggle-thumb-disabled` | `#f3f4f6` | Cor do thumb desabilitado. |
+| `--cao-slide-toggle-label` | `#111827` | Cor do label. |
+| `--cao-slide-toggle-label-disabled` | `#9ca3af` | Cor do label desabilitado. |
+| `--cao-slide-toggle-focus-ring` | `rgba(79, 70, 229, 0.35)` | Cor do anel de foco. |
+| `--cao-slide-toggle-track-width` | `36px` | Largura do trilho. |
+| `--cao-slide-toggle-track-height` | `20px` | Altura do trilho. |
+| `--cao-slide-toggle-thumb-size` | `16px` | Tamanho do thumb. |
+| `--cao-slide-toggle-duration` | `200ms` | Duração da animação. |
+
+**Exemplo com `ngModel`:**
+
+```html
+<cao-slide-toggle
+  label="Ativar notificações"
+  [(ngModel)]="notificacoesAtivas"
+  (checkedChange)="onCheckedChange($event)">
+</cao-slide-toggle>
+```
+
+**Exemplo com formulário reativo e cores customizadas:**
+
+```html
+<cao-slide-toggle
+  label="Modo escuro"
+  [formControl]="modoEscuro"
+  trackCheckedColor="#16a34a"
+  thumbCheckedColor="#ffffff"
+  trackColor="#fca5a5"
+  labelColor="#166534"
+  labelPosition="before">
+</cao-slide-toggle>
+```
+
+**Exemplo com ícones Lucide no thumb:**
+
+```html
+<cao-slide-toggle
+  label="Notificações"
+  [(ngModel)]="notificacoesAtivas"
+  thumbIcon="x"
+  thumbCheckedIcon="check"
+  [isLucideThumbIcon]="true"
+  thumbIconColor="#6b7280"
+  thumbCheckedIconColor="#16a34a"
+  [thumbIconSize]="12"
+  [thumbIconStrokeWidth]="2.5">
+</cao-slide-toggle>
+```
+
+**Exemplo com imagem no thumb:**
+
+```html
+<cao-slide-toggle
+  label="Ícone customizado"
+  [(ngModel)]="ativo"
+  thumbIcon="assets/icone-desligado.svg"
+  thumbCheckedIcon="assets/icone-ligado.svg"
+  [isLucideThumbIcon]="false"
+  [thumbIconSize]="10">
+</cao-slide-toggle>
+```
+
+Se `thumbCheckedIcon` não for informado, o componente reutiliza `thumbIcon` no estado ligado.
+
+**Exemplo desabilitado programaticamente:**
+
+```typescript
+@ViewChild(CaoSlideToggleComponent)
+slideToggle!: CaoSlideToggleComponent;
+
+bloquear(): void {
+  this.slideToggle.disable();
+}
+
+liberar(): void {
+  this.slideToggle.enable();
+}
+```
+
+**Observações:**
+
+- Usa um `input type="checkbox"` com `role="switch"`, com suporte a `Espaço`, `Enter`, foco visível e leitores de tela.
+- Funciona com `ngModel`, `formControlName` e `FormControl.disable()`.
+- As cores podem ser definidas por inputs ou por CSS custom properties.
+
+---
+
+### `CaoRadioGroupComponent` e `CaoRadioButtonComponent`
+
+Sistema de radio buttons no estilo do Material, com navegação por teclado, suporte a formulários e customização de cores. O grupo é o dono do valor selecionado; os botões apenas declaram seu `value` e o label.
+
+**Seletores:**
+- `<cao-radio-group>` — container do grupo
+- `<cao-radio-button>` — opção individual (deve ficar dentro do grupo)
+
+**Interface `ICaoRadioChangeEvent`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `value` | `unknown` | Valor recém-selecionado. |
+| `source` | `CaoRadioButtonComponent` | Botão que originou o evento. |
+
+#### Atributos do `CaoRadioGroupComponent` (Inputs)
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `value` | `any` | `undefined` | Valor selecionado. Também funciona via `ngModel`/`formControlName`. |
+| `name` | `string` | gerado automaticamente | Nome compartilhado pelos inputs nativos do grupo. |
+| `isDisabled` | `boolean` | `false` | Desabilita todas as opções. |
+| `disabled` | `boolean` | `false` | Alias de `isDisabled`. |
+| `required` | `boolean` | `false` | Marca o grupo como obrigatório. |
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Direção do layout. |
+| `labelPosition` | `'before' \| 'after'` | `'after'` | Posição padrão dos labels. |
+| `color` | `string` | `#4f46e5` | Cor da opção selecionada (borda e ponto). |
+| `unselectedColor` | `string` | `#6b7280` | Cor da borda da opção não selecionada. |
+| `disabledColor` | `string` | `#d1d5db` | Cor da opção desabilitada. |
+| `labelColor` | `string` | `#111827` | Cor dos labels. |
+| `disabledLabelColor` | `string` | `#9ca3af` | Cor dos labels desabilitados. |
+| `focusRingColor` | `string` | `rgba(79, 70, 229, 0.35)` | Cor do anel de foco. |
+| `size` | `string` | `20px` | Tamanho do círculo. |
+| `animationDuration` | `string` | `200ms` | Duração das animações. |
+| `gap` | `string` | `8px` | Espaçamento entre as opções. |
+| `compareWith` | `(option, value) => boolean` | `===` | Comparador customizado de valores. |
+| `ariaLabel` | `string` | `''` | Atributo `aria-label` do grupo. |
+| `ariaLabelledBy` | `string` | `''` | Atributo `aria-labelledby` do grupo. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E. |
+
+#### Eventos do `CaoRadioGroupComponent` (Outputs)
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `valueChange` | `EventEmitter<any>` | Emitido quando o valor selecionado muda. |
+| `selectionChange` | `EventEmitter<ICaoRadioChangeEvent>` | Emitido com o valor e o botão de origem. |
+
+#### Métodos do `CaoRadioGroupComponent`
+
+| Método | Descrição |
+| --- | --- |
+| `enable()` | Habilita o grupo e todas as opções. |
+| `disable()` | Desabilita o grupo e todas as opções. |
+| `isValueSelected(value)` | Verifica se um valor está selecionado usando `compareWith`. |
+| `markAsTouched()` | Marca o controle como tocado. |
+| `writeValue(value)` | Implementação de `ControlValueAccessor`. |
+| `setDisabledState(isDisabled)` | Implementação de `ControlValueAccessor`. |
+
+#### Atributos do `CaoRadioButtonComponent` (Inputs)
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `value` | `any` | `undefined` | **Obrigatório.** Valor único da opção dentro do grupo. |
+| `label` | `string` | `''` | Texto do label. Também aceita conteúdo projetado. |
+| `isDisabled` | `boolean` | `false` | Desabilita apenas esta opção. |
+| `disabled` | `boolean` | `false` | Alias de `isDisabled`. |
+| `labelPosition` | `'before' \| 'after'` | herda do grupo | Posição do label desta opção. |
+| `name` | `string` | herda do grupo | Sobrescreve o nome do grupo para esta opção. |
+| `id` | `string` | gerado automaticamente | Atributo `id` do input. |
+| `ariaLabel` | `string` | `''` | Atributo `aria-label` da opção. |
+| `ariaLabelledBy` | `string` | `''` | Atributo `aria-labelledby` da opção. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E. |
+| `color` | `string` | herda do grupo | Cor da opção selecionada. |
+| `unselectedColor` | `string` | herda do grupo | Cor da borda não selecionada. |
+| `disabledColor` | `string` | herda do grupo | Cor da opção desabilitada. |
+| `labelColor` | `string` | herda do grupo | Cor do label. |
+| `disabledLabelColor` | `string` | herda do grupo | Cor do label desabilitado. |
+| `focusRingColor` | `string` | herda do grupo | Cor do anel de foco. |
+| `size` | `string` | herda do grupo | Tamanho do círculo. |
+| `animationDuration` | `string` | herda do grupo | Duração das animações. |
+
+#### Métodos do `CaoRadioButtonComponent`
+
+| Método | Descrição |
+| --- | --- |
+| `select()` | Seleciona a opção no grupo, se estiver habilitada. |
+| `enable()` | Habilita apenas esta opção. |
+| `disable()` | Desabilita apenas esta opção. |
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-radio-color` | `#4f46e5` | Cor da opção selecionada. |
+| `--cao-radio-unselected` | `#6b7280` | Cor da borda não selecionada. |
+| `--cao-radio-disabled` | `#d1d5db` | Cor da opção desabilitada. |
+| `--cao-radio-label` | `#111827` | Cor do label. |
+| `--cao-radio-label-disabled` | `#9ca3af` | Cor do label desabilitado. |
+| `--cao-radio-focus-ring` | `rgba(79, 70, 229, 0.35)` | Cor do anel de foco. |
+| `--cao-radio-size` | `20px` | Tamanho do círculo. |
+| `--cao-radio-duration` | `200ms` | Duração das animações. |
+| `--cao-radio-gap` | `8px` | Espaçamento entre opções. |
+
+**Exemplo com `ngModel`:**
+
+```html
+<cao-radio-group [(ngModel)]="planoSelecionado" ariaLabel="Escolha um plano">
+  <cao-radio-button value="basico" label="Básico"></cao-radio-button>
+  <cao-radio-button value="profissional" label="Profissional"></cao-radio-button>
+  <cao-radio-button value="empresarial" label="Empresarial"></cao-radio-button>
+</cao-radio-group>
+```
+
+**Exemplo com formulário reativo, layout horizontal e cores customizadas:**
+
+```html
+<cao-radio-group
+  [formControl]="periodo"
+  orientation="horizontal"
+  gap="16px"
+  color="#16a34a"
+  unselectedColor="#94a3b8"
+  labelColor="#166534">
+  <cao-radio-button value="manha" label="Manhã"></cao-radio-button>
+  <cao-radio-button value="tarde" label="Tarde"></cao-radio-button>
+  <cao-radio-button value="noite" label="Noite"></cao-radio-button>
+</cao-radio-group>
+```
+
+**Exemplo com disabled geral e por opção:**
+
+```html
+<cao-radio-group [(ngModel)]="opcao" [isDisabled]="formularioBloqueado">
+  <cao-radio-button value="a" label="Disponível"></cao-radio-button>
+  <cao-radio-button value="b" label="Indisponível" [isDisabled]="true"></cao-radio-button>
+</cao-radio-group>
+```
+
+**Exemplo com `compareWith` para valores objetos:**
+
+```html
+<cao-radio-group [(ngModel)]="usuarioSelecionado" [compareWith]="compararUsuarios">
+  @for (usuario of usuarios; track usuario.id) {
+    <cao-radio-button [value]="usuario" [label]="usuario.nome"></cao-radio-button>
+  }
+</cao-radio-group>
+```
+
+```typescript
+compararUsuarios(a: Usuario | null, b: Usuario | null): boolean {
+  return a?.id === b?.id;
+}
+```
+
+**Observações:**
+
+- Cada `<cao-radio-button>` deve estar dentro de um `<cao-radio-group>`.
+- O grupo usa `role="radiogroup"` e inputs nativos `type="radio"` com o mesmo `name`, garantindo navegação por setas, foco e leitores de tela.
+- `FormControl.disable()` desabilita o grupo inteiro, assim como `isDisabled`/`disabled`.
+- Cores e tamanhos podem ser definidos no grupo (herdados por todas as opções) ou individualmente em cada botão.
+- Métodos `enable()`/`disable()` permitem controlar o estado programaticamente.
 
 ---
 

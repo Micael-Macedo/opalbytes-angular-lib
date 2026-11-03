@@ -1,0 +1,32 @@
+<label
+  class="cao-radio"
+  [class.cao-radio--checked]="isSelected"
+  [class.cao-radio--disabled]="effectiveDisabled"
+  [class.cao-radio--label-before]="effectiveLabelPosition === 'before'">
+  <input
+    #input
+    class="cao-radio__input"
+    type="radio"
+    [checked]="isSelected"
+    [disabled]="effectiveDisabled"
+    [required]="isRequired"
+    [attr.name]="effectiveName"
+    [attr.id]="inputId"
+    [attr.aria-label]="ariaLabel || null"
+    [attr.aria-labelledby]="ariaLabelledBy || null"
+    [attr.data-cy]="dataCy || null"
+    (change)="select()"
+    (blur)="onBlur()" />
+
+  <span class="cao-radio__control" aria-hidden="true">
+    <span class="cao-radio__dot"></span>
+  </span>
+
+  <span class="cao-radio__label">
+    @if (label) {
+      {{ label }}
+    } @else {
+      <ng-content />
+    }
+  </span>
+</label>

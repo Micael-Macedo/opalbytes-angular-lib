@@ -1,0 +1,21 @@
+:host {
+  --cao-radio-color: #4f46e5;
+  --cao-radio-unselected: #6b7280;
+  --cao-radio-disabled: #d1d5db;
+  --cao-radio-label: #111827;
+  --cao-radio-label-disabled: #9ca3af;
+  --cao-radio-focus-ring: rgba(79, 70, 229, 0.35);
+  --cao-radio-size: 20px;
+  --cao-radio-duration: 200ms;
+  --cao-radio-gap: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--cao-radio-gap);
+}
+
+:host(.cao-radio-group--horizontal) {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}

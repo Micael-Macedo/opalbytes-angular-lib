@@ -1,0 +1,48 @@
+<label
+  class="cao-slide-toggle"
+  [class.cao-slide-toggle--checked]="checked"
+  [class.cao-slide-toggle--disabled]="isDisabled"
+  [class.cao-slide-toggle--label-before]="labelPosition === 'before'">
+  <input
+    #input
+    class="cao-slide-toggle__input"
+    type="checkbox"
+    role="switch"
+    [checked]="checked"
+    [disabled]="isDisabled"
+    [required]="required"
+    [attr.name]="name || null"
+    [attr.id]="id || null"
+    [attr.aria-label]="ariaLabel || null"
+    [attr.data-cy]="dataCy || null"
+    (change)="onInputChange($event)"
+    (blur)="onBlur()"
+    (keydown.enter)="onEnter($event)" />
+
+  <span class="cao-slide-toggle__track" aria-hidden="true">
+    <span class="cao-slide-toggle__thumb">
+      @if (resolvedThumbIcon) {
+        @if (isLucideThumbIcon) {
+          <svg
+            class="cao-slide-toggle__thumb-icon"
+            [lucideIcon]="resolvedThumbIcon"
+            [size]="thumbIconSize"
+            [strokeWidth]="thumbIconStrokeWidth"></svg>
+        } @else {
+          <img
+            class="cao-slide-toggle__thumb-icon"
+            alt=""
+            [src]="resolvedThumbIcon" />
+        }
+      }
+    </span>
+  </span>
+
+  <span class="cao-slide-toggle__label">
+    @if (label) {
+      {{ label }}
+    } @else {
+      <ng-content />
+    }
+  </span>
+</label>
