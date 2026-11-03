@@ -1,3 +1,8 @@
+## 1.25.0 (2026-11-03)
+
+* Merge pull request #109 from Micael-Macedo/feature(components)/add-drawner-component ([4bc3405](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4bc3405)), closes [#109](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/109)
+* feat: add widget component ([0a36de5](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0a36de5))
+
 ## 1.24.0 (2026-09-15)
 
 * Merge branch 'main' of https://github.com/Micael-Macedo/opalbytes-angular-lib into feature(component ([402a5b3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/402a5b3))
