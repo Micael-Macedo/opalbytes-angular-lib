@@ -2,6 +2,7 @@
   class="widget-backdrop"
   role="presentation"
   tabindex="-1"
+  [ngClass]="widgetDirection()"
   [class.widget-backdrop--closing]="closing()"
   (mousedown)="onBackdropMouseDown($event)"
   (mouseup)="onBackdropMouseUp($event)"

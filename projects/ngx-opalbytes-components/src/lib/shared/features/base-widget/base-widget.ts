@@ -1,11 +1,13 @@
+import { CommonModule } from "@angular/common";
 import { Component, DestroyRef, HostListener, inject, input, output, signal } from "@angular/core";
 
 import { CaoWidgetService } from './widget.service';
 
+export type CaoWidgetDirection = "left" | "right" | "top" | "bottom";
 
 @Component({
   selector: "cao-base-widget",
-  imports: [],
+  imports: [CommonModule],
   templateUrl: "./base-widget.html",
   styleUrl: "./base-widget.css",
 })
@@ -22,6 +24,7 @@ export class CaoBaseWidgetComponent<TData = unknown> {
   displaySaveButton = input(true)
   displayCancelButton = input(true)
   shouldCloseWhenCancel = input(true)
+  widgetDirection = input<CaoWidgetDirection>("right")
   typeCancel = input<"cancel" | "back">("cancel")
   saveDisabled = input(false)
   saveIcon = input("arrow-right")

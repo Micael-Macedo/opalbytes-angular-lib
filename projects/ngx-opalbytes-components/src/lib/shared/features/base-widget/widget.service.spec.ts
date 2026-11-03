@@ -13,6 +13,7 @@ import { CaoBaseWidgetComponent } from "./base-widget";
       [subtitle]="subtitle()"
       [widgetIcon]="widgetIcon()"
       [widgetData]="widgetData()"
+      [widgetDirection]="widgetDirection()"
       (closeRequest)="closeWidget()"
       (save)="saveWidget()"
     >
@@ -84,6 +85,14 @@ describe("CaoWidgetService", () => {
 
     const el = getWidgetElement()!;
     expect(el.querySelector(".spec-data")?.textContent?.trim()).toBe("Sessões hoje - 42");
+  });
+
+  it("forwards the widget direction to the opened widget", () => {
+    service.open(SpecWidget, { inputs: { widgetDirection: "left" } });
+
+    const el = getWidgetElement()!;
+    expect(el.querySelector(".widget-backdrop.left")).toBeTruthy();
+    expect(el.querySelector(".widget-backdrop.right")).toBeNull();
   });
 
   it("disposes an existing widget before opening a new one", () => {

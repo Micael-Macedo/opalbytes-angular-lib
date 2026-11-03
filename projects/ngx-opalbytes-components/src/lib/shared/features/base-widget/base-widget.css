@@ -13,6 +13,22 @@
   animation: widget-fade-in var(--widget-animation-duration) ease-out;
 }
 
+.widget-backdrop.right {
+  justify-content: flex-end;
+}
+
+.widget-backdrop.left {
+  justify-content: flex-start;
+}
+
+.widget-backdrop.top {
+  align-items: flex-start;
+}
+
+.widget-backdrop.bottom {
+  align-items: flex-end;
+}
+
 .widget-backdrop--closing {
   pointer-events: none;
   animation: widget-fade-out var(--widget-animation-duration) ease-out forwards;
@@ -30,11 +46,51 @@
   box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  animation: widget-slide-in-right var(--widget-animation-duration) ease-out;
 }
 
-.widget-panel--closing {
+.widget-backdrop.left .widget-panel {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.widget-backdrop.top .widget-panel,
+.widget-backdrop.bottom .widget-panel {
+  width: 100%;
+  max-width: none;
+  height: 90vh;
+}
+
+.widget-backdrop.top .widget-panel {
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.widget-backdrop.bottom .widget-panel {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.widget-backdrop.right .widget-panel {
+  animation: widget-slide-in-right var(--widget-animation-duration) ease-out;
+}
+.widget-backdrop.left .widget-panel {
+  animation: widget-slide-in-left var(--widget-animation-duration) ease-out;
+}
+.widget-backdrop.top .widget-panel {
+  animation: widget-slide-in-top var(--widget-animation-duration) ease-out;
+}
+.widget-backdrop.bottom .widget-panel {
+  animation: widget-slide-in-bottom var(--widget-animation-duration) ease-out;
+}
+
+.widget-backdrop.right .widget-panel--closing {
   animation: widget-slide-out-right var(--widget-animation-duration) ease-out forwards;
+}
+.widget-backdrop.left .widget-panel--closing {
+  animation: widget-slide-out-left var(--widget-animation-duration) ease-out forwards;
+}
+.widget-backdrop.top .widget-panel--closing {
+  animation: widget-slide-out-top var(--widget-animation-duration) ease-out forwards;
+}
+.widget-backdrop.bottom .widget-panel--closing {
+  animation: widget-slide-out-bottom var(--widget-animation-duration) ease-out forwards;
 }
 
 .widget-body {
@@ -92,11 +148,65 @@
   }
 }
 
+@keyframes widget-slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes widget-slide-in-top {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes widget-slide-in-bottom {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 @keyframes widget-slide-out-right {
   from {
     transform: translateX(0);
   }
   to {
     transform: translateX(100%);
+  }
+}
+
+@keyframes widget-slide-out-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes widget-slide-out-top {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes widget-slide-out-bottom {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
   }
 }
