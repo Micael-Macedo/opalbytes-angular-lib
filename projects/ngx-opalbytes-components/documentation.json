@@ -15505,7 +15505,7 @@
         },
         {
             "name": "CaoRadioButtonComponent",
-            "id": "component-CaoRadioButtonComponent-6c71dc8bec3d47bb333a4580e317213b4717e9ec240b0ff61cd567a5417329ae58346f860f7ab110f868d90b02934437f1841c55d90dc2e1938c9d3771c6ae45",
+            "id": "component-CaoRadioButtonComponent-09520a7daee62609f6f5566ae363228150e50029d66446045f10aaaf6a455f3f5abcc5e8ef27099925d96f00f1a7b91bae2f4c07d88afa0a65f3869ba66147e6",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/radio/radio-button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -15759,7 +15759,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 130,
+                    "line": 131,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n",
@@ -15772,7 +15772,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 126,
+                    "line": 127,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n",
@@ -15785,7 +15785,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 122,
+                    "line": 123,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n",
@@ -15833,7 +15833,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from \"@angular/common\";\nimport {\n  Component,\n  forwardRef,\n  HostBinding,\n  Inject,\n  Input,\n  Optional,\n} from \"@angular/core\";\n\nimport { CaoRadioGroupComponent } from \"./radio-group.component\";\n\nlet nextRadioId = 0;\n\n@Component({\n  selector: \"cao-radio-button\",\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: \"./radio-button.component.html\",\n  styleUrl: \"./radio-button.component.css\",\n})\nexport class CaoRadioButtonComponent {\n  @Input() value: unknown = undefined;\n  @Input() label = \"\";\n  @Input() isDisabled = false;\n  @Input() labelPosition?: \"before\" | \"after\";\n  @Input() id = \"\";\n  @Input() name = \"\";\n  @Input() ariaLabel = \"\";\n  @Input() ariaLabelledBy = \"\";\n  @Input() dataCy = \"\";\n\n  @Input() color?: string;\n  @Input() unselectedColor?: string;\n  @Input() disabledColor?: string;\n  @Input() labelColor?: string;\n  @Input() disabledLabelColor?: string;\n  @Input() focusRingColor?: string;\n  @Input() size?: string;\n  @Input() animationDuration?: string;\n\n  @Input() set disabled(value: boolean) {\n    this.isDisabled = value;\n  }\n\n  get disabled(): boolean {\n    return this.isDisabled;\n  }\n\n  private readonly uid = `cao-radio-${nextRadioId++}`;\n\n  constructor(\n    @Optional()\n    @Inject(forwardRef(() => CaoRadioGroupComponent))\n    readonly group: CaoRadioGroupComponent | null,\n  ) {}\n\n  get effectiveDisabled(): boolean {\n    return this.isDisabled || !!this.group?.isEffectivelyDisabled;\n  }\n\n  get effectiveLabelPosition(): \"before\" | \"after\" {\n    return this.labelPosition ?? this.group?.labelPosition ?? \"after\";\n  }\n\n  get effectiveName(): string {\n    return this.name || this.group?.groupName || this.uid;\n  }\n\n  get inputId(): string {\n    return this.id || this.uid;\n  }\n\n  get isSelected(): boolean {\n    return this.group?.isValueSelected(this.value) ?? false;\n  }\n\n  get isRequired(): boolean {\n    return this.group?.required ?? false;\n  }\n\n  @HostBinding(\"style\")\n  get hostStyles(): Record<string, string> {\n    const styles: Record<string, string> = {};\n\n    if (this.color) {\n      styles[\"--cao-radio-color\"] = this.color;\n    }\n    if (this.unselectedColor) {\n      styles[\"--cao-radio-unselected\"] = this.unselectedColor;\n    }\n    if (this.disabledColor) {\n      styles[\"--cao-radio-disabled\"] = this.disabledColor;\n    }\n    if (this.labelColor) {\n      styles[\"--cao-radio-label\"] = this.labelColor;\n    }\n    if (this.disabledLabelColor) {\n      styles[\"--cao-radio-label-disabled\"] = this.disabledLabelColor;\n    }\n    if (this.focusRingColor) {\n      styles[\"--cao-radio-focus-ring\"] = this.focusRingColor;\n    }\n    if (this.size) {\n      styles[\"--cao-radio-size\"] = this.size;\n    }\n    if (this.animationDuration) {\n      styles[\"--cao-radio-duration\"] = this.animationDuration;\n    }\n\n    return styles;\n  }\n\n  select(): void {\n    if (this.effectiveDisabled) {\n      return;\n    }\n\n    this.group?.select(this);\n  }\n\n  onBlur(): void {\n    this.group?.markAsTouched();\n  }\n\n  enable(): void {\n    this.isDisabled = false;\n  }\n\n  disable(): void {\n    this.isDisabled = true;\n  }\n}\n",
+            "sourceCode": "import { CommonModule } from \"@angular/common\";\nimport {\n  Component,\n  forwardRef,\n  HostBinding,\n  Inject,\n  Input,\n  Optional,\n} from \"@angular/core\";\n\nimport { CaoRadioGroupComponent } from \"./radio-group.component\";\n\nlet nextRadioId = 0;\n\n@Component({\n  selector: \"cao-radio-button\",\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: \"./radio-button.component.html\",\n  styleUrl: \"./radio-button.component.css\",\n})\nexport class CaoRadioButtonComponent {\n  @Input() value: unknown = undefined;\n  @Input() label = \"\";\n  @Input() isDisabled = false;\n  @Input() labelPosition?: \"before\" | \"after\";\n  @Input() id = \"\";\n  @Input() name = \"\";\n  @Input() ariaLabel = \"\";\n  @Input() ariaLabelledBy = \"\";\n  @Input() dataCy = \"\";\n\n  @Input() color?: string;\n  @Input() unselectedColor?: string;\n  @Input() disabledColor?: string;\n  @Input() labelColor?: string;\n  @Input() disabledLabelColor?: string;\n  @Input() focusRingColor?: string;\n  @Input() size?: string;\n  @Input() animationDuration?: string;\n\n  @Input() set disabled(value: boolean) {\n    this.isDisabled = value;\n  }\n\n  get disabled(): boolean {\n    return this.isDisabled;\n  }\n\n  private readonly uid = `cao-radio-${nextRadioId++}`;\n\n  constructor(\n    @Optional()\n    @Inject(forwardRef(() => CaoRadioGroupComponent))\n    readonly group: CaoRadioGroupComponent | null,\n  ) {}\n\n  get effectiveDisabled(): boolean {\n    return this.isDisabled || !!this.group?.isEffectivelyDisabled;\n  }\n\n  get effectiveLabelPosition(): \"before\" | \"after\" {\n    return this.labelPosition ?? this.group?.labelPosition ?? \"after\";\n  }\n\n  get effectiveName(): string {\n    return this.name || this.group?.groupName || this.uid;\n  }\n\n  get inputId(): string {\n    return this.id || this.uid;\n  }\n\n  get isSelected(): boolean {\n    return this.group?.isValueSelected(this.value) ?? false;\n  }\n\n  get isRequired(): boolean {\n    return this.group?.required ?? false;\n  }\n\n  @HostBinding(\"style\")\n  get hostStyles(): Record<string, string> {\n    const styles: Record<string, string> = {};\n\n    if (this.color) {\n      styles[\"--cao-radio-color\"] = this.color;\n    }\n    if (this.unselectedColor) {\n      styles[\"--cao-radio-unselected\"] = this.unselectedColor;\n    }\n    if (this.disabledColor) {\n      styles[\"--cao-radio-disabled\"] = this.disabledColor;\n    }\n    if (this.labelColor) {\n      styles[\"--cao-radio-label\"] = this.labelColor;\n    }\n    if (this.disabledLabelColor) {\n      styles[\"--cao-radio-label-disabled\"] = this.disabledLabelColor;\n    }\n    if (this.focusRingColor) {\n      styles[\"--cao-radio-focus-ring\"] = this.focusRingColor;\n    }\n    if (this.size) {\n      styles[\"--cao-radio-size\"] = this.size;\n    }\n    if (this.animationDuration) {\n      styles[\"--cao-radio-duration\"] = this.animationDuration;\n    }\n\n    return styles;\n  }\n\n  select(): void {\n    console.log(this.group)\n    if (this.effectiveDisabled) {\n      return;\n    }\n\n    this.group?.select(this);\n  }\n\n  onBlur(): void {\n    this.group?.markAsTouched();\n  }\n\n  enable(): void {\n    this.isDisabled = false;\n  }\n\n  disable(): void {\n    this.isDisabled = true;\n  }\n}\n",
             "styleUrl": "./radio-button.component.css",
             "assetsDirs": [],
             "styleUrlsData": [
@@ -21904,17 +21904,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<Paginator>",
-                "defaultValue": "{\r\n  title: 'Componentes/Paginator',\r\n  component: Paginator,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    totalItems: { control: { type: 'number', min: 0 } },\r\n    pageSize: { control: { type: 'number', min: 1 } },\r\n    currentPage: { control: { type: 'number', min: 1 } },\r\n    pageSizeOptions: { control: 'object' },\r\n    customClass: { control: 'text' },\r\n    showFirstLastButtons: { control: 'boolean' },\r\n  },\r\n  args: {\r\n    pageEvent: fn(),\r\n    totalItems: 250,\r\n    pageSize: 10,\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -21943,6 +21932,17 @@
                 "deprecationMessage": "",
                 "type": "Meta<CaoBaseToggleComponent>",
                 "defaultValue": "{\r\n  title: 'Componentes/Base Toggle',\r\n  component: CaoBaseToggleComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    isChecked: { control: 'boolean' },\r\n    checkedTextPlaceholder: { control: 'text' },\r\n    uncheckedTextPlaceholder: { control: 'text' },\r\n    isDisabled: { control: 'boolean' },\r\n    placeholder: { control: 'text' },\r\n    errorMessage: { control: 'text' },\r\n  },\r\n  args: {\r\n    statusChanged: fn(),\r\n    valueChange: fn(),\r\n    searchClick: fn(),\r\n    inputChange: fn(),\r\n    checkedTextPlaceholder: 'Ligado',\r\n    uncheckedTextPlaceholder: 'Desligado',\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<Paginator>",
+                "defaultValue": "{\r\n  title: 'Componentes/Paginator',\r\n  component: Paginator,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    totalItems: { control: { type: 'number', min: 0 } },\r\n    pageSize: { control: { type: 'number', min: 1 } },\r\n    currentPage: { control: { type: 'number', min: 1 } },\r\n    pageSizeOptions: { control: 'object' },\r\n    customClass: { control: 'text' },\r\n    showFirstLastButtons: { control: 'boolean' },\r\n  },\r\n  args: {\r\n    pageEvent: fn(),\r\n    totalItems: 250,\r\n    pageSize: 10,\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -22085,7 +22085,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<CaoRadioButtonComponent>",
-                "defaultValue": "{\n  title: 'Componentes/Radio Button',\n  component: CaoRadioButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    (story) => ({\n      ...story,\n      moduleMetadata: {\n        imports: [FormsModule, CaoRadioGroupComponent, CaoRadioButtonComponent],\n      },\n    }),\n  ],\n  argTypes: {\n    labelPosition: { control: 'select', options: ['before', 'after'] },\n    isDisabled: { control: 'boolean' },\n    disabled: { control: 'boolean' },\n    color: { control: 'color' },\n    unselectedColor: { control: 'color' },\n    disabledColor: { control: 'color' },\n    labelColor: { control: 'color' },\n    disabledLabelColor: { control: 'color' },\n    focusRingColor: { control: 'color' },\n    size: { control: 'text' },\n    animationDuration: { control: 'text' },\n  },\n  args: {\n    value: 'option-1',\n    label: 'Opção selecionada',\n    labelPosition: 'after',\n    isDisabled: false,\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      selectedValue: args.value,\n    },\n    template: `\n      <cao-radio-group [(ngModel)]=\"selectedValue\">\n        <cao-radio-button\n          [value]=\"value\"\n          [label]=\"label\"\n          [isDisabled]=\"isDisabled\"\n          [labelPosition]=\"labelPosition\"\n          [name]=\"name\"\n          [id]=\"id\"\n          [ariaLabel]=\"ariaLabel\"\n          [ariaLabelledBy]=\"ariaLabelledBy\"\n          [dataCy]=\"dataCy\"\n          [color]=\"color\"\n          [unselectedColor]=\"unselectedColor\"\n          [disabledColor]=\"disabledColor\"\n          [labelColor]=\"labelColor\"\n          [disabledLabelColor]=\"disabledLabelColor\"\n          [focusRingColor]=\"focusRingColor\"\n          [size]=\"size\"\n          [animationDuration]=\"animationDuration\">\n        </cao-radio-button>\n        <cao-radio-button value=\"option-2\" label=\"Outra opção\"></cao-radio-button>\n      </cao-radio-group>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  title: 'Componentes/Radio Button',\n  component: CaoRadioButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    (story) => ({\n      ...story,\n      moduleMetadata: {\n        imports: [FormsModule, CaoRadioGroupComponent, CaoRadioButtonComponent],\n      },\n    }),\n  ],\n  argTypes: {\n    labelPosition: { control: 'select', options: ['before', 'after'] },\n    isDisabled: { control: 'boolean' },\n    disabled: { control: 'boolean' },\n    color: { control: 'color' },\n    unselectedColor: { control: 'color' },\n    disabledColor: { control: 'color' },\n    labelColor: { control: 'color' },\n    disabledLabelColor: { control: 'color' },\n    focusRingColor: { control: 'color' },\n    size: { control: 'text' },\n    animationDuration: { control: 'text' },\n  },\n  args: {\n    value: 'option-1',\n    label: 'Opção selecionada',\n    labelPosition: 'after',\n    isDisabled: false,\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      selectedValue: 'option-1',\n    },\n    template: `\n    <cao-radio-group\n      [(ngModel)]=\"selectedValue\"\n      [labelPosition]=\"labelPosition\">\n      <cao-radio-button\n        value=\"option-1\"\n        [label]=\"label\"\n        [isDisabled]=\"isDisabled\"\n        [labelPosition]=\"labelPosition\"\n        [color]=\"color\"\n        [unselectedColor]=\"unselectedColor\"\n        [disabledColor]=\"disabledColor\"\n        [labelColor]=\"labelColor\"\n        [disabledLabelColor]=\"disabledLabelColor\"\n        [focusRingColor]=\"focusRingColor\"\n        [size]=\"size\"\n        [animationDuration]=\"animationDuration\" />\n      <cao-radio-button value=\"option-2\" label=\"Outra opção\" />\n    </cao-radio-group>\n    <p>Selecionado: {{ selectedValue }}</p>\n  `,\n  }),\n}"
             },
             {
                 "name": "ModoEscuro",
@@ -22278,17 +22278,6 @@
                 "name": "Padrao",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    totalItems: 250,\r\n    pageSize: 10,\r\n  },\r\n}"
-            },
-            {
-                "name": "Padrao",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -22317,6 +22306,17 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    isChecked: false,\r\n  },\r\n}"
+            },
+            {
+                "name": "Padrao",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    totalItems: 250,\r\n    pageSize: 10,\r\n  },\r\n}"
             },
             {
                 "name": "Padrao",
@@ -22937,19 +22937,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
-                "rawtype": "StoryObj<Paginator>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
                 "rawtype": "StoryObj<StepperComponent>",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts",
                 "deprecated": false,
@@ -22978,6 +22965,19 @@
                 "coverageIgnore": false,
                 "rawtype": "StoryObj<CaoBaseToggleComponent>",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-toggle/base-toggle.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "StoryObj<Paginator>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -25045,7 +25045,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<CaoRadioButtonComponent>",
-                    "defaultValue": "{\n  title: 'Componentes/Radio Button',\n  component: CaoRadioButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    (story) => ({\n      ...story,\n      moduleMetadata: {\n        imports: [FormsModule, CaoRadioGroupComponent, CaoRadioButtonComponent],\n      },\n    }),\n  ],\n  argTypes: {\n    labelPosition: { control: 'select', options: ['before', 'after'] },\n    isDisabled: { control: 'boolean' },\n    disabled: { control: 'boolean' },\n    color: { control: 'color' },\n    unselectedColor: { control: 'color' },\n    disabledColor: { control: 'color' },\n    labelColor: { control: 'color' },\n    disabledLabelColor: { control: 'color' },\n    focusRingColor: { control: 'color' },\n    size: { control: 'text' },\n    animationDuration: { control: 'text' },\n  },\n  args: {\n    value: 'option-1',\n    label: 'Opção selecionada',\n    labelPosition: 'after',\n    isDisabled: false,\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      selectedValue: args.value,\n    },\n    template: `\n      <cao-radio-group [(ngModel)]=\"selectedValue\">\n        <cao-radio-button\n          [value]=\"value\"\n          [label]=\"label\"\n          [isDisabled]=\"isDisabled\"\n          [labelPosition]=\"labelPosition\"\n          [name]=\"name\"\n          [id]=\"id\"\n          [ariaLabel]=\"ariaLabel\"\n          [ariaLabelledBy]=\"ariaLabelledBy\"\n          [dataCy]=\"dataCy\"\n          [color]=\"color\"\n          [unselectedColor]=\"unselectedColor\"\n          [disabledColor]=\"disabledColor\"\n          [labelColor]=\"labelColor\"\n          [disabledLabelColor]=\"disabledLabelColor\"\n          [focusRingColor]=\"focusRingColor\"\n          [size]=\"size\"\n          [animationDuration]=\"animationDuration\">\n        </cao-radio-button>\n        <cao-radio-button value=\"option-2\" label=\"Outra opção\"></cao-radio-button>\n      </cao-radio-group>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  title: 'Componentes/Radio Button',\n  component: CaoRadioButtonComponent,\n  tags: ['autodocs'],\n  decorators: [\n    (story) => ({\n      ...story,\n      moduleMetadata: {\n        imports: [FormsModule, CaoRadioGroupComponent, CaoRadioButtonComponent],\n      },\n    }),\n  ],\n  argTypes: {\n    labelPosition: { control: 'select', options: ['before', 'after'] },\n    isDisabled: { control: 'boolean' },\n    disabled: { control: 'boolean' },\n    color: { control: 'color' },\n    unselectedColor: { control: 'color' },\n    disabledColor: { control: 'color' },\n    labelColor: { control: 'color' },\n    disabledLabelColor: { control: 'color' },\n    focusRingColor: { control: 'color' },\n    size: { control: 'text' },\n    animationDuration: { control: 'text' },\n  },\n  args: {\n    value: 'option-1',\n    label: 'Opção selecionada',\n    labelPosition: 'after',\n    isDisabled: false,\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      selectedValue: 'option-1',\n    },\n    template: `\n    <cao-radio-group\n      [(ngModel)]=\"selectedValue\"\n      [labelPosition]=\"labelPosition\">\n      <cao-radio-button\n        value=\"option-1\"\n        [label]=\"label\"\n        [isDisabled]=\"isDisabled\"\n        [labelPosition]=\"labelPosition\"\n        [color]=\"color\"\n        [unselectedColor]=\"unselectedColor\"\n        [disabledColor]=\"disabledColor\"\n        [labelColor]=\"labelColor\"\n        [disabledLabelColor]=\"disabledLabelColor\"\n        [focusRingColor]=\"focusRingColor\"\n        [size]=\"size\"\n        [animationDuration]=\"animationDuration\" />\n      <cao-radio-button value=\"option-2\" label=\"Outra opção\" />\n    </cao-radio-group>\n    <p>Selecionado: {{ selectedValue }}</p>\n  `,\n  }),\n}"
                 },
                 {
                     "name": "Padrao",
@@ -25557,21 +25557,6 @@
                     "kind": 184
                 }
             ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<Paginator>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/stepper/stepper.stories.ts": [
                 {
                     "name": "Story",
@@ -25610,6 +25595,21 @@
                     "coverageIgnore": false,
                     "rawtype": "StoryObj<CaoBaseToggleComponent>",
                     "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-toggle/base-toggle.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<Paginator>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/paginator/paginator.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "",
