@@ -606,6 +606,7 @@ Um painel lateral (drawer) para formulários e fluxos que precisam de mais espa�
 | `displaySaveButton` | `boolean` | `true` | Exibe o botão de salvar (disponível para classes derivadas). |
 | `displayCancelButton` | `boolean` | `true` | Exibe o botão de cancelar (disponível para classes derivadas). |
 | `shouldCloseWhenCancel` | `boolean` | `true` | Define se o cancelamento deve fechar o widget (disponível para classes derivadas). |
+| `widgetDirection` | `'left' \| 'right' \| 'top' \| 'bottom'` | `'right'` | Direção de entrada/saída do widget. `left`/`right` abrem como drawer lateral; `top`/`bottom` abrem como sheet. |
 | `typeCancel` | `'cancel' \| 'back'` | `'cancel'` | Tipo do botão de cancelamento (disponível para classes derivadas). |
 | `saveDisabled` | `boolean` | `false` | Desabilita a ação de salvar (disponível para classes derivadas). |
 | `saveIcon` | `string` | `'arrow-right'` | Ícone do botão de salvar (disponível para classes derivadas). |

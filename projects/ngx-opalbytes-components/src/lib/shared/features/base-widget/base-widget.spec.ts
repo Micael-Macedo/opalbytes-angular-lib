@@ -52,6 +52,34 @@ describe("CaoBaseWidgetComponent", () => {
     expect(getPanel()).toBeTruthy();
   });
 
+  it("applies the default right direction to the backdrop", () => {
+    expect(getBackdrop().classList.contains("right")).toBe(true);
+  });
+
+  it.each(["left", "right", "top", "bottom"] as const)(
+    "applies only the %s direction class to the backdrop",
+    (direction) => {
+      fixture.componentRef.setInput("widgetDirection", direction);
+      fixture.detectChanges();
+
+      const directions = ["left", "right", "top", "bottom"] as const;
+      for (const current of directions) {
+        expect(getBackdrop().classList.contains(current)).toBe(current === direction);
+      }
+    }
+  );
+
+  it("keeps the direction class while closing", () => {
+    fixture.componentRef.setInput("widgetDirection", "left");
+    fixture.detectChanges();
+
+    component.closeWidget();
+    fixture.detectChanges();
+
+    expect(getBackdrop().classList.contains("left")).toBe(true);
+    expect(getBackdrop().classList.contains("widget-backdrop--closing")).toBe(true);
+  });
+
   it("emits close after the close animation when closeWidget is called", () => {
     vi.useFakeTimers();
     let closed = 0;
