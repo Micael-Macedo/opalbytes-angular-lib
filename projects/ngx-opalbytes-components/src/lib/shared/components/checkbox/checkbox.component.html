@@ -1,0 +1,84 @@
+<label
+  class="cao-checkbox"
+  [class.cao-checkbox--checked]="checked && !indeterminate"
+  [class.cao-checkbox--indeterminate]="indeterminate"
+  [class.cao-checkbox--disabled]="isDisabled"
+  [class.cao-checkbox--label-before]="labelPosition === 'before'"
+  [class.cao-checkbox--invalid]="hasInvalidState"
+  [class.cao-checkbox--valid]="hasValidState">
+  <input
+    #input
+    class="cao-checkbox__input"
+    type="checkbox"
+    [checked]="checked"
+    [indeterminate]="indeterminate"
+    [disabled]="isDisabled"
+    [required]="required"
+    [attr.name]="name || null"
+    [attr.id]="inputId"
+    [attr.aria-label]="ariaLabel || null"
+    [attr.aria-labelledby]="ariaLabelledBy || null"
+    [attr.data-cy]="dataCy || null"
+    (change)="onInputChange($event)"
+    (blur)="onBlur()" />
+
+  <span class="cao-checkbox__control" aria-hidden="true">
+    @if (indeterminate) {
+      @if (indeterminateIcon) {
+        @if (isLucideIcon) {
+          <svg
+            class="cao-checkbox__icon"
+            [lucideIcon]="indeterminateIcon"
+            [size]="iconSize"
+            [strokeWidth]="iconStrokeWidth"></svg>
+        } @else {
+          <img class="cao-checkbox__icon" alt="" [src]="indeterminateIcon" />
+        }
+      } @else {
+        <svg
+          class="cao-checkbox__icon cao-checkbox__icon--default"
+          viewBox="0 0 24 24"
+          aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12" />
+        </svg>
+      }
+    } @else if (checked) {
+      @if (checkedIcon) {
+        @if (isLucideIcon) {
+          <svg
+            class="cao-checkbox__icon"
+            [lucideIcon]="checkedIcon"
+            [size]="iconSize"
+            [strokeWidth]="iconStrokeWidth"></svg>
+        } @else {
+          <img class="cao-checkbox__icon" alt="" [src]="checkedIcon" />
+        }
+      } @else {
+        <svg
+          class="cao-checkbox__icon cao-checkbox__icon--default"
+          viewBox="0 0 24 24"
+          aria-hidden="true">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      }
+    } @else if (uncheckedIcon) {
+      @if (isLucideIcon) {
+        <svg
+          class="cao-checkbox__icon"
+          [lucideIcon]="uncheckedIcon"
+          [size]="iconSize"
+          [strokeWidth]="iconStrokeWidth"></svg>
+      } @else {
+        <img class="cao-checkbox__icon" alt="" [src]="uncheckedIcon" />
+      }
+    }
+  </span>
+
+  <span class="cao-checkbox__label">
+    @if (label) {
+      {{ label }}
+    } @else {
+      <ng-content />
+    }
+  </span>
+</label>
