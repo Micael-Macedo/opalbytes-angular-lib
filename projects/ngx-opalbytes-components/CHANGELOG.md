@@ -1,3 +1,8 @@
+## 1.27.0 (2026-11-04)
+
+* Merge pull request #113 from Micael-Macedo/feature(components)/add-checkbox-component ([c0e0ba0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c0e0ba0)), closes [#113](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/113)
+* feat: add checkbox component ([29ce406](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/29ce406))
+
 ## 1.26.0 (2026-11-03)
 
 * Merge pull request #112 from Micael-Macedo/feature(components)/add-radio-slide-components ([ac2bd7c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ac2bd7c)), closes [#112](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/112)
