@@ -238,6 +238,7 @@ src/
         |   ├── base-input/
         |   ├── base-time-range/
         |   ├── base-toggle/
+        |   ├── checkbox/
         |   ├── drop-down/
         |   ├── footer/
         |   ├── kpi/
@@ -1253,6 +1254,174 @@ compararUsuarios(a: Usuario | null, b: Usuario | null): boolean {
 - `FormControl.disable()` desabilita o grupo inteiro, assim como `isDisabled`/`disabled`.
 - Cores e tamanhos podem ser definidos no grupo (herdados por todas as opções) ou individualmente em cada botão.
 - Métodos `enable()`/`disable()` permitem controlar o estado programaticamente.
+
+---
+
+### `CaoCheckboxComponent`
+
+Um checkbox acessível e customizável no estilo do Material, com suporte a `ngModel` e formulários reativos via `ControlValueAccessor`. Possui os estados marcado, desmarcado e indeterminado, ícones customizáveis e cores configuráveis por inputs ou CSS custom properties. O visual é construído sobre um `input type="checkbox"` nativo oculto, sem depender do Angular Material em runtime.
+
+**Seletor:** `<cao-checkbox>`
+
+**Interface `ICaoCheckboxChangeEvent`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `checked` | `boolean` | Novo estado do checkbox. |
+| `source` | `CaoCheckboxComponent` | Instância que originou o evento. |
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `checked` | `boolean` | `false` | Estado inicial/atual do checkbox. |
+| `indeterminate` | `boolean` | `false` | Exibe o estado indeterminado (traço). Tem prioridade sobre `checked`. |
+| `isDisabled` | `boolean` | `false` | Desabilita o componente. |
+| `disabled` | `boolean` | `false` | Alias de `isDisabled` (mesmo comportamento). |
+| `required` | `boolean` | `false` | Marca o input nativo como obrigatório. |
+| `label` | `string` | `''` | Texto do label. Também aceita conteúdo projetado (`<ng-content>`). |
+| `labelPosition` | `'before' \| 'after'` | `'after'` | Posição do label em relação ao checkbox. |
+| `name` | `string` | `''` | Atributo `name` do input nativo. |
+| `id` | `string` | gerado automaticamente | Atributo `id` do input nativo. |
+| `ariaLabel` | `string` | `''` | Atributo `aria-label` do input. |
+| `ariaLabelledBy` | `string` | `''` | Atributo `aria-labelledby` do input. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E com Cypress. |
+| `control` | `AbstractControl \| null` | `undefined` | O `FormControl` associado. Usado para exibir os estados de validação. |
+| `errorMessage` | `string` | `''` | Mensagem de erro. Quando preenchida, aplica o estilo inválido. |
+| `color` | `string` | `#4f46e5` | Cor de fundo/borda do checkbox marcado ou indeterminado. |
+| `uncheckedColor` | `string` | `#6b7280` | Cor da borda quando desmarcado. |
+| `disabledColor` | `string` | `#d1d5db` | Cor do checkbox desabilitado. |
+| `labelColor` | `string` | `#111827` | Cor do label. |
+| `disabledLabelColor` | `string` | `#9ca3af` | Cor do label desabilitado. |
+| `focusRingColor` | `string` | `rgba(79, 70, 229, 0.35)` | Cor do anel de foco. |
+| `size` | `string` | `20px` | Tamanho do checkbox. |
+| `borderRadius` | `string` | `4px` | Raio da borda do checkbox. |
+| `animationDuration` | `string` | `200ms` | Duração das animações. |
+| `checkedIcon` | `string` | `''` | Ícone exibido quando marcado. Se vazio, usa um check SVG padrão. |
+| `uncheckedIcon` | `string` | `''` | Ícone exibido quando desmarcado. Se vazio, nenhum ícone é exibido. |
+| `indeterminateIcon` | `string` | `''` | Ícone exibido no estado indeterminado. Se vazio, usa um traço SVG padrão. |
+| `isLucideIcon` | `boolean` | `false` | Interpreta os ícones como nomes Lucide. Quando `false`, usa `<img>` (URL ou data URI). |
+| `iconColor` | `string` | `''` | Cor dos ícones Lucide (fallback para todos os estados). |
+| `checkedIconColor` | `string` | `''` | Cor do ícone quando marcado. Se vazio, usa `iconColor`. |
+| `uncheckedIconColor` | `string` | `''` | Cor do ícone quando desmarcado. Se vazio, usa `iconColor`. |
+| `iconSize` | `string \| number` | `14` | Tamanho do ícone. Números são convertidos para `px`. |
+| `iconStrokeWidth` | `string \| number` | `2.5` | Espessura do traço dos ícones Lucide. |
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `checkedChange` | `EventEmitter<boolean>` | Emitido quando o estado marcado muda. |
+| `indeterminateChange` | `EventEmitter<boolean>` | Emitido quando o estado indeterminado muda. |
+| `checkboxChange` | `EventEmitter<ICaoCheckboxChangeEvent>` | Emitido com o novo estado e a origem. |
+
+**Métodos**
+
+| Método | Descrição |
+| --- | --- |
+| `toggle()` | Alterna o estado, se não estiver desabilitado. |
+| `setChecked(value: boolean, emit = true)` | Define o estado programaticamente e limpa `indeterminate`. Passe `false` em `emit` para não disparar os eventos. |
+| `setIndeterminate(value: boolean)` | Define o estado indeterminado. |
+| `enable()` | Habilita o componente. |
+| `disable()` | Desabilita o componente. |
+| `writeValue(value)` | Implementação de `ControlValueAccessor`. |
+| `setDisabledState(isDisabled)` | Implementação de `ControlValueAccessor`. |
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-checkbox-color` | `#4f46e5` | Cor do checkbox marcado/indeterminado. |
+| `--cao-checkbox-unselected` | `#6b7280` | Cor da borda desmarcada. |
+| `--cao-checkbox-disabled` | `#d1d5db` | Cor do checkbox desabilitado. |
+| `--cao-checkbox-label` | `#111827` | Cor do label. |
+| `--cao-checkbox-label-disabled` | `#9ca3af` | Cor do label desabilitado. |
+| `--cao-checkbox-focus-ring` | `rgba(79, 70, 229, 0.35)` | Cor do anel de foco. |
+| `--cao-checkbox-size` | `20px` | Tamanho do checkbox. |
+| `--cao-checkbox-radius` | `4px` | Raio da borda. |
+| `--cao-checkbox-duration` | `200ms` | Duração das animações. |
+| `--cao-checkbox-icon-size` | `14px` | Tamanho do ícone. |
+| `--cao-checkbox-icon-color` | `#ffffff` | Cor do ícone. |
+
+**Exemplo com `ngModel`:**
+
+```html
+<cao-checkbox
+  label="Aceito os termos"
+  [(ngModel)]="aceitoTermos"
+  (checkedChange)="onCheckedChange($event)">
+</cao-checkbox>
+```
+
+**Exemplo com formulário reativo, validação e estado indeterminado:**
+
+```html
+<cao-checkbox
+  label="Selecionar todos"
+  [formControl]="selecionarTodos"
+  [indeterminate]="algunsSelecionados"
+  [control]="selecionarTodos"
+  errorMessage="Selecione ao menos uma opção">
+</cao-checkbox>
+```
+
+```typescript
+selecionarTodos = new FormControl(false, { validators: Validators.requiredTrue });
+algunsSelecionados = false;
+```
+
+**Exemplo com cores customizadas e label antes:**
+
+```html
+<cao-checkbox
+  label="Modo escuro"
+  labelPosition="before"
+  color="#16a34a"
+  uncheckedColor="#94a3b8"
+  labelColor="#166534"
+  size="24px"
+  borderRadius="6px">
+</cao-checkbox>
+```
+
+**Exemplo com ícones Lucide:**
+
+```html
+<cao-checkbox
+  label="Notificações"
+  [(ngModel)]="notificacoesAtivas"
+  checkedIcon="check"
+  indeterminateIcon="minus"
+  uncheckedIcon="x"
+  [isLucideIcon]="true"
+  iconColor="#6b7280"
+  checkedIconColor="#16a34a"
+  [iconSize]="16"
+  [iconStrokeWidth]="2.5">
+</cao-checkbox>
+```
+
+**Exemplo com imagem/data URI nos ícones:**
+
+```html
+<cao-checkbox
+  label="Ícone customizado"
+  [(ngModel)]="customizado"
+  checkedIcon="assets/icone-marcado.svg"
+  indeterminateIcon="assets/icone-indeterminado.svg"
+  [isLucideIcon]="false"
+  [iconSize]="12">
+</cao-checkbox>
+```
+
+**Observações:**
+
+- Usa um `input type="checkbox"` nativo oculto, mantendo clique no label, foco, navegação por teclado e suporte a leitores de tela.
+- O estado `indeterminate` tem prioridade visual sobre `checked`; ao alternar o checkbox, `indeterminate` é limpo e `indeterminateChange(false)` é emitido.
+- Funciona com `ngModel`, `formControlName` e `FormControl.disable()`.
+- Os estados `--invalid` e `--valid` são aplicados quando `control.touched` e o controle está inválido/válido; `errorMessage` também força o estilo inválido.
+- Para ícones Lucide, registre os ícones usados com `provideLucideIcons` (de `@lucide/angular`). Para imagens, informe uma URL ou data URI e mantenha `isLucideIcon` como `false`.
+- As cores e dimensões podem ser definidas por inputs ou sobrescritas via CSS custom properties.
 
 ---
 

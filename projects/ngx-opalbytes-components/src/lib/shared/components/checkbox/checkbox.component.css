@@ -1,0 +1,131 @@
+:host {
+  --cao-checkbox-color: #4f46e5;
+  --cao-checkbox-unselected: #6b7280;
+  --cao-checkbox-disabled: #d1d5db;
+  --cao-checkbox-label: #111827;
+  --cao-checkbox-label-disabled: #9ca3af;
+  --cao-checkbox-focus-ring: rgba(79, 70, 229, 0.35);
+  --cao-checkbox-size: 20px;
+  --cao-checkbox-radius: 4px;
+  --cao-checkbox-duration: 200ms;
+  --cao-checkbox-icon-size: 14px;
+  --cao-checkbox-icon-color: #ffffff;
+
+  display: inline-flex;
+}
+
+.cao-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cao-checkbox--disabled {
+  cursor: not-allowed;
+}
+
+.cao-checkbox__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.cao-checkbox__control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  box-sizing: border-box;
+  width: var(--cao-checkbox-size);
+  height: var(--cao-checkbox-size);
+  border: 2px solid var(--cao-checkbox-unselected);
+  border-radius: var(--cao-checkbox-radius);
+  background-color: transparent;
+  transition:
+    background-color var(--cao-checkbox-duration) ease,
+    border-color var(--cao-checkbox-duration) ease;
+}
+
+.cao-checkbox__icon {
+  flex: none;
+  width: var(--cao-checkbox-icon-size);
+  height: var(--cao-checkbox-icon-size);
+  color: var(--cao-checkbox-icon-color);
+  pointer-events: none;
+  object-fit: contain;
+}
+
+.cao-checkbox__icon--default {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cao-checkbox__label {
+  color: var(--cao-checkbox-label);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.cao-checkbox__label:empty {
+  display: none;
+}
+
+.cao-checkbox:not(.cao-checkbox--disabled):hover .cao-checkbox__control {
+  border-color: var(--cao-checkbox-color);
+}
+
+.cao-checkbox--checked .cao-checkbox__control,
+.cao-checkbox--indeterminate .cao-checkbox__control {
+  border-color: var(--cao-checkbox-color);
+  background-color: var(--cao-checkbox-color);
+}
+
+.cao-checkbox--invalid .cao-checkbox__control {
+  border-color: var(--error, #dc2626);
+}
+
+.cao-checkbox--valid .cao-checkbox__control {
+  border-color: var(--success, #16a34a);
+}
+
+.cao-checkbox--disabled .cao-checkbox__control {
+  border-color: var(--cao-checkbox-disabled);
+  background-color: transparent;
+}
+
+.cao-checkbox--disabled.cao-checkbox--checked .cao-checkbox__control,
+.cao-checkbox--disabled.cao-checkbox--indeterminate .cao-checkbox__control {
+  background-color: var(--cao-checkbox-disabled);
+}
+
+.cao-checkbox--disabled .cao-checkbox__icon {
+  opacity: 0.65;
+}
+
+.cao-checkbox--disabled .cao-checkbox__label {
+  color: var(--cao-checkbox-label-disabled);
+}
+
+.cao-checkbox__input:focus-visible + .cao-checkbox__control {
+  box-shadow: 0 0 0 3px var(--cao-checkbox-focus-ring);
+}
+
+.cao-checkbox--label-before .cao-checkbox__control {
+  order: 2;
+}
+
+.cao-checkbox--label-before .cao-checkbox__label {
+  order: 1;
+}
