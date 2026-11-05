@@ -63,18 +63,17 @@ export class ExemploComponent { }
 
 ## Organização de Pastas
 
-Dentro da pasta `src/lib/`, as diretivas são organizadas em `directives/` e cada diretiva reside em sua própria pasta, contendo seus arquivos (`.ts`, `.spec.ts`).
+Dentro da pasta `src/lib/`, as diretivas são organizadas em `directives/` e cada diretiva reside em sua própria pasta, contendo seus arquivos (`.ts`, `.spec.ts`) e um barrel `index.ts`.
 
 ```
 src/
 └── lib/
     └── directives/
+        ├── badge/
         ├── highlight/
         ├── skeleton/
         └── tooltip/
 ```
-
----
 
 ---
 
@@ -103,6 +102,88 @@ Realça a cor de fundo de um elemento quando o usuário passa o mouse sobre ele.
   Passe o mouse aqui para um realce azul claro.
 </div>
 ```
+
+---
+
+### `CaoBadgeDirective`
+Exibe um badge (contador, status ou ponto indicador) sobre o elemento hospedeiro, inspirado no `matBadge` do Angular Material, porém **sem nenhuma dependência externa**: todo o estilo é aplicado inline pela própria diretiva.
+
+**Seletor:** `[caoBadge]`
+
+**Inputs**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `caoBadge` | `string \| number \| null \| undefined` | `undefined` | Conteúdo do badge. Valor vazio/nulo oculta o badge (exceto em modo `dot`). `0` é exibido normalmente |
+| `caoBadgeColor` | `'primary' \| 'accent' \| 'warn' \| 'success' \| 'info' \| string` | `'primary'` | Cor de fundo: preset ou qualquer cor CSS (`#f00`, `rgb(...)`, `var(--minha-cor)`) |
+| `caoBadgeTextColor` | `string` | `'#ffffff'` | Cor do texto |
+| `caoBadgePosition` | `'above after' \| 'above before' \| 'below before' \| 'below after' \| 'above' \| 'below' \| 'before' \| 'after'` | `'above after'` | Posição relativa ao elemento. Em valores parciais, o eixo omitido usa o padrão (`above` / `after`) |
+| `caoBadgeSize` | `'small' \| 'medium' \| 'large'` | `'medium'` | Tamanho do badge (16px / 22px / 28px) |
+| `caoBadgeOverlap` | `boolean` | `true` | `true` sobrepõe o badge ao conteúdo; `false` o posiciona para fora da borda do elemento |
+| `caoBadgeHidden` | `boolean` | `false` | Oculta o badge com animação |
+| `caoBadgeDot` | `boolean` | `false` | Exibe apenas um ponto, sem texto (6px / 8px / 10px conforme o tamanho) |
+| `caoBadgeMax` | `number` | `undefined` | Valor máximo; acima dele é exibido `{max}+` (ex.: `99+`) |
+| `caoBadgeDescription` | `string` | `''` | Descrição acessível lida por leitores de tela |
+
+**Presets de cor**
+
+| Preset | Cor |
+| --- | --- |
+| `primary` | `#1976d2` |
+| `accent` | `#ff4081` |
+| `warn` | `#d32f2f` |
+| `success` | `#2e7d32` |
+| `info` | `#0288d1` |
+
+**Exemplos de Uso**
+
+```html
+<!-- 1. Uso básico -->
+<button caoBadge="3">Inbox</button>
+
+<!-- 2. Contador dinâmico com limite -->
+<button [caoBadge]="unread" [caoBadgeMax]="99" caoBadgeColor="warn">
+  Mensagens
+</button>
+
+<!-- 3. Cores customizadas -->
+<span
+  caoBadge="novo"
+  caoBadgeColor="#00bfa5"
+  caoBadgeTextColor="#00251a"
+>
+  Recurso
+</span>
+
+<!-- 4. Posição e tamanho -->
+<div caoBadge="2" caoBadgePosition="below before" caoBadgeSize="large">
+  Carrinho
+</div>
+
+<!-- 5. Sem sobreposição (badge fora da borda do elemento) -->
+<button caoBadge="8" [caoBadgeOverlap]="false">Alertas</button>
+
+<!-- 6. Apenas um ponto indicador -->
+<button caoBadge [caoBadgeDot]="true" caoBadgeColor="success">Online</button>
+
+<!-- 7. Controlando a visibilidade -->
+<button
+  [caoBadge]="unread"
+  [caoBadgeHidden]="unread === 0"
+  caoBadgeDescription="Você possui novas mensagens"
+>
+  Inbox
+</button>
+```
+
+**Comportamento**
+- O badge é um `span` posicionado de forma absoluta dentro do elemento hospedeiro; se o host tiver `position: static`, a diretiva define `position: relative` e remove essa alteração ao ser destruída
+- Conteúdo é inserido via `textContent`, portanto **nunca é interpretado como HTML**
+- A exibição/ocultação usa uma transição de escala (`scale`) que respeita a preferência `prefers-reduced-motion`
+- Quando oculto, o badge recebe `aria-hidden="true"`; quando visível e com `caoBadgeDescription`, recebe `role="img"` e `aria-label`
+- O badge usa `pointer-events: none`, sem interferir nos cliques do elemento
+- Compatível com SSR: o acesso a `getComputedStyle` e `matchMedia` só ocorre no navegador
+- Todos os inputs são reativos (signal inputs) e podem ser alterados a qualquer momento
 
 ---
 
@@ -211,8 +292,8 @@ Exibe uma dica (tooltip) ao lado de um elemento quando o usuário passa o mouse 
 | `tooltipPosition` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Posição do tooltip em relação ao elemento hospedeiro |
 | `tooltipBgColor` | `string` | `'#323232'` | Cor de fundo do tooltip |
 | `tooltipTextColor` | `string` | `'#ffffff'` | Cor do texto |
-| `tooltipFontSize` | `string` | `'13px'` | Tamanho da fonte do texto |
-| `tooltipMaxWidth` | `string` | `'220px'` | Largura máxima do tooltip |
+| `tooltipFontSize` | `string` | `'12px'` | Tamanho da fonte do texto |
+| `tooltipMaxWidth` | `string` | `'250px'` | Largura máxima do tooltip |
 | `tooltipArrow` | `boolean` | `true` | Exibe a seta indicadora apontando para o elemento |
 | `tooltipOffsetPx` | `number` | `8` | Distância (em px) entre o tooltip e o elemento |
 
@@ -261,8 +342,8 @@ Exibe uma dica (tooltip) ao lado de um elemento quando o usuário passa o mouse 
 
 Para adicionar uma nova diretiva a esta biblioteca, siga os passos abaixo:
 
-1.  **Crie os arquivos** da sua diretiva dentro da pasta `src/lib/directives/`, seguindo a estrutura de pastas existente.
-2.  **Exponha a diretiva** na API pública da biblioteca, adicionando uma linha de exportação no arquivo `src/public-api.ts`.
+1.  **Crie os arquivos** da sua diretiva dentro da pasta `src/lib/directives/`, seguindo a estrutura de pastas existente (arquivo `.ts`, `.spec.ts` e barrel `index.ts`).
+2.  **Exponha a diretiva** na API pública da biblioteca, adicionando uma linha de exportação no arquivo `src/public-api.ts` (ex.: `export * from './lib/directives/badge';`).
 3.  **Adicione ou atualize os testes unitários** para garantir a cobertura e o funcionamento esperado.
 4.  **Faça o commit** seguindo as [regras de commit do projeto](/README.md#룰-regras-de-commit-com-escopo-obrigatório), usando o escopo `directives`.
 
@@ -292,4 +373,3 @@ Os relatórios completos de métricas estão disponíveis no repositório.
 O prefixo para diretivas nesta biblioteca é `cao`.
 
 - **Diretivas**: Utilize o prefixo `cao...` em camelCase para os seletores de atributo.
-
