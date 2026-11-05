@@ -1,3 +1,8 @@
+## 1.28.0 (2026-11-05)
+
+* Merge pull request #116 from Micael-Macedo/feature(components)/add-accordion-component ([c2dd81d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c2dd81d)), closes [#116](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/116)
+* feat: add accordion component ([96ff96f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/96ff96f))
+
 ## 1.27.0 (2026-11-04)
 
 * Merge pull request #113 from Micael-Macedo/feature(components)/add-checkbox-component ([c0e0ba0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c0e0ba0)), closes [#113](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/113)
