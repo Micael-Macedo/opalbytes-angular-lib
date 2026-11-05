@@ -1,3 +1,8 @@
+## 1.6.0 (2026-11-05)
+
+* Merge pull request #114 from Micael-Macedo/feature(directives)/add-badge-directive ([fcb301c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fcb301c)), closes [#114](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/114)
+* feat: add badge directive ([54a5020](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/54a5020))
+
 ## <small>1.5.1 (2026-09-15)</small>
 
 * Merge pull request #103 from Micael-Macedo/fix(directives)/adjust-tooltip-size-and-width ([9be13cc](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9be13cc)), closes [#103](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/103)
