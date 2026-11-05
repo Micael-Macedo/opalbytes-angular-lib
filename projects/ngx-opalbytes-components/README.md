@@ -232,7 +232,8 @@ src/
 └── lib/
     └── shared/
         └── components/
-        |   ├── autocomplete/
+        |   ├── accordion/
+        |   ├── accordion-item/
         |   ├── base-button/
         |   ├── base-icon/
         |   ├── base-input/
@@ -928,6 +929,205 @@ Um componente de alternância (toggle switch) que funciona com `ngModel` ou `for
 | `searchClick` | `EventEmitter<void>` | Emitido quando o ícone de busca é clicado. |
 | `inputChange` | `EventEmitter<string>` | Emitido a cada mudança no input. |
 | `statusChanged` | `EventEmitter<CaoBaseToggleComponent>` | Emitido quando o toggle é alternado. |
+
+---
+### `CaoAccordionComponent` e `CaoAccordionItemComponent`
+
+Um accordion (painéis expansíveis) acessível e totalmente customizável, inspirado na API do `CdkAccordion`, mas **sem depender do `@angular/cdk`, do Angular Material ou de qualquer outra biblioteca externa** — usa apenas `@angular/core` e `@angular/common`. Cores, posições, textos e visibilidade são configuráveis por inputs ou por CSS custom properties. A animação de abrir/fechar é feita só com CSS e respeita `prefers-reduced-motion`.
+
+**Seletores:**
+- `<cao-accordion>` — container (controla modo único/múltiplo e o tema herdado pelos itens)
+- `<cao-accordion-item>` — painel individual (também pode ser usado isolado, como um cartão expansível)
+
+#### Atributos do `CaoAccordionComponent` (Inputs)
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `multi` | `boolean` | `false` | Permite vários itens expandidos ao mesmo tempo. No modo único, expandir um item recolhe os demais. |
+| `displayMode` | `'default' \| 'flat' \| 'separated'` | `'default'` | `default`: painéis unidos em um único contorno arredondado; `flat`: unidos, sem bordas laterais/cantos; `separated`: cada painel é um cartão separado por `gap`. |
+| `hideToggle` | `boolean` | `false` | Oculta o ícone de expandir/recolher em todos os itens. |
+| `isVisible` | `boolean` | `true` | Exibe ou oculta o accordion inteiro. |
+| `togglePosition` | `'before' \| 'after'` | `'after'` | Posição do ícone em relação ao texto do cabeçalho. |
+| `headerAlign` | `'start' \| 'center' \| 'end'` | `'start'` | Alinhamento do texto do cabeçalho. |
+| `contentAlign` | `'start' \| 'center' \| 'end'` | `'start'` | Alinhamento do texto do conteúdo. |
+| `headerBgColor` | `string` | `#ffffff` | Cor de fundo do cabeçalho. |
+| `headerTextColor` | `string` | `#111827` | Cor do texto do cabeçalho. |
+| `headerHoverBgColor` | `string` | `#f3f4f6` | Cor de fundo do cabeçalho ao passar o mouse. |
+| `headerActiveBgColor` | `string` | cor do cabeçalho | Cor de fundo do cabeçalho do item expandido. |
+| `activeColor` | `string` | `#4f46e5` | Cor do texto/ícone do cabeçalho do item expandido. |
+| `contentBgColor` | `string` | `#ffffff` | Cor de fundo do conteúdo. |
+| `contentTextColor` | `string` | `#374151` | Cor do texto do conteúdo. |
+| `borderColor` | `string` | `#e5e7eb` | Cor das bordas e divisórias. |
+| `disabledColor` | `string` | `#9ca3af` | Cor do texto de itens desabilitados. |
+| `focusRingColor` | `string` | `rgba(79, 70, 229, 0.35)` | Cor do anel de foco do teclado. |
+| `iconColor` | `string` | `currentColor` | Cor do ícone de expandir/recolher. |
+| `borderRadius` | `string` | `8px` | Raio da borda. |
+| `gap` | `string` | `8px` | Espaçamento entre os itens (modo `separated`). |
+| `headerPadding` | `string` | `12px 16px` | Padding do cabeçalho. |
+| `contentPadding` | `string` | `16px` | Padding do conteúdo. |
+| `animationDuration` | `string` | `250ms` | Duração da animação. |
+| `dataCy` | `string` | `''` | Atributo `data-cy` para testes E2E. |
+
+#### Métodos do `CaoAccordionComponent`
+
+| Método | Descrição |
+| --- | --- |
+| `openAll()` | Expande todos os itens. Só tem efeito quando `multi` está ativo. |
+| `closeAll()` | Recolhe todos os itens. |
+
+#### Atributos do `CaoAccordionItemComponent` (Inputs)
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `label` | `string` | `''` | Texto do cabeçalho. |
+| `description` | `string` | `''` | Texto secundário exibido abaixo do `label`. |
+| `expanded` | `boolean` | `false` | Estado de expansão. Suporta two-way binding: `[(expanded)]`. |
+| `isDisabled` | `boolean` | `false` | Desabilita a interação do usuário com o item. |
+| `isVisible` | `boolean` | `true` | Exibe ou oculta o item. |
+| `headingLevel` | `number` | `3` | Nível do heading (`aria-level`) do cabeçalho. |
+| `hideToggle` | `boolean` | herda do accordion | Oculta o ícone neste item. |
+| `togglePosition` | `'before' \| 'after'` | herda do accordion | Posição do ícone neste item. |
+| `headerAlign` | `'start' \| 'center' \| 'end'` | herda do accordion | Alinhamento do cabeçalho neste item. |
+| `headerBgColor` | `string` | herda do accordion | Cor de fundo do cabeçalho deste item. |
+| `headerTextColor` | `string` | herda do accordion | Cor do texto do cabeçalho deste item. |
+| `headerActiveBgColor` | `string` | herda do accordion | Cor de fundo do cabeçalho quando expandido. |
+| `activeColor` | `string` | herda do accordion | Cor do texto/ícone quando expandido. |
+| `contentBgColor` | `string` | herda do accordion | Cor de fundo do conteúdo. |
+| `contentTextColor` | `string` | herda do accordion | Cor do texto do conteúdo. |
+| `borderColor` | `string` | herda do accordion | Cor das bordas. |
+| `iconColor` | `string` | herda do accordion | Cor do ícone. |
+| `dataCy` | `string` | `''` | Atributo `data-cy` para testes E2E (veja abaixo). |
+
+#### Eventos do `CaoAccordionItemComponent` (Outputs)
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `opened` | `output<void>` | Emitido quando o item é expandido. |
+| `closed` | `output<void>` | Emitido quando o item é recolhido. |
+| `expandedChange` | `output<boolean>` | Emitido a cada mudança de estado (usado pelo `[(expanded)]`). |
+
+#### Métodos do `CaoAccordionItemComponent`
+
+| Método | Descrição |
+| --- | --- |
+| `toggle()` | Alterna o estado (ignorado se o item estiver desabilitado). |
+| `open()` | Expande o item. |
+| `close()` | Recolhe o item. |
+
+#### Projeção de conteúdo
+
+| Recurso | Descrição |
+| --- | --- |
+| Slot padrão (`<ng-content />`) | Conteúdo do painel. |
+| `[caoAccordionHeader]` | Conteúdo extra projetado no cabeçalho, abaixo do `label`/`description` (ex.: badges, status). |
+
+#### `data-cy` para testes E2E
+
+Ao informar `dataCy="faq"` em um item, são gerados automaticamente os seletores:
+
+| Elemento | Atributo |
+| --- | --- |
+| Item (host) | `data-cy="faq"` |
+| Botão do cabeçalho | `data-cy="faq-header"` |
+| Painel de conteúdo | `data-cy="faq-content"` |
+
+```typescript
+cy.get('[data-cy="faq-header"]').click();
+cy.get('[data-cy="faq-content"]').should('be.visible');
+```
+
+#### CSS Custom Properties
+
+Podem ser definidas globalmente, por accordion ou por item (têm precedência sobre os valores padrão, e os inputs equivalentes as definem automaticamente).
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-accordion-header-bg` | `#ffffff` | Fundo do cabeçalho. |
+| `--cao-accordion-header-text` | `#111827` | Texto do cabeçalho. |
+| `--cao-accordion-header-hover-bg` | `#f3f4f6` | Fundo do cabeçalho no hover. |
+| `--cao-accordion-header-active-bg` | `var(--cao-accordion-header-bg)` | Fundo do cabeçalho expandido. |
+| `--cao-accordion-active-color` | `#4f46e5` | Texto/ícone do cabeçalho expandido. |
+| `--cao-accordion-content-bg` | `#ffffff` | Fundo do conteúdo. |
+| `--cao-accordion-content-text` | `#374151` | Texto do conteúdo. |
+| `--cao-accordion-border-color` | `#e5e7eb` | Bordas e divisórias. |
+| `--cao-accordion-disabled-color` | `#9ca3af` | Texto desabilitado. |
+| `--cao-accordion-focus-ring` | `rgba(79, 70, 229, 0.35)` | Anel de foco. |
+| `--cao-accordion-icon-color` | `currentColor` | Cor do ícone. |
+| `--cao-accordion-radius` | `8px` | Raio da borda. |
+| `--cao-accordion-gap` | `8px` | Espaço entre itens (`separated`). |
+| `--cao-accordion-header-padding` | `12px 16px` | Padding do cabeçalho. |
+| `--cao-accordion-content-padding` | `16px` | Padding do conteúdo. |
+| `--cao-accordion-header-align` | `start` | Alinhamento do texto do cabeçalho. |
+| `--cao-accordion-content-align` | `start` | Alinhamento do texto do conteúdo. |
+| `--cao-accordion-duration` | `250ms` | Duração da animação. |
+
+**Exemplo básico:**
+
+```typescript
+import { Component } from '@angular/core';
+import { CaoAccordionComponent, CaoAccordionItemComponent } from 'ngx-opalbytes-components';
+
+@Component({
+  selector: 'app-faq',
+  imports: [CaoAccordionComponent, CaoAccordionItemComponent],
+  template: `
+    <cao-accordion dataCy="faq-accordion">
+      <cao-accordion-item label="Como funciona?" dataCy="faq-1" [expanded]="true">
+        Conteúdo da primeira pergunta.
+      </cao-accordion-item>
+      <cao-accordion-item label="Posso cancelar?" description="Sem multa" dataCy="faq-2">
+        Conteúdo da segunda pergunta.
+      </cao-accordion-item>
+    </cao-accordion>
+  `,
+})
+export class FaqComponent {}
+```
+
+**Exemplo com múltiplos itens abertos, cores, ícone antes do texto e controle externo:**
+
+```html
+<cao-accordion
+  #acc
+  [multi]="true"
+  displayMode="separated"
+  togglePosition="before"
+  headerAlign="center"
+  headerBgColor="#eef2ff"
+  headerTextColor="#312e81"
+  activeColor="#16a34a"
+  contentBgColor="#ffffff"
+  borderColor="#c7d2fe"
+  borderRadius="12px"
+  animationDuration="400ms"
+  dataCy="meu-accordion">
+
+  <cao-accordion-item label="Dados pessoais" [(expanded)]="dadosAbertos" (opened)="onAbriu()" (closed)="onFechou()">
+    ...
+  </cao-accordion-item>
+
+  <cao-accordion-item label="Pagamento" [isDisabled]="semPermissao" headerBgColor="#fef3c7">
+    <span caoAccordionHeader>Pendente</span>
+    ...
+  </cao-accordion-item>
+
+  <cao-accordion-item label="Somente admin" [isVisible]="ehAdmin" [hideToggle]="true">
+    ...
+  </cao-accordion-item>
+</cao-accordion>
+
+<cao-button buttonText="Abrir todos" (buttonClick)="acc.openAll()"></cao-button>
+<cao-button buttonText="Fechar todos" (buttonClick)="acc.closeAll()"></cao-button>
+```
+
+**Observações:**
+
+- Sem dependências externas: não usa `@angular/cdk`, `@angular/material`, `@lucide/angular` nem `ngx-mask`; o ícone é um SVG inline.
+- Acessibilidade: o cabeçalho é um `<button>` dentro de um `role="heading"`, com `aria-expanded`, `aria-controls` e painel `role="region"` com `aria-labelledby`. Painéis recolhidos ficam fora da ordem de tabulação e do leitor de tela.
+- Teclado: `Enter`/`Espaço` alternam o item; `↑`/`↓` movem o foco entre cabeçalhos; `Home`/`End` vão ao primeiro/último.
+- Itens definidos como `isDisabled` bloqueiam apenas a interação do usuário; `open()`, `close()` e `[expanded]` continuam funcionando programaticamente.
+- Os inputs do `<cao-accordion-item>` sobrescrevem os do `<cao-accordion>` apenas naquele item.
+- Fora de um `<cao-accordion>`, o item se comporta como um cartão expansível independente.
 
 ---
 
