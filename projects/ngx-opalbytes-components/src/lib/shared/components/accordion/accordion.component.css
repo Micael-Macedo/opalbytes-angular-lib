@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+:host(.cao-accordion--hidden) {
+  display: none;
+}
+
+/* Painéis unidos: o fundo do host aparece nos 1px de gap e funciona como divisória. */
+:host(.cao-accordion--default) {
+  gap: 1px;
+  background: var(--cao-accordion-border-color, #e5e7eb);
+  border: 1px solid var(--cao-accordion-border-color, #e5e7eb);
+  border-radius: var(--cao-accordion-radius, 8px);
+  overflow: hidden;
+}
+
+:host(.cao-accordion--flat) {
+  gap: 1px;
+  background: var(--cao-accordion-border-color, #e5e7eb);
+  border-top: 1px solid var(--cao-accordion-border-color, #e5e7eb);
+  border-bottom: 1px solid var(--cao-accordion-border-color, #e5e7eb);
+}
+
+:host(.cao-accordion--separated) {
+  gap: var(--cao-accordion-gap, 8px);
+}

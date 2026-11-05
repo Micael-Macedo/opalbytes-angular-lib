@@ -1,3 +1,6 @@
+export * from './accordion/accordion.component'
+export * from './accordion/accordion.token'
+export * from './accordion-item/accordion-item.component'
 export * from './base-button/base-button.component'
 export * from './base-input/base-input'
 export * from './base-time-range/base-time-range'
