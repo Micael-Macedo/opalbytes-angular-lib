@@ -1,0 +1,52 @@
+<div class="cao-accordion-item">
+  <div class="cao-accordion-item__heading" role="heading" [attr.aria-level]="headingLevel()">
+    <button
+      type="button"
+      class="cao-accordion-item__header"
+      [class.cao-accordion-item__header--toggle-before]="togglePos() === 'before'"
+      [id]="headerId"
+      [disabled]="isDisabled()"
+      [attr.aria-expanded]="expanded()"
+      [attr.aria-controls]="panelId"
+      [attr.data-cy]="headerDataCy()"
+      (click)="toggle()">
+      <span class="cao-accordion-item__text">
+        <span class="cao-accordion-item__label">{{ label() }}</span>
+        @if (description()) {
+          <span class="cao-accordion-item__description">{{ description() }}</span>
+        }
+        <ng-content select="[caoAccordionHeader]" />
+      </span>
+
+      @if (!toggleHidden()) {
+        <svg
+          class="cao-accordion-item__icon"
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      }
+    </button>
+  </div>
+
+  <div
+    class="cao-accordion-item__panel"
+    role="region"
+    [id]="panelId"
+    [attr.aria-labelledby]="headerId"
+    [attr.data-cy]="panelDataCy()">
+    <div class="cao-accordion-item__panel-inner">
+      <div class="cao-accordion-item__content">
+        <ng-content />
+      </div>
+    </div>
+  </div>
+</div>
