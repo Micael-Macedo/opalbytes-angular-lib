@@ -1,3 +1,10 @@
+## 1.29.0 (2026-11-09)
+
+* Merge pull request #117 from Micael-Macedo/feature(components)/breadcrumb-component ([4426c5a](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4426c5a)), closes [#117](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/117)
+* feat: add avatar component ([40eb721](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/40eb721))
+* feat: add avatar component into readme ([ca7456b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/ca7456b))
+* feat: add breadcrumb component ([fa948ba](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fa948ba))
+
 ## 1.28.0 (2026-11-05)
 
 * Merge pull request #116 from Micael-Macedo/feature(components)/add-accordion-component ([c2dd81d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c2dd81d)), closes [#116](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/116)
