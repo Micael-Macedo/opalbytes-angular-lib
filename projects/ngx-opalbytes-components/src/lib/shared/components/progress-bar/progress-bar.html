@@ -1,0 +1,39 @@
+<div
+  class="cao-progress-bar"
+  [style.--cao-progress-bar-color]="color() || null"
+  [style.--cao-progress-bar-track-color]="trackColor() || null"
+  [style.--cao-progress-bar-buffer-color]="bufferColor() || null"
+  [style.--cao-progress-bar-duration]="animationDuration() || null">
+  <div
+    class="cao-progress-bar__track"
+    role="progressbar"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [attr.aria-valuenow]="ariaValueNow()"
+    [attr.aria-label]="ariaLabel() || null"
+    [attr.aria-labelledby]="ariaLabelledBy() || null"
+    [attr.data-cy]="dataCy() || null"
+    [style.height]="height()"
+    [style.border-radius]="borderRadius() || null">
+    @switch (mode()) {
+      @case ('determinate') {
+        <div class="cao-progress-bar__fill" [style.width.%]="clampedValue()"></div>
+      }
+      @case ('buffer') {
+        <div class="cao-progress-bar__dots" [style.left.%]="clampedBuffer()"></div>
+        <div class="cao-progress-bar__buffer" [style.width.%]="clampedBuffer()"></div>
+        <div class="cao-progress-bar__fill" [style.width.%]="clampedValue()"></div>
+      }
+      @default {
+        <div class="cao-progress-bar__inner" [class.cao-progress-bar__inner--query]="mode() === 'query'">
+          <div class="cao-progress-bar__bar cao-progress-bar__bar--primary"></div>
+          <div class="cao-progress-bar__bar cao-progress-bar__bar--secondary"></div>
+        </div>
+      }
+    }
+  </div>
+
+  @if (showValue() && hasValue()) {
+    <span class="cao-progress-bar__value" aria-hidden="true">{{ valueLabel() }}</span>
+  }
+</div>
