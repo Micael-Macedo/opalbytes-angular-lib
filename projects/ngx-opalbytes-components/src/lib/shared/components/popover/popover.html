@@ -1,0 +1,44 @@
+<ng-template #panelTemplate>
+  <div
+    [ngClass]="'cao-popover'"
+    tabindex="-1"
+    [id]="panelId"
+    [class]="styleClass()"
+    [class.cao-popover--top]="placement() === 'top'"
+    [class.cao-popover--bottom]="placement() === 'bottom'"
+    [class.cao-popover--left]="placement() === 'left'"
+    [class.cao-popover--right]="placement() === 'right'"
+    [class.cao-popover--align-start]="align() === 'start'"
+    [class.cao-popover--align-center]="align() === 'center'"
+    [class.cao-popover--align-end]="align() === 'end'"
+    [class.cao-popover--no-arrow]="!showArrow()"
+    [attr.role]="role() || null"
+    [attr.aria-label]="ariaLabel() || null"
+    [attr.aria-labelledby]="ariaLabelledBy() || null"
+    [attr.data-cy]="dataCy() || null"
+    [style.width]="width() || null"
+    [style.max-width]="maxWidth() || null"
+    [style.--cao-popover-bg]="bgColor() || null"
+    [style.--cao-popover-text]="textColor() || null"
+    [style.--cao-popover-border-color]="borderColor() || null"
+    [style.--cao-popover-radius]="borderRadius() || null"
+    [style.--cao-popover-padding]="padding() || null"
+    (mouseenter)="panelHoverChange.emit(true)"
+    (mouseleave)="panelHoverChange.emit(false)">
+    @if (showArrow()) {
+      <span class="cao-popover__arrow" aria-hidden="true"></span>
+    }
+
+    <div class="cao-popover__content" [class.cao-popover__content--with-close]="showCloseIcon()">
+      <ng-content />
+    </div>
+
+    @if (showCloseIcon()) {
+      <button type="button" class="cao-popover__close" [attr.aria-label]="closeAriaLabel()" (click)="onCloseClick()">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    }
+  </div>
+</ng-template>

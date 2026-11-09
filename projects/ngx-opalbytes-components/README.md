@@ -247,6 +247,8 @@ src/
         |   ├── kpi/
         |   ├── links-button/
         |   ├── paginator/
+        |   ├── progress-bar/
+        |   ├── progress-spinner/
         |   ├── radio/
         |   ├── skeleton/
         |   ├── slide-toggle/
@@ -2048,6 +2050,142 @@ Controle de paginação para tabelas ou listas.
 | Evento | Tipo | Descrição |
 | --- | --- | --- |
 | `pageEvent` | `EventEmitter<PageEvent>` | Emitido em qualquer evento de paginação. |
+
+---
+### `CaoProgressBarComponent`
+
+Barra de progresso baseada no `mat-progress-bar` do Angular Material, **sem depender do Material em runtime** (apenas `@angular/core`). Suporta os modos `determinate`, `indeterminate`, `buffer` e `query`, cores e altura configuráveis e exibição opcional do percentual.
+
+**Seletor:** `<cao-progress-bar>`
+
+**Tipo `CaoProgressBarMode`**
+
+| Valor | Descrição |
+| --- | --- |
+| `'determinate'` | Progresso conhecido, controlado por `value` (padrão). |
+| `'indeterminate'` | Progresso desconhecido, animação contínua. |
+| `'buffer'` | Exibe `value` (progresso) e `bufferValue` (buffer), com pontos animados no restante. |
+| `'query'` | Indeterminado com a animação invertida (ex.: aguardando resposta antes de passar a `determinate`). |
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `mode` | `CaoProgressBarMode` | `'determinate'` | Modo de exibição. |
+| `value` | `number` | `0` | Progresso de 0 a 100 (`determinate` e `buffer`). Valores fora do intervalo são limitados. |
+| `bufferValue` | `number` | `0` | Valor do buffer de 0 a 100 (`buffer`). |
+| `color` | `string` | `''` | Cor da barra (qualquer cor CSS). Padrão visual: `#4f46e5`. |
+| `trackColor` | `string` | `''` | Cor do trilho. Padrão visual: `#e5e7eb`. |
+| `bufferColor` | `string` | `''` | Cor do buffer. Padrão: `color` com 35% de opacidade. |
+| `height` | `string` | `'4px'` | Altura da barra. |
+| `borderRadius` | `string` | `''` | Raio da borda. Padrão: totalmente arredondada. |
+| `animationDuration` | `string` | `''` | Duração do ciclo nos modos indeterminado/query. Padrão visual: `2s`. |
+| `showValue` | `boolean` | `false` | Exibe o percentual ao lado da barra (`determinate` e `buffer`). |
+| `ariaLabel` | `string` | `''` | `aria-label` da barra. |
+| `ariaLabelledBy` | `string` | `''` | `aria-labelledby` da barra. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E com Cypress. |
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-progress-bar-color` | `#4f46e5` | Cor da barra. |
+| `--cao-progress-bar-track-color` | `#e5e7eb` | Cor do trilho. |
+| `--cao-progress-bar-buffer-color` | `color-mix(in srgb, <cor> 35%, transparent)` | Cor do buffer. |
+| `--cao-progress-bar-text-color` | `#374151` | Cor do percentual (`showValue`). |
+| `--cao-progress-bar-radius` | `999px` | Raio da borda. |
+| `--cao-progress-bar-duration` | `2s` | Duração do ciclo da animação. |
+
+**Exemplos:**
+
+```html
+<!-- Determinate com percentual -->
+<cao-progress-bar [value]="progresso" [showValue]="true" ariaLabel="Upload do arquivo"></cao-progress-bar>
+
+<!-- Indeterminate -->
+<cao-progress-bar mode="indeterminate" ariaLabel="Carregando"></cao-progress-bar>
+
+<!-- Buffer -->
+<cao-progress-bar mode="buffer" [value]="30" [bufferValue]="65"></cao-progress-bar>
+
+<!-- Query, cores e altura customizadas -->
+<cao-progress-bar mode="query" color="#16a34a" trackColor="#dcfce7" height="8px"></cao-progress-bar>
+```
+
+**Observações:**
+
+- Usa `role="progressbar"` com `aria-valuemin`, `aria-valuemax` e `aria-valuenow` (omitido nos modos indeterminado e query). Informe `ariaLabel` ou `ariaLabelledBy` para leitores de tela.
+- `value` e `bufferValue` aceitam string (`value="50"`), convertida com `numberAttribute`.
+- Respeita `prefers-reduced-motion`: transições são removidas e a animação indeterminada fica mais lenta.
+- Não possui dependências externas.
+---
+### `CaoProgressSpinnerComponent`
+
+Spinner de progresso circular baseado no `mat-progress-spinner` do Angular Material, **sem depender do Material em runtime** (apenas `@angular/core`; o visual é um SVG). Suporta os modos `determinate` e `indeterminate`, diâmetro, espessura, cores, trilho e percentual central configuráveis.
+
+**Seletor:** `<cao-progress-spinner>`
+
+**Tipos**
+
+| Tipo | Valores |
+| --- | --- |
+| `CaoProgressSpinnerMode` | `'determinate'` \| `'indeterminate'` |
+| `CaoProgressSpinnerLinecap` | `'round'` \| `'butt'` \| `'square'` |
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `mode` | `CaoProgressSpinnerMode` | `'indeterminate'` | Modo de exibição. |
+| `value` | `number` | `0` | Progresso de 0 a 100 (`determinate`). Valores fora do intervalo são limitados. |
+| `diameter` | `number` | `48` | Diâmetro em px (mínimo `8`). |
+| `strokeWidth` | `number` | `0` | Espessura do traço em px. `0` = automático (10% do diâmetro). |
+| `strokeLinecap` | `CaoProgressSpinnerLinecap` | `'round'` | Formato da ponta do traço. |
+| `color` | `string` | `''` | Cor do indicador (qualquer cor CSS). Padrão visual: `#4f46e5`. |
+| `trackColor` | `string` | `''` | Cor do trilho (círculo de fundo). Padrão: transparente. |
+| `animationDuration` | `string` | `''` | Duração de uma volta no modo indeterminado. Padrão visual: `1.4s`. |
+| `showValue` | `boolean` | `false` | Exibe o percentual no centro (`determinate`). |
+| `textColor` | `string` | `''` | Cor do percentual. Padrão visual: `#111827`. |
+| `ariaLabel` | `string` | `''` | `aria-label` do spinner. |
+| `ariaLabelledBy` | `string` | `''` | `aria-labelledby` do spinner. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E com Cypress. |
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-progress-spinner-color` | `#4f46e5` | Cor do indicador. |
+| `--cao-progress-spinner-track-color` | `transparent` | Cor do trilho. |
+| `--cao-progress-spinner-text-color` | `#111827` | Cor do percentual. |
+| `--cao-progress-spinner-duration` | `1.4s` | Duração de uma volta (indeterminado). |
+
+**Exemplos:**
+
+```html
+<!-- Indeterminate -->
+<cao-progress-spinner ariaLabel="Carregando"></cao-progress-spinner>
+
+<!-- Determinate com trilho e percentual -->
+<cao-progress-spinner
+  mode="determinate"
+  [value]="progresso"
+  [diameter]="96"
+  trackColor="#e5e7eb"
+  [showValue]="true"
+  ariaLabel="Progresso do envio">
+</cao-progress-spinner>
+
+<!-- Tamanho, espessura e cor customizados -->
+<cao-progress-spinner [diameter]="24" [strokeWidth]="3" color="#16a34a"></cao-progress-spinner>
+```
+
+**Observações:**
+
+- Usa `role="progressbar"` com `aria-valuemin`, `aria-valuemax` e `aria-valuenow` (omitido no modo indeterminado). Informe `ariaLabel` ou `ariaLabelledBy` para leitores de tela.
+- `value`, `diameter` e `strokeWidth` aceitam string (`diameter="64"`), convertida com `numberAttribute`.
+- O diâmetro padrão é `48` (o Material usa `100`); informe `[diameter]="100"` para o mesmo tamanho.
+- Respeita `prefers-reduced-motion`: transições são removidas e a rotação fica mais lenta.
+- Não possui dependências externas.
 
 ---
 
