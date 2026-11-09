@@ -1,3 +1,10 @@
+## 1.30.0 (2026-11-09)
+
+* Merge pull request #118 from Micael-Macedo/feature(components)/add-progress-popover-component ([15f4c15](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/15f4c15)), closes [#118](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/118)
+* feat: add base popover component ([b03b1c7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/b03b1c7))
+* feat: add progress bar component ([a042865](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a042865))
+* feat: add progress spinner component ([1e57e94](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/1e57e94))
+
 ## 1.29.0 (2026-11-09)
 
 * Merge pull request #117 from Micael-Macedo/feature(components)/breadcrumb-component ([4426c5a](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/4426c5a)), closes [#117](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/117)
