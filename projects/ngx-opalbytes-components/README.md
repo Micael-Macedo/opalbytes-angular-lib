@@ -234,6 +234,7 @@ src/
         └── components/
         |   ├── accordion/
         |   ├── accordion-item/
+        |   ├── avatar/
         |   ├── base-button/
         |   ├── base-icon/
         |   ├── base-input/
