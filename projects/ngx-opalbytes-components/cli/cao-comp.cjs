@@ -185,7 +185,7 @@ import { fn } from 'storybook/test';
 import { CaoBaseButtonComponent } from '../../app/components/base-button/base-button.component';
 
 const meta: Meta<CaoBaseButtonComponent> = {
-  title: 'Components/Base Button',
+  title: 'Componentes/Base Button',
   component: CaoBaseButtonComponent,
   tags: ['autodocs'],
   args: { buttonClick: fn() },
@@ -327,18 +327,18 @@ function setupStorybook(destination, force) {
   if (conflicts.length) {
     process.stderr.write(
       `Erro: os seguintes arquivos ja existem no destino (use --force para sobrescrever):\n` +
-        conflicts.map((c) => `  - ${c}`).join('\n') +
-        '\n'
+      conflicts.map((c) => `  - ${c}`).join('\n') +
+      '\n'
     );
     return 1;
   }
 
   process.stdout.write(
     `Setup de Storybook gerado em "${root}".\n` +
-      `Arquivos criados:\n` +
-      created.map((c) => `  - ${c}`).join('\n') +
-      '\n' +
-      `Leia ${path.join(root, 'STORYBOOK-SETUP.md')} para instalar as dependencias e rodar.\n`
+    `Arquivos criados:\n` +
+    created.map((c) => `  - ${c}`).join('\n') +
+    '\n' +
+    `Leia ${path.join(root, 'STORYBOOK-SETUP.md')} para instalar as dependencias e rodar.\n`
   );
   return 0;
 }
@@ -429,7 +429,7 @@ function main() {
     const available = listComponents(templatesDir).join(', ');
     process.stderr.write(
       `Erro: componente "${component}" nao encontrado.\n` +
-        `Componentes disponiveis: ${available}\n`
+      `Componentes disponiveis: ${available}\n`
     );
     return 1;
   }
@@ -441,8 +441,8 @@ function main() {
   if (conflicts.length) {
     process.stderr.write(
       `Erro: os seguintes arquivos ja existem no destino (use --force para sobrescrever):\n` +
-        conflicts.map((c) => `  - ${c}`).join('\n') +
-        '\n'
+      conflicts.map((c) => `  - ${c}`).join('\n') +
+      '\n'
     );
     return 1;
   }

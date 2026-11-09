@@ -234,11 +234,13 @@ src/
         └── components/
         |   ├── accordion/
         |   ├── accordion-item/
+        |   ├── avatar/
         |   ├── base-button/
         |   ├── base-icon/
         |   ├── base-input/
         |   ├── base-time-range/
         |   ├── base-toggle/
+        |   ├── breadcrumb/
         |   ├── checkbox/
         |   ├── drop-down/
         |   ├── footer/
@@ -931,6 +933,61 @@ Um componente de alternância (toggle switch) que funciona com `ngModel` ou `for
 | `statusChanged` | `EventEmitter<CaoBaseToggleComponent>` | Emitido quando o toggle é alternado. |
 
 ---
+
+### `CaoBreadcrumbComponent`
+ 
+Trilha de navegação (breadcrumb) com ícones Lucide ou imagem, link de navegação, badge e divisor customizável.
+ 
+**Seletor:** `<cao-breadcrumb>`
+ 
+**Interface `ICaoBreadcrumbItem`**
+ 
+| Propriedade | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `label` | `string` | — | Texto do item. |
+| `icon` | `string` | — | Nome do ícone Lucide ou URL/caminho/data URI de imagem. |
+| `isLucideIcon` | `boolean` | `true` | Define se `icon` é Lucide. |
+| `iconPosition` | `'left' \| 'right'` | `'left'` | Direção do ícone em relação ao texto. |
+| `iconColor` / `iconSize` / `iconStrokeWidth` | `string` / `number` / `number` | — / `16` / `1.5` | Aparência do ícone. |
+| `link` | `string \| unknown[]` | — | Navegação interna (`routerLink`). |
+| `queryParams` | `Params` | — | Query params do `link`. |
+| `href` / `target` | `string` / `'_self' \| '_blank' ...` | — | Navegação externa. |
+| `command` | `(e: ICaoBreadcrumbItemClickEvent) => void` | — | Callback de clique (sem `link`/`href` vira `<button>`). |
+| `badge` / `badgeColor` / `badgeBgColor` | `string \| number` / `string` / `string` | — | Badge do item. |
+| `disabled` | `boolean` | `false` | Desabilita o item. |
+| `ariaLabel` / `dataCy` | `string` | — | Acessibilidade e testes E2E. |
+ 
+**Atributos (Inputs)**
+ 
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `items` | `ICaoBreadcrumbItem[]` | `[]` | Itens; o último é a página atual (`aria-current="page"`). |
+| `home` | `ICaoBreadcrumbItem` | `undefined` | Item inicial opcional. |
+| `separator` | `string` | `'/'` | Texto do divisor. |
+| `separatorIcon` | `string` | `''` | Ícone do divisor (sobrepõe `separator`). |
+| `isLucideSeparatorIcon` | `boolean` | `true` | Define se `separatorIcon` é Lucide. |
+| `separatorIconSize` / `separatorIconStrokeWidth` | `number` | `14` / `1.5` | Aparência do ícone divisor. |
+| `linkColor`, `linkHoverColor`, `currentColor`, `separatorColor`, `fontSize`, `gap` | `string` | `''` | Atalhos para as CSS custom properties. |
+| `ariaLabel` | `string` | `'Breadcrumb'` | `aria-label` do `<nav>`. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E. |
+ 
+**Eventos (Outputs):** `itemClick` → `ICaoBreadcrumbItemClickEvent` (`item`, `index`, `originalEvent`).
+ 
+**CSS Custom Properties:** `--cao-breadcrumb-link-color` (`#6b7280`), `--cao-breadcrumb-link-hover-color` (`#4f46e5`), `--cao-breadcrumb-current-color` (`#111827`), `--cao-breadcrumb-separator-color` (`#9ca3af`), `--cao-breadcrumb-disabled-color`, `--cao-breadcrumb-focus-ring`, `--cao-breadcrumb-badge-bg`, `--cao-breadcrumb-badge-text`, `--cao-breadcrumb-gap` (`8px`), `--cao-breadcrumb-font-size` (`0.875rem`).
+ 
+```html
+<cao-breadcrumb
+  [home]="{ icon: 'house', ariaLabel: 'Início', link: '/' }"
+  [items]="[
+    { label: 'Pedidos', icon: 'package', iconPosition: 'right', link: '/pedidos', badge: 12 },
+    { label: 'Pedido #42' }
+  ]"
+  separatorIcon="chevron-right" />
+```
+ 
+> Depende de `BaseIcon` (copie junto ao usar `cao-comp`) e de `@angular/router`.
+
+---
 ### `CaoAccordionComponent` e `CaoAccordionItemComponent`
 
 Um accordion (painéis expansíveis) acessível e totalmente customizável, inspirado na API do `CdkAccordion`, mas **sem depender do `@angular/cdk`, do Angular Material ou de qualquer outra biblioteca externa** — usa apenas `@angular/core` e `@angular/common`. Cores, posições, textos e visibilidade são configuráveis por inputs ou por CSS custom properties. A animação de abrir/fechar é feita só com CSS e respeita `prefers-reduced-motion`.
@@ -1130,7 +1187,110 @@ export class FaqComponent {}
 - Fora de um `<cao-accordion>`, o item se comporta como um cartão expansível independente.
 
 ---
+### `CaoAvatarComponent`
 
+Avatar para representar usuários ou entidades, com imagem, ícone (Lucide ou imagem) ou texto (iniciais). Possui imagem padrão embutida, usada enquanto nenhuma fonte for informada ou quando a imagem falha ao carregar. Tamanho, formato e contorno (stroke) são configuráveis.
+
+**Seletor:** `<cao-avatar>`
+
+**Tipos**
+
+| Tipo | Valores |
+| --- | --- |
+| `CaoAvatarPresetSize` | `'small'` (24px) \| `'normal'` (32px) \| `'large'` (48px) \| `'xlarge'` (64px) |
+| `CaoAvatarShape` | `'circle'` \| `'rounded'` \| `'square'` |
+| `CaoAvatarStrokeStyle` | `'solid'` \| `'dashed'` \| `'dotted'` \| `'double'` |
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `src` | `string \| null \| undefined` | `''` | URL da imagem. Se vazia ou se falhar ao carregar, o avatar usa `icon`, `label` ou a imagem padrão (nessa ordem). |
+| `defaultSrc` | `string` | `''` | Imagem padrão customizada. Se vazia, usa a silhueta embutida (`CAO_AVATAR_DEFAULT_SRC`). |
+| `label` | `string` | `''` | Texto exibido (ex.: iniciais) quando não há imagem nem ícone. |
+| `icon` | `string` | `''` | Nome do ícone Lucide ou caminho/URL de imagem usada como ícone. |
+| `isLucideIcon` | `boolean` | `true` | Define se `icon` é um ícone Lucide. |
+| `iconColor` | `string` | `''` | Cor do ícone Lucide. Se vazia, usa `textColor`. |
+| `size` | `CaoAvatarPresetSize \| number \| string` | `'normal'` | Tamanho predefinido, número em px ou texto (`'72px'`, `'4.5rem'`). Valores inválidos voltam para `'normal'`. |
+| `shape` | `CaoAvatarShape` | `'circle'` | Formato do avatar. |
+| `strokeWidth` | `number \| string` | `0` | Espessura do contorno. Número é convertido para `px`; `0` remove o contorno. |
+| `strokeColor` | `string` | `'#ffffff'` | Cor do contorno. |
+| `strokeStyle` | `CaoAvatarStrokeStyle` | `'solid'` | Estilo do contorno. |
+| `bgColor` | `string` | `''` | Cor de fundo (sobrescreve `--cao-avatar-bg`). |
+| `textColor` | `string` | `''` | Cor do texto/ícone (sobrescreve `--cao-avatar-text`). |
+| `alt` | `string` | `''` | Texto alternativo do avatar. |
+| `ariaLabel` | `string` | `''` | `aria-label` do avatar. Prioridade: `ariaLabel` → `alt` → `label` → `'Avatar'`. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E com Cypress. |
+
+**Ordem de exibição**
+
+1. `src` (se informado e carregado com sucesso);
+2. `icon`;
+3. `label`;
+4. imagem padrão (`defaultSrc` ou a silhueta embutida).
+
+Se o `src` falhar ao carregar (erro 404, URL inválida etc.), o componente passa automaticamente para o próximo item da lista.
+
+**Constantes exportadas**
+
+| Constante | Descrição |
+| --- | --- |
+| `CAO_AVATAR_DEFAULT_SRC` | Data URI da imagem padrão (silhueta em SVG, funciona offline). |
+| `CAO_AVATAR_SIZES` | Mapa dos tamanhos predefinidos em px (`small`, `normal`, `large`, `xlarge`). |
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-avatar-bg` | `#e5e7eb` | Cor de fundo. |
+| `--cao-avatar-text` | `#374151` | Cor do texto/ícone. |
+| `--cao-avatar-radius` | `25%` | Raio da borda no formato `rounded`. |
+
+**Exemplo básico:**
+
+```html
+<!-- Sem src: exibe a imagem padrão -->
+<cao-avatar></cao-avatar>
+
+<!-- Com imagem -->
+<cao-avatar src="https://exemplo.com/foto.png" alt="Foto de Maria" size="large"></cao-avatar>
+
+<!-- Com iniciais -->
+<cao-avatar label="MB" bgColor="#eef2ff" textColor="#4338ca"></cao-avatar>
+
+<!-- Com ícone Lucide -->
+<cao-avatar icon="user" bgColor="#dcfce7" iconColor="#166534"></cao-avatar>
+```
+
+**Exemplo com tamanho, formato e contorno:**
+
+```html
+<cao-avatar src="assets/foto.png" size="xlarge" shape="rounded"></cao-avatar>
+<cao-avatar src="assets/foto.png" [size]="96" shape="square"></cao-avatar>
+<cao-avatar src="assets/foto.png" size="7rem"></cao-avatar>
+
+<cao-avatar
+  src="assets/foto.png"
+  size="xlarge"
+  [strokeWidth]="3"
+  strokeColor="#4f46e5"
+  strokeStyle="dashed">
+</cao-avatar>
+```
+
+**Exemplo com imagem padrão customizada:**
+
+```html
+<cao-avatar [src]="usuario.foto" defaultSrc="assets/avatar-padrao.png"></cao-avatar>
+```
+
+**Observações:**
+
+- Possui `role="img"` com `aria-label`; a imagem interna é decorativa (`alt=""`), evitando leitura duplicada.
+- A imagem padrão é um SVG em data URI e passa por `DomSanitizer.bypassSecurityTrustUrl` (conteúdo controlado pela lib). Data URIs em SVG informadas em `src` **não** recebem esse tratamento e podem ser bloqueadas pelo sanitizador do Angular — use URL, caminho de arquivo ou PNG/JPEG em base64.
+- Para ícones Lucide, registre os ícones usados com `provideLucideIcons` (de `@lucide/angular`).
+- Depende de `BaseIcon` (copie junto ao usar `cao-comp`).
+---
 ### `CaoSlideToggleComponent`
 
 Um switch (slide toggle) acessível e customizável, com suporte a `ngModel` e formulários reativos via `ControlValueAccessor`. O visual é construído com trilho e thumb animados, sem depender do Material em runtime.
