@@ -1,0 +1,27 @@
+<div
+  class="cao-avatar"
+  role="img"
+  [class.cao-avatar--circle]="shape() === 'circle'"
+  [class.cao-avatar--rounded]="shape() === 'rounded'"
+  [class.cao-avatar--square]="shape() === 'square'"
+  [attr.aria-label]="accessibleName()"
+  [attr.data-cy]="dataCy() || null"
+  [style.width.px]="sizePx()"
+  [style.height.px]="sizePx()"
+  [style.border-width]="strokeWidthCss()"
+  [style.border-style]="strokeStyle()"
+  [style.border-color]="strokeColor()"
+  [style.background-color]="bgColor() || null"
+  [style.color]="textColor() || null">
+  @switch (mode()) {
+    @case ('image') {
+      <img class="cao-avatar__image" alt="" aria-hidden="true" [src]="src()" (error)="onImageError()" />
+    }
+    @case ('label') {
+      <span class="cao-avatar__label" [style.font-size.px]="fontSizePx()">{{ label() }}</span>
+    }
+    @default {
+      <img class="cao-avatar__image" alt="" aria-hidden="true" [src]="defaultImage()" />
+    }
+  }
+</div>

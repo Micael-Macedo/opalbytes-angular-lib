@@ -11601,6 +11601,557 @@
             "templateData": "<div class=\"form-field\">\r\n  @if (label) {\r\n    <label [for]=\"dataCy\">{{ label }}</label>\r\n  }\r\n\r\n  <div class=\"rnv-autocomplete-field autocomplete\">\r\n    <div\r\n      #wrapper\r\n      class=\"input-wrapper\"\r\n      [class.has-leading-icon]=\"_leadingIcon\"\r\n      [class.has-trailing-icon]=\"_trailingIcon\"\r\n      [class.focused]=\"isFocused\"\r\n      [class.invalid]=\"control?.touched && control?.invalid\"\r\n      [class.valid]=\"control?.touched && control?.valid && control?.value\">\r\n\r\n      @if (_leadingIcon) {\r\n        @if (isLucideIcon) {\r\n          <div class=\"icon\"\r\n            tabindex=\"0\"\r\n            (click)=\"onLeadingIconClick($event)\"\r\n            (keydown.enter)=\"onLeadingIconClick($event)\">\r\n            <svg [strokeWidth]=\"strokeWidthIcon\" [size]=\"iconSize\" [lucideIcon]=\"_leadingIcon\" [style.color]=\"iconColor\"></svg>\r\n          </div>\r\n        } @else {\r\n          <div class=\"icon\"\r\n            tabindex=\"0\"\r\n            (click)=\"onLeadingIconClick($event)\"\r\n            (keydown.enter)=\"onLeadingIconClick($event)\">\r\n            <img alt=\"ícone de início\" [style.width]=\"iconSize\" [src]=\"_leadingIcon\" />\r\n          </div>\r\n        }\r\n      }\r\n\r\n      <input\r\n        #inputEl\r\n        type=\"text\"\r\n        autocomplete=\"off\"\r\n        role=\"combobox\"\r\n        aria-haspopup=\"listbox\"\r\n        [attr.aria-expanded]=\"isPanelOpen\"\r\n        [attr.aria-controls]=\"isPanelOpen ? listboxId : null\"\r\n        [attr.aria-activedescendant]=\"activeOptionId\"\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"isDisabled\"\r\n        [formControl]=\"internalControl\"\r\n        [attr.data-cy]=\"dataCy\"\r\n        [id]=\"dataCy\"\r\n        (focus)=\"onFocus()\"\r\n        (blur)=\"onBlur()\"\r\n        (input)=\"onUserInput()\"\r\n        (keydown)=\"onInputKeydown($event)\" />\r\n\r\n      @if (_trailingIcon) {\r\n        @if (isLucideIcon) {\r\n          <div\r\n            tabindex=\"0\"\r\n            class=\"icon trailing-icon\"\r\n            (click)=\"onTrailingIconClick($event)\"\r\n            (keydown.enter)=\"onTrailingIconClick($event)\">\r\n            <svg [strokeWidth]=\"strokeWidthIcon\" [size]=\"iconSize\" [lucideIcon]=\"_trailingIcon\" [style.color]=\"iconColor\"></svg>\r\n          </div>\r\n        } @else {\r\n          <div\r\n            tabindex=\"0\"\r\n            class=\"icon trailing-icon\"\r\n            (click)=\"onTrailingIconClick($event)\"\r\n            (keydown.enter)=\"onTrailingIconClick($event)\">\r\n            <img alt=\"ícone de fim\" [style.width]=\"iconSize\"  [src]=\"_trailingIcon\" />\r\n          </div>\r\n        }\r\n      }\r\n    </div>\r\n\r\n    @if (errorText) {\r\n      <span class=\"error-text\">{{ errorText }}</span>\r\n    }\r\n  </div>\r\n</div>\r\n\r\n<ng-template #panel>\r\n  <div\r\n    class=\"autocomplete-panel\"\r\n    cdkScrollable\r\n    role=\"listbox\"\r\n    [id]=\"listboxId\"\r\n    [style.width]=\"'100%'\"\r\n    [style.max-height]=\"'260px'\"\r\n    [style.background]=\"autocompleteBgColor\">\r\n    \r\n    @if (!filteredOptionsList.length) {\r\n      <div class=\"empty-state\">Nenhum resultado encontrado</div>\r\n    }\r\n\r\n    @for (option of filteredOptionsList; track trackByOptionId($index, option)) {\r\n      <div\r\n        class=\"option-item\"\r\n        role=\"option\"\r\n        [id]=\"optionId(option)\"\r\n        [class.active]=\"$index === activeIndex\"\r\n        [class.selected]=\"isOptionSelected(option)\"\r\n        [attr.aria-selected]=\"$index === activeIndex\"\r\n        (mousedown)=\"$event.preventDefault(); selectOption(option)\"\r\n        (mouseenter)=\"activeIndex = $index\">\r\n        <span>{{ option.nome }}</span>\r\n\r\n        <div class=\"option-item-icons\">\r\n          @if (showCheckIcon && isOptionSelected(option)) {\r\n            @if (isLucideCheckIcon) {\r\n              <svg class=\"check-icon\" [strokeWidth]=\"strokeWidthIcon\" [lucideIcon]=\"checkIcon\" [style.color]=\"iconColor\"></svg>\r\n            } @else {\r\n              <span class=\"check-icon\">{{ checkIcon }}</span>\r\n            }\r\n          }\r\n\r\n          @if (optionIcon) {\r\n            @if (isLucideOptionIcon) {\r\n              <svg [strokeWidth]=\"strokeWidthIcon\" [size]=\"iconSize\" [lucideIcon]=\"optionIcon\" [style.color]=\"optionIConColor || iconColor\"></svg>\r\n            } @else {\r\n              <img alt=\"\" [src]=\"optionIcon\" />\r\n            }\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </div>\r\n</ng-template>"
         },
         {
+            "name": "CaoAvatarComponent",
+            "id": "component-CaoAvatarComponent-7799a1b45031e10c26ace7decbd8eeff5c068ecebeca094947ee6e1165d2cb70c4d7bbf348c55e359ffadd43df92bc58a76df8d76b2dbe53865bf19b2bd2e646",
+            "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cao-avatar",
+            "styleUrls": [
+                "./avatar.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./avatar.html"
+            ],
+            "templateVariables": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "alt",
+                    "coverageIgnore": false,
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 45,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "ariaLabel",
+                    "coverageIgnore": false,
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 46,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "bgColor",
+                    "coverageIgnore": false,
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 42,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "dataCy",
+                    "coverageIgnore": false,
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 47,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "defaultSrc",
+                    "coverageIgnore": false,
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Imagem padrão customizada, usada quando nada é informado ou <code>src</code> falha ao carregar.</p>\n",
+                    "line": 24,
+                    "rawdescription": "\nImagem padrão customizada, usada quando nada é informado ou `src` falha ao carregar.",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "icon",
+                    "coverageIgnore": false,
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Nome do ícone Lucide ou imagem usada como ícone.</p>\n",
+                    "line": 28,
+                    "rawdescription": "\nNome do ícone Lucide ou imagem usada como ícone.",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "iconColor",
+                    "coverageIgnore": false,
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 30,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "isLucideIcon",
+                    "coverageIgnore": false,
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 29,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "label",
+                    "coverageIgnore": false,
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Texto exibido (ex.: iniciais) quando não há imagem nem ícone.</p>\n",
+                    "line": 26,
+                    "rawdescription": "\nTexto exibido (ex.: iniciais) quando não há imagem nem ícone.",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "shape",
+                    "coverageIgnore": false,
+                    "defaultValue": "'circle'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "CaoAvatarShape",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Formato do avatar.</p>\n",
+                    "line": 35,
+                    "rawdescription": "\nFormato do avatar.",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "size",
+                    "coverageIgnore": false,
+                    "defaultValue": "'normal'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "CaoAvatarPresetSize | number | string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Tamanho: <code>&#39;small&#39; | &#39;normal&#39; | &#39;large&#39; | &#39;xlarge&#39;</code>, número em px ou string (<code>&#39;72px&#39;</code>, <code>&#39;4.5rem&#39;</code>).</p>\n",
+                    "line": 33,
+                    "rawdescription": "\nTamanho: `'small' | 'normal' | 'large' | 'xlarge'`, número em px ou string (`'72px'`, `'4.5rem'`).",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "src",
+                    "coverageIgnore": false,
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | null | undefined",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>URL da imagem. Se vazia ou inválida, usa ícone, label ou a imagem padrão (nessa ordem).</p>\n",
+                    "line": 22,
+                    "rawdescription": "\nURL da imagem. Se vazia ou inválida, usa ícone, label ou a imagem padrão (nessa ordem).",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "strokeColor",
+                    "coverageIgnore": false,
+                    "defaultValue": "'#ffffff'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 39,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "strokeStyle",
+                    "coverageIgnore": false,
+                    "defaultValue": "'solid'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "CaoAvatarStrokeStyle",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 40,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "strokeWidth",
+                    "coverageIgnore": false,
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number | string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "<p>Espessura do contorno (stroke). Número = px. <code>0</code> remove o contorno.</p>\n",
+                    "line": 38,
+                    "rawdescription": "\nEspessura do contorno (stroke). Número = px. `0` remove o contorno.",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "textColor",
+                    "coverageIgnore": false,
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 43,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "accessibleName",
+                    "coverageIgnore": false,
+                    "defaultValue": "computed<string>(\n    () => this.ariaLabel() || this.alt() || this.label() || 'Avatar',\n  )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 67,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "defaultImage",
+                    "coverageIgnore": false,
+                    "defaultValue": "computed<string | SafeUrl>(() => this.defaultSrc() || this.defaultUrl)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 65,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "defaultUrl",
+                    "coverageIgnore": false,
+                    "defaultValue": "this.sanitizer.bypassSecurityTrustUrl(CAO_AVATAR_DEFAULT_SRC)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "SafeUrl",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                },
+                {
+                    "name": "failedSrc",
+                    "coverageIgnore": false,
+                    "defaultValue": "signal<string | null>(null)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                },
+                {
+                    "name": "fontSizePx",
+                    "coverageIgnore": false,
+                    "defaultValue": "computed<number>(() => Math.round(this.sizePx() * 0.4))",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 50,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "iconSizePx",
+                    "coverageIgnore": false,
+                    "defaultValue": "computed<number>(() => Math.round(this.sizePx() * 0.55))",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 51,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "mode",
+                    "coverageIgnore": false,
+                    "defaultValue": "computed<CaoAvatarMode>(() => {\n    const src = this.src();\n    if (src && this.failedSrc() !== src) {return 'image';}\n    if (this.label()) {return 'label';}\n    return 'default';\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 58,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "sanitizer",
+                    "coverageIgnore": false,
+                    "defaultValue": "inject(DomSanitizer)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                },
+                {
+                    "name": "sizePx",
+                    "coverageIgnore": false,
+                    "defaultValue": "computed<number>(() => this.resolveSize(this.size()))",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 49,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "strokeWidthCss",
+                    "coverageIgnore": false,
+                    "defaultValue": "computed<string>(() => {\n    const width = this.strokeWidth();\n    return typeof width === 'number' ? `${width}px` : width;\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 53,
+                    "rawdescription": "\n",
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onImageError",
+                    "coverageIgnore": false,
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 71,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n",
+                    "description": "",
+                    "modifierKind": [
+                        124
+                    ]
+                },
+                {
+                    "name": "resolveSize",
+                    "coverageIgnore": false,
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "CaoAvatarPresetSize | number | string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "number",
+                    "typeParameters": [],
+                    "line": 75,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "CaoAvatarPresetSize | number | string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "coverageIgnore": false,
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';\nimport { DomSanitizer, SafeUrl } from '@angular/platform-browser';\n\nimport { CAO_AVATAR_DEFAULT_SRC, CAO_AVATAR_SIZES } from './avatar.constants';\nimport { CaoAvatarPresetSize, CaoAvatarShape, CaoAvatarStrokeStyle } from './avatar.model';\n\ntype CaoAvatarMode = 'image'  | 'label' | 'default';\n\n@Component({\n  selector: 'cao-avatar',\n  imports: [],\n  templateUrl: './avatar.html',\n  styleUrl: './avatar.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class CaoAvatarComponent {\n  private readonly sanitizer = inject(DomSanitizer);\n  private readonly defaultUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(CAO_AVATAR_DEFAULT_SRC);\n  private readonly failedSrc = signal<string | null>(null);\n\n  /** URL da imagem. Se vazia ou inválida, usa ícone, label ou a imagem padrão (nessa ordem). */\n  readonly src = input<string | null | undefined>('');\n  /** Imagem padrão customizada, usada quando nada é informado ou `src` falha ao carregar. */\n  readonly defaultSrc = input<string>('');\n  /** Texto exibido (ex.: iniciais) quando não há imagem nem ícone. */\n  readonly label = input<string>('');\n  /** Nome do ícone Lucide ou imagem usada como ícone. */\n  readonly icon = input<string>('');\n  readonly isLucideIcon = input<boolean>(true);\n  readonly iconColor = input<string>('');\n\n  /** Tamanho: `'small' | 'normal' | 'large' | 'xlarge'`, número em px ou string (`'72px'`, `'4.5rem'`). */\n  readonly size = input<CaoAvatarPresetSize | number | string>('normal');\n  /** Formato do avatar. */\n  readonly shape = input<CaoAvatarShape>('circle');\n\n  /** Espessura do contorno (stroke). Número = px. `0` remove o contorno. */\n  readonly strokeWidth = input<number | string>(0);\n  readonly strokeColor = input<string>('#ffffff');\n  readonly strokeStyle = input<CaoAvatarStrokeStyle>('solid');\n\n  readonly bgColor = input<string>('');\n  readonly textColor = input<string>('');\n\n  readonly alt = input<string>('');\n  readonly ariaLabel = input<string>('');\n  readonly dataCy = input<string>('');\n\n  protected readonly sizePx = computed<number>(() => this.resolveSize(this.size()));\n  protected readonly fontSizePx = computed<number>(() => Math.round(this.sizePx() * 0.4));\n  protected readonly iconSizePx = computed<number>(() => Math.round(this.sizePx() * 0.55));\n\n  protected readonly strokeWidthCss = computed<string>(() => {\n    const width = this.strokeWidth();\n    return typeof width === 'number' ? `${width}px` : width;\n  });\n\n  protected readonly mode = computed<CaoAvatarMode>(() => {\n    const src = this.src();\n    if (src && this.failedSrc() !== src) {return 'image';}\n    if (this.label()) {return 'label';}\n    return 'default';\n  });\n\n  protected readonly defaultImage = computed<string | SafeUrl>(() => this.defaultSrc() || this.defaultUrl);\n\n  protected readonly accessibleName = computed<string>(\n    () => this.ariaLabel() || this.alt() || this.label() || 'Avatar',\n  );\n\n  protected onImageError(): void {\n    this.failedSrc.set(this.src() ?? null);\n  }\n\n  private resolveSize(value: CaoAvatarPresetSize | number | string): number {\n    if (typeof value === 'number') {return value > 0 ? value : CAO_AVATAR_SIZES.normal;}\n    if (value in CAO_AVATAR_SIZES) {return CAO_AVATAR_SIZES[value as CaoAvatarPresetSize];}\n\n    const parsed = Number.parseFloat(value);\n    if (Number.isNaN(parsed) || parsed <= 0) {return CAO_AVATAR_SIZES.normal;}\n    return value.trim().endsWith('rem') || value.trim().endsWith('em') ? parsed * 16 : parsed;\n  }\n}",
+            "styleUrl": "./avatar.css",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  display: inline-block;\r\n  line-height: 0;\r\n}\r\n\r\n.cao-avatar {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  box-sizing: border-box;\r\n  flex-shrink: 0;\r\n  overflow: hidden;\r\n  background-color: var(--cao-avatar-bg, #e5e7eb);\r\n  color: var(--cao-avatar-text, #374151);\r\n  font-weight: 600;\r\n  line-height: 1;\r\n  user-select: none;\r\n}\r\n\r\n.cao-avatar--circle {\r\n  border-radius: 50%;\r\n}\r\n\r\n.cao-avatar--rounded {\r\n  border-radius: var(--cao-avatar-radius, 25%);\r\n}\r\n\r\n.cao-avatar--square {\r\n  border-radius: 0;\r\n}\r\n\r\n.cao-avatar__image {\r\n  display: block;\r\n  width: 100%;\r\n  height: 100%;\r\n  object-fit: cover;\r\n}\r\n\r\n.cao-avatar__label {\r\n  max-width: 100%;\r\n  overflow: hidden;\r\n  text-overflow: clip;\r\n  white-space: nowrap;\r\n}",
+                    "styleUrl": "./avatar.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "relationships": {
+                "incoming": [],
+                "outgoing": []
+            },
+            "templateData": "<div\n  class=\"cao-avatar\"\n  role=\"img\"\n  [class.cao-avatar--circle]=\"shape() === 'circle'\"\n  [class.cao-avatar--rounded]=\"shape() === 'rounded'\"\n  [class.cao-avatar--square]=\"shape() === 'square'\"\n  [attr.aria-label]=\"accessibleName()\"\n  [attr.data-cy]=\"dataCy() || null\"\n  [style.width.px]=\"sizePx()\"\n  [style.height.px]=\"sizePx()\"\n  [style.border-width]=\"strokeWidthCss()\"\n  [style.border-style]=\"strokeStyle()\"\n  [style.border-color]=\"strokeColor()\"\n  [style.background-color]=\"bgColor() || null\"\n  [style.color]=\"textColor() || null\">\n  @switch (mode()) {\n    @case ('image') {\n      <img class=\"cao-avatar__image\" alt=\"\" aria-hidden=\"true\" [src]=\"src()\" (error)=\"onImageError()\" />\n    }\n    @case ('label') {\n      <span class=\"cao-avatar__label\" [style.font-size.px]=\"fontSizePx()\">{{ label() }}</span>\n    }\n    @default {\n      <img class=\"cao-avatar__image\" alt=\"\" aria-hidden=\"true\" [src]=\"defaultImage()\" />\n    }\n  }\n</div>"
+        },
+        {
             "name": "CaoBaseButtonComponent",
             "id": "component-CaoBaseButtonComponent-cff881d9ccb4276c18b49756306a404d6790b919744f62099a223dae06604f63a754bab56832d2f9e02a564204a3e543c88721094480f3369a3eacbbb5835dc9",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.component.ts",
@@ -14619,12 +15170,11 @@
         },
         {
             "name": "CaoBreadcrumbComponent",
-            "id": "component-CaoBreadcrumbComponent-992bd38ce5263e39c322713c712ff8ea4bfb23cfbfa18b7647fc01295968d01eab71bc3653826bfaa0d27bceef2d3f50834b14596afe4989b39a76a5ca4b72e3",
+            "id": "component-CaoBreadcrumbComponent-e0428725b31ab9f5382af35c48722c867f7c7d042fd85540c2fb3e538e80b31b311bc37fee57d49a089f8e18e2bf7d31456765482583c8da78e6199a81a46ab2",
             "file": "projects/ngx-opalbytes-components/src/lib/shared/components/breadcrumb/breadcrumb.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
             "entryComponents": [],
-            "host": {},
             "inputs": [],
             "outputs": [],
             "providers": [],
@@ -14650,7 +15200,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 44,
+                    "line": 36,
                     "rawdescription": "\n",
                     "modifierKind": [
                         148
@@ -14667,7 +15217,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 39,
+                    "line": 31,
                     "rawdescription": "\n",
                     "modifierKind": [
                         148
@@ -14684,7 +15234,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 45,
+                    "line": 37,
                     "rawdescription": "\n",
                     "modifierKind": [
                         148
@@ -14701,7 +15251,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 41,
+                    "line": 33,
                     "rawdescription": "\n",
                     "modifierKind": [
                         148
@@ -14718,7 +15268,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 42,
+                    "line": 34,
                     "rawdescription": "\n",
                     "modifierKind": [
                         148
@@ -14735,7 +15285,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Item &quot;home&quot; opcional, sempre exibido como primeiro item.</p>\n",
-                    "line": 27,
+                    "line": 19,
                     "rawdescription": "\nItem \"home\" opcional, sempre exibido como primeiro item.",
                     "modifierKind": [
                         148
@@ -14752,7 +15302,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 33,
+                    "line": 25,
                     "rawdescription": "\n",
                     "modifierKind": [
                         148
@@ -14769,7 +15319,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Itens do breadcrumb. O último item é tratado como página atual.</p>\n",
-                    "line": 25,
+                    "line": 17,
                     "rawdescription": "\nItens do breadcrumb. O último item é tratado como página atual.",
                     "modifierKind": [
                         148
@@ -14786,7 +15336,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 37,
+                    "line": 29,
                     "rawdescription": "\n",
                     "modifierKind": [
                         148
@@ -14803,7 +15353,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 38,
+                    "line": 30,
                     "rawdescription": "\n",
                     "modifierKind": [
                         148
@@ -14820,7 +15370,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Texto do divisor. Padrão: <code>&#39;/&#39;</code>. Ignorado se <code>separatorIcon</code> for informado.</p>\n",
-                    "line": 30,
+                    "line": 22,
                     "rawdescription": "\nTexto do divisor. Padrão: `'/'`. Ignorado se `separatorIcon` for informado.",
                     "modifierKind": [
                         148
@@ -14837,7 +15387,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 40,
+                    "line": 32,
                     "rawdescription": "\n",
                     "modifierKind": [
                         148
@@ -14854,7 +15404,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Ícone do divisor (nome Lucide ou imagem). Tem prioridade sobre <code>separator</code>.</p>\n",
-                    "line": 32,
+                    "line": 24,
                     "rawdescription": "\nÍcone do divisor (nome Lucide ou imagem). Tem prioridade sobre `separator`.",
                     "modifierKind": [
                         148
@@ -14871,7 +15421,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 34,
+                    "line": 26,
                     "rawdescription": "\n",
                     "modifierKind": [
                         148
@@ -14888,7 +15438,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 35,
+                    "line": 27,
                     "rawdescription": "\n",
                     "modifierKind": [
                         148
@@ -14906,7 +15456,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "<p>Emitido ao clicar em qualquer item interativo.</p>\n",
-                    "line": 48,
+                    "line": 40,
                     "rawdescription": "\nEmitido ao clicar em qualquer item interativo.",
                     "modifierKind": [
                         148
@@ -14925,7 +15475,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 50,
+                    "line": 42,
                     "rawdescription": "\n",
                     "modifierKind": [
                         124,
@@ -14934,6 +15484,44 @@
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "hasLink",
+                    "coverageIgnore": false,
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "ICaoBreadcrumbItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 51,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n",
+                    "description": "",
+                    "modifierKind": [
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "ICaoBreadcrumbItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
                 {
                     "name": "iconPosition",
                     "coverageIgnore": false,
@@ -14950,7 +15538,7 @@
                     "optional": false,
                     "returnType": "\"left\" | \"right\"",
                     "typeParameters": [],
-                    "line": 69,
+                    "line": 65,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n",
@@ -14996,7 +15584,7 @@
                     "optional": false,
                     "returnType": "boolean",
                     "typeParameters": [],
-                    "line": 55,
+                    "line": 47,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n",
@@ -15045,7 +15633,7 @@
                     "optional": false,
                     "returnType": "boolean",
                     "typeParameters": [],
-                    "line": 73,
+                    "line": 69,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n",
@@ -15099,7 +15687,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 59,
+                    "line": 55,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n",
@@ -15164,12 +15752,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\nimport { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';\nimport { RouterLink } from '@angular/router';\n\nimport { ICaoBreadcrumbItem, ICaoBreadcrumbItemClickEvent } from './breadcrumb.model';\nimport { CaoBaseIcon } from '../base-icon/base-icon';\n\n@Component({\n  selector: 'cao-breadcrumb',\n  imports: [NgTemplateOutlet, RouterLink, CaoBaseIcon],\n  templateUrl: './breadcrumb.html',\n  styleUrl: './breadcrumb.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  host: {\n    '[style.--cao-breadcrumb-link-color]': 'linkColor() || null',\n    '[style.--cao-breadcrumb-link-hover-color]': 'linkHoverColor() || null',\n    '[style.--cao-breadcrumb-current-color]': 'currentColor() || null',\n    '[style.--cao-breadcrumb-separator-color]': 'separatorColor() || null',\n    '[style.--cao-breadcrumb-font-size]': 'fontSize() || null',\n    '[style.--cao-breadcrumb-gap]': 'gap() || null',\n  },\n})\nexport class CaoBreadcrumbComponent {\n  /** Itens do breadcrumb. O último item é tratado como página atual. */\n  readonly items = input<ICaoBreadcrumbItem[]>([]);\n  /** Item \"home\" opcional, sempre exibido como primeiro item. */\n  readonly home = input<ICaoBreadcrumbItem | undefined>(undefined);\n\n  /** Texto do divisor. Padrão: `'/'`. Ignorado se `separatorIcon` for informado. */\n  readonly separator = input<string>('/');\n  /** Ícone do divisor (nome Lucide ou imagem). Tem prioridade sobre `separator`. */\n  readonly separatorIcon = input<string>('');\n  readonly isLucideSeparatorIcon = input<boolean>(true);\n  readonly separatorIconSize = input<number>(14);\n  readonly separatorIconStrokeWidth = input<number>(1.5);\n\n  readonly linkColor = input<string>('');\n  readonly linkHoverColor = input<string>('');\n  readonly currentColor = input<string>('');\n  readonly separatorColor = input<string>('');\n  readonly fontSize = input<string>('');\n  readonly gap = input<string>('');\n\n  readonly ariaLabel = input<string>('Breadcrumb');\n  readonly dataCy = input<string>('');\n\n  /** Emitido ao clicar em qualquer item interativo. */\n  readonly itemClick = output<ICaoBreadcrumbItemClickEvent>();\n\n  protected readonly allItems = computed<ICaoBreadcrumbItem[]>(() => {\n    const home = this.home();\n    return home ? [home, ...this.items()] : this.items();\n  });\n\n  protected isInteractive(item: ICaoBreadcrumbItem, isLast: boolean): boolean {\n    return !isLast && !item.disabled && (item.link != null || !!item.href || !!item.command);\n  }\n\n  protected onItemClick(item: ICaoBreadcrumbItem, index: number, event: Event): void {\n    if (item.disabled) {\n      event.preventDefault();\n      return;\n    }\n    const payload: ICaoBreadcrumbItemClickEvent = { item, index, originalEvent: event };\n    item.command?.(payload);\n    this.itemClick.emit(payload);\n  }\n\n  protected iconPosition(item: ICaoBreadcrumbItem): 'left' | 'right' {\n    return item.iconPosition ?? 'left';\n  }\n\n  protected isLucide(item: ICaoBreadcrumbItem): boolean {\n    return item.isLucideIcon ?? true;\n  }\n}",
+            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\nimport { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';\nimport { RouterLink } from '@angular/router';\n\nimport { ICaoBreadcrumbItem, ICaoBreadcrumbItemClickEvent } from './breadcrumb.model';\nimport { CaoBaseIcon } from '../base-icon/base-icon';\n\n@Component({\n  selector: 'cao-breadcrumb',\n  imports: [NgTemplateOutlet, RouterLink, CaoBaseIcon],\n  templateUrl: './breadcrumb.html',\n  styleUrl: './breadcrumb.css',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class CaoBreadcrumbComponent {\n  /** Itens do breadcrumb. O último item é tratado como página atual. */\n  readonly items = input<ICaoBreadcrumbItem[]>([]);\n  /** Item \"home\" opcional, sempre exibido como primeiro item. */\n  readonly home = input<ICaoBreadcrumbItem | undefined>(undefined);\n\n  /** Texto do divisor. Padrão: `'/'`. Ignorado se `separatorIcon` for informado. */\n  readonly separator = input<string>('/');\n  /** Ícone do divisor (nome Lucide ou imagem). Tem prioridade sobre `separator`. */\n  readonly separatorIcon = input<string>('');\n  readonly isLucideSeparatorIcon = input<boolean>(true);\n  readonly separatorIconSize = input<number>(14);\n  readonly separatorIconStrokeWidth = input<number>(1.5);\n\n  readonly linkColor = input<string>('');\n  readonly linkHoverColor = input<string>('');\n  readonly currentColor = input<string>('');\n  readonly separatorColor = input<string>('');\n  readonly fontSize = input<string>('');\n  readonly gap = input<string>('');\n\n  readonly ariaLabel = input<string>('Breadcrumb');\n  readonly dataCy = input<string>('');\n\n  /** Emitido ao clicar em qualquer item interativo. */\n  readonly itemClick = output<ICaoBreadcrumbItemClickEvent>();\n\n  protected readonly allItems = computed<ICaoBreadcrumbItem[]>(() => {\n    const home = this.home();\n    return home ? [home, ...this.items()] : this.items();\n  });\n\n  protected isInteractive(item: ICaoBreadcrumbItem, isLast: boolean): boolean {\n    return !isLast && !item.disabled && (this.hasLink(item) || !!item.href || !!item.command);\n  }\n\n  protected hasLink(item: ICaoBreadcrumbItem): boolean {\n    return item.link !== undefined && item.link !== null;\n  }\n\n  protected onItemClick(item: ICaoBreadcrumbItem, index: number, event: Event): void {\n    if (item.disabled) {\n      event.preventDefault();\n      return;\n    }\n    const payload: ICaoBreadcrumbItemClickEvent = { item, index, originalEvent: event };\n    item.command?.(payload);\n    this.itemClick.emit(payload);\n  }\n\n  protected iconPosition(item: ICaoBreadcrumbItem): 'left' | 'right' {\n    return item.iconPosition ?? 'left';\n  }\n\n  protected isLucide(item: ICaoBreadcrumbItem): boolean {\n    return item.isLucideIcon ?? true;\n  }\n}",
             "styleUrl": "./breadcrumb.css",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n  --_link: var(--cao-breadcrumb-link-color, #6b7280);\r\n  --_link-hover: var(--cao-breadcrumb-link-hover-color, #4f46e5);\r\n  --_current: var(--cao-breadcrumb-current-color, #111827);\r\n  --_separator: var(--cao-breadcrumb-separator-color, #9ca3af);\r\n  --_disabled: var(--cao-breadcrumb-disabled-color, #d1d5db);\r\n  --_focus: var(--cao-breadcrumb-focus-ring, rgba(79, 70, 229, 0.35));\r\n  --_badge-bg: var(--cao-breadcrumb-badge-bg, #eef2ff);\r\n  --_badge-text: var(--cao-breadcrumb-badge-text, #4338ca);\r\n  --_gap: var(--cao-breadcrumb-gap, 8px);\r\n  --_size: var(--cao-breadcrumb-font-size, 0.875rem);\r\n\r\n  display: block;\r\n}\r\n\r\n.cao-breadcrumb__list {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  gap: var(--_gap);\r\n  margin: 0;\r\n  padding: 0;\r\n  list-style: none;\r\n  font-size: var(--_size);\r\n  line-height: 1.25;\r\n}\r\n\r\n.cao-breadcrumb__item,\r\n.cao-breadcrumb__separator {\r\n  display: inline-flex;\r\n  align-items: center;\r\n}\r\n\r\n.cao-breadcrumb__separator {\r\n  color: var(--_separator);\r\n  user-select: none;\r\n}\r\n\r\n.cao-breadcrumb__action,\r\n.cao-breadcrumb__text {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 6px;\r\n  padding: 2px 4px;\r\n  border: 0;\r\n  border-radius: 4px;\r\n  background: none;\r\n  color: var(--_link);\r\n  font: inherit;\r\n  text-decoration: none;\r\n}\r\n\r\n.cao-breadcrumb__action {\r\n  cursor: pointer;\r\n  transition: color 150ms ease;\r\n}\r\n\r\n.cao-breadcrumb__action:hover {\r\n  color: var(--_link-hover);\r\n  text-decoration: underline;\r\n  text-underline-offset: 3px;\r\n}\r\n\r\n.cao-breadcrumb__action:focus-visible {\r\n  outline: 2px solid var(--_focus);\r\n  outline-offset: 1px;\r\n}\r\n\r\n.cao-breadcrumb__item--current .cao-breadcrumb__text {\r\n  color: var(--_current);\r\n  font-weight: 600;\r\n}\r\n\r\n.cao-breadcrumb__item--disabled .cao-breadcrumb__text {\r\n  color: var(--_disabled);\r\n  cursor: not-allowed;\r\n}\r\n\r\n.cao-breadcrumb__icon {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  line-height: 0;\r\n}\r\n\r\n.cao-breadcrumb__badge {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  min-width: 18px;\r\n  padding: 1px 6px;\r\n  border-radius: 999px;\r\n  background: var(--_badge-bg);\r\n  color: var(--_badge-text);\r\n  font-size: 0.75em;\r\n  font-weight: 600;\r\n  line-height: 1.4;\r\n}\r\n\r\n@media (prefers-reduced-motion: reduce) {\r\n  .cao-breadcrumb__action {\r\n    transition: none;\r\n  }\r\n}",
+                    "data": ":host {\r\n  display: block;\r\n}\r\n\r\n.cao-breadcrumb {\r\n  --_link: var(--cao-breadcrumb-link-color, #6b7280);\r\n  --_link-hover: var(--cao-breadcrumb-link-hover-color, #4f46e5);\r\n  --_current: var(--cao-breadcrumb-current-color, #111827);\r\n  --_separator: var(--cao-breadcrumb-separator-color, #9ca3af);\r\n  --_disabled: var(--cao-breadcrumb-disabled-color, #d1d5db);\r\n  --_focus: var(--cao-breadcrumb-focus-ring, rgba(79, 70, 229, 0.35));\r\n  --_badge-bg: var(--cao-breadcrumb-badge-bg, #eef2ff);\r\n  --_badge-text: var(--cao-breadcrumb-badge-text, #4338ca);\r\n  --_gap: var(--cao-breadcrumb-gap, 8px);\r\n  --_size: var(--cao-breadcrumb-font-size, 0.875rem);\r\n}\r\n\r\n.cao-breadcrumb__list {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  gap: var(--_gap);\r\n  margin: 0;\r\n  padding: 0;\r\n  list-style: none;\r\n  font-size: var(--_size);\r\n  line-height: 1.25;\r\n}\r\n\r\n.cao-breadcrumb__item,\r\n.cao-breadcrumb__separator {\r\n  display: inline-flex;\r\n  align-items: center;\r\n}\r\n\r\n.cao-breadcrumb__separator {\r\n  color: var(--_separator);\r\n  user-select: none;\r\n}\r\n\r\n.cao-breadcrumb__action,\r\n.cao-breadcrumb__text {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  gap: 6px;\r\n  padding: 2px 4px;\r\n  border: 0;\r\n  border-radius: 4px;\r\n  background: none;\r\n  color: var(--_link);\r\n  font: inherit;\r\n  text-decoration: none;\r\n}\r\n\r\n.cao-breadcrumb__action {\r\n  cursor: pointer;\r\n  transition: color 150ms ease;\r\n}\r\n\r\n.cao-breadcrumb__action:hover {\r\n  color: var(--_link-hover);\r\n  text-decoration: underline;\r\n  text-underline-offset: 3px;\r\n}\r\n\r\n.cao-breadcrumb__action:focus-visible {\r\n  outline: 2px solid var(--_focus);\r\n  outline-offset: 1px;\r\n}\r\n\r\n.cao-breadcrumb__item--current .cao-breadcrumb__text {\r\n  color: var(--_current);\r\n  font-weight: 600;\r\n}\r\n\r\n.cao-breadcrumb__item--disabled .cao-breadcrumb__text {\r\n  color: var(--_disabled);\r\n  cursor: not-allowed;\r\n}\r\n\r\n.cao-breadcrumb__icon {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  line-height: 0;\r\n}\r\n\r\n.cao-breadcrumb__badge {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  min-width: 18px;\r\n  padding: 1px 6px;\r\n  border-radius: 999px;\r\n  background: var(--_badge-bg);\r\n  color: var(--_badge-text);\r\n  font-size: 0.75em;\r\n  font-weight: 600;\r\n  line-height: 1.4;\r\n}\r\n\r\n@media (prefers-reduced-motion: reduce) {\r\n  .cao-breadcrumb__action {\r\n    transition: none;\r\n  }\r\n}",
                     "styleUrl": "./breadcrumb.css"
                 }
             ],
@@ -15192,7 +15780,7 @@
                     }
                 ]
             },
-            "templateData": "<ng-template #content let-item let-index=\"index\">\n  @if (item.icon && iconPosition(item) === 'left') {\n    <ng-container *ngTemplateOutlet=\"icon; context: { $implicit: item }\" />\n  }\n  @if (item.label) {\n    <span class=\"cao-breadcrumb__label\">{{ item.label }}</span>\n  }\n  @if (item.icon && iconPosition(item) === 'right') {\n    <ng-container *ngTemplateOutlet=\"icon; context: { $implicit: item }\" />\n  }\n  @if (item.badge !== undefined && item.badge !== null && item.badge !== '') {\n    <span\n      class=\"cao-breadcrumb__badge\"\n      [style.color]=\"item.badgeColor || null\"\n      [style.background-color]=\"item.badgeBgColor || null\"\n      [attr.data-cy]=\"item.dataCy ? item.dataCy + '-badge' : null\">\n      {{ item.badge }}\n    </span>\n  }\n</ng-template>\n\n<ng-template #icon let-item>\n  <span class=\"cao-breadcrumb__icon\" aria-hidden=\"true\">\n    <cao-base-icon\n      [imgSource]=\"item.icon\"\n      [isLucideIcon]=\"isLucide(item)\"\n      [iconColor]=\"item.iconColor ?? ''\"\n      [strokeWidthIcon]=\"item.iconStrokeWidth ?? 1.5\"\n      [size]=\"item.iconSize ?? 16\" />\n  </span>\n</ng-template>\n\n@if (allItems().length) {\n  <nav class=\"cao-breadcrumb\" [attr.aria-label]=\"ariaLabel()\" [attr.data-cy]=\"dataCy() || null\">\n    <ol class=\"cao-breadcrumb__list\">\n      @for (item of allItems(); track $index; let i = $index; let last = $last) {\n        <li\n          class=\"cao-breadcrumb__item\"\n          [class.cao-breadcrumb__item--current]=\"last\"\n          [class.cao-breadcrumb__item--disabled]=\"item.disabled\"\n          [attr.data-cy]=\"item.dataCy || null\">\n          @if (isInteractive(item, last)) {\n            @if (item.link != null) {\n              <a\n                class=\"cao-breadcrumb__action\"\n                [routerLink]=\"item.link\"\n                [queryParams]=\"item.queryParams\"\n                [target]=\"item.target ?? '_self'\"\n                [attr.aria-label]=\"item.ariaLabel || null\"\n                (click)=\"onItemClick(item, i, $event)\">\n                <ng-container *ngTemplateOutlet=\"content; context: { $implicit: item, index: i }\" />\n              </a>\n            } @else if (item.href) {\n              <a\n                class=\"cao-breadcrumb__action\"\n                [attr.href]=\"item.href\"\n                [attr.target]=\"item.target || null\"\n                [attr.rel]=\"item.target === '_blank' ? 'noopener noreferrer' : null\"\n                [attr.aria-label]=\"item.ariaLabel || null\"\n                (click)=\"onItemClick(item, i, $event)\">\n                <ng-container *ngTemplateOutlet=\"content; context: { $implicit: item, index: i }\" />\n              </a>\n            } @else {\n              <button\n                type=\"button\"\n                class=\"cao-breadcrumb__action\"\n                [attr.aria-label]=\"item.ariaLabel || null\"\n                (click)=\"onItemClick(item, i, $event)\">\n                <ng-container *ngTemplateOutlet=\"content; context: { $implicit: item, index: i }\" />\n              </button>\n            }\n          } @else {\n            <span\n              class=\"cao-breadcrumb__text\"\n              [attr.aria-current]=\"last ? 'page' : null\"\n              [attr.aria-disabled]=\"item.disabled ? 'true' : null\"\n              [attr.aria-label]=\"item.ariaLabel || null\">\n              <ng-container *ngTemplateOutlet=\"content; context: { $implicit: item, index: i }\" />\n            </span>\n          }\n        </li>\n\n        @if (!last) {\n          <li class=\"cao-breadcrumb__separator\" role=\"presentation\" aria-hidden=\"true\">\n            @if (separatorIcon()) {\n              <cao-base-icon\n                [imgSource]=\"separatorIcon()\"\n                [isLucideIcon]=\"isLucideSeparatorIcon()\"\n                [strokeWidthIcon]=\"separatorIconStrokeWidth()\"\n                [size]=\"separatorIconSize()\" />\n            } @else {\n              {{ separator() }}\n            }\n          </li>\n        }\n      }\n    </ol>\n  </nav>\n}"
+            "templateData": "<ng-template #content let-item let-index=\"index\">\n  @if (item.icon && iconPosition(item) === 'left') {\n    <ng-container *ngTemplateOutlet=\"icon; context: { $implicit: item }\" />\n  }\n  @if (item.label) {\n    <span class=\"cao-breadcrumb__label\">{{ item.label }}</span>\n  }\n  @if (item.icon && iconPosition(item) === 'right') {\n    <ng-container *ngTemplateOutlet=\"icon; context: { $implicit: item }\" />\n  }\n  @if (item.badge !== undefined && item.badge !== null && item.badge !== '') {\n    <span\n      class=\"cao-breadcrumb__badge\"\n      [style.color]=\"item.badgeColor || null\"\n      [style.background-color]=\"item.badgeBgColor || null\"\n      [attr.data-cy]=\"item.dataCy ? item.dataCy + '-badge' : null\">\n      {{ item.badge }}\n    </span>\n  }\n</ng-template>\n\n<ng-template #icon let-item>\n  <span class=\"cao-breadcrumb__icon\" aria-hidden=\"true\">\n    <cao-base-icon\n      [imgSource]=\"item.icon\"\n      [isLucideIcon]=\"isLucide(item)\"\n      [iconColor]=\"item.iconColor ?? ''\"\n      [strokeWidthIcon]=\"item.iconStrokeWidth ?? 1.5\"\n      [size]=\"item.iconSize ?? 16\" />\n  </span>\n</ng-template>\n\n@if (allItems().length) {\n  <nav\n    class=\"cao-breadcrumb\"\n    [attr.aria-label]=\"ariaLabel()\"\n    [attr.data-cy]=\"dataCy() || null\"\n    [style.--cao-breadcrumb-link-color]=\"linkColor() || null\"\n    [style.--cao-breadcrumb-link-hover-color]=\"linkHoverColor() || null\"\n    [style.--cao-breadcrumb-current-color]=\"currentColor() || null\"\n    [style.--cao-breadcrumb-separator-color]=\"separatorColor() || null\"\n    [style.--cao-breadcrumb-font-size]=\"fontSize() || null\"\n    [style.--cao-breadcrumb-gap]=\"gap() || null\">\n    <ol class=\"cao-breadcrumb__list\">\n      @for (item of allItems(); track $index; let i = $index; let last = $last) {\n        <li\n          class=\"cao-breadcrumb__item\"\n          [class.cao-breadcrumb__item--current]=\"last\"\n          [class.cao-breadcrumb__item--disabled]=\"item.disabled\"\n          [attr.data-cy]=\"item.dataCy || null\">\n          @if (isInteractive(item, last)) {\n            @if (hasLink(item)) {\n              <a\n                class=\"cao-breadcrumb__action\"\n                [routerLink]=\"item.link\"\n                [queryParams]=\"item.queryParams\"\n                [target]=\"item.target ?? '_self'\"\n                [attr.aria-label]=\"item.ariaLabel || null\"\n                (click)=\"onItemClick(item, i, $event)\">\n                <ng-container *ngTemplateOutlet=\"content; context: { $implicit: item, index: i }\" />\n              </a>\n            } @else if (item.href) {\n              <a\n                class=\"cao-breadcrumb__action\"\n                [attr.href]=\"item.href\"\n                [attr.target]=\"item.target || null\"\n                [attr.rel]=\"item.target === '_blank' ? 'noopener noreferrer' : null\"\n                [attr.aria-label]=\"item.ariaLabel || null\"\n                (click)=\"onItemClick(item, i, $event)\">\n                <ng-container *ngTemplateOutlet=\"content; context: { $implicit: item, index: i }\" />\n              </a>\n            } @else {\n              <button\n                type=\"button\"\n                class=\"cao-breadcrumb__action\"\n                [attr.aria-label]=\"item.ariaLabel || null\"\n                (click)=\"onItemClick(item, i, $event)\">\n                <ng-container *ngTemplateOutlet=\"content; context: { $implicit: item, index: i }\" />\n              </button>\n            }\n          } @else {\n            <span\n              class=\"cao-breadcrumb__text\"\n              [attr.aria-current]=\"last ? 'page' : null\"\n              [attr.aria-disabled]=\"item.disabled ? 'true' : null\"\n              [attr.aria-label]=\"item.ariaLabel || null\">\n              <ng-container *ngTemplateOutlet=\"content; context: { $implicit: item, index: i }\" />\n            </span>\n          }\n        </li>\n\n        @if (!last) {\n          <li class=\"cao-breadcrumb__separator\" role=\"presentation\" aria-hidden=\"true\">\n            @if (separatorIcon()) {\n              <cao-base-icon\n                [imgSource]=\"separatorIcon()\"\n                [isLucideIcon]=\"isLucideSeparatorIcon()\"\n                [strokeWidthIcon]=\"separatorIconStrokeWidth()\"\n                [size]=\"separatorIconSize()\" />\n            } @else {\n              {{ separator() }}\n            }\n          </li>\n        }\n      }\n    </ol>\n  </nav>\n}"
         },
         {
             "name": "CaoCardComponent",
@@ -24799,7 +25387,18 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "ICaoBreadcrumbItem[]",
-                "defaultValue": "[\r\n  { label: 'Início', link: '/' },\r\n  { label: 'Clientes', link: '/clientes' },\r\n  { label: 'Maria Souza' },\r\n]"
+                "defaultValue": "[\r\n    { label: 'Início', link: '/' },\r\n    { label: 'Clientes', link: '/clientes' },\r\n    { label: 'Maria Souza' },\r\n]"
+            },
+            {
+                "name": "BrokenImageFallsBack",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ args: { src: 'https://invalid.example/nao-existe.png' } }"
             },
             {
                 "name": "CAO_ACCORDION",
@@ -24811,6 +25410,32 @@
                 "deprecationMessage": "",
                 "type": "unknown",
                 "defaultValue": "new InjectionToken<ICaoAccordionHost>('CAO_ACCORDION')"
+            },
+            {
+                "name": "CAO_AVATAR_DEFAULT_SRC",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.constants.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "`data:image/svg+xml;utf8,${encodeURIComponent(DEFAULT_AVATAR_SVG)}`",
+                "rawdescription": "Imagem padrão (silhueta) usada quando nenhuma fonte é informada ou a imagem falha ao carregar.",
+                "description": "<p>Imagem padrão (silhueta) usada quando nenhuma fonte é informada ou a imagem falha ao carregar.</p>\n"
+            },
+            {
+                "name": "CAO_AVATAR_SIZES",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.constants.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "{\r\n  small: 24,\r\n  normal: 32,\r\n  large: 48,\r\n  xlarge: 64,\r\n} as const",
+                "rawdescription": "Tamanhos predefinidos, em px.",
+                "description": "<p>Tamanhos predefinidos, em px.</p>\n"
             },
             {
                 "name": "cardBadge",
@@ -24893,23 +25518,23 @@
                 "name": "ComAmbosIcones",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-input/base-input.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Valor monetário',\r\n    type: 'text',\r\n    leadingIcon: 'DollarSign',\r\n    trailingIcon: 'X',\r\n    isLucideIcon: true,\r\n  },\r\n}"
-            },
-            {
-                "name": "ComAmbosIcones",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    buttonText: 'Enviar',\r\n    leadingIcon: 'Send',\r\n    trailingIcon: 'ArrowRight',\r\n    isLucideIcon: true,\r\n    iconColor: '#f97316',\r\n  },\r\n}"
+            },
+            {
+                "name": "ComAmbosIcones",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-input/base-input.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Valor monetário',\r\n    type: 'text',\r\n    leadingIcon: 'DollarSign',\r\n    trailingIcon: 'X',\r\n    isLucideIcon: true,\r\n  },\r\n}"
             },
             {
                 "name": "ComAmbosIcones",
@@ -25113,6 +25738,17 @@
                 "name": "ComLeadingIcon",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    buttonText: 'Salvar',\r\n    leadingIcon: 'Save',\r\n    isLucideIcon: true,\r\n  },\r\n}"
+            },
+            {
+                "name": "ComLeadingIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-input/base-input.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -25130,17 +25766,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Selecione uma data',\r\n    leadingIcon: 'Calendar',\r\n    isLucideIcon: true,\r\n    iconColor: '#3b82f6',\r\n  },\r\n}"
-            },
-            {
-                "name": "ComLeadingIcon",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    buttonText: 'Salvar',\r\n    leadingIcon: 'Save',\r\n    isLucideIcon: true,\r\n  },\r\n}"
             },
             {
                 "name": "ComLeadingIcon",
@@ -25289,6 +25914,17 @@
                 "name": "ComTrailingIcon",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    buttonText: 'Próximo',\r\n    trailingIcon: 'ArrowRight',\r\n    isLucideIcon: true,\r\n  },\r\n}"
+            },
+            {
+                "name": "ComTrailingIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-input/base-input.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -25306,17 +25942,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Selecione uma data',\r\n    trailingIcon: 'X',\r\n    isLucideIcon: true,\r\n  },\r\n}"
-            },
-            {
-                "name": "ComTrailingIcon",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    buttonText: 'Próximo',\r\n    trailingIcon: 'ArrowRight',\r\n    isLucideIcon: true,\r\n  },\r\n}"
             },
             {
                 "name": "ComTrailingIcon",
@@ -25429,6 +26054,17 @@
                 "defaultValue": "{\r\n  args: {\r\n    colorText: '#374151',\r\n    colorActive: '#dc2626',\r\n    colorHoverBg: '#fee2e2',\r\n    colorInkBar: '#dc2626',\r\n    colorHeaderBorder: '#f3f4f6',\r\n  },\r\n  render: () => renderTabs(defaultPanels),\r\n}"
             },
             {
+                "name": "CustomDefaultImage",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ args: { defaultSrc: 'https://i.pravatar.cc/200?img=47' } }"
+            },
+            {
                 "name": "CustomTextSeparator",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -25451,6 +26087,17 @@
                 "defaultValue": "{}"
             },
             {
+                "name": "DEFAULT_AVATAR_SVG",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.constants.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "unknown",
+                "defaultValue": "'<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\">' +\r\n  '<rect width=\"64\" height=\"64\" fill=\"#e5e7eb\"/>' +\r\n  '<circle cx=\"32\" cy=\"25\" r=\"11\" fill=\"#9ca3af\"/>' +\r\n  '<path d=\"M10 64c0-13 10-22 22-22s22 9 22 22z\" fill=\"#9ca3af\"/>' +\r\n  '</svg>'"
+            },
+            {
                 "name": "DEFAULT_ERROR_STATE_MATCHER",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -25460,6 +26107,17 @@
                 "deprecationMessage": "",
                 "type": "unknown",
                 "defaultValue": "new ErrorStateMatcher()"
+            },
+            {
+                "name": "DefaultImage",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
             },
             {
                 "name": "defaultKpi",
@@ -25531,6 +26189,17 @@
                 "name": "Desabilitado",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    buttonText: 'Desabilitado',\r\n    isDisabled: true,\r\n  },\r\n}"
+            },
+            {
+                "name": "Desabilitado",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-input/base-input.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -25553,12 +26222,12 @@
                 "name": "Desabilitado",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/checkbox/checkbox.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    isDisabled: true,\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Selecione uma data',\r\n    isDisabled: true,\r\n    value: new Date(2026, 0, 15),\r\n  },\r\n}"
             },
             {
                 "name": "Desabilitado",
@@ -25575,23 +26244,12 @@
                 "name": "Desabilitado",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/checkbox/checkbox.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Selecione uma data',\r\n    isDisabled: true,\r\n    value: new Date(2026, 0, 15),\r\n  },\r\n}"
-            },
-            {
-                "name": "Desabilitado",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    buttonText: 'Desabilitado',\r\n    isDisabled: true,\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    isDisabled: true,\r\n  },\r\n}"
             },
             {
                 "name": "Desabilitado",
@@ -25641,23 +26299,23 @@
                 "name": "Desabilitado",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: { label: 'Bloqueada', isDisabled: true },\r\n}"
-            },
-            {
-                "name": "Desabilitado",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    isDisabled: true,\r\n  },\r\n}"
+            },
+            {
+                "name": "Desabilitado",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: { label: 'Bloqueada', isDisabled: true },\r\n}"
             },
             {
                 "name": "DesabilitadoAtivado",
@@ -25734,7 +26392,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    items: [\r\n      { label: 'Docs', href: 'https://angular.dev', target: '_blank' },\r\n      { label: 'Ação customizada', command: () => alert('command executado') },\r\n      { label: 'Desabilitado', link: '/x', disabled: true },\r\n      { label: 'Atual' },\r\n    ],\r\n  },\r\n}"
+                "defaultValue": "{\r\n    args: {\r\n        items: [\r\n            { label: 'Docs', href: 'https://angular.dev', target: '_blank' },\r\n            { label: 'Ação customizada', command: () => console.warn('command executado') },\r\n            { label: 'Desabilitado', link: '/x', disabled: true },\r\n            { label: 'Atual' },\r\n        ],\r\n    },\r\n}"
             },
             {
                 "name": "Fixo",
@@ -25954,7 +26612,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: { separatorIcon: 'chevron-right', isLucideSeparatorIcon: true, separatorColor: '#6b7280' },\r\n}"
+                "defaultValue": "{\r\n    args: { separatorIcon: 'chevron-right', isLucideSeparatorIcon: true, separatorColor: '#6b7280' },\r\n}"
             },
             {
                 "name": "IconsLeftAndRight",
@@ -25965,7 +26623,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    items: [\r\n      { label: 'Empresa', icon: 'building-2', iconPosition: 'left', link: '/empresa' },\r\n      { label: 'Projetos', icon: 'folder', iconPosition: 'right', link: '/projetos' },\r\n      { label: 'Perfil', icon: 'user', iconPosition: 'left' },\r\n    ],\r\n  },\r\n}"
+                "defaultValue": "{\r\n    args: {\r\n        items: [\r\n            { label: 'Empresa', icon: 'building-2', iconPosition: 'left', link: '/empresa' },\r\n            { label: 'Projetos', icon: 'folder', iconPosition: 'right', link: '/projetos' },\r\n            { label: 'Perfil', icon: 'user', iconPosition: 'left' },\r\n        ],\r\n    },\r\n}"
             },
             {
                 "name": "imageIcon",
@@ -25998,7 +26656,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    items: [\r\n      { label: 'Início', icon: IMG_ICON, isLucideIcon: false, link: '/' },\r\n      { label: 'Relatórios', icon: IMG_ICON, isLucideIcon: false, iconPosition: 'right', link: '/relatorios' },\r\n      { label: 'Mensal' },\r\n    ],\r\n  },\r\n}"
+                "defaultValue": "{\r\n    args: {\r\n        items: [\r\n            { label: 'Início', icon: IMG_ICON, isLucideIcon: false, link: '/' },\r\n            { label: 'Relatórios', icon: IMG_ICON, isLucideIcon: false, iconPosition: 'right', link: '/relatorios' },\r\n            { label: 'Mensal' },\r\n        ],\r\n    },\r\n}"
             },
             {
                 "name": "IMG_ICON",
@@ -26009,7 +26667,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "unknown",
-                "defaultValue": "'data:image/svg+xml;utf8,' +\r\n  encodeURIComponent(\r\n    '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#4f46e5\"/><path d=\"M8 12l3 3 5-6\" stroke=\"#fff\" stroke-width=\"2\" fill=\"none\"/></svg>',\r\n  )"
+                "defaultValue": "`data:image/svg+xml;utf8,${encodeURIComponent(\r\n        '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#4f46e5\"/><path d=\"M8 12l3 3 5-6\" stroke=\"#fff\" stroke-width=\"2\" fill=\"none\"/></svg>',\r\n    )}`"
             },
             {
                 "name": "Indeterminado",
@@ -26125,12 +26783,23 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<CaoBaseIcon>",
-                "defaultValue": "{\r\n  title: 'Componentes/Base Icon',\r\n  component: CaoBaseIcon,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    imgSource: { control: 'text' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    strokeWidthIcon: { control: { type: 'number', min: 0.5, max: 3, step: 0.1 } },\r\n    iconColor: { control: 'color' },\r\n    size: { control: { type: 'number', min: 8, max: 96 } },\r\n  },\r\n  args: {\r\n    imgSource: 'Home',\r\n    isLucideIcon: true,\r\n    size: 32,\r\n  },\r\n}"
+                "type": "Meta<CaoBaseButtonComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Base Button',\r\n  component: CaoBaseButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    buttonText: { control: 'text' },\r\n    btnClass: { control: 'text' },\r\n    tooltip: { control: 'text' },\r\n    leadingIcon: { control: 'text' },\r\n    trailingIcon: { control: 'text' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    iconColor: { control: 'color' },\r\n    isDarkMode: { control: 'boolean' },\r\n    isDisabled: { control: 'boolean' },\r\n    isLoading: { control: 'boolean' },\r\n    strokeWidthIcon: { control: { type: 'number', min: 0.5, max: 3, step: 0.1 } },\r\n    minTextToTooltip: { control: { type: 'number', min: 1, max: 100 } },\r\n    iconSize: { control: { type: 'number', min: 8, max: 64 } },\r\n    dataCy: { control: 'text' },\r\n  },\r\n  args: {\r\n    buttonClick: fn(),\r\n    buttonText: 'Clique!',\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CaoAvatarComponent>",
+                "defaultValue": "{\r\n    title: 'Componentes/Avatar',\r\n    component: CaoAvatarComponent,\r\n    tags: ['autodocs'],\r\n    decorators: [applicationConfig({ providers: [provideLucideIcons(STORY_ICONS as never)] })],\r\n    render: (args) => ({ props: args, template: `<cao-avatar ${argsToTemplate(args)} />` }),\r\n    argTypes: {\r\n        src: { control: 'text', description: 'URL da imagem. Vazia → ícone, label ou imagem padrão.' },\r\n        defaultSrc: { control: 'text', description: 'Imagem padrão customizada.' },\r\n        label: { control: 'text' },\r\n        isLucideIcon: { control: 'boolean' },\r\n        iconColor: { control: 'color' },\r\n        size: { control: 'text', description: \"'small' | 'normal' | 'large' | 'xlarge' | número (px) | '4rem'\" },\r\n        shape: { control: 'inline-radio', options: ['circle', 'rounded', 'square'] },\r\n        strokeWidth: { control: 'text' },\r\n        strokeColor: { control: 'color' },\r\n        strokeStyle: { control: 'inline-radio', options: ['solid', 'dashed', 'dotted', 'double'] },\r\n        bgColor: { control: 'color' },\r\n        textColor: { control: 'color' },\r\n    },\r\n    args: { size: 'large', shape: 'circle', strokeWidth: 0, strokeColor: '#ffffff', strokeStyle: 'solid' },\r\n}"
             },
             {
                 "name": "meta",
@@ -26142,6 +26811,17 @@
                 "deprecationMessage": "",
                 "type": "Meta<CaoBaseInput>",
                 "defaultValue": "{\r\n  title: 'Componentes/Base Input',\r\n  component: CaoBaseInput,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    type: {\r\n      control: 'select',\r\n      options: ['text', 'textarea', 'number', 'password', 'date'],\r\n    },\r\n    placeholder: { control: 'text' },\r\n    inputClass: { control: 'text' },\r\n    value: { control: 'text' },\r\n    errorMessage: { control: 'text' },\r\n    isDisabled: { control: 'boolean' },\r\n    maxLength: { control: { type: 'number', min: 1 } },\r\n    searchMode: { control: 'boolean' },\r\n    showBorder: { control: 'boolean' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    iconColor: { control: 'color' },\r\n    mask: { control: 'text' },\r\n    tooltip: { control: 'text' },\r\n    dataCy: { control: 'text' },\r\n    textareaRows: { control: 'text' },\r\n    decimalMarker: { control: 'select', options: ['.', ','] },\r\n    thousandSeparator: { control: 'text' },\r\n    allowNegativeNumbers: { control: 'boolean' },\r\n    separatorLimit: { control: 'text' },\r\n  },\r\n  args: {\r\n    valueChange: fn(),\r\n    searchClick: fn(),\r\n    inputChange: fn(),\r\n    placeholder: 'Digite algo...',\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CaoBaseIcon>",
+                "defaultValue": "{\r\n  title: 'Componentes/Base Icon',\r\n  component: CaoBaseIcon,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    imgSource: { control: 'text' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    strokeWidthIcon: { control: { type: 'number', min: 0.5, max: 3, step: 0.1 } },\r\n    iconColor: { control: 'color' },\r\n    size: { control: { type: 'number', min: 8, max: 96 } },\r\n  },\r\n  args: {\r\n    imgSource: 'Home',\r\n    isLucideIcon: true,\r\n    size: 32,\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -26169,23 +26849,45 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/breadcrumb/breadcrumb.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<CaoBreadcrumbComponent>",
-                "defaultValue": "{\r\n  title: 'Components/Breadcrumb',\r\n  component: CaoBreadcrumbComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [\r\n        provideRouter([]),\r\n        provideLucideIcons({ LucideBuilding2, LucideChevronRight, LucideFolder, LucideHouse, LucideUser } as never),\r\n      ],\r\n    }),\r\n  ],\r\n  render: (args) => ({ props: args, template: `<cao-breadcrumb ${argsToTemplate(args)} />` }),\r\n  argTypes: {\r\n    items: { control: 'object', description: 'Lista de itens (o último é a página atual).' },\r\n    home: { control: 'object', description: 'Item home opcional, exibido antes dos itens.' },\r\n    separator: { control: 'text', description: 'Texto do divisor. Padrão: \"/\".' },\r\n    separatorIcon: { control: 'text', description: 'Ícone do divisor (Lucide ou imagem). Sobrepõe `separator`.' },\r\n    isLucideSeparatorIcon: { control: 'boolean' },\r\n    separatorIconSize: { control: 'number' },\r\n    linkColor: { control: 'color' },\r\n    linkHoverColor: { control: 'color' },\r\n    currentColor: { control: 'color' },\r\n    separatorColor: { control: 'color' },\r\n    fontSize: { control: 'text' },\r\n    gap: { control: 'text' },\r\n    ariaLabel: { control: 'text' },\r\n    itemClick: { action: 'itemClick' },\r\n  },\r\n  args: { items: basicItems, separator: '/', ariaLabel: 'Breadcrumb' },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/card/card.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<CaoCardComponent>",
                 "defaultValue": "{\r\n  title: 'Componentes/Card',\r\n  component: CaoCardComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    variant: { control: 'select', options: ['horizontal', 'square'] },\r\n    title: { control: 'text' },\r\n    subtitle: { control: 'text' },\r\n    detail: { control: 'text' },\r\n    detailColor: { control: 'text' },\r\n    icon: { control: 'text' },\r\n    bgColor: { control: 'text' },\r\n    borderColor: { control: 'text' },\r\n    selected: { control: 'boolean' },\r\n    clickable: { control: 'boolean' },\r\n    cardClick: { action: 'cardClicked' },\r\n  },\r\n  args: {\r\n    cardClick: fn(),\r\n    title: 'Projeto Renova',\r\n    subtitle: 'Monitoramento de qualidade',\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/breadcrumb/breadcrumb.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CaoBreadcrumbComponent>",
+                "defaultValue": "{\r\n    title: 'Componentes/Breadcrumb',\r\n    component: CaoBreadcrumbComponent,\r\n    tags: ['autodocs'],\r\n    decorators: [\r\n        applicationConfig({\r\n            providers: [\r\n                provideRouter([]),\r\n                provideLucideIcons(STORY_ICONS as never),\r\n            ],\r\n        }),\r\n    ],\r\n    render: (args) => ({ props: args, template: `<cao-breadcrumb ${argsToTemplate(args)} />` }),\r\n    argTypes: {\r\n        items: { control: 'object', description: 'Lista de itens (o último é a página atual).' },\r\n        home: { control: 'object', description: 'Item home opcional, exibido antes dos itens.' },\r\n        separator: { control: 'text', description: 'Texto do divisor. Padrão: \"/\".' },\r\n        separatorIcon: { control: 'text', description: 'Ícone do divisor (Lucide ou imagem). Sobrepõe `separator`.' },\r\n        isLucideSeparatorIcon: { control: 'boolean' },\r\n        separatorIconSize: { control: 'number' },\r\n        linkColor: { control: 'color' },\r\n        linkHoverColor: { control: 'color' },\r\n        currentColor: { control: 'color' },\r\n        separatorColor: { control: 'color' },\r\n        fontSize: { control: 'text' },\r\n        gap: { control: 'text' },\r\n        ariaLabel: { control: 'text' },\r\n        itemClick: { action: 'itemClick' },\r\n    },\r\n    args: { items: basicItems, separator: '/', ariaLabel: 'Breadcrumb' },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CaoDatePicker>",
+                "defaultValue": "{\r\n  title: 'Componentes/Date Picker',\r\n  component: CaoDatePicker,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    placeholder: { control: 'text' },\r\n    inputClass: { control: 'text' },\r\n    errorMessage: { control: 'text' },\r\n    isDisabled: { control: 'boolean' },\r\n    searchMode: { control: 'boolean' },\r\n    showBorder: { control: 'boolean' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    iconColor: { control: 'color' },\r\n    tooltip: { control: 'text' },\r\n    dataCy: { control: 'text' },\r\n    dateHint: { control: 'text' },\r\n    controlName: { control: 'text' },\r\n    openOnFocus: { control: 'boolean' },\r\n    minDate: { control: 'date' },\r\n    maxDate: { control: 'date' },\r\n  },\r\n  args: {\r\n    valueChange: fn(),\r\n    searchClick: fn(),\r\n    inputChange: fn(),\r\n    leadingIconClick: fn(),\r\n    trailingIconClick: fn(),\r\n    placeholder: 'Data de nascimento',\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CaoDropDownComponent>",
+                "defaultValue": "{\r\n  title: 'Componentes/Drop Down',\r\n  component: CaoDropDownComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    textHeader: { control: 'text' },\r\n    options: { control: 'object' },\r\n    dropDownClass: { control: 'text' },\r\n    isDisabled: { control: 'boolean' },\r\n    tooltip: { control: 'text' },\r\n    dropDirectionInput: { control: 'select', options: ['up', 'down'] },\r\n    dataCy: { control: 'text' },\r\n    ariaLabel: { control: 'text' },\r\n    ariaLabelledBy: { control: 'text' },\r\n    listAriaLabel: { control: 'text' },\r\n  },\r\n  args: {\r\n    itemSelected: fn(),\r\n    textHeader: 'SELECIONE UM ITEM',\r\n    options: defaultOptions,\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -26213,45 +26915,12 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<CaoDropDownComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Drop Down',\r\n  component: CaoDropDownComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    textHeader: { control: 'text' },\r\n    options: { control: 'object' },\r\n    dropDownClass: { control: 'text' },\r\n    isDisabled: { control: 'boolean' },\r\n    tooltip: { control: 'text' },\r\n    dropDirectionInput: { control: 'select', options: ['up', 'down'] },\r\n    dataCy: { control: 'text' },\r\n    ariaLabel: { control: 'text' },\r\n    ariaLabelledBy: { control: 'text' },\r\n    listAriaLabel: { control: 'text' },\r\n  },\r\n  args: {\r\n    itemSelected: fn(),\r\n    textHeader: 'SELECIONE UM ITEM',\r\n    options: defaultOptions,\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<CaoDatePicker>",
-                "defaultValue": "{\r\n  title: 'Componentes/Date Picker',\r\n  component: CaoDatePicker,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    placeholder: { control: 'text' },\r\n    inputClass: { control: 'text' },\r\n    errorMessage: { control: 'text' },\r\n    isDisabled: { control: 'boolean' },\r\n    searchMode: { control: 'boolean' },\r\n    showBorder: { control: 'boolean' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    iconColor: { control: 'color' },\r\n    tooltip: { control: 'text' },\r\n    dataCy: { control: 'text' },\r\n    dateHint: { control: 'text' },\r\n    controlName: { control: 'text' },\r\n    openOnFocus: { control: 'boolean' },\r\n    minDate: { control: 'date' },\r\n    maxDate: { control: 'date' },\r\n  },\r\n  args: {\r\n    valueChange: fn(),\r\n    searchClick: fn(),\r\n    inputChange: fn(),\r\n    leadingIconClick: fn(),\r\n    trailingIconClick: fn(),\r\n    placeholder: 'Data de nascimento',\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<Footer>",
                 "defaultValue": "{\r\n  title: 'Componentes/Footer',\r\n  component: Footer,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    currentRoute: { control: 'text' },\r\n    footerText: { control: 'text' },\r\n    isFixed: { control: 'boolean' },\r\n  },\r\n  args: {\r\n    footerText: 'Opalbytes',\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<CaoBaseButtonComponent>",
-                "defaultValue": "{\r\n  title: 'Componentes/Base Button',\r\n  component: CaoBaseButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    buttonText: { control: 'text' },\r\n    btnClass: { control: 'text' },\r\n    tooltip: { control: 'text' },\r\n    leadingIcon: { control: 'text' },\r\n    trailingIcon: { control: 'text' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    iconColor: { control: 'color' },\r\n    isDarkMode: { control: 'boolean' },\r\n    isDisabled: { control: 'boolean' },\r\n    isLoading: { control: 'boolean' },\r\n    strokeWidthIcon: { control: { type: 'number', min: 0.5, max: 3, step: 0.1 } },\r\n    minTextToTooltip: { control: { type: 'number', min: 1, max: 100 } },\r\n    iconSize: { control: { type: 'number', min: 8, max: 64 } },\r\n    dataCy: { control: 'text' },\r\n  },\r\n  args: {\r\n    buttonClick: fn(),\r\n    buttonText: 'Clique!',\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -26378,23 +27047,23 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<CaoTabPanel>",
-                "defaultValue": "{\r\n  title: 'Componentes/Tab Panel',\r\n  component: CaoTabPanel,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    label: { control: 'text' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    leadingIcon: { control: 'text' },\r\n    trailingIcon: { control: 'text' },\r\n    isDisabled: { control: 'boolean' },\r\n  },\r\n  args: {\r\n    label: 'Conteúdo da aba',\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<TimePicker>",
                 "defaultValue": "{\r\n  title: 'Componentes/Time Picker',\r\n  component: TimePicker,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    isDisabled: { control: 'boolean' },\r\n    dataCy: { control: 'text' },\r\n    min: { control: 'text' },\r\n    max: { control: 'text' },\r\n  },\r\n  args: {\r\n    timeChange: fn(),\r\n    min: '07:00',\r\n    max: '23:00',\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CaoTabPanel>",
+                "defaultValue": "{\r\n  title: 'Componentes/Tab Panel',\r\n  component: CaoTabPanel,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    label: { control: 'text' },\r\n    isLucideIcon: { control: 'boolean' },\r\n    leadingIcon: { control: 'text' },\r\n    trailingIcon: { control: 'text' },\r\n    isDisabled: { control: 'boolean' },\r\n  },\r\n  args: {\r\n    label: 'Conteúdo da aba',\r\n  },\r\n}"
             },
             {
                 "name": "ModoEscuro",
@@ -26554,6 +27223,17 @@
                 "name": "Padrao",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    buttonText: 'Clique!',\r\n  },\r\n}"
+            },
+            {
+                "name": "Padrao",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-input/base-input.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
@@ -26587,12 +27267,12 @@
                 "name": "Padrao",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/checkbox/checkbox.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{}"
+                "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Selecione uma data',\r\n  },\r\n}"
             },
             {
                 "name": "Padrao",
@@ -26609,12 +27289,12 @@
                 "name": "Padrao",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/checkbox/checkbox.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Selecione uma data',\r\n  },\r\n}"
+                "defaultValue": "{}"
             },
             {
                 "name": "Padrao",
@@ -26626,17 +27306,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    footerText: 'Opalbytes',\r\n  },\r\n}"
-            },
-            {
-                "name": "Padrao",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    buttonText: 'Clique!',\r\n  },\r\n}"
             },
             {
                 "name": "Padrao",
@@ -26752,23 +27421,23 @@
                 "name": "Padrao",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
-                "coverageIgnore": false,
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  render: (args) => ({\r\n    template: `\r\n      <cao-tab-panel\r\n        [label]=\"label\"\r\n        [isLucideIcon]=\"isLucideIcon\"\r\n        [leadingIcon]=\"leadingIcon\"\r\n        [trailingIcon]=\"trailingIcon\"\r\n        [isDisabled]=\"isDisabled\">\r\n        <p>Este é o conteúdo renderizado pela aba.</p>\r\n      </cao-tab-panel>\r\n    `,\r\n    props: args,\r\n  }),\r\n}"
-            },
-            {
-                "name": "Padrao",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
                 "coverageIgnore": false,
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    min: '07:00',\r\n    max: '23:00',\r\n  },\r\n}"
+            },
+            {
+                "name": "Padrao",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  render: (args) => ({\r\n    template: `\r\n      <cao-tab-panel\r\n        [label]=\"label\"\r\n        [isLucideIcon]=\"isLucideIcon\"\r\n        [leadingIcon]=\"leadingIcon\"\r\n        [trailingIcon]=\"trailingIcon\"\r\n        [isDisabled]=\"isDisabled\">\r\n        <p>Este é o conteúdo renderizado pela aba.</p>\r\n      </cao-tab-panel>\r\n    `,\r\n    props: args,\r\n  }),\r\n}"
             },
             {
                 "name": "PadraoComIconeSVG",
@@ -26791,6 +27460,17 @@
                 "deprecationMessage": "",
                 "type": "unknown",
                 "defaultValue": "`\r\n  <cao-tab-panel label=\"Início\" leadingIcon=\"Home\"><p>Conteúdo de início.</p></cao-tab-panel>\r\n  <cao-tab-panel label=\"Buscar\" leadingIcon=\"Search\"><p>Conteúdo de busca.</p></cao-tab-panel>\r\n  <cao-tab-panel label=\"Configurações\" leadingIcon=\"Settings\"><p>Conteúdo de configurações.</p></cao-tab-panel>\r\n`"
+            },
+            {
+                "name": "PHOTO",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'C:\\Users\\micael.barbosa\\Desktop\\Renova\\opalbytes-angular-lib\\projects\\ngx-opalbytes-components\\src\\png\\nal do canal.png'"
             },
             {
                 "name": "preview",
@@ -26925,6 +27605,17 @@
                 "defaultValue": "{\r\n  render: () => ({\r\n    template: `\r\n      <div style=\"display: flex; flex-direction: column; gap: 12px; width: 320px;\">\r\n        <cao-skeleton [width]=\"'100%'\" [height]=\"'12px'\"></cao-skeleton>\r\n        <cao-skeleton [width]=\"'80%'\" [height]=\"'12px'\"></cao-skeleton>\r\n        <cao-skeleton [width]=\"'60%'\" [height]=\"'12px'\"></cao-skeleton>\r\n      </div>\r\n    `,\r\n  }),\r\n}"
             },
             {
+                "name": "ROW",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'display:flex;gap:16px;align-items:center;flex-wrap:wrap'"
+            },
+            {
                 "name": "Selecionado",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -26958,6 +27649,28 @@
                 "defaultValue": "{\r\n  args: {\r\n    placeholder: 'Digite sua senha',\r\n    type: 'password',\r\n    trailingIcon: 'Eye',\r\n    isLucideIcon: true,\r\n  },\r\n}"
             },
             {
+                "name": "Shapes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n    render: () => ({\r\n        template: `\r\n      <div style=\"${ROW}\">\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" shape=\"circle\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" shape=\"rounded\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" shape=\"square\" />\r\n      </div>`,\r\n    }),\r\n}"
+            },
+            {
+                "name": "Sizes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n    render: () => ({\r\n        template: `\r\n      <div style=\"${ROW}\">\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"small\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"normal\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"large\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" [size]=\"96\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"7rem\" />\r\n      </div>`,\r\n    }),\r\n}"
+            },
+            {
                 "name": "SomenteStep",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -26980,6 +27693,28 @@
                 "defaultValue": "{\r\n  render: () =>\r\n    renderStepper(`\r\n      <cao-step title=\"Primeira\" />\r\n      <cao-step title=\"Segunda\" />\r\n      <cao-step title=\"Terceira\" isActive=\"true\" />\r\n    `),\r\n}"
             },
             {
+                "name": "STORY_ICONS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{ LucideUser }"
+            },
+            {
+                "name": "STORY_ICONS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/breadcrumb/breadcrumb.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{ LucideBuilding2, LucideChevronRight, LucideFolder, LucideHouse, LucideUser }"
+            },
+            {
                 "name": "storyImports",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -26989,6 +27724,17 @@
                 "deprecationMessage": "",
                 "type": "[]",
                 "defaultValue": "[ReactiveFormsModule, CaoFormField, CaoBaseInput, CaoHint, CaoError]"
+            },
+            {
+                "name": "Stroke",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n    render: () => ({\r\n        template: `\r\n      <div style=\"${ROW}\">\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" [strokeWidth]=\"2\" strokeColor=\"#4f46e5\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" [strokeWidth]=\"4\" strokeColor=\"#16a34a\" strokeStyle=\"dashed\" />\r\n        <cao-avatar label=\"AB\" size=\"xlarge\" shape=\"rounded\" [strokeWidth]=\"3\" strokeColor=\"#f59e0b\" strokeStyle=\"double\" />\r\n      </div>`,\r\n    }),\r\n}"
             },
             {
                 "name": "Sucesso",
@@ -27043,7 +27789,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    linkColor: '#0f766e',\r\n    linkHoverColor: '#134e4a',\r\n    currentColor: '#042f2e',\r\n    separatorColor: '#5eead4',\r\n    fontSize: '1rem',\r\n    gap: '12px',\r\n    separatorIcon: 'chevron-right',\r\n  },\r\n}"
+                "defaultValue": "{\r\n    args: {\r\n        linkColor: '#0f766e',\r\n        linkHoverColor: '#134e4a',\r\n        currentColor: '#042f2e',\r\n        separatorColor: '#5eead4',\r\n        fontSize: '1rem',\r\n        gap: '12px',\r\n        separatorIcon: 'chevron-right',\r\n    },\r\n}"
             },
             {
                 "name": "TrailingIcons",
@@ -27076,7 +27822,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    items: [\r\n      { label: 'Início', link: '/' },\r\n      { label: 'Pedidos', link: '/pedidos', badge: 12 },\r\n      { label: 'Pendentes', badge: 'novo', badgeBgColor: '#dcfce7', badgeColor: '#166534' },\r\n    ],\r\n  },\r\n}"
+                "defaultValue": "{\r\n    args: {\r\n        items: [\r\n            { label: 'Início', link: '/' },\r\n            { label: 'Pedidos', link: '/pedidos', badge: 12 },\r\n            { label: 'Pendentes', badge: 'novo', badgeBgColor: '#dcfce7', badgeColor: '#166534' },\r\n        ],\r\n    },\r\n}"
             },
             {
                 "name": "WithHome",
@@ -27087,7 +27833,40 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: { home: { icon: 'house', ariaLabel: 'Início', link: '/' }, items: basicItems.slice(1) },\r\n}"
+                "defaultValue": "{\r\n    args: { home: { icon: 'house', ariaLabel: 'Início', link: '/' }, items: basicItems.slice(1) },\r\n}"
+            },
+            {
+                "name": "WithIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ args: { icon: 'user', bgColor: '#dcfce7', iconColor: '#166534' } }"
+            },
+            {
+                "name": "WithImage",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ args: { src: PHOTO, alt: 'Foto de perfil' } }"
+            },
+            {
+                "name": "WithLabel",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "coverageIgnore": false,
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{ args: { label: 'MB', bgColor: '#eef2ff', textColor: '#4338ca' } }"
             }
         ],
         "functions": [
@@ -27171,6 +27950,58 @@
                 "deprecationMessage": "",
                 "rawdescription": "Posição do ícone de expandir/recolher em relação ao texto do cabeçalho.",
                 "description": "<p>Posição do ícone de expandir/recolher em relação ao texto do cabeçalho.</p>\n",
+                "kind": 193
+            },
+            {
+                "name": "CaoAvatarMode",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "\"image\" | \"label\" | \"default\"",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "CaoAvatarPresetSize",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "\"small\" | \"normal\" | \"large\" | \"xlarge\"",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.model.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "CaoAvatarShape",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "\"circle\" | \"rounded\" | \"square\"",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.model.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "CaoAvatarStrokeStyle",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "\"solid\" | \"dashed\" | \"dotted\" | \"double\"",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.model.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
                 "kind": 193
             },
             {
@@ -27308,8 +28139,21 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoBaseIcon>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
+                "rawtype": "StoryObj<CaoBaseButtonComponent>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "StoryObj<CaoAvatarComponent>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -27323,6 +28167,19 @@
                 "coverageIgnore": false,
                 "rawtype": "StoryObj<CaoBaseInput>",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-input/base-input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "StoryObj<CaoBaseIcon>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -27360,6 +28217,19 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
+                "rawtype": "StoryObj<CaoCardComponent>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/card/card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
                 "rawtype": "StoryObj<CaoBreadcrumbComponent>",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/breadcrumb/breadcrumb.stories.ts",
                 "deprecated": false,
@@ -27373,8 +28243,21 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoCardComponent>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/card/card.stories.ts",
+                "rawtype": "StoryObj<CaoDatePicker>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "rawdescription": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "coverageIgnore": false,
+                "rawtype": "StoryObj<CaoDropDownComponent>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -27412,47 +28295,8 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoDropDownComponent>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoDatePicker>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
                 "rawtype": "StoryObj<Footer>",
                 "file": "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "rawdescription": "",
-                "description": "",
-                "kind": 184
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoBaseButtonComponent>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -27607,8 +28451,8 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
-                "rawtype": "StoryObj<CaoTabPanel>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
+                "rawtype": "StoryObj<TimePicker>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -27620,8 +28464,8 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "coverageIgnore": false,
-                "rawtype": "StoryObj<TimePicker>",
-                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
+                "rawtype": "StoryObj<CaoTabPanel>",
+                "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "rawdescription": "",
@@ -28383,7 +29227,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "ICaoBreadcrumbItem[]",
-                    "defaultValue": "[\r\n  { label: 'Início', link: '/' },\r\n  { label: 'Clientes', link: '/clientes' },\r\n  { label: 'Maria Souza' },\r\n]"
+                    "defaultValue": "[\r\n    { label: 'Início', link: '/' },\r\n    { label: 'Clientes', link: '/clientes' },\r\n    { label: 'Maria Souza' },\r\n]"
                 },
                 {
                     "name": "CustomTextSeparator",
@@ -28416,7 +29260,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    items: [\r\n      { label: 'Docs', href: 'https://angular.dev', target: '_blank' },\r\n      { label: 'Ação customizada', command: () => alert('command executado') },\r\n      { label: 'Desabilitado', link: '/x', disabled: true },\r\n      { label: 'Atual' },\r\n    ],\r\n  },\r\n}"
+                    "defaultValue": "{\r\n    args: {\r\n        items: [\r\n            { label: 'Docs', href: 'https://angular.dev', target: '_blank' },\r\n            { label: 'Ação customizada', command: () => console.warn('command executado') },\r\n            { label: 'Desabilitado', link: '/x', disabled: true },\r\n            { label: 'Atual' },\r\n        ],\r\n    },\r\n}"
                 },
                 {
                     "name": "IconSeparator",
@@ -28427,7 +29271,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: { separatorIcon: 'chevron-right', isLucideSeparatorIcon: true, separatorColor: '#6b7280' },\r\n}"
+                    "defaultValue": "{\r\n    args: { separatorIcon: 'chevron-right', isLucideSeparatorIcon: true, separatorColor: '#6b7280' },\r\n}"
                 },
                 {
                     "name": "IconsLeftAndRight",
@@ -28438,7 +29282,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    items: [\r\n      { label: 'Empresa', icon: 'building-2', iconPosition: 'left', link: '/empresa' },\r\n      { label: 'Projetos', icon: 'folder', iconPosition: 'right', link: '/projetos' },\r\n      { label: 'Perfil', icon: 'user', iconPosition: 'left' },\r\n    ],\r\n  },\r\n}"
+                    "defaultValue": "{\r\n    args: {\r\n        items: [\r\n            { label: 'Empresa', icon: 'building-2', iconPosition: 'left', link: '/empresa' },\r\n            { label: 'Projetos', icon: 'folder', iconPosition: 'right', link: '/projetos' },\r\n            { label: 'Perfil', icon: 'user', iconPosition: 'left' },\r\n        ],\r\n    },\r\n}"
                 },
                 {
                     "name": "ImageIcon",
@@ -28449,7 +29293,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    items: [\r\n      { label: 'Início', icon: IMG_ICON, isLucideIcon: false, link: '/' },\r\n      { label: 'Relatórios', icon: IMG_ICON, isLucideIcon: false, iconPosition: 'right', link: '/relatorios' },\r\n      { label: 'Mensal' },\r\n    ],\r\n  },\r\n}"
+                    "defaultValue": "{\r\n    args: {\r\n        items: [\r\n            { label: 'Início', icon: IMG_ICON, isLucideIcon: false, link: '/' },\r\n            { label: 'Relatórios', icon: IMG_ICON, isLucideIcon: false, iconPosition: 'right', link: '/relatorios' },\r\n            { label: 'Mensal' },\r\n        ],\r\n    },\r\n}"
                 },
                 {
                     "name": "IMG_ICON",
@@ -28460,7 +29304,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "unknown",
-                    "defaultValue": "'data:image/svg+xml;utf8,' +\r\n  encodeURIComponent(\r\n    '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#4f46e5\"/><path d=\"M8 12l3 3 5-6\" stroke=\"#fff\" stroke-width=\"2\" fill=\"none\"/></svg>',\r\n  )"
+                    "defaultValue": "`data:image/svg+xml;utf8,${encodeURIComponent(\r\n        '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#4f46e5\"/><path d=\"M8 12l3 3 5-6\" stroke=\"#fff\" stroke-width=\"2\" fill=\"none\"/></svg>',\r\n    )}`"
                 },
                 {
                     "name": "meta",
@@ -28471,7 +29315,18 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<CaoBreadcrumbComponent>",
-                    "defaultValue": "{\r\n  title: 'Components/Breadcrumb',\r\n  component: CaoBreadcrumbComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [\r\n        provideRouter([]),\r\n        provideLucideIcons({ LucideBuilding2, LucideChevronRight, LucideFolder, LucideHouse, LucideUser } as never),\r\n      ],\r\n    }),\r\n  ],\r\n  render: (args) => ({ props: args, template: `<cao-breadcrumb ${argsToTemplate(args)} />` }),\r\n  argTypes: {\r\n    items: { control: 'object', description: 'Lista de itens (o último é a página atual).' },\r\n    home: { control: 'object', description: 'Item home opcional, exibido antes dos itens.' },\r\n    separator: { control: 'text', description: 'Texto do divisor. Padrão: \"/\".' },\r\n    separatorIcon: { control: 'text', description: 'Ícone do divisor (Lucide ou imagem). Sobrepõe `separator`.' },\r\n    isLucideSeparatorIcon: { control: 'boolean' },\r\n    separatorIconSize: { control: 'number' },\r\n    linkColor: { control: 'color' },\r\n    linkHoverColor: { control: 'color' },\r\n    currentColor: { control: 'color' },\r\n    separatorColor: { control: 'color' },\r\n    fontSize: { control: 'text' },\r\n    gap: { control: 'text' },\r\n    ariaLabel: { control: 'text' },\r\n    itemClick: { action: 'itemClick' },\r\n  },\r\n  args: { items: basicItems, separator: '/', ariaLabel: 'Breadcrumb' },\r\n}"
+                    "defaultValue": "{\r\n    title: 'Componentes/Breadcrumb',\r\n    component: CaoBreadcrumbComponent,\r\n    tags: ['autodocs'],\r\n    decorators: [\r\n        applicationConfig({\r\n            providers: [\r\n                provideRouter([]),\r\n                provideLucideIcons(STORY_ICONS as never),\r\n            ],\r\n        }),\r\n    ],\r\n    render: (args) => ({ props: args, template: `<cao-breadcrumb ${argsToTemplate(args)} />` }),\r\n    argTypes: {\r\n        items: { control: 'object', description: 'Lista de itens (o último é a página atual).' },\r\n        home: { control: 'object', description: 'Item home opcional, exibido antes dos itens.' },\r\n        separator: { control: 'text', description: 'Texto do divisor. Padrão: \"/\".' },\r\n        separatorIcon: { control: 'text', description: 'Ícone do divisor (Lucide ou imagem). Sobrepõe `separator`.' },\r\n        isLucideSeparatorIcon: { control: 'boolean' },\r\n        separatorIconSize: { control: 'number' },\r\n        linkColor: { control: 'color' },\r\n        linkHoverColor: { control: 'color' },\r\n        currentColor: { control: 'color' },\r\n        separatorColor: { control: 'color' },\r\n        fontSize: { control: 'text' },\r\n        gap: { control: 'text' },\r\n        ariaLabel: { control: 'text' },\r\n        itemClick: { action: 'itemClick' },\r\n    },\r\n    args: { items: basicItems, separator: '/', ariaLabel: 'Breadcrumb' },\r\n}"
+                },
+                {
+                    "name": "STORY_ICONS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/breadcrumb/breadcrumb.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{ LucideBuilding2, LucideChevronRight, LucideFolder, LucideHouse, LucideUser }"
                 },
                 {
                     "name": "Themed",
@@ -28482,7 +29337,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    linkColor: '#0f766e',\r\n    linkHoverColor: '#134e4a',\r\n    currentColor: '#042f2e',\r\n    separatorColor: '#5eead4',\r\n    fontSize: '1rem',\r\n    gap: '12px',\r\n    separatorIcon: 'chevron-right',\r\n  },\r\n}"
+                    "defaultValue": "{\r\n    args: {\r\n        linkColor: '#0f766e',\r\n        linkHoverColor: '#134e4a',\r\n        currentColor: '#042f2e',\r\n        separatorColor: '#5eead4',\r\n        fontSize: '1rem',\r\n        gap: '12px',\r\n        separatorIcon: 'chevron-right',\r\n    },\r\n}"
                 },
                 {
                     "name": "WithBadges",
@@ -28493,7 +29348,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    items: [\r\n      { label: 'Início', link: '/' },\r\n      { label: 'Pedidos', link: '/pedidos', badge: 12 },\r\n      { label: 'Pendentes', badge: 'novo', badgeBgColor: '#dcfce7', badgeColor: '#166534' },\r\n    ],\r\n  },\r\n}"
+                    "defaultValue": "{\r\n    args: {\r\n        items: [\r\n            { label: 'Início', link: '/' },\r\n            { label: 'Pedidos', link: '/pedidos', badge: 12 },\r\n            { label: 'Pendentes', badge: 'novo', badgeBgColor: '#dcfce7', badgeColor: '#166534' },\r\n        ],\r\n    },\r\n}"
                 },
                 {
                     "name": "WithHome",
@@ -28504,7 +29359,152 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: { home: { icon: 'house', ariaLabel: 'Início', link: '/' }, items: basicItems.slice(1) },\r\n}"
+                    "defaultValue": "{\r\n    args: { home: { icon: 'house', ariaLabel: 'Início', link: '/' }, items: basicItems.slice(1) },\r\n}"
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts": [
+                {
+                    "name": "BrokenImageFallsBack",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{ args: { src: 'https://invalid.example/nao-existe.png' } }"
+                },
+                {
+                    "name": "CustomDefaultImage",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{ args: { defaultSrc: 'https://i.pravatar.cc/200?img=47' } }"
+                },
+                {
+                    "name": "DefaultImage",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<CaoAvatarComponent>",
+                    "defaultValue": "{\r\n    title: 'Componentes/Avatar',\r\n    component: CaoAvatarComponent,\r\n    tags: ['autodocs'],\r\n    decorators: [applicationConfig({ providers: [provideLucideIcons(STORY_ICONS as never)] })],\r\n    render: (args) => ({ props: args, template: `<cao-avatar ${argsToTemplate(args)} />` }),\r\n    argTypes: {\r\n        src: { control: 'text', description: 'URL da imagem. Vazia → ícone, label ou imagem padrão.' },\r\n        defaultSrc: { control: 'text', description: 'Imagem padrão customizada.' },\r\n        label: { control: 'text' },\r\n        isLucideIcon: { control: 'boolean' },\r\n        iconColor: { control: 'color' },\r\n        size: { control: 'text', description: \"'small' | 'normal' | 'large' | 'xlarge' | número (px) | '4rem'\" },\r\n        shape: { control: 'inline-radio', options: ['circle', 'rounded', 'square'] },\r\n        strokeWidth: { control: 'text' },\r\n        strokeColor: { control: 'color' },\r\n        strokeStyle: { control: 'inline-radio', options: ['solid', 'dashed', 'dotted', 'double'] },\r\n        bgColor: { control: 'color' },\r\n        textColor: { control: 'color' },\r\n    },\r\n    args: { size: 'large', shape: 'circle', strokeWidth: 0, strokeColor: '#ffffff', strokeStyle: 'solid' },\r\n}"
+                },
+                {
+                    "name": "PHOTO",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'C:\\Users\\micael.barbosa\\Desktop\\Renova\\opalbytes-angular-lib\\projects\\ngx-opalbytes-components\\src\\png\\nal do canal.png'"
+                },
+                {
+                    "name": "ROW",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'display:flex;gap:16px;align-items:center;flex-wrap:wrap'"
+                },
+                {
+                    "name": "Shapes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n    render: () => ({\r\n        template: `\r\n      <div style=\"${ROW}\">\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" shape=\"circle\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" shape=\"rounded\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" shape=\"square\" />\r\n      </div>`,\r\n    }),\r\n}"
+                },
+                {
+                    "name": "Sizes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n    render: () => ({\r\n        template: `\r\n      <div style=\"${ROW}\">\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"small\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"normal\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"large\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" [size]=\"96\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"7rem\" />\r\n      </div>`,\r\n    }),\r\n}"
+                },
+                {
+                    "name": "STORY_ICONS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{ LucideUser }"
+                },
+                {
+                    "name": "Stroke",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n    render: () => ({\r\n        template: `\r\n      <div style=\"${ROW}\">\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" [strokeWidth]=\"2\" strokeColor=\"#4f46e5\" />\r\n        <cao-avatar [src]=\"'${PHOTO}'\" size=\"xlarge\" [strokeWidth]=\"4\" strokeColor=\"#16a34a\" strokeStyle=\"dashed\" />\r\n        <cao-avatar label=\"AB\" size=\"xlarge\" shape=\"rounded\" [strokeWidth]=\"3\" strokeColor=\"#f59e0b\" strokeStyle=\"double\" />\r\n      </div>`,\r\n    }),\r\n}"
+                },
+                {
+                    "name": "WithIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{ args: { icon: 'user', bgColor: '#dcfce7', iconColor: '#166534' } }"
+                },
+                {
+                    "name": "WithImage",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{ args: { src: PHOTO, alt: 'Foto de perfil' } }"
+                },
+                {
+                    "name": "WithLabel",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{ args: { label: 'MB', bgColor: '#eef2ff', textColor: '#4338ca' } }"
                 }
             ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/accordion/accordion.token.ts": [
@@ -28518,6 +29518,45 @@
                     "deprecationMessage": "",
                     "type": "unknown",
                     "defaultValue": "new InjectionToken<ICaoAccordionHost>('CAO_ACCORDION')"
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.constants.ts": [
+                {
+                    "name": "CAO_AVATAR_DEFAULT_SRC",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.constants.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "`data:image/svg+xml;utf8,${encodeURIComponent(DEFAULT_AVATAR_SVG)}`",
+                    "rawdescription": "Imagem padrão (silhueta) usada quando nenhuma fonte é informada ou a imagem falha ao carregar.",
+                    "description": "<p>Imagem padrão (silhueta) usada quando nenhuma fonte é informada ou a imagem falha ao carregar.</p>\n"
+                },
+                {
+                    "name": "CAO_AVATAR_SIZES",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.constants.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "{\r\n  small: 24,\r\n  normal: 32,\r\n  large: 48,\r\n  xlarge: 64,\r\n} as const",
+                    "rawdescription": "Tamanhos predefinidos, em px.",
+                    "description": "<p>Tamanhos predefinidos, em px.</p>\n"
+                },
+                {
+                    "name": "DEFAULT_AVATAR_SVG",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.constants.ts",
+                    "coverageIgnore": false,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "defaultValue": "'<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\">' +\r\n  '<rect width=\"64\" height=\"64\" fill=\"#e5e7eb\"/>' +\r\n  '<circle cx=\"32\" cy=\"25\" r=\"11\" fill=\"#9ca3af\"/>' +\r\n  '<path d=\"M10 64c0-13 10-22 22-22s22 9 22 22z\" fill=\"#9ca3af\"/>' +\r\n  '</svg>'"
                 }
             ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/card/card.stories.ts": [
@@ -30194,6 +31233,62 @@
                     "kind": 193
                 }
             ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.ts": [
+                {
+                    "name": "CaoAvatarMode",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "\"image\" | \"label\" | \"default\"",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.model.ts": [
+                {
+                    "name": "CaoAvatarPresetSize",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "\"small\" | \"normal\" | \"large\" | \"xlarge\"",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.model.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "CaoAvatarShape",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "\"circle\" | \"rounded\" | \"square\"",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.model.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "CaoAvatarStrokeStyle",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "\"solid\" | \"dashed\" | \"dotted\" | \"double\"",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.model.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/breadcrumb/breadcrumb.model.ts": [
                 {
                     "name": "CaoBreadcrumbIconPosition",
@@ -30340,14 +31435,29 @@
                     "kind": 184
                 }
             ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts": [
+            "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
                     "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoBaseIcon>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
+                    "rawtype": "StoryObj<CaoBaseButtonComponent>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<CaoAvatarComponent>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "",
@@ -30363,6 +31473,21 @@
                     "coverageIgnore": false,
                     "rawtype": "StoryObj<CaoBaseInput>",
                     "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-input/base-input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<CaoBaseIcon>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-icon/base-icon.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "",
@@ -30400,6 +31525,21 @@
                     "kind": 184
                 }
             ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/card/card.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<CaoCardComponent>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/card/card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/breadcrumb/breadcrumb.stories.ts": [
                 {
                     "name": "Story",
@@ -30415,14 +31555,29 @@
                     "kind": 184
                 }
             ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/card/card.stories.ts": [
+            "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
                     "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoCardComponent>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/card/card.stories.ts",
+                    "rawtype": "StoryObj<CaoDatePicker>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<CaoDropDownComponent>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "",
@@ -30460,36 +31615,6 @@
                     "kind": 184
                 }
             ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoDropDownComponent>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/drop-down/drop-down.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoDatePicker>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/date-picker/date-picker.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts": [
                 {
                     "name": "Story",
@@ -30498,21 +31623,6 @@
                     "coverageIgnore": false,
                     "rawtype": "StoryObj<Footer>",
                     "file": "projects/ngx-opalbytes-components/src/lib/shared/components/footer/footer.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoBaseButtonComponent>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/base-button/base-button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "",
@@ -30685,21 +31795,6 @@
                     "kind": 184
                 }
             ],
-            "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "coverageIgnore": false,
-                    "rawtype": "StoryObj<CaoTabPanel>",
-                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts": [
                 {
                     "name": "Story",
@@ -30708,6 +31803,21 @@
                     "coverageIgnore": false,
                     "rawtype": "StoryObj<TimePicker>",
                     "file": "projects/ngx-opalbytes-components/src/lib/shared/components/time-picker/time-picker.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "coverageIgnore": false,
+                    "rawtype": "StoryObj<CaoTabPanel>",
+                    "file": "projects/ngx-opalbytes-components/src/lib/shared/components/tab-panel/tab-panel.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "",
@@ -30738,7 +31848,7 @@
         "children": []
     },
     "coverage": {
-        "count": 1,
+        "count": 2,
         "status": "low",
         "files": [
             {
@@ -30991,6 +32101,225 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
                 "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.constants.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CAO_AVATAR_DEFAULT_SRC",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.constants.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CAO_AVATAR_SIZES",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.constants.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DEFAULT_AVATAR_SVG",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.model.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "CaoAvatarPresetSize",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.model.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "CaoAvatarShape",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.model.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "CaoAvatarStrokeStyle",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "BrokenImageFallsBack",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CustomDefaultImage",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DefaultImage",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PHOTO",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ROW",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Shapes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Sizes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "STORY_ICONS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Stroke",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithImage",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithLabel",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CaoAvatarComponent",
+                "coveragePercent": 24,
+                "coverageCount": "7/29",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/avatar/avatar.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "CaoAvatarMode",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -31603,6 +32932,16 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "STORY_ICONS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-opalbytes-components/src/lib/shared/components/breadcrumb/breadcrumb.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "Themed",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -31643,8 +32982,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "CaoBreadcrumbComponent",
-                "coveragePercent": 22,
-                "coverageCount": "5/22",
+                "coveragePercent": 21,
+                "coverageCount": "5/23",
                 "status": "low"
             },
             {

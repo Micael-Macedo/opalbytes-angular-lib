@@ -1186,7 +1186,110 @@ export class FaqComponent {}
 - Fora de um `<cao-accordion>`, o item se comporta como um cartão expansível independente.
 
 ---
+### `CaoAvatarComponent`
 
+Avatar para representar usuários ou entidades, com imagem, ícone (Lucide ou imagem) ou texto (iniciais). Possui imagem padrão embutida, usada enquanto nenhuma fonte for informada ou quando a imagem falha ao carregar. Tamanho, formato e contorno (stroke) são configuráveis.
+
+**Seletor:** `<cao-avatar>`
+
+**Tipos**
+
+| Tipo | Valores |
+| --- | --- |
+| `CaoAvatarPresetSize` | `'small'` (24px) \| `'normal'` (32px) \| `'large'` (48px) \| `'xlarge'` (64px) |
+| `CaoAvatarShape` | `'circle'` \| `'rounded'` \| `'square'` |
+| `CaoAvatarStrokeStyle` | `'solid'` \| `'dashed'` \| `'dotted'` \| `'double'` |
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `src` | `string \| null \| undefined` | `''` | URL da imagem. Se vazia ou se falhar ao carregar, o avatar usa `icon`, `label` ou a imagem padrão (nessa ordem). |
+| `defaultSrc` | `string` | `''` | Imagem padrão customizada. Se vazia, usa a silhueta embutida (`CAO_AVATAR_DEFAULT_SRC`). |
+| `label` | `string` | `''` | Texto exibido (ex.: iniciais) quando não há imagem nem ícone. |
+| `icon` | `string` | `''` | Nome do ícone Lucide ou caminho/URL de imagem usada como ícone. |
+| `isLucideIcon` | `boolean` | `true` | Define se `icon` é um ícone Lucide. |
+| `iconColor` | `string` | `''` | Cor do ícone Lucide. Se vazia, usa `textColor`. |
+| `size` | `CaoAvatarPresetSize \| number \| string` | `'normal'` | Tamanho predefinido, número em px ou texto (`'72px'`, `'4.5rem'`). Valores inválidos voltam para `'normal'`. |
+| `shape` | `CaoAvatarShape` | `'circle'` | Formato do avatar. |
+| `strokeWidth` | `number \| string` | `0` | Espessura do contorno. Número é convertido para `px`; `0` remove o contorno. |
+| `strokeColor` | `string` | `'#ffffff'` | Cor do contorno. |
+| `strokeStyle` | `CaoAvatarStrokeStyle` | `'solid'` | Estilo do contorno. |
+| `bgColor` | `string` | `''` | Cor de fundo (sobrescreve `--cao-avatar-bg`). |
+| `textColor` | `string` | `''` | Cor do texto/ícone (sobrescreve `--cao-avatar-text`). |
+| `alt` | `string` | `''` | Texto alternativo do avatar. |
+| `ariaLabel` | `string` | `''` | `aria-label` do avatar. Prioridade: `ariaLabel` → `alt` → `label` → `'Avatar'`. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E com Cypress. |
+
+**Ordem de exibição**
+
+1. `src` (se informado e carregado com sucesso);
+2. `icon`;
+3. `label`;
+4. imagem padrão (`defaultSrc` ou a silhueta embutida).
+
+Se o `src` falhar ao carregar (erro 404, URL inválida etc.), o componente passa automaticamente para o próximo item da lista.
+
+**Constantes exportadas**
+
+| Constante | Descrição |
+| --- | --- |
+| `CAO_AVATAR_DEFAULT_SRC` | Data URI da imagem padrão (silhueta em SVG, funciona offline). |
+| `CAO_AVATAR_SIZES` | Mapa dos tamanhos predefinidos em px (`small`, `normal`, `large`, `xlarge`). |
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-avatar-bg` | `#e5e7eb` | Cor de fundo. |
+| `--cao-avatar-text` | `#374151` | Cor do texto/ícone. |
+| `--cao-avatar-radius` | `25%` | Raio da borda no formato `rounded`. |
+
+**Exemplo básico:**
+
+```html
+<!-- Sem src: exibe a imagem padrão -->
+<cao-avatar></cao-avatar>
+
+<!-- Com imagem -->
+<cao-avatar src="https://exemplo.com/foto.png" alt="Foto de Maria" size="large"></cao-avatar>
+
+<!-- Com iniciais -->
+<cao-avatar label="MB" bgColor="#eef2ff" textColor="#4338ca"></cao-avatar>
+
+<!-- Com ícone Lucide -->
+<cao-avatar icon="user" bgColor="#dcfce7" iconColor="#166534"></cao-avatar>
+```
+
+**Exemplo com tamanho, formato e contorno:**
+
+```html
+<cao-avatar src="assets/foto.png" size="xlarge" shape="rounded"></cao-avatar>
+<cao-avatar src="assets/foto.png" [size]="96" shape="square"></cao-avatar>
+<cao-avatar src="assets/foto.png" size="7rem"></cao-avatar>
+
+<cao-avatar
+  src="assets/foto.png"
+  size="xlarge"
+  [strokeWidth]="3"
+  strokeColor="#4f46e5"
+  strokeStyle="dashed">
+</cao-avatar>
+```
+
+**Exemplo com imagem padrão customizada:**
+
+```html
+<cao-avatar [src]="usuario.foto" defaultSrc="assets/avatar-padrao.png"></cao-avatar>
+```
+
+**Observações:**
+
+- Possui `role="img"` com `aria-label`; a imagem interna é decorativa (`alt=""`), evitando leitura duplicada.
+- A imagem padrão é um SVG em data URI e passa por `DomSanitizer.bypassSecurityTrustUrl` (conteúdo controlado pela lib). Data URIs em SVG informadas em `src` **não** recebem esse tratamento e podem ser bloqueadas pelo sanitizador do Angular — use URL, caminho de arquivo ou PNG/JPEG em base64.
+- Para ícones Lucide, registre os ícones usados com `provideLucideIcons` (de `@lucide/angular`).
+- Depende de `BaseIcon` (copie junto ao usar `cao-comp`).
+---
 ### `CaoSlideToggleComponent`
 
 Um switch (slide toggle) acessível e customizável, com suporte a `ngModel` e formulários reativos via `ControlValueAccessor`. O visual é construído com trilho e thumb animados, sem depender do Material em runtime.
