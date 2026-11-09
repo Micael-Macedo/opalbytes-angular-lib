@@ -1,0 +1,50 @@
+<div
+  class="cao-progress-spinner"
+  role="progressbar"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  [class.cao-progress-spinner--determinate]="isDeterminate()"
+  [class.cao-progress-spinner--indeterminate]="!isDeterminate()"
+  [attr.aria-valuenow]="ariaValueNow()"
+  [attr.aria-label]="ariaLabel() || null"
+  [attr.aria-labelledby]="ariaLabelledBy() || null"
+  [attr.data-cy]="dataCy() || null"
+  [style.width.px]="size()"
+  [style.height.px]="size()"
+  [style.--cao-progress-spinner-color]="color() || null"
+  [style.--cao-progress-spinner-track-color]="trackColor() || null"
+  [style.--cao-progress-spinner-duration]="animationDuration() || null"
+  [style.--cao-progress-spinner-text-color]="textColor() || null"
+  [style.--cao-progress-spinner-circumference]="circumference() + 'px'">
+  <svg
+    class="cao-progress-spinner__svg"
+    focusable="false"
+    aria-hidden="true"
+    [attr.width]="size()"
+    [attr.height]="size()"
+    [attr.viewBox]="'0 0 ' + size() + ' ' + size()">
+    <circle
+      class="cao-progress-spinner__track"
+      fill="none"
+      [attr.cx]="center()"
+      [attr.cy]="center()"
+      [attr.r]="radius()"
+      [attr.stroke-width]="stroke()" />
+    <circle
+      class="cao-progress-spinner__indicator"
+      fill="none"
+      [attr.cx]="center()"
+      [attr.cy]="center()"
+      [attr.r]="radius()"
+      [attr.stroke-width]="stroke()"
+      [attr.stroke-linecap]="strokeLinecap()"
+      [attr.stroke-dasharray]="circumference()"
+      [attr.stroke-dashoffset]="dashOffset()" />
+  </svg>
+
+  @if (showValue() && isDeterminate()) {
+    <span class="cao-progress-spinner__value" aria-hidden="true" [style.font-size.px]="fontSize()">
+      {{ valueLabel() }}
+    </span>
+  }
+</div>

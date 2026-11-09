@@ -1,0 +1,90 @@
+:host {
+  display: inline-block;
+  line-height: 0;
+}
+
+.cao-progress-spinner {
+  --_color: var(--cao-progress-spinner-color, #4f46e5);
+  --_track: var(--cao-progress-spinner-track-color, transparent);
+  --_duration: var(--cao-progress-spinner-duration, 1.4s);
+  --_text: var(--cao-progress-spinner-text-color, #111827);
+  --_circ: var(--cao-progress-spinner-circumference, 0px);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cao-progress-spinner__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cao-progress-spinner__track {
+  stroke: var(--_track);
+}
+
+.cao-progress-spinner__indicator {
+  stroke: var(--_color);
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 300ms ease;
+}
+
+.cao-progress-spinner__value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--_text);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.cao-progress-spinner--indeterminate .cao-progress-spinner__svg {
+  animation: cao-progress-spinner-rotate var(--_duration) linear infinite;
+}
+
+.cao-progress-spinner--indeterminate .cao-progress-spinner__indicator {
+  animation: cao-progress-spinner-dash calc(var(--_duration) * 1.4) ease-in-out infinite;
+  transition: none;
+}
+
+@keyframes cao-progress-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cao-progress-spinner-dash {
+  0% {
+    stroke-dashoffset: calc(var(--_circ) * 0.95);
+    transform: rotate(-90deg);
+  }
+  50% {
+    stroke-dashoffset: calc(var(--_circ) * 0.25);
+    transform: rotate(45deg);
+  }
+  100% {
+    stroke-dashoffset: calc(var(--_circ) * 0.95);
+    transform: rotate(270deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cao-progress-spinner__indicator {
+    transition: none;
+  }
+
+  .cao-progress-spinner--indeterminate .cao-progress-spinner__svg {
+    animation-duration: calc(var(--_duration) * 3);
+  }
+
+  .cao-progress-spinner--indeterminate .cao-progress-spinner__indicator {
+    animation-duration: calc(var(--_duration) * 4.2);
+  }
+}
