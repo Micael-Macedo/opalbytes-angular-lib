@@ -239,6 +239,7 @@ src/
         |   ├── base-input/
         |   ├── base-time-range/
         |   ├── base-toggle/
+        |   ├── breadcrumb/
         |   ├── checkbox/
         |   ├── drop-down/
         |   ├── footer/
@@ -929,6 +930,61 @@ Um componente de alternância (toggle switch) que funciona com `ngModel` ou `for
 | `searchClick` | `EventEmitter<void>` | Emitido quando o ícone de busca é clicado. |
 | `inputChange` | `EventEmitter<string>` | Emitido a cada mudança no input. |
 | `statusChanged` | `EventEmitter<CaoBaseToggleComponent>` | Emitido quando o toggle é alternado. |
+
+---
+
+### `CaoBreadcrumbComponent`
+ 
+Trilha de navegação (breadcrumb) com ícones Lucide ou imagem, link de navegação, badge e divisor customizável.
+ 
+**Seletor:** `<cao-breadcrumb>`
+ 
+**Interface `ICaoBreadcrumbItem`**
+ 
+| Propriedade | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `label` | `string` | — | Texto do item. |
+| `icon` | `string` | — | Nome do ícone Lucide ou URL/caminho/data URI de imagem. |
+| `isLucideIcon` | `boolean` | `true` | Define se `icon` é Lucide. |
+| `iconPosition` | `'left' \| 'right'` | `'left'` | Direção do ícone em relação ao texto. |
+| `iconColor` / `iconSize` / `iconStrokeWidth` | `string` / `number` / `number` | — / `16` / `1.5` | Aparência do ícone. |
+| `link` | `string \| unknown[]` | — | Navegação interna (`routerLink`). |
+| `queryParams` | `Params` | — | Query params do `link`. |
+| `href` / `target` | `string` / `'_self' \| '_blank' ...` | — | Navegação externa. |
+| `command` | `(e: ICaoBreadcrumbItemClickEvent) => void` | — | Callback de clique (sem `link`/`href` vira `<button>`). |
+| `badge` / `badgeColor` / `badgeBgColor` | `string \| number` / `string` / `string` | — | Badge do item. |
+| `disabled` | `boolean` | `false` | Desabilita o item. |
+| `ariaLabel` / `dataCy` | `string` | — | Acessibilidade e testes E2E. |
+ 
+**Atributos (Inputs)**
+ 
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `items` | `ICaoBreadcrumbItem[]` | `[]` | Itens; o último é a página atual (`aria-current="page"`). |
+| `home` | `ICaoBreadcrumbItem` | `undefined` | Item inicial opcional. |
+| `separator` | `string` | `'/'` | Texto do divisor. |
+| `separatorIcon` | `string` | `''` | Ícone do divisor (sobrepõe `separator`). |
+| `isLucideSeparatorIcon` | `boolean` | `true` | Define se `separatorIcon` é Lucide. |
+| `separatorIconSize` / `separatorIconStrokeWidth` | `number` | `14` / `1.5` | Aparência do ícone divisor. |
+| `linkColor`, `linkHoverColor`, `currentColor`, `separatorColor`, `fontSize`, `gap` | `string` | `''` | Atalhos para as CSS custom properties. |
+| `ariaLabel` | `string` | `'Breadcrumb'` | `aria-label` do `<nav>`. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E. |
+ 
+**Eventos (Outputs):** `itemClick` → `ICaoBreadcrumbItemClickEvent` (`item`, `index`, `originalEvent`).
+ 
+**CSS Custom Properties:** `--cao-breadcrumb-link-color` (`#6b7280`), `--cao-breadcrumb-link-hover-color` (`#4f46e5`), `--cao-breadcrumb-current-color` (`#111827`), `--cao-breadcrumb-separator-color` (`#9ca3af`), `--cao-breadcrumb-disabled-color`, `--cao-breadcrumb-focus-ring`, `--cao-breadcrumb-badge-bg`, `--cao-breadcrumb-badge-text`, `--cao-breadcrumb-gap` (`8px`), `--cao-breadcrumb-font-size` (`0.875rem`).
+ 
+```html
+<cao-breadcrumb
+  [home]="{ icon: 'house', ariaLabel: 'Início', link: '/' }"
+  [items]="[
+    { label: 'Pedidos', icon: 'package', iconPosition: 'right', link: '/pedidos', badge: 12 },
+    { label: 'Pedido #42' }
+  ]"
+  separatorIcon="chevron-right" />
+```
+ 
+> Depende de `BaseIcon` (copie junto ao usar `cao-comp`) e de `@angular/router`.
 
 ---
 ### `CaoAccordionComponent` e `CaoAccordionItemComponent`

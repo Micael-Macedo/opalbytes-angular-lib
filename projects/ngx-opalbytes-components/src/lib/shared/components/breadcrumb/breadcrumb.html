@@ -1,0 +1,108 @@
+<ng-template #content let-item let-index="index">
+  @if (item.icon && iconPosition(item) === 'left') {
+    <ng-container *ngTemplateOutlet="icon; context: { $implicit: item }" />
+  }
+  @if (item.label) {
+    <span class="cao-breadcrumb__label">{{ item.label }}</span>
+  }
+  @if (item.icon && iconPosition(item) === 'right') {
+    <ng-container *ngTemplateOutlet="icon; context: { $implicit: item }" />
+  }
+  @if (item.badge !== undefined && item.badge !== null && item.badge !== '') {
+    <span
+      class="cao-breadcrumb__badge"
+      [style.color]="item.badgeColor || null"
+      [style.background-color]="item.badgeBgColor || null"
+      [attr.data-cy]="item.dataCy ? item.dataCy + '-badge' : null">
+      {{ item.badge }}
+    </span>
+  }
+</ng-template>
+
+<ng-template #icon let-item>
+  <span class="cao-breadcrumb__icon" aria-hidden="true">
+    <cao-base-icon
+      [imgSource]="item.icon"
+      [isLucideIcon]="isLucide(item)"
+      [iconColor]="item.iconColor ?? ''"
+      [strokeWidthIcon]="item.iconStrokeWidth ?? 1.5"
+      [size]="item.iconSize ?? 16" />
+  </span>
+</ng-template>
+
+@if (allItems().length) {
+  <nav
+    class="cao-breadcrumb"
+    [attr.aria-label]="ariaLabel()"
+    [attr.data-cy]="dataCy() || null"
+    [style.--cao-breadcrumb-link-color]="linkColor() || null"
+    [style.--cao-breadcrumb-link-hover-color]="linkHoverColor() || null"
+    [style.--cao-breadcrumb-current-color]="currentColor() || null"
+    [style.--cao-breadcrumb-separator-color]="separatorColor() || null"
+    [style.--cao-breadcrumb-font-size]="fontSize() || null"
+    [style.--cao-breadcrumb-gap]="gap() || null">
+    <ol class="cao-breadcrumb__list">
+      @for (item of allItems(); track $index; let i = $index; let last = $last) {
+        <li
+          class="cao-breadcrumb__item"
+          [class.cao-breadcrumb__item--current]="last"
+          [class.cao-breadcrumb__item--disabled]="item.disabled"
+          [attr.data-cy]="item.dataCy || null">
+          @if (isInteractive(item, last)) {
+            @if (hasLink(item)) {
+              <a
+                class="cao-breadcrumb__action"
+                [routerLink]="item.link"
+                [queryParams]="item.queryParams"
+                [target]="item.target ?? '_self'"
+                [attr.aria-label]="item.ariaLabel || null"
+                (click)="onItemClick(item, i, $event)">
+                <ng-container *ngTemplateOutlet="content; context: { $implicit: item, index: i }" />
+              </a>
+            } @else if (item.href) {
+              <a
+                class="cao-breadcrumb__action"
+                [attr.href]="item.href"
+                [attr.target]="item.target || null"
+                [attr.rel]="item.target === '_blank' ? 'noopener noreferrer' : null"
+                [attr.aria-label]="item.ariaLabel || null"
+                (click)="onItemClick(item, i, $event)">
+                <ng-container *ngTemplateOutlet="content; context: { $implicit: item, index: i }" />
+              </a>
+            } @else {
+              <button
+                type="button"
+                class="cao-breadcrumb__action"
+                [attr.aria-label]="item.ariaLabel || null"
+                (click)="onItemClick(item, i, $event)">
+                <ng-container *ngTemplateOutlet="content; context: { $implicit: item, index: i }" />
+              </button>
+            }
+          } @else {
+            <span
+              class="cao-breadcrumb__text"
+              [attr.aria-current]="last ? 'page' : null"
+              [attr.aria-disabled]="item.disabled ? 'true' : null"
+              [attr.aria-label]="item.ariaLabel || null">
+              <ng-container *ngTemplateOutlet="content; context: { $implicit: item, index: i }" />
+            </span>
+          }
+        </li>
+
+        @if (!last) {
+          <li class="cao-breadcrumb__separator" role="presentation" aria-hidden="true">
+            @if (separatorIcon()) {
+              <cao-base-icon
+                [imgSource]="separatorIcon()"
+                [isLucideIcon]="isLucideSeparatorIcon()"
+                [strokeWidthIcon]="separatorIconStrokeWidth()"
+                [size]="separatorIconSize()" />
+            } @else {
+              {{ separator() }}
+            }
+          </li>
+        }
+      }
+    </ol>
+  </nav>
+}

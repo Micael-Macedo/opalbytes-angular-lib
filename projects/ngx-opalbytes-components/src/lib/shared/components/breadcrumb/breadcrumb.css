@@ -1,0 +1,105 @@
+:host {
+  display: block;
+}
+
+.cao-breadcrumb {
+  --_link: var(--cao-breadcrumb-link-color, #6b7280);
+  --_link-hover: var(--cao-breadcrumb-link-hover-color, #4f46e5);
+  --_current: var(--cao-breadcrumb-current-color, #111827);
+  --_separator: var(--cao-breadcrumb-separator-color, #9ca3af);
+  --_disabled: var(--cao-breadcrumb-disabled-color, #d1d5db);
+  --_focus: var(--cao-breadcrumb-focus-ring, rgba(79, 70, 229, 0.35));
+  --_badge-bg: var(--cao-breadcrumb-badge-bg, #eef2ff);
+  --_badge-text: var(--cao-breadcrumb-badge-text, #4338ca);
+  --_gap: var(--cao-breadcrumb-gap, 8px);
+  --_size: var(--cao-breadcrumb-font-size, 0.875rem);
+}
+
+.cao-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--_gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--_size);
+  line-height: 1.25;
+}
+
+.cao-breadcrumb__item,
+.cao-breadcrumb__separator {
+  display: inline-flex;
+  align-items: center;
+}
+
+.cao-breadcrumb__separator {
+  color: var(--_separator);
+  user-select: none;
+}
+
+.cao-breadcrumb__action,
+.cao-breadcrumb__text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 4px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--_link);
+  font: inherit;
+  text-decoration: none;
+}
+
+.cao-breadcrumb__action {
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+
+.cao-breadcrumb__action:hover {
+  color: var(--_link-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cao-breadcrumb__action:focus-visible {
+  outline: 2px solid var(--_focus);
+  outline-offset: 1px;
+}
+
+.cao-breadcrumb__item--current .cao-breadcrumb__text {
+  color: var(--_current);
+  font-weight: 600;
+}
+
+.cao-breadcrumb__item--disabled .cao-breadcrumb__text {
+  color: var(--_disabled);
+  cursor: not-allowed;
+}
+
+.cao-breadcrumb__icon {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.cao-breadcrumb__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--_badge-bg);
+  color: var(--_badge-text);
+  font-size: 0.75em;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cao-breadcrumb__action {
+    transition: none;
+  }
+}
