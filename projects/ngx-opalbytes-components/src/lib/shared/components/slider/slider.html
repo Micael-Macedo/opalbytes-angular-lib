@@ -1,0 +1,54 @@
+<div
+  class="cao-slider"
+  [class.cao-slider--disabled]="isInactive()"
+  [class.cao-slider--discrete]="discrete()"
+  [class.cao-slider--range]="range()"
+  [attr.data-cy]="dataCy() || null"
+  [style.--cao-slider-color]="color() || null"
+  [style.--cao-slider-track-color]="trackColor() || null"
+  [style.--cao-slider-thumb-color]="thumbColor() || null"
+  [style.--cao-slider-track-height]="trackHeight() || null"
+  [style.--cao-slider-thumb-size]="thumbSize() || null">
+  <div
+    #track
+    class="cao-slider__track"
+    (pointerdown)="onPointerDown($event)"
+    (pointermove)="onPointerMove($event)"
+    (pointerup)="onPointerEnd($event)"
+    (pointercancel)="onPointerEnd($event)"
+    (lostpointercapture)="onPointerEnd($event)">
+    <div class="cao-slider__rail"></div>
+    <div class="cao-slider__fill" [style.left.%]="fillStart()" [style.width.%]="fillWidth()"></div>
+
+    @for (tick of ticks(); track tick.value) {
+      <span
+        class="cao-slider__tick"
+        [class.cao-slider__tick--active]="isTickActive(tick.pct)"
+        [style.left.%]="tick.pct"></span>
+    }
+
+    @for (thumb of thumbs(); track thumb.id) {
+      <div
+        class="cao-slider__thumb"
+        role="slider"
+        aria-orientation="horizontal"
+        [class.cao-slider__thumb--dragging]="dragging() === thumb.id"
+        [attr.data-thumb]="thumb.id"
+        [tabindex]="isInactive() ? -1 : 0"
+        [attr.aria-valuemin]="thumb.min"
+        [attr.aria-valuemax]="thumb.max"
+        [attr.aria-valuenow]="thumb.value"
+        [attr.aria-valuetext]="format(thumb.value)"
+        [attr.aria-label]="thumb.ariaLabel || null"
+        [attr.aria-labelledby]="ariaLabelledBy() || null"
+        [attr.aria-disabled]="isInactive() ? 'true' : null"
+        [style.left.%]="thumb.pct"
+        (keydown)="onKeydown($event, thumb.id)"
+        (blur)="onBlur()">
+        @if (discrete()) {
+          <span class="cao-slider__label" aria-hidden="true">{{ format(thumb.value) }}</span>
+        }
+      </div>
+    }
+  </div>
+</div>

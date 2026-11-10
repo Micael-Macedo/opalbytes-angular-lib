@@ -252,6 +252,7 @@ src/
         |   ├── radio/
         |   ├── skeleton/
         |   ├── slide-toggle/
+        |   ├── slider/
         |   ├── stepper/
         |   ├── tab-group/
         |   ├── tab-panel/
@@ -1617,6 +1618,106 @@ compararUsuarios(a: Usuario | null, b: Usuario | null): boolean {
 - Cores e tamanhos podem ser definidos no grupo (herdados por todas as opções) ou individualmente em cada botão.
 - Métodos `enable()`/`disable()` permitem controlar o estado programaticamente.
 
+---
+### `CaoSliderComponent`
+
+Slider baseado no `mat-slider` do Angular Material, **sem depender do Material em runtime** (apenas `@angular/core` e `@angular/forms`). Suporta valor único ou intervalo (dois thumbs), balão de valor (`discrete`), marcas por passo, `ngModel`/formulários reativos e acessibilidade completa por teclado.
+
+**Seletor:** `<cao-slider>`
+
+**Interface `ICaoSliderChangeEvent`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `value` | `number` | Valor único (ou inicial, no modo `range`). |
+| `endValue` | `number \| null` | Valor final no modo `range`; `null` no modo simples. |
+| `thumb` | `'start' \| 'end'` | Thumb que originou a alteração. |
+| `source` | `CaoSliderComponent` | Instância que originou o evento. |
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `min` | `number` | `0` | Valor mínimo. |
+| `max` | `number` | `100` | Valor máximo. |
+| `step` | `number` | `1` | Incremento entre valores. |
+| `value` | `number \| null` | `null` | Valor único (ou inicial). Suporta `[(value)]`. `null` equivale a `min`. |
+| `endValue` | `number \| null` | `null` | Valor final no modo `range`. Suporta `[(endValue)]`. `null` equivale a `max`. |
+| `range` | `boolean` | `false` | Habilita dois thumbs. Os thumbs não se cruzam. |
+| `discrete` | `boolean` | `false` | Exibe um balão com o valor ao passar o mouse, focar ou arrastar. |
+| `showTickMarks` | `boolean` | `false` | Exibe marcas em cada passo (ocultas se houver mais de 101). |
+| `displayWith` | `(value: number) => string` | `String` | Formata o valor do balão e do `aria-valuetext`. |
+| `isDisabled` | `boolean` | `false` | Desabilita o slider. |
+| `disabled` | `boolean` | `false` | Alias de `isDisabled`. |
+| `color` | `string` | `''` | Cor do preenchimento. Padrão visual: `#4f46e5`. |
+| `trackColor` | `string` | `''` | Cor da trilha. Padrão visual: `#e5e7eb`. |
+| `thumbColor` | `string` | `''` | Cor do thumb. Padrão: `color`. |
+| `trackHeight` | `string` | `''` | Altura da trilha. Padrão visual: `4px`. |
+| `thumbSize` | `string` | `''` | Tamanho do thumb. Padrão visual: `20px`. |
+| `ariaLabel` | `string` | `''` | `aria-label` (modo simples). |
+| `ariaLabelledBy` | `string` | `''` | `aria-labelledby` dos thumbs. |
+| `startAriaLabel` / `endAriaLabel` | `string` | `'Valor inicial'` / `'Valor final'` | `aria-label` dos thumbs no modo `range`. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E com Cypress. |
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `valueChange` / `endValueChange` | `number \| null` | Gerados pelo `[(value)]` / `[(endValue)]`. |
+| `sliderChange` | `ICaoSliderChangeEvent` | Emitido a cada alteração feita pelo usuário (ponteiro ou teclado). |
+| `dragStarted` | `void` | Emitido ao começar a arrastar. |
+| `dragEnded` | `void` | Emitido ao soltar o thumb. |
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-slider-color` | `#4f46e5` | Cor do preenchimento. |
+| `--cao-slider-track-color` | `#e5e7eb` | Cor da trilha. |
+| `--cao-slider-thumb-color` | `var(--cao-slider-color)` | Cor do thumb. |
+| `--cao-slider-track-height` | `4px` | Altura da trilha. |
+| `--cao-slider-thumb-size` | `20px` | Tamanho do thumb. |
+| `--cao-slider-focus-ring` | `rgba(79, 70, 229, 0.35)` | Anel de foco. |
+| `--cao-slider-label-bg` / `--cao-slider-label-text` | cor / `#ffffff` | Balão do modo `discrete`. |
+| `--cao-slider-disabled-color` | `#9ca3af` | Cor quando desabilitado. |
+
+**Exemplos:**
+
+```html
+<!-- Simples, com two-way binding -->
+<cao-slider [(value)]="volume" [discrete]="true" ariaLabel="Volume"></cao-slider>
+
+<!-- Intervalo com marcas e valor formatado -->
+<cao-slider
+  [range]="true"
+  [min]="0"
+  [max]="5000"
+  [step]="100"
+  [discrete]="true"
+  [showTickMarks]="true"
+  [displayWith]="moeda"
+  [(value)]="minimo"
+  [(endValue)]="maximo">
+</cao-slider>
+
+<!-- Formulário reativo (intervalo => [inicio, fim]) -->
+<cao-slider [formControl]="faixa" [range]="true"></cao-slider>
+```
+
+```typescript
+faixa = new FormControl<[number, number]>([20, 80], { nonNullable: true });
+moeda = (valor: number) => `R$ ${valor.toLocaleString('pt-BR')}`;
+```
+
+**Teclado:** `←`/`↓` diminuem e `→`/`↑` aumentam em um passo; `PageUp`/`PageDown` movem 10 passos; `Home`/`End` vão ao mínimo/máximo (limitados pelo outro thumb no modo `range`).
+
+**Observações:**
+
+- Cada thumb usa `role="slider"` com `aria-valuemin`, `aria-valuemax`, `aria-valuenow` e `aria-valuetext`. No modo `range`, os limites do thumb inicial e final são ajustados pelo outro thumb.
+- Com `ngModel`/`FormControl`, o valor é `number` no modo simples e `[number, number]` no modo `range`; `FormControl.disable()` desabilita o slider.
+- Ao clicar na trilha, o thumb mais próximo é movido; se ambos estiverem no mesmo valor, o thumb a mover é decidido pela direção do arraste.
+- Valores fora de `min`/`max` são limitados; valores decimais respeitam a precisão do `step`.
+- Respeita `prefers-reduced-motion`. Apenas orientação horizontal.
 ---
 
 ### `CaoCheckboxComponent`
