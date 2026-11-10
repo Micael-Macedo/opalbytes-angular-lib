@@ -1,0 +1,124 @@
+@if (showTrigger()) {
+  <button
+    type="button"
+    class="cao-cmdk-trigger"
+    aria-haspopup="dialog"
+    aria-keyshortcuts="Control+K Meta+K"
+    [attr.aria-expanded]="open()"
+    [attr.aria-label]="ariaLabel()"
+    (click)="toggle()">
+    <svg class="cao-cmdk-trigger__icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <circle cx="11" cy="11" r="7" />
+      <path d="M20 20l-3.5-3.5" />
+    </svg>
+    <span class="cao-cmdk-trigger__text">{{ triggerPlaceholder() }}</span>
+    @if (enableShortcut()) {
+      <span class="cao-cmdk-trigger__keys" aria-hidden="true">
+        <kbd>{{ modifierLabel }}</kbd>
+        <kbd>{{ shortcutKey().toUpperCase() }}</kbd>
+      </span>
+    }
+  </button>
+}
+
+<ng-template #dialogTemplate>
+  <div
+    class="cao-cmdk"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="ariaLabel()"
+    [attr.data-cy]="dataCy() || null"
+    [style.width]="width()"
+    [style.--cao-cmdk-bg]="bgColor() || null"
+    [style.--cao-cmdk-text]="textColor() || null"
+    [style.--cao-cmdk-border-color]="borderColor() || null"
+    [style.--cao-cmdk-active-bg]="activeBgColor() || null"
+    (keydown)="onKeydown($event)">
+    <div class="cao-cmdk__search">
+      <svg class="cao-cmdk__search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <circle cx="11" cy="11" r="7" />
+        <path d="M20 20l-3.5-3.5" />
+      </svg>
+      <input
+        class="cao-cmdk__input"
+        type="text"
+        role="combobox"
+        aria-expanded="true"
+        aria-autocomplete="list"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        [attr.aria-controls]="listId"
+        [attr.aria-activedescendant]="activeDomId()"
+        [attr.aria-label]="ariaLabel()"
+        [placeholder]="placeholder()"
+        [value]="query()"
+        (input)="onQueryInput($event)" />
+    </div>
+
+    <div
+      class="cao-cmdk__list"
+      role="listbox"
+      [id]="listId"
+      [style.max-height]="listMaxHeight()"
+      (mousedown)="$event.preventDefault()">
+      @for (group of visibleGroups(); track group.key) {
+        <div class="cao-cmdk__group" role="group" [attr.aria-labelledby]="group.heading ? group.headingId : null">
+          @if (group.heading) {
+            <div class="cao-cmdk__heading" role="presentation" [id]="group.headingId">{{ group.heading }}</div>
+          }
+
+          @for (entry of group.entries; track entry.domId) {
+            <div
+              class="cao-cmdk__item"
+              role="option"
+              tabindex="-1"
+              [id]="entry.domId"
+              [class.cao-cmdk__item--active]="entry.index === activeIndex()"
+              [class.cao-cmdk__item--disabled]="entry.item.disabled"
+              [attr.aria-selected]="entry.index === activeIndex()"
+              [attr.aria-disabled]="entry.item.disabled ? 'true' : null"
+              [attr.data-cy]="entry.item.dataCy || null"
+              (click)="select(entry)"
+              (keydown)="onItemKeydown($event, entry)"
+              (mousemove)="setActive(entry)">
+              @if (entry.item.icon) {
+                <span class="cao-cmdk__item-icon" aria-hidden="true">
+                  <cao-base-icon
+                    [imgSource]="entry.item.icon"
+                    [isLucideIcon]="entry.item.isLucideIcon ?? true"
+                    [iconColor]="entry.item.iconColor ?? ''"
+                    [strokeWidthIcon]="1.5"
+                    [size]="16" />
+                </span>
+              }
+
+              <span class="cao-cmdk__item-text">
+                <span class="cao-cmdk__item-label">{{ entry.item.label }}</span>
+                @if (entry.item.description) {
+                  <span class="cao-cmdk__item-description">{{ entry.item.description }}</span>
+                }
+              </span>
+
+              @if (entry.item.badge) {
+                <span class="cao-cmdk__item-badge">{{ entry.item.badge }}</span>
+              }
+
+              @if (entry.item.shortcut) {
+                <span class="cao-cmdk__item-shortcut" aria-hidden="true">
+                  @for (key of toKeys(entry.item.shortcut); track $index) {
+                    <kbd>{{ key }}</kbd>
+                  }
+                </span>
+              }
+            </div>
+          }
+        </div>
+      }
+
+      @if (flatEntries().length === 0) {
+        <div class="cao-cmdk__empty" role="status">{{ emptyText() }}</div>
+      }
+    </div>
+  </div>
+</ng-template>

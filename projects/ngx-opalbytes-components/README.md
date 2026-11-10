@@ -242,6 +242,7 @@ src/
         |   ├── base-toggle/
         |   ├── breadcrumb/
         |   ├── checkbox/
+        |   ├── command-k/
         |   ├── drop-down/
         |   ├── footer/
         |   ├── kpi/
@@ -252,6 +253,7 @@ src/
         |   ├── radio/
         |   ├── skeleton/
         |   ├── slide-toggle/
+        |   ├── slider/
         |   ├── stepper/
         |   ├── tab-group/
         |   ├── tab-panel/
@@ -1618,6 +1620,106 @@ compararUsuarios(a: Usuario | null, b: Usuario | null): boolean {
 - Métodos `enable()`/`disable()` permitem controlar o estado programaticamente.
 
 ---
+### `CaoSliderComponent`
+
+Slider baseado no `mat-slider` do Angular Material, **sem depender do Material em runtime** (apenas `@angular/core` e `@angular/forms`). Suporta valor único ou intervalo (dois thumbs), balão de valor (`discrete`), marcas por passo, `ngModel`/formulários reativos e acessibilidade completa por teclado.
+
+**Seletor:** `<cao-slider>`
+
+**Interface `ICaoSliderChangeEvent`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `value` | `number` | Valor único (ou inicial, no modo `range`). |
+| `endValue` | `number \| null` | Valor final no modo `range`; `null` no modo simples. |
+| `thumb` | `'start' \| 'end'` | Thumb que originou a alteração. |
+| `source` | `CaoSliderComponent` | Instância que originou o evento. |
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `min` | `number` | `0` | Valor mínimo. |
+| `max` | `number` | `100` | Valor máximo. |
+| `step` | `number` | `1` | Incremento entre valores. |
+| `value` | `number \| null` | `null` | Valor único (ou inicial). Suporta `[(value)]`. `null` equivale a `min`. |
+| `endValue` | `number \| null` | `null` | Valor final no modo `range`. Suporta `[(endValue)]`. `null` equivale a `max`. |
+| `range` | `boolean` | `false` | Habilita dois thumbs. Os thumbs não se cruzam. |
+| `discrete` | `boolean` | `false` | Exibe um balão com o valor ao passar o mouse, focar ou arrastar. |
+| `showTickMarks` | `boolean` | `false` | Exibe marcas em cada passo (ocultas se houver mais de 101). |
+| `displayWith` | `(value: number) => string` | `String` | Formata o valor do balão e do `aria-valuetext`. |
+| `isDisabled` | `boolean` | `false` | Desabilita o slider. |
+| `disabled` | `boolean` | `false` | Alias de `isDisabled`. |
+| `color` | `string` | `''` | Cor do preenchimento. Padrão visual: `#4f46e5`. |
+| `trackColor` | `string` | `''` | Cor da trilha. Padrão visual: `#e5e7eb`. |
+| `thumbColor` | `string` | `''` | Cor do thumb. Padrão: `color`. |
+| `trackHeight` | `string` | `''` | Altura da trilha. Padrão visual: `4px`. |
+| `thumbSize` | `string` | `''` | Tamanho do thumb. Padrão visual: `20px`. |
+| `ariaLabel` | `string` | `''` | `aria-label` (modo simples). |
+| `ariaLabelledBy` | `string` | `''` | `aria-labelledby` dos thumbs. |
+| `startAriaLabel` / `endAriaLabel` | `string` | `'Valor inicial'` / `'Valor final'` | `aria-label` dos thumbs no modo `range`. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E com Cypress. |
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `valueChange` / `endValueChange` | `number \| null` | Gerados pelo `[(value)]` / `[(endValue)]`. |
+| `sliderChange` | `ICaoSliderChangeEvent` | Emitido a cada alteração feita pelo usuário (ponteiro ou teclado). |
+| `dragStarted` | `void` | Emitido ao começar a arrastar. |
+| `dragEnded` | `void` | Emitido ao soltar o thumb. |
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-slider-color` | `#4f46e5` | Cor do preenchimento. |
+| `--cao-slider-track-color` | `#e5e7eb` | Cor da trilha. |
+| `--cao-slider-thumb-color` | `var(--cao-slider-color)` | Cor do thumb. |
+| `--cao-slider-track-height` | `4px` | Altura da trilha. |
+| `--cao-slider-thumb-size` | `20px` | Tamanho do thumb. |
+| `--cao-slider-focus-ring` | `rgba(79, 70, 229, 0.35)` | Anel de foco. |
+| `--cao-slider-label-bg` / `--cao-slider-label-text` | cor / `#ffffff` | Balão do modo `discrete`. |
+| `--cao-slider-disabled-color` | `#9ca3af` | Cor quando desabilitado. |
+
+**Exemplos:**
+
+```html
+<!-- Simples, com two-way binding -->
+<cao-slider [(value)]="volume" [discrete]="true" ariaLabel="Volume"></cao-slider>
+
+<!-- Intervalo com marcas e valor formatado -->
+<cao-slider
+  [range]="true"
+  [min]="0"
+  [max]="5000"
+  [step]="100"
+  [discrete]="true"
+  [showTickMarks]="true"
+  [displayWith]="moeda"
+  [(value)]="minimo"
+  [(endValue)]="maximo">
+</cao-slider>
+
+<!-- Formulário reativo (intervalo => [inicio, fim]) -->
+<cao-slider [formControl]="faixa" [range]="true"></cao-slider>
+```
+
+```typescript
+faixa = new FormControl<[number, number]>([20, 80], { nonNullable: true });
+moeda = (valor: number) => `R$ ${valor.toLocaleString('pt-BR')}`;
+```
+
+**Teclado:** `←`/`↓` diminuem e `→`/`↑` aumentam em um passo; `PageUp`/`PageDown` movem 10 passos; `Home`/`End` vão ao mínimo/máximo (limitados pelo outro thumb no modo `range`).
+
+**Observações:**
+
+- Cada thumb usa `role="slider"` com `aria-valuemin`, `aria-valuemax`, `aria-valuenow` e `aria-valuetext`. No modo `range`, os limites do thumb inicial e final são ajustados pelo outro thumb.
+- Com `ngModel`/`FormControl`, o valor é `number` no modo simples e `[number, number]` no modo `range`; `FormControl.disable()` desabilita o slider.
+- Ao clicar na trilha, o thumb mais próximo é movido; se ambos estiverem no mesmo valor, o thumb a mover é decidido pela direção do arraste.
+- Valores fora de `min`/`max` são limitados; valores decimais respeitam a precisão do `step`.
+- Respeita `prefers-reduced-motion`. Apenas orientação horizontal.
+---
 
 ### `CaoCheckboxComponent`
 
@@ -1787,6 +1889,158 @@ algunsSelecionados = false;
 
 ---
 
+### `CaoCmdKComponent`
+
+Paleta de comandos (command palette) inspirada no `Command` do shadcn/ui. Exibe um **campo de busca** que abre, no centro da tela, uma lista de comandos com busca, grupos, ícones, atalhos e navegação por teclado. A paleta abre pelo campo ou pelo atalho global **`Ctrl + K`** (Windows/Linux) / **`⌘ + K`** (macOS). Usa o `Overlay` do `@angular/cdk`.
+
+**Seletor:** `<cao-cmd-k>`
+
+**Interface `ICaoCmdKItem`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `id` | `string \| number` | Identificador único do item. |
+| `label` | `string` | Texto principal (usado na busca). |
+| `description` | `string` | Texto secundário abaixo do `label` (também usado na busca). |
+| `icon` | `string` | Nome do ícone Lucide ou caminho/URL de imagem. |
+| `isLucideIcon` | `boolean` | Define se `icon` é Lucide. Padrão: `true`. |
+| `iconColor` | `string` | Cor do ícone Lucide. |
+| `shortcut` | `string \| string[]` | Atalho exibido à direita (apenas visual). Ex.: `'⌘P'` ou `['G', 'P']`. |
+| `keywords` | `string[]` | Palavras-chave adicionais para a busca. |
+| `badge` | `string` | Badge exibido à direita. |
+| `disabled` | `boolean` | Desabilita o item. |
+| `data` | `unknown` | Dados livres devolvidos em `itemSelected`. |
+| `command` | `(item: ICaoCmdKItem) => void` | Callback executado ao selecionar. |
+| `dataCy` | `string` | Atributo para testes E2E. |
+
+**Interface `ICaoCmdKGroup`:** `{ id?: string \| number; heading: string; items: ICaoCmdKItem[] }`
+
+**Interface `ICaoCmdKSelectEvent`:** `{ item: ICaoCmdKItem; group: string }`
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `open` | `boolean` | `false` | Visibilidade da paleta. Suporta `[(open)]`. |
+| `query` | `string` | `''` | Texto da busca. Suporta `[(query)]`. |
+| `items` | `ICaoCmdKItem[]` | `[]` | Itens sem grupo (exibidos antes dos grupos). |
+| `groups` | `ICaoCmdKGroup[]` | `[]` | Grupos de itens. |
+| `placeholder` | `string` | `'Digite um comando ou pesquise...'` | Placeholder da busca dentro da paleta. |
+| `emptyText` | `string` | `'Nenhum resultado encontrado.'` | Texto quando nada corresponde. |
+| `showTrigger` | `boolean` | `true` | Exibe o campo que abre a paleta. |
+| `triggerPlaceholder` | `string` | `'Buscar comandos...'` | Texto do campo que abre a paleta. |
+| `enableShortcut` | `boolean` | `true` | Habilita o atalho global `Ctrl/⌘ + K`. |
+| `shortcutKey` | `string` | `'k'` | Tecla usada com `Ctrl`/`⌘`. |
+| `closeOnSelect` | `boolean` | `true` | Fecha ao selecionar um item. |
+| `clearOnClose` | `boolean` | `true` | Limpa a busca ao fechar. |
+| `loop` | `boolean` | `true` | Volta ao início/fim ao navegar além dos extremos. |
+| `localFilter` | `boolean` | `true` | Filtra localmente. Use `false` para busca remota. |
+| `filterFn` | `CaoCmdKFilterFn \| null` | `null` | Filtro customizado `(item, query) => boolean` (substitui o padrão). |
+| `position` | `'center' \| 'top'` | `'center'` | Posição vertical do painel. |
+| `width` | `string` | `'640px'` | Largura do painel (limitada à largura da tela). |
+| `listMaxHeight` | `string` | `'320px'` | Altura máxima da lista (com rolagem). |
+| `bgColor` / `textColor` / `borderColor` / `activeBgColor` | `string` | `''` | Cores do painel. |
+| `ariaLabel` | `string` | `'Menu de comandos'` | Rótulo acessível do campo e da paleta. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E com Cypress. |
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `itemSelected` | `ICaoCmdKSelectEvent` | Emitido ao selecionar um item. |
+| `openChange` | `boolean` | Gerado pelo `[(open)]`. |
+| `queryChange` | `string` | Gerado pelo `[(query)]`; use para busca remota. |
+
+**Métodos:** `show()`, `close()` e `toggle()`.
+
+**Busca:** ignora acentos e maiúsculas/minúsculas e considera `label`, `description`, `keywords` e o título do grupo. Os resultados são ordenados por relevância dentro de cada grupo (igual, começa com, palavra começa com, contém e, com 3+ caracteres, correspondência por letras em sequência). Grupos sem resultados são ocultados.
+
+**Teclado**
+
+| Tecla | Ação |
+| --- | --- |
+| `Ctrl/⌘ + K` | Abre/fecha a paleta (global). |
+| `↓` / `↑` | Move o destaque (pula itens desabilitados). |
+| `Enter` | Seleciona o item destacado. |
+| `Esc` | Fecha a paleta. |
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-cmdk-bg` | `#ffffff` | Fundo do painel. |
+| `--cao-cmdk-text` | `#111827` | Cor do texto. |
+| `--cao-cmdk-muted` | `#6b7280` | Textos secundários, ícones e títulos de grupo. |
+| `--cao-cmdk-border-color` | `#e5e7eb` | Bordas e divisórias. |
+| `--cao-cmdk-active-bg` | `#f3f4f6` | Fundo do item destacado. |
+| `--cao-cmdk-radius` | `12px` | Raio da borda do painel. |
+| `--cao-cmdk-shadow` | sombra ampla | Sombra do painel. |
+| `--cao-cmdk-trigger-bg` / `--cao-cmdk-trigger-border` / `--cao-cmdk-trigger-text` | `#ffffff` / `#d1d5db` / `#6b7280` | Aparência do campo que abre a paleta. |
+
+**Exemplo básico:**
+
+```typescript
+import { CaoCmdKComponent, ICaoCmdKGroup, ICaoCmdKSelectEvent } from 'ngx-opalbytes-components';
+
+@Component({
+  selector: 'app-header',
+  imports: [CaoCmdKComponent],
+  template: `
+    <cao-cmd-k [groups]="grupos" (itemSelected)="aoSelecionar($event)"></cao-cmd-k>
+  `,
+})
+export class HeaderComponent {
+  private readonly router = inject(Router);
+
+  grupos: ICaoCmdKGroup[] = [
+    {
+      heading: 'Sugestões',
+      items: [
+        { id: 'calendario', label: 'Calendário', icon: 'calendar', data: '/calendario' },
+        { id: 'emoji', label: 'Buscar emoji', icon: 'smile' },
+      ],
+    },
+    {
+      heading: 'Configurações',
+      items: [
+        { id: 'perfil', label: 'Perfil', icon: 'user', shortcut: '⌘P', data: '/perfil' },
+        { id: 'sair', label: 'Sair', icon: 'log-out', command: () => this.auth.logout() },
+      ],
+    },
+  ];
+
+  aoSelecionar({ item }: ICaoCmdKSelectEvent): void {
+    if (typeof item.data === 'string') {
+      this.router.navigateByUrl(item.data);
+    }
+  }
+}
+```
+
+**Sem campo visível (apenas atalho ou botão próprio):**
+
+```html
+<button type="button" (click)="cmd.show()">Comandos</button>
+<cao-cmd-k #cmd [showTrigger]="false" [(open)]="aberto" [items]="comandos"></cao-cmd-k>
+```
+
+**Busca remota:**
+
+```html
+<cao-cmd-k [localFilter]="false" [items]="resultados" (queryChange)="buscar($event)"></cao-cmd-k>
+```
+
+**Observações:**
+
+- A navegação entre páginas (router) fica a cargo do consumidor, via `command` ou `(itemSelected)`; o componente não depende de `@angular/router`.
+- O foco vai para o campo de busca ao abrir e volta ao elemento anterior ao fechar. `Tab` mantém o foco no campo.
+- Acessibilidade: o campo usa `role="combobox"` com `aria-activedescendant`; a lista usa `role="listbox"`, grupos com `role="group"` e itens com `role="option"`.
+- O atalho global é registrado no `document`; com várias instâncias na mesma página, desative-o em todas menos uma (`[enableShortcut]="false"`).
+- `shortcut` nos itens é apenas visual; para atalhos reais, trate-os na aplicação.
+- Para ícones Lucide, registre os ícones usados com `provideLucideIcons` (de `@lucide/angular`). Depende de `BaseIcon` (copie junto ao usar `cao-comp`) e de `@angular/cdk`.
+- Requer ambiente de browser ao abrir (atenção em SSR).
+
+---
 ### `DropDown`
 Um menu suspenso (dropdown) com busca, que funciona com `ngModel` ou `formControlName`.
 
