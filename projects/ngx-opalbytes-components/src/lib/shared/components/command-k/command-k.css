@@ -1,0 +1,235 @@
+:host {
+  display: block;
+}
+
+/* Campo que abre a paleta (aparência de input) */
+.cao-cmdk-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 200px;
+  height: 36px;
+  padding: 0 8px 0 12px;
+  border: 1px solid var(--cao-cmdk-trigger-border, #d1d5db);
+  border-radius: 8px;
+  background-color: var(--cao-cmdk-trigger-bg, #ffffff);
+  color: var(--cao-cmdk-trigger-text, #6b7280);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.cao-cmdk-trigger:hover {
+  border-color: #9ca3af;
+}
+
+.cao-cmdk-trigger:focus-visible {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+}
+
+.cao-cmdk-trigger__icon {
+  flex: 0 0 auto;
+}
+
+.cao-cmdk-trigger__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cao-cmdk-trigger__keys {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 4px;
+}
+
+kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  padding: 1px 6px;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  background-color: #f9fafb;
+  color: #6b7280;
+  font-family: inherit;
+  font-size: 0.6875rem;
+  line-height: 1.5;
+}
+
+/* Painel */
+.cao-cmdk {
+  --_bg: var(--cao-cmdk-bg, #ffffff);
+  --_text: var(--cao-cmdk-text, #111827);
+  --_muted: var(--cao-cmdk-muted, #6b7280);
+  --_border: var(--cao-cmdk-border-color, #e5e7eb);
+  --_active: var(--cao-cmdk-active-bg, #f3f4f6);
+  --_radius: var(--cao-cmdk-radius, 12px);
+  --_shadow: var(--cao-cmdk-shadow, 0 25px 50px -12px rgba(0, 0, 0, 0.3));
+
+  box-sizing: border-box;
+  max-width: calc(100vw - 32px);
+  overflow: hidden;
+  border: 1px solid var(--_border);
+  border-radius: var(--_radius);
+  background-color: var(--_bg);
+  box-shadow: var(--_shadow);
+  color: var(--_text);
+  font-size: 0.875rem;
+  animation: cao-cmdk-in 140ms ease-out;
+}
+
+.cao-cmdk__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--_border);
+}
+
+.cao-cmdk__search-icon {
+  flex: 0 0 auto;
+  color: var(--_muted);
+}
+
+.cao-cmdk__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.9375rem;
+  outline: none;
+}
+
+.cao-cmdk__input::placeholder {
+  color: var(--_muted);
+}
+
+.cao-cmdk__list {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 4px;
+  overscroll-behavior: contain;
+}
+
+.cao-cmdk__group + .cao-cmdk__group {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--_border);
+}
+
+.cao-cmdk__heading {
+  padding: 8px 8px 4px;
+  color: var(--_muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.cao-cmdk__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+.cao-cmdk__item--active {
+  background-color: var(--_active);
+}
+
+.cao-cmdk__item--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.cao-cmdk__item-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  color: var(--_muted);
+  line-height: 0;
+}
+
+.cao-cmdk__item-text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cao-cmdk__item-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cao-cmdk__item-description {
+  overflow: hidden;
+  color: var(--_muted);
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cao-cmdk__item-badge {
+  flex: 0 0 auto;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background-color: #eef2ff;
+  color: #4338ca;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.cao-cmdk__item-shortcut {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.cao-cmdk__empty {
+  padding: 24px 8px;
+  color: var(--_muted);
+  text-align: center;
+}
+
+@keyframes cao-cmdk-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cao-cmdk {
+    animation: none;
+  }
+
+  .cao-cmdk-trigger {
+    transition: none;
+  }
+}

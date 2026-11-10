@@ -242,6 +242,7 @@ src/
         |   ├── base-toggle/
         |   ├── breadcrumb/
         |   ├── checkbox/
+        |   ├── command-k/
         |   ├── drop-down/
         |   ├── footer/
         |   ├── kpi/
@@ -1888,6 +1889,158 @@ algunsSelecionados = false;
 
 ---
 
+### `CaoCmdKComponent`
+
+Paleta de comandos (command palette) inspirada no `Command` do shadcn/ui. Exibe um **campo de busca** que abre, no centro da tela, uma lista de comandos com busca, grupos, ícones, atalhos e navegação por teclado. A paleta abre pelo campo ou pelo atalho global **`Ctrl + K`** (Windows/Linux) / **`⌘ + K`** (macOS). Usa o `Overlay` do `@angular/cdk`.
+
+**Seletor:** `<cao-cmd-k>`
+
+**Interface `ICaoCmdKItem`**
+
+| Propriedade | Tipo | Descrição |
+| --- | --- | --- |
+| `id` | `string \| number` | Identificador único do item. |
+| `label` | `string` | Texto principal (usado na busca). |
+| `description` | `string` | Texto secundário abaixo do `label` (também usado na busca). |
+| `icon` | `string` | Nome do ícone Lucide ou caminho/URL de imagem. |
+| `isLucideIcon` | `boolean` | Define se `icon` é Lucide. Padrão: `true`. |
+| `iconColor` | `string` | Cor do ícone Lucide. |
+| `shortcut` | `string \| string[]` | Atalho exibido à direita (apenas visual). Ex.: `'⌘P'` ou `['G', 'P']`. |
+| `keywords` | `string[]` | Palavras-chave adicionais para a busca. |
+| `badge` | `string` | Badge exibido à direita. |
+| `disabled` | `boolean` | Desabilita o item. |
+| `data` | `unknown` | Dados livres devolvidos em `itemSelected`. |
+| `command` | `(item: ICaoCmdKItem) => void` | Callback executado ao selecionar. |
+| `dataCy` | `string` | Atributo para testes E2E. |
+
+**Interface `ICaoCmdKGroup`:** `{ id?: string \| number; heading: string; items: ICaoCmdKItem[] }`
+
+**Interface `ICaoCmdKSelectEvent`:** `{ item: ICaoCmdKItem; group: string }`
+
+**Atributos (Inputs)**
+
+| Atributo | Tipo | Padrão | Descrição |
+| --- | --- | --- | --- |
+| `open` | `boolean` | `false` | Visibilidade da paleta. Suporta `[(open)]`. |
+| `query` | `string` | `''` | Texto da busca. Suporta `[(query)]`. |
+| `items` | `ICaoCmdKItem[]` | `[]` | Itens sem grupo (exibidos antes dos grupos). |
+| `groups` | `ICaoCmdKGroup[]` | `[]` | Grupos de itens. |
+| `placeholder` | `string` | `'Digite um comando ou pesquise...'` | Placeholder da busca dentro da paleta. |
+| `emptyText` | `string` | `'Nenhum resultado encontrado.'` | Texto quando nada corresponde. |
+| `showTrigger` | `boolean` | `true` | Exibe o campo que abre a paleta. |
+| `triggerPlaceholder` | `string` | `'Buscar comandos...'` | Texto do campo que abre a paleta. |
+| `enableShortcut` | `boolean` | `true` | Habilita o atalho global `Ctrl/⌘ + K`. |
+| `shortcutKey` | `string` | `'k'` | Tecla usada com `Ctrl`/`⌘`. |
+| `closeOnSelect` | `boolean` | `true` | Fecha ao selecionar um item. |
+| `clearOnClose` | `boolean` | `true` | Limpa a busca ao fechar. |
+| `loop` | `boolean` | `true` | Volta ao início/fim ao navegar além dos extremos. |
+| `localFilter` | `boolean` | `true` | Filtra localmente. Use `false` para busca remota. |
+| `filterFn` | `CaoCmdKFilterFn \| null` | `null` | Filtro customizado `(item, query) => boolean` (substitui o padrão). |
+| `position` | `'center' \| 'top'` | `'center'` | Posição vertical do painel. |
+| `width` | `string` | `'640px'` | Largura do painel (limitada à largura da tela). |
+| `listMaxHeight` | `string` | `'320px'` | Altura máxima da lista (com rolagem). |
+| `bgColor` / `textColor` / `borderColor` / `activeBgColor` | `string` | `''` | Cores do painel. |
+| `ariaLabel` | `string` | `'Menu de comandos'` | Rótulo acessível do campo e da paleta. |
+| `dataCy` | `string` | `''` | Atributo para testes E2E com Cypress. |
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `itemSelected` | `ICaoCmdKSelectEvent` | Emitido ao selecionar um item. |
+| `openChange` | `boolean` | Gerado pelo `[(open)]`. |
+| `queryChange` | `string` | Gerado pelo `[(query)]`; use para busca remota. |
+
+**Métodos:** `show()`, `close()` e `toggle()`.
+
+**Busca:** ignora acentos e maiúsculas/minúsculas e considera `label`, `description`, `keywords` e o título do grupo. Os resultados são ordenados por relevância dentro de cada grupo (igual, começa com, palavra começa com, contém e, com 3+ caracteres, correspondência por letras em sequência). Grupos sem resultados são ocultados.
+
+**Teclado**
+
+| Tecla | Ação |
+| --- | --- |
+| `Ctrl/⌘ + K` | Abre/fecha a paleta (global). |
+| `↓` / `↑` | Move o destaque (pula itens desabilitados). |
+| `Enter` | Seleciona o item destacado. |
+| `Esc` | Fecha a paleta. |
+
+**CSS Custom Properties**
+
+| Propriedade | Padrão | Descrição |
+| --- | --- | --- |
+| `--cao-cmdk-bg` | `#ffffff` | Fundo do painel. |
+| `--cao-cmdk-text` | `#111827` | Cor do texto. |
+| `--cao-cmdk-muted` | `#6b7280` | Textos secundários, ícones e títulos de grupo. |
+| `--cao-cmdk-border-color` | `#e5e7eb` | Bordas e divisórias. |
+| `--cao-cmdk-active-bg` | `#f3f4f6` | Fundo do item destacado. |
+| `--cao-cmdk-radius` | `12px` | Raio da borda do painel. |
+| `--cao-cmdk-shadow` | sombra ampla | Sombra do painel. |
+| `--cao-cmdk-trigger-bg` / `--cao-cmdk-trigger-border` / `--cao-cmdk-trigger-text` | `#ffffff` / `#d1d5db` / `#6b7280` | Aparência do campo que abre a paleta. |
+
+**Exemplo básico:**
+
+```typescript
+import { CaoCmdKComponent, ICaoCmdKGroup, ICaoCmdKSelectEvent } from 'ngx-opalbytes-components';
+
+@Component({
+  selector: 'app-header',
+  imports: [CaoCmdKComponent],
+  template: `
+    <cao-cmd-k [groups]="grupos" (itemSelected)="aoSelecionar($event)"></cao-cmd-k>
+  `,
+})
+export class HeaderComponent {
+  private readonly router = inject(Router);
+
+  grupos: ICaoCmdKGroup[] = [
+    {
+      heading: 'Sugestões',
+      items: [
+        { id: 'calendario', label: 'Calendário', icon: 'calendar', data: '/calendario' },
+        { id: 'emoji', label: 'Buscar emoji', icon: 'smile' },
+      ],
+    },
+    {
+      heading: 'Configurações',
+      items: [
+        { id: 'perfil', label: 'Perfil', icon: 'user', shortcut: '⌘P', data: '/perfil' },
+        { id: 'sair', label: 'Sair', icon: 'log-out', command: () => this.auth.logout() },
+      ],
+    },
+  ];
+
+  aoSelecionar({ item }: ICaoCmdKSelectEvent): void {
+    if (typeof item.data === 'string') {
+      this.router.navigateByUrl(item.data);
+    }
+  }
+}
+```
+
+**Sem campo visível (apenas atalho ou botão próprio):**
+
+```html
+<button type="button" (click)="cmd.show()">Comandos</button>
+<cao-cmd-k #cmd [showTrigger]="false" [(open)]="aberto" [items]="comandos"></cao-cmd-k>
+```
+
+**Busca remota:**
+
+```html
+<cao-cmd-k [localFilter]="false" [items]="resultados" (queryChange)="buscar($event)"></cao-cmd-k>
+```
+
+**Observações:**
+
+- A navegação entre páginas (router) fica a cargo do consumidor, via `command` ou `(itemSelected)`; o componente não depende de `@angular/router`.
+- O foco vai para o campo de busca ao abrir e volta ao elemento anterior ao fechar. `Tab` mantém o foco no campo.
+- Acessibilidade: o campo usa `role="combobox"` com `aria-activedescendant`; a lista usa `role="listbox"`, grupos com `role="group"` e itens com `role="option"`.
+- O atalho global é registrado no `document`; com várias instâncias na mesma página, desative-o em todas menos uma (`[enableShortcut]="false"`).
+- `shortcut` nos itens é apenas visual; para atalhos reais, trate-os na aplicação.
+- Para ícones Lucide, registre os ícones usados com `provideLucideIcons` (de `@lucide/angular`). Depende de `BaseIcon` (copie junto ao usar `cao-comp`) e de `@angular/cdk`.
+- Requer ambiente de browser ao abrir (atenção em SSR).
+
+---
 ### `DropDown`
 Um menu suspenso (dropdown) com busca, que funciona com `ngModel` ou `formControlName`.
 
