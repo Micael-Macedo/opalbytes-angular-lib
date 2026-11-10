@@ -1,3 +1,10 @@
+## 1.31.0 (2026-11-10)
+
+* Merge pull request #119 from Micael-Macedo/feature(components)/add-slider-component ([0fe306e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0fe306e)), closes [#119](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/119)
+* feat: add command-k component ([164c955](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/164c955))
+* feat: add slider component ([0bb6a7b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0bb6a7b))
+* refactor: popover component ([5c25a6b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/5c25a6b))
+
 ## 1.30.0 (2026-11-09)
 
 * Merge pull request #118 from Micael-Macedo/feature(components)/add-progress-popover-component ([15f4c15](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/15f4c15)), closes [#118](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/118)
