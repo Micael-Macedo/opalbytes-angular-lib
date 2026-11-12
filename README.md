@@ -232,6 +232,35 @@ Siga o `STORYBOOK-SETUP.md` gerado para instalar as dependências
 
 ---
 
+##  CLI cao-comp
+
+O CLI `cao-comp` (disponível em `projects/ngx-opalbytes-components/cli/cao-comp.cjs`) copia componentes, gera o setup de Storybook e cria novos projetos no padrão.
+
+### Gerar novo projeto (`cao-comp new`)
+
+Cria um projeto novo a partir do repositório base, já ajustando nome, porta e os alvos de build por ambiente:
+
+```bash
+cao-comp new <nome> [-p <porta>]
+```
+
+- `<nome>`: apenas letras minúsculas e hífens (`^[a-z-]+$`).
+- `-p, --port <porta>`: porta do projeto, entre `4206` e `4299` (padrão `4206`).
+
+O comando clona o repositório base em `./<nome>` (a pasta não pode existir), ajusta `package.json`/`package-lock.json` (nome/porta) e `angular.json` (nome do projeto e `buildTarget` de `production`, `homologation`, `development` e `local`) e executa `npm install`.
+
+```bash
+# via binário global (precisa estar atualizado)
+cao-comp new meu-app -p 4207
+
+# via versão local do repositório
+npm run cao-comp -- new meu-app -p 4207
+```
+
+> Requisitos: `git`, Node/npm e acesso ao repositório base. Consulte a documentação completa em `projects/ngx-opalbytes-components/README.md`.
+
+---
+
 ##  Performance Monitoring
 
 Este monorepo inclui ferramentas integradas de monitoramento de performance:
@@ -464,5 +493,5 @@ O versionamento e a publicação de novas versões são totalmente automatizados
 *   `npm run lint`: Analisa o código em busca de erros de estilo e padrões.
 *   `npm run storybook`: Abre o Storybook dos componentes (porta 6006).
 *   `npm run build-storybook`: Gera o build estático do Storybook.
-*   `npm run cao-comp -- <args>`: Invoca o CLI `cao-comp` localmente (ex: `npm run cao-comp -- base-button ./dest`, `npm run cao-comp -- storybook ./meu-projeto`).
+*   `npm run cao-comp -- <args>`: Invoca o CLI `cao-comp` localmente (ex: `npm run cao-comp -- base-button ./dest`, `npm run cao-comp -- storybook ./meu-projeto`, `npm run cao-comp -- new meu-app -p 4207`).
 

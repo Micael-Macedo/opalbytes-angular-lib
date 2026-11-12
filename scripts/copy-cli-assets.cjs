@@ -79,6 +79,7 @@ function generateDocs() {
   lines.push('```bash');
   lines.push('cao-comp <componente> <destino> [--force]');
   lines.push('cao-comp storybook <destino> [--force]');
+  lines.push('cao-comp new [nome] [opcoes]');
   lines.push('```');
   lines.push('');
   lines.push('| Argumento    | Descricao                                                 |');
@@ -86,6 +87,7 @@ function generateDocs() {
   lines.push('| `<componente>` | Nome da pasta em `shared/components` (ex: `base-button`) |');
   lines.push('| `<destino>`    | Pasta onde os arquivos serao gerados (criada se nao existir) |');
   lines.push('| `storybook`    | Gera o setup do Storybook (.storybook/ + exemplo + doc)  |');
+  lines.push('| `new`          | Cria um novo projeto a partir do repositorio base         |');
   lines.push('');
   lines.push('## Opcoes');
   lines.push('');
@@ -96,6 +98,13 @@ function generateDocs() {
   lines.push('| `-f`, `--force`   | Sobrescreve arquivos existentes no destino    |');
   lines.push('| `-v`, `--version` | Exibe a versao                                |');
   lines.push('');
+  lines.push('## Opcoes do subcomando new');
+  lines.push('');
+  lines.push('| Opcao                  | Descricao                                               |');
+  lines.push('|------------------------|---------------------------------------------------------|');
+  lines.push('| `-n`, `--name <nome>`  | Nome do projeto (apenas letras minusculas e hifens)     |');
+  lines.push('| `-p`, `--port <porta>` | Porta do projeto, entre `4206` e `4299` (padrao `4206`) |');
+  lines.push('');
   lines.push('## Exemplos');
   lines.push('');
   lines.push('```bash');
@@ -104,7 +113,17 @@ function generateDocs() {
   lines.push('cao-comp --list');
   lines.push('cao-comp storybook ./meu-projeto');
   lines.push('cao-comp base-button ./meu-projeto/src/app/components && cao-comp storybook ./meu-projeto');
+  lines.push('cao-comp new meu-app');
+  lines.push('cao-comp new meu-app -p 4207');
   lines.push('```');
+  lines.push('');
+  lines.push('## Novo projeto (cao-comp new)');
+  lines.push('');
+  lines.push('O subcomando `new` clona o repositorio base em `./<nome>` (a pasta');
+  lines.push('nao pode existir), ajusta `package.json`/`package-lock.json`');
+  lines.push('(nome e porta) e `angular.json` (nome do projeto e `buildTarget`');
+  lines.push('de `production`, `homologation`, `development` e `local`) e executa');
+  lines.push('`npm install`. Requer `git`, Node/npm e acesso ao repositorio base.');
   lines.push('');
   lines.push(`## Componentes disponiveis (${components.length})`);
   lines.push('');
