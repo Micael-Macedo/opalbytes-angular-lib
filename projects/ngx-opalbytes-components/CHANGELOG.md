@@ -1,3 +1,8 @@
+## 1.32.0 (2026-11-12)
+
+* Merge pull request #120 from Micael-Macedo/feature(components)/add-base-repo-by-cli ([fb8e47e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fb8e47e)), closes [#120](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/120)
+* feat: add create projects by global cli ([04dd01b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/04dd01b))
+
 ## 1.31.0 (2026-11-10)
 
 * Merge pull request #119 from Micael-Macedo/feature(components)/add-slider-component ([0fe306e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0fe306e)), closes [#119](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/119)
