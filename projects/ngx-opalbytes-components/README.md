@@ -97,6 +97,8 @@ npm link
 
 ```bash
 cao-comp <componente> <destino> [opcoes]
+cao-comp storybook <destino> [opcoes]
+cao-comp new [nome] [opcoes]
 ```
 
 **Argumentos:**
@@ -122,6 +124,47 @@ cao-comp base-button ./src/app/components
 cao-comp stepper ./src/app/components --force
 cao-comp --list
 ```
+
+### Gerar novo projeto (`cao-comp new`)
+
+Cria um projeto novo já no padrão, a partir do repositório base, ajustando nome, porta e os alvos de build por ambiente.
+
+```bash
+cao-comp new [nome] [opcoes]
+```
+
+**Argumentos:**
+
+| Argumento | Descrição |
+| --- | --- |
+| `<nome>` | Nome do projeto. Aceita apenas letras minúsculas e hífens (`^[a-z-]+$`). Se omitido, será solicitado. |
+
+**Opções:**
+
+| Opção | Descrição |
+| --- | --- |
+| `-n, --name <nome>` | Nome do projeto (alternativa ao argumento posicional). |
+| `-p, --port <porta>` | Porta do projeto. Valores válidos: `4206`–`4299` (padrão `4206`). |
+
+**O comando:**
+
+1. Valida o nome e a porta.
+2. Clona o repositório base em `./<nome>` (a pasta de destino não pode existir).
+3. Ajusta `package.json` e `package-lock.json` (nome e porta).
+4. Ajusta `angular.json` (nome do projeto e `buildTarget` de `production`, `homologation`, `development` e `local`).
+5. Executa `npm install`.
+
+**Requisitos:** `git`, Node/npm e acesso ao repositório base.
+
+**Exemplos:**
+
+```bash
+cao-comp new meu-app
+cao-comp new meu-app -p 4207
+npm run cao-comp -- new meu-app -p 4207
+```
+
+> Para executar a versão local do repositório, use `npm run cao-comp -- ...`. A instalação global precisa estar atualizada.
 
 ---
 

@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 'use strict';
 
+const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const readlineSync = require('readline-sync');
 
 const USAGE = `cao-comp — Copia um componente da lib ngx-opalbytes-components para qualquer projeto
 e gera o setup de Storybook para visualizar os componentes
@@ -10,6 +12,7 @@ e gera o setup de Storybook para visualizar os componentes
 Uso:
   cao-comp <componente> <destino> [opcoes]
   cao-comp storybook <destino> [opcoes]
+  cao-comp new [nome] [opcoes]
 
 Argumentos:
   <componente>   Nome da pasta do componente em shared/components (ex: base-button)
@@ -25,12 +28,12 @@ Subcomando storybook:
   Gera o setup minimo do Storybook (.storybook/, exemplo de story e STORYBOOK-SETUP.md)
   em <destino>, pronto para visualizar os componentes copiados.
 
-Exemplos:
-  cao-comp base-button ./src/app/components
-  cao-comp stepper ./src/app/components --force
-  cao-comp --list
-  cao-comp storybook ./meu-projeto
-  cao-comp base-button ./meu-projeto/src/app/components && cao-comp storybook ./meu-projeto
+Subcomando new:
+  Cria um novo projeto interativamente (ou via flags).
+
+Opcoes de new:
+  -n, --name <nome>       Nome do projeto
+  -p, --port <porta>      Porta do projeto (default: 4206)
 `;
 
 const STORYBOOK_FILES = {
@@ -42,7 +45,6 @@ const config: StorybookConfig = {
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
   "addons": [
-    "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "@storybook/addon-docs",
     "@storybook/addon-onboarding"
@@ -51,26 +53,13 @@ const config: StorybookConfig = {
     "name": "@storybook/angular-vite",
     "options": {
       "compodoc": false,
-      "compodocArgs": [
-        "-e",
-        "json",
-        "-d",
-        "."
-      ]
+      "compodocArgs": ["-e", "json", "-d", "."]
     }
   }
 };
 export default config;
 `,
   '.storybook/preview.ts': `import type { Preview } from '@storybook/angular-vite';
-
-// Para habilitar as docs automaticas (argTypes) com Compodoc:
-// 1. Gere o documentation.json:  npx @compodoc/compodoc -p tsconfig.json -e json -d .
-// 2. Coloque "compodoc": true no framework options do .storybook/main.ts
-// 3. Descomente as linhas abaixo:
-// import { setCompodocJson } from '@storybook/addon-docs/angular';
-// import docJson from '../documentation.json';
-// setCompodocJson(docJson);
 
 const preview: Preview = {
   parameters: {
@@ -101,7 +90,7 @@ export default preview;
 `,
 };
 
-const EXAMPLE_STORY_LINES = [
+const EXAMPLE_STORY = [
   `import { Component, EventEmitter, Input, Output } from '@angular/core';`,
   `import type { Meta, StoryObj } from '@storybook/angular-vite';`,
   `import { fn } from 'storybook/test';`,
@@ -135,101 +124,29 @@ const EXAMPLE_STORY_LINES = [
   `export default meta;`,
   `type Story = StoryObj<StorybookExampleButtonComponent>;`,
   ``,
-  `export const Default: Story = {`,
-  `  args: { label: 'Clique!' },`,
-  `};`,
+  `export const Default: Story = { args: { label: 'Clique!' } };`,
+  `export const ComIconeTexto: Story = { args: { label: 'Salvar' } };`,
+  `export const Desabilitado: Story = { args: { label: 'Bloqueado', isDisabled: true } };`,
   ``,
-  `export const ComIconeTexto: Story = {`,
-  `  args: { label: 'Salvar' },`,
-  `};`,
-  ``,
-  `export const Desabilitado: Story = {`,
-  `  args: { label: 'Bloqueado', isDisabled: true },`,
-  `};`,
-  ``,
-];
+].join('\n');
 
 const STORYBOOK_SETUP_DOC = `# Storybook — Setup gerado pelo cao-comp
 
-Este diretorio contem o setup minimo do Storybook para visualizar os
-componentes da lib ngx-opalbytes-components em um projeto externo.
-
-## 1. Instalar as dependencias (no destino)
-
-Adicione as dependencias de desenvolvimento:
+## 1. Instalar dependencias
 
 \`\`\`bash
-npm i -D storybook @storybook/angular-vite @storybook/addon-essentials @storybook/addon-a11y @storybook/addon-docs @storybook/addon-onboarding @compodoc/compodoc
+npm i -D storybook @storybook/angular-vite @storybook/addon-a11y @storybook/addon-docs @storybook/addon-onboarding @compodoc/compodoc
 \`\`\`
 
-Certifique-se de que as peer dependencies dos componentes estao instaladas:
-\`@angular/core\`, \`@angular/common\`, \`@angular/material\`, \`@angular/cdk\`,
-\`@lucide/angular\` e \`ngx-mask\`.
-
-## 2. Copiar os componentes que deseja visualizar
+## 2. Rodar
 
 \`\`\`bash
-cao-comp base-button ./src/app/components
-cao-comp base-input ./src/app/components
-cao-comp --list   # lista todos os componentes disponiveis
-\`\`\`
-
-## 3. Criar stories para os componentes copiados
-
-Abra \`src/stories/CaoButton.stories.ts\` (exemplo gerado) ou crie arquivos
-\`*.stories.ts\` junto dos componentes. Exemplo:
-
-\`\`\`ts
-import type { Meta, StoryObj } from '@storybook/angular-vite';
-import { fn } from 'storybook/test';
-import { CaoBaseButtonComponent } from '../../app/components/base-button/base-button.component';
-
-const meta: Meta<CaoBaseButtonComponent> = {
-  title: 'Componentes/Base Button',
-  component: CaoBaseButtonComponent,
-  tags: ['autodocs'],
-  args: { buttonClick: fn() },
-};
-
-export default meta;
-type Story = StoryObj<CaoBaseButtonComponent>;
-
-export const Default: Story = { args: { buttonText: 'Clique!' } };
-export const ComIcone: Story = { args: { buttonText: 'Salvar', leadingIcon: 'Save', isLucideIcon: true } };
-\`\`\`
-
-## 4. Rodar
-
-\`\`\`bash
-# Servidor de desenvolvimento (porta 6006)
 npx storybook dev -c .storybook -p 6006
-
-# Build estatico
 npx storybook build -c .storybook -o storybook-static
 \`\`\`
-
-Dica: adicione ao package.json do projeto de destino:
-
-\`\`\`json
-{
-  "scripts": {
-    "storybook": "storybook dev -c .storybook -p 6006",
-    "build-storybook": "storybook build -c .storybook -o storybook-static"
-  }
-}
-\`\`\`
-
-## Opcional: Compodoc (docs automaticas)
-
-1. Gere o JSON de documentacao na raiz do destino:
-   \`\`\`bash
-   npx @compodoc/compodoc -p tsconfig.json -e json -d .
-   \`\`\`
-2. No \`.storybook/main.ts\`, altere \`"compodoc": false\` para \`"compodoc": true\`.
-3. No \`.storybook/preview.ts\`, descomente o bloco do Compodoc.
-
-> O \`--force\` sobrescreve os arquivos gerados pelo cao-comp no destino.
 `;
+
+// ---------- utilitarios puros (facilmente testaveis) ----------
 
 function resolveTemplatesDir() {
   const candidates = [
@@ -238,9 +155,7 @@ function resolveTemplatesDir() {
     path.join(__dirname, '..', '..', 'src', 'lib', 'shared', 'components'),
   ];
   for (const dir of candidates) {
-    if (fs.existsSync(dir) && fs.statSync(dir).isDirectory()) {
-      return dir;
-    }
+    if (fs.existsSync(dir) && fs.statSync(dir).isDirectory()) return dir;
   }
   return null;
 }
@@ -255,12 +170,8 @@ function resolvePackageVersion() {
     if (fs.existsSync(file)) {
       try {
         const pkg = JSON.parse(fs.readFileSync(file, 'utf8'));
-        if (pkg && pkg.version) {
-          return pkg.version;
-        }
-      } catch (_) {
-        /* ignore */
-      }
+        if (pkg && pkg.version) return pkg.version;
+      } catch (_) { /* ignore */ }
     }
   }
   return 'desconhecida';
@@ -315,7 +226,7 @@ function setupStorybook(destination, force) {
   }
 
   const storyFile = path.join(root, 'src', 'stories', 'CaoButton.stories.ts');
-  if (writeFileIfAllowed(storyFile, EXAMPLE_STORY_LINES.join('\n'), force, conflicts)) {
+  if (writeFileIfAllowed(storyFile, EXAMPLE_STORY, force, conflicts)) {
     created.push(path.relative(root, storyFile));
   }
 
@@ -327,27 +238,51 @@ function setupStorybook(destination, force) {
   if (conflicts.length) {
     process.stderr.write(
       `Erro: os seguintes arquivos ja existem no destino (use --force para sobrescrever):\n` +
-      conflicts.map((c) => `  - ${c}`).join('\n') +
-      '\n'
+        conflicts.map((c) => `  - ${c}`).join('\n') + '\n'
     );
     return 1;
   }
 
   process.stdout.write(
     `Setup de Storybook gerado em "${root}".\n` +
-    `Arquivos criados:\n` +
-    created.map((c) => `  - ${c}`).join('\n') +
-    '\n' +
-    `Leia ${path.join(root, 'STORYBOOK-SETUP.md')} para instalar as dependencias e rodar.\n`
+      `Arquivos criados:\n` +
+      created.map((c) => `  - ${c}`).join('\n') + '\n'
   );
   return 0;
 }
 
+// ---------- parse de argumentos ----------
+
 function parseArgs(argv) {
   const positionals = [];
-  const flags = { help: false, list: false, force: false, version: false };
-  for (let i = 0; i < argv.length; i++) {
-    const arg = argv[i];
+  const flags = {
+    help: false,
+    list: false,
+    force: false,
+    version: false,
+    name: null,
+    port: null,
+    repo: null,
+    websocket: false,
+    stage: false,
+  };
+
+  const valueFlags = new Set(['--name', '--port', '--repo']);
+  const normalized = [];
+  for (const arg of argv) {
+    if (typeof arg === 'string' && arg.startsWith('--') && arg.includes('=')) {
+      const eq = arg.indexOf('=');
+      const key = arg.slice(0, eq);
+      if (valueFlags.has(key)) {
+        normalized.push(key, arg.slice(eq + 1));
+        continue;
+      }
+    }
+    normalized.push(arg);
+  }
+
+  for (let i = 0; i < normalized.length; i++) {
+    const arg = normalized[i];
     switch (arg) {
       case '-h':
       case '--help':
@@ -361,6 +296,26 @@ function parseArgs(argv) {
       case '--force':
         flags.force = true;
         break;
+      case '-n':
+      case '--name':
+        flags.name = normalized[++i];
+        break;
+      case '-p':
+      case '--port':
+        flags.port = normalized[++i];
+        break;
+      case '-r':
+      case '--repo':
+        flags.repo = normalized[++i];
+        break;
+      case '-ws':
+      case '--websocket':
+        flags.websocket = true;
+        break;
+      case '-s':
+      case '--stage':
+        flags.stage = true;
+        break;
       case '-v':
       case '--version':
         flags.version = true;
@@ -372,21 +327,164 @@ function parseArgs(argv) {
   return { positionals, flags };
 }
 
-function main() {
-  const argv = process.argv.slice(2);
+function isValidName(name){
+  const regex = /^[a-z-]+$/
+  return regex.test(name)
+}
+
+function isValidPort(port){
+  if(port >= 4206 && port < 4300) return true
+
+  return false
+}
+
+
+const DEFAULT_BASE_PROJECT_URL = 'https://github.com/Micael-Macedo/opalbytes-base-repo.git'
+// ---------- acao: new ----------
+
+function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
+
+  const providedName = projectName || flags.name;
+  if (providedName && !isValidName(providedName)) {
+    process.stderr.write(
+      `Erro: nome de projeto invalido "${providedName}". Use apenas letras minusculas e hifens.\n`
+    );
+    return 1;
+  }
+
+  let name = providedName || prompt.text('Nome do projeto: ');
+  while (!isValidName(name)) {
+    writeText("Nome de projeto invalido \n")
+    name = prompt.text('Nome do projeto: ');
+  }
+
+  if (flags.port && !isValidPort(parseInt(flags.port))) {
+    process.stderr.write(
+      `Erro: porta invalida "${flags.port}". Use um valor entre 4206 e 4299.\n`
+    );
+    return 1;
+  }
+
+  let port =
+    flags.port || prompt.text('Porta do projeto [4206]: ') || '4206';
+  while (!isValidPort(parseInt(port))) {
+    writeText("porta invalida \n")
+    port = prompt.text('Porta do projeto [4206]: ') || '4206';
+  }
+
+  const destination = path.resolve();
+  const newRepoPath = path.join(destination, name);
+
+  if (fs.existsSync(newRepoPath)) {
+    process.stderr.write(
+      `Erro: a pasta "${newRepoPath}" ja existe. Remova-a ou escolha outro nome.\n`
+    );
+    return 1;
+  }
+
+  const withWebsocket =
+    typeof flags.websocket === 'boolean' && flags.websocket
+      ? true
+      : prompt.confirm('Integracao com Websocket?');
+
+  const withStage =
+    typeof flags.stage === 'boolean' && flags.stage
+      ? true
+      : prompt.confirm('Ambiente stage?');
+
+  const urlRepository =
+    flags.repo || prompt.text('Link repositorio azure: ');
+
+  process.stdout.write(
+    `Projeto "${name}" configurado:\n` +
+      `  destino: ${destination}\n` +
+      `  porta: ${port}\n` +
+      `  websocket: ${withWebsocket}\n` +
+      `  stage: ${withStage}\n` +
+      `  repo: ${urlRepository || '(nao informado)'}\n`
+  );
+
+  cloneRepository(DEFAULT_BASE_PROJECT_URL, newRepoPath)
+
+  updatePackageJson(newRepoPath, name, port)
+
+  updateAngularFile(newRepoPath, name)
+
+  installNpmPackages(newRepoPath)
+
+  writeText("🎆Projeto instalado com sucesso🎆")
+  return 0;
+}
+const DEFAULT_REPO_NAME = 'opalbytes-base-repo'
+
+function updatePackageJson(destination, name, port) {
+  printLine()
+  writeText("Modificando arquivos package")
+  replaceLineMatching(path.join(destination, 'package.json'), '"name":', `  "name": "${name}",`);
+  replaceLineMatching(path.join(destination, 'package.json'), '"port":', `  "port": ${port},`);
+  
+  replaceLineMatching(path.join(destination, 'package-lock.json'), `"name":`, `  "name": "${name}",`);
+  replaceLineMatching(path.join(destination, 'package-lock.json'), `      "name": "opalbytes-base-repo",`, `      "name": "${name}",`);
+  printLine()
+}
+
+const ENV_PATHS = [
+  "production",
+  "homologation",
+  "development",
+  "local",
+]
+
+function writeText(message){
+  process.stdout.write(message + " \n")
+}
+
+function updateAngularFile(destination, name) {
+  console.log(destination, name)
+  replaceLineMatching(path.join(destination, 'angular.json'), `"${DEFAULT_REPO_NAME}"`, `    "${name}": {`);
+
+  for (const env of ENV_PATHS) {
+    replaceLineMatching(path.join(destination, 'angular.json'), `"buildTarget": "${DEFAULT_REPO_NAME}:build:${env}"`, `              "buildTarget": "${name}:build:${env}"`);
+  }
+}
+
+
+// Abstracao do prompt para permitir testes sem stdin
+const defaultPrompt = {
+  text: (msg) => readlineSync.question(msg),
+  confirm: (msg) => readlineSync.keyInYN(msg),
+};
+
+// ---------- subcomandos ----------
+
+const subcommands = {
+  storybook: (dest, flags) => {
+    if (!dest) {
+      process.stderr.write('Erro: informe o destino do Storybook.\n');
+      return 1;
+    }
+    return setupStorybook(dest, flags.force);
+  },
+  new: (name, flags) => createNewProject(name, flags),
+};
+
+// ---------- entrypoint ----------
+
+function main(argv = process.argv.slice(2), deps = {}) {
   const { positionals, flags } = parseArgs(argv);
+  const prompt = deps.prompt || defaultPrompt;
+  const templatesDir = deps.templatesDir || resolveTemplatesDir();
 
   if (flags.help) {
-    process.stdout.write(USAGE + '\n');
+    writeText((USAGE + '\n'));
     return 0;
   }
 
   if (flags.version) {
-    process.stdout.write(`cao-comp ${resolvePackageVersion()}\n`);
+    writeText((`cao-comp ${resolvePackageVersion()}\n`));
     return 0;
   }
 
-  const templatesDir = resolveTemplatesDir();
   if (!templatesDir) {
     process.stderr.write(
       'Erro: nao foi possivel localizar a pasta de templates dos componentes.\n'
@@ -395,62 +493,131 @@ function main() {
   }
 
   if (flags.list) {
-    const components = listComponents(templatesDir);
-    process.stdout.write('Componentes disponiveis:\n');
-    for (const c of components) {
-      process.stdout.write(`  - ${c}\n`);
+    writeText('Componentes disponiveis:\n');
+    for (const c of listComponents(templatesDir)) {
+      writeText(`  - ${c}\n`);
     }
     return 0;
   }
 
   const [first, second] = positionals;
 
-  if (first === 'storybook') {
-    if (!second) {
-      process.stderr.write(
-        'Erro: informe o destino do Storybook.\n\n' + USAGE + '\n'
-      );
-      return 1;
+  if (subcommands[first]) {
+    // passa `second` como nome/destino e o objeto de flags
+    if (first === 'new') {
+      return createNewProject(second, flags, prompt);
     }
-    return setupStorybook(second, flags.force);
+    return subcommands[first](second, flags);
   }
 
-  const component = first;
-  const destination = second;
-  if (!component || !destination) {
-    process.stderr.write(
-      'Erro: informe o componente e o destino.\n\n' + USAGE + '\n'
-    );
+  // copia de componente (comportamento default)
+  if (!first || !second) {
+    process.stderr.write('Erro: informe o componente e o destino.\n\n' + USAGE + '\n');
     return 1;
   }
 
-  const sourceDir = path.join(templatesDir, component);
+  const sourceDir = path.join(templatesDir, first);
   if (!fs.existsSync(sourceDir) || !fs.statSync(sourceDir).isDirectory()) {
-    const available = listComponents(templatesDir).join(', ');
     process.stderr.write(
-      `Erro: componente "${component}" nao encontrado.\n` +
-      `Componentes disponiveis: ${available}\n`
+      `Erro: componente "${first}" nao encontrado.\n` +
+        `Componentes disponiveis: ${listComponents(templatesDir).join(', ')}\n`
     );
     return 1;
   }
 
-  fs.mkdirSync(destination, { recursive: true });
+  fs.mkdirSync(second, { recursive: true });
   const conflicts = [];
-  copyRecursive(sourceDir, destination, flags.force, conflicts);
+  copyRecursive(sourceDir, second, flags.force, conflicts);
 
   if (conflicts.length) {
     process.stderr.write(
       `Erro: os seguintes arquivos ja existem no destino (use --force para sobrescrever):\n` +
-      conflicts.map((c) => `  - ${c}`).join('\n') +
-      '\n'
+        conflicts.map((c) => `  - ${c}`).join('\n') + '\n'
     );
     return 1;
   }
 
-  process.stdout.write(
-    `Componente "${component}" copiado para "${destination}".\n`
-  );
+  process.stdout.write(`Componente "${first}" copiado para "${second}".\n`);
   return 0;
 }
 
-process.exit(main());
+if (require.main === module) {
+  process.exit(main());
+}
+
+module.exports = {
+  main,
+  parseArgs,
+  listComponents,
+  copyRecursive,
+  writeFileIfAllowed,
+  setupStorybook,
+  createNewProject,
+  resolveTemplatesDir,
+  resolvePackageVersion,
+  defaultPrompt,
+};
+
+
+function replaceLine(filePath, lineIndex /* 0-based */, newLine) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  const lines = content.split(/\r?\n/);   // preserva CRLF se existir
+  if (lineIndex < 0 || lineIndex >= lines.length) {
+    throw new RangeError(`Linha ${lineIndex} fora do intervalo (0..${lines.length - 1})`);
+  }
+  lines[lineIndex] = newLine;
+  fs.writeFileSync(filePath, lines.join('\n'));
+}
+
+function installNpmPackages(cwd) {
+  printLine()
+  writeText("Baixando pacotes npm")
+  const isWin = process.platform === 'win32';
+  execFileSync(isWin ? 'npm.cmd' : 'npm', ['install'], { 
+    stdio: 'inherit', 
+    cwd,
+    shell: isWin
+  });
+  writeText("Pacotes npm instalados")
+  printLine()
+}
+
+function cloneRepository(url, destination){
+  printLine()
+  writeText("Clonando repositorio base")
+  execFileSync('git', ['clone', url, destination], { stdio: 'inherit' });
+  writeText("Repositorio base clonado")
+  printLine()
+}
+
+function printLine(){
+  process.stdout.write("------------------------------------------------------ \n")
+
+}
+
+function deleteFile(filePath) {
+    if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+    }
+}
+function deleteFolder(folder) {
+  if (fs.existsSync(folder)) {
+    fs.rmSync(folder, { recursive: true, force: true });
+  }
+}
+
+function replaceLineMatching(filePath, match, newLine) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  const eol = content.includes('\r\n') ? '\r\n' : '\n';
+  const re = typeof match === 'string' ? new RegExp(escapeRegExp(match)) : match;
+  const lines = content.split(/\r?\n/);
+  const idx = lines.findIndex((l) => re.test(l));
+  if (idx === -1) return false;       // nada alterado
+  lines[idx] = newLine;
+  fs.writeFileSync(filePath, lines.join(eol));
+  return true;
+}
+
+function escapeRegExp(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
