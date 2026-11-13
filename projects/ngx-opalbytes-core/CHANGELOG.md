@@ -1,3 +1,13 @@
+## 1.5.0 (2026-11-13)
+
+* Merge pull request #121 from Micael-Macedo/refactor(core)/update-token-service-functions ([26e0c30](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/26e0c30)), closes [#121](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/121)
+* Merge pull request #122 from Micael-Macedo/refactor(core)/update-token-service-functions ([d2550a4](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d2550a4)), closes [#122](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/122)
+* test: global localStorage for token service ([3954070](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3954070))
+* refactor: decode token and get infos token service ([2f97adb](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2f97adb))
+* refactor: import token service ([c1de2c9](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c1de2c9))
+* feat: add local storage service ([f248c42](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/f248c42))
+* feat: add session storage service ([556bf69](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/556bf69))
+
 ## 1.4.0 (2026-10-19)
 
 * Merge pull request #107 from Micael-Macedo/feature(core)/update-provide-core-config ([2e93912](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/2e93912)), closes [#107](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/107)
