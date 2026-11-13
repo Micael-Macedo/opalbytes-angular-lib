@@ -1,3 +1,8 @@
+## <small>1.33.2 (2026-11-13)</small>
+
+* Merge pull request #125 from Micael-Macedo/fix(components)/npm-cao-comp-dependencies ([478210a](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/478210a)), closes [#125](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/125)
+* fix: dealing with package imports ([3a9bf70](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/3a9bf70))
+
 ## <small>1.33.1 (2026-11-13)</small>
 
 * Merge pull request #124 from Micael-Macedo/fix(components)/npm-cao-comp-dependencies ([5e5a422](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/5e5a422)), closes [#124](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/124)
