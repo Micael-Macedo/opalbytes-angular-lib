@@ -5,7 +5,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 
 import { authGuard } from "./auth.guard";
-import { CaoTokenGuardService } from "../services/token/token.service";
+import { CaoTokenService } from "../services/token/token.service";
 
 function createRouteSnapshot(): ActivatedRouteSnapshot {
   return {} as ActivatedRouteSnapshot;
@@ -25,7 +25,7 @@ describe("authGuard", () => {
     vi.clearAllMocks();
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      providers: [{ provide: CaoTokenGuardService, useValue: tokenServiceMock }],
+      providers: [{ provide: CaoTokenService, useValue: tokenServiceMock }],
     });
     router = TestBed.inject(Router);
   });

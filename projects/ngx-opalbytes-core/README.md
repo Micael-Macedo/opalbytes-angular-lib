@@ -121,10 +121,10 @@ export class AppComponent {
 O `core` oferece as peças fundamentais para a arquitetura de uma aplicação.
 
 ### Itens Disponíveis no `core`
--   **Services**: Comunicação com APIs, cache, cookies, storage, CEP, alertas, toast, loading e CRUD genérico.
+-   **Services**: Comunicação com APIs, cache, cookies, storage (local/session), CEP, alertas, toast, loading e CRUD genérico.
 -   **Interceptors**: Manipulação de requisições e respostas HTTP (loading, transformação e tratamento de erros).
 -   **Models**: Modelos de dados centrais, como `BaseResourceModel` e `HttpErrorModel`.
--   **Guards**: Proteção de rotas com `authGuard` e `CaoTokenGuardService`.
+-   **Guards**: Proteção de rotas com `authGuard`.
 -   **Config**: Gerenciamento de configurações de ambiente (`development`, `production`) e helpers de URLs/endpoints.
 -   **Utils**: Utilitários globais, como `GlobalErrorHandler` e `NavigationUtil`.
 -   **Providers**: Provider padrão para aplicações (`caoProvideCore`).
@@ -138,12 +138,14 @@ O `core` oferece as peças fundamentais para a arquitetura de uma aplicação.
 | `ToastService` | Para gerenciar notificações do tipo "toast". |
 | `LoadingService` | Para controlar o estado de "carregando" em toda a aplicação. |
 | `HttpCacheService` | Para armazenar em cache respostas de requisições HTTP GET. |
-| `CookieService` | Leitura, escrita e remoção de cookies de forma tipada. |
+| `CookieService` | Leitura, escrita e remoção de cookies de forma tipada, com validação de tamanho (4 KB). |
 | `StorageService` | Abstração sobre `localStorage`/`sessionStorage`. |
+| `CaoLocalStorageService` | Manipulação de `localStorage` com ofuscação base64, prefixo de isolamento e TTL. |
+| `CaoSessionStorageService` | Manipulação de `sessionStorage` com ofuscação base64, prefixo de isolamento e TTL. |
 | `CEPService` | Busca de endereços por CEP (BrasilAPI com fallback para ViaCEP) e municípios por UF. |
 | `CaoConfigService` | Carrega e fornece as configurações de ambiente (`getApiUrl`, `getPath`, `buildUrl`, etc.). |
 | `HelpConfig` | Helpers de endpoints e métodos HTTP prontos para uso. |
-| `CaoTokenGuardService` | Gerencia o token de autenticação usado pelos guards. |
+| `CaoTokenService` | Gerencia o token de autenticação (JWT), refresh token e dados do usuário. |
 | `HttpErrorHandlerService` | Processa erros HTTP de forma centralizada (alertas, redirects). |
 | `ResponseTransformerService` | Normaliza respostas HTTP para o formato `ICaoApiResponse`. |
 | `NavigationUtil` | Navegação centralizada (rotas, params, reload, nova aba). |
@@ -221,6 +223,151 @@ export class EnderecoComponent {
   }
 }
 ```
+
+---
+
+## Armazenamento (Cookies, LocalStorage e SessionStorage)
+
+A biblioteca oferece **três serviços especializados** para persistência no browser, todos com guard de plataforma (SSR-safe) e sem dependências externas.
+
+### `CookieService`
+
+Manipulação tipada de cookies com validação de tamanho e suporte a todas as opções do padrão.
+
+```typescript
+import { Component, inject } from "@angular/core";
+import { CookieService } from "ngx-opalbytes-core";
+
+@Component({ ... })
+export class MeuComponente {
+  private cookieService = inject(CookieService);
+
+  salvar() {
+    // expires em dias (number) ou Date específica
+    this.cookieService.set("token", "abc123", {
+      expires: 7,
+      path: "/",
+      secure: true,
+      sameSite: "Lax",
+    });
+  }
+
+  ler() {
+    const token = this.cookieService.get("token"); // string | null
+    return token;
+  }
+
+  remover() {
+    this.cookieService.remove("token", { path: "/" });
+  }
+}
+```
+
+**Características:**
+- Validação de tamanho (limite de 4096 bytes) com `throw` em caso de excesso.
+- Codificação/decodificação automática via `encodeURIComponent`/`decodeURIComponent`.
+- Suporte a `expires`, `path`, `domain`, `secure`, `sameSite` e `httpOnly` (este último apenas via servidor).
+- Métodos: `set`, `get`, `remove`, `has`, `getAll`, `clear`.
+
+### `CaoLocalStorageService`
+
+Abstração sobre `localStorage` com **ofuscação base64** de chaves e valores, **prefixo de isolamento** (`_m_`) e **TTL (lazy expiration)**.
+
+```typescript
+import { Component, inject } from "@angular/core";
+import { CaoLocalStorageService } from "ngx-opalbytes-core";
+
+@Component({ ... })
+export class MeuComponente {
+  private storage = inject(CaoLocalStorageService);
+
+  salvar() {
+    // expiresIn em milissegundos
+    this.storage.set("token", "abc123", { expiresIn: 3_600_000 });
+  }
+
+  ler() {
+    return this.storage.get<string>("token"); // 'abc123' | null
+  }
+
+  remover() {
+    this.storage.remove("token");
+  }
+}
+```
+
+**Características:**
+- Chaves ofuscadas no formato `_m_<base64(encodeURIComponent(key))>`.
+- Valores serializados em JSON + base64.
+- TTL com **lazy expiration**: itens expirados são removidos automaticamente no próximo `get`.
+- `clear()` afeta **apenas** entradas gravadas por este serviço (prefixo `_m_`), preservando dados de outros apps no mesmo domínio.
+- Métodos: `set`, `get`, `remove`, `clear`, `has`, `keys`, `size`.
+- SSR-safe: retorna `null`/`[]`/`0` fora do browser.
+
+### `CaoSessionStorageService`
+
+API idêntica ao `CaoLocalStorageService`, porém operando sobre `sessionStorage` — os dados persistem apenas durante a sessão da aba/janela.
+
+```typescript
+import { Component, inject } from "@angular/core";
+import { CaoSessionStorageService } from "ngx-opalbytes-core";
+
+@Component({ ... })
+export class MeuComponente {
+  private sessionStorageService = inject(CaoSessionStorageService);
+
+  salvarRascunho(draft: { id: number }) {
+    this.sessionStorageService.set("draft", draft, { expiresIn: 600_000 });
+  }
+
+  lerRascunho() {
+    return this.sessionStorageService.get<{ id: number }>("draft");
+  }
+}
+```
+
+**Características:** as mesmas do `CaoLocalStorageService`, mas com escopo de sessão.
+
+### `CaoTokenService`
+
+Gerencia o ciclo de vida do token JWT, refresh token e dados do usuário. Internamente usa o `CaoLocalStorageService`, com **migração automática** de chaves legadas (`app_*`).
+
+```typescript
+import { Component, inject } from "@angular/core";
+import { CaoTokenService } from "ngx-opalbytes-core";
+
+@Component({ ... })
+export class LoginComponent {
+  private tokenService = inject(CaoTokenService);
+
+  login(token: string, refreshToken: string) {
+    this.tokenService.setToken(token);
+    this.tokenService.setRefreshToken(refreshToken);
+    this.tokenService.setUserDataFromToken();
+  }
+
+  verificarSessao() {
+    if (this.tokenService.isTokenExpired()) {
+      // redirecionar para login
+    }
+    // Assinar mudanças de token
+    this.tokenService.observeToken().subscribe((token) => {
+      console.log("Token mudou:", token);
+    });
+  }
+
+  logout() {
+    this.tokenService.removeAllTokens();
+  }
+}
+```
+
+**Principais métodos:**
+- `hasToken`, `setToken`, `getToken`, `removeToken`
+- `getDecodedToken`, `getRole`, `isTokenExpired`, `isTokenExpiringSoon`
+- `getRefreshToken`, `setRefreshToken`, `removeRefreshToken`, `hasRefreshToken`
+- `setUserDataFromToken`, `getUserData`, `removeUserData`
+- `removeAllTokens`, `observeToken` (retorna `Observable<string | null>`)
 
 ---
 
