@@ -1,3 +1,8 @@
+## <small>1.33.1 (2026-11-13)</small>
+
+* Merge pull request #124 from Micael-Macedo/fix(components)/npm-cao-comp-dependencies ([5e5a422](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/5e5a422)), closes [#124](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/124)
+* fix: npm cao comp dependencies ([cb9bd81](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/cb9bd81))
+
 ## 1.33.0 (2026-11-13)
 
 * Merge pull request #123 from Micael-Macedo/feature(components)/add-project-into-azure-by-cli ([f73a517](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/f73a517)), closes [#123](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/123)
