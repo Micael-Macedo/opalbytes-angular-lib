@@ -1,3 +1,8 @@
+## 1.33.0 (2026-11-13)
+
+* Merge pull request #123 from Micael-Macedo/feature(components)/add-project-into-azure-by-cli ([f73a517](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/f73a517)), closes [#123](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/123)
+* feat: add git azure integration to create repo ([6426bbf](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/6426bbf))
+
 ## 1.32.0 (2026-11-12)
 
 * Merge pull request #120 from Micael-Macedo/feature(components)/add-base-repo-by-cli ([fb8e47e](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/fb8e47e)), closes [#120](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/120)
