@@ -406,11 +406,11 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
 
   cloneRepository(DEFAULT_BASE_PROJECT_URL, newRepoPath)
 
-  // updatePackageJson(newRepoPath, name, port)
+  updatePackageJson(newRepoPath, name, port)
 
-  // updateAngularFile(newRepoPath, name)
+  updateAngularFile(newRepoPath, name)
 
-  // installNpmPackages(newRepoPath)
+  installNpmPackages(newRepoPath)
 
   deleteFolder(path.join(newRepoPath, '.git'))
 
