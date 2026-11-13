@@ -1,5 +1,5 @@
 import { isPlatformBrowser, DOCUMENT } from "@angular/common";
-import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
+import { Injectable, PLATFORM_ID, inject } from "@angular/core";
 
 export interface ICaoCookieOptions {
   expires?: number | Date; // Dias ou data específica
@@ -14,10 +14,8 @@ export interface ICaoCookieOptions {
   providedIn: "root",
 })
 export class CookieService {
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) private platformId: object
-  ) {}
+  private document: Document = inject(DOCUMENT);
+  private platformId: object = inject(PLATFORM_ID);
 
   /**
    * Define um cookie
