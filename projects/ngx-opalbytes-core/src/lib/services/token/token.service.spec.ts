@@ -15,6 +15,24 @@ const LEGACY_PREFIX = "app_";
 const NOW_MS = 1_700_000_000_000;
 const NOW_S = Math.floor(NOW_MS / 1000);
 
+function createStorageFake() {
+  const store = new Map<string, string>();
+  return {
+    getItem(key: string): string | null {
+      return store.has(key) ? (store.get(key) as string) : null;
+    },
+    setItem(key: string, value: string): void {
+      store.set(key, String(value));
+    },
+    removeItem(key: string): void {
+      store.delete(key);
+    },
+    clear(): void {
+      store.clear();
+    },
+  };
+}
+
 describe("CaoTokenService", () => {
   let service: CaoTokenService;
 
@@ -31,6 +49,8 @@ describe("CaoTokenService", () => {
 
   const jwtDecodeMock = jwtDecode as unknown as Mock;
 
+  let fakeStorage: ReturnType<typeof createStorageFake>;
+
   function setup(platformId: string = "browser"): CaoTokenService {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
@@ -46,7 +66,8 @@ describe("CaoTokenService", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.restoreAllMocks();
-    localStorage.clear();
+    fakeStorage = createStorageFake();
+    vi.stubGlobal("localStorage", fakeStorage);
     storageMock.getItem.mockReturnValue(null);
     localStorageMock.has.mockReturnValue(false);
     localStorageMock.get.mockReturnValue(null);
@@ -55,7 +76,7 @@ describe("CaoTokenService", () => {
   });
 
   afterEach(() => {
-    localStorage.clear();
+    vi.unstubAllGlobals();
   });
 
   it("should be created", () => {
@@ -460,7 +481,7 @@ describe("CaoTokenService", () => {
     });
 
     it("should attempt the migration only once per key", () => {
-      const getItemSpy = vi.spyOn(Storage.prototype, "getItem");
+      const getItemSpy = vi.spyOn(fakeStorage, "getItem");
 
       service.getRefreshToken();
       service.getRefreshToken();
@@ -471,8 +492,8 @@ describe("CaoTokenService", () => {
 
     it("should not touch localStorage when not running in the browser", () => {
       const server = setup("server");
-      const getItemSpy = vi.spyOn(Storage.prototype, "getItem");
-      const removeItemSpy = vi.spyOn(Storage.prototype, "removeItem");
+      const getItemSpy = vi.spyOn(fakeStorage, "getItem");
+      const removeItemSpy = vi.spyOn(fakeStorage, "removeItem");
 
       server.getRefreshToken();
       server.removeRefreshToken();
