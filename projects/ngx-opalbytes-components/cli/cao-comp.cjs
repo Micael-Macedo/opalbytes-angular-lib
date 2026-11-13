@@ -406,11 +406,18 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
 
   cloneRepository(DEFAULT_BASE_PROJECT_URL, newRepoPath)
 
-  updatePackageJson(newRepoPath, name, port)
+  // updatePackageJson(newRepoPath, name, port)
 
-  updateAngularFile(newRepoPath, name)
+  // updateAngularFile(newRepoPath, name)
 
-  installNpmPackages(newRepoPath)
+  // installNpmPackages(newRepoPath)
+
+  deleteFolder(path.join(newRepoPath, '.git'))
+
+  if(urlRepository){
+    console.log(newRepoPath)
+    initRepo(newRepoPath, urlRepository)
+  }
 
   writeText("🎆Projeto instalado com sucesso🎆")
   return 0;
@@ -599,11 +606,26 @@ function deleteFile(filePath) {
     if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
     }
-}
-function deleteFolder(folder) {
-  if (fs.existsSync(folder)) {
-    fs.rmSync(folder, { recursive: true, force: true });
   }
+  
+  function deleteFolder(folder) {
+    if (fs.existsSync(folder)) {
+      fs.rmSync(folder, { recursive: true, force: true });
+    }
+  }
+
+function initRepo(projectName, repoLink){
+  printLine()
+  process.chdir(projectName)
+  writeText("fazendo commit no repositorio " + repoLink)
+  execFileSync('git', ['init'], { stdio: 'inherit' });
+  execFileSync('git', ['branch', '-M', 'main'], { stdio: 'inherit' });
+  execFileSync('git', ['add', '.'], { stdio: 'inherit' });
+  execFileSync('git', ['commit', '-m', '"feat: add base project"'], { stdio: 'inherit' });
+  execFileSync('git', ['remote', 'add', 'origin', repoLink], { stdio: 'inherit' });
+  execFileSync('git', ['push', '-u', 'origin', 'main'], { stdio: 'inherit' });
+  writeText("Commit realizado com sucesso")
+  printLine()
 }
 
 function replaceLineMatching(filePath, match, newLine) {
