@@ -1,3 +1,8 @@
+## <small>1.33.3 (2026-11-16)</small>
+
+* Merge pull request #126 from Micael-Macedo/refactor(components)/functions-cli-comp-lib ([a7eef16](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a7eef16)), closes [#126](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/126)
+* refactor: functions generate comp lib ([22333f3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/22333f3))
+
 ## <small>1.33.2 (2026-11-13)</small>
 
 * Merge pull request #125 from Micael-Macedo/fix(components)/npm-cao-comp-dependencies ([478210a](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/478210a)), closes [#125](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/125)
