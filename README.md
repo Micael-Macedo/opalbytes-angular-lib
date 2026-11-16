@@ -214,19 +214,19 @@ Gera o build estático em `dist/storybook/ngx-opalbytes-components`.
 
 ### Storybook em projetos externos (`cao-comp storybook`)
 
-O CLI `cao-comp` possui o subcomando `storybook` que gera o **setup mínimo**
+O CLI `cao-comp` possui o subcomando `storybook`, que gera o **setup mínimo**
 do Storybook (`.storybook/`, exemplo de story e guia `STORYBOOK-SETUP.md`)
-em qualquer projeto, para visualizar os componentes copiados:
+em qualquer projeto para visualizar componentes copiados:
 
 ```bash
 # 1. Copie um componente para o projeto externo
-cao-comp base-button ./meu-projeto/src/app/components
+cao-comp comp base-button ./meu-projeto/src/app/components
 
 # 2. Gere o setup do Storybook no projeto externo
 cao-comp storybook ./meu-projeto
 ```
 
-Siga o `STORYBOOK-SETUP.md` gerado para instalar as dependências
+Siga o `STORYBOOK-SETUP.md` gerado para instalar dependências
 (`storybook`, `@storybook/angular-vite`, addons) e rodar com
 `npx storybook dev -c .storybook -p 6006`.
 
@@ -234,30 +234,27 @@ Siga o `STORYBOOK-SETUP.md` gerado para instalar as dependências
 
 ##  CLI cao-comp
 
-O CLI `cao-comp` (disponível em `projects/ngx-opalbytes-components/cli/cao-comp.cjs`) copia componentes, gera o setup de Storybook e cria novos projetos no padrão.
+O CLI `cao-comp` (disponível em `projects/ngx-opalbytes-components/cli/cao-comp.cjs`) possui os subcomandos `comp`, `storybook` e `new`. O script está organizado por blocos (constantes/templates, resolução, utilitários de FS, handlers de comando e parsing/dispatch), com documentação interna de responsabilidades e efeitos colaterais.
 
-### Gerar novo projeto (`cao-comp new`)
-
-Cria um projeto novo a partir do repositório base, já ajustando nome, porta e os alvos de build por ambiente:
+### Uso resumido
 
 ```bash
-cao-comp new <nome> [-p <porta>]
+cao-comp comp <componente> <destino> [--force] [--list]
+cao-comp storybook <destino> [--force]
+cao-comp new [nome] [--name <nome>] [--port <porta>]
 ```
 
-- `<nome>`: apenas letras minúsculas e hífens (`^[a-z-]+$`).
-- `-p, --port <porta>`: porta do projeto, entre `4206` e `4299` (padrão `4206`).
-
-O comando clona o repositório base em `./<nome>` (a pasta não pode existir), ajusta `package.json`/`package-lock.json` (nome/porta) e `angular.json` (nome do projeto e `buildTarget` de `production`, `homologation`, `development` e `local`) e executa `npm install`.
+### Exemplos
 
 ```bash
-# via binário global (precisa estar atualizado)
+cao-comp comp base-button ./src/app/components
+cao-comp comp --list
+cao-comp storybook ./meu-projeto
 cao-comp new meu-app -p 4207
-
-# via versão local do repositório
 npm run cao-comp -- new meu-app -p 4207
 ```
 
-> Requisitos: `git`, Node/npm e acesso ao repositório base. Consulte a documentação completa em `projects/ngx-opalbytes-components/README.md`.
+> Requisitos para `new`: `git`, Node/npm e acesso ao repositório base. Consulte a documentação completa em `projects/ngx-opalbytes-components/README.md` (inclui observações de compatibilidade de uso conforme a versão do CLI instalada).
 
 ---
 
@@ -493,5 +490,5 @@ O versionamento e a publicação de novas versões são totalmente automatizados
 *   `npm run lint`: Analisa o código em busca de erros de estilo e padrões.
 *   `npm run storybook`: Abre o Storybook dos componentes (porta 6006).
 *   `npm run build-storybook`: Gera o build estático do Storybook.
-*   `npm run cao-comp -- <args>`: Invoca o CLI `cao-comp` localmente (ex: `npm run cao-comp -- base-button ./dest`, `npm run cao-comp -- storybook ./meu-projeto`, `npm run cao-comp -- new meu-app -p 4207`).
+*   `npm run cao-comp -- <args>`: Invoca o CLI `cao-comp` localmente (ex: `npm run cao-comp -- comp base-button ./dest`, `npm run cao-comp -- storybook ./meu-projeto`, `npm run cao-comp -- new meu-app -p 4207`).
 

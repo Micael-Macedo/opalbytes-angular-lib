@@ -74,7 +74,7 @@ export class ExemploComponent {
 
 ## Comandos CLI
 
-A biblioteca disponibiliza uma CLI (`cao-comp`) para copiar o código-fonte de um componente da `ngx-opalbytes-components` para qualquer projeto. Isso é útil quando você precisa customizar o código-fonte de um componente internamente, sem depender apenas da API pública.
+A biblioteca disponibiliza a CLI `cao-comp` (implementada em `projects/ngx-opalbytes-components/cli/cao-comp.cjs`) para copiar componentes da `ngx-opalbytes-components` para outros projetos, gerar um setup mínimo de Storybook e criar novos projetos a partir de um template base.
 
 ### Instalação global
 
@@ -90,69 +90,76 @@ Para desenvolvimento local, a partir da pasta `projects/ngx-opalbytes-components
 npm link
 ```
 
-> Caso não queira instalar, também é possível executar o script diretamente:
+> Também é possível executar o script diretamente:
 > `node ./node_modules/ngx-opalbytes-components/cli/cao-comp.cjs ...`
 
-### Uso
+### Uso (conforme `--help`)
 
 ```bash
-cao-comp <componente> <destino> [opcoes]
+cao-comp comp <componente> <destino> [opcoes]
 cao-comp storybook <destino> [opcoes]
 cao-comp new [nome] [opcoes]
 ```
 
-**Argumentos:**
+**Subcomandos:**
+
+| Subcomando | Descrição |
+| --- | --- |
+| `comp` | Copia um componente de `shared/components` para `<destino>/<componente>`. |
+| `storybook` | Gera `.storybook/`, story de exemplo e `STORYBOOK-SETUP.md` no destino. |
+| `new` | Cria um projeto novo a partir do repositório base, ajustando nome/porta/configurações. |
+
+**Argumentos principais:**
 
 | Argumento | Descrição |
 | --- | --- |
 | `<componente>` | Nome da pasta do componente em `shared/components` (ex: `base-button`). |
-| `<destino>` | Pasta de destino onde os arquivos serão gerados (criada se não existir). |
+| `<destino>` | Pasta de destino (criada se não existir). |
 
-**Opções:**
+**Opções globais/comuns:**
 
 | Opção | Descrição |
 | --- | --- |
 | `-h, --help` | Exibe a ajuda. |
-| `-l, --list` | Lista os componentes disponíveis para cópia. |
+| `-l, --list` | Lista os componentes disponíveis para cópia (fluxo `comp`). |
 | `-f, --force` | Sobrescreve arquivos existentes no destino. |
 | `-v, --version` | Exibe a versão. |
 
 **Exemplos:**
 
 ```bash
-cao-comp base-button ./src/app/components
-cao-comp stepper ./src/app/components --force
-cao-comp --list
+cao-comp comp base-button ./src/app/components
+cao-comp comp stepper ./src/app/components --force
+cao-comp comp --list
+cao-comp storybook ./meu-projeto
+cao-comp --help
 ```
+
+> Observação: a base atual do CLI possui trechos históricos com assinaturas/fluxos divergentes (ex.: forma de invocar `comp` e tratamento de alguns caminhos). Em caso de dúvida, valide com `cao-comp --help` e com o comportamento da versão instalada.
 
 ### Gerar novo projeto (`cao-comp new`)
 
-Cria um projeto novo já no padrão, a partir do repositório base, ajustando nome, porta e os alvos de build por ambiente.
+Cria um projeto novo já no padrão, a partir do repositório base, ajustando nome, porta e alvos de build por ambiente.
 
 ```bash
 cao-comp new [nome] [opcoes]
 ```
 
-**Argumentos:**
+**Argumentos/opções:**
 
-| Argumento | Descrição |
+| Opção/Argumento | Descrição |
 | --- | --- |
-| `<nome>` | Nome do projeto. Aceita apenas letras minúsculas e hífens (`^[a-z-]+$`). Se omitido, será solicitado. |
-
-**Opções:**
-
-| Opção | Descrição |
-| --- | --- |
-| `-n, --name <nome>` | Nome do projeto (alternativa ao argumento posicional). |
+| `<nome>` / `-n, --name <nome>` | Nome do projeto. Aceita apenas letras minúsculas e hífens (`^[a-z-]+$`). Se omitido, pode ser solicitado interativamente. |
 | `-p, --port <porta>` | Porta do projeto. Valores válidos: `4206`–`4299` (padrão `4206`). |
 
-**O comando:**
+**O comando (visão geral):**
 
 1. Valida o nome e a porta.
 2. Clona o repositório base em `./<nome>` (a pasta de destino não pode existir).
 3. Ajusta `package.json` e `package-lock.json` (nome e porta).
 4. Ajusta `angular.json` (nome do projeto e `buildTarget` de `production`, `homologation`, `development` e `local`).
 5. Executa `npm install`.
+6. Remove `.git` do template e, se houver repositório informado, inicializa e faz push inicial (conforme fluxo implementado).
 
 **Requisitos:** `git`, Node/npm e acesso ao repositório base.
 
@@ -165,6 +172,18 @@ npm run cao-comp -- new meu-app -p 4207
 ```
 
 > Para executar a versão local do repositório, use `npm run cao-comp -- ...`. A instalação global precisa estar atualizada.
+
+### Organização interna do CLI (`cli/cao-comp.cjs`)
+
+O script é organizado em blocos funcionais (com comentários de seção) para facilitar manutenção:
+
+- **Constantes e templates**: `USAGE`, conteúdo gerado do Storybook (`STORYBOOK_FILES`, story/doc) e constantes padrão.
+- **Resolução e descoberta**: localização de diretórios de templates/pacote e listagem de componentes.
+- **Utilitários de I/O e FS**: escrita condicional, cópia recursiva, substituição de linhas, logs auxiliares.
+- **Comandos/handlers**: `setupStorybook`, fluxo de `new` (validação, clone, ajustes, install/git) e `comp` (resolução de templates, listagem e cópia).
+- **CLI (parsing/dispatch/entrypoint)**: `parseArgs`, validações, abstração de prompt, tabela de subcomandos e `main`.
+
+Essa organização documenta a responsabilidade das funções e os efeitos colaterais (filesystem, processos externos, stdout/stderr), servindo de referência para evolução do CLI.
 
 ---
 
@@ -237,15 +256,15 @@ Suponha que sua aplicação precise de um `<cao-input>` com um **tooltip mais el
 
 1. Explore os componentes disponíveis:
    ```bash
-   cao-comp --list
+   cao-comp comp --list
    ```
 2. Copie o fonte do componente para o seu projeto:
    ```bash
-   cao-comp base-input ./src/app/components/base-input-custom
+   cao-comp comp base-input ./src/app/components/base-input-custom
    ```
 3. Gere o Storybook para visualizar e validar:
    ```bash
-   cao-comp base-input ./src/app/components/base-input-custom
+   cao-comp comp base-input ./src/app/components/base-input-custom
    cao-comp storybook .
    ```
 4. Edite diretamente o `template` e os estilos do componente copiado para incluir o novo layout e a tooltip customizada, e adicione os novos `@Input`s/`@Output`s que o seu caso precisa — sem repassar nada de um wrapper.
