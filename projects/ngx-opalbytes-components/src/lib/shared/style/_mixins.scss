@@ -1,0 +1,18 @@
+@use 'tokens' as t;
+
+// Emite a camada semântica de um tema ('light' | 'dark').
+@mixin cao-theme($mode: 'light') {
+  @if $mode == 'dark' {
+    @include t.cao-emit-tokens(t.$cao-dark);
+    color-scheme: dark;
+  } @else {
+    @include t.cao-emit-tokens(t.$cao-light);
+    color-scheme: light;
+  }
+}
+
+// Emite as camadas derivadas (componentes + legado).
+@mixin cao-derived-layers {
+  @include t.cao-emit-tokens(t.$cao-components);
+  @include t.cao-emit-tokens(t.$cao-legacy, '--');
+}

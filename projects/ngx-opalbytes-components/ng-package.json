@@ -8,6 +8,8 @@
   "assets": [
     "./src/assets",
     "./cli",
-    "./src/lib/shared/components"
+    "./src/lib/shared/components",
+    { "glob": "theme.css", "input": "src/styles", "output": "styles" },
+    { "glob": "*.scss",   "input": "src/styles", "output": "styles" }
   ]
 }

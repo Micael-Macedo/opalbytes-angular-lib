@@ -16,5 +16,5 @@
   "bin": {
     "cao-comp": "cli/cao-comp.cjs"
   },
-  "sideEffects": false
+  "sideEffects": ["*.css", "*.scss"]
 }
