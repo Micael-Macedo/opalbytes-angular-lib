@@ -1,6 +1,34 @@
 #!/usr/bin/env node
 'use strict';
 
+/**
+ * cao-comp — CLI da biblioteca ngx-opalbytes-components
+ *
+ * Objetivo:
+ * - Copiar componentes de `shared/components` (templates) para projetos externos.
+ * - Gerar setup mínimo de Storybook para visualizar componentes copiados.
+ * - Criar novo projeto base a partir de repositório template.
+ *
+ * Subcomandos (uso principal):
+ * - `cao-comp comp <componente> <destino> [--force] [--list]`
+ * - `cao-comp storybook <destino> [--force]`
+ * - `cao-comp new [nome] [--name <nome>] [--port <porta>] [--repo <url>] [--websocket] [--stage]`
+ *
+ * Organização/fluxo (alto nível):
+ * 1. Constantes e templates: `USAGE`, arquivos de Storybook, defaults.
+ * 2. Resolução/descoberta: localizar templates/pacote e listar componentes.
+ * 3. Utilitários de I/O e FS: escrita condicional, cópia recursiva, replace de linhas, mensagens.
+ * 4. Comandos/handlers: Storybook, criação de projeto (`new`) e cópia de componente (`comp`).
+ * 5. CLI: parsing de argumentos, prompt, dispatch em `main`, exports para testes/reuso.
+ *
+ * Efeitos colaterais:
+ * - Lê/escreve arquivos e diretórios, executa `git`/`npm`, escreve em stdout/stderr e pode retornar códigos de saída.
+ *
+ * Observações de manutenção:
+ * - Algumas funções utilitárias são declaradas após `module.exports` (function declarations com hoisting).
+ * - Há divergências históricas de assinatura/fluxo (ex.: `subcommands.comp` vs `componentCommands`); ao evoluir, alinhar dispatch, handlers e `USAGE`.
+ */
+
 const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -10,7 +38,7 @@ const USAGE = `cao-comp — Copia um componente da lib ngx-opalbytes-components 
 e gera o setup de Storybook para visualizar os componentes
 
 Uso:
-  cao-comp <componente> <destino> [opcoes]
+  cao-comp comp <componente> <destino> [opcoes]
   cao-comp storybook <destino> [opcoes]
   cao-comp new [nome] [opcoes]
 
@@ -146,8 +174,11 @@ npx storybook build -c .storybook -o storybook-static
 \`\`\`
 `;
 
-// ---------- utilitarios puros (facilmente testaveis) ----------
+/* -----------------------------------------------------------------------------
+ * Resolução e descoberta (templates, versão, listagem)
+ * -------------------------------------------------------------------------- */
 
+/** Resolve o diretório de templates/componentes da lib em diferentes layouts (dev/dist). */
 function resolveTemplatesDir() {
   const candidates = [
     path.join(__dirname, '..', 'templates'),
@@ -160,6 +191,7 @@ function resolveTemplatesDir() {
   return null;
 }
 
+/** Obtém a versão do pacote a partir de package.json candidatos; fallback "desconhecida". */
 function resolvePackageVersion() {
   const candidates = [
     path.join(__dirname, '..', 'package.json'),
@@ -177,6 +209,7 @@ function resolvePackageVersion() {
   return 'desconhecida';
 }
 
+/** Lista pastas de componentes disponíveis no diretório de templates (ordenado). */
 function listComponents(templatesDir) {
   return fs
     .readdirSync(templatesDir, { withFileTypes: true })
@@ -185,24 +218,11 @@ function listComponents(templatesDir) {
     .sort();
 }
 
-function copyRecursive(src, dest, force, conflicts) {
-  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-    if (entry.isDirectory()) {
-      fs.mkdirSync(destPath, { recursive: true });
-      copyRecursive(srcPath, destPath, force, conflicts);
-    } else {
-      if (fs.existsSync(destPath) && !force) {
-        conflicts.push(destPath);
-        continue;
-      }
-      fs.mkdirSync(path.dirname(destPath), { recursive: true });
-      fs.copyFileSync(srcPath, destPath);
-    }
-  }
-}
+/* -----------------------------------------------------------------------------
+ * Utilitários de escrita/FS (efeitos colaterais controlados por flags)
+ * -------------------------------------------------------------------------- */
 
+/** Escreve arquivo se não existir ou se `force=true`; registra conflitos quando bloqueado. */
 function writeFileIfAllowed(filePath, content, force, conflicts) {
   if (fs.existsSync(filePath) && !force) {
     conflicts.push(filePath);
@@ -213,6 +233,14 @@ function writeFileIfAllowed(filePath, content, force, conflicts) {
   return true;
 }
 
+/* -----------------------------------------------------------------------------
+ * Comandos: Storybook
+ * -------------------------------------------------------------------------- */
+
+/**
+ * Gera setup mínimo do Storybook e story de exemplo no destino.
+ * @returns {number} código de saída (0 sucesso, 1 conflito/erro esperado).
+ */
 function setupStorybook(destination, force) {
   const root = path.resolve(destination);
   const conflicts = [];
@@ -238,21 +266,27 @@ function setupStorybook(destination, force) {
   if (conflicts.length) {
     process.stderr.write(
       `Erro: os seguintes arquivos ja existem no destino (use --force para sobrescrever):\n` +
-        conflicts.map((c) => `  - ${c}`).join('\n') + '\n'
+      conflicts.map((c) => `  - ${c}`).join('\n') + '\n'
     );
     return 1;
   }
 
   process.stdout.write(
     `Setup de Storybook gerado em "${root}".\n` +
-      `Arquivos criados:\n` +
-      created.map((c) => `  - ${c}`).join('\n') + '\n'
+    `Arquivos criados:\n` +
+    created.map((c) => `  - ${c}`).join('\n') + '\n'
   );
   return 0;
 }
 
-// ---------- parse de argumentos ----------
+/* -----------------------------------------------------------------------------
+ * CLI: parsing e validações de entrada
+ * -------------------------------------------------------------------------- */
 
+/**
+ * Converte argv em argumentos posicionais e flags normalizadas.
+ * Suporta flags curtas/longas, aliases e `--flag=valor` para flags de valor.
+ */
 function parseArgs(argv) {
   const positionals = [];
   const flags = {
@@ -285,38 +319,47 @@ function parseArgs(argv) {
     const arg = normalized[i];
     switch (arg) {
       case '-h':
+      case '--h':
       case '--help':
         flags.help = true;
         break;
       case '-l':
+      case '--l':
       case '--list':
         flags.list = true;
         break;
       case '-f':
+      case '--f':
       case '--force':
         flags.force = true;
         break;
       case '-n':
+      case '--n':
       case '--name':
         flags.name = normalized[++i];
         break;
       case '-p':
+      case '--p':
       case '--port':
         flags.port = normalized[++i];
         break;
       case '-r':
+      case '--r':
       case '--repo':
         flags.repo = normalized[++i];
         break;
       case '-ws':
+      case '--ws':
       case '--websocket':
         flags.websocket = true;
         break;
       case '-s':
+      case '--s':
       case '--stage':
         flags.stage = true;
         break;
       case '-v':
+      case '--v':
       case '--version':
         flags.version = true;
         break;
@@ -327,21 +370,32 @@ function parseArgs(argv) {
   return { positionals, flags };
 }
 
-function isValidName(name){
+/** Valida nome do projeto (`new`): apenas letras minúsculas e hífens. */
+function isValidName(name) {
   const regex = /^[a-z-]+$/
   return regex.test(name)
 }
 
-function isValidPort(port){
-  if(port >= 4206 && port < 4300) return true
+/** Valida porta do projeto (`new`): intervalo aceito 4206–4299. */
+function isValidPort(port) {
+  if (port >= 4206 && port < 4300) return true
 
   return false
 }
 
 
 const DEFAULT_BASE_PROJECT_URL = 'https://github.com/Micael-Macedo/opalbytes-base-repo.git'
-// ---------- acao: new ----------
 
+/* -----------------------------------------------------------------------------
+ * Comandos: criação de projeto (`new`)
+ * Fluxo: valida entrada -> clona template -> ajusta configs -> instala deps -> (opcional) init/push git
+ * -------------------------------------------------------------------------- */
+
+/**
+ * Cria um novo projeto a partir do repositório base.
+ * Pode solicitar dados via prompt quando não fornecidos por args/flags.
+ * @returns {number} código de saída.
+ */
 function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
 
   const providedName = projectName || flags.name;
@@ -397,11 +451,11 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
 
   process.stdout.write(
     `Projeto "${name}" configurado:\n` +
-      `  destino: ${destination}\n` +
-      `  porta: ${port}\n` +
-      `  websocket: ${withWebsocket}\n` +
-      `  stage: ${withStage}\n` +
-      `  repo: ${urlRepository || '(nao informado)'}\n`
+    `  destino: ${destination}\n` +
+    `  porta: ${port}\n` +
+    `  websocket: ${withWebsocket}\n` +
+    `  stage: ${withStage}\n` +
+    `  repo: ${urlRepository || '(nao informado)'}\n`
   );
 
   cloneRepository(DEFAULT_BASE_PROJECT_URL, newRepoPath)
@@ -414,8 +468,7 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
 
   deleteFolder(path.join(newRepoPath, '.git'))
 
-  if(urlRepository){
-    console.log(newRepoPath)
+  if (urlRepository) {
     initRepo(newRepoPath, urlRepository)
   }
 
@@ -424,12 +477,13 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
 }
 const DEFAULT_REPO_NAME = 'opalbytes-base-repo'
 
+/** Atualiza nome/porta em package.json e package-lock.json do projeto gerado. */
 function updatePackageJson(destination, name, port) {
   printLine()
   writeText("Modificando arquivos package")
   replaceLineMatching(path.join(destination, 'package.json'), '"name":', `  "name": "${name}",`);
   replaceLineMatching(path.join(destination, 'package.json'), '"port":', `  "port": ${port},`);
-  
+
   replaceLineMatching(path.join(destination, 'package-lock.json'), `"name":`, `  "name": "${name}",`);
   replaceLineMatching(path.join(destination, 'package-lock.json'), `      "name": "opalbytes-base-repo",`, `      "name": "${name}",`);
   printLine()
@@ -442,12 +496,13 @@ const ENV_PATHS = [
   "local",
 ]
 
-function writeText(message){
+/** Escreve mensagem em stdout com quebra de linha. */
+function writeText(message) {
   process.stdout.write(message + " \n")
 }
 
+/** Ajusta referências de nome/buildTarget no angular.json para o novo projeto. */
 function updateAngularFile(destination, name) {
-  console.log(destination, name)
   replaceLineMatching(path.join(destination, 'angular.json'), `"${DEFAULT_REPO_NAME}"`, `    "${name}": {`);
 
   for (const env of ENV_PATHS) {
@@ -456,14 +511,20 @@ function updateAngularFile(destination, name) {
 }
 
 
-// Abstracao do prompt para permitir testes sem stdin
+/** Abstração de prompt para permitir testes sem stdin. */
 const defaultPrompt = {
   text: (msg) => readlineSync.question(msg),
   confirm: (msg) => readlineSync.keyInYN(msg),
 };
 
-// ---------- subcomandos ----------
+/* -----------------------------------------------------------------------------
+ * Dispatch de subcomandos e entrypoint
+ * -------------------------------------------------------------------------- */
 
+/**
+ * Tabela de subcomandos. Observação: assinaturas diferem por comando e o fluxo
+ * principal faz dispatch explícito em `main` (especialmente para `new`/`comp`).
+ */
 const subcommands = {
   storybook: (dest, flags) => {
     if (!dest) {
@@ -473,14 +534,19 @@ const subcommands = {
     return setupStorybook(dest, flags.force);
   },
   new: (name, flags) => createNewProject(name, flags),
+  comp: (name, flags) => componentCommands(name, flags)
 };
 
-// ---------- entrypoint ----------
-
+/**
+ * Entrypoint do CLI.
+ * - Trata `--help`/`--version`.
+ * - Faz dispatch para subcomandos conhecidos.
+ * - Retorna código numérico quando tratado; pode retornar `undefined` para formas não reconhecidas.
+ */
 function main(argv = process.argv.slice(2), deps = {}) {
   const { positionals, flags } = parseArgs(argv);
+
   const prompt = deps.prompt || defaultPrompt;
-  const templatesDir = deps.templatesDir || resolveTemplatesDir();
 
   if (flags.help) {
     writeText((USAGE + '\n'));
@@ -492,60 +558,19 @@ function main(argv = process.argv.slice(2), deps = {}) {
     return 0;
   }
 
-  if (!templatesDir) {
-    process.stderr.write(
-      'Erro: nao foi possivel localizar a pasta de templates dos componentes.\n'
-    );
-    return 1;
-  }
-
-  if (flags.list) {
-    writeText('Componentes disponiveis:\n');
-    for (const c of listComponents(templatesDir)) {
-      writeText(`  - ${c}\n`);
-    }
-    return 0;
-  }
-
-  const [first, second] = positionals;
+  const [first, second, third] = positionals;
 
   if (subcommands[first]) {
     // passa `second` como nome/destino e o objeto de flags
-    if (first === 'new') {
-      return createNewProject(second, flags, prompt);
+    switch (first) {
+      case 'new':
+        return createNewProject(second, flags, prompt);
+      case 'comp':
+        return componentCommands(deps, second, third, flags)
+      default:
+        return subcommands[first](second, flags);
     }
-    return subcommands[first](second, flags);
   }
-
-  // copia de componente (comportamento default)
-  if (!first || !second) {
-    process.stderr.write('Erro: informe o componente e o destino.\n\n' + USAGE + '\n');
-    return 1;
-  }
-
-  const sourceDir = path.join(templatesDir, first);
-  if (!fs.existsSync(sourceDir) || !fs.statSync(sourceDir).isDirectory()) {
-    process.stderr.write(
-      `Erro: componente "${first}" nao encontrado.\n` +
-        `Componentes disponiveis: ${listComponents(templatesDir).join(', ')}\n`
-    );
-    return 1;
-  }
-
-  fs.mkdirSync(second, { recursive: true });
-  const conflicts = [];
-  copyRecursive(sourceDir, second, flags.force, conflicts);
-
-  if (conflicts.length) {
-    process.stderr.write(
-      `Erro: os seguintes arquivos ja existem no destino (use --force para sobrescrever):\n` +
-        conflicts.map((c) => `  - ${c}`).join('\n') + '\n'
-    );
-    return 1;
-  }
-
-  process.stdout.write(`Componente "${first}" copiado para "${second}".\n`);
-  return 0;
 }
 
 if (require.main === module) {
@@ -565,7 +590,95 @@ module.exports = {
   defaultPrompt,
 };
 
+/* -----------------------------------------------------------------------------
+ * Comandos: cópia de componentes (`comp`) e utilitários complementares
+ * -------------------------------------------------------------------------- */
 
+/**
+ * Handler de `comp`: resolve templates, trata `--list` e delega cópia do componente.
+ * Assinatura usada por `main`: (deps, componente, destino, flags).
+ */
+function componentCommands(deps, second, third, flags) {
+  const templatesDir = deps.templatesDir || resolveTemplatesDir();
+
+  if (!templatesDir) {
+    process.stderr.write(
+      'Erro: nao foi possivel localizar a pasta de templates dos componentes.\n'
+    );
+    return 1;
+  }
+
+  if (flags.list) {
+    writeText('Componentes disponiveis:\n');
+    for (const c of listComponents(templatesDir)) {
+      writeText(`  - ${c}\n`);
+    }
+    return 0;
+  }
+
+  generateComponent(second, third, flags, templatesDir)
+
+}
+
+/**
+ * Copia a pasta do componente selecionado para `<destino>/<componente>`.
+ * Retorna código de saída; em conflito sem `--force` reporta arquivos existentes.
+ */
+function generateComponent(componentName, position, flags, templatesDir) {
+  if (!componentName) {
+    process.stderr.write('Erro: informe o componente e o destino.\n\n' + USAGE + '\n');
+    return 1;
+  }
+
+  const sourceDir = path.join(templatesDir, componentName);
+  if (!fs.existsSync(sourceDir) || !fs.statSync(sourceDir).isDirectory()) {
+    process.stderr.write(
+      `Erro: componente "${componentName}" nao encontrado.\n` +
+      `Componentes disponiveis: ${listComponents(templatesDir).join(', ')}\n`
+    );
+    return 1;
+  }
+
+  const destination = position ?? __dirname
+  const folderDestination = destination + `\\${componentName}`
+
+  fs.mkdirSync(folderDestination, { recursive: true });
+  const conflicts = [];
+  copyRecursive(sourceDir, folderDestination, flags.force, conflicts);
+
+  if (conflicts.length) {
+    process.stderr.write(
+      `Erro: os seguintes arquivos ja existem no destino (use --force para sobrescrever):\n` +
+      conflicts.map((c) => `  - ${c}`).join('\n') + '\n'
+    );
+    return 1;
+  }
+
+  process.stdout.write(`Componente "${componentName}" copiado para "${folderDestination}".\n`);
+  return 0;
+
+}
+
+/** Copia recursivamente diretórios/arquivos respeitando `force` e acumulando conflitos. */
+function copyRecursive(src, dest, force, conflicts) {
+  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      fs.mkdirSync(destPath, { recursive: true });
+      copyRecursive(srcPath, destPath, force, conflicts);
+    } else {
+      if (fs.existsSync(destPath) && !force) {
+        conflicts.push(destPath);
+        continue;
+      }
+      fs.mkdirSync(path.dirname(destPath), { recursive: true });
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+}
+
+/** Substitui uma linha por índice (0-based). Utilitário de edição de arquivos texto. */
 function replaceLine(filePath, lineIndex /* 0-based */, newLine) {
   const content = fs.readFileSync(filePath, 'utf8');
   const lines = content.split(/\r?\n/);   // preserva CRLF se existir
@@ -576,12 +689,13 @@ function replaceLine(filePath, lineIndex /* 0-based */, newLine) {
   fs.writeFileSync(filePath, lines.join('\n'));
 }
 
+/** Executa `npm install` no diretório informado (efeito colateral externo). */
 function installNpmPackages(cwd) {
   printLine()
   writeText("Baixando pacotes npm")
   const isWin = process.platform === 'win32';
-  execFileSync(isWin ? 'npm.cmd' : 'npm', ['install'], { 
-    stdio: 'inherit', 
+  execFileSync(isWin ? 'npm.cmd' : 'npm', ['install'], {
+    stdio: 'inherit',
     cwd,
     shell: isWin
   });
@@ -589,7 +703,8 @@ function installNpmPackages(cwd) {
   printLine()
 }
 
-function cloneRepository(url, destination){
+/** Clona repositório git no destino (efeito colateral externo). */
+function cloneRepository(url, destination) {
   printLine()
   writeText("Clonando repositorio base")
   execFileSync('git', ['clone', url, destination], { stdio: 'inherit' });
@@ -597,24 +712,28 @@ function cloneRepository(url, destination){
   printLine()
 }
 
-function printLine(){
+/** Imprime separador visual em stdout. */
+function printLine() {
   process.stdout.write("------------------------------------------------------ \n")
 
 }
 
+/** Remove arquivo se existir. */
 function deleteFile(filePath) {
-    if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
-    }
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath);
   }
-  
-  function deleteFolder(folder) {
-    if (fs.existsSync(folder)) {
-      fs.rmSync(folder, { recursive: true, force: true });
-    }
-  }
+}
 
-function initRepo(projectName, repoLink){
+/** Remove pasta recursivamente se existir. */
+function deleteFolder(folder) {
+  if (fs.existsSync(folder)) {
+    fs.rmSync(folder, { recursive: true, force: true });
+  }
+}
+
+/** Inicializa repositório git, cria commit inicial e faz push para `origin/main`. */
+function initRepo(projectName, repoLink) {
   printLine()
   process.chdir(projectName)
   writeText("fazendo commit no repositorio " + repoLink)
@@ -628,6 +747,7 @@ function initRepo(projectName, repoLink){
   printLine()
 }
 
+/** Substitui a primeira linha que corresponder ao padrão/string informado; preserva EOL. */
 function replaceLineMatching(filePath, match, newLine) {
   const content = fs.readFileSync(filePath, 'utf8');
   const eol = content.includes('\r\n') ? '\r\n' : '\n';
@@ -640,6 +760,7 @@ function replaceLineMatching(filePath, match, newLine) {
   return true;
 }
 
+/** Escapa string para uso seguro em RegExp. */
 function escapeRegExp(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
