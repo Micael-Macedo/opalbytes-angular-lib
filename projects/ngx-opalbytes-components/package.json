@@ -1,6 +1,6 @@
 {
   "name": "ngx-opalbytes-components",
-  "version": "1.33.3",
+  "version": "1.34.0",
   "peerDependencies": {
     "@angular/common": "^21.0.0",
     "@angular/core": "^21.0.0",
@@ -16,7 +16,10 @@
   "bin": {
     "cao-comp": "cli/cao-comp.cjs"
   },
-  "sideEffects": ["**/*.css", "**/*.scss"],
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
   "exports": {
     "./styles/theme.css": "./styles/theme.css",
     "./styles/theme.scss": "./styles/theme.scss",

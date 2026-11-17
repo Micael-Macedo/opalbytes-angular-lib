@@ -1,3 +1,11 @@
+## 1.34.0 (2026-11-17)
+
+* Merge pull request #127 from Micael-Macedo/feature(components)/add-theme-styling-file ([15d58da](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/15d58da)), closes [#127](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/127)
+* fix: components storybook title ([278e394](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/278e394))
+* feat: add base theme styling file ([604d38b](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/604d38b))
+* feat: add sass package ([8e005a3](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/8e005a3))
+* feat: add token variables into components ([da95adc](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/da95adc))
+
 ## <small>1.33.3 (2026-11-16)</small>
 
 * Merge pull request #126 from Micael-Macedo/refactor(components)/functions-cli-comp-lib ([a7eef16](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a7eef16)), closes [#126](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/126)
