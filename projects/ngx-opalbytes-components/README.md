@@ -36,6 +36,32 @@ Esta biblioteca possui as seguintes dependências:
 | `tslib` | `^2.3.0` |
 
 ---
+## Tema (estilos globais)
+
+O tema centralizado é publicado em `styles/theme.css`. Importe-o uma única vez no estilo global da aplicação, preferencialmente no `angular.json`:
+
+```json
+"styles": [
+  "node_modules/ngx-opalbytes-components/styles/theme.css",
+  "src/styles.scss"
+]
+```
+
+Também é possível importá-lo no SCSS global:
+
+```scss
+@import 'ngx-opalbytes-components/styles/theme.css';
+```
+
+O tema claro é aplicado por padrão em `:root`. Para alternar para o escuro, defina `data-cao-theme="dark"` no `<html>` ou em qualquer container:
+
+```html
+<html data-cao-theme="dark">
+```
+
+Os fontes SCSS também são publicados em `styles/` (`theme`, `tokens`, `mixins` e `palette`) para personalizações via `@use`.
+
+---
 ## Como Usar
 
 Os componentes nesta biblioteca são `standalone`, o que significa que você pode importá-los diretamente nos seus componentes ou módulos.

@@ -16,5 +16,10 @@
   "bin": {
     "cao-comp": "cli/cao-comp.cjs"
   },
-  "sideEffects": ["*.css", "*.scss"]
+  "sideEffects": ["**/*.css", "**/*.scss"],
+  "exports": {
+    "./styles/theme.css": "./styles/theme.css",
+    "./styles/theme.scss": "./styles/theme.scss",
+    "./styles/*": "./styles/*"
+  }
 }
