@@ -3,13 +3,12 @@
   "dest": "../../dist/ngx-opalbytes-components",
   "lib": {
     "entryFile": "src/public-api.ts",
-    "styleIncludePaths": ["src/styles"]
+    "styleIncludePaths": ["src/lib/shared/style"]
   },
   "assets": [
     "./src/assets",
     "./cli",
     "./src/lib/shared/components",
-    { "glob": "theme.css", "input": "src/styles", "output": "styles" },
-    { "glob": "*.scss",   "input": "src/styles", "output": "styles" }
+    { "glob": "*.scss", "input": "src/lib/shared/style", "output": "styles" }
   ]
 }

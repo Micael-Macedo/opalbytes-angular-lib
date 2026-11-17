@@ -1,14 +1,6 @@
 :host {
-  --cao-form-field-bg-background: var(--input-background, #ffffff);
-  --cao-form-field-border-color: var(--line-color, #e5e7eb);
   --cao-form-field-border-width: 1px;
   --cao-form-field-border-radius: 8px;
-  --cao-form-field-color-error: var(--error, #dc2626);
-  --cao-form-field-color-label: var(--primary, #111827);
-  --cao-form-field-color-hint: var(--input-text, #9ca3af);
-  --cao-form-field-color-text: var(--text-color-input, #111827);
-  --cao-form-field-focus-border: var(--primary, #111827);
-  --cao-form-field-success-border: var(--success, #16a34a);
 
   display: block;
   width: 100%;
@@ -27,7 +19,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   line-height: 1.25rem;
-  color: var(--cao-form-field-color-label);
+  color: var(--cao-form-field-color-label, var(--cao-color-text, #111827));
   text-transform: uppercase;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -41,7 +33,7 @@
   font-weight: 500;
   text-transform: none;
   letter-spacing: 0;
-  color: var(--cao-form-field-color-hint);
+  color: var(--cao-form-field-color-hint, var(--cao-color-text-muted, #9ca3af));
   pointer-events: none;
   transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1),
     font-size 150ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -54,7 +46,7 @@
 .cao-form-field__label--floated {
   transform: translateY(calc(-50% - 14px)) scale(0.75);
   transform-origin: left top;
-  color: var(--cao-form-field-color-label);
+  color: var(--cao-form-field-color-label, var(--cao-color-text, #111827));
   font-weight: 700;
 }
 
@@ -64,19 +56,19 @@
   align-items: center;
   width: 100%;
   min-height: 44px;
-  background-color: var(--cao-form-field-bg-background);
-  border: var(--cao-form-field-border-width) solid var(--cao-form-field-border-color);
+  background-color: var(--cao-form-field-bg-background, var(--cao-form-field-bg, var(--cao-color-surface, #ffffff)));
+  border: var(--cao-form-field-border-width) solid var(--cao-form-field-border-color, var(--cao-color-border-strong, #e5e7eb));
   border-radius: var(--cao-form-field-border-radius);
   transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
     background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .input-field:focus-within {
-  border-color: var(--cao-form-field-focus-border);
+  border-color: var(--cao-form-field-focus-border, var(--cao-form-field-focus-color, var(--cao-color-primary, #111827)));
 }
 
 .cao-form-field.error-state .input-field {
-  border-color: var(--cao-form-field-color-error);
+  border-color: var(--cao-form-field-color-error, var(--cao-form-field-error-color, var(--cao-color-danger, #dc2626)));
 }
 
 .cao-form-field.disabled .input-field {
@@ -100,7 +92,7 @@
   border: none;
   outline: none;
   background: transparent;
-  color: var(--cao-form-field-color-text);
+  color: var(--cao-form-field-color-text, var(--cao-form-field-text, var(--cao-color-text, #111827)));
   font-family: inherit;
   font-size: 0.875rem;
   padding: 6px 12px;
@@ -122,7 +114,7 @@
 .input-slot ::ng-deep cao-input textarea {
   background: transparent;
   border: none;
-  color: var(--cao-form-field-color-text);
+  color: var(--cao-form-field-color-text, var(--cao-form-field-text, var(--cao-color-text, #111827)));
 }
 
 .label-inside .input-slot ::ng-deep input,
@@ -141,7 +133,7 @@
 .cao-form-field__hint {
   font-size: 0.75rem;
   line-height: 1.25rem;
-  color: var(--cao-form-field-color-hint);
+  color: var(--cao-form-field-color-hint, var(--cao-color-text-muted, #9ca3af));
 }
 
 .cao-form-field__hint + .subscript-wrapper {
@@ -150,5 +142,5 @@
 
 .cao-form-field.required .cao-form-field__label::after {
   content: " *";
-  color: var(--cao-form-field-color-error);
+  color: var(--cao-form-field-color-error, var(--cao-form-field-error-color, var(--cao-color-danger, #dc2626)));
 }

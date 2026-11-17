@@ -1,7 +1,6 @@
 :host {
   display: block;
   position: relative;
-  --autocomplete-bg-color: white;
 }
 
 .form-field {
@@ -33,7 +32,7 @@ label {
   height: var(--form-field-height, 44px);
   display: flex;
   align-items: center;
-  background-color: var(--autocomplete-bg-color, white);
+  background-color: var(--autocomplete-bg-color, var(--cao-color-surface, #ffffff));
   border: 1px solid transparent;
   border-radius: 4px;
   box-sizing: border-box;
@@ -95,7 +94,7 @@ input {
 
 /* Painel do CDK Overlay */
 .autocomplete-panel {
-  background: var(--autocomplete-bg-color, white);
+  background: var(--autocomplete-bg-color, var(--cao-color-surface, #ffffff));
   border-radius: 8px;
   padding: 6px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);

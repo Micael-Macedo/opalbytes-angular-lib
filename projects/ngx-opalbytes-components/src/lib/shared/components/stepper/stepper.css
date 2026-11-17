@@ -12,6 +12,6 @@
   position: absolute;
   top: 50%;
   height: 1.5px;
-  background-color: var(--return-color);
+  background-color: var(--return-color, var(--cao-color-text-muted, #6b7280));
   z-index: 1;
 }

@@ -13,7 +13,7 @@
   font-weight: 700;
   text-align: center;
   text-transform: uppercase;
-  color: var(--title-info);
+  color: var(--title-info, var(--cao-color-text-secondary, #4b5563));
   margin-bottom: 12%;
   text-wrap: wrap;
   height: 64px;
@@ -30,8 +30,8 @@
   width: 250px;
   height: 100px;
   text-transform: uppercase;
-  background-color: var(--primary);
-  color: var(--white);
+  background-color: var(--primary, var(--cao-color-primary, #4f46e5));
+  color: var(--white, var(--cao-color-surface, #ffffff));
   font-weight: 700;
   padding: 30px;
   display: flex;
@@ -40,23 +40,23 @@
   text-align: center;
   font-size: 16px;
   border-radius: 20px;
-  box-shadow: 0 4px 4px 0 var(--shadow-black);
+  box-shadow: 0 4px 4px 0 var(--shadow-black, rgba(0, 0, 0, 0.08));
   cursor: pointer;
 }
 
 .links-info .links .link.disabled {
-  background-color: var(--input-disabled-bg);
-  color: var(--black);
+  background-color: var(--input-disabled-bg, var(--cao-color-surface-muted, #f3f4f6));
+  color: var(--black, var(--cao-color-text, #000000));
   pointer-events: none;
   cursor: default;
 }
 
 .links-info .links .link:active {
-  background-color: var(--active-success-btn);
+  background-color: var(--active-success-btn, var(--cao-color-success, #16a34a));
 }
 
 .links-info .links .link:hover {
-  background: linear-gradient(125.78deg, var(--primary) 7.03%, var(--confirm-color) 96.73%);
+  background: linear-gradient(125.78deg, var(--primary, var(--cao-color-primary, #4f46e5)) 7.03%, var(--confirm-color, var(--cao-color-success, #16a34a)) 96.73%);
 }
 
 @media (max-width: 768px) {

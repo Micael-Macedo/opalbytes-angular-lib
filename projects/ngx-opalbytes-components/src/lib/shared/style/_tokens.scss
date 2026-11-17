@@ -178,8 +178,8 @@ $cao-components: (
 
 // ---------------------------------------------------------------------------
 // 4) ALIASES LEGADOS (--<nome>) -> semântica. Preserva compatibilidade.
-//    ⚠ Valores inferidos dos nomes: conferir com .storybook/preview.css
-//    (fonte atual dos tokens legados) antes de remover esse arquivo.
+//    Valores herdados da antiga folha do Storybook, agora mapeados para a
+//    camada semântica para acompanhar claro/escuro.
 // ---------------------------------------------------------------------------
 $cao-legacy: (
   'primary':             var(--cao-color-primary),
@@ -195,12 +195,12 @@ $cao-legacy: (
   'color-warn':          var(--cao-color-warning),
   'input-background':    var(--cao-color-surface),
   'input-disabled-bg':   var(--cao-color-surface-muted),
-  'input-text':          var(--cao-color-text),
+  'input-text':          var(--cao-color-text-muted),
   'text-color-input':    var(--cao-color-text),
   'line-color':          var(--cao-color-border),
   'title-info':          var(--cao-color-text-secondary),
   'hover-drop-down':     var(--cao-color-surface-hover),
-  'return-color':        var(--cao-color-primary),
+  'return-color':        var(--cao-color-text-muted),
   'gray-dark':           var(--cao-color-text-secondary),
   'bg-card':             var(--cao-color-surface),
   'data-bg':             var(--cao-color-surface-muted),
@@ -209,13 +209,38 @@ $cao-legacy: (
   'text-toggle-checked': var(--cao-color-on-primary),
   'color-tooltip':       var(--cao-color-text),
   'icon-collor':         var(--cao-color-text-muted), // (sic) grafia original
-  'form-field-height':   48px,
+  'form-field-height':    48px,
+  'form-field-bg-background': var(--cao-form-field-bg),
+  'form-field-color-error': var(--cao-form-field-error-color),
+  'form-field-color-hint': var(--cao-color-text-muted),
+  'form-field-color-label': var(--cao-color-text),
+  'form-field-color-text': var(--cao-form-field-text),
+  'form-field-focus-border': var(--cao-form-field-focus-color),
+  'form-field-success-border': var(--cao-color-success),
   'table-bg':            var(--cao-color-surface),
   'table-header-bg':     var(--cao-color-surface-muted),
   'table-border':        var(--cao-color-border),
   'table-text':          var(--cao-color-text),
   'table-row-hover':     var(--cao-color-surface-hover),
   'toast-progress-duration': 5s,
+  'shadow-black':        rgba(p.$black, 0.08),
+  'active-success-btn':  var(--cao-color-success),
+  'confirm-color':       var(--cao-color-success),
+  'border-toggle-checked': var(--cao-color-primary),
+  'text-unselected-toggle-checked': var(--cao-color-text-muted),
+  'support-orange':      #fb923c,
+  'message-color':       var(--cao-color-text-secondary),
+  'text-color':          var(--cao-color-text),
+  'disabled-button':     var(--cao-color-disabled),
+  'autocomplete-bg-color': var(--cao-color-surface),
+  'table-background':    var(--cao-color-surface),
+  'table-header':        var(--cao-color-surface-muted),
+  'table-body-color':    var(--cao-color-text),
+  'border-table-ligth':  var(--cao-color-border),
+  'color-primary-foreground': var(--cao-color-on-primary),
+  'color-success-foreground': var(--cao-color-on-primary),
+  'color-warn-foreground': var(--cao-color-on-primary),
+  'color-destructive-foreground': var(--cao-color-on-primary),
 );
 
 @mixin cao-emit-tokens($map, $prefix: '--cao-') {
