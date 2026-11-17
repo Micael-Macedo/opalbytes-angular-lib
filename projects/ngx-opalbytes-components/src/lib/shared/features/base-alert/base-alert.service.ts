@@ -1,21 +1,23 @@
-import { Overlay } from "@angular/cdk/overlay";
+import { Overlay, PositionStrategy } from "@angular/cdk/overlay";
 import { ComponentPortal } from "@angular/cdk/portal";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 
 import { BaseAlert } from "./base-alert";
-import { IAlertConfig } from "./base-alert.interface";
+import { CaoAlertType, ICaoAlertConfig, ICaoAlertDTO } from "./base-alert.interface";
 
 @Injectable({
   providedIn: "root",
 })
-export class BaseAlertService {
-  constructor(private overlay: Overlay) { }
+export abstract class BaseAlertService {
+  private readonly overlay = inject(Overlay);
   protected defaultTime = 3000
 
-  show(config: IAlertConfig): void {
+  protected abstract defaultPosition: PositionStrategy 
+
+  protected show(config: ICaoAlertConfig, durationTime: number): void {
     const overlayRef = this.overlay.create({
       hasBackdrop: false,
-      positionStrategy: this.overlay.position().global().centerHorizontally().top("10%"),
+      positionStrategy: this.defaultPosition,
       scrollStrategy: this.overlay.scrollStrategies.block(),
     });
 
@@ -25,7 +27,35 @@ export class BaseAlertService {
 
     setTimeout(() => {
       overlayRef.dispose();
-    }, this.defaultTime);
+    }, durationTime);
+  }
+
+  info(dataAlert: ICaoAlertDTO, duration = this.defaultTime): void {
+    const alertConfig = this.generateAlertConfig(dataAlert, "info")
+    this.show(alertConfig, duration);
+  }
+  success(dataAlert: ICaoAlertDTO, duration = this.defaultTime): void {
+    const alertConfig = this.generateAlertConfig(dataAlert, "success")
+    this.show(alertConfig, duration);
+  }
+
+  error(dataAlert: ICaoAlertDTO, duration = this.defaultTime): void {
+    const alertConfig = this.generateAlertConfig(dataAlert, "error")
+    this.show(alertConfig, duration);
+  }
+
+  warning(dataAlert: ICaoAlertDTO, duration = this.defaultTime): void {
+    const alertConfig = this.generateAlertConfig(dataAlert, "warning")
+    this.show(alertConfig, duration);
+  }
+
+  protected generateAlertConfig(data: ICaoAlertDTO, type: CaoAlertType): ICaoAlertConfig{
+    const alertConfig: ICaoAlertConfig = {
+      message: data.message,
+      type: type,
+      title: data.title,
+    }
+    return alertConfig
   }
 
   generateComponentPortal(): typeof BaseAlert{
