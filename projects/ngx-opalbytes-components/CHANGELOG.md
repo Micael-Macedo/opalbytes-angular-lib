@@ -1,3 +1,11 @@
+## <small>1.34.1 (2026-11-17)</small>
+
+* Merge pull request #128 from Micael-Macedo/fix(components)/display-alert-services-options ([203f78c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/203f78c)), closes [#128](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/128)
+* Merge pull request #129 from Micael-Macedo/fix(components)/display-alert-services-options ([c4a6800](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c4a6800)), closes [#129](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/129)
+* chore: merge branch 'main' of origin into fix(components)/display-alert-services-options ([0e28403](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/0e28403))
+* test: fix alert type interface ([a7a9ab5](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a7a9ab5))
+* fix: display base alert options ([a3d80ac](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a3d80ac))
+
 ## 1.34.0 (2026-11-17)
 
 * Merge pull request #127 from Micael-Macedo/feature(components)/add-theme-styling-file ([15d58da](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/15d58da)), closes [#127](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/127)
