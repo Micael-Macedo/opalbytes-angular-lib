@@ -40,7 +40,7 @@ const GROUPS: ICaoCmdKGroup[] = [
 const WRAP = 'padding:24px;max-width:420px';
 
 const meta: Meta<CaoCmdKComponent> = {
-  title: 'Components/Cmd-K',
+  title: 'Componentes/Cmd-K',
   component: CaoCmdKComponent,
   tags: ['autodocs'],
   decorators: [applicationConfig({ providers: [provideLucideIcons(STORY_ICONS as never)] })],

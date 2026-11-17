@@ -6,7 +6,7 @@ import { CaoPopoverTriggerDirective } from './popover-trigger.directive';
 const WRAP = 'display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;padding:140px 40px';
 
 const meta: Meta<CaoPopoverComponent> = {
-  title: 'Components/Popover',
+  title: 'Componentes/Popover',
   component: CaoPopoverComponent,
   tags: ['autodocs'],
   decorators: [moduleMetadata({ imports: [CaoPopoverTriggerDirective] })],
