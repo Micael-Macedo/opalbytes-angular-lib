@@ -1,7 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { AlertType } from './base-alert.interface';
+import { CaoAlertType, ICaoAlertConfig } from './base-alert.interface';
 
 @Component({
   selector: 'cao-alert',
@@ -11,17 +11,11 @@ import { AlertType } from './base-alert.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseAlert implements OnInit {
-  data!: {
-    type: AlertType;
-    title: string;
-    message: string;
-    alertIcon?: string
-  };
-
+  data!: ICaoAlertConfig
   iconPath!: string;
   titleClass!: string;
 
-  private iconPaths: Record<AlertType, string> = {
+  private iconPaths: Record<CaoAlertType, string> = {
     success: "https://placehold.co/600x400",
     error: "https://placehold.co/600x400",
     info: "https://placehold.co/600x400",
