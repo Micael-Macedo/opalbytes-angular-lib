@@ -1,0 +1,22 @@
+@use 'tokens' as t;
+@use 'mixins' as m;
+
+// Semântica + estáticos (claro por padrão)
+:root,
+[data-cao-theme='light'] {
+  @include t.cao-emit-tokens(t.$cao-static);
+  @include m.cao-theme('light');
+}
+
+// Escuro: reemite SOMENTE a camada semântica
+[data-cao-theme='dark'] {
+  @include m.cao-theme('dark');
+}
+
+// Camadas derivadas são reemitidas em todo escopo de tema para que
+// var(--cao-color-*) seja resolvido no escopo certo (ex.: <div data-cao-theme="dark">
+// aninhado dentro de uma página clara). Se ficassem só no :root, herdariam o valor claro.
+:root,
+[data-cao-theme] {
+  @include m.cao-derived-layers;
+}

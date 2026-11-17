@@ -1,7 +1,7 @@
 /* Add these focus states to your existing CSS */
 
 .dropdown-header:focus {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--primary, var(--cao-color-primary, #4f46e5));
   outline-offset: 2px;
 }
 
@@ -10,18 +10,18 @@
 }
 
 .dropdown-search input:focus {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--primary, var(--cao-color-primary, #4f46e5));
   outline-offset: 2px;
 }
 
 .dropdown-item:focus {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--primary, var(--cao-color-primary, #4f46e5));
   outline-offset: -2px;
 }
 
 /* Enhanced focused state */
 .dropdown-item.focused {
-  background-color: var(--hover-drop-down);
+  background-color: var(--hover-drop-down, var(--cao-color-surface-hover, #f3f4f6));
   font-weight: bold;
 }
 

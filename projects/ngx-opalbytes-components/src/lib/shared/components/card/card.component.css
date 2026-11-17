@@ -1,15 +1,15 @@
 :host {
-  --radius-card: 0.5rem;
-  --color-bg-main: #ffffff;
-  --color-bg-gray: #f3f4f6;
-  --color-border-gray: #d1d5db;
-  --color-border-orange: #fb923c;
-  --color-text-gray-400: #9ca3af;
-  --color-text-gray-500: #6b7280;
-  --color-text-gray-600: #4b5563;
-  --color-text-gray-700: #374151;
-  --color-text-gray-900: #111827;
-  --color-white: #ffffff;
+  --radius-card: var(--cao-radius-md, 0.5rem);
+  --color-bg-main: var(--cao-color-surface, #ffffff);
+  --color-bg-gray: var(--cao-color-surface-hover, #f3f4f6);
+  --color-border-gray: var(--cao-color-border-strong, #d1d5db);
+  --color-border-orange: #fb923c; /* específico do card: sem equivalente semântico */
+  --color-text-gray-400: var(--cao-color-text-disabled, #9ca3af);
+  --color-text-gray-500: var(--cao-color-text-muted, #6b7280);
+  --color-text-gray-600: var(--cao-color-text-muted, #4b5563);
+  --color-text-gray-700: var(--cao-color-text-secondary, #374151);
+  --color-text-gray-900: var(--cao-color-text, #111827);
+  --color-white: var(--cao-color-on-primary, #ffffff);
 }
 
 .card {

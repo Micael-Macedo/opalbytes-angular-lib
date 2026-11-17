@@ -7,7 +7,7 @@ import { CaoSliderComponent } from './slider';
 const COLUMN = 'display:flex;flex-direction:column;gap:40px;max-width:480px;padding:48px 24px 16px';
 
 const meta: Meta<CaoSliderComponent> = {
-  title: 'Components/Slider',
+  title: 'Componentes/Slider',
   component: CaoSliderComponent,
   tags: ['autodocs'],
   decorators: [moduleMetadata({ imports: [ReactiveFormsModule] })],

@@ -2,7 +2,7 @@
   display: block;
   font-size: 0.75rem;
   line-height: 1.25rem;
-  color: var(--cao-form-field-color-hint, var(--input-text, #9ca3af));
+  color: var(--cao-form-field-color-hint, var(--cao-color-text-muted, var(--input-text, #9ca3af)));
 }
 
 .cao-hint {

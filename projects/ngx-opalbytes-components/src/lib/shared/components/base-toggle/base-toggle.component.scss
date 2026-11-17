@@ -12,7 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--border-toggle);
+    border: 2px solid var(--cao-color-border-strong, var(--border-toggle, #d1d5db));
     background-color: transparent;
 
     .check-text {
@@ -22,19 +22,19 @@
     .line {
       height: 24px;
       width: 1px;
-      background-color: var(--data-bg);
+      background-color: var(--cao-color-surface-muted, var(--data-bg, #f3f4f6));
     }
 
     &.activated-toggle {
-      border: 2px solid var(--border-toggle-checked);
-      background-color: var(--bg-toggle-checked);
+      border: 2px solid var(--cao-color-primary, var(--border-toggle-checked, #4f46e5));
+      background-color: var(--cao-color-primary, var(--bg-toggle-checked, #4f46e5));
 
       .check-text {
-        color: var(--text-toggle-checked);
+        color: var(--cao-color-on-primary, var(--text-toggle-checked, #ffffff));
       }
 
       .unchecked {
-        color: var(--text-unselected-toggle-checked);
+        color: var(--cao-color-text-muted, var(--text-unselected-toggle-checked, #6b7280));
       }
     }
 

@@ -3,14 +3,14 @@
 }
 
 .cao-breadcrumb {
-  --_link: var(--cao-breadcrumb-link-color, #6b7280);
-  --_link-hover: var(--cao-breadcrumb-link-hover-color, #4f46e5);
-  --_current: var(--cao-breadcrumb-current-color, #111827);
-  --_separator: var(--cao-breadcrumb-separator-color, #9ca3af);
-  --_disabled: var(--cao-breadcrumb-disabled-color, #d1d5db);
-  --_focus: var(--cao-breadcrumb-focus-ring, rgba(79, 70, 229, 0.35));
-  --_badge-bg: var(--cao-breadcrumb-badge-bg, #eef2ff);
-  --_badge-text: var(--cao-breadcrumb-badge-text, #4338ca);
+  --_link: var(--cao-breadcrumb-link-color, var(--cao-color-text-muted, #6b7280));
+  --_link-hover: var(--cao-breadcrumb-link-hover-color, var(--cao-color-primary, #4f46e5));
+  --_current: var(--cao-breadcrumb-current-color, var(--cao-color-text, #111827));
+  --_separator: var(--cao-breadcrumb-separator-color, var(--cao-color-text-disabled, #9ca3af));
+  --_disabled: var(--cao-breadcrumb-disabled-color, var(--cao-color-disabled, #d1d5db));
+  --_focus: var(--cao-breadcrumb-focus-ring, var(--cao-color-primary-ring, rgba(79, 70, 229, 0.35)));
+  --_badge-bg: var(--cao-breadcrumb-badge-bg, color-mix(in srgb, var(--cao-color-primary, #4f46e5) 10%, transparent));
+  --_badge-text: var(--cao-breadcrumb-badge-text, var(--cao-color-primary-hover, #4338ca));
   --_gap: var(--cao-breadcrumb-gap, 8px);
   --_size: var(--cao-breadcrumb-font-size, 0.875rem);
 }

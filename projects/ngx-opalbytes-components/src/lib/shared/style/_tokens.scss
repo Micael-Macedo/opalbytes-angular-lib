@@ -1,0 +1,250 @@
+@use 'palette' as p;
+
+// ---------------------------------------------------------------------------
+// 1) CAMADA SEMÂNTICA (única que muda entre claro/escuro)
+//    Emitida como --cao-<chave>
+// ---------------------------------------------------------------------------
+$cao-light: (
+  'color-primary':          p.$indigo-600,
+  'color-primary-hover':    p.$indigo-700,
+  'color-primary-ring':     rgba(p.$indigo-600, 0.35),
+  'color-on-primary':       p.$white,
+  'color-surface':          p.$white,
+  'color-surface-muted':    p.$gray-100,
+  'color-surface-hover':    p.$gray-100,
+  'color-text':             p.$gray-900,
+  'color-text-secondary':   p.$gray-700,
+  'color-text-muted':       p.$gray-500,
+  'color-text-disabled':    p.$gray-400,
+  'color-border':           p.$gray-200,
+  'color-border-strong':    p.$gray-300,
+  'color-disabled':         p.$gray-300,
+  'color-track':            p.$gray-200,
+  'color-danger':           p.$red-600,
+  'color-success':          p.$green-600,
+  'color-warning':          p.$amber-500,
+  'color-info':             p.$blue-600,
+  'color-overlay':          rgba(p.$black, 0.5),
+  'color-skeleton':         #e2e8f0,
+  'color-skeleton-shine':   #f8fafc,
+  'shadow-sm':              (0 1px 2px rgba(p.$black, 0.06)),
+  'shadow-md':              (0 4px 6px -1px rgba(p.$black, 0.1), 0 2px 4px -2px rgba(p.$black, 0.1)),
+  'shadow-lg':              (0 10px 15px -3px rgba(p.$black, 0.12), 0 4px 6px -4px rgba(p.$black, 0.1)),
+);
+
+$cao-dark: (
+  'color-primary':          p.$indigo-400,
+  'color-primary-hover':    p.$indigo-300,
+  'color-primary-ring':     rgba(p.$indigo-400, 0.45),
+  'color-on-primary':       p.$gray-950,
+  'color-surface':          p.$gray-900,
+  'color-surface-muted':    p.$gray-800,
+  'color-surface-hover':    p.$gray-800,
+  'color-text':             p.$gray-50,
+  'color-text-secondary':   p.$gray-200,
+  'color-text-muted':       p.$gray-400,
+  'color-text-disabled':    p.$gray-500,
+  'color-border':           p.$gray-700,
+  'color-border-strong':    p.$gray-600,
+  'color-disabled':         p.$gray-600,
+  'color-track':            p.$gray-700,
+  'color-danger':           p.$red-400,
+  'color-success':          p.$green-400,
+  'color-warning':          p.$amber-400,
+  'color-info':             p.$blue-400,
+  'color-overlay':          rgba(p.$black, 0.7),
+  'color-skeleton':         p.$gray-800,
+  'color-skeleton-shine':   p.$gray-700,
+  'shadow-sm':              (0 1px 2px rgba(p.$black, 0.5)),
+  'shadow-md':              (0 4px 6px -1px rgba(p.$black, 0.55), 0 2px 4px -2px rgba(p.$black, 0.5)),
+  'shadow-lg':              (0 10px 15px -3px rgba(p.$black, 0.6), 0 4px 6px -4px rgba(p.$black, 0.5)),
+);
+
+// ---------------------------------------------------------------------------
+// 2) TOKENS ESTÁTICOS (independem de tema)
+// ---------------------------------------------------------------------------
+$cao-static: (
+  'radius-sm':       4px,
+  'radius-md':       8px,
+  'radius-lg':       12px,
+  'radius-full':     9999px,
+  'font-family':     (system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif),
+  'font-size-sm':    0.875rem,
+  'font-size-md':    1rem,
+  'font-weight-medium': 500,
+  'duration-fast':   150ms,
+  'duration-base':   200ms,
+  'duration-slow':   300ms,
+);
+
+// ---------------------------------------------------------------------------
+// 3) CATÁLOGO DE COMPONENTES  (--cao-<comp>-*) -> aponta para a semântica
+//    Excluídos (runtime): --cao-progress-spinner-circumference,
+//    --skeleton-* dimensionais/animação, --widget-animation-duration.
+// ---------------------------------------------------------------------------
+$cao-components: (
+  // accordion
+  'accordion-header-bg':        var(--cao-color-surface),
+  'accordion-header-text':      var(--cao-color-text),
+  'accordion-header-hover-bg':  var(--cao-color-surface-hover),
+  'accordion-active-color':     var(--cao-color-primary),
+  'accordion-content-bg':       var(--cao-color-surface),
+  'accordion-content-text':     var(--cao-color-text-secondary),
+  'accordion-border-color':     var(--cao-color-border),
+  'accordion-disabled-color':   var(--cao-color-text-disabled),
+  'accordion-focus-ring':       var(--cao-color-primary-ring),
+  'accordion-radius':           var(--cao-radius-md),
+  // avatar
+  'avatar-bg':                  var(--cao-color-border),
+  'avatar-text':                var(--cao-color-text-secondary),
+  // breadcrumb
+  'breadcrumb-link-color':       var(--cao-color-text-muted),
+  'breadcrumb-link-hover-color': var(--cao-color-primary),
+  'breadcrumb-current-color':    var(--cao-color-text),
+  'breadcrumb-separator-color':  var(--cao-color-text-disabled),
+  'breadcrumb-disabled-color':   var(--cao-color-disabled),
+  'breadcrumb-focus-ring':       var(--cao-color-primary-ring),
+  'breadcrumb-badge-bg':         color-mix(in srgb, var(--cao-color-primary) 10%, transparent),
+  'breadcrumb-badge-text':       var(--cao-color-primary-hover),
+  // checkbox
+  'checkbox-color':             var(--cao-color-primary),
+  'checkbox-unselected':        var(--cao-color-text-muted),
+  'checkbox-disabled':          var(--cao-color-disabled),
+  'checkbox-label':             var(--cao-color-text),
+  'checkbox-label-disabled':    var(--cao-color-text-disabled),
+  'checkbox-focus-ring':        var(--cao-color-primary-ring),
+  'checkbox-icon-color':        var(--cao-color-on-primary),
+  // cmd-k
+  'cmdk-bg':                    var(--cao-color-surface),
+  'cmdk-text':                  var(--cao-color-text),
+  'cmdk-muted':                 var(--cao-color-text-muted),
+  'cmdk-border-color':          var(--cao-color-border),
+  'cmdk-active-bg':             var(--cao-color-surface-hover),
+  'cmdk-radius':                var(--cao-radius-lg),
+  'cmdk-shadow':                var(--cao-shadow-lg),
+  'cmdk-trigger-bg':            var(--cao-color-surface),
+  'cmdk-trigger-border':        var(--cao-color-border-strong),
+  'cmdk-trigger-text':          var(--cao-color-text-muted),
+  // form-field
+  'form-field-bg':              var(--cao-color-surface),
+  'form-field-text':            var(--cao-color-text),
+  'form-field-border-color':    var(--cao-color-border-strong),
+  'form-field-focus-color':     var(--cao-color-primary),
+  'form-field-error-color':     var(--cao-color-danger),
+  'form-field-disabled-bg':     var(--cao-color-surface-muted),
+  'form-field-placeholder':     var(--cao-color-text-disabled),
+  // popover
+  'popover-bg':                 var(--cao-color-surface),
+  'popover-text':               var(--cao-color-text),
+  'popover-border-color':       var(--cao-color-border),
+  'popover-shadow':             var(--cao-shadow-md),
+  // progress (bar + spinner)
+  'progress-bar-color':         var(--cao-color-primary),
+  'progress-bar-track-color':   var(--cao-color-track),
+  'progress-bar-text-color':    var(--cao-color-text-secondary),
+  'progress-spinner-color':     var(--cao-color-primary),
+  'progress-spinner-text-color': var(--cao-color-text),
+  // radio
+  'radio-color':                var(--cao-color-primary),
+  'radio-unselected':           var(--cao-color-text-muted),
+  'radio-disabled':             var(--cao-color-disabled),
+  'radio-label':                var(--cao-color-text),
+  'radio-label-disabled':       var(--cao-color-text-disabled),
+  'radio-focus-ring':           var(--cao-color-primary-ring),
+  // slide-toggle
+  'slide-toggle-track':          var(--cao-color-disabled),
+  'slide-toggle-track-checked':  var(--cao-color-primary),
+  'slide-toggle-thumb':          var(--cao-color-surface),
+  'slide-toggle-thumb-checked':  var(--cao-color-on-primary),
+  'slide-toggle-track-disabled': var(--cao-color-track),
+  'slide-toggle-thumb-disabled': var(--cao-color-surface-muted),
+  'slide-toggle-label':          var(--cao-color-text),
+  'slide-toggle-label-disabled': var(--cao-color-text-disabled),
+  'slide-toggle-focus-ring':     var(--cao-color-primary-ring),
+  // slider
+  'slider-color':               var(--cao-color-primary),
+  'slider-track-color':         var(--cao-color-track),
+  'slider-focus-ring':          var(--cao-color-primary-ring),
+  'slider-label-text':          var(--cao-color-on-primary),
+  'slider-disabled-color':      var(--cao-color-text-disabled),
+  // tabs
+  'tab-color-text':             var(--cao-color-text-muted),
+  'tab-color-active':           var(--cao-color-primary),
+  'tab-color-hover-bg':         var(--cao-color-surface-hover),
+  'tab-color-disabled':         var(--cao-color-disabled),
+  'tab-color-ink-bar':          var(--cao-color-primary),
+  'tab-color-header-border':    var(--cao-color-border),
+);
+
+// ---------------------------------------------------------------------------
+// 4) ALIASES LEGADOS (--<nome>) -> semântica. Preserva compatibilidade.
+//    Valores herdados da antiga folha do Storybook, agora mapeados para a
+//    camada semântica para acompanhar claro/escuro.
+// ---------------------------------------------------------------------------
+$cao-legacy: (
+  'primary':             var(--cao-color-primary),
+  'color-primary':       var(--cao-color-primary),
+  'white':               var(--cao-color-surface),
+  'black':               var(--cao-color-text),
+  'error':               var(--cao-color-danger),
+  'error-color':         var(--cao-color-danger),
+  'color-destructive':   var(--cao-color-danger),
+  'success':             var(--cao-color-success),
+  'color-success':       var(--cao-color-success),
+  'info':                var(--cao-color-info),
+  'color-warn':          var(--cao-color-warning),
+  'input-background':    var(--cao-color-surface),
+  'input-disabled-bg':   var(--cao-color-surface-muted),
+  'input-text':          var(--cao-color-text-muted),
+  'text-color-input':    var(--cao-color-text),
+  'line-color':          var(--cao-color-border),
+  'title-info':          var(--cao-color-text-secondary),
+  'hover-drop-down':     var(--cao-color-surface-hover),
+  'return-color':        var(--cao-color-text-muted),
+  'gray-dark':           var(--cao-color-text-secondary),
+  'bg-card':             var(--cao-color-surface),
+  'data-bg':             var(--cao-color-surface-muted),
+  'border-toggle':       var(--cao-color-border-strong),
+  'bg-toggle-checked':   var(--cao-color-primary),
+  'text-toggle-checked': var(--cao-color-on-primary),
+  'color-tooltip':       var(--cao-color-text),
+  'icon-collor':         var(--cao-color-text-muted), // (sic) grafia original
+  'form-field-height':    48px,
+  'form-field-bg-background': var(--cao-form-field-bg),
+  'form-field-color-error': var(--cao-form-field-error-color),
+  'form-field-color-hint': var(--cao-color-text-muted),
+  'form-field-color-label': var(--cao-color-text),
+  'form-field-color-text': var(--cao-form-field-text),
+  'form-field-focus-border': var(--cao-form-field-focus-color),
+  'form-field-success-border': var(--cao-color-success),
+  'table-bg':            var(--cao-color-surface),
+  'table-header-bg':     var(--cao-color-surface-muted),
+  'table-border':        var(--cao-color-border),
+  'table-text':          var(--cao-color-text),
+  'table-row-hover':     var(--cao-color-surface-hover),
+  'toast-progress-duration': 5s,
+  'shadow-black':        rgba(p.$black, 0.08),
+  'active-success-btn':  var(--cao-color-success),
+  'confirm-color':       var(--cao-color-success),
+  'border-toggle-checked': var(--cao-color-primary),
+  'text-unselected-toggle-checked': var(--cao-color-text-muted),
+  'support-orange':      #fb923c,
+  'message-color':       var(--cao-color-text-secondary),
+  'text-color':          var(--cao-color-text),
+  'disabled-button':     var(--cao-color-disabled),
+  'autocomplete-bg-color': var(--cao-color-surface),
+  'table-background':    var(--cao-color-surface),
+  'table-header':        var(--cao-color-surface-muted),
+  'table-body-color':    var(--cao-color-text),
+  'border-table-ligth':  var(--cao-color-border),
+  'color-primary-foreground': var(--cao-color-on-primary),
+  'color-success-foreground': var(--cao-color-on-primary),
+  'color-warn-foreground': var(--cao-color-on-primary),
+  'color-destructive-foreground': var(--cao-color-on-primary),
+);
+
+@mixin cao-emit-tokens($map, $prefix: '--cao-') {
+  @each $name, $value in $map {
+    #{$prefix}#{$name}: #{$value};
+  }
+}

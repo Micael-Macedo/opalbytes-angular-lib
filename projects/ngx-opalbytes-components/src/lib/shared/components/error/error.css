@@ -2,7 +2,7 @@
   display: block;
   font-size: 0.75rem;
   line-height: 1.25rem;
-  color: var(--cao-form-field-color-error, var(--error, #dc2626));
+  color: var(--cao-form-field-color-error, var(--cao-form-field-error-color, var(--cao-color-danger, var(--error, #dc2626))));
 }
 
 .cao-error {

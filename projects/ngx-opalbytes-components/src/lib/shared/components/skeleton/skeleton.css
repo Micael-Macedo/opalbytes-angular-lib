@@ -16,8 +16,6 @@
   --skeleton-height: 100%;
 
   /* ─── Visual tokens — inherit from parent if set there ─── */
-  --skeleton-bg: #e2e8f0;
-  --skeleton-shine: #f8fafc;
   --skeleton-radius: 14px;
   --skeleton-speed: 2s;
   --skeleton-animation-deg: 90deg;
@@ -33,7 +31,7 @@
   overflow: hidden;
   width: var(--skeleton-width);
   height: var(--skeleton-height);
-  background-color: var(--skeleton-bg);
+  background-color: var(--skeleton-bg, var(--cao-color-skeleton, #e2e8f0));
   border-radius: var(--skeleton-radius);
 
   /* Prevent content from leaking during SSR */
@@ -72,7 +70,7 @@
   background: linear-gradient(
     var(--skeleton-animation-deg),
     transparent 30%,
-    var(--skeleton-shine) 50%,
+    var(--skeleton-shine, var(--cao-color-skeleton-shine, #f8fafc)) 50%,
     transparent 70%
   );
   background-size: 200% 100%;

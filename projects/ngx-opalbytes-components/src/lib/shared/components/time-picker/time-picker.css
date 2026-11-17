@@ -16,18 +16,18 @@
   height: 43px;
   display: flex;
   align-items: center;
-  background-color: var(--input-background);
+  background-color: var(--input-background, var(--cao-color-surface, #ffffff));
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: border-color 0.2s ease-in-out;
 }
 
 .custom-timepicker.invalid .mat-mdc-text-field-wrapper {
-  border-color: var(--error);
+  border-color: var(--error, var(--cao-color-danger, #dc2626));
 }
 
 /* só aplica o verde de success enquanto estiver focado */
 .custom-timepicker.valid.mat-focused .mat-mdc-text-field-wrapper {
-  border-color: var(--success);
+  border-color: var(--success, var(--cao-color-success, #16a34a));
 }
 
 /* após perder o foco, "neutraliza" o success para transparente */
@@ -48,7 +48,7 @@
 
 .custom-timepicker .mat-mdc-icon-button.mat-mdc-button-base {
   padding: 0;
-  border-left: 1px solid var(--line-color);
+  border-left: 1px solid var(--line-color, var(--cao-color-border, #e5e7eb));
   border-radius: 0;
   margin: 0;
   display: flex;
@@ -57,11 +57,11 @@
 }
 
 .custom-timepicker .mat-timepicker-toggle-default-icon {
-  color: var(--primary);
+  color: var(--primary, var(--cao-color-primary, #4f46e5));
 }
 
 .custom-timepicker .mat-mdc-form-field-flex {
-  background-color: var(--input-background);
+  background-color: var(--input-background, var(--cao-color-surface, #ffffff));
 }
 
 /* oculta label flutuante e subscript conforme seu estilo */
