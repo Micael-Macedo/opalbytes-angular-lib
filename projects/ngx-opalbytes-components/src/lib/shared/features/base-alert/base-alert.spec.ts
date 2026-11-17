@@ -1,7 +1,7 @@
 import { BaseAlert } from './base-alert';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { AlertType } from './base-alert.interface';
+import { CaoAlertType } from './base-alert.interface';
 
 
 describe('BaseAlert', () => {
@@ -32,8 +32,8 @@ describe('BaseAlert', () => {
   });
 
   it("deve retornar corretamente todos os icones", () => {
-    const types: AlertType[] = ["success", "error", "info", "warning"];
-    const expectedPaths: Record<AlertType, string> = {
+    const types: CaoAlertType[] = ["success", "error", "info", "warning"];
+    const expectedPaths: Record<CaoAlertType, string> = {
       success: "https://placehold.co/600x400",
       error: "https://placehold.co/600x400",
       info: "https://placehold.co/600x400",
@@ -48,7 +48,7 @@ describe('BaseAlert', () => {
   });
 
   it("deve reconhecer cada tipo de classe de titulo corretamente por tipo de alerta", () => {
-    const types: AlertType[] = ["success", "error", "info", "warning"];
+    const types: CaoAlertType[] = ["success", "error", "info", "warning"];
 
     types.forEach((type) => {
       component.data.type = type
