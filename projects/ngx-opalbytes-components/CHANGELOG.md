@@ -1,3 +1,8 @@
+## 1.35.0 (2026-11-18)
+
+* Merge pull request #130 from Micael-Macedo/feature(components)/add-azure-update-to-project-name ([1fe5054](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/1fe5054)), closes [#130](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/130)
+* feat: add update azure variables to project name ([af99853](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/af99853))
+
 ## <small>1.34.1 (2026-11-17)</small>
 
 * Merge pull request #128 from Micael-Macedo/fix(components)/display-alert-services-options ([203f78c](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/203f78c)), closes [#128](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/128)
