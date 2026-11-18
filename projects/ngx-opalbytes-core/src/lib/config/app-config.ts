@@ -15,7 +15,6 @@ export interface ICaoWebSocketEndpointConfig {
   heartbeatInterval?: number;
 }
 
-
 export type CaoWebSocketEndpointValue = string | ICaoWebSocketEndpointConfig;
 export type WebSocketUrls = Record<string, CaoWebSocketEndpointValue>;
 
