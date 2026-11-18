@@ -6,6 +6,19 @@ import { localConfig } from "./config.local";
 import { productionConfig } from "./config.prod";
 import { ICaoAppUrlsRecord, AppPaths, HttpMethods, AppAuth, CaoEnviromentType } from "../interfaces";
 
+export interface ICaoWebSocketEndpointConfig {
+  url: string;
+  reconnect?: boolean;
+  reconnectInterval?: number;
+  reconnectAttempts?: number;
+  heartbeat?: boolean;
+  heartbeatInterval?: number;
+}
+
+
+export type CaoWebSocketEndpointValue = string | ICaoWebSocketEndpointConfig;
+export type WebSocketUrls = Record<string, CaoWebSocketEndpointValue>;
+
 export interface ICaoAppConfig {
   production: boolean;
   environment: CaoEnviromentType;
@@ -13,6 +26,7 @@ export interface ICaoAppConfig {
   paths: AppPaths;
   httpMethods?: HttpMethods;
   auth?: AppAuth;
+  websocket?: WebSocketUrls;
 }
 
 // Token de injeção para o environment
