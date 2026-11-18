@@ -1,3 +1,8 @@
+## <small>1.5.1 (2026-11-18)</small>
+
+* Merge pull request #132 from Micael-Macedo/feature(core)/add-socket-config-options ([e116044](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/e116044)), closes [#132](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/132)
+* fix: remove websocket empty space ([6e62c5f](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/6e62c5f))
+
 ## 1.5.0 (2026-11-13)
 
 * Merge pull request #121 from Micael-Macedo/refactor(core)/update-token-service-functions ([26e0c30](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/26e0c30)), closes [#121](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/121)
