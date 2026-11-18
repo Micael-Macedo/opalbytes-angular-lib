@@ -463,14 +463,21 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
   updatePackageJson(newRepoPath, name, port)
 
   updateAngularFile(newRepoPath, name)
-
-  installNpmPackages(newRepoPath)
-
+  
   deleteFolder(path.join(newRepoPath, '.git'))
 
   if (urlRepository) {
+    printLine()
+    writeText("Atualizando arquivo node pipeline")
+    updateAzurePipelineFile(newRepoPath, name)
+    writeText("Atualizando arquivo azure variables")
+    printLine()
+    updateVariablesFile(newRepoPath, name)
+    
     initRepo(newRepoPath, urlRepository)
   }
+
+  installNpmPackages(newRepoPath)
 
   writeText("🎆Projeto instalado com sucesso🎆")
   return 0;
@@ -699,16 +706,30 @@ function installNpmPackages(cwd) {
     cwd,
     shell: isWin
   });
-  writeText("Pacotes npm instalados")
+  writeText("✅ Pacotes npm instalados ")
   printLine()
 }
+
+function updateAzurePipelineFile(repoPath, projectName){
+  const scriptsPath = path.join(repoPath, "azure-pipelines/azure-pipelines-node.yml")
+  replaceLineMatching(scriptsPath, '# Pipeline CI/CD - monitora-client (Angular 21)', `# Pipeline CI/CD - ${projectName} (Angular 21)`)
+  replaceLineMatching(scriptsPath, '  BUILD_OUTPUT: "dist/monitora-client/browser"', `  BUILD_OUTPUT: "dist/${projectName}/browser"`)
+  writeText("✅ Arquivo azure atualizado")
+} 
+
+function updateVariablesFile(repoPath, projectName){
+  const variablesPath = path.join(repoPath, "azure-pipelines/variables.yml")
+  replaceLineMatching(variablesPath, '    value: MONITORA-CLIENT', `    value: ${projectName.toLocaleUpperCase()}`)
+  replaceLineMatching(variablesPath, '    value: monintora-client', `    value: ${projectName}`)
+  writeText("✅ Arquivo variaveis azure atualizado")
+} 
 
 /** Clona repositório git no destino (efeito colateral externo). */
 function cloneRepository(url, destination) {
   printLine()
   writeText("Clonando repositorio base")
   execFileSync('git', ['clone', url, destination], { stdio: 'inherit' });
-  writeText("Repositorio base clonado")
+  writeText("✅ Repositorio base clonado")
   printLine()
 }
 
@@ -743,7 +764,7 @@ function initRepo(projectName, repoLink) {
   execFileSync('git', ['commit', '-m', '"feat: add base project"'], { stdio: 'inherit' });
   execFileSync('git', ['remote', 'add', 'origin', repoLink], { stdio: 'inherit' });
   execFileSync('git', ['push', '-u', 'origin', 'main'], { stdio: 'inherit' });
-  writeText("Commit realizado com sucesso")
+  writeText("✅ Commit realizado com sucesso")
   printLine()
 }
 
