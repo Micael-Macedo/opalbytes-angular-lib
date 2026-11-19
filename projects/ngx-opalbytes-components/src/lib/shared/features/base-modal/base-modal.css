@@ -1,96 +1,72 @@
-.modal {
-  width: 100vw;
-  height: 100vh;
+.cao-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  transition: 0.5s;
-  top: -100vh;
-  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: cao-modal-fade-in 0.25s ease;
 }
 
-.modal .modal-dialog {
+.cao-modal-backdrop--closing {
+  animation: cao-modal-fade-out 0.25s ease forwards;
+  pointer-events: none;
+}
+
+.cao-modal-panel {
   padding: 24px 34px;
   border-radius: 20px;
   position: relative;
   max-width: 1444px;
-  height: auto;
-  top: -100vh;
-  transition: 0.5s;
-  background-color: var(--bg-card);
-  left: 0;
+  max-height: 90vh;
+  overflow: auto;
+  background-color: var(--bg-card, #fff);
+  animation: cao-modal-enter 0.25s ease;
 }
 
-.modal .modal-dialog.custom {
+.cao-modal-panel.custom {
   padding: 0;
 }
 
-.modal .modal-dialog.w-100 {
-  width: 100%;
+.cao-modal-panel--closing {
+  animation: cao-modal-leave 0.25s ease forwards;
 }
 
-.modal .modal-dialog.w-90 {
-  width: 90%;
+.cao-modal-panel.w-100 { width: 100%; }
+.cao-modal-panel.w-90 { width: 90%; }
+.cao-modal-panel.w-80 { width: 80%; }
+.cao-modal-panel.w-75 { width: 75%; }
+.cao-modal-panel.w-70 { width: 70%; }
+.cao-modal-panel.w-60 { width: 60%; }
+.cao-modal-panel.w-50 { width: 50%; }
+.cao-modal-panel.w-40 { width: 40%; }
+.cao-modal-panel.w-30 { width: 30%; }
+.cao-modal-panel.w-20 { width: 20%; }
+.cao-modal-panel.w-10 { width: 10%; }
+
+@keyframes cao-modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.modal .modal-dialog.w-80 {
-  width: 80%;
+@keyframes cao-modal-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
-.modal .modal-dialog.w-75 {
-  width: 75%;
+@keyframes cao-modal-enter {
+  from { opacity: 0; transform: translateY(-16px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.modal .modal-dialog.w-70 {
-  width: 70%;
-}
-
-.modal .modal-dialog.w-60 {
-  width: 60%;
-}
-
-.modal .modal-dialog.w-50 {
-  width: 50%;
-}
-
-.modal .modal-dialog.w-40 {
-  width: 40%;
-}
-
-.modal .modal-dialog.w-30 {
-  width: 30%;
-}
-
-.modal .modal-dialog.w-20 {
-  width: 20%;
-}
-
-.modal .modal-dialog.w-10 {
-  width: 10%;
-}
-
-.modal.show {
-  z-index: 1000;
-  display: flex;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal.show .modal-dialog {
-  top: 0;
+@keyframes cao-modal-leave {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-16px) scale(0.98); }
 }
 
 @media (max-width: 768px) {
-  .modal-dialog {
+  .cao-modal-panel {
     width: 90%;
     max-width: 90vw;
-    margin-left: 0;
-  }
-}
-
-@media (min-width: 769px) {
-  .modal-dialog {
-    width: 75%;
-    margin-left: 250px;
   }
 }
