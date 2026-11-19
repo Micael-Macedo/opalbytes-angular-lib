@@ -1,3 +1,8 @@
+## 1.36.0 (2026-11-19)
+
+* Merge pull request #133 from Micael-Macedo/feature(components)/update-base-modal-to-portal ([1cf16ea](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/1cf16ea)), closes [#133](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/133)
+* feat: add display base modal by portal ([d4f95d0](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/d4f95d0))
+
 ## 1.35.0 (2026-11-18)
 
 * Merge pull request #130 from Micael-Macedo/feature(components)/add-azure-update-to-project-name ([1fe5054](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/1fe5054)), closes [#130](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/130)
