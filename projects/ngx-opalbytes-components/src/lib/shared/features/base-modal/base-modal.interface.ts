@@ -1,21 +1,4 @@
-export type ModalType =
-  | "validation"
-  | "finger"
-  | "facial"
-  | "clinic"
-  | "graph"
-  | "restriction"
-  | "default";
-
-export interface IModal {
-  status: boolean;
-  data?: any;
-  type: ModalType;
-  modal?: string;
-}
-
-export type ModalTypeClass = "default" | "custom";
-export type ModalTypeSize =
+export type CaoModalSize =
   | "w-100"
   | "w-90"
   | "w-80"
@@ -27,3 +10,17 @@ export type ModalTypeSize =
   | "w-30"
   | "w-20"
   | "w-10";
+
+export type CaoModalPanelClass = "default" | "custom";
+
+export interface ICaoModalOptions<TData = unknown> {
+  data?: TData;
+  inputs?: Record<string, unknown>;
+  closeOnOverlayClick?: boolean;
+  closeOthers?: boolean;
+}
+
+export interface ICaoModalRef<TResult = unknown> {
+  readonly id: string;
+  close(result?: TResult): void;
+}

@@ -1,35 +1,93 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, HostListener, input, output, signal } from "@angular/core";
 
-import { ModalTypeClass, ModalTypeSize } from './base-modal.interface';
-import { BaseModalService } from './base-modal.service';
+import { CaoModalPanelClass, CaoModalSize } from "./base-modal.interface";
 
 @Component({
-  selector: 'cao-modal',
+  selector: "cao-base-modal",
   imports: [CommonModule],
-  templateUrl: './base-modal.html',
-  styleUrl: './base-modal.css',
+  templateUrl: "./base-modal.html",
+  styleUrl: "./base-modal.css",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BaseModal<T> {
-  @Input() showModal = false;
-  @Input() title = "";
-  @Input() data!: T;
-  @Input() modalTypeClass: ModalTypeClass = "default";
-  @Input() modalClass = "modal-default";
-  @Input() modalSize: ModalTypeSize = "w-70";
-  @Input() closeOnOverlayClick = false;
+export class CaoBaseModalComponent<TData = unknown, TResult = unknown> {
+  private static readonly CLOSE_ANIMATION_MS = 250;
 
-  protected modalService = inject(BaseModalService);
+  readonly title = input("");
+  readonly data = input<TData | undefined>(undefined);
+  readonly modalSize = input<CaoModalSize>("w-70");
+  readonly modalClass = input("");
+  readonly panelClass = input<CaoModalPanelClass>("default");
+  readonly closeOnOverlayClick = input(false);
 
-  closeModals() { }
+  readonly opened = output<void>();
+  readonly closed = output<TResult | undefined>();
+  readonly closeRequest = output<TResult | undefined>();
 
-  closeModalsWithoutDialog() {
-    this.modalService.closeAllModals();
+  readonly closing = signal(false);
+
+  private mouseDownOnBackdrop = false;
+  private closeStarted = false;
+  private closeRequestEmitted = false;
+  private pendingResult: TResult | undefined;
+  isTop = false;
+
+  requestClose(result?: TResult): void {
+    this.startClose(result);
   }
 
-  onOverlayClick() {
-    if (this.closeOnOverlayClick) {
-      this.closeModals();
+  emitOpened(): void {
+    this.opened.emit();
+  }
+
+  emitClosed(result?: TResult): void {
+    this.closed.emit(result);
+  }
+
+  onBackdropMouseDown(event: MouseEvent): void {
+    this.mouseDownOnBackdrop = event.target === event.currentTarget;
+  }
+
+  onBackdropMouseUp(event: MouseEvent): void {
+    const shouldClose =
+      this.mouseDownOnBackdrop &&
+      event.target === event.currentTarget &&
+      this.closeOnOverlayClick();
+    this.mouseDownOnBackdrop = false;
+    if (shouldClose) {
+      this.requestClose();
     }
+  }
+
+  onAnimationEnd(event: AnimationEvent): void {
+    if (!this.closing() || event.target !== event.currentTarget) {
+      return;
+    }
+    this.emitCloseRequest();
+  }
+
+  @HostListener("document:keydown.escape")
+  onEscapeKey(): void {
+    if (this.isTop) {
+      this.requestClose();
+    }
+  }
+
+  private startClose(result?: TResult): void {
+    if (this.closeStarted) {
+      return;
+    }
+    this.closeStarted = true;
+    this.pendingResult = result;
+    this.closing.set(true);
+    setTimeout(() => this.emitCloseRequest(), CaoBaseModalComponent.CLOSE_ANIMATION_MS);
+  }
+
+  private emitCloseRequest(): void {
+    if (this.closeRequestEmitted) {
+      return;
+    }
+    this.closeRequestEmitted = true;
+    this.closeRequest.emit(this.pendingResult);
   }
 }

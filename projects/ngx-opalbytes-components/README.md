@@ -821,22 +821,109 @@ export class MinhaPaginaComponent {
 
 ---
 
-### `FeatureBaseModal`
-Um componente de modal genérico que pode ser customizado.
+### `CaoBaseModalComponent` e `CaoModalService`
 
-**Seletor:** `<cao-feature-base-modal>`
+Modal aberto programaticamente via `Overlay`/`ComponentPortal` do `@angular/cdk` (padrão do `BaseWidget`), com suporte a empilhamento e detecção de abertura/fechamento por **outputs**.
+
+**Seletor:** `<cao-base-modal>`  
+**Classe genérica:** `CaoBaseModalComponent<TData = unknown, TResult = unknown>`
 
 **Atributos (Inputs)**
 
 | Atributo | Tipo | Padrão | Descrição |
 | --- | --- | --- | --- |
-| `showModal` | `boolean` | `false` | Controla a visibilidade do modal. |
-| `title` | `string` | `''` | O título do modal. |
-| `data` | `T` | `undefined` | Dados a serem passados para o conteúdo do modal. |
-| `modalTypeClass` | `'default' \| 'custom'` | `'default'` | Classe de tipo de modal. |
-| `modalClass` | `string` | `'modal-default'` | Classe CSS customizada para o modal. |
-| `modalSize` | `'w-100' \| 'w-90' \| ...` | `'w-70'` | Largura do modal. |
-| `closeOnOverlayClick`| `boolean`| `false`| Fecha o modal ao clicar no overlay. |
+| `title` | `string` | `''` | Título do modal (disponível para o conteúdo). |
+| `data` | `TData \| undefined` | `undefined` | Dados passados ao modal. |
+| `modalSize` | `CaoModalSize` (`'w-10'`…`'w-100'`) | `'w-70'` | Largura do painel. |
+| `modalClass` | `string` | `''` | Classe(s) CSS customizada(s) do painel. |
+| `panelClass` | `'default' \| 'custom'` | `'default'` | Estilo do painel (`custom` remove o padding padrão). |
+| `closeOnOverlayClick` | `boolean` | `false` | Fecha ao clicar no backdrop (somente quando o modal é o topo da pilha). |
+
+**Eventos (Outputs)**
+
+| Evento | Tipo | Descrição |
+| --- | --- | --- |
+| `opened` | `void` | Emitido quando o modal é aberto/anexado (detecção de abertura). |
+| `closed` | `TResult \| undefined` | Emitido quando o modal finaliza o fechamento (detecção de fechamento). |
+| `closeRequest` | `TResult \| undefined` | Solicita o fechamento do modal (ouvido pelo serviço). |
+
+**Métodos**
+
+| Método | Descrição |
+| --- | --- |
+| `requestClose(result?)` | Inicia o fechamento (animação) e emite `closeRequest` com o resultado. |
+| `emitOpened()` / `emitClosed(result?)` | Emissão controlada de abertura/fechamento (uso interno/serviço). |
+
+> `ESC` fecha apenas o modal do topo. `opened`/`closed` são emitidos no ciclo do modal aberto via portal; trate-os no próprio componente do modal (ex.: bindings no `<cao-base-modal>`).
+
+**Interfaces**
+
+| Tipo | Descrição |
+| --- | --- |
+| `ICaoModalOptions<TData>` | `{ data?, inputs?, closeOnOverlayClick?, closeOthers? }` — `closeOthers` (`false`) fecha os modais anteriores antes de abrir. |
+| `ICaoModalRef<TResult>` | `{ id, close(result?) }` retornado por `open()`. |
+| `CaoModalSize` | `'w-10' \| 'w-20' \| 'w-30' \| 'w-40' \| 'w-50' \| 'w-60' \| 'w-70' \| 'w-75' \| 'w-80' \| 'w-90' \| 'w-100'` |
+| `CaoModalPanelClass` | `'default' \| 'custom'` |
+
+**`CaoModalService`**
+
+| Método | Descrição |
+| --- | --- |
+| `open<TComponent, TResult>(component, options?)` | Abre o componente em um overlay (portal). Empilha modais por padrão; com `closeOthers: true` fecha os anteriores. Retorna `ICaoModalRef`. |
+| `close(result?)` | Fecha o modal do topo. |
+| `closeAll(result?)` | Fecha todos os modais. |
+
+- Backdrop/scroll gerenciados via CDK; integra com histórico do navegador (`popstate` fecha o topo). O output `closeRequest` do componente aciona o fechamento gerenciado pelo serviço.
+
+**Exemplo de uso**
+
+```typescript
+// confirmar-acao.modal.ts
+import { Component } from '@angular/core';
+import { CaoBaseModalComponent } from 'ngx-opalbytes-components';
+
+@Component({
+  selector: 'app-confirmar-acao-modal',
+  imports: [CaoBaseModalComponent],
+  template: `
+    <cao-base-modal
+      [data]="data()"
+      [closeOnOverlayClick]="true"
+      (opened)="onOpened()"
+      (closed)="onClosed($event)"
+    >
+      <p>{{ data()?.mensagem }}</p>
+      <button type="button" (click)="requestClose(true)">Confirmar</button>
+      <button type="button" (click)="requestClose(false)">Cancelar</button>
+    </cao-base-modal>
+  `,
+})
+export class ConfirmarAcaoModal extends CaoBaseModalComponent<{ mensagem: string }, boolean> {
+  onOpened(): void { /* modal aberto */ }
+  onClosed(resultado?: boolean): void { /* modal fechado */ }
+}
+```
+
+```typescript
+import { Component, inject } from '@angular/core';
+import { CaoModalService } from 'ngx-opalbytes-components';
+import { ConfirmarAcaoModal } from './confirmar-acao.modal';
+
+@Component({ /* ... */ })
+export class MinhaPaginaComponent {
+  private readonly modalService = inject(CaoModalService);
+
+  abrir(): void {
+    const ref = this.modalService.open(ConfirmarAcaoModal, {
+      data: { mensagem: 'Deseja continuar?' },
+      // closeOthers: true, // opcional: fecha modais anteriores
+    });
+    // ref.close(resultado?) para fechar programaticamente
+  }
+}
+```
+
+> Símbolos exportados: `CaoBaseModalComponent`, `CaoModalService`, `ICaoModalOptions`, `ICaoModalRef`, `CaoModalSize`, `CaoModalPanelClass`.
 
 ---
 

@@ -1,7 +1,17 @@
-<div aria-hidden="true" class="modal" tabIndex="0" [class.show]="showModal" (keydown)="onOverlayClick()"
-  (click)="onOverlayClick()">
-  <div aria-hidden="true" class="modal-dialog" tabIndex="1" [ngClass]="[modalSize, modalClass]"
-    (keydown)="$event.stopPropagation()" (click)="$event.stopPropagation()">
+<div
+  class="cao-modal-backdrop"
+  [class.cao-modal-backdrop--closing]="closing()"
+  (mousedown)="onBackdropMouseDown($event)"
+  (mouseup)="onBackdropMouseUp($event)"
+>
+  <div
+    class="cao-modal-panel"
+    [ngClass]="[modalSize(), panelClass(), modalClass()]"
+    [class.cao-modal-panel--closing]="closing()"
+    (mousedown)="$event.stopPropagation()"
+    (mouseup)="$event.stopPropagation()"
+    (animationend)="onAnimationEnd($event)"
+  >
     <ng-content />
   </div>
 </div>
