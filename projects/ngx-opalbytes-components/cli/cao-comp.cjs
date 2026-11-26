@@ -351,12 +351,12 @@ function parseArgs(argv) {
       case '-ws':
       case '--ws':
       case '--websocket':
-        flags.websocket = true;
+        flags.websocket = normalized[++i];
         break;
       case '-s':
       case '--s':
       case '--stage':
-        flags.stage = true;
+        flags.stage = normalized[++i];
         break;
       case '-v':
       case '--v':
@@ -487,7 +487,7 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
     initRepo(newRepoPath, urlRepository)
   }
 
-  installNpmPackages(newRepoPath)
+  // installNpmPackages(newRepoPath)
 
   writeText("🎆Projeto instalado com sucesso🎆")
   return 0;
@@ -501,7 +501,7 @@ function updatePackageJson(destination, name, port, includeStage) {
   const packageJson = path.join(destination, 'package.json')
   replaceLineMatching(packageJson, '"name":', `  "name": "${name}",`);
   replaceLineMatching(packageJson, '"port":', `  "port": ${port},`);
-  
+  ''
   const packageLockJson = path.join(destination, 'package-lock.json')
   replaceLineMatching(packageLockJson, `"name":`, `  "name": "${name}",`);
   replaceLineMatching(packageLockJson, `      "name": "opalbytes-base-repo",`, `      "name": "${name}",`);
@@ -527,6 +527,7 @@ function writeText(message) {
 }
 
 function isValidadeInput(input, acceptableOptions){
+  console.log(input)
   return acceptableOptions.includes(input.toLocaleLowerCase())
 }
 
@@ -761,6 +762,19 @@ function cloneRepository(url, destination) {
   printLine()
 }
 
+function remoteHasMainBranch(repoLink) {
+  try {
+    const refs = execFileSync(
+      'git',
+      ['ls-remote', '--exit-code', '--heads', repoLink, 'refs/heads/main'],
+      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }
+    );
+    return refs.trim().length > 0;
+  } catch (_) {
+    return false;
+  }
+}
+
 /** Imprime separador visual em stdout. */
 function printLine() {
   process.stdout.write("------------------------------------------------------ \n")
@@ -787,10 +801,17 @@ function initRepo(projectName, repoLink) {
   process.chdir(projectName)
   writeText("fazendo commit no repositorio " + repoLink)
   execFileSync('git', ['init'], { stdio: 'inherit' });
+  execFileSync('git', ['remote', 'add', 'origin', repoLink], { stdio: 'inherit' });
+
+  if (remoteHasMainBranch(repoLink)) {
+    execFileSync('git', ['pull', 'origin', 'main'], { stdio: 'inherit' });
+  } else {
+    writeText("Repositorio remoto sem branch main; pulando git pull origin main")
+  }
+
   execFileSync('git', ['branch', '-M', 'main'], { stdio: 'inherit' });
   execFileSync('git', ['add', '.'], { stdio: 'inherit' });
   execFileSync('git', ['commit', '-m', '"feat: add base project"'], { stdio: 'inherit' });
-  execFileSync('git', ['remote', 'add', 'origin', repoLink], { stdio: 'inherit' });
   execFileSync('git', ['push', '-u', 'origin', 'main'], { stdio: 'inherit' });
   writeText("✅ Commit realizado com sucesso")
   printLine()
