@@ -1,3 +1,8 @@
+## <small>1.36.3 (2026-11-26)</small>
+
+* Merge pull request #136 from Micael-Macedo/fix(components)/remove-stage-files-by-flags ([c2b61b1](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/c2b61b1)), closes [#136](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/136)
+* fix: install npm packages during repo creation ([116576d](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/116576d))
+
 ## <small>1.36.2 (2026-11-26)</small>
 
 * Merge pull request #135 from Micael-Macedo/fix(components)/remove-stage-files-by-flags ([a0f2955](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a0f2955)), closes [#135](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/135)
