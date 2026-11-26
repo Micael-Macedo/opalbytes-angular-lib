@@ -1,3 +1,8 @@
+## <small>1.36.2 (2026-11-26)</small>
+
+* Merge pull request #135 from Micael-Macedo/fix(components)/remove-stage-files-by-flags ([a0f2955](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/a0f2955)), closes [#135](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/135)
+* fix: send repo to origin if empty or with readme ([90982bc](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/90982bc))
+
 ## <small>1.36.1 (2026-11-26)</small>
 
 * Merge pull request #134 from Micael-Macedo/fix(components)/remove-stage-files-by-flags ([19874fe](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/19874fe)), closes [#134](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/134)
