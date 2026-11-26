@@ -428,6 +428,8 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
 
   const destination = path.resolve();
   const newRepoPath = path.join(destination, name);
+  const defaultValidOptions = ['y', 'n']
+
 
   if (fs.existsSync(newRepoPath)) {
     process.stderr.write(
@@ -436,15 +438,21 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
     return 1;
   }
 
-  const withWebsocket =
-    typeof flags.websocket === 'boolean' && flags.websocket
-      ? true
-      : prompt.confirm('Integracao com Websocket?');
+  let stage = flags.stage || prompt.text('Ambiente stage? [y/N] ') || 'n';
 
-  const withStage =
-    typeof flags.stage === 'boolean' && flags.stage
-      ? true
-      : prompt.confirm('Ambiente stage?');
+  while(!isValidadeInput(stage, defaultValidOptions)){
+    stage = prompt.text('Ambiente stage? [y/N] ') || 'n'
+  }
+
+  const withStage = stage === 'y' ? true : false
+  
+  let websocket = flags.websocket || prompt.text('Integracao com WebSocket? [y/N] ') || 'n';
+  
+  while(!isValidadeInput(websocket, defaultValidOptions)){
+    websocket = prompt.text('Integracao com WebSocket? [y/N] ') || 'n'
+  }
+  
+  const withWebsocket = websocket === 'y' ? true : false
 
   const urlRepository =
     flags.repo || prompt.text('Link repositorio azure: ');
@@ -460,24 +468,26 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
 
   cloneRepository(DEFAULT_BASE_PROJECT_URL, newRepoPath)
 
-  updatePackageJson(newRepoPath, name, port)
+  updatePackageJson(newRepoPath, name, port, withStage)
 
-  updateAngularFile(newRepoPath, name)
+  updateAngularFile(newRepoPath, name, withStage)
+
+  enviromentFolder(newRepoPath, withStage)
   
-  deleteFolder(path.join(newRepoPath, '.git'))
+  // deleteFolder(path.join(newRepoPath, '.git'))
 
-  if (urlRepository) {
-    printLine()
-    writeText("Atualizando arquivo node pipeline")
-    updateAzurePipelineFile(newRepoPath, name)
-    writeText("Atualizando arquivo azure variables")
-    printLine()
-    updateVariablesFile(newRepoPath, name)
+  // if (urlRepository) {
+  //   printLine()
+  //   writeText("Atualizando arquivo node pipeline")
+  //   updateAzurePipelineFile(newRepoPath, name)
+  //   writeText("Atualizando arquivo azure variables")
+  //   printLine()
+  //   updateVariablesFile(newRepoPath, name)
     
-    initRepo(newRepoPath, urlRepository)
-  }
+  //   initRepo(newRepoPath, urlRepository)
+  // }
 
-  installNpmPackages(newRepoPath)
+  // installNpmPackages(newRepoPath)
 
   writeText("🎆Projeto instalado com sucesso🎆")
   return 0;
@@ -485,14 +495,22 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
 const DEFAULT_REPO_NAME = 'opalbytes-base-repo'
 
 /** Atualiza nome/porta em package.json e package-lock.json do projeto gerado. */
-function updatePackageJson(destination, name, port) {
+function updatePackageJson(destination, name, port, includeStage) {
   printLine()
   writeText("Modificando arquivos package")
-  replaceLineMatching(path.join(destination, 'package.json'), '"name":', `  "name": "${name}",`);
-  replaceLineMatching(path.join(destination, 'package.json'), '"port":', `  "port": ${port},`);
+  const packageJson = path.join(destination, 'package.json')
+  replaceLineMatching(packageJson, '"name":', `  "name": "${name}",`);
+  replaceLineMatching(packageJson, '"port":', `  "port": ${port},`);
+  
+  const packageLockJson = path.join(destination, 'package-lock.json')
+  replaceLineMatching(packageLockJson, `"name":`, `  "name": "${name}",`);
+  replaceLineMatching(packageLockJson, `      "name": "opalbytes-base-repo",`, `      "name": "${name}",`);
 
-  replaceLineMatching(path.join(destination, 'package-lock.json'), `"name":`, `  "name": "${name}",`);
-  replaceLineMatching(path.join(destination, 'package-lock.json'), `      "name": "opalbytes-base-repo",`, `      "name": "${name}",`);
+  if(!includeStage){
+    removeLine(packageJson, '"build:stage": "ng build --configuration stage",')
+    removeLine(packageJson, '"start:stage": "ng serve --open --configuration stage"')
+  }
+
   printLine()
 }
 
@@ -508,12 +526,22 @@ function writeText(message) {
   process.stdout.write(message + " \n")
 }
 
+function isValidadeInput(input, acceptableOptions){
+  return acceptableOptions.includes(input.toLocaleLowerCase())
+}
+
 /** Ajusta referências de nome/buildTarget no angular.json para o novo projeto. */
-function updateAngularFile(destination, name) {
-  replaceLineMatching(path.join(destination, 'angular.json'), `"${DEFAULT_REPO_NAME}"`, `    "${name}": {`);
+function updateAngularFile(destination, name, withStage) {
+  const jsonAngular = path.join(destination, 'angular.json')
+  replaceLineMatching(jsonAngular, `"${DEFAULT_REPO_NAME}"`, `    "${name}": {`);
 
   for (const env of ENV_PATHS) {
-    replaceLineMatching(path.join(destination, 'angular.json'), `"buildTarget": "${DEFAULT_REPO_NAME}:build:${env}"`, `              "buildTarget": "${name}:build:${env}"`);
+    replaceLineMatching(jsonAngular, `"buildTarget": "${DEFAULT_REPO_NAME}:build:${env}"`, `              "buildTarget": "${name}:build:${env}"`);
+  }
+
+  if(!withStage){
+    removeLine(jsonAngular, "stage", 11)
+    removeLine(jsonAngular, "stage", 3)
   }
 }
 
@@ -772,13 +800,49 @@ function initRepo(projectName, repoLink) {
 function replaceLineMatching(filePath, match, newLine) {
   const content = fs.readFileSync(filePath, 'utf8');
   const eol = content.includes('\r\n') ? '\r\n' : '\n';
-  const re = typeof match === 'string' ? new RegExp(escapeRegExp(match)) : match;
   const lines = content.split(/\r?\n/);
-  const idx = lines.findIndex((l) => re.test(l));
-  if (idx === -1) return false;       // nada alterado
+
+  const idx = findMatchingLineIndex(filePath, match)
+  
+  if (idx === -1) return false;
   lines[idx] = newLine;
   fs.writeFileSync(filePath, lines.join(eol));
   return true;
+}
+
+function removeLine(filePath, line, range = 1){
+  const index = findMatchingLineIndex(filePath, line)
+  if (index === -1) return false;
+
+  const content = fs.readFileSync(filePath, 'utf8');
+  const eol = content.includes('\r\n') ? '\r\n' : '\n';
+  const lines = content.split(/\r?\n/);
+
+  lines.splice(index, range)
+  fs.writeFileSync(filePath, lines.join(eol));
+  return true;
+}
+
+function enviromentFolder(pathOrigin, withStage){
+  const infraConfigPath = path.join(pathOrigin, "src\\app\\infrastructure\\config")
+  const stageConfigPath = path.join(infraConfigPath, "config.stage.ts")
+  console.log(stageConfigPath)
+
+
+  if(!withStage){
+    printLine()
+    writeText("Excluindo arquivo de config rotas stage")
+    deleteFile(stageConfigPath)
+    printLine()
+  }
+}
+
+function findMatchingLineIndex(filePath, match){
+  const content = fs.readFileSync(filePath, 'utf8');
+  const re = typeof match === 'string' ? new RegExp(escapeRegExp(match)) : match;
+  const lines = content.split(/\r?\n/);
+  const idx = lines.findIndex((l) => re.test(l));
+  return idx
 }
 
 /** Escapa string para uso seguro em RegExp. */
