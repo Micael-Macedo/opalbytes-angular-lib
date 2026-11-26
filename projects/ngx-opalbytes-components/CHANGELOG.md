@@ -1,3 +1,9 @@
+## <small>1.36.1 (2026-11-26)</small>
+
+* Merge pull request #134 from Micael-Macedo/fix(components)/remove-stage-files-by-flags ([19874fe](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/19874fe)), closes [#134](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/134)
+* fix: release npm functions to deal with packages ([5b00498](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/5b00498))
+* fix: remove stage files by flag in cli ([9a8cce7](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/9a8cce7))
+
 ## 1.36.0 (2026-11-19)
 
 * Merge pull request #133 from Micael-Macedo/feature(components)/update-base-modal-to-portal ([1cf16ea](https://github.com/Micael-Macedo/opalbytes-angular-lib/commit/1cf16ea)), closes [#133](https://github.com/Micael-Macedo/opalbytes-angular-lib/issues/133)
