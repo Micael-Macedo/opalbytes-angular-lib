@@ -474,20 +474,20 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
 
   enviromentFolder(newRepoPath, withStage)
   
-  // deleteFolder(path.join(newRepoPath, '.git'))
+  deleteFolder(path.join(newRepoPath, '.git'))
 
-  // if (urlRepository) {
-  //   printLine()
-  //   writeText("Atualizando arquivo node pipeline")
-  //   updateAzurePipelineFile(newRepoPath, name)
-  //   writeText("Atualizando arquivo azure variables")
-  //   printLine()
-  //   updateVariablesFile(newRepoPath, name)
+  if (urlRepository) {
+    printLine()
+    writeText("Atualizando arquivo node pipeline")
+    updateAzurePipelineFile(newRepoPath, name)
+    writeText("Atualizando arquivo azure variables")
+    printLine()
+    updateVariablesFile(newRepoPath, name)
     
-  //   initRepo(newRepoPath, urlRepository)
-  // }
+    initRepo(newRepoPath, urlRepository)
+  }
 
-  // installNpmPackages(newRepoPath)
+  installNpmPackages(newRepoPath)
 
   writeText("🎆Projeto instalado com sucesso🎆")
   return 0;
