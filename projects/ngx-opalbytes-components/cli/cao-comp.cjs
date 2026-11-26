@@ -487,7 +487,7 @@ function createNewProject(projectName, flags = {}, prompt = defaultPrompt) {
     initRepo(newRepoPath, urlRepository)
   }
 
-  // installNpmPackages(newRepoPath)
+  installNpmPackages(newRepoPath)
 
   writeText("🎆Projeto instalado com sucesso🎆")
   return 0;
@@ -527,7 +527,6 @@ function writeText(message) {
 }
 
 function isValidadeInput(input, acceptableOptions){
-  console.log(input)
   return acceptableOptions.includes(input.toLocaleLowerCase())
 }
 
@@ -597,7 +596,6 @@ function main(argv = process.argv.slice(2), deps = {}) {
   const [first, second, third] = positionals;
 
   if (subcommands[first]) {
-    // passa `second` como nome/destino e o objeto de flags
     switch (first) {
       case 'new':
         return createNewProject(second, flags, prompt);
@@ -847,8 +845,6 @@ function removeLine(filePath, line, range = 1){
 function enviromentFolder(pathOrigin, withStage){
   const infraConfigPath = path.join(pathOrigin, "src\\app\\infrastructure\\config")
   const stageConfigPath = path.join(infraConfigPath, "config.stage.ts")
-  console.log(stageConfigPath)
-
 
   if(!withStage){
     printLine()
